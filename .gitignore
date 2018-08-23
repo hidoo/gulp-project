@@ -1,0 +1,43 @@
+# -------------
+# osx file
+# -------------
+
+.DS_Store
+._*
+
+
+# -------------
+# cache file
+# -------------
+
+*.swp
+
+
+# -------------
+# diff file
+# -------------
+
+*.diff
+
+
+# -------------
+# log file
+# -------------
+
+*.log
+
+
+# -------------
+# package
+# -------------
+
+node_modules/
+
+
+# -------------
+# child package
+# -------------
+
+packages/**/node_modules
+packages/**/lib
+packages/**/package-lock.json

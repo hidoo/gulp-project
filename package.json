@@ -4,12 +4,15 @@
   "description": "gulp project monorepo.",
   "main": "index.js",
   "scripts": {
-    "prepare": "npm-run-all -s build test",
+    "bootstrap": "lerna bootstrap --hoist",
+    "dev:test": "lerna exec -- 'npm test -- --watch'",
     "build": "npm-run-all -s build:packages",
     "build:packages": "lerna run build",
     "test": "npm-run-all -s test:lint test:packages",
     "test:lint": "eslint .",
-    "test:packages": "lerna run test"
+    "test:packages": "lerna run test",
+    "postinstall": "npm run bootstrap",
+    "prepare": "npm-run-all -s build test"
   },
   "author": "hidoo",
   "license": "MIT",
@@ -24,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

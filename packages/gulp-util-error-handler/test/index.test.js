@@ -6,11 +6,14 @@ import stripAnsi from 'strip-ansi';
 import log from 'fancy-log';
 import errorHandler from '../src';
 
-describe('errorHandler', () => {
+describe('gulp-util-error-handler', () => {
   let spy = null;
 
-  before(() => {
+  beforeEach(() => {
     spy = sinon.spy(log, 'error');
+  });
+  afterEach(() => {
+    spy.restore();
   });
 
   it('should out formated message if argment "error" is valid.', () => {

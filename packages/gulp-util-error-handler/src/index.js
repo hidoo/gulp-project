@@ -9,7 +9,7 @@ import log from 'fancy-log';
  * @example
  * import {src, dest} from 'gulp';
  * import plumber from 'gulp-plumber';
- * import errorHandler from '@hidoo/gulp-project-util-error-handler';
+ * import errorHandler from '@hidoo/gulp-util-error-handler';
  *
  * src('/path/to/src')
  *   .pipe(plumber({errorHandler}))

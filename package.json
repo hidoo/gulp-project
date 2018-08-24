@@ -4,7 +4,7 @@
   "description": "gulp project monorepo.",
   "main": "index.js",
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap",
     "dev:test": "lerna exec --parallel -- 'npm test -- --watch'",
     "build": "npm-run-all -s build:packages",
     "build:packages": "lerna run build",

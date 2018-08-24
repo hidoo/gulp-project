@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "dev:test": "lerna exec -- 'npm test -- --watch'",
+    "dev:test": "lerna exec --parallel -- 'npm test -- --watch'",
     "build": "npm-run-all -s build:packages",
     "build:packages": "lerna run build",
     "test": "npm-run-all -s test:lint test:packages",

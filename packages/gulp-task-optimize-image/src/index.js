@@ -30,6 +30,14 @@ const DEFAULT_OPTIONS = {
   // compress file or not
   compress: false,
 
+  // compress options
+  compressOptions: [
+    imagemin.gifsicle({interlaced: true}),
+    imagemin.jpegtran({progressive: true}),
+    imagemin.optipng({optimizationLevel: 5}),
+    imagemin.svgo()
+  ],
+
   // out log or not
   verbose: true
 };
@@ -62,7 +70,7 @@ export default function optimizeImage(options = {}) {
   // define task
   // + record last run time to lastRunRecords that use for incremental build.
   const task = () => {
-    const {evenize, evenizeOptions, compress, verbose} = opts,
+    const {evenize, evenizeOptions, compress, compressOptions, verbose} = opts,
           {imageMagick} = evenizeOptions;
 
     return src(opts.src, {since: lastRunRecords.get(task)})
@@ -72,7 +80,7 @@ export default function optimizeImage(options = {}) {
       .pipe(cond(evenize, evenizer({imageMagick, verbose})))
       .pipe(isImage.restore)
       .pipe(isntIco)
-      .pipe(cond(compress, imagemin({verbose})))
+      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
       .pipe(isntIco.restore)
       .pipe(dest(opts.dest))
       .pipe(isSvg)

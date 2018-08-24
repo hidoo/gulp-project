@@ -36,13 +36,14 @@ const PLUGIN_NAME = 'gulp-plugin-image-evenizer';
  * return evenized image if image width or height is odd number.
  * @param {DEFAULT_OPTIONS} options option
  * @return {DestroyableTransform}
+ *
  * @example
- * import {src, dest} from 'gulp';
+ * import {src, dest, task} from 'gulp';
  * import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
  *
- * src('/path/to/src')
+ * task('evenize', () => src('/path/to/src')
  *   .pipe(imageEvenizer())
- *   .pipe(dest('/path/to/dest'));
+ *   .pipe(dest('/path/to/dest'))):
  */
 export default function imageEvenizer(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},

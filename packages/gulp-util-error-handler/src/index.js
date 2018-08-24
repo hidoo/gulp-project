@@ -7,13 +7,13 @@ import log from 'fancy-log';
  * @return {void}
  *
  * @example
- * import {src, dest} from 'gulp';
+ * import {src, dest, task} from 'gulp';
  * import plumber from 'gulp-plumber';
  * import errorHandler from '@hidoo/gulp-util-error-handler';
  *
- * src('/path/to/src')
+ * task('some', () => src('/path/to/src')
  *   .pipe(plumber({errorHandler}))
- *   .pipe(dest('/path/to/dest'));
+ *   .pipe(dest('/path/to/dest')));
  */
 export default function errorHandler(error) {
   const {name, message, line, column, file, reason, plugin} = error,

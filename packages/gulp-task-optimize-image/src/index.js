@@ -52,13 +52,14 @@ const lastRunRecords = new WeakMap();
  * return image optimize task
  * @param {DEFAULT_OPTIONS} options option
  * @return {Function}
+ *
  * @example
  * import {task} from 'gulp';
  * import optimizeImage from '@hidoo/gulp-task-optimize-image';
  *
  * task('image', optimizeImage({
  *   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
- *   dest: '/path/to/dest',
+ *   dest: '/path/to/dest'
  * }));
  */
 export default function optimizeImage(options = {}) {

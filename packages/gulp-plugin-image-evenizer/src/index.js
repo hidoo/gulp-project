@@ -86,10 +86,10 @@ export default function imageEvenizer(options = {}) {
 
         if (direction === '') {
           done(null, file);
-          Promise.resolve();
+          return Promise.resolve();
         }
 
-        image
+        return image
           .gravity(direction)
           .background(mime === 'image/jpeg' ? '#fff' : 'rgba(255,255,255,0)')
           .extent(width, height)

@@ -19,6 +19,9 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  */
 const DEFAULT_OPTIONS = {
 
+  // task name (set displayName)
+  name: 'build:css',
+
   // source path (required)
   src: null,
 
@@ -77,7 +80,7 @@ export default function buildCss(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
   // define task
-  return () => {
+  const task = () => {
     const {
             filename, browsers, banner,
             stylusOptions,
@@ -117,4 +120,11 @@ export default function buildCss(options = {}) {
       .pipe(cond(compress, gzip({append: true})))
       .pipe(cond(compress, dest(opts.dest)));
   };
+
+  // add displayName (used as task name for gulp)
+  if (typeof opts.name === 'string' && opts.name !== '') {
+    task.displayName = opts.name;
+  }
+
+  return task;
 }

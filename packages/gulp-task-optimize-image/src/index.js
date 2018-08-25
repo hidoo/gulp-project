@@ -13,6 +13,9 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  */
 const DEFAULT_OPTIONS = {
 
+  // task name (set displayName)
+  name: 'optimize:image',
+
   // source path (required)
   src: null,
 
@@ -89,6 +92,11 @@ export default function optimizeImage(options = {}) {
       .pipe(cond(compress, dest(opts.dest)))
       .pipe(isSvg.restore);
   };
+
+  // add displayName (used as task name for gulp)
+  if (typeof opts.name === 'string' && opts.name !== '') {
+    task.displayName = opts.name;
+  }
 
   return task;
 }

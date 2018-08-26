@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "dev:test": "lerna exec --parallel -- 'npm test -- --watch'",
+    "dev:test": "lerna exec --parallel --ignore @hidoo/gulp-project-sample -- 'npm test -- --watch'",
     "build": "npm-run-all -s build:packages",
-    "build:packages": "lerna run build",
+    "build:packages": "lerna run build --ignore @hidoo/gulp-project-sample",
     "test": "npm-run-all -s test:lint test:packages",
     "test:lint": "eslint .",
-    "test:packages": "lerna run test",
+    "test:packages": "lerna run test --ignore @hidoo/gulp-project-sample",
     "postinstall": "npm run bootstrap",
     "prepare": "npm-run-all -s build test"
   },

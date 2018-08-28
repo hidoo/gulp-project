@@ -1,0 +1,54 @@
+---
+# 管理用 ID・ページ名
+uid: PC-A-01-00
+title: テストページ（PC）
+
+# SEO関連
+seo:
+  title: "{{site.meta.sitename}}"
+  description: "{{site.seo.description}}"
+  keywords: "{{site.seo.keywords}}"
+
+# OGP関連
+ogp:
+  title:
+  description:
+  type:
+  url:
+  image:
+  appID:
+
+# フラグ
+is:
+  top: false
+---
+{{#extend 'base'}}
+{{#content 'body'}}
+
+  {{!--
+    Markdown のパース
+  --}}
+  {{#markdown}}
+## グローバル変数
+
+|変数名|説明|現在の値|
+|:--|:--|:--|
+|`NODE_ENV`|`process.env.NODE_ENV` の値|`{{NODE_ENV}}`|
+|`compress`|`config.compress` の値|`{{compress}}`|
+|`path.depth`|ページのルートからの相対パス|`{{path.depth}}`|
+|`path.relative`|ページのルートからの相対パス|`{{path.relative}}`|
+|`path.basename`|ページのファイルのベースネーム|`{{path.basename}}`|
+|`path.extname`|ページのファイルの拡張子|`{{path.extname}}`|
+
+## サイト共通のデータ
+
+{{#each @root.site.meta}}{{#if @first}}
+|変数名|現在の値|
+|:--|:--|
+{{/if}}
+|{{@key}}|`{{this}}`|
+{{/each}}
+  {{/markdown}}
+
+{{/content}}
+{{/extend}}

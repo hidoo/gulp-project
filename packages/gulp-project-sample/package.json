@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.0.0-rc.2",
     "@babel/register": "^7.0.0-rc.2",
     "@hidoo/gulp-task-build-css-stylus": "^0.0.0",
+    "@hidoo/gulp-task-build-html-handlebars": "^0.0.0",
     "@hidoo/gulp-task-optimize-image": "^0.0.0",
     "cross-env": "^5.2.0",
     "gulp": "^4.0.0",

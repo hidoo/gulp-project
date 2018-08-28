@@ -9,6 +9,7 @@ import rimraf from 'rimraf';
  */
 import * as config from './config';
 import * as css from './tasks/css';
+import * as html from './tasks/html';
 import * as image from './tasks/image';
 
 /**
@@ -24,6 +25,7 @@ export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
  */
 export const build = parallel(
   css.main,
+  html.main,
   image.main
 );
 
@@ -33,6 +35,7 @@ export const build = parallel(
  */
 export const watch = parallel(
   css.watch,
+  html.watch,
   image.watch
 );
 

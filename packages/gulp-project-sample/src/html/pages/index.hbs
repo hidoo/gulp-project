@@ -1,0 +1,137 @@
+---
+# 管理用 ID・ページ名
+uid: PC-A-00-00
+title: トップページ（PC）
+
+# SEO関連
+seo:
+  title: "{{site.meta.sitename}}"
+  description: "{{site.seo.description}}"
+  keywords: "{{site.seo.keywords}}"
+
+# OGP関連
+ogp:
+  title: "{{testdata.hoge}}"
+  description:
+  type:
+  url:
+  image:
+  appID:
+
+# フラグ
+is:
+  top: true
+
+# テストデータ
+testdata:
+  hoge: ああああああああ
+  json: >
+    {{{toJson (filterArray test.internetServices key='type.seek' value=true)}}}
+---
+{{#extend 'base'}}
+{{#content 'body'}}
+
+  {{!--
+    Markdown のパース
+  --}}
+  {{#markdown}}
+## グローバル変数
+
+|変数名|説明|現在の値|
+|:--|:--|:--|
+|`NODE_ENV`|`process.env.NODE_ENV` の値|`{{NODE_ENV}}`|
+|`compress`|`config.compress` の値|`{{compress}}`|
+|`path.depth`|ルートからの深さ|`{{path.depth}}`|
+|`path.relative`|ルートからの相対パス|`{{path.relative}}`|
+|`path.basename`|ページのベースネーム|`{{path.basename}}`|
+|`path.extname`|ページの拡張子|`{{path.extname}}`|
+
+## サイト共通のデータ
+
+{{#each @root.site.meta}}{{#if @first}}
+|変数名|現在の値|
+|:--|:--|
+{{/if}}
+|{{@key}}|`{{this}}`|
+{{/each}}
+  {{/markdown}}
+
+  {{!--
+    Markdown のパースと、JSON への変換
+  --}}
+  {{#markdown}}
+```json
+{{{toJson @root.test.internetServices prettify=true}}}
+```
+  {{/markdown}}
+
+  {{site.seo.title}}
+
+  {{this.testdata.hoge}}
+
+  {{this.testdata.json}}
+
+  {{!--
+    ループ
+  --}}
+  {{#each @root.test.internetServices}}
+    {{#if @first}}
+      <ul>
+    {{/if}}
+
+    <li>
+      <a href="{{this.url}}">
+        {{#ifModulo (add @index 1) 2 0}}★{{else}}☆{{/ifModulo}} {{this.label}}
+      </a>
+    </li>
+
+    {{#if @last}}
+      </ul>
+    {{/if}}
+  {{/each}}
+
+  {{!--
+    ソート
+    + 'label' をキーにした昇順
+  --}}
+  {{#each (sortArray @root.test.internetServices order='ascend' key='label')}}
+    {{#if @first}}
+      <ul>
+    {{/if}}
+
+    <li>
+      <a href="{{this.url}}">
+        {{#ifModulo (add @index 1) 2 0}}★{{else}}☆{{/ifModulo}} {{this.label}}
+      </a>
+    </li>
+
+    {{#if @last}}
+      </ul>
+    {{/if}}
+  {{/each}}
+
+  {{!--
+    フィルタリング、かつ、ソート
+    + 'type.sns' = true のもののみをフィルタ
+    + 'label' をキーにした降順
+  --}}
+  {{#each (sortArray (filterArray @root.test.internetServices key='type.sns' value=true) order='descend' key='label')}}
+    {{#if @first}}
+      <ul>
+    {{/if}}
+
+    <li>
+      <a href="{{this.url}}">
+        {{#ifModulo (add @index 1) 2 0}}★{{else}}☆{{/ifModulo}} {{this.label}}
+      </a>
+    </li>
+
+    {{#if @last}}
+      </ul>
+    {{/if}}
+  {{/each}}
+
+  {{> test}}
+
+{{/content}}
+{{/extend}}

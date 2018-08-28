@@ -23,7 +23,7 @@ export {default as pkg} from './package.json';
 export const compress = process.env.NODE_ENV !== 'development' || false; // eslint-disable-line max-len
 
 /**
- * ファイルのパスに関する設定
+ * path settings
  * @type {Object}
  */
 export const path = {
@@ -34,13 +34,18 @@ export const path = {
 
   // roles
   css: '/css',
+  data: '/data',
+  html: '/html',
   image: '/images',
 
   // source details
   get srcCss() { return `${this.src}${this.css}`; },
+  get srcData() { return `${this.src}${this.data}`; },
+  get srcHtml() { return `${this.src}${this.html}`; },
   get srcImage() { return `${this.src}${this.image}`; },
 
   // destinaion details
   get destCss() { return `${this.dest}${this.css}`; },
+  get destHtml() { return this.dest; },
   get destImage() { return `${this.dest}${this.image}`; }
 };

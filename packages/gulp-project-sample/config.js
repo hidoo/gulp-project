@@ -32,20 +32,14 @@ export const path = {
   src: './src',
   dest: './public',
 
-  // roles
-  css: '/css',
-  data: '/data',
-  html: '/html',
-  image: '/images',
-
   // source details
-  get srcCss() { return `${this.src}${this.css}`; },
-  get srcData() { return `${this.src}${this.data}`; },
-  get srcHtml() { return `${this.src}${this.html}`; },
-  get srcImage() { return `${this.src}${this.image}`; },
+  get srcCss() { return `${this.src}/css`; },
+  get srcData() { return `${this.src}/data`; },
+  get srcHtml() { return `${this.src}/html`; },
+  get srcImage() { return `${this.src}/image`; },
 
   // destinaion details
-  get destCss() { return `${this.dest}${this.css}`; },
+  get destCss() { return `${this.dest}/css`; },
   get destHtml() { return this.dest; },
-  get destImage() { return `${this.dest}${this.image}`; }
+  get destImage() { return `${this.dest}/images`; }
 };

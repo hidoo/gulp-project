@@ -40,9 +40,7 @@ const DEFAULT_OPTIONS = {
 
   // stylus options
   stylusOptions: {
-    rawDefine: {
-      NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-line no-process-env
-    }
+    rawDefine: {}
   },
 
   // array of html file path that target of uncss process
@@ -83,33 +81,45 @@ export default function buildCss(options = {}) {
   const task = () => {
     const {
             filename, browsers, banner,
-            stylusOptions,
             uncssTargets, uncssIgnore,
             additionalProcess,
             compress
           } = opts,
           extname = path.extname(filename),
           basename = path.basename(filename, extname),
+          stylusOptions = opts.stylusOptions || {},
           postProcesses = [];
 
+    // additinal stylus data
+    // + always add NODE_ENV
+    const mergedStylusOptions = {
+      ...stylusOptions,
+      rawDefine: {
+        ...stylusOptions.rawDefine,
+        NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-line no-process-env
+      }
+    };
+
+    // add default post css process
     postProcesses.push(autoprefixer({browsers}));
     postProcesses.push(cssmqpacker);
 
-    // add post process if opts.uncssTargets is valid
+    // add post css process if opts.uncssTargets is valid
     if (Array.isArray(uncssTargets) && Boolean(uncssTargets.length)) {
       postProcesses.push(uncss({
         html: uncssTargets,
         ignore: Array.isArray(uncssIgnore) ? uncssIgnore : []
       }));
     }
-    // add post process if opts.additionalProcess is valid
+
+    // add post css process if opts.additionalProcess is valid
     if (typeof additionalProcess === 'function') {
       postProcesses.push(additionalProcess);
     }
 
     return src(opts.src)
       .pipe(plumber({errorHandler}))
-      .pipe(stylus({...stylusOptions}))
+      .pipe(stylus(mergedStylusOptions))
       .pipe(postcss([...postProcesses]))
       .pipe(header(banner))
       .pipe(rename({basename, extname}))

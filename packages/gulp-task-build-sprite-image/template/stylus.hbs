@@ -1,0 +1,41 @@
+{{#each items}}
+
+{{!--
+  only first time
+--}}
+{{#if @first}}
+
+{{!--
+  define $sprites if not defined.
+--}}
+unless ($sprites is defined) {
+  $sprites = {};
+}
+
+{{!--
+  add sprite sheet common data on sprite sheet basename.
+--}}
+$sprites["{{ basename @root.spritesheet.escaped_image }}"] = {
+  totalWidth: {{ @root.spritesheet.px.width }},
+  totalHeight: {{ @root.spritesheet.px.height }},
+  image: "{{{ @root.spritesheet.escaped_image }}}"
+};
+
+{{/if}}
+
+{{!--
+  add each image data by image basename.
+--}}
+$sprites["{{ this.name }}"] = {
+  x: {{ this.px.x }},
+  y: {{ this.px.y }},
+  offsetX: {{ this.px.offset_x }},
+  offsetY: {{ this.px.offset_y }},
+  width: {{ this.px.width }},
+  height: {{ this.px.height }},
+  totalWidth: {{ this.px.total_width }},
+  totalHeight: {{ this.px.total_height }},
+  image: "{{{ this.escaped_image }}}"
+}
+
+{{/each}}

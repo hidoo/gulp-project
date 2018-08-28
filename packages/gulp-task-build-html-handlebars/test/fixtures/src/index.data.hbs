@@ -1,0 +1,8 @@
+---
+seo:
+  title: "page title{{#if data.site.title}} | {{ data.site.title }}{{/if}}"
+  description: "page description.{{#if data.site.description}}{{ data.site.description }}{{/if}}"
+---
+this is contents.
+{{this.seo.title}}
+{{this.seo.description}}

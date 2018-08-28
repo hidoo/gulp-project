@@ -1,0 +1,12 @@
+---
+seo:
+  title: "page title"
+  description: "page description."
+---
+{{#extend 'fuga'}}
+{{#content 'body'}}
+this is contents.
+{{this.seo.title}}
+{{this.seo.description}}
+{{/content}}
+{{/extend}}

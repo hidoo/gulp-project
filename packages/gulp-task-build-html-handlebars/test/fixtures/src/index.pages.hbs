@@ -1,0 +1,9 @@
+---
+seo:
+  title: "page title"
+  description: "page description."
+---
+{{#each @root.pages}}
+title: {{this.seo.title}}
+description: {{this.seo.description}}
+{{/each}}

@@ -39,3 +39,10 @@ node_modules/
 # -------------
 
 public/*
+
+
+# -------------
+# source
+# -------------
+
+src/**/_sprite_*.styl

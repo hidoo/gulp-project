@@ -37,9 +37,11 @@ export const path = {
   get srcData() { return `${this.src}/data`; },
   get srcHtml() { return `${this.src}/html`; },
   get srcImage() { return `${this.src}/image`; },
+  get srcSprite() { return `${this.src}/sprite`; },
 
   // destinaion details
   get destCss() { return `${this.dest}/css`; },
   get destHtml() { return this.dest; },
-  get destImage() { return `${this.dest}/images`; }
+  get destImage() { return `${this.dest}/images`; },
+  get destSprite() { return `${this.dest}/images/sprites`; }
 };

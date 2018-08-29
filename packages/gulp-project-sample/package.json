@@ -20,9 +20,9 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.2",
-    "@babel/preset-env": "^7.0.0-rc.2",
-    "@babel/register": "^7.0.0-rc.2",
+    "@babel/core": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/register": "7.0.0",
     "@hidoo/gulp-task-build-css-stylus": "^0.0.0",
     "@hidoo/gulp-task-build-html-handlebars": "^0.0.0",
     "@hidoo/gulp-task-build-sprite-image": "^0.0.0",

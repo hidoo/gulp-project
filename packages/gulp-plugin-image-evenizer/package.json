@@ -25,10 +25,10 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-rc.2",
-    "@babel/core": "^7.0.0-rc.2",
-    "@babel/preset-env": "^7.0.0-rc.2",
-    "@babel/register": "^7.0.0-rc.2",
+    "@babel/cli": "7.0.0",
+    "@babel/core": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/register": "7.0.0",
     "babel-preset-power-assert": "3.0.0-beta.1",
     "cross-env": "^5.2.0",
     "image-size": "^0.6.3",

@@ -1,0 +1,17 @@
+spriteName: {{ spriteName }}
+imgPath: {{{ imgPath }}}
+{{#each shapes}}
+elasticWidth: {{ this.elasticWidth }}em
+elasticHeight: {{ this.elasticHeight }}em
+elasticBackgroundWidt: {{ this.elasticBackgroundWidth }}%
+elasticBackgroundHeigh: {{ this.elasticBackgroundHeight }}%
+elasticOffsetX: {{ this.elasticOffsetX }}em
+elasticOffsetY: {{ this.elasticOffsetY }}em
+roundedHeight: {{ this.roundedHeight }}px
+px.offset_x: {{ this.px.offset_x }}px
+px.offset_y: {{ this.px.offset_y }}px
+px.width: {{ this.px.width }}px
+px.height: {{ this.px.height }}px
+px.total_width: {{ this.px.total_width }}px
+px.total_height: {{ this.px.total_height }}px
+{{/each}}

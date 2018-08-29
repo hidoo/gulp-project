@@ -1,0 +1,17 @@
+{{#each shapes}}
+$sprite-{{ this.name }}-name = "{{ ../spriteName}}";
+$sprite-{{ this.name }}-image = "{{{ ../imgPath }}}";
+$sprite-{{ this.name }}-elastic-width = {{ this.elasticWidth }}em;
+$sprite-{{ this.name }}-elastic-height = {{ this.elasticHeight }}em;
+$sprite-{{ this.name }}-elastic-background-width = {{ this.elasticBackgroundWidth }}%;
+$sprite-{{ this.name }}-elastic-background-height = {{ this.elasticBackgroundHeight }}%;
+$sprite-{{ this.name }}-elastic-offset-x = {{ this.elasticOffsetX }}em;
+$sprite-{{ this.name }}-elastic-offset-y = {{ this.elasticOffsetY }}em;
+$sprite-{{ this.name }}-rounded-height = {{ this.roundedHeight }}px;
+$sprite-{{ this.name }}-offset-x = {{ this.px.offset_x }}px;
+$sprite-{{ this.name }}-offset-y = {{ this.px.offset_y }}px;
+$sprite-{{ this.name }}-width = {{ this.px.width }}px;
+$sprite-{{ this.name }}-height = {{ this.px.height }}px;
+$sprite-{{ this.name }}-total-width = {{ this.px.total_width }}px;
+$sprite-{{ this.name }}-total-height = {{ this.px.total_height }}px;
+{{/each}}

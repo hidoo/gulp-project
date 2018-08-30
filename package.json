@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "dev:test": "lerna exec --parallel --ignore @hidoo/gulp-project-sample -- 'npm test -- --watch'",
-    "dev:sample": "lerna exec --scope @hidoo/gulp-project-sample -- 'npm start'",
+    "dev:test": "lerna exec 'npm test -- --watch' --ignore @hidoo/gulp-project-sample",
+    "dev:test:parallel": "npm run dev:test -- --parallel",
+    "dev:sample": "lerna exec 'npm start' --scope @hidoo/gulp-project-sample",
     "build": "npm-run-all -s build:packages",
     "build:packages": "lerna run build --ignore @hidoo/gulp-project-sample",
     "test": "npm-run-all -s test:lint test:packages",

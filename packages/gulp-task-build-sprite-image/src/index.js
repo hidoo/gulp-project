@@ -79,6 +79,19 @@ const DEFAULT_OPTIONS = {
  * return build image sprite sheet task
  * @param {DEFAULT_OPTIONS} options option
  * @return {Function}
+ *
+ * @example
+ * import {task} from 'gulp';
+ * import buildSprite from '@hidoo/gulp-task-build-sprite-image';
+ *
+ * task('sprite', buildSprite({
+ *   src: '/path/to/sprite/*.png',
+ *   destImg: '/path/to/dest/image',
+ *   destCss: '/path/to/dest/css',
+ *   imgName: 'sprite.png',
+ *   cssName: 'sprite.styl',
+ *   imgPath: './image/sprite.png'
+ * }));
  */
 export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};

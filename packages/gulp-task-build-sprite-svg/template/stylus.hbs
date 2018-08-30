@@ -1,0 +1,45 @@
+{{#each shapes}}
+
+{{!--
+  only first time
+--}}
+{{#if @first}}
+
+{{!--
+  define $sprites if not defined.
+--}}
+unless ($sprites is defined) {
+  $sprites = {};
+}
+
+{{!--
+  add sprite sheet common data on sprite sheet basename.
+--}}
+$sprites["{{ ../spriteName }}"] = {
+  image: "{{{ ../imgPath }}}"
+};
+
+{{/if}}
+
+{{!--
+  add each image data by image basename.
+  + includes shape's sizes both elastic and fixed pixel
+--}}
+$sprites["{{ this.name }}"] = {
+  elasticWidth: {{ this.elasticWidth }}em,
+  elasticHeight: {{ this.elasticHeight }}em,
+  elasticBackgroundWidth: {{ this.elasticBackgroundWidth }}%,
+  elasticBackgroundHeight: {{ this.elasticBackgroundHeight }}%,
+  elasticOffsetX: {{ this.elasticOffsetX }}em,
+  elasticOffsetY: {{ this.elasticOffsetY }}em,
+  roundedHeight: {{ this.roundedHeight }}px,
+  image: "{{{ ../imgPath }}}",
+  offsetX: {{ this.px.offset_x }}px,
+  offsetY: {{ this.px.offset_y }}px,
+  width: {{ this.px.width }}px,
+  height: {{ this.px.height }}px,
+  totalWidth: {{ this.px.total_width }}px,
+  totalHeight: {{ this.px.total_height }}px,
+}
+
+{{/each}}

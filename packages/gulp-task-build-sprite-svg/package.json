@@ -1,0 +1,46 @@
+{
+  "name": "@hidoo/gulp-task-build-sprite-svg",
+  "version": "0.0.0",
+  "description": "Task that build svg sprite sheet for gulp.",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "keywords": [
+    "gulp",
+    "task"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "7.0.0",
+    "@babel/core": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/register": "7.0.0",
+    "babel-preset-power-assert": "3.0.0-beta.1",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@hidoo/gulp-plugin-svg-sprite": "^0.0.0",
+    "@hidoo/gulp-util-error-handler": "^0.0.0",
+    "@hidoo/handlebars-helpers": "^0.1.1",
+    "gulp-gzip": "^1.4.2",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-plumber": "^1.2.0",
+    "merge-stream": "^1.0.1",
+    "vinyl-buffer": "^1.0.1"
+  },
+  "peerDependencies": {
+    "gulp": "^4.0.0"
+  }
+}

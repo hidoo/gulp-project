@@ -40,4 +40,5 @@ node_modules/
 
 packages/**/node_modules
 packages/**/lib
+!packages/gulp-project-sample/**/lib
 packages/**/package-lock.json

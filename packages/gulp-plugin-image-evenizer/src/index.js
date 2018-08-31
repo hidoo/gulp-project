@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS = {
   imageMagick: true,
 
   // out log or not
-  verbose: true
+  verbose: false
 };
 
 /**

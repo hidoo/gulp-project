@@ -164,8 +164,7 @@ describe('gulp-task-build-html-handlebars', () => {
     const task = buildHtml({
       src: `${path.src}/index.data.hbs`,
       dest: path.dest,
-      data: `${path.src}/data/**/invalid.yml`,
-      verbose: false
+      data: `${path.src}/data/**/invalid.yml`
     });
 
     task().on('finish', () => {

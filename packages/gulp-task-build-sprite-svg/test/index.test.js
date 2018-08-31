@@ -23,8 +23,7 @@ describe('gulp-task-build-sprite-svg', () => {
       destCss: `${path.dest}`,
       imgName: 'svg-sprite.svg',
       cssName: 'svg-sprite.styl',
-      imgPath: './svg-sprite.svg',
-      verbose: false
+      imgPath: './svg-sprite.svg'
     });
 
     task().on('finish', () => {
@@ -49,8 +48,7 @@ describe('gulp-task-build-sprite-svg', () => {
       imgName: 'svg-sprite.svg',
       cssName: 'svg-sprite.styl',
       imgPath: './svg-sprite.svg',
-      compress: true,
-      verbose: false
+      compress: true
     });
 
     task().on('finish', () => {
@@ -78,8 +76,7 @@ describe('gulp-task-build-sprite-svg', () => {
       destCss: `${path.dest}`,
       imgName: 'svg-sprite.svg',
       cssName: 'svg-sprite.styl',
-      imgPath: './svg-sprite.svg?version=0.0.0',
-      verbose: false
+      imgPath: './svg-sprite.svg?version=0.0.0'
     });
 
     task().on('finish', () => {

@@ -23,8 +23,7 @@ describe('gulp-task-build-sprite-image', () => {
       destCss: `${path.dest}`,
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.styl',
-      imgPath: './image-sprite.png',
-      verbose: false
+      imgPath: './image-sprite.png'
     });
 
     task().on('finish', () => {
@@ -49,8 +48,7 @@ describe('gulp-task-build-sprite-image', () => {
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.styl',
       imgPath: './image-sprite.png',
-      evenize: true,
-      verbose: false
+      evenize: true
     });
 
     task().on('finish', () => {
@@ -75,8 +73,7 @@ describe('gulp-task-build-sprite-image', () => {
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.styl',
       imgPath: './image-sprite.png',
-      compress: true,
-      verbose: false
+      compress: true
     });
 
     task().on('finish', () => {
@@ -100,8 +97,7 @@ describe('gulp-task-build-sprite-image', () => {
       destCss: `${path.dest}`,
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.styl',
-      imgPath: './image-sprite.png?version=0.0.0',
-      verbose: false
+      imgPath: './image-sprite.png?version=0.0.0'
     });
 
     task().on('finish', () => {

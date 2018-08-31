@@ -16,7 +16,7 @@ describe('gulp-plugin-image-evenizer', () => {
     ];
 
     return await Promise.all(cases.map(([path, [width, height]]) => new Promise((resolve) => {
-      const plugin = imageEvenizer({verbose: false}),
+      const plugin = imageEvenizer(),
             src = fs.readFileSync(path, {encode: null}),
             fakeFile = new Vinyl({
               path: path,

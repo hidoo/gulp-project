@@ -20,8 +20,7 @@ describe('gulp-task-optimize-image', () => {
   it('should out to "options.dest" if argument "options.src" is set.', (done) => {
     const task = optimizeImage({
       src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
-      dest: path.dest,
-      verbose: false
+      dest: path.dest
     });
 
     task().on('finish', () => {
@@ -45,8 +44,7 @@ describe('gulp-task-optimize-image', () => {
           task = optimizeImage({
             src: `${path.src}/{${cases.map(([file]) => file).join(',')}}`,
             dest: path.dest,
-            evenize: true,
-            verbose: false
+            evenize: true
           });
 
     task().on('finish', () => {
@@ -64,8 +62,7 @@ describe('gulp-task-optimize-image', () => {
     const task = optimizeImage({
       src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
       dest: path.dest,
-      compress: true,
-      verbose: false
+      compress: true
     });
 
     task().on('finish', () => {

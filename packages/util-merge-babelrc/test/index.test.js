@@ -163,13 +163,13 @@ describe('gulp-util-merge-babelrc', () => {
         [
           babelrcPath,
           '',
-          {verbose: false},
+          {},
           {plugins: [], presets: [], ...babelrc}
         ],
         [
           babelrcPath,
           {plugins: ['aaaa', 'bbb'], presets: [['@babel/preset-env', {targets: {browsers: 'hoge'}}]]},
-          {verbose: false},
+          {},
           {...babelrc, plugins: ['aaaa', 'bbb'], presets: [['@babel/preset-env', {targets: {browsers: 'hoge'}}]]}
         ]
       ];

@@ -58,7 +58,7 @@ const DEFAULT_OPTIONS = {
   ],
 
   // out log or not
-  verbose: true
+  verbose: false
 };
 
 /**

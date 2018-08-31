@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
   presetEnvAllowTargets: ['browsers'],
 
   // out log or not
-  verbose: true
+  verbose: false
 };
 
 /**

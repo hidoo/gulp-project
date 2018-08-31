@@ -1,0 +1,53 @@
+{
+  "name": "@hidoo/gulp-task-build-js-browserify",
+  "version": "0.0.0",
+  "description": "Task that build javascript by browserify for gulp.",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "keywords": [
+    "gulp",
+    "task"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "7.0.0",
+    "@babel/core": "7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/register": "7.0.0",
+    "babel-preset-power-assert": "3.0.0-beta.1",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@hidoo/gulp-util-error-handler": "^0.0.0",
+    "@hidoo/util-merge-babelrc": "^0.0.0",
+    "babelify": "^9.0.0",
+    "browserify": "13.3.0",
+    "envify": "^4.1.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-if": "^2.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "licensify": "^3.1.3",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "gulp": "^4.0.0"
+  }
+}

@@ -152,6 +152,7 @@ export default function mergeBabelrc(path = '', source, options = {}) {
 
   return {
     ...babelrc,
+    ...source,
     presets: mergeBabelPresets(babelrc.presets, source.presets, opts),
     plugins: mergeBabelPlugins(babelrc.plugins, source.plugins)
   };

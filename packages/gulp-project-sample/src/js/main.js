@@ -1,6 +1,3 @@
-/**
- * 必要なモジュールのインポート（ローカル）
- */
 import sampleEsm, {getUserAgent} from './lib/sample-esm';
 import sampleCjs, {getUserAgent as getUserAgentCjs} from './lib/sample-cjs';
 

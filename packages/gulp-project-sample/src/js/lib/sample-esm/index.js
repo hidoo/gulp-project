@@ -1,5 +1,5 @@
 /**
- * ユーザーエージェント文字列を返す
+ * return UserAgent string
  * @return {String}
  */
 export function getUserAgent() {
@@ -10,8 +10,8 @@ export function getUserAgent() {
 }
 
 /**
- * 指定された要素の内容テキストを返す
- * @param {HTMLElement} element 対象の要素
+ * return textContent from specified element
+ * @param {HTMLElement} element target element
  * @return {String}
  */
 export function getTextContent(element) {
@@ -22,7 +22,7 @@ export function getTextContent(element) {
 }
 
 /**
- * メッセージを返す
+ * return message
  * @return {String}
  */
 export default function() {

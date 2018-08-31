@@ -1,5 +1,5 @@
 /**
- * メッセージを返す
+ * return message
  * @return {String}
  */
 module.exports = function() {
@@ -7,7 +7,7 @@ module.exports = function() {
 };
 
 /**
- * ユーザーエージェント文字列を返す
+ * return UserAgent string
  * @return {String}
  */
 module.exports.getUserAgent = function getUserAgent() {
@@ -18,8 +18,8 @@ module.exports.getUserAgent = function getUserAgent() {
 };
 
 /**
- * 指定された要素の内容テキストを返す
- * @param {HTMLElement} element 対象の要素
+ * return textContent from specified element
+ * @param {HTMLElement} element target element
  * @return {String}
  */
 module.exports.getTextContent = function getTextContent(element) {

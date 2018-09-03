@@ -96,7 +96,7 @@ describe('gulp-task-build-css-stylus', () => {
     const task = buildCss({
       src: `${path.src}/style.styl`,
       dest: path.dest,
-      banner: '/*! hogehoge */\n',
+      banner: '/*! copyright <%= pkg.author %> */\n',
       compress: false
     });
 

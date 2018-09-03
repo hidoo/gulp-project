@@ -11,7 +11,18 @@ import csso from 'postcss-csso';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import gzip from 'gulp-gzip';
+import log from 'fancy-log';
 import errorHandler from '@hidoo/gulp-util-error-handler';
+
+let pkg = {};
+
+// try to load package.json that on current working directory
+try {
+  pkg = require(path.resolve(process.cwd(), 'package.json')); // eslint-disable-line global-require
+}
+catch (error) {
+  log.error('Failed to load package.json.');
+}
 
 /**
 * task default options.
@@ -121,7 +132,7 @@ export default function buildCss(options = {}) {
       .pipe(plumber({errorHandler}))
       .pipe(stylus(mergedStylusOptions))
       .pipe(postcss([...postProcesses]))
-      .pipe(header(banner))
+      .pipe(header(banner, {pkg}))
       .pipe(rename({basename, extname}))
       .pipe(dest(opts.dest))
       .pipe(cond(compress, rename({suffix: '.min'})))

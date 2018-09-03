@@ -4,7 +4,8 @@
   "description": "Plugin that build svg sprite sheet for gulp.",
   "main": "lib/index.js",
   "files": [
-    "lib/"
+    "lib/",
+    "template/"
   ],
   "scripts": {
     "prebuild": "rimraf ./lib",

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <title>Style Guide - {{ options.title }}</title>
+    <meta name="description" content="{{ options.description }}" />
+
+    <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
+    <link rel="stylesheet" href="kss-assets/kss.css" />
+
+    {{!-- load specified paths by options.css --}}
+    {{{styles}}}
+
+  </head>
+<body id="styleguide">
+
+  <header class="styleguide-header styleguide-reset">
+    <div class="styleguide-container">
+      <h1>Style Guide<span class="title">{{ options.title }}</span><span class="version">(v{{ options.version }})</span></h1>
+    </div>
+  </header>
+
+  <div class="styleguide-container">
+
+    {{!--
+      navigation
+    --}}
+    {{#each menu}}
+      {{#if @first}}
+        <nav class="styleguide-menu styleguide-reset">
+          <ul class="styleguide-menu-list">
+      {{/if}}
+
+          {{!--
+            first, display link to overview
+          --}}
+          {{#if @first}}
+            <li><a href="./">0. README</a></li>
+          {{/if}}
+
+          {{!--
+            display link to each sections
+          --}}
+          <li><a href="section-{{ this.referenceURI }}.html"{{#if this.isActive}}  class="selected"{{/if}}>{{ this.referenceNumber}}. {{ this.header }}</a>
+
+            {{!--
+              display link to child sections,
+              if section is active and has child sections
+            --}}
+            {{#if this.isActive}}
+              {{#if this.children}}
+                <ul class="styleguide-menu-list-child">
+                  {{#each this.children}}
+
+                    {{!--
+                      display child section only that has description
+                    --}}
+                    {{#if this.description}}
+                      <li>
+                        <a href="section-{{ ../this.referenceURI }}.html#styleguide-section-{{ this.referenceURI }}">{{ this.referenceNumber}}. {{ this.header }}</a>
+                      </li>
+                    {{/if}}
+
+                  {{/each}}
+                </ul>
+              {{/if}}
+            {{/if}}
+
+          </li>
+
+      {{#if @last}}
+          </ul>
+        </nav>
+      {{/if}}
+    {{/each}}
+
+    {{!--
+      contents
+    --}}
+    <main class="styleguide-content">
+
+      {{!--
+        display overview when has homepage value
+        otherwise display styleguide sections
+      --}}
+      {{#if homepage}}
+
+        <div class="styleguide-markdown-body styleguide-reset">
+          {{{homepage}}}
+        </div>
+
+      {{else}}
+
+        {{!
+          The "root" element comes first in this loop, and can be detected using
+          the "#if @first" block as seen below.
+
+          ```
+          {
+            header: 'block.x.x',
+            description: '',
+            deprecated: false,
+            experimental: false,
+            reference: 'block.x.x',
+            referenceNumber: '0.0.0',
+            referenceURI: 'block-x-x',
+            weight: 0,
+            markup: '',
+            example: '',
+            depth: 0,
+            modifiers: [{
+              name: 'block-x-x-x',
+              description: 'default style',
+              className: 'block-x-x-x',
+              markup: ''
+            }],
+            parameters: [
+            ],
+            sourceFile: {
+              name: '',
+              base: '',
+              path: '',
+              line: 0
+            }
+          }
+          ```
+        }}
+        {{#each sections}}
+
+          {{!--
+            display only heading when no example
+          --}}
+          {{#unless this.example}}
+
+            {{#if this.description}}
+              <div class="styleguide-section-header styleguide-section-depth-{{ this.depth }} styleguide-reset">
+
+                <header class="styleguide-section-header-label" id="styleguide-section-{{ this.referenceURI }}">
+                  <h{{ this.depth }}>{{ this.header }}</h{{ this.depth }}>
+                </header>
+
+                {{!--
+                  description of this section
+                --}}
+                <div class="markdown-body styleguide-reset">
+                  {{{ this.description }}}
+                </div>
+
+              </div>
+            {{/if}}
+
+          {{else}}
+
+            <section class="styleguide-example">
+
+              <header class="styleguide-example-header styleguide-reset" id="styleguide-item-{{ this.referenceURI }}">
+                <h{{ this.depth }} class="styleguide-example-header-title">Style guide: {{ this.reference }} <em>{{ this.header }}</em></h{{ this.depth }}>
+              </header>
+
+              <div class="styleguide-description styleguide-markdown-body styleguide-reset">
+
+                {{!--
+                  description of this section
+                --}}
+                {{#if this.description}}
+                  {{{ this.description }}}
+                {{/if}}
+
+                {{!--
+                  list of modifiers
+                --}}
+                {{#if this.modifiers}}
+                  <ul class="styleguide-modifier">
+                    {{#each this.modifiers}}
+                      <li><strong>{{ this.name }}</strong> - {{{ this.description }}}</li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+
+                {{!--
+                  list of parameters
+                --}}
+                {{#if this.parameters}}
+                  <ul class="styleguide-modifier">
+                    {{#each this.parameters}}
+                      <li><strong>{{ this.name }}</strong> - {{{ this.description }}}（{{ this.defaultValue }}）</li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+
+                {{!--
+                  reference to source file
+                --}}
+                {{#if this.sourceFile.name}}
+                  <p class="styleguide-sourcefile">Source: <code>{{ this.sourceFile.name }}</code>, line {{ this.sourceFile.line }}</p>
+                {{/if}}
+
+              </div>
+
+              {{!--
+                example of rendered markup
+              --}}
+              {{#each this.modifiers}}
+                <div class="styleguide-element styleguide-modifier">
+                  <span class="styleguide-modifier-name">{{ this.name }}</span>
+                  <div class="styleguide-element-wrapper">{{{ this.markup }}}</div>
+                </div>
+              {{/each}}
+
+              {{!--
+                example of markup
+              --}}
+              <div class="styleguide-html styleguide-reset">
+                <div class="styleguide-html-highlight">
+                  <pre><code class="handlebars html javascript">{{ this.markup }}</code></pre>
+                </div>
+              </div>
+
+            </section>
+
+          {{/unless}}
+
+        {{/each}}
+
+      {{/if}}
+
+    </main>
+
+  </div>
+
+  <footer class="styleguide-footer styleguide-reset styleguide-container">
+    <p>Created using <a href="https://github.com/hughsk/kss-node">kss-node</a>.</p>
+    <p>Designed by <a href="https://github.com/">GitHub</a>, Adjusted by hidoo</p>
+  </footer>
+
+  {{!--
+    syntax highlighting
+  --}}
+  <!--[if ! IE]>-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/stylus.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/handlebars.min.js"></script>
+  <script>
+  (function(window) {
+    'use strict';
+
+    if (window.hljs) {
+      window.hljs.initHighlightingOnLoad();
+    }
+  })(window);
+  </script>
+  <!--<![endif]-->
+
+  {{!--
+    change background of styleguide-element
+  --}}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+  (function($) {
+    'use strict';
+
+    var THEME_CLASS_NAMES = [
+      'styleguide-element-wrapper--dark',
+      'styleguide-element-wrapper--light',
+      'styleguide-element-wrapper--red',
+      'styleguide-element-wrapper--green',
+      'styleguide-element-wrapper--blue'
+    ];
+
+    $('.styleguide-element-wrapper').on('click', function(event) {
+      var $element = $(this),
+          themes = THEME_CLASS_NAMES,
+          isDark = $element.hasClass(themes[0]),
+          isLight = $element.hasClass(themes[1]),
+          isRed = $element.hasClass(themes[2]),
+          isGreen = $element.hasClass(themes[3]),
+          isBlue = $element.hasClass(themes[4]);
+
+        if (isDark){
+          $element.addClass(themes[1]).removeClass(themes[0]);
+        }
+        else if (isLight) {
+          $element.addClass(themes[2]).removeClass(themes[1]);
+        }
+        else if (isRed) {
+          $element.addClass(themes[3]).removeClass(themes[2]);
+        }
+        else if (isGreen) {
+          $element.addClass(themes[4]).removeClass(themes[3]);
+        }
+        else if (isBlue) {
+          $element.removeClass(themes[4]);
+        }
+        else {
+          $element.addClass(themes[0]);
+        }
+
+      event.stopPropagation();
+    });
+  })(jQuery);
+  </script>
+
+  {{!--
+    load specified paths by options.js
+  --}}
+  {{{scripts}}}
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "kss-node-handlebars-builder",
+  "version": "3.0.0",
+  "description": "The default builder for kss-node.",
+  "main": "builder.js",
+  "scripts": {
+    "sass": "lessc ./kss-assets/kss.less ./kss-assets/kss.css"
+  },
+  "devDependencies": {
+    "less": "^2.7.1"
+  }
+}

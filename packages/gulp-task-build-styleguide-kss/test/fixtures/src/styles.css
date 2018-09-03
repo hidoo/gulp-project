@@ -1,0 +1,60 @@
+/*
+block
+
+Block
+
+Style guide: block
+*/
+/*
+block-test
+
+Test Block
+
+Style guide: block.test
+*/
+/*
+Variations
+
+Test Block - Type A - A
+
+Markup: <div class="{{modifier_class}}  mod-box">
+  <div class="{{modifier_class}}__container  mod-box__container">
+    <!-- some contents here -->
+    {{> 'block.test.b.a' modifier_class='block-test-b-a'}}
+  </div>
+</div>
+
+block-test-a-a - default style
+
+Style guide: block.test.a.a
+*/
+.block-test-a-a {
+  width: 100%;
+  min-height: 300px;
+  padding: 30px;
+  background-color: #999;
+}
+/*
+Variations
+
+Test Block - Type B - A
+
+Markup: <div class="{{modifier_class}}  mod-box">
+  <div class="{{modifier_class}}__container  mod-box__container">
+    <!-- some contents here -->
+  </div>
+</div>
+
+block-test-b-a - default style
+
+Style guide: block.test.b.a
+*/
+.block-test-b-a {
+  width: 100%;
+  min-height: 300px;
+  background-color: #000;
+}
+body {
+  color: #000;
+  background-color: #fff;
+}

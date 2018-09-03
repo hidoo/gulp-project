@@ -1,0 +1,42 @@
+{
+  "name": "@hidoo/gulp-task-build-styleguide-kss",
+  "version": "0.0.0",
+  "description": "Task that build styleguide by kss for gulp.",
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "builder/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "keywords": [
+    "gulp",
+    "task"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-preset-power-assert": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@hidoo/gulp-util-error-handler": "^0.0.0",
+    "@hidoo/handlebars-helpers": "^0.1.1",
+    "handlebars": "^4.0.11",
+    "kss": "3.0.0-beta.18"
+  },
+  "peerDependencies": {
+    "gulp": "^4.0.0"
+  }
+}

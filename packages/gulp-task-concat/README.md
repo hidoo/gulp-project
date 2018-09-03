@@ -16,7 +16,7 @@ for JavaScript:
 import {task} from 'gulp';
 import {concatJs} from '@hidoo/gulp-task-concat';
 
-task('js', concatJs({
+task('concat:js', concatJs({
   src: [
     '/path/to/js/a.js'
     '/path/to/js/b.js'
@@ -32,7 +32,7 @@ for CSS:
 import {task} from 'gulp';
 import {concatCss} from '@hidoo/gulp-task-concat';
 
-task('js', concatCss({
+task('concat:css', concatCss({
   src: [
     '/path/to/css/a.css'
     '/path/to/css/b.css'

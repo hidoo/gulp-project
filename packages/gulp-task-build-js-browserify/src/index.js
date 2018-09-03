@@ -37,7 +37,7 @@ const DEFAULT_OPTIONS = {
 
   // use polyfill or not
   // + see options.useBuiltIns in @babel/preset-env
-  useBuiltins: 'usage',
+  useBuiltIns: 'usage',
 
   // babelrc path
   babelrc: path.resolve(process.cwd(), '.babelrc.js'),
@@ -65,12 +65,12 @@ const DEFAULT_OPTIONS = {
  */
 export default function buildJs(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},
-        {browsers, useBuiltins, babelrc, verbose} = opts,
+        {browsers, useBuiltIns, babelrc, verbose} = opts,
         babelifyOptions = mergeBabelrc(babelrc, {
           presets: [
             ['@babel/preset-env', {
               targets: {browsers},
-              useBuiltIns: useBuiltins,
+              useBuiltIns: useBuiltIns,
               debug: verbose
             }]
           ]

@@ -27,6 +27,8 @@ export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
  * @return {Function}
  */
 export const build = parallel(
+  css.dependency,
+  js.dependency,
   series(
     sprite.main,
     css.main,

@@ -4,6 +4,7 @@
 import gulp from 'gulp';
 import buildJsBrowserify from '@hidoo/gulp-task-build-js-browserify';
 import buildJsRollup from '@hidoo/gulp-task-build-js-rollup';
+import {concatJs} from '@hidoo/gulp-task-concat';
 
 /**
  * import modules - local
@@ -25,7 +26,16 @@ export const rollup = buildJsRollup({
   filename: 'main.rollup.js',
   compress
 });
+export const dependency = concatJs({
+  src: [
+    `${path.srcJs}/deps/sample-b.js`,
+    `${path.srcJs}/deps/sample-a.js`
+  ],
+  dest: `${path.destJs}`,
+  compress
+});
 export const main = gulp.parallel(browserify, rollup);
 export const watch = () => {
-  gulp.watch(`${path.srcJs}/**/*.js`, main);
+  gulp.watch(`${path.srcJs}/**/*.js,!${path.srcJs}/deps/*.js`, main);
+  gulp.watch(`${path.srcJs}/deps/*.js`, dependency);
 };

@@ -4,6 +4,7 @@
 import {relative} from 'path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
+import copy from '@hidoo/gulp-task-copy';
 
 /**
  * import modules - local
@@ -27,15 +28,12 @@ export const build = buildStyleguide({
   js: [`${pathToJsFromStyleguide}/main.js`],
   compress
 });
-export const prebuild = () => {
-  const task = () => gulp.src(`${path.srcCss}/*.md`)
-    .pipe(gulp.dest(`${path.srcStyleguide}`));
-
-  task.displayName = 'build:stylebuide:copy';
-  return task;
-};
+export const prebuild = copy({
+  src: `${path.srcCss}/*.md`,
+  dest: path.srcStyleguide
+});
 export const main = gulp.series(
-  prebuild(),
+  prebuild,
   build
 );
 export const watch = () => {

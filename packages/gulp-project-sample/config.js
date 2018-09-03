@@ -39,11 +39,13 @@ export const path = {
   get srcImage() { return `${this.src}/image`; },
   get srcJs() { return `${this.src}/js`; },
   get srcSprite() { return `${this.src}/sprite`; },
+  get srcStyleguide() { return `${this.dest}/css`; },
 
   // destinaion details
   get destCss() { return `${this.dest}/css`; },
   get destHtml() { return this.dest; },
   get destImage() { return `${this.dest}/images`; },
   get destJs() { return `${this.dest}/js`; },
-  get destSprite() { return `${this.dest}/images/sprites`; }
+  get destSprite() { return `${this.dest}/images/sprites`; },
+  get destStyleguide() { return `${this.dest}/styleguide`; }
 };

@@ -13,6 +13,7 @@ import * as js from './tasks/js';
 import * as html from './tasks/html';
 import * as image from './tasks/image';
 import * as sprite from './tasks/sprite';
+import * as styleguide from './tasks/styleguide';
 
 /**
  * clean dest task
@@ -28,7 +29,8 @@ export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
 export const build = parallel(
   series(
     sprite.main,
-    css.main
+    css.main,
+    styleguide.main
   ),
   js.main,
   html.main,
@@ -44,7 +46,8 @@ export const watch = parallel(
   js.watch,
   html.watch,
   image.watch,
-  sprite.watch
+  sprite.watch,
+  styleguide.watch
 );
 
 /**

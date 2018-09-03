@@ -32,6 +32,7 @@
     "@hidoo/gulp-task-build-js-rollup": "^0.0.0",
     "@hidoo/gulp-task-build-sprite-image": "^0.0.0",
     "@hidoo/gulp-task-build-sprite-svg": "^0.0.0",
+    "@hidoo/gulp-task-build-styleguide-kss": "^0.0.0",
     "@hidoo/gulp-task-optimize-image": "^0.0.0",
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",

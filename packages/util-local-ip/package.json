@@ -1,0 +1,30 @@
+{
+  "name": "@hidoo/util-local-ip",
+  "version": "0.0.0",
+  "description": "Utility that get current ip address in local network.",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "keywords": [
+    "ip"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-preset-power-assert": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "ip-regex": "^3.0.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0"
+  }
+}

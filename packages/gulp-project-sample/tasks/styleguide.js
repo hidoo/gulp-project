@@ -25,7 +25,7 @@ export const build = buildStyleguide({
   src: `${path.srcStyleguide}`,
   dest: `${path.destStyleguide}`,
   css: [`${pathToCssFromStyleguide}/main.css`],
-  js: [`${pathToJsFromStyleguide}/main.js`],
+  js: [`${pathToJsFromStyleguide}/main.browserify.js`],
   compress
 });
 export const prebuild = copy({

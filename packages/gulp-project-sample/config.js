@@ -1,4 +1,10 @@
-/* eslint no-process-env: 0 */
+/* eslint-disable max-len, no-magic-numbers, no-process-env */
+
+/**
+ * import modules
+ */
+import {Command} from 'commander';
+import ips from '@hidoo/util-local-ip';
 
 /**
  * adjust NODE_ENV
@@ -10,17 +16,42 @@ if (typeof process.env.NODE_ENV !== 'string' || process.env.NODE_ENV === '') {
 }
 
 /**
- * package.json
+ * parse cli options
+ * @type {commander.Command}
+ */
+const cli = new Command()
+  .option('--host <ip>', 'set ip.')
+  .option('--port <number>', 'set port.')
+  .option('--protocol <scheme>', 'set protocol.')
+  .option('--open [type]', 'open browser automatically or not.')
+  .option('--ui', 'enable debug ui or not.')
+  .option('--compress', 'enable file compress or not.')
+  .parse(process.argv);
+
+/**
+ * dev server options
  * @type {Object}
  */
-export {default as pkg} from './package.json';
+export const serverOptions = {
+  host: String(cli.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
+  port: Number(cli.port || process.env.SERVER_PORT) || 8000,
+  protocol: String(cli.protocol || process.env.SERVER_PROTOCOL) || 'http',
+  open: String(cli.open || process.env.SERVER_OPEN) || false,
+  ui: Boolean(cli.ui || process.env.SERVER_UI) || false
+};
 
 /**
  * compress flag
  * + It is true, when process.env.NODE_ENV is not 'development'.
  * @type {Boolean}
  */
-export const compress = process.env.NODE_ENV !== 'development' || false; // eslint-disable-line max-len
+export const compress = cli.compress || process.env.NODE_ENV !== 'development' || false;
+
+/**
+ * package.json
+ * @type {Object}
+ */
+export {default as pkg} from './package.json';
 
 /**
  * path settings

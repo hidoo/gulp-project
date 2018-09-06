@@ -36,6 +36,6 @@ export const dependency = concatJs({
 });
 export const main = gulp.parallel(browserify, rollup);
 export const watch = () => {
-  gulp.watch(`${path.srcJs}/**/*.js,!${path.srcJs}/deps/*.js`, main);
+  gulp.watch([`!${path.srcJs}/deps/*.js`, `${path.srcJs}/**/*.js`], main);
   gulp.watch(`${path.srcJs}/deps/*.js`, dependency);
 };

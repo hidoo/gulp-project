@@ -14,6 +14,7 @@ import * as html from './tasks/html';
 import * as image from './tasks/image';
 import * as sprite from './tasks/sprite';
 import * as styleguide from './tasks/styleguide';
+import server from './tasks/server';
 
 /**
  * clean dest task
@@ -59,5 +60,8 @@ export const watch = parallel(
 export default series(
   clean,
   build,
-  watch
+  parallel(
+    server,
+    watch
+  )
 );

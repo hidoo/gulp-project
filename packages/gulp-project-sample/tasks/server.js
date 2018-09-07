@@ -28,9 +28,7 @@ const server = () => new Promise((resolve, reject) => {
       directory: true
     },
     startPath: '/README',
-    middleware: [app],
-    files: [`${path.dest}/**/*.{html,css,js,png,jpg,jpeg,gif,svg}`],
-    reloadDebounce: 1000
+    middleware: [app]
   };
 
   bs.init(options, (error, instance) => {
@@ -39,6 +37,10 @@ const server = () => new Promise((resolve, reject) => {
     }
     resolve(instance);
   });
+
+  bs.watch(`${path.dest}/**/*.{html,css,js,png,jpg,jpeg,gif,svg}`)
+    .on('add', (filepath) => bs.reload(filepath))
+    .on('change', (filepath) => bs.reload(filepath));
 });
 
 export default server;

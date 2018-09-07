@@ -37,6 +37,7 @@
     "@hidoo/gulp-task-concat": "^0.0.0",
     "@hidoo/gulp-task-copy": "^0.0.0",
     "@hidoo/gulp-task-optimize-image": "^0.0.0",
+    "@hidoo/util-fancy-print": "^0.0.0",
     "@hidoo/util-local-ip": "^0.0.0",
     "babel-preset-power-assert": "^3.0.0",
     "browser-sync": "^2.24.7",

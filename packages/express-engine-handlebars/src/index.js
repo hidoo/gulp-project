@@ -40,6 +40,20 @@ const DEFAULT_OPTIONS = {
  * return Handlebars template engine for express
  * @param {Object} options options
  * @return {Function}
+ *
+ * @example
+ * import express from 'express';
+ * import expressEngineHandlebars from '@hidoo/express-engine-handlebars';
+ *
+ * const app = express();
+ *
+ * app.set('view engine', 'hbs');
+ * app.set('views', '/path/to/views');
+ * app.engine('hbs', expressEngineHandlebars({
+ *   layouts: '/path/to/views/layouts/**.hbs',
+ *   partials: '/path/to/views/partials/**.hbs',
+ *   helpers: '/path/to/views/helpers/**.js'
+ * }));
  */
 export default function expressEngineHandlebars(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};

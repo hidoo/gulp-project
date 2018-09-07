@@ -1,0 +1,35 @@
+{
+  "name": "@hidoo/util-fancy-print",
+  "version": "0.0.0",
+  "description": "Utility that print styled values to console",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "keywords": [
+    "gulp"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-preset-power-assert": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2",
+    "sinon": "^6.1.5",
+    "strip-ansi": "^4.0.0"
+  }
+}

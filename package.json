@@ -19,7 +19,7 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@hidoo/eslint-config": "^0.1.1",
+    "@hidoo/eslint-config": "^0.1.2",
     "babel-eslint": "^9.0.0",
     "eslint": "^5.5.0",
     "husky": "^1.0.0-rc.13",

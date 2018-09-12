@@ -1,0 +1,18 @@
+site:
+
+  meta:
+    sitename: "Site name"
+    url: "https://example.com/"
+
+  seo:
+    title: "Site Title"
+    description: "Site description."
+    keywords: "site,keywords"
+
+  ogp:
+    sitename: "{{{ site.meta.sitename }}}"
+    title: "{{{ site.seo.title }}}"
+    description: "{{{ site.seo.description }}}"
+    type: article
+    url: "{{{ site.meta.url }}}"
+    image:

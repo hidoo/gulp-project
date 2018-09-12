@@ -1,0 +1,19 @@
+<svg id="sample-b.svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-opacity: 0;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="rect" class="cls-1" d="M239,13.011h64v64H239v-64Z" transform="translate(-239 -13)"/>
+  <path id="shape" class="cls-2" d="M292.923,66.952H280.079L271,76.034l-9.082-9.082H249.071V54.107l-9.082-9.082,9.082-9.082V23.1h12.844L271,14.017l9.082,9.082h12.844V35.943l9.083,9.082-9.083,9.082V66.952Z" transform="translate(-239 -13)"/>
+</svg>

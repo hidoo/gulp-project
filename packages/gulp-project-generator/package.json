@@ -1,0 +1,50 @@
+{
+  "name": "@hidoo/gulp-project-generator",
+  "version": "0.0.0",
+  "description": "Command line tool that generate gulp project scaffold.",
+  "main": "lib/index.js",
+  "bin": {
+    "gulp-project-generator": "bin/index.js"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "scripts": {
+    "start": "npm run dev -- ../../examples/basic-project --verbose",
+    "dev": "cross-env NODE_ENV=development babel-node ./src/index.js",
+    "prebuild": "rimraf ./lib",
+    "build": "babel ./src --out-dir ./lib",
+    "test": "cross-env NODE_ENV=test mocha ./test/**/*.test.js"
+  },
+  "keywords": [
+    "gulp",
+    "scaffold"
+  ],
+  "author": "hidoo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-preset-power-assert": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@hidoo/handlebars-helpers": "^0.1.1",
+    "babel-eslint": "^9.0.0",
+    "chalk": "^2.4.1",
+    "commander": "^2.17.1",
+    "eslint": "^5.5.0",
+    "glob": "^7.1.3",
+    "glob-parent": "^3.1.0",
+    "handlebars": "^4.0.12",
+    "inquirer": "^6.2.0",
+    "mkdirp": "^0.5.1"
+  }
+}

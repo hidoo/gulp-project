@@ -1,0 +1,34 @@
+# git
+.git export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+.gitkeep export-ignore
+
+# dot files
+.editorconfig export-ignore
+.eslintrc export-ignore
+.babelrc export-ignore
+
+# npm
+package.json export-ignore
+package-lock.json export-ignore
+
+# gulp
+gulpfile.babel.js export-ignore
+config.js export-ignore
+task/ export-ignore
+
+# sources
+src/ export-ignore
+
+# distributions
+{{#if this.html}}
+public/**/page-list.html export-ignore
+{{/if}}
+{{#if this.styleguide}}
+public/**/styleguide/ export-ignore
+public/**/css/*.md export-ignore
+{{/if}}
+
+# docs
+README.md export-ignore

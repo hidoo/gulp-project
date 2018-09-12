@@ -1,0 +1,131 @@
+/**
+ * import modules
+ */
+import gulp from 'gulp';
+import rimraf from 'rimraf';
+import fancyPrint from '@hidoo/util-fancy-print';
+
+/**
+ * import modules - tasks
+ */
+import * as config from './config';
+{{#if this.css}}
+  import * as css from './task/css';
+{{/if}}
+{{#if this.html}}
+  import * as html from './task/html';
+{{/if}}
+{{#if this.image}}
+  import * as image from './task/image';
+{{/if}}
+{{#if this.js}}
+  import * as js from './task/js';
+{{/if}}
+{{#if this.sprite}}
+  import * as sprite from './task/sprite';
+{{/if}}
+{{#if this.styleguide}}
+  import * as styleguide from './task/styleguide';
+{{/if}}
+{{#if this.server}}
+  import server from './task/server';
+{{/if}}
+
+/**
+ * print values of config
+ */
+fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
+  {
+    label: 'NODE_ENV',
+    value: process.env.NODE_ENV // eslint-disable-line no-process-env
+  },
+  {
+    label: 'Compress Flag',
+    value: config.compress
+  },
+  {
+    label: 'Destination',
+    value: config.path.dest
+  },
+  {{#if this.server}}
+    {
+      label: 'Local Web Server',
+      value: (({host, port, protocol}) =>
+        `${protocol}://${host}:${port}/`)(config.serverOptions)
+    },
+  {{/if}}
+]);
+
+/**
+ * clean dest task
+ * @param {Function} done callback
+ * @return {void}
+ */
+export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
+
+/**
+ * build task
+ * @return {Function}
+ */
+export const build = gulp.parallel(
+  {{#if this.css}}
+    gulp.series(
+      {{#if this.sprite}}
+        sprite.main,
+      {{/if}}
+      css.main,
+      {{#if this.styleguide}}
+        styleguide.main,
+      {{/if}}
+    ),
+  {{/if}}
+  {{#if this.js}}
+    js.main,
+  {{/if}}
+  {{#if this.html}}
+    html.main,
+  {{/if}}
+  {{#if this.image}}
+    image.main,
+  {{/if}}
+);
+
+/**
+ * file observe task
+ * @return {Function}
+ */
+export const watch = gulp.parallel(
+  {{#if this.css}}
+    css.watch,
+  {{/if}}
+  {{#if this.js}}
+    js.watch,
+  {{/if}}
+  {{#if this.html}}
+    html.watch,
+  {{/if}}
+  {{#if this.image}}
+    image.watch,
+  {{/if}}
+  {{#if this.sprite}}
+    sprite.watch,
+  {{/if}}
+  {{#if this.styleguide}}
+    styleguide.watch,
+  {{/if}}
+);
+
+/**
+ * default task
+ * @return {Function}
+ */
+export default gulp.series(
+  clean,
+  build,
+  gulp.parallel(
+    {{#if this.server}}
+      server,
+    {{/if}}
+    watch
+  )
+);

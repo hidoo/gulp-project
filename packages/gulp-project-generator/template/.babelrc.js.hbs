@@ -1,0 +1,16 @@
+module.exports = {
+  presets: [
+    ['@babel/preset-env', {
+      targets: {node: 'current'}
+    }]
+  ],
+  {{#if this.js}}
+  env: {
+    test: {
+      presets: [
+        'power-assert'
+      ]
+    }
+  },
+  {{/if}}
+};

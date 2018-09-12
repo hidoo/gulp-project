@@ -1,0 +1,49 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+{{#if this.css}}
+
+[*.styl]
+quote_type = double
+indent_style = space
+indent_size = 2
+{{/if}}
+{{#if this.html}}
+
+[*.hbs]
+indent_style = space
+indent_size = 2
+{{else}}
+{{#if this.server}}
+
+[*.hbs]
+indent_style = space
+indent_size = 2
+{{/if}}
+{{/if}}
+
+[*.js]
+quote_type = single
+indent_style = space
+indent_size = 2
+
+[*.json]
+quote_type = double
+indent_style = space
+indent_size = 2
+{{#if this.html}}
+
+[*.yml]
+indent_style = space
+indent_size = 2
+{{/if}}
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.pdf,*.txt]
+trim_trailing_whitespace = false
+insert_final_newline = false

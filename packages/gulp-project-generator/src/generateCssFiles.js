@@ -29,6 +29,10 @@ export default async function generateCssFiles(src = '', dest = '', options = {}
 
       await mkdir(`${dest}/src/css`, {verbose});
       await copy(`${src}/src/css/**/*.{styl,md}`, `${dest}/src/css`, {verbose});
+
+      if (options.cssDeps) {
+        await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css`, {verbose});
+      }
     }
   }
   catch (error) {

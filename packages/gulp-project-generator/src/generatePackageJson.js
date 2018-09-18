@@ -50,6 +50,11 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: '@hidoo/gulp-task-build-css-stylus', version: '^0.0.0'}
     );
   }
+  if (options.cssDeps) {
+    devDependencies.push(
+      {name: '@hidoo/gulp-task-concat', version: '^0.0.0'}
+    );
+  }
   if (options.html) {
     devDependencies.push(
       {name: '@hidoo/gulp-task-build-html-handlebars', version: '^0.0.0'}
@@ -85,6 +90,11 @@ export default async function generatePackageJson(name = '', dest = '', options 
         break;
       default:
     }
+  }
+  if (options.jsDeps) {
+    devDependencies.push(
+      {name: '@hidoo/gulp-task-concat', version: '^0.0.0'}
+    );
   }
   if (options.server) {
     devDependencies.push(

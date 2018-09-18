@@ -25,9 +25,11 @@ Options:
   --name <name>           set project name.
   --no-interactive        Disable interactive interface.
   --no-css                Disable CSS build task.
+  --no-css-deps           Disable CSS dependency build task.
   --no-html               Disable HTML build task.
   --no-image              Disable image optimize task.
   --no-js                 Disable JavaScript build task.
+  --no-js-deps            Disable JavaScript dependency build task.
   --no-server             Disable local dev server.
   --no-sprite             Disable sprite sheet build task. (Enable forcely when --no-css specified.)
   --no-styleguide         Disable styleguide build task. (Enable forcely when --no-css specified.)

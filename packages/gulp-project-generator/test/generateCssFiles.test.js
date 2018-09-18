@@ -51,4 +51,23 @@ describe('generateCssFiles', () => {
     );
   });
 
+  it('should generate files css task if argument options.css is true and argument options.cssDeps is true.', async () => {
+    await generateCssFiles(path.src, path.dest, {css: true, cssDeps: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-css-deps.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`).sort(),
+          expectedAssetList = [
+            ...glob.sync(`${path.src}/src/css/**/*`),
+            ...glob.sync(`${path.src}/src/cssDeps/**/*`).map((filepath) => filepath.replace('cssDeps', 'css'))
+          ].sort();
+
+    assert(actualTask);
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(
+      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
+      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
+    );
+  });
+
 });

@@ -88,6 +88,17 @@ async function choiseOptions(options = {}) {
             }
           },
           {
+            type: 'checkbox',
+            name: 'depsTasks',
+            message: 'Please select the dependency task you need for the project.',
+            choices: (answers) => [
+              answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
+              answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
+            ].filter((choice) => choice),
+            filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
+            when: (answers) => answers.tasks.css || answers.tasks.js
+          },
+          {
             type: 'list',
             name: 'jsBundler',
             message: 'Please select the JavaScript bundler.',
@@ -114,6 +125,7 @@ async function choiseOptions(options = {}) {
       return {
         interactive: options.interactive,
         ...results.tasks,
+        ...results.depsTasks,
         jsBundler: results.jsBundler,
         spriteType: results.spriteType,
         verbose: options.verbose
@@ -142,7 +154,7 @@ async function confirm(name = '', options = {}) {
 
       console.log('');
       console.log(`  ${chalk.white('Tasks:')}`);
-      Object.keys(options).forEach((key) => {
+      Object.keys(options).sort().forEach((key) => {
         if (
           key !== 'interactive' &&
           key !== 'verbose' &&
@@ -206,8 +218,14 @@ async function main(src = '', dest = '', options = {}) {
 
     // disable forcely in relation to --no-css
     if (!opts.css) {
+      opts.cssDeps = false;
       opts.sprite = false;
       opts.styleguide = false;
+    }
+
+    // disable forcely in relation to --no-js
+    if (!opts.js) {
+      opts.jsDeps = false;
     }
 
     if (!await confirm(name, opts)) {
@@ -252,9 +270,11 @@ program
   .option('--name <name>', 'set project name.')
   .option('--no-interactive', 'Disable interactive interface.')
   .option('--no-css', 'Disable CSS build task.')
+  .option('--no-css-deps', 'Disable CSS dependency build task.')
   .option('--no-html', 'Disable HTML build task.')
   .option('--no-image', 'Disable image optimize task.')
   .option('--no-js', 'Disable JavaScript build task.')
+  .option('--no-js-deps', 'Disable JavaScript dependency build task.')
   .option('--no-server', 'Disable local dev server.')
   .option('--no-sprite', 'Disable sprite sheet build task. (Enable forcely when --no-css specified.)')
   .option('--no-styleguide', 'Disable styleguide build task. (Enable forcely when --no-css specified.)')

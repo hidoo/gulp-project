@@ -67,4 +67,23 @@ describe('generateJsFiles', () => {
     );
   });
 
+  it('should generate files for javascript task if argument options.js is true and argument options.jsDeps is true.', async () => {
+    await generateJsFiles(path.src, path.dest, {js: true, jsDeps: true, jsBundler: 'browserify'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/js.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-js-deps.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/js/**/*`).sort(),
+          expectedAssetList = [
+            ...glob.sync(`${path.src}/src/js/**/*`),
+            ...glob.sync(`${path.src}/src/jsDeps/**/*`).map((filepath) => filepath.replace('jsDeps', 'js'))
+          ].sort();
+
+    assert(actualTask);
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(
+      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
+      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
+    );
+  });
+
 });

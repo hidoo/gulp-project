@@ -2,15 +2,8 @@
  * import modules
  */
 import gulp from 'gulp';
-{{#is jsBundler 'browserify'}}
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
-{{/is}}
-{{#is jsBundler 'rollup'}}
-import buildJs from '@hidoo/gulp-task-build-js-rollup';
-{{/is}}
-{{#if jsDeps}}
 import {concatJs} from '@hidoo/gulp-task-concat';
-{{/if}}
 
 /**
  * import modules - local
@@ -25,7 +18,6 @@ export const main = buildJs({
   compress: config.compress
 });
 
-{{#if jsDeps}}
 // define dependency task
 export const deps = concatJs({
   src: [
@@ -36,25 +28,20 @@ export const deps = concatJs({
   filename: 'bundle.js',
   compress: config.compress
 });
-{{/if}}
 
 // define watch task
 export const watch = () => {
   gulp.watch(
     [
-      {{#if jsDeps}}
-        `!${config.path.srcJs}/deps/*.js`,
-      {{/if}}
+      `!${config.path.srcJs}/deps/*.js`,
       `${config.path.srcJs}/**/*.js`
     ],
     main
   );
-  {{#if jsDeps}}
   gulp.watch(
     [
       `${config.path.srcJs}/deps/*.js`
     ],
     deps
   );
-  {{/if}}
 };

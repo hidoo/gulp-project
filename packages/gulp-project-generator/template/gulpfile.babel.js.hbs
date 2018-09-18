@@ -68,6 +68,12 @@ export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
  * @return {Function}
  */
 export const build = gulp.parallel(
+  {{#if this.cssDeps}}
+    css.deps,
+  {{/if}}
+  {{#if this.jsDeps}}
+    js.deps,
+  {{/if}}
   {{#if this.css}}
     gulp.series(
       {{#if this.sprite}}

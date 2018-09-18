@@ -3,9 +3,7 @@
  */
 import gulp from 'gulp';
 import buildCss from '@hidoo/gulp-task-build-css-stylus';
-{{#if cssDeps}}
 import {concatCss} from '@hidoo/gulp-task-concat';
-{{/if}}
 
 /**
  * import modules - local
@@ -20,7 +18,6 @@ export const main = buildCss({
   compress: config.compress
 });
 
-{{#if cssDeps}}
 // define dependency task
 export const deps = concatCss({
   src: [
@@ -31,7 +28,6 @@ export const deps = concatCss({
   filename: 'bundle.css',
   compress: config.compress
 });
-{{/if}}
 
 // define watch task
 export const watch = () => {
@@ -41,12 +37,10 @@ export const watch = () => {
     ],
     main
   );
-  {{#if cssDeps}}
   gulp.watch(
     [
       `${config.path.srcCss}/deps/*.css`
     ],
     deps
   );
-  {{/if}}
 };

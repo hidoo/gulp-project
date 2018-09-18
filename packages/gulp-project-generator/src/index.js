@@ -4,7 +4,9 @@ import path from 'path';
 import chalk from 'chalk';
 import program from 'commander';
 import inquirer from 'inquirer';
+import rimraf from 'rimraf';
 import mkdir from './mkdir';
+import isEmptyDir from './isEmptyDir';
 import createProjectName from './createProjectName';
 import generatePackageJson from './generatePackageJson';
 import generateReadme from './generateReadme';
@@ -19,6 +21,34 @@ import generateServerFiles from './generateServerFiles';
 import generateSpriteFiles from './generateSpriteFiles';
 import generateStyleguideFiles from './generateStyleguideFiles';
 import pkg from '../package.json';
+
+/**
+ * return force generate or not
+ * @param {String} dest destination path
+ * @param {Object} options command line options
+ * @return {Promise<Boolean>}
+ */
+async function comfirmForce(dest = '', options = {}) {
+  try {
+    if (await isEmptyDir(dest) || options.force) {
+      return true;
+    }
+
+    const results = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'confirm',
+        message: `${dest} is not empty directory, continue?`,
+        default: false
+      }
+    ]);
+
+    return results.confirm;
+  }
+  catch (error) {
+    throw error;
+  }
+}
 
 /**
  * return user inputted project name
@@ -123,6 +153,7 @@ async function choiseOptions(options = {}) {
         ]);
 
       return {
+        force: options.force,
         interactive: options.interactive,
         ...results.tasks,
         ...results.depsTasks,
@@ -144,7 +175,7 @@ async function choiseOptions(options = {}) {
  * @param {Object} options command line options
  * @return {Promise<Object>}
  */
-async function confirm(name = '', options = {}) {
+async function confirmConfig(name = '', options = {}) {
   try {
     if (options.interactive) {
 
@@ -157,6 +188,7 @@ async function confirm(name = '', options = {}) {
       Object.keys(options).sort().forEach((key) => {
         if (
           key !== 'interactive' &&
+          key !== 'force' &&
           key !== 'verbose' &&
           key !== 'jsBundler' &&
           key !== 'spriteType'
@@ -213,6 +245,12 @@ async function main(src = '', dest = '', options = {}) {
   }
 
   try {
+    if (!await comfirmForce(dest, options)) {
+      console.log('');
+      console.log(chalk.bold.yellow('Aborting.'));
+      return false;
+    }
+
     const name = await inputProjectName(dest, options),
           opts = await choiseOptions(options);
 
@@ -228,12 +266,13 @@ async function main(src = '', dest = '', options = {}) {
       opts.jsDeps = false;
     }
 
-    if (!await confirm(name, opts)) {
+    if (!await confirmConfig(name, opts)) {
       return main(src, dest, options);
     }
 
     console.log('');
     console.log(chalk.white('Prepare directories:'));
+    rimraf.sync(dest);
     await mkdir(`${dest}/src`, {verbose: opts.verbose});
     await mkdir(`${dest}/task`, {verbose: opts.verbose});
     console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
@@ -268,6 +307,7 @@ program
   .version(pkg.version, '-v, --version')
   .usage('<dir> [options]')
   .option('--name <name>', 'set project name.')
+  .option('--force', 'Generate forcely even if <dir> is not empty.')
   .option('--no-interactive', 'Disable interactive interface.')
   .option('--no-css', 'Disable CSS build task.')
   .option('--no-css-deps', 'Disable CSS dependency build task.')
@@ -289,7 +329,11 @@ if (program.args.length) {
   const sourceDir = path.resolve(__dirname, '../template'),
         destDir = path.resolve(program.args[0]) || process.cwd();
 
-  main(sourceDir, destDir, program.opts());
+  main(sourceDir, destDir, program.opts())
+    .catch((error) => {
+      console.error(error);
+      process.exitCode = 1;
+    });
 }
 else {
   program.help();

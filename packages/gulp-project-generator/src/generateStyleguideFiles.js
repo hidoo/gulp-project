@@ -20,11 +20,15 @@ export default async function generateStyleguideFiles(src = '', dest = '', optio
   const {verbose} = options;
 
   try {
-    if (options.styleguide) {
-      await render(`${src}/task/styleguide.js.hbs`, options)
-        .then((output) => formatCode(output))
-        .then((output) => write(output, `${dest}/task/styleguide.js`, {verbose}));
+    if (!options.styleguide) {
+      return;
     }
+
+    await render(`${src}/task/styleguide.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/task/styleguide.js`, {verbose}));
+
+    return;
   }
   catch (error) {
     throw error;

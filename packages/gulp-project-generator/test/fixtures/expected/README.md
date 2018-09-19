@@ -28,6 +28,23 @@ $ npm run dev
 $ npm run dev:build
 ```
 
+#### Command line options
+
+```sh
+--host <ip>             set ip. (default: 0.0.0.0)
+--port <number>         set port. (default: 8000)
+--protocol <scheme>     set protocol. [https|http] (default: http)
+--open [type]           open browser automatically. [true|local|external|ui|ui-external|false]
+--ui                    enable debug ui or not.
+--compress              enable file compress or not.
+```
+
+example:
+
+```sh
+$ npm run dev -- --compress
+```
+
 ### For production
 
 ```sh

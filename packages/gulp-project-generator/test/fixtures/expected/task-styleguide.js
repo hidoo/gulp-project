@@ -15,22 +15,21 @@ import * as config from '../config';
  * relative path from styleguide to css
  * @type {String}
  */
-const fromStyleguideToCss = relative(config.path.destStyleguide, config.path.destCss);
+const pathToCss = relative(config.path.destStyleguide, config.path.destCss);
 
 /**
  * relative path from styleguide to js
  * @type {String}
  */
-const fromStyleguideToJs = relative(config.path.destStyleguide, config.path.destJs);
+const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
 
 // define build task
 export const build = buildStyleguide({
   name: 'styleguide:build',
   src: `${config.path.srcStyleguide}`,
   dest: `${config.path.destStyleguide}`,
-  css: [`${fromStyleguideToCss}/main.css`],
-  js: [`${fromStyleguideToJs}/main.js`],
-  compress: config.compress
+  css: [`${pathToCss}/main.css`],
+  js: [`${pathToJs}/main.js`]
 });
 
 // define prebuild task

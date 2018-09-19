@@ -28,11 +28,13 @@ describe('generateImageFiles', () => {
   it('should not generate if argument options.image is false.', async () => {
     await generateImageFiles(path.src, path.dest, {image: false});
 
-    const actualTask = glob.sync(`${path.dest}/task/image.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/image/**/*`);
+    const actualTask = glob.sync(`${path.dest}/task/image.js`, {nodir: true}),
+          actualAssetList = glob.sync(`${path.dest}/src/image/**/*`, {nodir: true});
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files image task if argument options.image is true.', async () => {
@@ -40,15 +42,45 @@ describe('generateImageFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/image.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-image.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/image/**/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/image/**/*`);
+          actualAssetList = glob.sync(`${path.dest}/src/image/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/image/sample.gif',
+            '/src/image/sample.jpg',
+            '/src/image/sample.png',
+            '/src/image/sample.svg'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files image task if argument options.image is true argument options.multiDevice is true.', async () => {
+    await generateImageFiles(path.src, path.dest, {image: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/image.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-image-multi-device.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/image/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/image/desktop/sample.gif',
+            '/src/image/desktop/sample.jpg',
+            '/src/image/desktop/sample.png',
+            '/src/image/desktop/sample.svg',
+            '/src/image/mobile/sample.gif',
+            '/src/image/mobile/sample.jpg',
+            '/src/image/mobile/sample.png',
+            '/src/image/mobile/sample.svg'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
 });

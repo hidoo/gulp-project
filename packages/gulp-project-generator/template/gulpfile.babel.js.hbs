@@ -63,63 +63,183 @@ fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
  */
 export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
 
+{{#if multiDevice}}
+/**
+ * return skip task
+ * @param {String} name task name
+ * @return {Function}
+ */
+export const skip = (name = 'skip') => {
+  const task = (done) => done();
+
+  task.displayName = name;
+  return task;
+};
+{{/if}}
+
 /**
  * build task
  * @return {Function}
  */
-export const build = gulp.parallel(
-  {{#if this.cssDeps}}
-    css.deps,
-  {{/if}}
-  {{#if this.jsDeps}}
-    js.deps,
-  {{/if}}
-  {{#if this.css}}
-    gulp.series(
-      {{#if this.sprite}}
-        sprite.main,
+{{#if multiDevice}}
+  export const build = gulp.parallel(
+    config.skipDevice === 'desktop' ? skip('skip:build:desktop') : gulp.parallel(
+      {{#if this.cssDeps}}
+        css.desktop.deps,
       {{/if}}
-      css.main,
-      {{#if this.styleguide}}
-        styleguide.main,
+      {{#if this.jsDeps}}
+        js.desktop.deps,
+      {{/if}}
+      {{#if this.css}}
+        gulp.series(
+          {{#if this.sprite}}
+            sprite.desktop.main,
+          {{/if}}
+          css.desktop.main,
+          {{#if this.styleguide}}
+            styleguide.desktop.main,
+          {{/if}}
+        ),
+      {{/if}}
+      {{#if this.js}}
+        js.desktop.main,
+      {{/if}}
+      {{#if this.html}}
+        html.desktop.main,
+      {{/if}}
+      {{#if this.image}}
+        image.desktop.main,
       {{/if}}
     ),
-  {{/if}}
-  {{#if this.js}}
-    js.main,
-  {{/if}}
-  {{#if this.html}}
-    html.main,
-  {{/if}}
-  {{#if this.image}}
-    image.main,
-  {{/if}}
-);
+    config.skipDevice === 'mobile' ? skip('skip:build:mobile') : gulp.parallel(
+      {{#if this.cssDeps}}
+        css.mobile.deps,
+      {{/if}}
+      {{#if this.jsDeps}}
+        js.mobile.deps,
+      {{/if}}
+      {{#if this.css}}
+        gulp.series(
+          {{#if this.sprite}}
+            sprite.mobile.main,
+          {{/if}}
+          css.mobile.main,
+          {{#if this.styleguide}}
+            styleguide.mobile.main,
+          {{/if}}
+        ),
+      {{/if}}
+      {{#if this.js}}
+        js.mobile.main,
+      {{/if}}
+      {{#if this.html}}
+        html.mobile.main,
+      {{/if}}
+      {{#if this.image}}
+        image.mobile.main,
+      {{/if}}
+    )
+  );
+{{else}}
+  export const build = gulp.parallel(
+    {{#if this.cssDeps}}
+      css.deps,
+    {{/if}}
+    {{#if this.jsDeps}}
+      js.deps,
+    {{/if}}
+    {{#if this.css}}
+      gulp.series(
+        {{#if this.sprite}}
+          sprite.main,
+        {{/if}}
+        css.main,
+        {{#if this.styleguide}}
+          styleguide.main,
+        {{/if}}
+      ),
+    {{/if}}
+    {{#if this.js}}
+      js.main,
+    {{/if}}
+    {{#if this.html}}
+      html.main,
+    {{/if}}
+    {{#if this.image}}
+      image.main,
+    {{/if}}
+  );
+{{/if}}
 
 /**
  * file observe task
  * @return {Function}
  */
-export const watch = gulp.parallel(
-  {{#if this.css}}
-    css.watch,
-  {{/if}}
-  {{#if this.js}}
-    js.watch,
-  {{/if}}
-  {{#if this.html}}
-    html.watch,
-  {{/if}}
-  {{#if this.image}}
-    image.watch,
-  {{/if}}
-  {{#if this.sprite}}
-    sprite.watch,
-  {{/if}}
-  {{#if this.styleguide}}
-    styleguide.watch,
-  {{/if}}
-);
+{{#if multiDevice}}
+  export const watch = gulp.parallel(
+    config.skipDevice === 'desktop' ? skip('skip:watch:desktop') : gulp.parallel(
+      {{#if this.css}}
+        css.desktop.watch,
+      {{/if}}
+      {{#if this.js}}
+        js.desktop.watch,
+      {{/if}}
+      {{#if this.html}}
+        html.desktop.watch,
+      {{/if}}
+      {{#if this.image}}
+        image.desktop.watch,
+      {{/if}}
+      {{#if this.sprite}}
+        sprite.desktop.watch,
+      {{/if}}
+      {{#if this.styleguide}}
+        styleguide.desktop.watch,
+      {{/if}}
+    ),
+    config.skipDevice === 'mobile' ? skip('skip:watch:mobile') : gulp.parallel(
+      {{#if this.css}}
+        css.mobile.watch,
+      {{/if}}
+      {{#if this.js}}
+        js.mobile.watch,
+      {{/if}}
+      {{#if this.html}}
+        html.mobile.watch,
+      {{/if}}
+      {{#if this.image}}
+        image.mobile.watch,
+      {{/if}}
+      {{#if this.sprite}}
+        sprite.mobile.watch,
+      {{/if}}
+      {{#if this.styleguide}}
+        styleguide.mobile.watch,
+      {{/if}}
+    )
+  );
+{{else}}
+  export const watch = gulp.parallel(
+    {{#if this.css}}
+      css.watch,
+    {{/if}}
+    {{#if this.js}}
+      js.watch,
+    {{/if}}
+    {{#if this.html}}
+      html.watch,
+    {{/if}}
+    {{#if this.image}}
+      image.watch,
+    {{/if}}
+    {{#if this.sprite}}
+      sprite.watch,
+    {{/if}}
+    {{#if this.styleguide}}
+      styleguide.watch,
+    {{/if}}
+  );
+{{/if}}
 
 /**
  * default task

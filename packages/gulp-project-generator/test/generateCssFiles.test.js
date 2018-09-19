@@ -28,11 +28,13 @@ describe('generateCssFiles', () => {
   it('should not generate if argument options.css is false.', async () => {
     await generateCssFiles(path.src, path.dest, {css: false});
 
-    const actualTask = glob.sync(`${path.dest}/task/css.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`);
+    const actualTask = glob.sync(`${path.dest}/task/css.js`, {nodir: true}),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true});
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files css task if argument options.css is true.', async () => {
@@ -40,15 +42,18 @@ describe('generateCssFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-css.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/css/**/*`);
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/css/README.md',
+            '/src/css/main.styl'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
   it('should generate files css task if argument options.css is true and argument options.cssDeps is true.', async () => {
@@ -56,18 +61,66 @@ describe('generateCssFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-css-deps.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`).sort(),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
           expectedAssetList = [
-            ...glob.sync(`${path.src}/src/css/**/*`),
-            ...glob.sync(`${path.src}/src/cssDeps/**/*`).map((filepath) => filepath.replace('cssDeps', 'css'))
-          ].sort();
+            '/src/css/README.md',
+            '/src/css/deps/sample-a.css',
+            '/src/css/deps/sample-b.css',
+            '/src/css/main.styl'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files css task if argument options.css is true and argument options.multiDevice is true.', async () => {
+    await generateCssFiles(path.src, path.dest, {css: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-css-multi-device.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/css/desktop/README.md',
+            '/src/css/desktop/main.styl',
+            '/src/css/mobile/README.md',
+            '/src/css/mobile/main.styl'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files css task if argument options.css and argument options.multiDevice and argument options.cssDeps is true.', async () => {
+    await generateCssFiles(path.src, path.dest, {css: true, cssDeps: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-css-multi-device-deps.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/css/desktop/README.md',
+            '/src/css/desktop/deps/sample-a.css',
+            '/src/css/desktop/deps/sample-b.css',
+            '/src/css/desktop/main.styl',
+            '/src/css/mobile/README.md',
+            '/src/css/mobile/deps/sample-a.css',
+            '/src/css/mobile/deps/sample-b.css',
+            '/src/css/mobile/main.styl'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
 });

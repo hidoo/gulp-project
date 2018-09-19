@@ -24,7 +24,7 @@ describe('generateReadme', () => {
     actual.then(() => done());
   });
 
-  it('should generate config.js.', async () => {
+  it('should generate README.md.', async () => {
     await generateReadme('hoge-project', path.src, path.dest, {
       css: true,
       html: true,
@@ -37,6 +37,25 @@ describe('generateReadme', () => {
 
     const actual = fs.readFileSync(`${path.dest}/README.md`),
           expected = fs.readFileSync(`${path.expected}/README.md`);
+
+    assert(actual);
+    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+  });
+
+  it('should generate README.md if argument options.multiDevice is true.', async () => {
+    await generateReadme('hoge-project', path.src, path.dest, {
+      css: true,
+      html: true,
+      image: true,
+      js: true,
+      server: true,
+      sprite: true,
+      styleguide: true,
+      multiDevice: true
+    });
+
+    const actual = fs.readFileSync(`${path.dest}/README.md`),
+          expected = fs.readFileSync(`${path.expected}/README-multi-device.md`);
 
     assert(actual);
     assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());

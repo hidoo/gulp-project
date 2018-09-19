@@ -28,11 +28,13 @@ describe('generateStyleguideFiles', () => {
   it('should not generate if argument options.styleguide is false.', async () => {
     await generateStyleguideFiles(path.src, path.dest, {styleguide: false});
 
-    const actualTask = glob.sync(`${path.dest}/task/styleguide.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/styleguide/**/*`);
+    const actualTask = glob.sync(`${path.dest}/task/styleguide.js`, {nodir: true}),
+          actualAssetList = glob.sync(`${path.dest}/src/styleguide/**/*`, {nodir: true});
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files for styleguide task if argument options.styleguide is true.', async () => {
@@ -50,6 +52,16 @@ describe('generateStyleguideFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/styleguide.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-styleguide.js`);
+
+    assert(actualTask);
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+  });
+
+  it('should generate files for styleguide task if argument options.styleguide and options.multiDevice are true.', async () => {
+    await generateStyleguideFiles(path.src, path.dest, {styleguide: true, js: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/styleguide.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-styleguide-multi-device.js`);
 
     assert(actualTask);
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());

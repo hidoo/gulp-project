@@ -12,43 +12,139 @@ import {concatCss} from '@hidoo/gulp-task-concat';
  */
 import * as config from '../config';
 
-// define main task
-export const main = buildCss({
-  name: 'css:main',
-  src: `${config.path.srcCss}/main.styl`,
-  dest: `${config.path.destCss}`,
-  filename: 'main.css',
-  compress: config.compress
-});
+{{#if multiDevice}}
 
-{{#if cssDeps}}
-// define dependency task
-export const deps = concatCss({
-  name: 'css:deps',
-  src: [
-    `${config.path.srcCss}/deps/sample-b.css`,
-    `${config.path.srcCss}/deps/sample-a.css`
-  ],
-  dest: config.path.destCss,
-  filename: 'bundle.css',
-  compress: config.compress
-});
-{{/if}}
+  // define main task
+  const mainDesktop = buildCss({
+    name: 'css:desktop:main',
+    src: `${config.path.srcCssDesktop}/main.styl`,
+    dest: `${config.path.destCssDesktop}`,
+    filename: 'main.css',
+    compress: config.compress
+  });
+  const mainMobile = buildCss({
+    name: 'css:mobile:main',
+    src: `${config.path.srcCssMobile}/main.styl`,
+    dest: `${config.path.destCssMobile}`,
+    filename: 'main.css',
+    compress: config.compress
+  });
 
-// define watch task
-export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCss}/*.styl`
-    ],
-    main
-  );
   {{#if cssDeps}}
-  gulp.watch(
-    [
-      `${config.path.srcCss}/deps/*.css`
+  // define dependency task
+  const depsDesktop = concatCss({
+    name: 'css:desktop:deps',
+    src: [
+      `${config.path.srcCssDesktop}/deps/sample-b.css`,
+      `${config.path.srcCssDesktop}/deps/sample-a.css`
     ],
-    deps
-  );
+    dest: config.path.destCssDesktop,
+    filename: 'bundle.css',
+    compress: config.compress
+  });
+  const depsMobile = concatCss({
+    name: 'css:mobile:deps',
+    src: [
+      `${config.path.srcCssMobile}/deps/sample-b.css`,
+      `${config.path.srcCssMobile}/deps/sample-a.css`
+    ],
+    dest: config.path.destCssMobile,
+    filename: 'bundle.css',
+    compress: config.compress
+  });
   {{/if}}
-};
+
+  // define watch task
+  const watchDesktop = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCssDesktop}/*.styl`
+      ],
+      mainDesktop
+    );
+    {{#if cssDeps}}
+    gulp.watch(
+      [
+        `${config.path.srcCssDesktop}/deps/*.css`
+      ],
+      depsDesktop
+    );
+    {{/if}}
+  };
+  const watchMobile = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCssMobile}/*.styl`
+      ],
+      mainMobile
+    );
+    {{#if cssDeps}}
+    gulp.watch(
+      [
+        `${config.path.srcCssMobile}/deps/*.css`
+      ],
+      depsMobile
+    );
+    {{/if}}
+  };
+
+  // export tasks
+  export const desktop = {
+    main: mainDesktop,
+    {{#if cssDeps}}
+      deps: depsDesktop,
+    {{/if}}
+    watch: watchDesktop
+  };
+  export const mobile = {
+    main: mainMobile,
+    {{#if cssDeps}}
+      deps: depsMobile,
+    {{/if}}
+    watch: watchMobile
+  };
+
+{{else}}
+
+  // define main task
+  export const main = buildCss({
+    name: 'css:main',
+    src: `${config.path.srcCss}/main.styl`,
+    dest: `${config.path.destCss}`,
+    filename: 'main.css',
+    compress: config.compress
+  });
+
+  {{#if cssDeps}}
+  // define dependency task
+  export const deps = concatCss({
+    name: 'css:deps',
+    src: [
+      `${config.path.srcCss}/deps/sample-b.css`,
+      `${config.path.srcCss}/deps/sample-a.css`
+    ],
+    dest: config.path.destCss,
+    filename: 'bundle.css',
+    compress: config.compress
+  });
+  {{/if}}
+
+  // define watch task
+  export const watch = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCss}/*.styl`
+      ],
+      main
+    );
+    {{#if cssDeps}}
+    gulp.watch(
+      [
+        `${config.path.srcCss}/deps/*.css`
+      ],
+      deps
+    );
+    {{/if}}
+  };
+
+{{/if}}

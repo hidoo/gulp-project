@@ -28,11 +28,13 @@ describe('generateServerFiles', () => {
   it('should not generate if argument options.server is false.', async () => {
     await generateServerFiles(path.src, path.dest, {server: false});
 
-    const actualTask = glob.sync(`${path.dest}/task/server.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/server/**/*`);
+    const actualTask = glob.sync(`${path.dest}/task/server.js`, {nodir: true}),
+          actualAssetList = glob.sync(`${path.dest}/src/server/**/*`, {nodir: true});
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files for local web server task if argument options.server is true.', async () => {
@@ -40,15 +42,45 @@ describe('generateServerFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/server.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-server.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/server/**/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/server/**/*`);
+          actualAssetList = glob.sync(`${path.dest}/src/server/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/server/app.js',
+            '/src/server/controllers/api.js',
+            '/src/server/controllers/index.js',
+            '/src/server/routes/api.js',
+            '/src/server/routes/index.js',
+            '/src/server/views/markdown.hbs'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files for local web server task if argument options.server and argument options.multiDevice is true.', async () => {
+    await generateServerFiles(path.src, path.dest, {server: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/server.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-server.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/server/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/server/app.js',
+            '/src/server/controllers/api.js',
+            '/src/server/controllers/index.js',
+            '/src/server/routes/api.js',
+            '/src/server/routes/index.js',
+            '/src/server/views/markdown.hbs'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
 });

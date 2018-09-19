@@ -1,4 +1,4 @@
-# {{this.name}}
+# hoge-project
 
 > A project scaffold using [gulp](http://gulpjs.com/).
 
@@ -31,16 +31,12 @@ $ npm run dev:build
 #### Command line options
 
 ```sh
-{{#if server}}
 --host <ip>             set ip. (default: 0.0.0.0)
 --port <number>         set port. (default: 8000)
 --protocol <scheme>     set protocol. [https|http] (default: http)
 --open [type]           open browser automatically. [true|local|external|ui|ui-external|false]
 --ui                    enable debug ui or not.
-{{/if}}
-{{#if multiDevice}}
 --skip-device <device>  skip target device tasks. [desktop|mobile]
-{{/if}}
 --compress              enable file compress or not.
 ```
 

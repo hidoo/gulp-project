@@ -48,20 +48,46 @@ fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
 export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
 
 /**
+ * return skip task
+ * @param {String} name task name
+ * @return {Function}
+ */
+export const skip = (name = 'skip') => {
+  const task = (done) => done();
+
+  task.displayName = name;
+  return task;
+};
+
+/**
  * build task
  * @return {Function}
  */
 export const build = gulp.parallel(
-  css.deps,
-  js.deps,
-  gulp.series(
-    sprite.main,
-    css.main,
-    styleguide.main
+  config.skipDevice === 'desktop' ? skip('skip:build:desktop') : gulp.parallel(
+    css.desktop.deps,
+    js.desktop.deps,
+    gulp.series(
+      sprite.desktop.main,
+      css.desktop.main,
+      styleguide.desktop.main
+    ),
+    js.desktop.main,
+    html.desktop.main,
+    image.desktop.main
   ),
-  js.main,
-  html.main,
-  image.main
+  config.skipDevice === 'mobile' ? skip('skip:build:mobile') : gulp.parallel(
+    css.mobile.deps,
+    js.mobile.deps,
+    gulp.series(
+      sprite.mobile.main,
+      css.mobile.main,
+      styleguide.mobile.main
+    ),
+    js.mobile.main,
+    html.mobile.main,
+    image.mobile.main
+  )
 );
 
 /**
@@ -69,12 +95,22 @@ export const build = gulp.parallel(
  * @return {Function}
  */
 export const watch = gulp.parallel(
-  css.watch,
-  js.watch,
-  html.watch,
-  image.watch,
-  sprite.watch,
-  styleguide.watch
+  config.skipDevice === 'desktop' ? skip('skip:watch:desktop') : gulp.parallel(
+    css.desktop.watch,
+    js.desktop.watch,
+    html.desktop.watch,
+    image.desktop.watch,
+    sprite.desktop.watch,
+    styleguide.desktop.watch
+  ),
+  config.skipDevice === 'mobile' ? skip('skip:watch:mobile') : gulp.parallel(
+    css.mobile.watch,
+    js.mobile.watch,
+    html.mobile.watch,
+    image.mobile.watch,
+    sprite.mobile.watch,
+    styleguide.mobile.watch
+  )
 );
 
 /**

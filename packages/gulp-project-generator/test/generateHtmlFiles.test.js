@@ -31,8 +31,10 @@ describe('generateHtmlFiles', () => {
     const actualTask = glob.sync(`${path.dest}/task/html.js`),
           actualAssetList = glob.sync(`${path.dest}/src/html/**/*`);
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files html task if argument options.html is true.', async () => {
@@ -40,15 +42,47 @@ describe('generateHtmlFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/html.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-html.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/html/**/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/html/**/*`);
+          actualAssetList = glob.sync(`${path.dest}/src/html/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/html/layouts/base.hbs',
+            '/src/html/pages/index.hbs',
+            '/src/html/pages/page-list.hbs',
+            '/src/html/partials/head/meta.hbs',
+            '/src/html/partials/head/ogp.hbs',
+            '/src/html/partials/head/seo.hbs'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files html task if argument options.html is true and argument options.multiDevice is true.', async () => {
+    await generateHtmlFiles(path.src, path.dest, {html: true, multiDevice: true});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/html.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-html-multi-device.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/html/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/html/desktop/index.hbs',
+            '/src/html/desktop/page-list.hbs',
+            '/src/html/layouts/base.hbs',
+            '/src/html/mobile/index.hbs',
+            '/src/html/mobile/page-list.hbs',
+            '/src/html/partials/head/meta.hbs',
+            '/src/html/partials/head/ogp.hbs',
+            '/src/html/partials/head/seo.hbs'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
 });

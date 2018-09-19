@@ -97,6 +97,13 @@ async function choiseOptions(options = {}) {
       const results = await inquirer
         .prompt([
           {
+            type: 'confirm',
+            name: 'multiDevice',
+            message: 'Enable multi-device mode?',
+            default: false,
+            when: () => !options.multiDevice
+          },
+          {
             type: 'checkbox',
             name: 'tasks',
             message: 'Please select the task you need for the project.',
@@ -155,6 +162,7 @@ async function choiseOptions(options = {}) {
       return {
         force: options.force,
         interactive: options.interactive,
+        multiDevice: options.multiDevice || results.multiDevice,
         ...results.tasks,
         ...results.depsTasks,
         jsBundler: results.jsBundler,
@@ -182,6 +190,12 @@ async function confirmConfig(name = '', options = {}) {
       console.log('');
       console.log(`  ${chalk.white('Project Name:')}`);
       console.log(`    ${chalk.cyan(name)}`);
+
+      if (options.multiDevice) {
+        console.log('');
+        console.log(`  ${chalk.white('Multi-device Mode:')}`);
+        console.log(`    ${chalk.cyan(options.multiDevice)}`);
+      }
 
       console.log('');
       console.log(`  ${chalk.white('Tasks:')}`);
@@ -309,6 +323,7 @@ program
   .option('--name <name>', 'set project name.')
   .option('--force', 'Generate forcely even if <dir> is not empty.')
   .option('--no-interactive', 'Disable interactive interface.')
+  .option('--multi-device', 'Enable multi-device mode.')
   .option('--no-css', 'Disable CSS build task.')
   .option('--no-css-deps', 'Disable CSS dependency build task.')
   .option('--no-html', 'Disable HTML build task.')

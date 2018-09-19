@@ -5,6 +5,53 @@ import render from './render';
 import formatCode from './formatCode';
 
 /**
+ * copy assets for single device mode
+ * @param {String} src source path
+ * @param {String} dest destination path
+ * @param {OPTIONS} options command line options
+ * @return {Promise}
+ */
+async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
+  const {verbose} = options;
+
+  await mkdir(`${dest}/src/sprite`, {verbose});
+  switch (options.spriteType) {
+    case 'svg':
+      await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite`, {verbose});
+      break;
+    case 'image':
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite`, {verbose}); // eslint-disable-line max-len
+      break;
+    default:
+  }
+}
+
+/**
+ * copy assets for multi device mode
+ * @param {String} src source path
+ * @param {String} dest destination path
+ * @param {OPTIONS} options command line options
+ * @return {Promise}
+ */
+async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
+  const {verbose} = options;
+
+  await mkdir(`${dest}/src/sprite/desktop`, {verbose});
+  await mkdir(`${dest}/src/sprite/mobile`, {verbose});
+  switch (options.spriteType) {
+    case 'svg':
+      await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite/desktop`, {verbose});
+      await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite/mobile`, {verbose});
+      break;
+    case 'image':
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/desktop`, {verbose}); // eslint-disable-line max-len
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/mobile`, {verbose}); // eslint-disable-line max-len
+      break;
+    default:
+  }
+}
+
+/**
  * generate sprite sheet files
  * @param {String} src source path
  * @param {String} dest destination path
@@ -22,22 +69,22 @@ export default async function generateSpriteFiles(src = '', dest = '', options =
   const {verbose} = options;
 
   try {
-    if (options.sprite) {
-      await render(`${src}/task/sprite.js.hbs`, options)
-        .then((output) => formatCode(output))
-        .then((output) => write(output, `${dest}/task/sprite.js`, {verbose}));
-
-      await mkdir(`${dest}/src/sprite`, {verbose});
-      switch (options.spriteType) {
-        case 'svg':
-          await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite`, {verbose});
-          break;
-        case 'image':
-          await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite`, {verbose}); // eslint-disable-line max-len
-          break;
-        default:
-      }
+    if (!options.sprite) {
+      return;
     }
+
+    await render(`${src}/task/sprite.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/task/sprite.js`, {verbose}));
+
+    if (options.multiDevice) {
+      await copyAssetsForMultiDeviceDevice(src, dest, options);
+    }
+    else {
+      await copyAssetsForSingleDevice(src, dest, options);
+    }
+
+    return;
   }
   catch (error) {
     throw error;

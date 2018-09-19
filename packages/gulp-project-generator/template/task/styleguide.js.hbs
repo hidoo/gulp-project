@@ -15,46 +15,129 @@ import * as config from '../config';
  * relative path from styleguide to css
  * @type {String}
  */
-const fromStyleguideToCss = relative(config.path.destStyleguide, config.path.destCss);
+{{#if multiDevice}}
+const pathToCssDesktop = relative(config.path.destStyleguideDesktop, config.path.destCssDesktop); // eslint-disable-line max-len
+const pathToCssMobile = relative(config.path.destStyleguideMobile, config.path.destCssMobile); // eslint-disable-line max-len
+{{else}}
+const pathToCss = relative(config.path.destStyleguide, config.path.destCss);
+{{/if}}
 
-{{#if this.js}}
+{{#if js}}
 /**
  * relative path from styleguide to js
  * @type {String}
  */
-const fromStyleguideToJs = relative(config.path.destStyleguide, config.path.destJs);
+{{#if multiDevice}}
+const pathToJsDesktop = relative(config.path.destStyleguideDesktop, config.path.destJsDesktop); // eslint-disable-line max-len
+const pathToJsMobile = relative(config.path.destStyleguideMobile, config.path.destJsMobile); // eslint-disable-line max-len
+{{else}}
+const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
+{{/if}}
 {{/if}}
 
-// define build task
-export const build = buildStyleguide({
-  name: 'styleguide:build',
-  src: `${config.path.srcStyleguide}`,
-  dest: `${config.path.destStyleguide}`,
-  css: [`${fromStyleguideToCss}/main.css`],
-  js: [{{#if this.js}}`${fromStyleguideToJs}/main.js`{{/if}}],
-  compress: config.compress
-});
+{{#if multiDevice}}
 
-// define prebuild task
-export const prebuild = copy({
-  name: 'styleguide:prebuild',
-  src: `${config.path.srcCss}/*.md`,
-  dest: config.path.srcStyleguide
-});
+  // define build task
+  const buildDesktop = buildStyleguide({
+    name: 'styleguide:desktop:build',
+    src: `${config.path.srcStyleguideDesktop}`,
+    dest: `${config.path.destStyleguideDesktop}`,
+    css: [`${pathToCssDesktop}/main.css`],
+    js: [{{#if this.js}}`${pathToJsDesktop}/main.js`{{/if}}]
+  });
+  const buildMobile = buildStyleguide({
+    name: 'styleguide:mobile:build',
+    src: `${config.path.srcStyleguideMobile}`,
+    dest: `${config.path.destStyleguideMobile}`,
+    css: [`${pathToCssMobile}/main.css`],
+    js: [{{#if this.js}}`${pathToJsMobile}/main.js`{{/if}}]
+  });
 
-// define main task
-export const main = gulp.series(
-  prebuild,
-  build
-);
+  // define prebuild task
+  const prebuildDesktop = copy({
+    name: 'styleguide:desktop:prebuild',
+    src: `${config.path.srcCssDesktop}/*.md`,
+    dest: config.path.srcStyleguideDesktop
+  });
+  const prebuildMobile = copy({
+    name: 'styleguide:mobile:prebuild',
+    src: `${config.path.srcCssMobile}/*.md`,
+    dest: config.path.srcStyleguideMobile
+  });
 
-// define watch task
-export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCss}/*.md`,
-      `${config.path.srcStyleguide}/*.css`
-    ],
-    main
+  // define main task
+  const mainDesktop = gulp.series(
+    prebuildDesktop,
+    buildDesktop
   );
-};
+  const mainMobile = gulp.series(
+    prebuildMobile,
+    buildMobile
+  );
+
+  // define watch task
+  const watchDesktop = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCssDesktop}/*.md`,
+        `${config.path.srcStyleguideDesktop}/*.css`
+      ],
+      mainDesktop
+    );
+  };
+  const watchMobile = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCssMobile}/*.md`,
+        `${config.path.srcStyleguideMobile}/*.css`
+      ],
+      mainMobile
+    );
+  };
+
+  // export tasks
+  export const desktop = {
+    main: mainDesktop,
+    watch: watchDesktop
+  };
+  export const mobile = {
+    main: mainMobile,
+    watch: watchMobile
+  };
+
+{{else}}
+
+  // define build task
+  export const build = buildStyleguide({
+    name: 'styleguide:build',
+    src: `${config.path.srcStyleguide}`,
+    dest: `${config.path.destStyleguide}`,
+    css: [`${pathToCss}/main.css`],
+    js: [{{#if this.js}}`${pathToJs}/main.js`{{/if}}]
+  });
+
+  // define prebuild task
+  export const prebuild = copy({
+    name: 'styleguide:prebuild',
+    src: `${config.path.srcCss}/*.md`,
+    dest: config.path.srcStyleguide
+  });
+
+  // define main task
+  export const main = gulp.series(
+    prebuild,
+    build
+  );
+
+  // define watch task
+  export const watch = () => {
+    gulp.watch(
+      [
+        `${config.path.srcCss}/*.md`,
+        `${config.path.srcStyleguide}/*.css`
+      ],
+      main
+    );
+  };
+
+{{/if}}

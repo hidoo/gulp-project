@@ -28,11 +28,13 @@ describe('generateSpriteFiles', () => {
   it('should not generate if argument options.sprite is false.', async () => {
     await generateSpriteFiles(path.src, path.dest, {sprite: false});
 
-    const actualTask = glob.sync(`${path.dest}/task/sprite.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`);
+    const actualTask = glob.sync(`${path.dest}/task/sprite.js`, {nodir: true}),
+          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`, {nodir: true});
 
-    assert(Array.isArray(actualTask) && actualTask.length === 0);
-    assert(Array.isArray(actualAssetList) && actualAssetList.length === 0);
+    assert(Array.isArray(actualTask));
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask, []);
+    assert.deepStrictEqual(actualAssetList, []);
   });
 
   it('should generate files for svg sprite sheet task if argument options.sprite is true and argument options.spriteType is "svg".', async () => {
@@ -40,15 +42,18 @@ describe('generateSpriteFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/sprite.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-sprite-svg.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/sprite/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/sprite/*.svg`);
+          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/sprite/sample-a.svg',
+            '/src/sprite/sample-b.svg'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
   it('should generate files for svg sprite sheet task if argument options.sprite is true and argument options.spriteType is "image".', async () => {
@@ -56,15 +61,39 @@ describe('generateSpriteFiles', () => {
 
     const actualTask = fs.readFileSync(`${path.dest}/task/sprite.js`),
           expectedTask = fs.readFileSync(`${path.expected}/task-sprite-image.js`),
-          actualAssetList = glob.sync(`${path.dest}/src/sprite/*`),
-          expectedAssetList = glob.sync(`${path.src}/src/sprite/*.{jpg,jpeg,png,gif}`);
+          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/sprite/sample-a.png',
+            '/src/sprite/sample-b.png'
+          ];
 
     assert(actualTask);
+    assert(Array.isArray(actualAssetList));
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
-    assert.deepStrictEqual(
-      actualAssetList.map((filepath) => filepath.replace(path.dest, '')),
-      expectedAssetList.map((filepath) => filepath.replace(path.src, ''))
-    );
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files for svg sprite sheet task if argument options.sprite is true and argument options.multiDevice is true.', async () => {
+    await generateSpriteFiles(path.src, path.dest, {sprite: true, multiDevice: true, spriteType: 'svg'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/sprite.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-sprite-multi-device.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/sprite/desktop/sample-a.svg',
+            '/src/sprite/desktop/sample-b.svg',
+            '/src/sprite/mobile/sample-a.svg',
+            '/src/sprite/mobile/sample-b.svg'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
 });

@@ -21,7 +21,7 @@ const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disabl
  * relative path from css to sprite
  * @type {String}
  */
-const fromCssToSprite = relative(config.path.destCss, config.path.destSprite);
+const pathToSprite = relative(config.path.destCss, config.path.destSprite);
 
 // define main task
 export const main = buildSprite({
@@ -31,7 +31,7 @@ export const main = buildSprite({
   destCss: `${config.path.srcCss}`,
   imgName: 'sample.png',
   cssName: '_sprite_sample.styl',
-  imgPath: `${fromCssToSprite}/sample.png${cacheParameter}`,
+  imgPath: `${pathToSprite}/sample.png${cacheParameter}`,
   evenize: false,
   compress: config.compress
 });

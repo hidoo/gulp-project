@@ -29,6 +29,9 @@ const cli = new Command()
   .option('--open [type]', 'open browser automatically or not.')
   .option('--ui', 'enable debug ui or not.')
 {{/if}}
+{{#if this.multiDevice}}
+  .option('--skip-device <device>', 'skip target device tasks.', /^(desktop|mobile)$/)
+{{/if}}
   .option('--compress', 'enable file compress or not.')
   .parse(process.argv);
 
@@ -44,6 +47,14 @@ export const serverOptions = {
   open: String(cli.open || process.env.SERVER_OPEN) || false,
   ui: Boolean(cli.ui || process.env.SERVER_UI) || false
 };
+{{/if}}
+
+{{#if this.multiDevice}}
+/**
+ * skiped tasks target device name
+ * @type {String}
+ */
+export const skipDevice = cli.skipDevice || '';
 {{/if}}
 
 /**
@@ -69,44 +80,98 @@ export const path = {
   src: './src',
   dest: './public',
 
+  {{#if multiDevice}}
+    // device
+    desktop: '/desktop',
+    mobile: '/mobile',
+  {{/if}}
+
   // source details
   {{#if this.css}}
     get srcCss() { return `${this.src}/css`; },
+    {{#if multiDevice}}
+      get srcCssDesktop() { return `${this.srcCss}${this.desktop}`; },
+      get srcCssMobile() { return `${this.srcCss}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.html}}
     get srcData() { return `${this.src}/data`; },
     get srcHtml() { return `${this.src}/html`; },
+    {{#if multiDevice}}
+      get srcHtmlDesktop() { return `${this.srcHtml}${this.desktop}`; },
+      get srcHtmlMobile() { return `${this.srcHtml}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.image}}
     get srcImage() { return `${this.src}/image`; },
+    {{#if multiDevice}}
+      get srcImageDesktop() { return `${this.srcImage}${this.desktop}`; },
+      get srcImageMobile() { return `${this.srcImage}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.js}}
     get srcJs() { return `${this.src}/js`; },
+    {{#if multiDevice}}
+      get srcJsDesktop() { return `${this.srcJs}${this.desktop}`; },
+      get srcJsMobile() { return `${this.srcJs}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.sprite}}
     get srcSprite() { return `${this.src}/sprite`; },
+    {{#if multiDevice}}
+      get srcSpriteDesktop() { return `${this.srcSprite}${this.desktop}`; },
+      get srcSpriteMobile() { return `${this.srcSprite}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.styleguide}}
     get srcStyleguide() { return `${this.dest}/css`; },
+    {{#if multiDevice}}
+      get srcStyleguideDesktop() { return this.srcStyleguide; },
+      get srcStyleguideMobile() { return `${this.dest}${this.mobile}/css`; },
+    {{/if}}
   {{/if}}
 
   // destinaion details
   {{#if this.css}}
     get destCss() { return `${this.dest}/css`; },
+    {{#if multiDevice}}
+      get destCssDesktop() { return this.destCss; },
+      get destCssMobile() { return `${this.dest}${this.mobile}/css`; },
+    {{/if}}
   {{/if}}
   {{#if this.html}}
     get destHtml() { return this.dest; },
+    {{#if multiDevice}}
+      get destHtmlDesktop() { return this.destHtml; },
+      get destHtmlMobile() { return `${this.dest}${this.mobile}`; },
+    {{/if}}
   {{/if}}
   {{#if this.image}}
     get destImage() { return `${this.dest}/images`; },
+    {{#if multiDevice}}
+      get destImageDesktop() { return this.destImage; },
+      get destImageMobile() { return `${this.dest}${this.mobile}/images`; },
+    {{/if}}
   {{/if}}
   {{#if this.js}}
     get destJs() { return `${this.dest}/js`; },
+    {{#if multiDevice}}
+      get destJsDesktop() { return this.destJs; },
+      get destJsMobile() { return `${this.dest}${this.mobile}/js`; },
+    {{/if}}
   {{/if}}
   {{#if this.sprite}}
     get destSprite() { return `${this.dest}/images/sprites`; },
+    {{#if multiDevice}}
+      get destSpriteDesktop() { return this.destSprite; },
+      get destSpriteMobile() { return `${this.dest}${this.mobile}/images/sprites`; },
+    {{/if}}
   {{/if}}
   {{#if this.styleguide}}
     get destStyleguide() { return `${this.dest}/styleguide`; },
+    {{#if multiDevice}}
+      get destStyleguideDesktop() { return this.destStyleguide; },
+      get destStyleguideMobile() { return `${this.dest}${this.mobile}/styleguide`; },
+    {{/if}}
   {{/if}}
 };

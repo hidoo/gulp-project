@@ -27,9 +27,11 @@ describe('generateConfig', () => {
   it('should generate config.js.', async () => {
     await generateConfig(path.src, path.dest, {
       css: true,
+      cssDeps: true,
       html: true,
       image: true,
       js: true,
+      jsDeps: true,
       server: true,
       sprite: true,
       styleguide: true
@@ -37,6 +39,27 @@ describe('generateConfig', () => {
 
     const actual = fs.readFileSync(`${path.dest}/config.js`),
           expected = fs.readFileSync(`${path.expected}/config.js`);
+
+    assert(actual);
+    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+  });
+
+  it('should generate config.js if argument argument options.multiDevice is true.', async () => {
+    await generateConfig(path.src, path.dest, {
+      css: true,
+      cssDeps: true,
+      html: true,
+      image: true,
+      js: true,
+      jsDeps: true,
+      server: true,
+      sprite: true,
+      styleguide: true,
+      multiDevice: true
+    });
+
+    const actual = fs.readFileSync(`${path.dest}/config.js`),
+          expected = fs.readFileSync(`${path.expected}/config-multi-device.js`);
 
     assert(actual);
     assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());

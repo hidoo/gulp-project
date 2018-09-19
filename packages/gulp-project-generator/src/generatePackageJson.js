@@ -28,6 +28,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'cross-env', version: '^5.2.0'},
           {name: 'eslint', version: '^5.6.0'},
           {name: 'gulp', version: '^4.0.0'},
+          {name: 'husky', version: '^1.0.0-rc.14'},
+          {name: 'lint-staged', version: '^7.2.2'},
           {name: 'npm-run-all', version: '^4.1.3'},
           {name: 'rimraf', version: '^2.6.2'}
         ],
@@ -143,7 +145,17 @@ export default async function generatePackageJson(name = '', dest = '', options 
     devDependencies: devDependencies
       .sort((a, b) => a.name.localeCompare(b.name))
       .reduce((prev, current) => ({...prev, [current.name]: current.version}), {}),
-    dependencies: {}
+    dependencies: {},
+    husky: {
+      hooks: {
+        'pre-commit': 'lint-staged'
+      }
+    },
+    'lint-staged': {
+      '**/*.js': [
+        'eslint'
+      ]
+    }
   };
 
   try {

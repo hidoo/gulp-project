@@ -12,6 +12,7 @@ import * as config from '../config';
 
 // define main task
 export const main = buildCss({
+  name: 'css:main',
   src: `${config.path.srcCss}/main.styl`,
   dest: `${config.path.destCss}`,
   filename: 'main.css',
@@ -20,6 +21,7 @@ export const main = buildCss({
 
 // define dependency task
 export const deps = concatCss({
+  name: 'css:deps',
   src: [
     `${config.path.srcCss}/deps/sample-b.css`,
     `${config.path.srcCss}/deps/sample-a.css`

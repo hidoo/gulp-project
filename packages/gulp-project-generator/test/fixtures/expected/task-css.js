@@ -11,6 +11,7 @@ import * as config from '../config';
 
 // define main task
 export const main = buildCss({
+  name: 'css:main',
   src: `${config.path.srcCss}/main.styl`,
   dest: `${config.path.destCss}`,
   filename: 'main.css',

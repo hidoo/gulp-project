@@ -11,6 +11,7 @@ import * as config from '../config';
 
 // define main task
 export const main = optimizeImage({
+  name: 'image:main',
   src: `${config.path.srcImage}/**/*.{jpg,jpeg,png,gif,svg}`,
   dest: `${config.path.destImage}`,
   compress: config.compress

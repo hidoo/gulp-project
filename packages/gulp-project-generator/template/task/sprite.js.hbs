@@ -31,6 +31,7 @@ const fromCssToSprite = relative(config.path.destCss, config.path.destSprite);
 // define main task
 {{#is spriteType 'svg'}}
 export const main = buildSprite({
+  name: 'sprite:main',
   src: `${config.path.srcSprite}/**/sample-*.svg`,
   destImg: `${config.path.destSprite}`,
   destCss: `${config.path.srcCss}`,
@@ -43,6 +44,7 @@ export const main = buildSprite({
 {{/is}}
 {{#is spriteType 'image'}}
 export const main = buildSprite({
+  name: 'sprite:main',
   src: `${config.path.srcSprite}/**/sample-*.png`,
   destImg: `${config.path.destSprite}`,
   destCss: `${config.path.srcCss}`,

@@ -12,6 +12,7 @@ import * as config from '../config';
 
 // define main task
 export const main = buildJs({
+  name: 'js:main',
   src: `${config.path.srcJs}/main.js`,
   dest: `${config.path.destJs}`,
   filename: 'main.js',
@@ -20,6 +21,7 @@ export const main = buildJs({
 
 // define dependency task
 export const deps = concatJs({
+  name: 'js:deps',
   src: [
     `${config.path.srcJs}/deps/sample-b.js`,
     `${config.path.srcJs}/deps/sample-a.js`

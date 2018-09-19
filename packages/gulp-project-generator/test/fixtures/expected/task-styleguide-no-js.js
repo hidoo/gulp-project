@@ -19,6 +19,7 @@ const fromStyleguideToCss = relative(config.path.destStyleguide, config.path.des
 
 // define build task
 export const build = buildStyleguide({
+  name: 'styleguide:build',
   src: `${config.path.srcStyleguide}`,
   dest: `${config.path.destStyleguide}`,
   css: [`${fromStyleguideToCss}/main.css`],
@@ -28,6 +29,7 @@ export const build = buildStyleguide({
 
 // define prebuild task
 export const prebuild = copy({
+  name: 'styleguide:prebuild',
   src: `${config.path.srcCss}/*.md`,
   dest: config.path.srcStyleguide
 });

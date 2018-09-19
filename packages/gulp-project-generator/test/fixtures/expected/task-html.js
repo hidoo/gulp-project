@@ -11,6 +11,7 @@ import * as config from '../config';
 
 // define main task
 export const main = buildHtml({
+  name: 'html:main',
   src: `${config.path.srcHtml}/pages/**/*.hbs`,
   dest: `${config.path.destHtml}`,
   partials: `${config.path.srcHtml}/partials/**/*.hbs`,

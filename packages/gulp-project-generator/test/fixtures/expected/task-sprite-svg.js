@@ -25,6 +25,7 @@ const fromCssToSprite = relative(config.path.destCss, config.path.destSprite);
 
 // define main task
 export const main = buildSprite({
+  name: 'sprite:main',
   src: `${config.path.srcSprite}/**/sample-*.svg`,
   destImg: `${config.path.destSprite}`,
   destCss: `${config.path.srcCss}`,

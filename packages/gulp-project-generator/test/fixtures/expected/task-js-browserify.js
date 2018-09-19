@@ -11,6 +11,7 @@ import * as config from '../config';
 
 // define main task
 export const main = buildJs({
+  name: 'js:main',
   src: `${config.path.srcJs}/main.js`,
   dest: `${config.path.destJs}`,
   filename: 'main.js',

@@ -26,7 +26,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'babel-eslint', version: '^9.0.0'},
           {name: 'commander', version: '^2.17.1'},
           {name: 'cross-env', version: '^5.2.0'},
-          {name: 'eslint', version: '^5.5.0'},
+          {name: 'eslint', version: '^5.6.0'},
           {name: 'gulp', version: '^4.0.0'},
           {name: 'npm-run-all', version: '^4.1.3'},
           {name: 'rimraf', version: '^2.6.2'}

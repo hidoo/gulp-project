@@ -4,5 +4,4 @@ packages/**/lib/*
 packages/**/test/fixtures/dest/*
 packages/**/test/fixtures/expected/*
 packages/gulp-project-generator/test/fixtures/src/formatCode/*
-packages/gulp-project-sample/public/*
 examples/**/public/*

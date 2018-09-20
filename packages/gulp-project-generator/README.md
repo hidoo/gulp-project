@@ -23,7 +23,9 @@ Options:
 
   -v, --version           output the version number
   --name <name>           set project name.
+  --force                 Generate forcely even if <dir> is not empty.
   --no-interactive        Disable interactive interface.
+  --multi-device          Enable multi-device mode.
   --no-css                Disable CSS build task.
   --no-css-deps           Disable CSS dependency build task.
   --no-html               Disable HTML build task.

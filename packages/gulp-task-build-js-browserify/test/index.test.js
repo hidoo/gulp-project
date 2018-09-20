@@ -57,11 +57,12 @@ describe('gulp-task-build-js-browserify', () => {
     });
 
     task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`),
-            expected = fs.readFileSync(`${path.expected}/main.browsers.js`);
+      // remove license comment before compare source code (for travis CI)
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().replace(/^[\s\S]*?\*\//m, ''),
+            expected = fs.readFileSync(`${path.expected}/main.browsers.js`).toString().replace(/^[\s\S]*?\*\//m, '');
 
       assert(actual);
-      assert.deepStrictEqual(actual.toString(), expected.toString());
+      assert.deepStrictEqual(actual, expected);
       done();
     });
   });

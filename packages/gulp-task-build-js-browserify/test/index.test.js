@@ -95,15 +95,13 @@ describe('gulp-task-build-js-browserify', () => {
             actualMin = fs.readFileSync(`${path.dest}/main.min.js`),
             actualGz = fs.readFileSync(`${path.dest}/main.min.js.gz`),
             expected = fs.readFileSync(`${path.expected}/main.js`),
-            expectedMin = fs.readFileSync(`${path.expected}/main.min.js`),
-            expectedGz = fs.readFileSync(`${path.expected}/main.min.js.gz`);
+            expectedMin = fs.readFileSync(`${path.expected}/main.min.js`);
 
       assert(actual);
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual.toString(), expected.toString());
       assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
-      assert.deepStrictEqual(actualGz, expectedGz);
       done();
     });
   });

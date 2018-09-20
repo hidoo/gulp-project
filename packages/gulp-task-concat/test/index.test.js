@@ -94,15 +94,13 @@ describe('gulp-task-concat', () => {
             actualMin = fs.readFileSync(`${path.dest}/bundle.min.js`),
             actualGz = fs.readFileSync(`${path.dest}/bundle.min.js.gz`),
             expected = fs.readFileSync(`${path.expected}/bundle.compress.js`),
-            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.js`),
-            expectedGz = fs.readFileSync(`${path.expected}/bundle.compress.min.js.gz`);
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.js`);
 
       assert(actual);
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
       assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
-      assert.deepStrictEqual(actualGz, expectedGz);
       done();
     });
   });
@@ -185,15 +183,13 @@ describe('gulp-task-concat', () => {
             actualMin = fs.readFileSync(`${path.dest}/bundle.min.css`),
             actualGz = fs.readFileSync(`${path.dest}/bundle.min.css.gz`),
             expected = fs.readFileSync(`${path.expected}/bundle.compress.css`),
-            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.css`),
-            expectedGz = fs.readFileSync(`${path.expected}/bundle.compress.min.css.gz`);
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.css`);
 
       assert(actual);
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
       assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
-      assert.deepStrictEqual(actualGz, expectedGz);
       done();
     });
   });

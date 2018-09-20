@@ -100,7 +100,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.server) {
     devDependencies.push(
-      {name: '@hidoo/express-engine-handlebars', version: '^0.0.0'},
+      {name: '@hidoo/express-engine-handlebars', version: '^0.1.0'},
       {name: '@hidoo/util-local-ip', version: '^0.0.0'},
       {name: 'browser-sync', version: '^2.24.7'},
       {name: 'express', version: '^4.16.3'}

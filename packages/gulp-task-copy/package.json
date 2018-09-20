@@ -2,6 +2,9 @@
   "name": "@hidoo/gulp-task-copy",
   "version": "0.0.0",
   "description": "Task that copy files for gulp.",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -15,6 +18,9 @@
     "gulp",
     "task"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {

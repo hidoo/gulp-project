@@ -2,6 +2,9 @@
   "name": "@hidoo/util-local-ip",
   "version": "0.0.0",
   "description": "Utility that get current ip address in local network.",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -14,6 +17,9 @@
   "keywords": [
     "ip"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {

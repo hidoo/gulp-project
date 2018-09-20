@@ -2,6 +2,9 @@
   "name": "@hidoo/util-merge-babelrc",
   "version": "0.0.0",
   "description": "Utility that merge .babelrc.",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -14,6 +17,9 @@
   "keywords": [
     "babel"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "hidoo",
   "license": "MIT",
   "dependencies": {

@@ -2,6 +2,9 @@
   "name": "@hidoo/gulp-plugin-image-evenizer",
   "version": "0.0.0",
   "description": "Plugin that evenize image for gulp.",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -15,6 +18,9 @@
     "gulp",
     "plugin"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "hidoo",
   "license": "MIT",
   "dependencies": {

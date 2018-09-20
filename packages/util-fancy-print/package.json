@@ -2,6 +2,9 @@
   "name": "@hidoo/util-fancy-print",
   "version": "0.0.0",
   "description": "Utility that print styled values to console",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -14,6 +17,9 @@
   "keywords": [
     "gulp"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "hidoo",
   "license": "MIT",
   "dependencies": {

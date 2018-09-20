@@ -42,4 +42,4 @@ packages/**/node_modules
 packages/**/lib
 !packages/gulp-project-generator/template/**/lib
 packages/**/package-lock.json
-examples/
+examples/dev/

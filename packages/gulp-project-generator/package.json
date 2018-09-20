@@ -11,8 +11,8 @@
     "lib/"
   ],
   "scripts": {
-    "start": "npm run dev -- ../../examples/basic-project --verbose --force",
-    "dev": "cross-env NODE_ENV=development babel-node ./src/index.js",
+    "start": "npm run generate -- ../../examples/dev --verbose --force",
+    "generate": "cross-env NODE_ENV=development babel-node ./src/index.js",
     "prebuild": "rimraf ./lib",
     "build": "babel ./src --out-dir ./lib",
     "test": "cross-env NODE_ENV=test mocha ./test/**/*.test.js"

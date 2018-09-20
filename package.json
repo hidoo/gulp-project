@@ -1,8 +1,8 @@
 {
   "name": "@hidoo/gulp-project",
   "version": "0.0.0",
-  "description": "gulp project monorepo.",
-  "main": "index.js",
+  "description": "This is the monorepo for gulp project packages.",
+  "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "dev:test": "lerna exec 'npm test -- --watch' --no-private",

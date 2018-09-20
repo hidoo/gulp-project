@@ -56,14 +56,12 @@ describe('gulp-task-build-sprite-svg', () => {
             actualSvgGzip = fs.readFileSync(`${path.dest}/svg-sprite.svg.gz`),
             actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
             expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.compressed.svg`),
-            expectedSvgGzip = fs.readFileSync(`${path.expected}/svg-sprite.compressed.svg.gz`),
             expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.compressed.styl`);
 
       assert(actualSvg);
       assert(actualSvgGzip);
       assert(actualCss);
       assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualSvgGzip, expectedSvgGzip);
       assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
       done();
     });

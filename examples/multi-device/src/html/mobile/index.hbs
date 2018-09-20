@@ -1,0 +1,27 @@
+---
+uid: A-00-00
+title: Top page
+
+seo:
+  title: "{{site.meta.sitename}}"
+  description: "{{site.seo.description}}"
+  keywords: "{{site.seo.keywords}}"
+
+ogp:
+  title: "{{site.meta.sitename}}"
+  description: "{{site.seo.description}}"
+  type:
+  url:
+  image:
+  appID:
+
+is:
+  top: true
+---
+{{#extend 'base'}}
+{{#content 'body'}}
+
+<p>Hello</p>
+
+{{/content}}
+{{/extend}}

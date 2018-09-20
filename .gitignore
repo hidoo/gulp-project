@@ -38,8 +38,10 @@ node_modules/
 # child package
 # -------------
 
+packages/**/package-lock.json
 packages/**/node_modules
 packages/**/lib
 !packages/gulp-project-generator/template/**/lib
-packages/**/package-lock.json
+examples/**/package-lock.json
+examples/**/node_modules
 examples/dev/

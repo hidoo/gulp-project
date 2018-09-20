@@ -1,0 +1,59 @@
+---
+uid: Z
+title: Page list
+
+seo:
+  title:
+  keywords:
+  description:
+
+ogp:
+  title:
+  description:
+  type:
+  url:
+  image:
+  appID:
+
+is:
+  top: false
+---
+{{#extend 'base'}}
+{{#content 'body'}}
+
+  <h1>Page list</h1>
+
+  {{#each (sortArray @root.pages order='ascend' key='uid') }}
+    {{#isnt this.uid 'Z'}}
+
+      <h2>[{{this.uid}}] <a class="mod-text__link" href="{{@root.path.depth}}{{this.path.relative}}">{{this.title}}</a></h2>
+
+      <p>seo:title</p>
+      <p style="color:#999;">{{#if this.seo.title}}{{this.seo.title}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.seo.title}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>seo:description</p>
+      <p style="color:#999;">{{#if this.seo.description}}{{this.seo.description}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.seo.description}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>seo:keywords</p>
+      <p style="color:#999;">{{#if this.seo.keywords}}{{this.seo.keywords}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.seo.keywords}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>og:title</p>
+      <p style="color:#999;">{{#if this.ogp.title}}{{this.ogp.title}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.title}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>og:description</p>
+      <p style="color:#999;">{{#if this.ogp.description}}{{this.ogp.description}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.description}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>og:type</p>
+      <p style="color:#999;">{{#if this.ogp.type}}{{this.ogp.type}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.type}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>og:url</p>
+      <p style="color:#999;">{{#if this.ogp.url}}{{this.ogp.url}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.url}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+      <p>og:image</p>
+      <p style="color:#999;">{{#if this.ogp.image}}{{this.ogp.image}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.image}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
+
+    {{/isnt}}
+  {{/each}}
+
+{{/content}}
+{{/extend}}

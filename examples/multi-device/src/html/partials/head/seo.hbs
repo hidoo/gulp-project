@@ -1,0 +1,4 @@
+{{!-- seo --}}
+<title>{{#if @root.seo.title}}{{@root.seo.title}}{{else}}{{@root.site.seo.title}}{{/if}}</title>
+<meta name="keywords" content="{{#if @root.seo.keywords}}{{@root.seo.keywords}}{{else}}{{@root.site.seo.keywords}}{{/if}}" />
+<meta name="description" content="{{#if @root.seo.keywords}}{{@root.seo.description}}{{else}}{{@root.site.seo.description}}{{/if}}" />

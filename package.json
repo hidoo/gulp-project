@@ -8,11 +8,16 @@
     "dev:test": "lerna exec 'npm test -- --watch' --no-private",
     "dev:test:parallel": "npm run dev:test -- --parallel",
     "dev:generator": "lerna exec 'npm start' --scope @hidoo/gulp-project-generator",
-    "build": "npm-run-all -s build:packages",
+    "build": "npm-run-all -s build:packages build:examples",
     "build:packages": "lerna run build --no-private",
-    "test": "npm-run-all -s test:lint test:packages",
+    "build:examples": "npm-run-all -s build:examples:*",
+    "build:examples:single-device": "lerna exec 'npm run generate -- ../../examples/single-device --no-interactive --force' --scope @hidoo/gulp-project-generator",
+    "build:examples:multi-device": "lerna exec 'npm run generate -- ../../examples/multi-device --no-interactive --force --multi-device' --scope @hidoo/gulp-project-generator",
+    "postbuild": "npm run bootstrap",
+    "test": "npm-run-all -s test:lint test:packages test:examples",
     "test:lint": "eslint .",
     "test:packages": "lerna run test --no-private",
+    "test:examples": "cross-env NODE_ENV=test mocha",
     "postinstall": "npm run bootstrap",
     "prepare": "npm-run-all -s build test"
   },
@@ -23,11 +28,16 @@
     "@commitlint/config-conventional": "^7.1.2",
     "@hidoo/eslint-config": "^0.1.2",
     "babel-eslint": "^9.0.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
+    "glob": "^7.1.3",
     "husky": "^1.0.0-rc.14",
     "lerna": "^3.4.0",
     "lint-staged": "^7.2.2",
-    "npm-run-all": "^4.1.3"
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.3",
+    "power-assert": "^1.6.0",
+    "rimraf": "^2.6.2"
   },
   "husky": {
     "hooks": {

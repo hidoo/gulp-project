@@ -1,0 +1,7 @@
+{{!-- ogp --}}
+<meta property="og:title" content="{{#if @root.ogp.title}}{{@root.ogp.title}}{{else}}{{@root.site.ogp.title}}{{/if}}" />
+<meta property="og:type" content="{{#if @root.ogp.type}}{{@root.ogp.type}}{{else}}{{@root.site.ogp.type}}{{/if}}">
+<meta property="og:url" content="{{#if @root.ogp.url}}{{@root.ogp.url}}{{else}}{{@root.site.ogp.url}}{{/if}}" />
+<meta property="og:image" content="{{#if @root.ogp.image}}{{@root.ogp.image}}{{else}}{{@root.site.ogp.image}}{{/if}}" />
+<meta property="og:site_name" content="{{@root.site.ogp.sitename}}" />
+<meta property="og:description" content="{{#if @root.ogp.description}}{{@root.ogp.description}}{{else}}{{@root.site.ogp.description}}{{/if}}" />

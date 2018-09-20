@@ -1,5 +1,7 @@
 # @hidoo/gulp-project
 
+[![Build Status](https://travis-ci.org/hidoo/gulp-project.svg?branch=master)](https://travis-ci.org/hidoo/gulp-project)
+
 > This is the monorepo for gulp project packages.
 
 ## Examples

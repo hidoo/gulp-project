@@ -4,5 +4,15 @@
     "examples/*"
   ],
   "hoist": true,
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "command": {
+    "publish": {
+      "message": "chore(release): publish %s",
+      "conventionalCommits": true
+    }
+  },
+  "ignoreChanges": [
+    "examples/**/**",
+    "**/CHANGELOG.md"
+  ]
 }

@@ -19,7 +19,7 @@
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
     "postinstall": "npm run bootstrap",
-    "prepare": "npm-run-all -s build test"
+    "prepublish": "npm-run-all -s build test"
   },
   "author": "hidoo",
   "license": "MIT",

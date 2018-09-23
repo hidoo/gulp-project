@@ -3,6 +3,7 @@
 import assert from 'assert';
 import rimraf from 'rimraf';
 import generatePackageJson from '../src/generatePackageJson';
+import pkg from '../package.json';
 
 describe('generatePackageJson', () => {
   const path = {
@@ -38,7 +39,7 @@ describe('generatePackageJson', () => {
     /* eslint-enable global-require */
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim().replace('^0.0.0', `^${pkg.version}`));
   });
 
 });

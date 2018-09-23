@@ -1,6 +1,7 @@
 /* eslint-disable max-len, max-statements */
 
 import write from './write';
+import pkg from '../package.json';
 
 /**
  * generate package.json
@@ -17,12 +18,14 @@ export default async function generatePackageJson(name = '', dest = '', options 
     throw new TypeError('Argument "dest" is not string.');
   }
 
+  const gulpProjectVersion = `^${pkg.version}`;
+
   const devDependencies = [
           {name: '@babel/core', version: '^7.0.0'},
           {name: '@babel/preset-env', version: '^7.0.0'},
           {name: '@babel/register', version: '^7.0.0'},
           {name: '@hidoo/eslint-config', version: '^0.1.2'},
-          {name: '@hidoo/util-fancy-print', version: '^0.0.0'},
+          {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
           {name: 'babel-eslint', version: '^9.0.0'},
           {name: 'commander', version: '^2.17.1'},
           {name: 'cross-env', version: '^5.2.0'},
@@ -49,22 +52,22 @@ export default async function generatePackageJson(name = '', dest = '', options 
 
   if (options.css) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-build-css-stylus', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-build-css-stylus', version: gulpProjectVersion}
     );
   }
   if (options.cssDeps) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-concat', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-concat', version: gulpProjectVersion}
     );
   }
   if (options.html) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-build-html-handlebars', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-build-html-handlebars', version: gulpProjectVersion}
     );
   }
   if (options.image) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-optimize-image', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-optimize-image', version: gulpProjectVersion}
     );
   }
   if (options.js) {
@@ -82,12 +85,12 @@ export default async function generatePackageJson(name = '', dest = '', options 
     switch (options.jsBundler) {
       case 'browserify':
         devDependencies.push(
-          {name: '@hidoo/gulp-task-build-js-browserify', version: '^0.0.0'}
+          {name: '@hidoo/gulp-task-build-js-browserify', version: gulpProjectVersion}
         );
         break;
       case 'rollup':
         devDependencies.push(
-          {name: '@hidoo/gulp-task-build-js-rollup', version: '^0.0.0'}
+          {name: '@hidoo/gulp-task-build-js-rollup', version: gulpProjectVersion}
         );
         break;
       default:
@@ -95,13 +98,13 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.jsDeps) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-concat', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-concat', version: gulpProjectVersion}
     );
   }
   if (options.server) {
     devDependencies.push(
       {name: '@hidoo/express-engine-handlebars', version: '^0.1.0'},
-      {name: '@hidoo/util-local-ip', version: '^0.0.0'},
+      {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
       {name: 'browser-sync', version: '^2.24.7'},
       {name: 'express', version: '^4.16.3'}
     );
@@ -110,12 +113,12 @@ export default async function generatePackageJson(name = '', dest = '', options 
     switch (options.spriteType) {
       case 'svg':
         devDependencies.push(
-          {name: '@hidoo/gulp-task-build-sprite-svg', version: '^0.0.0'}
+          {name: '@hidoo/gulp-task-build-sprite-svg', version: gulpProjectVersion}
         );
         break;
       case 'image':
         devDependencies.push(
-          {name: '@hidoo/gulp-task-build-sprite-image', version: '^0.0.0'}
+          {name: '@hidoo/gulp-task-build-sprite-image', version: gulpProjectVersion}
         );
         break;
       default:
@@ -123,8 +126,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.styleguide) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-build-styleguide-kss', version: '^0.0.0'},
-      {name: '@hidoo/gulp-task-copy', version: '^0.0.0'}
+      {name: '@hidoo/gulp-task-build-styleguide-kss', version: gulpProjectVersion},
+      {name: '@hidoo/gulp-task-copy', version: gulpProjectVersion}
     );
   }
 

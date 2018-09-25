@@ -22,8 +22,8 @@ async function bumpVersion(semver = 'patch') {
     const version = `v${lernaJson.version}`;
     const commitMsg = util.format(lernaJson.command.publish.message, version);
 
-    process.stdout.write(`${chalk.cyan('>>')} build to examples ${chalk.grey('...')}`);
-    await exec('npm run build:examples');
+    process.stdout.write(`${chalk.cyan('>>')} prepare ${chalk.grey('...')}`);
+    await exec('npm run release:prepare');
     process.stdout.cursorTo(24);
     process.stdout.write(` ${chalk.green('done')}`);
     console.log('');

@@ -6,6 +6,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "release:version": "node ./scripts/bumpVersion.js",
+    "release:prepare": "npm-run-all -s build test",
     "release:publish": "lerna publish from-git",
     "dev:test": "lerna exec 'npm test -- --watch' --no-private",
     "dev:test:parallel": "npm run dev:test -- --parallel",
@@ -20,8 +21,7 @@
     "test:lint": "eslint .",
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
-    "postinstall": "npm run bootstrap",
-    "prepublish": "npm-run-all -s build test"
+    "postinstall": "npm run bootstrap"
   },
   "author": "hidoo",
   "license": "MIT",

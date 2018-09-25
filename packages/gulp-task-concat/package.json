@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-concat",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Task that concat files for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -36,7 +36,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.1.0",
+    "@hidoo/gulp-util-error-handler": "^0.1.1",
     "fancy-log": "^1.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-gzip": "^1.4.2",

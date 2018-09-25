@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-js-rollup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Task that build javascript by rollup.js for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -37,8 +37,8 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.1.0",
-    "@hidoo/util-merge-babelrc": "^0.1.0",
+    "@hidoo/gulp-util-error-handler": "^0.1.1",
+    "@hidoo/util-merge-babelrc": "^0.1.1",
     "fancy-log": "^1.3.2",
     "gulp-gzip": "^1.4.2",
     "gulp-if": "^2.0.2",

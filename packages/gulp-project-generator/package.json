@@ -11,7 +11,8 @@
   },
   "files": [
     "bin/",
-    "lib/"
+    "lib/",
+    "template/"
   ],
   "scripts": {
     "start": "npm run generate -- ../../examples/dev --verbose --force",

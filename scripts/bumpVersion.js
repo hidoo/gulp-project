@@ -24,7 +24,7 @@ async function bumpVersion(semver = 'patch') {
 
     process.stdout.write(`${chalk.cyan('>>')} prepare ${chalk.grey('...')}`);
     await exec('npm run release:prepare');
-    process.stdout.cursorTo(24);
+    process.stdout.cursorTo(14);
     process.stdout.write(` ${chalk.green('done')}`);
     console.log('');
 

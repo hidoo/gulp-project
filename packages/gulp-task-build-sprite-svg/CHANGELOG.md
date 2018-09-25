@@ -1,0 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="0.1.0"></a>
+# 0.1.0 (2018-09-25)
+
+
+### Bug Fixes
+
+* **packages:** fix file fields in package.json ([e8c3978](https://github.com/hidoo/gulp-project/commit/e8c3978))
+
+
+### Features
+
+* **packages:** add task that build svg sprite sheet for gulp ([650afa6](https://github.com/hidoo/gulp-project/commit/650afa6))
+* **packages:** change default of options.verbose to false ([7d2baf1](https://github.com/hidoo/gulp-project/commit/7d2baf1))
+* **packages:** update babel-preset-power-assert to version 3.0.0 ([ab0540f](https://github.com/hidoo/gulp-project/commit/ab0540f))

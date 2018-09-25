@@ -1,0 +1,17 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="0.1.0"></a>
+# 0.1.0 (2018-09-25)
+
+
+### Features
+
+* **packages:** add compressOptions to gulp-task-optimize-image ([4765fbe](https://github.com/hidoo/gulp-project/commit/4765fbe))
+* **packages:** add name option to gulp-task-* packages ([6b675d1](https://github.com/hidoo/gulp-project/commit/6b675d1))
+* **packages:** add task that optimize image for gulp ([5389b21](https://github.com/hidoo/gulp-project/commit/5389b21))
+* **packages:** change default of options.verbose to false ([7d2baf1](https://github.com/hidoo/gulp-project/commit/7d2baf1))
+* **packages:** update [@babel](https://github.com/babel) packages to version 7.0.0 ([a272f80](https://github.com/hidoo/gulp-project/commit/a272f80))
+* **packages:** update babel-preset-power-assert to version 3.0.0 ([ab0540f](https://github.com/hidoo/gulp-project/commit/ab0540f))

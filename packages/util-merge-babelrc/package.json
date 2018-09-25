@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/util-merge-babelrc",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Utility that merge .babelrc.",
   "engines": {
     "node": ">=8.0.0"

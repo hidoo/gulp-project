@@ -21,7 +21,7 @@
     "test:lint": "eslint .",
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
-    "postinstall": "npm run bootstrap"
+    "postinstall": "npm-run-all -s bootstrap build:packages"
   },
   "author": "hidoo",
   "license": "MIT",

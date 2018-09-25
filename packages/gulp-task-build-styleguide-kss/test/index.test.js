@@ -3,9 +3,19 @@
 import assert from 'assert';
 import fs from 'fs';
 import rimraf from 'rimraf';
+import pkg from '../package.json';
 import buildStyleguide from '../src';
 
-describe('gulp-task-build-sprite-image', () => {
+/**
+ * replace version number in license comment
+ * @param {String} code target source code
+ * @return {String}
+ */
+function replaceVersion(code = '') {
+  return code.replace('<span class="version">(v0.0.0)</span>', `<span class="version">(v${pkg.version})</span>`);
+}
+
+describe('gulp-task-build-styleguide-kss', () => {
   const path = {
     src: `${__dirname}/fixtures/src`,
     dest: `${__dirname}/fixtures/dest`,
@@ -24,15 +34,15 @@ describe('gulp-task-build-sprite-image', () => {
 
     task()
       .then(() => {
-        const actualIndex = fs.readFileSync(`${path.dest}/index.html`),
-              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`),
-              expectedIndex = fs.readFileSync(`${path.expected}/minimal/index.html`),
-              expectedBlock = fs.readFileSync(`${path.expected}/minimal/section-block.html`);
+        const actualIndex = fs.readFileSync(`${path.dest}/index.html`).toString().trim(),
+              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`).toString().trim(),
+              expectedIndex = replaceVersion(fs.readFileSync(`${path.expected}/minimal/index.html`).toString().trim()),
+              expectedBlock = replaceVersion(fs.readFileSync(`${path.expected}/minimal/section-block.html`).toString().trim());
 
         assert(actualIndex);
         assert(actualBlock);
-        assert.deepStrictEqual(actualIndex.toString().trim(), expectedIndex.toString().trim());
-        assert.deepStrictEqual(actualBlock.toString().trim(), expectedBlock.toString().trim());
+        assert.deepStrictEqual(actualIndex, expectedIndex);
+        assert.deepStrictEqual(actualBlock, expectedBlock);
         done();
       })
       .catch((error) => done(error));
@@ -47,15 +57,15 @@ describe('gulp-task-build-sprite-image', () => {
 
     task()
       .then(() => {
-        const actualIndex = fs.readFileSync(`${path.dest}/index.html`),
-              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`),
-              expectedIndex = fs.readFileSync(`${path.expected}/homepage/index.html`),
-              expectedBlock = fs.readFileSync(`${path.expected}/homepage/section-block.html`);
+        const actualIndex = fs.readFileSync(`${path.dest}/index.html`).toString().trim(),
+              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`).toString().trim(),
+              expectedIndex = replaceVersion(fs.readFileSync(`${path.expected}/homepage/index.html`).toString().trim()),
+              expectedBlock = replaceVersion(fs.readFileSync(`${path.expected}/homepage/section-block.html`).toString().trim());
 
         assert(actualIndex);
         assert(actualBlock);
-        assert.deepStrictEqual(actualIndex.toString().trim(), expectedIndex.toString().trim());
-        assert.deepStrictEqual(actualBlock.toString().trim(), expectedBlock.toString().trim());
+        assert.deepStrictEqual(actualIndex, expectedIndex);
+        assert.deepStrictEqual(actualBlock, expectedBlock);
         done();
       })
       .catch((error) => done(error));
@@ -75,15 +85,15 @@ describe('gulp-task-build-sprite-image', () => {
 
     task()
       .then(() => {
-        const actualIndex = fs.readFileSync(`${path.dest}/index.html`),
-              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`),
-              expectedIndex = fs.readFileSync(`${path.expected}/css-js/index.html`),
-              expectedBlock = fs.readFileSync(`${path.expected}/css-js/section-block.html`);
+        const actualIndex = fs.readFileSync(`${path.dest}/index.html`).toString().trim(),
+              actualBlock = fs.readFileSync(`${path.dest}/section-block.html`).toString().trim(),
+              expectedIndex = replaceVersion(fs.readFileSync(`${path.expected}/css-js/index.html`).toString().trim()),
+              expectedBlock = replaceVersion(fs.readFileSync(`${path.expected}/css-js/section-block.html`).toString().trim());
 
         assert(actualIndex);
         assert(actualBlock);
-        assert.deepStrictEqual(actualIndex.toString().trim(), expectedIndex.toString().trim());
-        assert.deepStrictEqual(actualBlock.toString().trim(), expectedBlock.toString().trim());
+        assert.deepStrictEqual(actualIndex, expectedIndex);
+        assert.deepStrictEqual(actualBlock, expectedBlock);
         done();
       })
       .catch((error) => done(error));

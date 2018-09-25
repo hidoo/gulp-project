@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "release:version": "node ./scripts/bumpVersion.js",
+    "release:publish": "lerna publish from-git",
     "dev:test": "lerna exec 'npm test -- --watch' --no-private",
     "dev:test:parallel": "npm run dev:test -- --parallel",
     "dev:generator": "lerna exec 'npm start' --scope @hidoo/gulp-project-generator",
@@ -28,6 +30,7 @@
     "@commitlint/config-conventional": "^7.1.2",
     "@hidoo/eslint-config": "^0.1.3",
     "babel-eslint": "^9.0.0",
+    "chalk": "^2.4.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
     "glob": "^7.1.3",

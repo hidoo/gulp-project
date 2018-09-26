@@ -24,6 +24,11 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
       .then((output) => formatCode(output))
       .then((output) => write(output, `${dest}/.babelrc.js`, {verbose}));
 
+    if (options.conventionalCommits) {
+      await render(`${src}/.commitlintrc.js.hbs`, options)
+        .then((output) => write(output, `${dest}/.commitlintrc.js`, {verbose}));
+    }
+
     await render(`${src}/.eslintrc.js.hbs`, options)
       .then((output) => formatCode(output))
       .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));

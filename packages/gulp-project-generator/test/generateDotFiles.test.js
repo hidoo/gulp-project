@@ -83,4 +83,35 @@ describe('generateDotFiles', () => {
     });
   });
 
+  it('should generate dot files if argument options.conventionalCommits is true.', async () => {
+    await generateDotFiles(path.src, path.dest, {
+      css: true,
+      html: true,
+      image: true,
+      js: true,
+      server: true,
+      sprite: true,
+      styleguide: true,
+      conventionalCommits: true
+    });
+
+    const files = [
+      '.babelrc.js',
+      '.commitlintrc.js',
+      '.editorconfig',
+      '.eslintignore',
+      '.eslintrc.js',
+      '.gitattributes',
+      '.gitignore'
+    ];
+
+    files.forEach((file) => {
+      const actual = fs.readFileSync(`${path.dest}/${file}`),
+            expected = fs.readFileSync(`${path.expected}/${file}`);
+
+      assert(actual);
+      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    });
+  });
+
 });

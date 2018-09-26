@@ -26,6 +26,7 @@ Options:
   --force                 Generate forcely even if <dir> is not empty.
   --no-interactive        Disable interactive interface.
   --multi-device          Enable multi-device mode.
+  --conventional-commits  Set up tools for conventional commits.
   --no-css                Disable CSS build task.
   --no-css-deps           Disable CSS dependency build task.
   --no-html               Disable HTML build task.

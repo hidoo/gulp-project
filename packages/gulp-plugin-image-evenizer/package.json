@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-plugin-image-evenizer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Plugin that evenize image for gulp.",
   "engines": {
     "node": ">=8.0.0"

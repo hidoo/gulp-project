@@ -1,6 +1,7 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
 import assert from 'assert';
+import fs from 'fs';
 import rimraf from 'rimraf';
 import generatePackageJson from '../src/generatePackageJson';
 import pkg from '../package.json';
@@ -25,21 +26,23 @@ describe('generatePackageJson', () => {
   it('should generate package.json.', async () => {
     await generatePackageJson('hoge-project', path.dest, {
       css: true,
+      cssDeps: true,
       html: true,
       image: true,
       js: true,
+      jsDeps: true,
       server: true,
       sprite: true,
-      styleguide: true
+      styleguide: true,
+      jsBundler: 'browserify',
+      spriteType: 'svg'
     });
 
-    /* eslint-disable global-require */
-    const actual = require(`${path.dest}/package.json`),
-          expected = require(`${path.expected}/package.json`);
-    /* eslint-enable global-require */
+    const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
+          expected = fs.readFileSync(`${path.expected}/package.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim().replace('^0.0.0', `^${pkg.version}`));
+    assert.deepStrictEqual(actual, expected);
   });
 
 });

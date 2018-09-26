@@ -216,6 +216,8 @@ async function confirmConfig(name = '', options = {}) {
         if (
           key !== 'interactive' &&
           key !== 'force' &&
+          key !== 'conventionalCommits' &&
+          key !== 'multiDevice' &&
           key !== 'verbose' &&
           key !== 'jsBundler' &&
           key !== 'spriteType'

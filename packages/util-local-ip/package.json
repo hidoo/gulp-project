@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/util-local-ip",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Utility that get current ip address in local network.",
   "engines": {
     "node": ">=8.0.0"

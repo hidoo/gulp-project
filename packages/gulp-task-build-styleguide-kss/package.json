@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-styleguide-kss",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Task that build styleguide by kss for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -37,7 +37,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.2.1",
+    "@hidoo/gulp-util-error-handler": "^0.3.0",
     "@hidoo/handlebars-helpers": "^0.1.1",
     "handlebars": "^4.0.12",
     "kss": "3.0.0-beta.18"

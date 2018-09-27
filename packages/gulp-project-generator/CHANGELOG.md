@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
+
+
+### Bug Fixes
+
+* **packages:** fix .gitattributes template in gulp-project-generator ([51162d3](https://github.com/hidoo/gulp-project/commit/51162d3))
+* **packages:** fix config.js template in gulp-project-generator ([7382416](https://github.com/hidoo/gulp-project/commit/7382416))
+
+
+### Features
+
+* **packages:** add server task to package.json in generated project ([b15e6dd](https://github.com/hidoo/gulp-project/commit/b15e6dd))
+* update husky to v1.0.1 and lint-staged to v7.3.0 ([297addb](https://github.com/hidoo/gulp-project/commit/297addb))
+
+
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/hidoo/gulp-project/compare/v0.2.0...v0.2.1) (2018-09-27)
 

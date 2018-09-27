@@ -36,8 +36,8 @@ const cli = new Command()
 export const serverOptions = {
   host: String(cli.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
   port: Number(cli.port || process.env.SERVER_PORT) || 8000,
-  protocol: String(cli.protocol || process.env.SERVER_PROTOCOL) || 'http',
-  open: String(cli.open || process.env.SERVER_OPEN) || false,
+  protocol: String(cli.protocol || process.env.SERVER_PROTOCOL || 'http'),
+  open: cli.open || process.env.SERVER_OPEN || false,
   ui: Boolean(cli.ui || process.env.SERVER_UI) || false
 };
 

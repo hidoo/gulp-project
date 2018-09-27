@@ -37,11 +37,11 @@ describe('generateConfig', () => {
       styleguide: true
     });
 
-    const actual = fs.readFileSync(`${path.dest}/config.js`),
-          expected = fs.readFileSync(`${path.expected}/config.js`);
+    const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
+          expected = fs.readFileSync(`${path.expected}/config.js`).toString().trim();
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    assert.deepStrictEqual(actual, expected);
   });
 
   it('should generate config.js if argument argument options.multiDevice is true.', async () => {
@@ -58,11 +58,11 @@ describe('generateConfig', () => {
       multiDevice: true
     });
 
-    const actual = fs.readFileSync(`${path.dest}/config.js`),
-          expected = fs.readFileSync(`${path.expected}/config-multi-device.js`);
+    const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
+          expected = fs.readFileSync(`${path.expected}/config-multi-device.js`).toString().trim();
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    assert.deepStrictEqual(actual, expected);
   });
 
 });

@@ -48,6 +48,12 @@ fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
 export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
 
 /**
+ * server task
+ * @type {Function}
+ */
+export {default as server} from './task/server';
+
+/**
  * build task
  * @return {Function}
  */

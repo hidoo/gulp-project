@@ -17,6 +17,7 @@
     "start": "npm run dev",
     "static:build": "gulp build",
     "static:clean": "gulp clean",
+    "static:server": "gulp server",
     "static:watch": "gulp watch",
     "test": "npm-run-all -s test:*",
     "test:lint": "eslint .",

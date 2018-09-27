@@ -111,6 +111,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'browser-sync', version: '^2.24.7'},
       {name: 'express', version: '^4.16.3'}
     );
+    scripts.push(
+      {name: 'static:server', command: 'gulp server'}
+    );
   }
   if (options.sprite) {
     switch (options.spriteType) {

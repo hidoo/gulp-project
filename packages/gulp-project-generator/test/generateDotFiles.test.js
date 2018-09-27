@@ -36,20 +36,20 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      '.babelrc.js',
-      '.editorconfig',
-      '.eslintignore',
-      '.eslintrc.js',
-      '.gitattributes',
-      '.gitignore'
+      ['.babelrc.js', '.babelrc.js'],
+      ['.editorconfig', '.editorconfig'],
+      ['.eslintignore', '.eslintignore'],
+      ['.eslintrc.js', '.eslintrc.js'],
+      ['.gitattributes', '.gitattributes'],
+      ['.gitignore', '.gitignore']
     ];
 
     files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file}`),
-            expected = fs.readFileSync(`${path.expected}/${file}`);
+      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
+            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
 
       assert(actual);
-      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actual, expected);
     });
   });
 
@@ -66,20 +66,20 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      '.babelrc.js',
-      '.editorconfig',
-      '.eslintignore',
-      '.eslintrc.js',
-      '.gitattributes',
-      '.gitignore'
+      ['.babelrc.js', '.babelrc.js'],
+      ['.editorconfig', '.editorconfig'],
+      ['.eslintignore', '.eslintignore'],
+      ['.eslintrc.js', '.eslintrc.js'],
+      ['.gitattributes', '.gitattributes'],
+      ['.gitignore', '.gitignore']
     ];
 
     files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file}`),
-            expected = fs.readFileSync(`${path.expected}/${file}`);
+      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
+            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
 
       assert(actual);
-      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actual, expected);
     });
   });
 
@@ -96,21 +96,21 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      '.babelrc.js',
-      '.commitlintrc.js',
-      '.editorconfig',
-      '.eslintignore',
-      '.eslintrc.js',
-      '.gitattributes',
-      '.gitignore'
+      ['.babelrc.js', '.babelrc.js'],
+      ['.commitlintrc.js', '.commitlintrc.js'],
+      ['.editorconfig', '.editorconfig'],
+      ['.eslintignore', '.eslintignore'],
+      ['.eslintrc.js', '.eslintrc.js'],
+      ['.gitattributes', '.gitattributes-conventional-commits'],
+      ['.gitignore', '.gitignore']
     ];
 
     files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file}`),
-            expected = fs.readFileSync(`${path.expected}/${file}`);
+      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
+            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
 
       assert(actual);
-      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actual, expected);
     });
   });
 

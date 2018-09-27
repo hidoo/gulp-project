@@ -9,9 +9,7 @@
 .eslintrc.js export-ignore
 .eslintignore export-ignore
 .babelrc.js export-ignore
-{{#if this.conventionalCommits}}
 .commitlintrc.js export-ignore
-{{/if}}
 
 # npm
 package.json export-ignore
@@ -26,13 +24,9 @@ task/ export-ignore
 src/ export-ignore
 
 # distributions
-{{#if this.html}}
 public/**/page-list.html export-ignore
-{{/if}}
-{{#if this.styleguide}}
 public/**/styleguide/ export-ignore
 public/**/css/*.md export-ignore
-{{/if}}
 
 # docs
 README.md export-ignore

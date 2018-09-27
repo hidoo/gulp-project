@@ -6,8 +6,9 @@
 
 # dot files
 .editorconfig export-ignore
-.eslintrc export-ignore
-.babelrc export-ignore
+.eslintrc.js export-ignore
+.eslintignore export-ignore
+.babelrc.js export-ignore
 
 # npm
 package.json export-ignore

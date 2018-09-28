@@ -7,54 +7,53 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'build:styleguide',
-
-  // source path (required)
   src: null,
-
-  // destination path (required)
   dest: null,
-
-  // css paths that load to styleguide
   css: [],
-
-  // javascript paths that load to styleguide
   js: [],
-
-  // markdown filename that load to styleguide
-  // + it must be located in the same directory with options.src
   homepage: 'README.md',
-
-  // modifier string
   placeholder: '{{modifier_class}}',
-
-  // navigation depth to display
   'nav-depth': 2,
-
-  // masking of file that includes kss comments
   mask: '*.css',
-
-  // builder path
   builder: path.resolve(__dirname, '../builder'),
-
-  // out log or not
   verbose: false
 };
 
 /**
  * return build styleguide task by kss
- * @param {DEFAULT_OPTIONS} options オプション
- * @return {Function}
+ * @param {Object} options option
+ * @param {String} [options.name='build:styleguide'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.dest - destination path
+ * @param {Array<String>} [options.css=[]] - css paths that load to styleguide
+ * @param {Array<String>} [options.js=[]] - javascript paths that load to styleguide
+ * @param {String} [options.homepage='README.md'] - markdown filename that load to styleguide.
+ *   it must be located in the same directory with options.src
+ * @param {String} [options.placeholder='{{modifier_class}}'] - modifier string
+ * @param {Number} [options.nav-depth=2] - navigation depth to display
+ * @param {String} [options.mask='*.css'] - masking of file that includes kss comments
+ * @param {String} [options.builder=path.resolve(__dirname, '../builder')] - builder path.
+ *   see: {@link ./builder default builder}
+ * @param {Boolean} [options.verbose=false] - out log or not
+ * @return {Function<Promise>}
  *
  * @example
  * import {task} from 'gulp';
  * import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
  *
  * task('styleguide', buildStyleguide({
+ *   name: 'styleguide:main',
  *   src: '/path/to/css',
  *   dest: '/path/to/dest'
+ *   css: ['./path/from/styleguide/to/css/extra.css'],
+ *   js: ['./path/from/styleguide/to/js/extra.js'],
+ *   homepage: 'README.md',
+ *   placeholder: '{{modifier_class}}',
+ *   'nav-depth': 2,
+ *   mask: '*.css',
+ *   builder: '/path/to/builder',
+ *   verbose: true
  * }));
  */
 export default function kssBuildTask(options = {}) {

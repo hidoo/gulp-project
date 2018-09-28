@@ -15,68 +15,67 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'build:sprite',
-
-  // source path (required)
   src: null,
-
-  // destination image path (required)
   destImg: null,
-
-  // destination css path (required)
   destCss: null,
-
-  // destination image filename (required)
   imgName: null,
-
-  // destination css filename (required)
   cssName: null,
-
-  // destination image path in css (required)
   imgPath: null,
-
-  // padding between image in sprite sheet
   padding: 2,
-
-  // layout for generate sprite sheet（one of packed, vertical, and horizontal）
   layout: 'packed',
-
-  // Handlebars template for css
   cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
-
-  // Handlebars helpers
   cssHandlebarsHelpers: helpers,
-
-  // compress file or not
   compress: false,
-
-  // compress options
   compressOptions: [
     imagemin.svgo()
   ],
-
-  // out log or not
   verbose: false
 };
 
 /**
  * return build svg sprite sheet task
- * @param {DEFAULT_OPTIONS} options option
- * @return {Function}
+ * @param {Object} options option
+ * @param {String} [options.name='build:sprite'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.destImg - destination image path
+ * @param {String} options.destCss - destination css path
+ * @param {String} options.imgName - destination image filename
+ * @param {String} options.cssName - destination css filename
+ * @param {String} options.imgPath - destination image path in css
+ * @param {Number} [options.padding=2] - padding between image in sprite sheet
+ * @param {String} [options.layout='packed'] - layout for generate sprite sheet（one of [packed|vertical|horizontal]）
+ * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
+ *   see: {@link ./template/stylus.hbs default template}
+ * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Array} [options.compressOptions] - compress options.
+ *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
+ *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean} [options.verbose=false] - out log or not
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import buildSprite from '@hidoo/gulp-task-build-sprite-svg';
  *
  * task('sprite', buildSprite({
+ *   name: 'sprite:main',
  *   src: '/path/to/sprite/*.svg',
  *   destImg: '/path/to/dest/image',
  *   destCss: '/path/to/dest/css',
  *   imgName: 'sprite.svg',
  *   cssName: 'sprite.styl',
- *   imgPath: './image/sprite.svg'
+ *   imgPath: './path/from/css/to/sprite/sprite.svg'
+ *   padding: 10,
+ *   layout: 'vertical',
+ *   cssTemplate: '/path/to/template/stylus.hbs',
+ *   cssHandlebarsHelpers: {hoge: (value) => value},
+ *   compress: true,
+ *   compressOptions: [ // Default for this options
+ *     imagemin.svgo()
+ *   ],
+ *   verbose: true
  * }));
  */
 export default function buildSprite(options = {}) {

@@ -15,82 +15,85 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'build:sprite',
-
-  // source path (required)
   src: null,
-
-  // destination image path (required)
   destImg: null,
-
-  // destination css path (required)
   destCss: null,
-
-  // destination image filename (required)
   imgName: null,
-
-  // destination css filename (required)
   cssName: null,
-
-  // destination image path in css (required)
   imgPath: null,
-
-  // padding between image in sprite sheet
   padding: 2,
-
-  // algorithm for generate sprite sheet
   algorithm: 'binary-tree',
-
-  // engine for generate sprite sheet
   engine: 'pixelsmith',
-
-  // Handlebars template for css
   cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
-
-  // Handlebars helpers
   cssHandlebarsHelpers: helpers,
-
-  // apply evenize or not
   evenize: false,
-
-  // evenize options
-  evenizeOptions: {
-    imageMagick: true
-  },
-
-  // compress file or not
+  evenizeOptions: {imageMagick: true},
   compress: false,
-
-  // compress options
   compressOptions: [
     imagemin.gifsicle({interlaced: true}),
     imagemin.jpegtran({progressive: true}),
     imagemin.optipng({optimizationLevel: 5}),
     imagemin.svgo()
   ],
-
-  // out log or not
   verbose: false
 };
 
 /**
  * return build image sprite sheet task
- * @param {DEFAULT_OPTIONS} options option
- * @return {Function}
+ * @param {Object} options - option
+ * @param {String} [options.name='build:sprite'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.destImg - destination image path
+ * @param {String} options.destCss - destination css path
+ * @param {String} options.imgName - destination image filename
+ * @param {String} options.cssName - destination css filename
+ * @param {String} options.imgPath - destination image path in css
+ * @param {Number} [options.padding=2] - padding between image in sprite sheet.
+ *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
+ * @param {String} [options.algorithm='binary-tree'] - algorithm for generate sprite sheet.
+ *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
+ * @param {String} [options.engine='pixelsmith'] - engine for generate sprite sheet.
+ *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
+ * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
+ *   see: {@link ./template/stylus.hbs default template}
+ * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
+ * @param {Boolean} [options.evenize=false] - apply evenize or not
+ * @param {Object} [options.evenizeOptions={imageMagick: true}] - evenize options
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Array} [options.compressOptions] - compress options.
+ *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
+ *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean} [options.verbose=false] - out log or not
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import buildSprite from '@hidoo/gulp-task-build-sprite-image';
  *
  * task('sprite', buildSprite({
+ *   name: 'sprite:main',
  *   src: '/path/to/sprite/*.png',
  *   destImg: '/path/to/dest/image',
  *   destCss: '/path/to/dest/css',
  *   imgName: 'sprite.png',
  *   cssName: 'sprite.styl',
- *   imgPath: './image/sprite.png'
+ *   imgPath: './path/from/css/to/sprite/sprite.png'
+ *   padding: 10,
+ *   algorithm: 'top-down',
+ *   engine: 'pixelsmith',
+ *   cssTemplate: '/path/to/template/stylus.hbs',
+ *   cssHandlebarsHelpers: {hoge: (value) => value},
+ *   evenize: true,
+ *   evenizeOptions: {imageMagick: false},
+ *   compress: true,
+ *   compressOptions: [ // Default for this options
+ *     imagemin.gifsicle({interlaced: true}),
+ *     imagemin.jpegtran({progressive: true}),
+ *     imagemin.optipng({optimizationLevel: 5}),
+ *     imagemin.svgo()
+ *   ],
+ *   verbose: true
  * }));
  */
 export default function buildSprite(options = {}) {

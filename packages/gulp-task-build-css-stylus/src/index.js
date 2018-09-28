@@ -25,65 +25,58 @@ catch (error) {
 }
 
 /**
-* task default options.
+ * task default options.
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'build:css',
-
-  // source path (required)
   src: null,
-
-  // destination path (required)
   dest: null,
-
-  // destination filename
   filename: 'main.css',
-
-  // target browsers
-  // + http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4
   browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
-
-  // licence comments
   banner: '',
-
-  // stylus options
-  stylusOptions: {
-    rawDefine: {}
-  },
-
-  // array of html file path that target of uncss process
+  stylusOptions: {rawDefine: {}},
   uncssTargets: [],
-
-  // array of selector that should not removed
   uncssIgnore: [],
-
-  /**
-   * additional PostCss process
-   * @param {Root} root instance of PostCSS Root class
-   * @return {Root}
-   */
   additionalProcess: null,
-
-  // compress file or not
   compress: false
 };
 
 /**
  * return css build task by stylus
- * @param  {DEFAULT_OPTIONS} options options
- * @return {Function}
+ * @param  {Object} options - options
+ * @param  {String} [options.name='build:css'] - task name (use as displayName)
+ * @param  {String} options.src - source path
+ * @param  {String} options.dest - destination path
+ * @param  {String} [options.filename='main.css'] - destination filename
+ * @param  {Array<String>} [options.browsers] - target browsers.
+ *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
+ * @param  {String} [options.banner=''] - license comments
+ * @param  {Object} [options.stylusOptions={rawDefine: {}}] - stylus options.
+ *   see: {@link https://www.npmjs.com/package/gulp-stylus gulp-stylus options}
+ * @param  {Array<String>} [options.uncssTargets=[]] - array of html file path that target of uncss process
+ * @param  {Array<String>} [options.uncssIgnore=[]] - array of selector that should not removed
+ * @param  {Function<PostCSSRoot>} [options.additionalProcess=null] - additional PostCss process
+ * @param  {Boolean} [options.compress=false] - compress file or not
+ * @return {Function<Stream>}
  *
  * @example
- import {task} from 'gulp';
- import buildCss from '@hidoo/gulp-task-build-css-stylus';
-
- task('css', buildCss({
-   src: '/path/to/stylus/main.styl',
-   dest: '/path/to/dest'
- }));
+ * import {task} from 'gulp';
+ * import buildCss from '@hidoo/gulp-task-build-css-stylus';
+ *
+ * task('css', buildCss({
+ *   name: 'css:main',
+ *   src: '/path/to/stylus/main.styl',
+ *   dest: '/path/to/dest'
+ *   filename: 'styles.css',
+ *   browsers: ['> 0.1% in JP'],
+ *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   stylusOptions: {rawDefine: {}},
+ *   uncssTargets: ['/path/to/html/target.html'],
+ *   uncssIgnore: ['.ignore-selector'],
+ *   additionalProcess: (root) => root,
+ *   compress: true
+ * }));
  */
 export default function buildCss(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};

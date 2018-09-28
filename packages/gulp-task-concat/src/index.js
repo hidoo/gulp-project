@@ -28,42 +28,40 @@ catch (error) {
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'build:asset',
-
-  // source path (required)
   src: null,
-
-  // destination path (required)
   dest: null,
-
-  // destination filename
   filename: '',
-
-  // licence comments
   banner: '',
-
-  // compress file or not
   compress: false
 };
 
 /**
  * return javascript concat task
- * @param {DEFAULT_OPTIONS} options options
- * @return {Function}
+ * @param {Object} options options
+ * @param {String} [options.name='build:asset'] - task name (use as displayName)
+ * @param {Array<String>} options.src - source path
+ * @param {String} options.dest - destination path
+ * @param {String} [options.filename='bundle.js'] - destination filename
+ * @param {String} [options.banner=''] - license comments
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import {concatJs} from '@hidoo/gulp-task-concat';
  *
  * task('concat:js', concatJs({
+ *   name: 'js:deps',
  *   src: [
  *     '/path/to/js/a.js'
  *     '/path/to/js/b.js'
  *     '/path/to/js/c.js'
  *   ],
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
+ *   filename: 'deps.js',
+ *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   compress: true
  * }));
  */
 export function concatJs(options = {}) {
@@ -96,20 +94,30 @@ export function concatJs(options = {}) {
 
 /**
  * return css concat task
- * @param {DEFAULT_OPTIONS} options options
- * @return {Function}
+ * @param {Object} options options
+ * @param {String} [options.name='build:asset'] - task name (use as displayName)
+ * @param {Array<String>} options.src - source path
+ * @param {String} options.dest - destination path
+ * @param {String} [options.filename='bundle.css'] - destination filename
+ * @param {String} [options.banner=''] - license comments
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import {concatCss} from '@hidoo/gulp-task-concat';
  *
  * task('concat:css', concatCss({
+ *   name: 'css:deps',
  *   src: [
  *     '/path/to/css/a.css'
  *     '/path/to/css/b.css'
  *     '/path/to/css/c.css'
  *   ],
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
+ *   filename: 'deps.css',
+ *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   compress: true
  * }));
  */
 export function concatCss(options = {}) {

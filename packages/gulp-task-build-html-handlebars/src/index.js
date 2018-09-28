@@ -15,76 +15,6 @@ import {fromFiles, fromFrontMatter} from '@hidoo/data-from';
 import pathDepth from './pathDepth';
 
 /**
- * task default options.
- * @type {Object}
- */
-const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
-  name: 'build:html',
-
-  // source path (required)
-  src: null,
-
-  // destination path (required)
-  dest: null,
-
-  // destination extname
-  extname: '.html',
-
-  // Handlebars partials files glob pattern
-  partials: '',
-
-  // Handlebars layouts files glob pattern
-  layouts: '',
-
-  // Handlebars helpers files glob pattern
-  helpers: '',
-
-  // data files glob pattern
-  data: '',
-
-  // compress file or not
-  compress: false,
-
-  // compress options (using htmlmin)
-  compressOptions: {
-    caseSensitive: true,
-    collapseWhitespace: true,
-    conservativeCollapse: true,
-    preserveLineBreaks: true,
-    ignoreCustomFragments: [
-      // php start end tags
-      /<\?[\s\S]*?\?>/,
-      // cms tags
-      /<\/?mt:?[\s\S]*?>/i,
-      /<\$mt:?[\s\S]*?\$>/i
-    ]
-  },
-
-  /**
-   * additional process after data files parsed
-   * @param {Object} context data
-   * @return {Object}
-   */
-  onFilesParsed(context) {
-    return context;
-  },
-
-  /**
-   * additional process after front matter parsed
-   * @param {Object} context data
-   * @return {Object}
-   */
-  onFrontMatterParsed(context) {
-    return context;
-  },
-
-  // out log or not
-  verbose: false
-};
-
-/**
  * task name.
  * @type {String}
  */
@@ -178,8 +108,58 @@ function sortByFilename(options = {}) {
 }
 
 /**
+ * task default options.
+ * @type {Object}
+ */
+const DEFAULT_OPTIONS = {
+  name: 'build:html',
+  src: null,
+  dest: null,
+  extname: '.html',
+  partials: '',
+  layouts: '',
+  helpers: '',
+  data: '',
+  compress: false,
+  compressOptions: {
+    caseSensitive: true,
+    collapseWhitespace: true,
+    conservativeCollapse: true,
+    preserveLineBreaks: true,
+    ignoreCustomFragments: [
+      // php start end tags
+      /<\?[\s\S]*?\?>/,
+      // cms tags
+      /<\/?mt:?[\s\S]*?>/i,
+      /<\$mt:?[\s\S]*?\$>/i
+    ]
+  },
+  onFilesParsed(context) {
+    return context;
+  },
+  onFrontMatterParsed(context) {
+    return context;
+  },
+  verbose: false
+};
+
+/**
  * return html build task by handlebars
- * @param  {DEFAULT_OPTIONS} options options
+ * @param  {Object} options - options
+ * @param  {String} [options.name='build:html'] - task name (use as displayName)
+ * @param  {String} options.src - source path
+ * @param  {String} options.dest - destination path
+ * @param  {String} [options.extname='.html'] - destination extname
+ * @param  {String} [options.partials=''] - Handlebars partials files glob pattern
+ * @param  {String} [options.layouts=''] - Handlebars layouts files glob pattern
+ * @param  {String} [options.helpers=''] - Handlebars helpers files glob pattern
+ * @param  {String} [options.data=''] - data files glob pattern
+ * @param  {Boolean} [options.compress=false] - compress file or not
+ * @param  {Object} [options.compressOptions] - compress options. (see examples for default)
+ *   see: {@link https://www.npmjs.com/package/gulp-htmlmin gulp-htmlmin options}.
+ * @param  {Function<Object>} [options.onFilesParsed=(context) => context] - additional process after data files parsed
+ * @param  {Function<Object>} [options.onFrontMatterParsed=(context) => context] - additional process after front matter parsed
+ * @param  {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Promise>}
  *
  * @example
@@ -187,8 +167,29 @@ function sortByFilename(options = {}) {
  * import buildHtml from '@hidoo/gulp-task-build-html-handlebars';
  *
  * task('html', buildHtml({
+ *   name: 'html:main',
  *   src: '/path/to/html/*.hbs',
  *   dest: '/path/to/dest'
+ *   extname: '.php',
+ *   partials: '/path/to/html/partials/*.hbs',
+ *   layouts: '/path/to/html/layouts/*.hbs',
+ *   helpers: '/path/to/html/helpers/*.js',
+ *   data: '/path/to/html/data/*.{json,yaml}',
+ *   compress: true,
+ *   compressOptions: { // Default for this options
+ *     caseSensitive: true,
+ *     collapseWhitespace: true,
+ *     conservativeCollapse: true,
+ *     preserveLineBreaks: true,
+ *     ignoreCustomFragments: [
+ *       /<\?[\s\S]*?\?>/, // php start end tags
+ *       /<\/?mt:?[\s\S]*?>/i, // cms tags
+ *       /<\$mt:?[\s\S]*?\$>/i // cms tags
+ *     ]
+ *   },
+ *   onFilesParsed: (context) => context,
+ *   onFrontMatterParsed: (context) => context,
+ *   verbose: false
  * }));
  */
 export default function buildHtml(options = {}) {

@@ -12,36 +12,18 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'optimize:image',
-
-  // source path (required)
   src: null,
-
-  // destination path (required)
   dest: null,
-
-  // apply evenize or not
   evenize: false,
-
-  // evenize options
-  evenizeOptions: {
-    imageMagick: true
-  },
-
-  // compress file or not
+  evenizeOptions: {imageMagick: true},
   compress: false,
-
-  // compress options
   compressOptions: [
     imagemin.gifsicle({interlaced: true}),
     imagemin.jpegtran({progressive: true}),
     imagemin.optipng({optimizationLevel: 5}),
     imagemin.svgo()
   ],
-
-  // out log or not
   verbose: false
 };
 
@@ -53,16 +35,37 @@ const lastRunRecords = new WeakMap();
 
 /**
  * return image optimize task
- * @param {DEFAULT_OPTIONS} options option
- * @return {Function}
+ * @param {Object} options - option
+ * @param {String} [options.name='optimize:image'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.dest - destination path
+ * @param {Boolean} [options.evenize=false] - apply evenize or not
+ * @param {Object} [options.evenizeOptions={imageMagick: true}] - evenize options
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Array} [options.compressOptions] - compress options.
+ *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
+ *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean} [options.verbose=false] - out log or not
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import optimizeImage from '@hidoo/gulp-task-optimize-image';
  *
  * task('image', optimizeImage({
+ *   name: 'image:main',
  *   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
+ *   evenize: true,
+ *   evenizeOptions: {imageMagick: false},
+ *   compress: true,
+ *   compressOptions: [ // Default for this options
+ *     imagemin.gifsicle({interlaced: true}),
+ *     imagemin.jpegtran({progressive: true}),
+ *     imagemin.optipng({optimizationLevel: 5}),
+ *     imagemin.svgo()
+ *   ],
+ *   verbose: true
  * }));
  */
 export default function optimizeImage(options = {}) {

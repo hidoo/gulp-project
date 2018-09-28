@@ -7,27 +7,25 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
-  // task name (set displayName)
   name: 'copy:asset',
-
-  // source path (required)
   src: null,
-
-  // destination path (required)
   dest: null
 };
 
 /**
  * return copy files task
- * @param {DEFAULT_OPTIONS} options options
- * @return {Function}
+ * @param {Object} options - options
+ * @param {String} [options.name='copy:asset'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.dest - destination path
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
  * import {concatJs} from '@hidoo/gulp-task-copy';
  *
  * task('copy', copy({
+ *   name: 'copy:main',
  *   src: '/path/to/src',
  *   dest: '/path/to/dest'
  * }));

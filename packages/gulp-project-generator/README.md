@@ -5,13 +5,21 @@
 ## Installation
 
 ```sh
-$ npm install --save-dev @hidoo/gulp-project-generator
+$ npm install -g @hidoo/gulp-project-generator
 ```
 
 ## Usage
 
+basic:
+
 ```sh
-$ gulp-project-generator my-new-project
+$ gulp-project-generator /path/to/my-new-project
+```
+
+via npx (no need to install globally):
+
+```sh
+$ npx @hidoo/gulp-project-generator /path/to/my-new-project
 ```
 
 ### Options

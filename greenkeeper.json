@@ -2,8 +2,6 @@
   "groups": {
     "default": {
       "packages": [
-        "examples/multi-device/package.json",
-        "examples/single-device/package.json",
         "package.json",
         "packages/gulp-plugin-image-evenizer/package.json",
         "packages/gulp-plugin-svg-sprite/package.json",

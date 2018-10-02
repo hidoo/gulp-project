@@ -7,6 +7,6 @@
     "sass": "lessc ./kss-assets/kss.less ./kss-assets/kss.css"
   },
   "devDependencies": {
-    "less": "^3.8.1"
+    "less": "^2.7.1"
   }
 }

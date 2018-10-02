@@ -37,6 +37,6 @@
     "power-assert": "^1.6.0",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.5",
-    "strip-ansi": "^4.0.0"
+    "strip-ansi": "^5.0.0"
   }
 }

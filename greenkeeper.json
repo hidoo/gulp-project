@@ -20,6 +20,10 @@
         "packages/util-fancy-print/package.json",
         "packages/util-local-ip/package.json",
         "packages/util-merge-babelrc/package.json"
+      ],
+      "ignore": [
+        "babelify",
+        "browserify"
       ]
     }
   }

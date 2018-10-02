@@ -21,7 +21,8 @@
     "test:lint": "eslint .",
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
-    "postinstall": "npm-run-all -s bootstrap build:packages"
+    "install": "lerna bootstrap",
+    "postinstall": "npm run build:packages"
   },
   "author": "hidoo",
   "license": "MIT",
@@ -29,7 +30,7 @@
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
     "@hidoo/eslint-config": "^0.1.3",
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.1",
     "chalk": "^2.4.1",
     "cross-env": "^5.2.0",
     "documentation": "^8.1.2",

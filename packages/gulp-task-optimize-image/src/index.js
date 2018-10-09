@@ -16,7 +16,6 @@ const DEFAULT_OPTIONS = {
   src: null,
   dest: null,
   evenize: false,
-  evenizeOptions: {imageMagick: true},
   compress: false,
   compressOptions: [
     imagemin.gifsicle({interlaced: true}),
@@ -40,7 +39,6 @@ const lastRunRecords = new WeakMap();
  * @param {String} options.src - source path
  * @param {String} options.dest - destination path
  * @param {Boolean} [options.evenize=false] - apply evenize or not
- * @param {Object} [options.evenizeOptions={imageMagick: true}] - evenize options
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Array} [options.compressOptions] - compress options.
  *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
@@ -57,7 +55,6 @@ const lastRunRecords = new WeakMap();
  *   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
  *   dest: '/path/to/dest',
  *   evenize: true,
- *   evenizeOptions: {imageMagick: false},
  *   compress: true,
  *   compressOptions: [ // Default for this options
  *     imagemin.gifsicle({interlaced: true}),
@@ -77,14 +74,13 @@ export default function optimizeImage(options = {}) {
   // define task
   // + record last run time to lastRunRecords that use for incremental build.
   const task = () => {
-    const {evenize, evenizeOptions, compress, compressOptions, verbose} = opts,
-          {imageMagick} = evenizeOptions;
+    const {evenize, compress, compressOptions, verbose} = opts;
 
     return src(opts.src, {since: lastRunRecords.get(task)})
       .on('end', () => lastRunRecords.set(task, new Date()))
       .pipe(plumber({errorHandler}))
       .pipe(isImage)
-      .pipe(cond(evenize, evenizer({imageMagick, verbose})))
+      .pipe(cond(evenize, evenizer({verbose})))
       .pipe(isImage.restore)
       .pipe(isntIco)
       .pipe(cond(compress, imagemin([...compressOptions], {verbose})))

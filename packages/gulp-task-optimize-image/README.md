@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-task-optimize-image
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js

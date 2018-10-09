@@ -28,7 +28,6 @@ const DEFAULT_OPTIONS = {
   cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
   cssHandlebarsHelpers: helpers,
   evenize: false,
-  evenizeOptions: {imageMagick: true},
   compress: false,
   compressOptions: [
     imagemin.gifsicle({interlaced: true}),
@@ -59,7 +58,6 @@ const DEFAULT_OPTIONS = {
  *   see: {@link ./template/stylus.hbs default template}
  * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
  * @param {Boolean} [options.evenize=false] - apply evenize or not
- * @param {Object} [options.evenizeOptions={imageMagick: true}] - evenize options
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Array} [options.compressOptions] - compress options.
  *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
@@ -85,7 +83,6 @@ const DEFAULT_OPTIONS = {
  *   cssTemplate: '/path/to/template/stylus.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   evenize: true,
- *   evenizeOptions: {imageMagick: false},
  *   compress: true,
  *   compressOptions: [ // Default for this options
  *     imagemin.gifsicle({interlaced: true}),
@@ -101,12 +98,11 @@ export default function buildSprite(options = {}) {
 
   // define task
   const task = () => {
-    const {evenize, evenizeOptions, compress, compressOptions, verbose} = opts,
-          {imageMagick} = evenizeOptions;
+    const {evenize, compress, compressOptions, verbose} = opts;
 
     const stream = src(opts.src)
       .pipe(plumber({errorHandler}))
-      .pipe(cond(evenize, evenizer({imageMagick, verbose})))
+      .pipe(cond(evenize, evenizer({verbose})))
       .pipe(spritesmith(opts));
 
     // out css stream

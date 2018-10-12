@@ -4,7 +4,9 @@ import assert from 'assert';
 import fs from 'fs';
 import rimraf from 'rimraf';
 import sizeOf from 'image-size';
-import optimizeImage from '../src';
+import pixelmatch from 'pixelmatch';
+import imagemin from 'gulp-imagemin';
+import optimizeImage, {gifsicle, jpegtran, optipng, svgo} from '../src';
 
 describe('gulp-task-optimize-image', () => {
   const path = {
@@ -26,10 +28,12 @@ describe('gulp-task-optimize-image', () => {
     task().on('finish', () => {
       ['jpg', 'png', 'gif', 'svg', 'ico'].forEach((ext) => {
         const actual = fs.readFileSync(`${path.dest}/sample.${ext}`, {encode: null}),
-              expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {encode: null});
+              expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {encode: null}),
+              {width, height} = sizeOf(actual),
+              countDiffPixels = pixelmatch(actual, expected, null, width, height, {threshold: 0.1});
 
         assert(actual);
-        assert.deepEqual(actual, expected);
+        assert(countDiffPixels === 0);
       });
       done();
     });
@@ -37,22 +41,26 @@ describe('gulp-task-optimize-image', () => {
 
   it('should out evenized files to "options.dest" if argument "options.evenize" is true.', (done) => {
     const cases = [
-            ['10x9.jpg', [10, 10]],
-            ['9x10.png', [10, 10]],
-            ['9x9.gif', [10, 10]]
+            ['10x9', 'jpg', [10, 10]],
+            ['9x10', 'png', [10, 10]],
+            ['9x9', 'gif', [10, 10]]
           ],
           task = optimizeImage({
-            src: `${path.src}/{${cases.map(([file]) => file).join(',')}}`,
+            src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
             dest: path.dest,
             evenize: true
           });
 
     task().on('finish', () => {
-      cases.forEach(([file, [width, height]]) => {
-        const actual = sizeOf(`${path.dest}/${file}`);
+      cases.forEach(([basename, ext, [width, height]]) => {
+        const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null}),
+              expected = fs.readFileSync(`${path.expected}/${basename}.evenized.${ext}`, {encode: null}),
+              dimentions = sizeOf(expected),
+              countDiffPixels = pixelmatch(actual, expected, null, width, height, {threshold: 0.1});
 
-        assert(actual.width === width);
-        assert(actual.height === height);
+        assert(dimentions.width === width);
+        assert(dimentions.height === height);
+        assert(countDiffPixels === 0);
       });
       done();
     });
@@ -83,6 +91,16 @@ describe('gulp-task-optimize-image', () => {
         }
       });
       done();
+    });
+  });
+
+  describe('exports imagemin plugins', () => {
+
+    it('should be accessible to imagemin plugins', () => {
+      assert(imagemin.gifsicle === gifsicle);
+      assert(imagemin.jpegtran === jpegtran);
+      assert(imagemin.optipng === optipng);
+      assert(imagemin.svgo === svgo);
     });
   });
 

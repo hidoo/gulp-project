@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-task-optimize-image
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js
@@ -33,6 +19,14 @@ task('image', optimizeImage({
   dest: '/path/to/dest'
 }));
 ```
+
+## Supported formats
+
++ PNG
++ JPEG
++ GIF (Partical support)
+
+  + Alpha GIF and Animated GIF are not support.
 
 ## API
 

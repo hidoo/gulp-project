@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers, max-statements */
+
 import through from 'through2';
 import PluginError from 'plugin-error';
 import chunk from 'lodash.chunk';
@@ -14,8 +16,38 @@ import log from 'fancy-log';
  * @param {Number} value number
  * @return {Boolean}
  */
-function isOdd(value = 0) { // eslint-disable-line no-magic-numbers
-  return value % 2 === 1; // eslint-disable-line no-magic-numbers
+function isOdd(value = 0) {
+  return value % 2 === 1;
+}
+
+/**
+ * debug for ndarray of pixels
+ * @param {Vinyl} file vinyl of image file
+ * @param {View4duint8} pixels ndarray of pixels
+ * @return {void}
+ */
+function debug(file, pixels) { // eslint-disable-line no-unused-vars
+  const hasFrames = pixels.shape.length === 4,
+        width = hasFrames ? pixels.shape[1] : pixels.shape[0],
+        channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
+        data = chunk(chunk([...pixels.data], channels), width);
+
+  /* eslint-disable no-console */
+  console.log(`
+    file: ${file.basename}
+    pixels:
+      shape: [${pixels.shape.join(', ')}]
+      stride: [${pixels.stride.join(', ')}]
+      offset: ${pixels.offset}
+      size: ${pixels.size}
+      order: ${pixels.order}
+      dimension: ${pixels.dimension}
+      data:
+---
+${data.map((row) => row.map((el) => `[${el.join(' ')}]`).join(' ')).join('\n')}
+---
+  `);
+  /* eslint-enable no-console */
 }
 
 /**
@@ -62,8 +94,11 @@ export default function imageEvenizer(options = {}) {
     }
 
     const {ext, mime} = fileType(file.contents),
-          fillPixel = (/^jpe?g$/i).test(ext) ? [255, 255, 255, 255] : [255, 255, 255, 0], // eslint-disable-line no-magic-numbers
-          dimension = 4;
+          isJpg = (/^jpe?g$/i).test(ext),
+          isGif = (/^gif$/i).test(ext),
+          fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
+          saveOptions = isJpg ? {quality: 100} : {},
+          channels = 4;
 
     const promise = new Promise((resolve, reject) => {
       getPixels(file.contents, mime, (error, pixels) => {
@@ -76,42 +111,59 @@ export default function imageEvenizer(options = {}) {
 
     return promise
       .then((pixels) => {
-        const hasFrames = pixels.shape.length === 4, // eslint-disable-line no-magic-numbers
+        const hasFrames = pixels.shape.length === 4,
               width = hasFrames ? pixels.shape[1] : pixels.shape[0],
               height = hasFrames ? pixels.shape[2] : pixels.shape[1],
               isOddWidth = isOdd(width),
               isOddHeight = isOdd(height);
 
         // ignore animation gif and even size image
-        // eslint-disable-next-line no-magic-numbers
         if (hasFrames && pixels.shape[0] > 1 || !isOddWidth && !isOddHeight) {
           return done(null, file);
         }
 
         // transform to such as (example when the width is 3 pixels)
-        // [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255],
-        //  [0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255],
-        //  [0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]]
-        let data = chunk(chunk([...pixels.data], dimension), width),
+        // [[[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]],
+        //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]],
+        //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]]]
+        let data = chunk(chunk([...pixels.data], channels), width),
             newWidth = width,
             newHeight = height;
 
         // fill to width that to be even
         if (isOddWidth) {
-          newWidth = newWidth + 1; // eslint-disable-line no-magic-numbers
+          newWidth = newWidth + 1;
           data = data.map((row) => [...row, fillPixel]);
         }
 
         // fill to height that to be even
         if (isOddHeight) {
-          newHeight = newHeight + 1; // eslint-disable-line no-magic-numbers
-          data.push(Array.from(new Array(newWidth)).map(() => fillPixel));
+          newHeight = newHeight + 1;
+          data = [...data, Array.from(new Array(newWidth)).map(() => fillPixel)];
+        }
+
+        // set params (example when image size is 12x10)
+        // + shape -> [12, 10, 4]
+        // + stride -> [4, 48, 1]
+        const sizeInRow = newWidth * channels,
+              shape = [newWidth, newHeight, channels],
+              stride = [channels, sizeInRow, 1],
+              flattenData = flattenDeep(data);
+
+        // add frame to params (example when image size is 12x10)
+        // + shape -> [1, 12, 10, 4]
+        // + stride -> [480, 4, 48, 1]
+        if (isGif) {
+          const sizeInFrame = newWidth * newHeight * channels;
+
+          shape.unshift(1);
+          stride.unshift(sizeInFrame);
         }
 
         // transform array to ndarray
-        data = ndarray(flattenDeep(data), [newWidth, newHeight, dimension]);
+        const evenizedPixels = ndarray(Uint8ClampedArray.from(flattenData), shape, stride); // eslint-disable-line max-len
 
-        return getStream.buffer(savePixels(data, ext))
+        return getStream.buffer(savePixels(evenizedPixels, ext, saveOptions))
           .then((buffer) => {
             if (opts.verbose) {
               log(`${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`); // eslint-disable-line max-len

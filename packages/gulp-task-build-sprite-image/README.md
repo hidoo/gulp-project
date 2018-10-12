@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-task-build-sprite-image
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js
@@ -37,6 +23,14 @@ task('sprite', buildSprite({
   imgPath: './image/sprite.png'
 }));
 ```
+
+## Supported formats
+
++ PNG
++ JPEG
++ GIF (Partical support)
+
+  + Alpha GIF and Animated GIF are not support.
 
 ## API
 

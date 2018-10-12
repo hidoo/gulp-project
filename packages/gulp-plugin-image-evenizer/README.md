@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-plugin-image-evenizer
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js
@@ -32,6 +18,14 @@ task('evenize', () => src('/path/to/src')
   .pipe(imageEvenizer())
   .pipe(dest('/path/to/dest')));
 ```
+
+## Supported formats
+
++ PNG
++ JPEG
++ GIF (Partical support)
+
+  + Alpha GIF and Animated GIF are not support.
 
 ## Test
 

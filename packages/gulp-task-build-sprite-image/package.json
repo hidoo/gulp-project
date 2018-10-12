@@ -27,9 +27,9 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
@@ -48,7 +48,9 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-plumber": "^1.2.0",
     "gulp.spritesmith": "^6.9.0",
+    "image-size": "^0.6.3",
     "merge-stream": "^1.0.1",
+    "pixelmatch": "^4.0.2",
     "vinyl-buffer": "^1.0.1"
   },
   "peerDependencies": {

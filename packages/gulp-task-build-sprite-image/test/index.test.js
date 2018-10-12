@@ -3,6 +3,8 @@
 import assert from 'assert';
 import fs from 'fs';
 import rimraf from 'rimraf';
+import sizeOf from 'image-size';
+import pixelmatch from 'pixelmatch';
 import buildSprite from '../src';
 
 describe('gulp-task-build-sprite-image', () => {
@@ -30,11 +32,13 @@ describe('gulp-task-build-sprite-image', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
             actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
             expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.styl`);
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.styl`),
+            {width, height} = sizeOf(expectedImage),
+            countDiffPixels = pixelmatch(actualImage, expectedImage, null, width, height, {threshold: 0.1});
 
       assert(actualImage);
       assert(actualCss);
-      assert.deepEqual(actualImage, expectedImage);
+      assert(countDiffPixels === 0);
       assert.equal(String(actualCss), String(expectedCss));
       done();
     });
@@ -55,11 +59,13 @@ describe('gulp-task-build-sprite-image', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
             actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
             expectedImage = fs.readFileSync(`${path.expected}/image-sprite.evenized.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.evenized.styl`);
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.evenized.styl`),
+            {width, height} = sizeOf(expectedImage),
+            countDiffPixels = pixelmatch(actualImage, expectedImage, null, width, height, {threshold: 0.1});
 
       assert(actualImage);
       assert(actualCss);
-      assert.deepEqual(actualImage, expectedImage);
+      assert(countDiffPixels === 0);
       assert.equal(String(actualCss), String(expectedCss));
       done();
     });
@@ -80,11 +86,13 @@ describe('gulp-task-build-sprite-image', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
             actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
             expectedImage = fs.readFileSync(`${path.expected}/image-sprite.compressed.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.compressed.styl`);
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.compressed.styl`),
+            {width, height} = sizeOf(expectedImage),
+            countDiffPixels = pixelmatch(actualImage, expectedImage, null, width, height, {threshold: 0.1});
 
       assert(actualImage);
       assert(actualCss);
-      assert.deepEqual(actualImage, expectedImage);
+      assert(countDiffPixels === 0);
       assert.equal(String(actualCss), String(expectedCss));
       done();
     });
@@ -104,11 +112,13 @@ describe('gulp-task-build-sprite-image', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
             actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
             expectedImage = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.styl`);
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.styl`),
+            {width, height} = sizeOf(expectedImage),
+            countDiffPixels = pixelmatch(actualImage, expectedImage, null, width, height, {threshold: 0.1});
 
       assert(actualImage);
       assert(actualCss);
-      assert.deepEqual(actualImage, expectedImage);
+      assert(countDiffPixels === 0);
       assert.equal(String(actualCss), String(expectedCss));
       done();
     });

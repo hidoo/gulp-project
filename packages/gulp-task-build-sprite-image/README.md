@@ -28,7 +28,7 @@ task('sprite', buildSprite({
 
 -   PNG
 -   JPEG
--   GIF (Partical support)
+-   GIF (Partical support)
 
     -   Alpha GIF and Animated GIF are not support.
 
@@ -97,7 +97,7 @@ task('sprite', buildSprite({
 }));
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>**
 
 ### gifsicle
 

@@ -23,7 +23,7 @@ task('evenize', () => src('/path/to/src')
 
 + PNG
 + JPEG
-+ GIF (Partical support)
++ GIF (Partical support)
 
   + Alpha GIF and Animated GIF are not support.
 

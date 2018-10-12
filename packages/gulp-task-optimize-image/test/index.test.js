@@ -5,7 +5,8 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
-import optimizeImage from '../src';
+import imagemin from 'gulp-imagemin';
+import optimizeImage, {gifsicle, jpegtran, optipng, svgo} from '../src';
 
 describe('gulp-task-optimize-image', () => {
   const path = {
@@ -90,6 +91,16 @@ describe('gulp-task-optimize-image', () => {
         }
       });
       done();
+    });
+  });
+
+  describe('exports imagemin plugins', () => {
+
+    it('should be accessible to imagemin plugins', () => {
+      assert(imagemin.gifsicle === gifsicle);
+      assert(imagemin.jpegtran === jpegtran);
+      assert(imagemin.optipng === optipng);
+      assert(imagemin.svgo === svgo);
     });
   });
 

@@ -5,7 +5,8 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
-import buildSprite from '../src';
+import imagemin from 'gulp-imagemin';
+import buildSprite, {gifsicle, jpegtran, optipng, svgo} from '../src';
 
 describe('gulp-task-build-sprite-image', () => {
   const path = {
@@ -121,6 +122,16 @@ describe('gulp-task-build-sprite-image', () => {
       assert(countDiffPixels === 0);
       assert.equal(String(actualCss), String(expectedCss));
       done();
+    });
+  });
+
+  describe('exports imagemin plugins', () => {
+
+    it('should be accessible to imagemin plugins', () => {
+      assert(imagemin.gifsicle === gifsicle);
+      assert(imagemin.jpegtran === jpegtran);
+      assert(imagemin.optipng === optipng);
+      assert(imagemin.svgo === svgo);
     });
   });
 

@@ -125,3 +125,39 @@ export default function buildSprite(options = {}) {
 
   return task;
 }
+
+/**
+ * gifsicle plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const gifsicle = imagemin.gifsicle;
+
+/**
+ * jpegtran plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {jpegtran} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const jpegtran = imagemin.jpegtran;
+
+/**
+ * optipng plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {optipng} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const optipng = imagemin.optipng;
+
+/**
+ * svgo plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {svgo} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const svgo = imagemin.svgo;

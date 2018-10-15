@@ -77,10 +77,10 @@ export default async function generatePackageJson(name = '', dest = '', options 
     devDependencies.push(
       {name: '@babel/polyfill', version: '^7.0.0'},
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'jsdom', version: '^12.0.0'},
+      {name: 'jsdom', version: '^12.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^5.2.0'},
-      {name: 'power-assert', version: '^1.6.0'}
+      {name: 'power-assert', version: '^1.6.1'}
     );
     scripts.push(
       {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts'}
@@ -106,10 +106,10 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.server) {
     devDependencies.push(
-      {name: '@hidoo/express-engine-handlebars', version: '^0.1.0'},
+      {name: '@hidoo/express-engine-handlebars', version: '^0.1.2'},
       {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
-      {name: 'browser-sync', version: '^2.24.7'},
-      {name: 'express', version: '^4.16.3'}
+      {name: 'browser-sync', version: '^2.26.3'},
+      {name: 'express', version: '^4.16.4'}
     );
     scripts.push(
       {name: 'static:server', command: 'gulp server'}

@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-task-optimize-image
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js
@@ -33,6 +19,14 @@ task('image', optimizeImage({
   dest: '/path/to/dest'
 }));
 ```
+
+## Supported formats
+
+-   PNG
+-   JPEG
+-   GIF (Partical support)
+
+    -   Alpha GIF and Animated GIF are not support.
 
 ## API
 
@@ -49,7 +43,6 @@ return image optimize task
     -   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
-    -   `options.evenizeOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** evenize options (optional, default `{imageMagick:true}`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
           see: [DEFAULT_OPTIONS](./src/index.js).
@@ -67,7 +60,6 @@ task('image', optimizeImage({
   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
   dest: '/path/to/dest',
   evenize: true,
-  evenizeOptions: {imageMagick: false},
   compress: true,
   compressOptions: [ // Default for this options
     imagemin.gifsicle({interlaced: true}),
@@ -79,7 +71,55 @@ task('image', optimizeImage({
 }));
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>**
+
+### gifsicle
+
+gifsicle plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {gifsicle} from '@hidoo/gulp-task-optimize-image';
+```
+
+### jpegtran
+
+jpegtran plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {jpegtran} from '@hidoo/gulp-task-optimize-image';
+```
+
+### optipng
+
+optipng plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {optipng} from '@hidoo/gulp-task-optimize-image';
+```
+
+### svgo
+
+svgo plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {svgo} from '@hidoo/gulp-task-optimize-image';
+```
 
 ## Test
 

@@ -21,8 +21,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
   const gulpProjectVersion = `^${pkg.version}`;
 
   const devDependencies = [
-          {name: '@babel/core', version: '^7.0.0'},
-          {name: '@babel/preset-env', version: '^7.0.0'},
+          {name: '@babel/core', version: '^7.1.2'},
+          {name: '@babel/preset-env', version: '^7.1.0'},
           {name: '@babel/register', version: '^7.0.0'},
           {name: '@hidoo/eslint-config', version: '^0.1.3'},
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
@@ -138,7 +138,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.conventionalCommits) {
     devDependencies.push(
-      {name: '@commitlint/cli', version: '^7.2.0'},
+      {name: '@commitlint/cli', version: '^7.2.1'},
       {name: '@commitlint/config-conventional', version: '^7.1.2'},
       {name: 'conventional-changelog-cli', version: '^2.0.5'}
     );

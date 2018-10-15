@@ -8,20 +8,6 @@
 $ npm install --save-dev gulp@next @hidoo/gulp-task-build-sprite-image
 ```
 
-### ImageMagick or GraphicsMagick
-
-for example macOS
-
-```sh
-$ brew install imagemagick
-```
-
-or
-
-```sh
-$ brew install graphicsmagick
-```
-
 ## Usage
 
 ```js
@@ -37,6 +23,14 @@ task('sprite', buildSprite({
   imgPath: './image/sprite.png'
 }));
 ```
+
+## Supported formats
+
+-   PNG
+-   JPEG
+-   GIF (Partical support)
+
+    -   Alpha GIF and Animated GIF are not support.
 
 ## API
 
@@ -66,7 +60,6 @@ return build image sprite sheet task
           see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
     -   `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
     -   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
-    -   `options.evenizeOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** evenize options (optional, default `{imageMagick:true}`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
           see: [DEFAULT_OPTIONS](./src/index.js).
@@ -93,7 +86,6 @@ task('sprite', buildSprite({
   cssTemplate: '/path/to/template/stylus.hbs',
   cssHandlebarsHelpers: {hoge: (value) => value},
   evenize: true,
-  evenizeOptions: {imageMagick: false},
   compress: true,
   compressOptions: [ // Default for this options
     imagemin.gifsicle({interlaced: true}),
@@ -105,7 +97,55 @@ task('sprite', buildSprite({
 }));
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>**
+
+### gifsicle
+
+gifsicle plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+```
+
+### jpegtran
+
+jpegtran plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {jpegtran} from '@hidoo/gulp-task-build-sprite-image';
+```
+
+### optipng
+
+optipng plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {optipng} from '@hidoo/gulp-task-build-sprite-image';
+```
+
+### svgo
+
+svgo plugins for imagemin
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Examples
+
+```javascript
+import {svgo} from '@hidoo/gulp-task-build-sprite-image';
+```
 
 ## Test
 

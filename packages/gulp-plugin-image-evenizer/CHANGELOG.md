@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
+
+
+### Bug Fixes
+
+* **gulp-plugin-image-evenizer:** add stride when transform to ndarray ([bbd6a9f](https://github.com/hidoo/gulp-project/commit/bbd6a9f))
+* **package:** update file-type to version 10.0.0 ([a35253a](https://github.com/hidoo/gulp-project/commit/a35253a))
+
+
+### Features
+
+* **gulp-plugin-image-evenizer:** remove gm from dependencies ([8a821ce](https://github.com/hidoo/gulp-project/commit/8a821ce))
+
+
+### BREAKING CHANGES
+
+* **gulp-plugin-image-evenizer:** change alpha gif to not support (because save-pixels does not support it)
+update test case to add pixelmatch test
+add supported formats to README
+
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
 

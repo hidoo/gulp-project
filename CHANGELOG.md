@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
+
+
+### Bug Fixes
+
+* **gulp-plugin-image-evenizer:** add stride when transform to ndarray ([bbd6a9f](https://github.com/hidoo/gulp-project/commit/bbd6a9f))
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([a1aa0d0](https://github.com/hidoo/gulp-project/commit/a1aa0d0))
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([871733e](https://github.com/hidoo/gulp-project/commit/871733e))
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([85824af](https://github.com/hidoo/gulp-project/commit/85824af))
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([cee0ed3](https://github.com/hidoo/gulp-project/commit/cee0ed3))
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([b38cba1](https://github.com/hidoo/gulp-project/commit/b38cba1))
+* **package:** update file-type to version 10.0.0 ([a35253a](https://github.com/hidoo/gulp-project/commit/a35253a))
+
+
+### Features
+
+* **gulp-plugin-image-evenizer:** remove gm from dependencies ([8a821ce](https://github.com/hidoo/gulp-project/commit/8a821ce))
+* **gulp-task-build-sprite-image:** remove options.evenizeOptions ([699fb43](https://github.com/hidoo/gulp-project/commit/699fb43))
+* **gulp-task-optimize-image:** remove options.evenizeOptions ([83e25a5](https://github.com/hidoo/gulp-project/commit/83e25a5))
+* **packages:** change to accessible to imagemin plugins ([b028bf9](https://github.com/hidoo/gulp-project/commit/b028bf9))
+
+
+### Reverts
+
+* **package:** fix to ignore browserify and babelify from greenkeeper ([ebf0cde](https://github.com/hidoo/gulp-project/commit/ebf0cde))
+* **package:** fix to ignore examples package from greenkeeper ([7931450](https://github.com/hidoo/gulp-project/commit/7931450))
+* **package:** fix to ignore kss builder package from greenkeeper ([019faf6](https://github.com/hidoo/gulp-project/commit/019faf6))
+
+
+### BREAKING CHANGES
+
+* **gulp-plugin-image-evenizer:** change alpha gif to not support (because save-pixels does not support it)
+update test case to add pixelmatch test
+add supported formats to README
+
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
 

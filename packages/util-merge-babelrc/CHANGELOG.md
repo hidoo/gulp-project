@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
+
+**Note:** Version bump only for package @hidoo/util-merge-babelrc
+
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
 

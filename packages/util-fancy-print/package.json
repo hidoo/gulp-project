@@ -33,7 +33,7 @@
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
-    "power-assert": "^1.6.0",
+    "power-assert": "^1.6.1",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.5",
     "strip-ansi": "^5.0.0"

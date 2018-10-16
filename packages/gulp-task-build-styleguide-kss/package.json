@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@hidoo/gulp-util-error-handler": "^0.4.0",
-    "@hidoo/handlebars-helpers": "^0.2.2",
+    "@hidoo/handlebars-helpers": "^0.3.0",
     "handlebars": "^4.0.12",
     "kss": "3.0.0-beta.23"
   },

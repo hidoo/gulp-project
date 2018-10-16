@@ -368,7 +368,7 @@ html {
 }
 #styleguide .styleguide-markdown-body pre {
   color: #ddd;
-  background-color: #272822;
+  background-color: #282c34;
   border: 1px solid #000;
   font-size: 13px;
   line-height: 19px;
@@ -534,8 +534,8 @@ html {
 #styleguide .styleguide-example .styleguide-html {
   padding: 15px 15px;
   color: #ddd;
-  background: #272822;
-  border-top: 1px solid #272822;
+  background: #282c34;
+  border-top: 1px solid #282c34;
   overflow: auto;
 }
 #styleguide .styleguide-example .styleguide-html .styleguide-html-highlight {
@@ -590,120 +590,83 @@ html {
   }
 }
 /*
-Monokai style - ported by Luigi Maselli - http://grigio.org
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
 */
 .hljs {
   display: block;
+  overflow-x: auto;
   padding: 0.5em;
-  background: #272822;
-}
-.hljs-tag,
-.hljs-tag .hljs-title,
-.hljs-keyword,
-.hljs-literal,
-.hljs-strong,
-.hljs-change,
-.hljs-winutils,
-.hljs-flow,
-.lisp .hljs-title,
-.clojure .hljs-built_in,
-.nginx .hljs-title,
-.tex .hljs-special {
-  color: #F92672;
-}
-.hljs {
-  color: #DDD;
-}
-.hljs .hljs-constant,
-.asciidoc .hljs-code {
-  color: #66D9EF;
-}
-.hljs-code,
-.hljs-class .hljs-title,
-.hljs-header {
-  color: white;
-}
-.hljs-link_label,
-.hljs-attribute,
-.hljs-symbol,
-.hljs-symbol .hljs-string,
-.hljs-value,
-.hljs-regexp {
-  color: #BF79DB;
-}
-.hljs-link_url,
-.hljs-tag .hljs-value,
-.hljs-string,
-.hljs-bullet,
-.hljs-subst,
-.hljs-title,
-.hljs-emphasis,
-.haskell .hljs-type,
-.hljs-preprocessor,
-.hljs-pragma,
-.ruby .hljs-class .hljs-parent,
-.hljs-built_in,
-.sql .hljs-aggregate,
-.django .hljs-template_tag,
-.django .hljs-variable,
-.smalltalk .hljs-class,
-.hljs-javadoc,
-.django .hljs-filter .hljs-argument,
-.smalltalk .hljs-localvars,
-.smalltalk .hljs-array,
-.hljs-attr_selector,
-.hljs-pseudo,
-.hljs-addition,
-.hljs-stream,
-.hljs-envvar,
-.apache .hljs-tag,
-.apache .hljs-cbracket,
-.tex .hljs-command,
-.hljs-prompt {
-  color: #A6E22E;
+  color: #abb2bf;
+  background: #282c34;
 }
 .hljs-comment,
-.java .hljs-annotation,
-.smartquote,
-.hljs-blockquote,
-.hljs-horizontal_rule,
-.python .hljs-decorator,
-.hljs-template_comment,
-.hljs-pi,
-.hljs-doctype,
-.hljs-deletion,
-.hljs-shebang,
-.apache .hljs-sqbracket,
-.tex .hljs-formula {
-  color: #75715E;
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
 }
+.hljs-doctag,
 .hljs-keyword,
-.hljs-literal,
-.css .hljs-id,
-.hljs-phpdoc,
-.hljs-title,
-.hljs-header,
-.haskell .hljs-type,
-.vbscript .hljs-built_in,
-.sql .hljs-aggregate,
-.rsl .hljs-built_in,
-.smalltalk .hljs-class,
-.diff .hljs-header,
-.hljs-chunk,
-.hljs-winutils,
-.bash .hljs-variable,
-.apache .hljs-tag,
-.tex .hljs-special,
-.hljs-request,
-.hljs-status {
+.hljs-formula {
+  color: #c678dd;
+}
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+.hljs-literal {
+  color: #56b6c2;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  color: #98c379;
+}
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
   font-weight: bold;
 }
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula,
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
-  opacity: 0.5;
+.hljs-link {
+  text-decoration: underline;
 }

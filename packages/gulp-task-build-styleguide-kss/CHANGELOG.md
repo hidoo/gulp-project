@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/hidoo/gulp-project/compare/v0.4.0...v0.5.0) (2018-10-16)
+
+
+### Bug Fixes
+
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.3.0 ([f2e3acb](https://github.com/hidoo/gulp-project/commit/f2e3acb))
+
+
+### Features
+
+* **gulp-task-build-styleguide-kss:** remove highlight.js from builder ([ffecd54](https://github.com/hidoo/gulp-project/commit/ffecd54))
+
+
+
+
+
 # [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
 
 

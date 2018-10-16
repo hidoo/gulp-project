@@ -71,7 +71,7 @@ task('image', optimizeImage({
 }));
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>**
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Stream](https://nodejs.org/api/stream.html)>** 
 
 ### gifsicle
 

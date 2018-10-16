@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/hidoo/gulp-project/compare/v0.4.0...v0.5.0) (2018-10-16)
+
+
+### Bug Fixes
+
+* **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.3.0 ([b82ea08](https://github.com/hidoo/gulp-project/commit/b82ea08))
+
+
+
+
+
 # [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
 
 

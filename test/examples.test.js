@@ -45,9 +45,10 @@ describe('examples', () => {
               '/js/main.js',
               '/page-list.html',
               '/styleguide/index.html',
+              '/styleguide/kss-assets/atom-one-dark.less',
               '/styleguide/kss-assets/kss.css',
+              '/styleguide/kss-assets/kss.js',
               '/styleguide/kss-assets/kss.less',
-              '/styleguide/kss-assets/monokai.less',
               '/styleguide/section-block.html'
             ];
 
@@ -104,15 +105,17 @@ describe('examples', () => {
               '/mobile/js/main.js',
               '/mobile/page-list.html',
               '/mobile/styleguide/index.html',
+              '/mobile/styleguide/kss-assets/atom-one-dark.less',
               '/mobile/styleguide/kss-assets/kss.css',
+              '/mobile/styleguide/kss-assets/kss.js',
               '/mobile/styleguide/kss-assets/kss.less',
-              '/mobile/styleguide/kss-assets/monokai.less',
               '/mobile/styleguide/section-block.html',
               '/page-list.html',
               '/styleguide/index.html',
+              '/styleguide/kss-assets/atom-one-dark.less',
               '/styleguide/kss-assets/kss.css',
+              '/styleguide/kss-assets/kss.js',
               '/styleguide/kss-assets/kss.less',
-              '/styleguide/kss-assets/monokai.less',
               '/styleguide/section-block.html'
             ];
 

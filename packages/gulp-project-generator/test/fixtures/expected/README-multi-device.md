@@ -5,7 +5,6 @@
 ## Dependencies
 
 + [Node.js](https://nodejs.org/) (8.0.0+)
-+ [ImageMagick](http://www.imagemagick.org/)
 
 ## Installation
 

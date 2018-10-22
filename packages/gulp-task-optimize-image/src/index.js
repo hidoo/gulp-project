@@ -4,7 +4,8 @@ import cond from 'gulp-if';
 import filter from 'gulp-filter';
 import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
-import evenizer from '@hidoo/gulp-plugin-image-evenizer';
+import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
+import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
@@ -16,6 +17,7 @@ const DEFAULT_OPTIONS = {
   src: null,
   dest: null,
   evenize: false,
+  placeholder: false,
   compress: false,
   compressOptions: [
     imagemin.gifsicle({interlaced: true}),
@@ -39,6 +41,7 @@ const lastRunRecords = new WeakMap();
  * @param {String} options.src - source path
  * @param {String} options.dest - destination path
  * @param {Boolean} [options.evenize=false] - apply evenize or not
+ * @param {Boolean} [options.placeholder=false] - generate placeholder image or not
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Array} [options.compressOptions] - compress options.
  *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
@@ -55,6 +58,7 @@ const lastRunRecords = new WeakMap();
  *   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
  *   dest: '/path/to/dest',
  *   evenize: true,
+ *   placeholder: true,
  *   compress: true,
  *   compressOptions: [ // Default for this options
  *     imagemin.gifsicle({interlaced: true}),
@@ -74,15 +78,16 @@ export default function optimizeImage(options = {}) {
   // define task
   // + record last run time to lastRunRecords that use for incremental build.
   const task = () => {
-    const {evenize, compress, compressOptions, verbose} = opts;
+    const {evenize, placeholder, compress, compressOptions, verbose} = opts;
 
     return src(opts.src, {since: lastRunRecords.get(task)})
       .on('end', () => lastRunRecords.set(task, new Date()))
       .pipe(plumber({errorHandler}))
       .pipe(isImage)
-      .pipe(cond(evenize, evenizer({verbose})))
+      .pipe(cond(evenize, imageEvenizer({verbose})))
       .pipe(isImage.restore)
       .pipe(isntIco)
+      .pipe(cond(placeholder, imagePlaceholder({append: true, verbose})))
       .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
       .pipe(isntIco.restore)
       .pipe(dest(opts.dest))

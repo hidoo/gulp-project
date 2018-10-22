@@ -81,10 +81,13 @@ export default function imagePlaceholder(options = {}) {
 
     return getStream.buffer(savePixels(pixels, 'png', saveOptions))
       .then((buffer) => {
-        const placeholder = new Vinyl({contents: buffer}),
-              suffix = opts.suffix ? `.${opts.suffix}` : '';
-
-        placeholder.path = `${dirname}/${basename}${suffix}.png`;
+        const suffix = opts.suffix ? `.${opts.suffix}` : '',
+              placeholder = new Vinyl({
+                cwd: file.cwd,
+                base: file.base,
+                path: `${dirname}/${basename}${suffix}.png`,
+                contents: buffer
+              });
 
         // append placeholder image after original image.
         if (opts.append) {

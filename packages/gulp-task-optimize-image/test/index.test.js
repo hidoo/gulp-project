@@ -66,6 +66,39 @@ describe('gulp-task-optimize-image', () => {
     });
   });
 
+  it('should out placeholder images to "options.dest" if argument "options.placeholder" is true.', (done) => {
+    const cases = [
+            ['10x9', 'jpg'],
+            ['9x10', 'png'],
+            ['9x9', 'gif'],
+            ['sample', 'svg']
+          ],
+          task = optimizeImage({
+            src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
+            dest: path.dest,
+            placeholder: true
+          });
+
+    task().on('finish', () => {
+      cases.forEach(([basename, ext]) => {
+        const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null}),
+              placeholder = fs.readFileSync(`${path.dest}/${basename}.placeholder.png`, {encode: null}),
+              expected = fs.readFileSync(`${path.expected}/${basename}.original.${ext}`, {encode: null}),
+              placeholderExpected = fs.readFileSync(`${path.expected}/${basename}.placeholder.png`, {encode: null}),
+              dimentions = sizeOf(expected),
+              placeholderDimentions = sizeOf(placeholder),
+              countDiffPixels = pixelmatch(actual, expected, null, dimentions.width, dimentions.height, {threshold: 0.1}),
+              placeholderCountDiffPixels = pixelmatch(placeholder, placeholderExpected, null, placeholderDimentions.width, placeholderDimentions.height, {threshold: 0.1});
+
+        assert(placeholderDimentions.width === dimentions.width);
+        assert(placeholderDimentions.height === dimentions.height);
+        assert(countDiffPixels === 0);
+        assert(placeholderCountDiffPixels === 0);
+      });
+      done();
+    });
+  });
+
   it('should out compressed files to "options.dest" if argument "options.compress" is true.', (done) => {
     const task = optimizeImage({
       src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,

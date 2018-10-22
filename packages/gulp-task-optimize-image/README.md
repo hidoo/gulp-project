@@ -43,6 +43,7 @@ return image optimize task
     -   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
+    -   `options.placeholder` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** generate placeholder image or not (optional, default `false`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
           see: [DEFAULT_OPTIONS](./src/index.js).
@@ -60,6 +61,7 @@ task('image', optimizeImage({
   src: '/path/to/images/*.{jpg,jpeg,gif,png,svg,ico}',
   dest: '/path/to/dest',
   evenize: true,
+  placeholder: true,
   compress: true,
   compressOptions: [ // Default for this options
     imagemin.gifsicle({interlaced: true}),

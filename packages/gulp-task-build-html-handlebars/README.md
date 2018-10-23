@@ -81,6 +81,31 @@ task('html', buildHtml({
 
 Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>** 
 
+## Template API
+
+### Builtin Helpers
+
+See [@hidoo/handlebars-helpers](https://github.com/hidoo/handlebars-helpers).
+
+### Template context
+
+global:
+
+| name     | example                                   | description                         |
+| -------- | ----------------------------------------- | ----------------------------------- |
+| NODE_ENV | `{{#is NODE_ENV 'production'}}...{{/is}}` | string of `process.env.NODE_ENV`    |
+| compress | `{{#if compress}}...{{/if}}`              | value of `options.compress`         |
+| pages    | `{{#each pages}}...{{/each}}`             | array of Front Matter for all pages |
+
+path (when file is `subdir/index.hbs`):
+
+| name          | example                                    | description                              |
+| ------------- | ------------------------------------------ | ---------------------------------------- |
+| path.depth    | `{{path.depth}}` => `../`                  | depth of file from `options.src`         |
+| path.relative | `{{path.relative}}` => `subdir/index.html` | relative path of file from `options.src` |
+| path.basename | `{{path.basename}}` => `index.html`        | basename of file                         |
+| path.extname  | `{{path.extname}}` => `.html`              | extname of file                          |
+
 ## Test
 
 ```sh

@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-plugin-image-placeholder",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Plugin that add image of placeholder for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -27,8 +27,8 @@
   "license": "MIT",
   "dependencies": {
     "fancy-log": "^1.3.2",
-    "image-size": "^0.6.3",
     "get-stream": "^4.1.0",
+    "image-size": "^0.6.3",
     "ndarray": "^1.0.18",
     "plugin-error": "^1.0.1",
     "save-pixels": "^2.3.4",

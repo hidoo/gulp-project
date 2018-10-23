@@ -56,7 +56,7 @@ task('placeholder', () => src('/path/to/src')
   .pipe(dest('/path/to/dest'))):
 ```
 
-Returns **DestroyableTransform**
+Returns **DestroyableTransform** 
 
 ## Test
 

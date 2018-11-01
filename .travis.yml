@@ -4,7 +4,9 @@ node_js:
   - "11"
   - "10"
   - "8"
-install: npm install
+install:
+  - npm cache verify
+  - npm install
 cache:
   directories:
     - "$HOME/.npm"

@@ -27,7 +27,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "cssom": "^0.3.4",
-    "fancy-log": "^1.3.2",
+    "fancy-log": "^1.3.3",
     "handlebars": "^4.0.12",
     "plugin-error": "^1.0.1",
     "svg-sprite": "^1.4.0",

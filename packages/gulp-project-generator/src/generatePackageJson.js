@@ -33,7 +33,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'gulp', version: '^4.0.0'},
           {name: 'husky', version: '^1.1.2'},
           {name: 'lint-staged', version: '^8.0.4'},
-          {name: 'npm-run-all', version: '^4.1.3'},
+          {name: 'npm-run-all', version: '^4.1.5'},
           {name: 'rimraf', version: '^2.6.2'}
         ],
         scripts = [

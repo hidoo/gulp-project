@@ -32,6 +32,7 @@ const DEFAULT_OPTIONS = {
   src: null,
   dest: null,
   filename: '',
+  suffix: '.min',
   banner: '',
   compress: false
 };
@@ -43,6 +44,7 @@ const DEFAULT_OPTIONS = {
  * @param {Array<String>} options.src - source path
  * @param {String} options.dest - destination path
  * @param {String} [options.filename='bundle.js'] - destination filename
+ * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {String} [options.banner=''] - license comments
  * @param {Boolean} [options.compress=false] - compress file or not
  * @return {Function<Stream>}
@@ -60,6 +62,7 @@ const DEFAULT_OPTIONS = {
  *   ],
  *   dest: '/path/to/dest',
  *   filename: 'deps.js',
+ *   suffix: '.hoge',
  *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
  *   compress: true
  * }));
@@ -69,7 +72,7 @@ export function concatJs(options = {}) {
 
   // define task
   const task = () => {
-    const {filename, banner, compress} = opts;
+    const {filename, suffix, banner, compress} = opts;
 
     return src(opts.src)
       .pipe(plumber({errorHandler}))
@@ -77,7 +80,7 @@ export function concatJs(options = {}) {
       .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line no-process-env
       .pipe(header(banner, {pkg}))
       .pipe(dest(opts.dest))
-      .pipe(cond(compress, rename({suffix: '.min'})))
+      .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, uglify({output: {comments: 'some'}})))
       .pipe(cond(compress, dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))
@@ -99,6 +102,7 @@ export function concatJs(options = {}) {
  * @param {Array<String>} options.src - source path
  * @param {String} options.dest - destination path
  * @param {String} [options.filename='bundle.css'] - destination filename
+ * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {String} [options.banner=''] - license comments
  * @param {Boolean} [options.compress=false] - compress file or not
  * @return {Function<Stream>}
@@ -116,6 +120,7 @@ export function concatJs(options = {}) {
  *   ],
  *   dest: '/path/to/dest',
  *   filename: 'deps.css',
+ *   suffix: '.hoge',
  *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
  *   compress: true
  * }));
@@ -125,14 +130,14 @@ export function concatCss(options = {}) {
 
   // define task
   const task = () => {
-    const {filename, banner, compress} = opts;
+    const {filename, suffix, banner, compress} = opts;
 
     return src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(concat(filename || 'bundle.css'))
       .pipe(header(banner, {pkg}))
       .pipe(dest(opts.dest))
-      .pipe(cond(compress, rename({suffix: '.min'})))
+      .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, postcss([csso({restructure: false})])))
       .pipe(cond(compress, dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))

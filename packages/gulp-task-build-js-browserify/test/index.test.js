@@ -117,4 +117,48 @@ describe('gulp-task-build-js-browserify', () => {
     });
   });
 
+  it('should out to "main.hoge.js" and "main.hoge.js.gz" if argument "options.compress" is set and argument "options.suffix" is ".hoge".', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest,
+      suffix: '.hoge',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+            actualMin = fs.readFileSync(`${path.dest}/main.hoge.js`).toString().trim(),
+            actualGz = fs.readFileSync(`${path.dest}/main.hoge.js.gz`),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim()),
+            expectedMin = replaceVersion(fs.readFileSync(`${path.expected}/main.min.js`).toString().trim());
+
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actual, expected);
+      assert.deepStrictEqual(actualMin, expectedMin);
+      done();
+    });
+  });
+
+  it('should out to "main.js" and "main.js.gz" if argument "options.compress" is set and argument "options.suffix" is empty string.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest,
+      suffix: '',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actualMin = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+            actualGz = fs.readFileSync(`${path.dest}/main.js.gz`),
+            expectedMin = replaceVersion(fs.readFileSync(`${path.expected}/main.min.js`).toString().trim());
+
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actualMin, expectedMin);
+      done();
+    });
+  });
+
 });

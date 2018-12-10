@@ -92,6 +92,50 @@ describe('gulp-task-build-css-stylus', () => {
     });
   });
 
+  it('should out to "main.hoge.css" and "main.hoge.css.gz" if argument "options.compress" is true and argument "options.suffix" is ".hoge".', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.styl`,
+      dest: path.dest,
+      suffix: '.hoge',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.css`),
+            actualMin = fs.readFileSync(`${path.dest}/main.hoge.css`),
+            actualGz = fs.readFileSync(`${path.dest}/main.hoge.css.gz`),
+            expected = fs.readFileSync(`${path.expected}/main.css`),
+            expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.equal(String(actual), String(expected));
+      assert.equal(String(actualMin).trim(), String(expectedMin).trim());
+      done();
+    });
+  });
+
+  it('should out to "main.css" and "main.css.gz" if argument "options.compress" is true and argument "options.suffix" is empty string.', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.styl`,
+      dest: path.dest,
+      suffix: '',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actualMin = fs.readFileSync(`${path.dest}/main.css`),
+            actualGz = fs.readFileSync(`${path.dest}/main.css.gz`),
+            expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+
+      assert(actualMin);
+      assert(actualGz);
+      assert.equal(String(actualMin).trim(), String(expectedMin).trim());
+      done();
+    });
+  });
+
   it('should out to "main.css" that injected specified value if argument "options.banner" is set.', (done) => {
     const task = buildCss({
       src: `${path.src}/style.styl`,

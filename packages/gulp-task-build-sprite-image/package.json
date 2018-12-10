@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-sprite-image",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Task that build image sprite sheet for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -41,8 +41,8 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-plugin-image-evenizer": "^0.6.2",
-    "@hidoo/gulp-util-error-handler": "^0.6.2",
+    "@hidoo/gulp-plugin-image-evenizer": "^0.7.0",
+    "@hidoo/gulp-util-error-handler": "^0.7.0",
     "@hidoo/handlebars-helpers": "^0.4.1",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",

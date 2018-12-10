@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/util-fancy-print",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Utility that print styled values to console",
   "engines": {
     "node": ">=8.0.0"

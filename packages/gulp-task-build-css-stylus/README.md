@@ -50,6 +50,7 @@ return css build task by stylus
     -   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'main.css'`)
+    -   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
     -   `options.browsers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** target browsers.
           see: [default target browsers](http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4)
     -   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
@@ -71,6 +72,7 @@ task('css', buildCss({
   src: '/path/to/stylus/main.styl',
   dest: '/path/to/dest'
   filename: 'styles.css',
+  suffix: '.hoge',
   browsers: ['> 0.1% in JP'],
   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
   stylusOptions: {rawDefine: {}},

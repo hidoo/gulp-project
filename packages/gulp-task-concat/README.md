@@ -57,6 +57,7 @@ return javascript concat task
     -   `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.js'`)
+    -   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
     -   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
@@ -75,6 +76,7 @@ task('concat:js', concatJs({
   ],
   dest: '/path/to/dest',
   filename: 'deps.js',
+  suffix: '.hoge',
   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
   compress: true
 }));
@@ -93,6 +95,7 @@ return css concat task
     -   `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.css'`)
+    -   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
     -   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
@@ -111,6 +114,7 @@ task('concat:css', concatCss({
   ],
   dest: '/path/to/dest',
   filename: 'deps.css',
+  suffix: '.hoge',
   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
   compress: true
 }));

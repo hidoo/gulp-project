@@ -105,6 +105,58 @@ describe('gulp-task-concat', () => {
     });
   });
 
+  it('should out to compressed file if argument "options.compress" is true and argument "options.compress" is ".hoge".', (done) => {
+    const task = concatJs({
+      src: [
+        `${path.src}/a.js`,
+        `${path.src}/c.js`,
+        `${path.src}/b.js`
+      ],
+      dest: path.dest,
+      suffix: '.hoge',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/bundle.js`),
+            actualMin = fs.readFileSync(`${path.dest}/bundle.hoge.js`),
+            actualGz = fs.readFileSync(`${path.dest}/bundle.hoge.js.gz`),
+            expected = fs.readFileSync(`${path.expected}/bundle.compress.js`),
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.js`);
+
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
+      done();
+    });
+  });
+
+  it('should out to compressed file if argument "options.compress" is true and argument "options.compress" is empty string.', (done) => {
+    const task = concatJs({
+      src: [
+        `${path.src}/a.js`,
+        `${path.src}/c.js`,
+        `${path.src}/b.js`
+      ],
+      dest: path.dest,
+      suffix: '',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actualMin = fs.readFileSync(`${path.dest}/bundle.js`),
+            actualGz = fs.readFileSync(`${path.dest}/bundle.js.gz`),
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.js`);
+
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
+      done();
+    });
+  });
+
   it('should out to "bundle.css" if argument "options" is default.', (done) => {
     const task = concatCss({
       src: [
@@ -189,6 +241,58 @@ describe('gulp-task-concat', () => {
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
+      done();
+    });
+  });
+
+  it('should out to compressed file with suffix if argument "options.compress" is true and argument "options.suffix" is ".hoge".', (done) => {
+    const task = concatCss({
+      src: [
+        `${path.src}/a.css`,
+        `${path.src}/c.css`,
+        `${path.src}/b.css`
+      ],
+      dest: path.dest,
+      suffix: '.hoge',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/bundle.css`),
+            actualMin = fs.readFileSync(`${path.dest}/bundle.hoge.css`),
+            actualGz = fs.readFileSync(`${path.dest}/bundle.hoge.css.gz`),
+            expected = fs.readFileSync(`${path.expected}/bundle.compress.css`),
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.css`);
+
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+      assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
+      done();
+    });
+  });
+
+  it('should out to compressed file with suffix if argument "options.compress" is true and argument "options.suffix" is empty string.', (done) => {
+    const task = concatCss({
+      src: [
+        `${path.src}/a.css`,
+        `${path.src}/c.css`,
+        `${path.src}/b.css`
+      ],
+      dest: path.dest,
+      suffix: '',
+      compress: true
+    });
+
+    task().on('finish', () => {
+      const actualMin = fs.readFileSync(`${path.dest}/bundle.css`),
+            actualGz = fs.readFileSync(`${path.dest}/bundle.css.gz`),
+            expectedMin = fs.readFileSync(`${path.expected}/bundle.compress.min.css`);
+
+      assert(actualMin);
+      assert(actualGz);
       assert.deepStrictEqual(actualMin.toString().trim(), expectedMin.toString().trim());
       done();
     });

@@ -22,6 +22,7 @@ const DEFAULT_OPTIONS = {
   src: null,
   dest: null,
   filename: 'main.js',
+  suffix: '.min',
   browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   useBuiltIns: 'usage',
   babelrc: path.resolve(process.cwd(), '.babelrc.js'),
@@ -40,6 +41,7 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.src - source path
  * @param {String} options.dest - destination path
  * @param {String} [options.filename='main.js'] - destination filename
+ * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {Array<String>} [options.browsers] - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
  * @param {String|Boolean} [options.useBuiltIns='usage'] - use polyfill or not.
@@ -71,6 +73,7 @@ const DEFAULT_OPTIONS = {
  *   src: '/path/to/js/main.js',
  *   dest: '/path/to/dest',
  *   filename: 'main.js',
+ *   suffix: '.hoge',
  *   browsers: ['> 0.1% in JP'],
  *   useBuiltIns: false,
  *   babelrc: '/path/to/.babelrc.js',
@@ -87,7 +90,7 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = async () => {
-    const {filename, compress} = opts,
+    const {filename, suffix, compress} = opts,
           stream = through.obj();
 
     return rollup(inputOptions(opts))
@@ -105,7 +108,7 @@ export default function buildJs(options = {}) {
           .pipe(source(filename))
           .pipe(buffer())
           .pipe(dest(opts.dest))
-          .pipe(cond(compress, rename({suffix: '.min'})))
+          .pipe(cond(compress, rename({suffix})))
           .pipe(cond(compress, uglify({output: {comments: 'some'}})))
           .pipe(cond(compress, dest(opts.dest)))
           .pipe(cond(compress, gzip({append: true})))

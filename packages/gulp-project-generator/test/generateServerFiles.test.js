@@ -47,6 +47,7 @@ describe('generateServerFiles', () => {
             .sort(),
           expectedAssetList = [
             '/src/server/app.js',
+            '/src/server/constants/statusCode.js',
             '/src/server/controllers/api.js',
             '/src/server/controllers/index.js',
             '/src/server/routes/api.js',
@@ -70,6 +71,7 @@ describe('generateServerFiles', () => {
             .sort(),
           expectedAssetList = [
             '/src/server/app.js',
+            '/src/server/constants/statusCode.js',
             '/src/server/controllers/api.js',
             '/src/server/controllers/index.js',
             '/src/server/routes/api.js',

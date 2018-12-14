@@ -8,6 +8,7 @@ import autoprefixer from 'autoprefixer';
 import cssmqpacker from 'css-mqpacker';
 import uncss from 'postcss-uncss';
 import csso from 'postcss-csso';
+import url from 'postcss-url';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import gzip from 'gulp-gzip';
@@ -37,6 +38,8 @@ const DEFAULT_OPTIONS = {
   browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
   stylusOptions: {rawDefine: {}},
+  url: null,
+  urlOptions: {},
   uncssTargets: [],
   uncssIgnore: [],
   additionalProcess: null,
@@ -56,6 +59,10 @@ const DEFAULT_OPTIONS = {
  * @param  {String} [options.banner=''] - license comments
  * @param  {Object} [options.stylusOptions={rawDefine: {}}] - stylus options.
  *   see: {@link https://www.npmjs.com/package/gulp-stylus gulp-stylus options}
+ * @param  {String} [options.url=null] - type of processing of url() (one of [inline|copy|rebase])
+ *   see: {@link https://www.npmjs.com/package/postcss-url}
+ * @param  {Object} [options.urlOptions={}] - options of processing of url()
+ *   see: {@link https://www.npmjs.com/package/postcss-url#options-combinations}
  * @param  {Array<String>} [options.uncssTargets=[]] - array of html file path that target of uncss process
  * @param  {Array<String>} [options.uncssIgnore=[]] - array of selector that should not removed
  * @param  {Function<PostCSSRoot>} [options.additionalProcess=null] - additional PostCss process
@@ -75,6 +82,8 @@ const DEFAULT_OPTIONS = {
  *   browsers: ['> 0.1% in JP'],
  *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
  *   stylusOptions: {rawDefine: {}},
+ *   url: 'inline',
+ *   urlOptions: {basePath: path.resolve(process.cwd(), 'src/images'},
  *   uncssTargets: ['/path/to/html/target.html'],
  *   uncssIgnore: ['.ignore-selector'],
  *   additionalProcess: (root) => root,
@@ -110,6 +119,17 @@ export default function buildCss(options = {}) {
     // add default post css process
     postProcesses.push(autoprefixer({browsers}));
     postProcesses.push(cssmqpacker);
+
+    // add post css process by postcss-url
+    if (
+      typeof opts.url === 'string' &&
+      ['inline', 'copy', 'rebase'].includes(opts.url)
+    ) {
+      postProcesses.push(url({
+        ...opts.urlOptions,
+        url: opts.url
+      }));
+    }
 
     // add post css process if opts.uncssTargets is valid
     if (Array.isArray(uncssTargets) && Boolean(uncssTargets.length)) {

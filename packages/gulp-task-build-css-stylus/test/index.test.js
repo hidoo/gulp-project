@@ -136,6 +136,60 @@ describe('gulp-task-build-css-stylus', () => {
     });
   });
 
+  it('should out to "main.css" that not process url() value if argument "options.url" is not set.', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.url.styl`,
+      dest: path.dest,
+      compress: false
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.css`),
+            expected = fs.readFileSync(`${path.expected}/main.url-not-set.css`);
+
+      assert(actual);
+      assert.equal(String(actual), String(expected));
+      done();
+    });
+  });
+
+  it('should out to "main.css" that embed url() value if argument "options.url" is "inline".', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.url.styl`,
+      dest: path.dest,
+      url: 'inline',
+      compress: false
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.css`),
+            expected = fs.readFileSync(`${path.expected}/main.url.css`);
+
+      assert(actual);
+      assert.equal(String(actual), String(expected));
+      done();
+    });
+  });
+
+  it('should out to "main.css" that embed url() value with options if argument "options.url" is "inline" and argument.urlOptions is set.', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.url.styl`,
+      dest: path.dest,
+      url: 'inline',
+      urlOptions: {encodeType: 'base64'},
+      compress: false
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.css`),
+            expected = fs.readFileSync(`${path.expected}/main.url-options.css`);
+
+      assert(actual);
+      assert.equal(String(actual), String(expected));
+      done();
+    });
+  });
+
   it('should out to "main.css" that injected specified value if argument "options.banner" is set.', (done) => {
     const task = buildCss({
       src: `${path.src}/style.styl`,

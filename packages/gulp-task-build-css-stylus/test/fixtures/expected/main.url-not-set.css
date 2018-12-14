@@ -1,0 +1,7 @@
+@charset "utf-8";
+.block__image {
+  background-image: url("./images/sample.png");
+}
+.block__svg {
+  background-image: url("./images/sample.svg");
+}

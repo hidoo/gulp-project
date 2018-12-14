@@ -41,7 +41,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-plugin-svg-sprite": "^0.7.0",
+    "@hidoo/gulp-plugin-svg-sprite": "^0.8.0",
     "@hidoo/gulp-util-error-handler": "^0.7.0",
     "@hidoo/handlebars-helpers": "^0.4.1",
     "gulp-gzip": "^1.4.2",

@@ -41,7 +41,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hidoo/gulp-plugin-image-evenizer": "^0.7.0",
+    "@hidoo/gulp-plugin-image-evenizer": "^0.8.0",
     "@hidoo/gulp-plugin-image-placeholder": "^0.7.0",
     "@hidoo/gulp-util-error-handler": "^0.7.0",
     "gulp-filter": "^5.1.0",

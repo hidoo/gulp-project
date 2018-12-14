@@ -1,4 +1,5 @@
 import pkg from '../../../package.json';
+import * as status from '../constants/statusCode';
 
 /**
  * show project info
@@ -7,8 +8,6 @@ import pkg from '../../../package.json';
  * @return {Promise}
  */
 export async function project(req, res) {
-  const STATUS_OK = 200;
-
-  res.status(STATUS_OK).json(pkg);
+  res.status(status.OK).json(pkg);
   return;
 }

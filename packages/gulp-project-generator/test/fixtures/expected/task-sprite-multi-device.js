@@ -24,27 +24,49 @@ const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disabl
 const pathToSpriteDesktop = relative(config.path.destCssDesktop, config.path.destSpriteDesktop); // eslint-disable-line max-len
 const pathToSpriteMobile = relative(config.path.destCssMobile, config.path.destSpriteMobile); // eslint-disable-line max-len
 
+/**
+ * return merged build options for desktop
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildDesktopOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSpriteDesktop,
+    destCss: config.path.srcCssDesktop,
+    imgPath: `${pathToSpriteDesktop}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+
+/**
+ * return merged build options for mobile
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildMobileOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSpriteMobile,
+    destCss: config.path.srcCssMobile,
+    imgPath: `${pathToSpriteMobile}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+
 // define main task
-const mainDesktop = buildSprite({
+const mainDesktop = buildSprite(buildDesktopOptions({
   name: 'sprite:desktop:main',
   src: `${config.path.srcSpriteDesktop}/**/sample-*.svg`,
-  destImg: `${config.path.destSpriteDesktop}`,
-  destCss: `${config.path.srcCssDesktop}`,
   imgName: 'sample.svg',
-  cssName: '_sprite_sample.styl',
-  imgPath: `${pathToSpriteDesktop}/sample.svg${cacheParameter}`,
-  compress: config.compress
-});
-const mainMobile = buildSprite({
+  cssName: '_sprite_sample.styl'
+}));
+const mainMobile = buildSprite(buildMobileOptions({
   name: 'sprite:mobile:main',
   src: `${config.path.srcSpriteMobile}/**/sample-*.svg`,
-  destImg: `${config.path.destSpriteMobile}`,
-  destCss: `${config.path.srcCssMobile}`,
   imgName: 'sample.svg',
-  cssName: '_sprite_sample.styl',
-  imgPath: `${pathToSpriteMobile}/sample.svg${cacheParameter}`,
-  compress: config.compress
-});
+  cssName: '_sprite_sample.styl'
+}));
 
 // define watch task
 const watchDesktop = () => {

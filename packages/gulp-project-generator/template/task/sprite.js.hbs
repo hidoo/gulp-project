@@ -34,34 +34,73 @@ const pathToSprite = relative(config.path.destCss, config.path.destSprite);
 {{/if}}
 
 {{#if multiDevice}}
+/**
+ * return merged build options for desktop
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildDesktopOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSpriteDesktop,
+    destCss: config.path.srcCssDesktop,
+    imgPath: `${pathToSpriteDesktop}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+
+/**
+ * return merged build options for mobile
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildMobileOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSpriteMobile,
+    destCss: config.path.srcCssMobile,
+    imgPath: `${pathToSpriteMobile}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+{{else}}
+/**
+ * return merged build options
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSprite,
+    destCss: config.path.srcCss,
+    imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+{{/if}}
+
+{{#if multiDevice}}
 
   // define main task
-  const mainDesktop = buildSprite({
+  const mainDesktop = buildSprite(buildDesktopOptions({
     name: 'sprite:desktop:main',
     src: `${config.path.srcSpriteDesktop}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
-    destImg: `${config.path.destSpriteDesktop}`,
-    destCss: `${config.path.srcCssDesktop}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
     cssName: '_sprite_sample.styl',
-    imgPath: `${pathToSpriteDesktop}/sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}${cacheParameter}`,
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}
-    compress: config.compress
-  });
-  const mainMobile = buildSprite({
+  }));
+  const mainMobile = buildSprite(buildMobileOptions({
     name: 'sprite:mobile:main',
     src: `${config.path.srcSpriteMobile}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
-    destImg: `${config.path.destSpriteMobile}`,
-    destCss: `${config.path.srcCssMobile}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
     cssName: '_sprite_sample.styl',
-    imgPath: `${pathToSpriteMobile}/sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}${cacheParameter}`,
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}
-    compress: config.compress
-  });
+  }));
 
   // define watch task
   const watchDesktop = () => {
@@ -94,19 +133,15 @@ const pathToSprite = relative(config.path.destCss, config.path.destSprite);
 {{else}}
 
   // define main task
-  export const main = buildSprite({
+  export const main = buildSprite(buildOptions({
     name: 'sprite:main',
     src: `${config.path.srcSprite}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
-    destImg: `${config.path.destSprite}`,
-    destCss: `${config.path.srcCss}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
     cssName: '_sprite_sample.styl',
-    imgPath: `${pathToSprite}/sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}${cacheParameter}`,
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}
-    compress: config.compress
-  });
+  }));
 
   // define watch task
   export const watch = () => {

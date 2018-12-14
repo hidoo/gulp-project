@@ -23,18 +23,29 @@ const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disabl
  */
 const pathToSprite = relative(config.path.destCss, config.path.destSprite);
 
+/**
+ * return merged build options
+ * @param {Object} options build task options
+ * @return {Object}
+ */
+function buildOptions(options = {}) {
+  return {
+    ...options,
+    destImg: config.path.destSprite,
+    destCss: config.path.srcCss,
+    imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
+    compress: config.compress
+  };
+}
+
 // define main task
-export const main = buildSprite({
+export const main = buildSprite(buildOptions({
   name: 'sprite:main',
   src: `${config.path.srcSprite}/**/sample-*.png`,
-  destImg: `${config.path.destSprite}`,
-  destCss: `${config.path.srcCss}`,
   imgName: 'sample.png',
   cssName: '_sprite_sample.styl',
-  imgPath: `${pathToSprite}/sample.png${cacheParameter}`,
-  evenize: false,
-  compress: config.compress
-});
+  evenize: false
+}));
 
 // define watch task
 export const watch = () => {

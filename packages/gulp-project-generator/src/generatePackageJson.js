@@ -143,9 +143,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'conventional-changelog-cli', version: '^2.0.5'}
     );
     scripts.push(
-      {name: 'version', command: 'npm-run-all -s version:changelog version:commit'},
+      {name: 'version', command: 'npm-run-all -s test prod:build version:changelog version:commit'},
       {name: 'version:changelog', command: 'conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0'},
-      {name: 'version:commit', command: 'git add ./CHANGELOG.md'}
+      {name: 'version:commit', command: 'git add .'}
     );
     huskyHooks.push(
       {name: 'commit-msg', command: 'commitlint -E HUSKY_GIT_PARAMS'}

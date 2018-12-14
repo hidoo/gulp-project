@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
+
+
+### Features
+
+* **gulp-project-generator:** add buildOptions function to sprite task ([d2a111b](https://github.com/hidoo/gulp-project/commit/d2a111b))
+* **gulp-project-generator:** change "npm version" tasks ([68acf33](https://github.com/hidoo/gulp-project/commit/68acf33))
+* **gulp-project-generator:** update src files for server task ([990ce86](https://github.com/hidoo/gulp-project/commit/990ce86))
+* **gulp-task-build-css-stylus:** add options.url and options.urlOptions ([d61eed4](https://github.com/hidoo/gulp-project/commit/d61eed4))
+
+
+
+
+
 # [0.7.0](https://github.com/hidoo/gulp-project/compare/v0.6.2...v0.7.0) (2018-12-10)
 
 

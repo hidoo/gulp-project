@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@hidoo/gulp-util-error-handler": "^0.7.0",
-    "@hidoo/util-merge-babelrc": "^0.7.0",
+    "@hidoo/util-merge-babelrc": "^0.8.0",
     "babelify": "^9.0.0",
     "browserify": "13.3.0",
     "envify": "^4.1.0",

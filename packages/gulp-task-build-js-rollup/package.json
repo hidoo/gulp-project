@@ -61,7 +61,7 @@
   "peerDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
     "gulp": "^4.0.0"
   }
 }

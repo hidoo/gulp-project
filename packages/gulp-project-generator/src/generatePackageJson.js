@@ -75,7 +75,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.js) {
     devDependencies.push(
-      {name: '@babel/polyfill', version: '^7.2.3'},
+      {name: '@babel/polyfill', version: '^7.2.5'},
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
       {name: 'jsdom', version: '^12.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},

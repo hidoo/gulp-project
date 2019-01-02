@@ -46,7 +46,7 @@
     "mocha": "^5.2.0",
     "pixelmatch": "^4.0.2",
     "power-assert": "^1.6.1",
-    "rimraf": "^2.6.2",
+    "rimraf": "^2.6.3",
     "vinyl": "^2.2.0"
   }
 }

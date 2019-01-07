@@ -95,12 +95,20 @@ export default function buildJs(options = {}) {
 
     return rollup(inputOptions(opts))
       .then((bundle) => bundle.generate(outputOptions(opts)))
-      .then(({code, map}) => {
+      .then(({output}) => {
 
-        // add code and sourcemap to stream,
-        // and add null that indicates write completion
-        stream.push(concatSourceMap({code, map}));
-        stream.push(null);
+        for (const chunkOrAsset of output) {
+          if (chunkOrAsset.isAsset) {
+            throw new Error('"Asset" is not support.');
+          }
+
+          const {code, map} = chunkOrAsset;
+
+          // add code and sourcemap to stream,
+          // and add null that indicates write completion
+          stream.push(concatSourceMap({code, map}));
+          stream.push(null);
+        }
 
         // transform from nodejs stream to vinyl stream,
         // and flush as gulp task

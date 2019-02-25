@@ -41,7 +41,7 @@
     "@babel/register": "^7.0.0",
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.2",
     "power-assert": "^1.6.1"
   },
   "peerDependencies": {

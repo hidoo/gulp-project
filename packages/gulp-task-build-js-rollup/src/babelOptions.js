@@ -8,7 +8,7 @@ import mergeBabelrc from '@hidoo/util-merge-babelrc';
 export default function babelOptions(options = {}) {
   const defaultOptions = {
     babelrc: false,
-    externalHelpers: true,
+    externalHelpers: false,
     exclude: 'node_modules/**',
     presets: [],
     plugins: []

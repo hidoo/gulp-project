@@ -9,11 +9,11 @@ describe('babelOptions', () => {
     const cases = [
       [
         null,
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: []}
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: []}
       ],
       [
         [],
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: [
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
             targets: {browsers: []},
@@ -24,7 +24,7 @@ describe('babelOptions', () => {
       ],
       [
         {},
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: [
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
             targets: {browsers: []},
@@ -35,7 +35,7 @@ describe('babelOptions', () => {
       ],
       [
         {verbose: true},
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: [
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
             targets: {browsers: []},
@@ -46,7 +46,7 @@ describe('babelOptions', () => {
       ],
       [
         {useBuiltIns: 'usage'},
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: [
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
             targets: {browsers: []},
@@ -57,7 +57,7 @@ describe('babelOptions', () => {
       ],
       [
         {browsers: ['> 0.1% in JP', 'ie >= 8']},
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [], presets: [
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
             targets: {browsers: ['> 0.1% in JP', 'ie >= 8']},
@@ -68,7 +68,7 @@ describe('babelOptions', () => {
       ],
       [
         {babelrc: `${process.cwd()}/.babelrc.js`},
-        {babelrc: false, externalHelpers: true, exclude: 'node_modules/**', plugins: [],
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [],
           presets: [
             ['@babel/preset-env', {
               modules: false,

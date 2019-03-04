@@ -192,11 +192,11 @@
     });
   });
 
-  var id$1 = 0;
+  var id = 0;
   var px = Math.random();
 
   var _uid = function _uid(key) {
-    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id$1 + px).toString(36));
+    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
   };
 
   var _wks = createCommonjsModule(function (module) {
@@ -398,7 +398,7 @@
   // instead of the ES6 spec version, we didn't implement @@toPrimitive case
   // and the second argument - flag - preferred type is a string
 
-  var _toPrimitive$1 = function _toPrimitive(it, S) {
+  var _toPrimitive = function _toPrimitive(it, S) {
     if (!_isObject(it)) return it;
     var fn, val;
     if (S && typeof (fn = it.toString) == 'function' && !_isObject(val = fn.call(it))) return val;
@@ -410,7 +410,7 @@
   var dP = Object.defineProperty;
   var f = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes) {
     _anObject(O);
-    P = _toPrimitive$1(P, true);
+    P = _toPrimitive(P, true);
     _anObject(Attributes);
     if (_ie8DomDefine) try {
       return dP(O, P, Attributes);
@@ -545,7 +545,7 @@
   var gOPD = Object.getOwnPropertyDescriptor;
   var f$2 = _descriptors ? gOPD : function getOwnPropertyDescriptor(O, P) {
     O = _toIobject(O);
-    P = _toPrimitive$1(P, true);
+    P = _toPrimitive(P, true);
     if (_ie8DomDefine) try {
       return gOPD(O, P);
     } catch (e) {

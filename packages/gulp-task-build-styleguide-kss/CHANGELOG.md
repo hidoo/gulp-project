@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
+
+
+### Bug Fixes
+
+* **package:** update kss to version 3.0.0-beta.25 ([872f05e](https://github.com/hidoo/gulp-project/commit/872f05e)), closes [#140](https://github.com/hidoo/gulp-project/issues/140)
+
+
+
+
+
 # [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-styleguide-kss

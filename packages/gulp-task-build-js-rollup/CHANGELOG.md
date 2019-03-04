@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
+
+
+### Bug Fixes
+
+* **gulp-task-build-js-rollup:** change default of externalHelpers ([c51343f](https://github.com/hidoo/gulp-project/commit/c51343f))
+* **package:** update rollup to version 0.68.0 ([8642825](https://github.com/hidoo/gulp-project/commit/8642825))
+* **package:** update rollup to version 1.0.2 ([856ea1e](https://github.com/hidoo/gulp-project/commit/856ea1e)), closes [#127](https://github.com/hidoo/gulp-project/issues/127)
+* **package:** update rollup-plugin-license to version 0.8.1 ([4b9889e](https://github.com/hidoo/gulp-project/commit/4b9889e)), closes [#143](https://github.com/hidoo/gulp-project/issues/143)
+
+
+### Features
+
+* **gulp-task-build-js-rollup:** follow up version upgrade of rollup ([3f760ae](https://github.com/hidoo/gulp-project/commit/3f760ae))
+
+
+
+
+
 # [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup

@@ -43,7 +43,7 @@
   "dependencies": {
     "@hidoo/gulp-plugin-image-evenizer": "^0.8.1",
     "@hidoo/gulp-util-error-handler": "^0.8.1",
-    "@hidoo/handlebars-helpers": "^0.4.2",
+    "@hidoo/handlebars-helpers": "^0.5.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
     "gulp-plumber": "^1.2.1",

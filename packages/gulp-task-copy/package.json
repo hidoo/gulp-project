@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-copy",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Task that copy files for gulp.",
   "engines": {
     "node": ">=8.0.0"
@@ -40,7 +40,7 @@
     "rimraf": "^2.6.3"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.8.1",
+    "@hidoo/gulp-util-error-handler": "^0.8.2",
     "gulp-plumber": "^1.2.1"
   },
   "peerDependencies": {

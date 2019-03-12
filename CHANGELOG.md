@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/hidoo/gulp-project/compare/v0.8.1...v0.8.2) (2019-03-12)
+
+
+### Bug Fixes
+
+* **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([2b7c80e](https://github.com/hidoo/gulp-project/commit/2b7c80e))
+* **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([eff395a](https://github.com/hidoo/gulp-project/commit/eff395a))
+* **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([9b10a0b](https://github.com/hidoo/gulp-project/commit/9b10a0b))
+* **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([4c9b349](https://github.com/hidoo/gulp-project/commit/4c9b349))
+* **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([9c3ba19](https://github.com/hidoo/gulp-project/commit/9c3ba19))
+* **package:** update get-stream to version 5.0.0 ([e01fff0](https://github.com/hidoo/gulp-project/commit/e01fff0))
+* **package:** update get-stream to version 5.0.0 ([aaa4a66](https://github.com/hidoo/gulp-project/commit/aaa4a66))
+
+
+
+
+
 ## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
 
 

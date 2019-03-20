@@ -93,6 +93,30 @@ describe('gulp-util-merge-babelrc', () => {
           [['preset-g', {hoge: 'piyo'}]]
         ],
         [
+          [['@babel/preset-env', {useBuiltIns: false}]],
+          [['@babel/preset-env', {useBuiltIns: 'usage'}]],
+          {},
+          [['@babel/preset-env', {useBuiltIns: 'usage'}]]
+        ],
+        [
+          [['@babel/preset-env', {useBuiltIns: false, corejs: 2}]],
+          [['@babel/preset-env', {useBuiltIns: false, corejs: 3}]],
+          {},
+          [['@babel/preset-env', {useBuiltIns: false}]]
+        ],
+        [
+          [['@babel/preset-env', {useBuiltIns: false, corejs: 2}]],
+          [['@babel/preset-env', {useBuiltIns: 'usage', corejs: 3}]],
+          {},
+          [['@babel/preset-env', {useBuiltIns: 'usage', corejs: 3}]]
+        ],
+        [
+          [['@babel/preset-env', {useBuiltIns: false, corejs: 2}]],
+          [['@babel/preset-env', {useBuiltIns: 'usage'}]],
+          {},
+          [['@babel/preset-env', {useBuiltIns: 'usage', corejs: 2}]]
+        ],
+        [
           [['@babel/preset-env', {targets: {node: 'current'}}]],
           [['@babel/preset-env', {targets: {browsers: 'hoge'}}]],
           {},

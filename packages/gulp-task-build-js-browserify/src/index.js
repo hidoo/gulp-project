@@ -25,6 +25,7 @@ const DEFAULT_OPTIONS = {
   suffix: '.min',
   browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   useBuiltIns: 'usage',
+  corejs: 2,
   babelrc: path.resolve(process.cwd(), '.babelrc.js'),
   compress: false,
   verbose: false
@@ -42,6 +43,8 @@ const DEFAULT_OPTIONS = {
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
  * @param {String|Boolean} [options.useBuiltIns='usage'] - use polyfill or not.
  *   see: {@link https://babeljs.io/docs/en/babel-preset-env#usebuiltins useBuiltIns in @babel/preset-env}
+ * @param {Number|String|Object} [options.corejs=2] - specify core-js version (Recommend setting with options.useBuiltIns: 'entry')
+ *   see: {@link https://github.com/zloirock/core-js#babelpreset-env corejs in @babel/preset-env}
  * @param {String} [options.babelrc=path.resolve(process.cwd(), '.babelrc.js')] - babelrc path
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Boolean} [options.verbose=false] - out log or not
@@ -59,6 +62,7 @@ const DEFAULT_OPTIONS = {
  *   suffix: '.hoge',
  *   browsers: ['> 0.1% in JP'],
  *   useBuiltIns: false,
+ *   corejs: 3,
  *   babelrc: '/path/to/.babelrc.js',
  *   compress: true,
  *   verbose: true
@@ -66,12 +70,13 @@ const DEFAULT_OPTIONS = {
  */
 export default function buildJs(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},
-        {browsers, useBuiltIns, babelrc, verbose} = opts,
+        {browsers, useBuiltIns, corejs, babelrc, verbose} = opts,
         babelifyOptions = mergeBabelrc(babelrc, {
           presets: [
             ['@babel/preset-env', {
               targets: {browsers},
               useBuiltIns: useBuiltIns,
+              corejs: corejs,
               debug: verbose
             }]
           ]

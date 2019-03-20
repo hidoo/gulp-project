@@ -51,6 +51,19 @@ describe('babelOptions', () => {
             modules: false,
             targets: {browsers: []},
             useBuiltIns: 'usage',
+            corejs: 2,
+            debug: false
+          }]
+        ]}
+      ],
+      [
+        {useBuiltIns: 'usage', corejs: 3},
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
+          ['@babel/preset-env', {
+            modules: false,
+            targets: {browsers: []},
+            useBuiltIns: 'usage',
+            corejs: 3,
             debug: false
           }]
         ]}

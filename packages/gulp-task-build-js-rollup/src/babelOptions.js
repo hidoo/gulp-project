@@ -25,6 +25,7 @@ export default function babelOptions(options = {}) {
         modules: false,
         targets: {browsers: options.browsers ? options.browsers : []},
         useBuiltIns: options.useBuiltIns ? options.useBuiltIns : false,
+        corejs: options.corejs ? options.corejs : 2, // eslint-disable-line no-magic-numbers
         debug: options.verbose ? options.verbose : false
       }]
     ]

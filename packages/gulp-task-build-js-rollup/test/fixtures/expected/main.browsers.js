@@ -176,10 +176,10 @@
     get: _flags
   });
 
-  // 7.2.1 RequireObjectCoercible(argument)
-  var _defined = function _defined(it) {
-    if (it == undefined) throw TypeError("Can't call method on  " + it);
-    return it;
+  var toString = {}.toString;
+
+  var _cof = function _cof(it) {
+    return toString.call(it).slice(8, -1);
   };
 
   var _library = false;
@@ -214,6 +214,34 @@
 
     $exports.store = store;
   });
+
+  var TAG = _wks('toStringTag'); // ES3 wrong here
+
+  var ARG = _cof(function () {
+    return arguments;
+  }()) == 'Arguments'; // fallback for IE11 Script Access Denied error
+
+  var tryGet = function tryGet(it, key) {
+    try {
+      return it[key];
+    } catch (e) {
+      /* empty */
+    }
+  };
+
+  var _classof = function _classof(it) {
+    var O, T, B;
+    return it === undefined ? 'Undefined' : it === null ? 'Null' // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T // builtinTag case
+    : ARG ? _cof(O) // ES3 arguments fallback
+    : (B = _cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+  };
+
+  // 7.2.1 RequireObjectCoercible(argument)
+  var _defined = function _defined(it) {
+    if (it == undefined) throw TypeError("Can't call method on  " + it);
+    return it;
+  };
 
   var _fixReWks = function _fixReWks(KEY, length, exec) {
     var SYMBOL = _wks(KEY);
@@ -252,12 +280,6 @@
       return fn !== undefined ? fn.call(searchValue, O, replaceValue) : $replace.call(String(O), searchValue, replaceValue);
     }, $replace];
   });
-
-  var toString = {}.toString;
-
-  var _cof = function _cof(it) {
-    return toString.call(it).slice(8, -1);
-  };
 
   var MATCH = _wks('match');
 
@@ -374,6 +396,15 @@
       return typeof this == 'function' && this[SRC] || $toString.call(this);
     });
   });
+
+  var test = {};
+  test[_wks('toStringTag')] = 'z';
+
+  if (test + '' != '[object z]') {
+    _redefine(Object.prototype, 'toString', function toString() {
+      return '[object ' + _classof(this) + ']';
+    }, true);
+  }
 
   var DateProto = Date.prototype;
   var INVALID_DATE = 'Invalid Date';

@@ -83,25 +83,36 @@ export function mergeBabelPresets(presets = [], source = [], options = {}) {
       mergedOptions = merge(merge({}, originalOptions), merge({}, sourceOptions));
     }
 
-    // merge targets in @babel/preset-env options
-    // by options.presetEnvAllowTargets value
-    if (
-      (name === '@babel/preset-env' || name === '@babel/env') &&
-      mergedOptions.targets &&
-      Array.isArray(options.presetEnvAllowTargets)
-    ) {
-      mergedOptions.targets = Object.entries(mergedOptions.targets)
-        .filter(([key]) => options.presetEnvAllowTargets.includes(key))
-        .reduce((prev, [key, value]) => ({...prev, [key]: value}), {});
-    }
-
     mergedNames.push(name);
     return [name, mergedOptions];
   });
 
-  const restPresets = sourcePresets.filter(([name]) => !mergedNames.includes(name));
+  const restPresets = sourcePresets.filter(([name]) => !mergedNames.includes(name)),
+        mergedPresets = [...restPresets, ...overridePresets];
 
-  return [...restPresets, ...overridePresets].sort((a, b) => a[0].localeCompare(b[0]));
+  return mergedPresets
+    .map(([name, opts]) => {
+
+      // @babel/preset-env options
+      if (name === '@babel/preset-env' || name === '@babel/env') {
+        const {useBuiltIns, corejs} = opts;
+
+        // remove corejs options when useBuiltIns options is not set
+        if (!useBuiltIns || !corejs) {
+          delete opts.corejs;
+        }
+
+        // merge targets options by options.presetEnvAllowTargets value
+        if (opts.targets && Array.isArray(options.presetEnvAllowTargets)) {
+          opts.targets = Object.entries(opts.targets)
+            .filter(([key]) => options.presetEnvAllowTargets.includes(key))
+            .reduce((prev, [key, value]) => ({...prev, [key]: value}), {});
+        }
+      }
+
+      return [name, opts];
+    })
+    .sort((a, b) => a[0].localeCompare(b[0]));
 }
 
 /**

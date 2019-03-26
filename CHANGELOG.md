@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
+
+
+### Bug Fixes
+
+* **util-merge-babelrc:** fix case that ignored merging presets ([e3bb406](https://github.com/hidoo/gulp-project/commit/e3bb406))
+
+
+### Features
+
+* **gulp-task-build-js-browserify:** add corejs options ([ac0a127](https://github.com/hidoo/gulp-project/commit/ac0a127))
+* **gulp-task-build-js-rollup:** add corejs options ([40e77e3](https://github.com/hidoo/gulp-project/commit/40e77e3))
+
+
+
+
+
 ## [0.8.2](https://github.com/hidoo/gulp-project/compare/v0.8.1...v0.8.2) (2019-03-12)
 
 

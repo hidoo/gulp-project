@@ -19,7 +19,7 @@
     "postbuild": "npm run bootstrap",
     "test": "npm-run-all -s test:lint test:packages test:examples",
     "test:lint": "eslint .",
-    "test:packages": "lerna run test --no-private --concurrency 6",
+    "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
     "install": "lerna bootstrap",
     "postinstall": "npm run build:packages"

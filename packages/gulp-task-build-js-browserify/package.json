@@ -27,10 +27,10 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
+    "@babel/core": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
     "documentation": "^9.3.1",
@@ -55,9 +55,9 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "peerDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
+    "@babel/core": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "gulp": "^4.0.0"
   }
 }

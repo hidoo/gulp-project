@@ -94,6 +94,24 @@ describe('gulp-task-build-js-browserify', () => {
     });
   });
 
+  it('should out to "main.js" that polyfilled by specified version of core-js if argument "options.corejs" is set.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest,
+      useBuiltIns: 'entry',
+      corejs: 3
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.corejs.js`).toString().trim());
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
+  });
+
   it('should out to "main.min.js" and "main.min.js.gz" if argument "options.compress" is set.', (done) => {
     const task = buildJs({
       src: `${path.src}/main.js`,

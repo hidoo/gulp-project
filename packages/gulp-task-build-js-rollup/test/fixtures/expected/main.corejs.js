@@ -3,7 +3,7 @@
  *
  * @hidoo/gulp-task-build-js-rollup:
  * author: hidoo
- * version: 0.8.2
+ * version: 0.0.0
  */
 
 (function () {

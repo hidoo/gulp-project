@@ -14,7 +14,7 @@
   );
 
   elements.forEach(function(element) {
-    element.addEventListener('click', function(event) {
+    element.addEventListener('click', function() {
       var isDark = hasClass(element, THEME_CLASS_NAME_DARK),
           isLight = hasClass(element, THEME_CLASS_NAME_LIGHT),
           isRed = hasClass(element, THEME_CLASS_NAME_RED),
@@ -43,8 +43,6 @@
       else {
         addClass(element, THEME_CLASS_NAME_DARK);
       }
-
-      event.stopPropagation();
     }, false);
   });
 

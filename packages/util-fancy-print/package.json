@@ -32,7 +32,7 @@
     "@babel/register": "^7.4.0",
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
-    "mocha": "^6.1.1",
+    "mocha": "^6.1.2",
     "power-assert": "^1.6.1",
     "rimraf": "^2.6.3",
     "sinon": "^7.3.0",

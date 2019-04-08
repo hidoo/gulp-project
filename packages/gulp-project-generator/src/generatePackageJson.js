@@ -79,7 +79,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
       {name: 'jsdom', version: '^12.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
-      {name: 'mocha', version: '^6.0.2'},
+      {name: 'mocha', version: '^6.1.1'},
       {name: 'power-assert', version: '^1.6.1'}
     );
     scripts.push(

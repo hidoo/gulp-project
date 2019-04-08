@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
+
+
+### Bug Fixes
+
+* **gulp-task-build-styleguide-kss:** enable event bubbling in examples ([183362b](https://github.com/hidoo/gulp-project/commit/183362b))
+
+
+
+
+
 ## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-styleguide-kss

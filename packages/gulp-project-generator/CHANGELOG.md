@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
+
+
+### Bug Fixes
+
+* **package:** update glob-parent to version 5.0.0 ([ea432e0](https://github.com/hidoo/gulp-project/commit/ea432e0)), closes [#212](https://github.com/hidoo/gulp-project/issues/212)
+
+
+
+
+
 ## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator

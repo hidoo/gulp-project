@@ -43,7 +43,7 @@
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
     "image-size": "^0.7.2",
-    "mocha": "^6.1.2",
+    "mocha": "^6.1.4",
     "pixelmatch": "^4.0.2",
     "power-assert": "^1.6.1",
     "rimraf": "^2.6.3",

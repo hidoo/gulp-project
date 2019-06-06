@@ -5,9 +5,7 @@
  */
 export default function nodeResolveOptions(options) {
   const defaultOptions = {
-    module: true,
-    jsnext: true,
-    main: true
+    mainFields: ['module', 'jsnext', 'main']
   };
 
   if (
@@ -15,7 +13,12 @@ export default function nodeResolveOptions(options) {
     typeof options.nodeResolveOptions === 'object' &&
     !Array.isArray(options.nodeResolveOptions) && options.nodeResolveOptions !== null
   ) {
-    return {...defaultOptions, ...options.nodeResolveOptions};
+    return {
+      ...defaultOptions,
+      ...options.nodeResolveOptions,
+      mainFields: Array.isArray(options.nodeResolveOptions.mainFields) ?
+        options.nodeResolveOptions.mainFields : defaultOptions.mainFields
+    };
   }
   return defaultOptions;
 }

@@ -48,7 +48,7 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
     "gulp-plumber": "^1.2.1",
-    "merge-stream": "^1.0.1",
+    "merge-stream": "^2.0.0",
     "vinyl-buffer": "^1.0.1"
   },
   "peerDependencies": {

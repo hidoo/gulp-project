@@ -49,7 +49,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp.spritesmith": "^6.9.0",
     "image-size": "^0.7.4",
-    "merge-stream": "^1.0.1",
+    "merge-stream": "^2.0.0",
     "pixelmatch": "^4.0.2",
     "vinyl-buffer": "^1.0.1"
   },

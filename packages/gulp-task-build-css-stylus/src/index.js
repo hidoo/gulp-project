@@ -117,7 +117,7 @@ export default function buildCss(options = {}) {
     };
 
     // add default post css process
-    postProcesses.push(autoprefixer({browsers}));
+    postProcesses.push(autoprefixer({overrideBrowserslist: browsers}));
     postProcesses.push(cssmqpacker);
 
     // add post css process by postcss-url

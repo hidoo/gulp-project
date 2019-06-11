@@ -130,6 +130,16 @@ export default function imageEvenizer(options = {}) {
             newWidth = width,
             newHeight = height;
 
+        // replace [0, 0, 0, 0] to [255, 255, 255, 0] when media is gif
+        if (isGif) {
+          data = data.map((row) => row.map((pixel) => {
+            if (pixel.join(',') === '0,0,0,0') {
+              return fillPixel;
+            }
+            return pixel;
+          }));
+        }
+
         // fill to width that to be even
         if (isOddWidth) {
           newWidth = newWidth + 1;

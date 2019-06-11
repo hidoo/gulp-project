@@ -77,7 +77,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
     devDependencies.push(
       {name: '@babel/polyfill', version: '^7.4.0'},
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'jsdom', version: '^12.2.0'},
+      {name: 'jsdom', version: '^15.1.1'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^6.1.4'},
       {name: 'power-assert', version: '^1.6.1'}
@@ -108,8 +108,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
     devDependencies.push(
       {name: '@hidoo/express-engine-handlebars', version: '^0.1.8'},
       {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
-      {name: 'browser-sync', version: '^2.26.3'},
-      {name: 'express', version: '^4.16.4'}
+      {name: 'browser-sync', version: '^2.26.7'},
+      {name: 'express', version: '^4.17.1'}
     );
     scripts.push(
       {name: 'static:server', command: 'gulp server'}

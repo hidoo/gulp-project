@@ -8,7 +8,8 @@ import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import fileType from 'file-type';
 import imagemin from 'gulp-imagemin';
-import optimizeImage, {gifsicle, jpegtran, optipng, svgo} from '../src';
+import {default as origMozjpeg} from 'imagemin-mozjpeg';
+import optimizeImage, {gifsicle, jpegtran, mozjpeg, optipng, svgo} from '../src';
 
 /**
  * get array of uint8array from buffers
@@ -178,7 +179,8 @@ describe('gulp-task-optimize-image', () => {
 
     task().on('finish', () => {
       const promise = Promise.all(cases.map((ext) => new Promise((resolve) => {
-        const actual = fs.readFileSync(`${path.dest}/sample.${ext}`, {encode: null});
+        const actualPath = `${path.dest}/sample.${ext}`,
+              actual = fs.readFileSync(actualPath, {encode: null});
 
         if (ext === 'ico') {
           const expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {encode: null});
@@ -188,7 +190,8 @@ describe('gulp-task-optimize-image', () => {
           resolve();
         }
         else {
-          const expected = fs.readFileSync(`${path.expected}/sample.compressed.${ext}`, {encode: null});
+          const expectedPath = `${path.expected}/sample.compressed.${ext}`,
+                expected = fs.readFileSync(expectedPath, {encode: null});
 
           assert(actual);
           assert.deepEqual(actual, expected);
@@ -207,6 +210,7 @@ describe('gulp-task-optimize-image', () => {
     it('should be accessible to imagemin plugins', () => {
       assert(imagemin.gifsicle === gifsicle);
       assert(imagemin.jpegtran === jpegtran);
+      assert(origMozjpeg === mozjpeg);
       assert(imagemin.optipng === optipng);
       assert(imagemin.svgo === svgo);
     });

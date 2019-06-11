@@ -4,11 +4,57 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
 import imagemin from 'gulp-imagemin';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
 import evenizer from '@hidoo/gulp-plugin-image-evenizer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
+
+/**
+ * gifsicle plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const gifsicle = imagemin.gifsicle;
+
+/**
+ * jpegtran plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {jpegtran} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const jpegtran = imagemin.jpegtran;
+
+/**
+ * mozjpeg plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const mozjpeg = imageminMozjpeg;
+
+/**
+ * optipng plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {optipng} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const optipng = imagemin.optipng;
+
+/**
+ * svgo plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {svgo} from '@hidoo/gulp-task-build-sprite-image';
+ */
+export const svgo = imagemin.svgo;
 
 /**
 * task default options.
@@ -30,10 +76,10 @@ const DEFAULT_OPTIONS = {
   evenize: false,
   compress: false,
   compressOptions: [
-    imagemin.gifsicle({interlaced: true}),
-    imagemin.jpegtran({progressive: true}),
-    imagemin.optipng({optimizationLevel: 5}),
-    imagemin.svgo()
+    gifsicle({interlaced: true}),
+    mozjpeg({quality: 90, progressive: true}),
+    optipng({optimizationLevel: 5}),
+    svgo()
   ],
   verbose: false
 };
@@ -67,7 +113,7 @@ const DEFAULT_OPTIONS = {
  *
  * @example
  * import {task} from 'gulp';
- * import buildSprite from '@hidoo/gulp-task-build-sprite-image';
+ * import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
  *
  * task('sprite', buildSprite({
  *   name: 'sprite:main',
@@ -85,10 +131,10 @@ const DEFAULT_OPTIONS = {
  *   evenize: true,
  *   compress: true,
  *   compressOptions: [ // Default for this options
- *     imagemin.gifsicle({interlaced: true}),
- *     imagemin.jpegtran({progressive: true}),
- *     imagemin.optipng({optimizationLevel: 5}),
- *     imagemin.svgo()
+ *     gifsicle({interlaced: true}),
+ *     mozjpeg({quality: 90, progressive: true}),
+ *     optipng({optimizationLevel: 5}),
+ *     svgo()
  *   ],
  *   verbose: true
  * }));
@@ -125,39 +171,3 @@ export default function buildSprite(options = {}) {
 
   return task;
 }
-
-/**
- * gifsicle plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const gifsicle = imagemin.gifsicle;
-
-/**
- * jpegtran plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {jpegtran} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const jpegtran = imagemin.jpegtran;
-
-/**
- * optipng plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {optipng} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const optipng = imagemin.optipng;
-
-/**
- * svgo plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {svgo} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const svgo = imagemin.svgo;

@@ -48,10 +48,11 @@
     "@hidoo/gulp-util-error-handler": "^0.8.4",
     "@hidoo/handlebars-helpers": "^0.5.1",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^5.0.3",
+    "gulp-imagemin": "^6.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp.spritesmith": "^6.9.0",
     "image-size": "^0.7.4",
+    "imagemin-mozjpeg": "^8.0.0",
     "merge-stream": "^2.0.0",
     "vinyl-buffer": "^1.0.1"
   },

@@ -11,6 +11,15 @@ import * as helpers from '@hidoo/handlebars-helpers';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
+ * svgo plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {svgo} from '@hidoo/gulp-task-build-sprite-svg';
+ */
+export const svgo = imagemin.svgo;
+
+/**
  * task default options.
  * @type {Object}
  */
@@ -28,7 +37,7 @@ const DEFAULT_OPTIONS = {
   cssHandlebarsHelpers: helpers,
   compress: false,
   compressOptions: [
-    imagemin.svgo()
+    svgo()
   ],
   verbose: false
 };
@@ -57,7 +66,7 @@ const DEFAULT_OPTIONS = {
  *
  * @example
  * import {task} from 'gulp';
- * import buildSprite from '@hidoo/gulp-task-build-sprite-svg';
+ * import buildSprite, {svgo} from '@hidoo/gulp-task-build-sprite-svg';
  *
  * task('sprite', buildSprite({
  *   name: 'sprite:main',
@@ -66,14 +75,14 @@ const DEFAULT_OPTIONS = {
  *   destCss: '/path/to/dest/css',
  *   imgName: 'sprite.svg',
  *   cssName: 'sprite.styl',
- *   imgPath: './path/from/css/to/sprite/sprite.svg'
+ *   imgPath: './path/from/css/to/sprite/sprite.svg',
  *   padding: 10,
  *   layout: 'vertical',
  *   cssTemplate: '/path/to/template/stylus.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   compress: true,
  *   compressOptions: [ // Default for this options
- *     imagemin.svgo()
+ *     svgo()
  *   ],
  *   verbose: true
  * }));

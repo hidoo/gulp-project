@@ -4,9 +4,55 @@ import cond from 'gulp-if';
 import filter from 'gulp-filter';
 import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
 import errorHandler from '@hidoo/gulp-util-error-handler';
+
+/**
+ * gifsicle plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {gifsicle} from '@hidoo/gulp-task-optimize-image';
+ */
+export const gifsicle = imagemin.gifsicle;
+
+/**
+ * jpegtran plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {jpegtran} from '@hidoo/gulp-task-optimize-image';
+ */
+export const jpegtran = imagemin.jpegtran;
+
+/**
+ * mozjpeg plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {mozjpeg} from '@hidoo/gulp-task-optimize-image';
+ */
+export const mozjpeg = imageminMozjpeg;
+
+/**
+ * optipng plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {optipng} from '@hidoo/gulp-task-optimize-image';
+ */
+export const optipng = imagemin.optipng;
+
+/**
+ * svgo plugins for imagemin
+ * @type {Function}
+ *
+ * @example
+ * import {svgo} from '@hidoo/gulp-task-optimize-image';
+ */
+export const svgo = imagemin.svgo;
 
 /**
  * task default options.
@@ -20,10 +66,10 @@ const DEFAULT_OPTIONS = {
   placeholder: false,
   compress: false,
   compressOptions: [
-    imagemin.gifsicle({interlaced: true}),
-    imagemin.jpegtran({progressive: true}),
-    imagemin.optipng({optimizationLevel: 5}),
-    imagemin.svgo()
+    gifsicle({interlaced: true}),
+    mozjpeg({quality: 90, progressive: true}),
+    optipng({optimizationLevel: 5}),
+    svgo()
   ],
   verbose: false
 };
@@ -51,7 +97,7 @@ const lastRunRecords = new WeakMap();
  *
  * @example
  * import {task} from 'gulp';
- * import optimizeImage from '@hidoo/gulp-task-optimize-image';
+ * import optimizeImage, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-optimize-image';
  *
  * task('image', optimizeImage({
  *   name: 'image:main',
@@ -61,10 +107,10 @@ const lastRunRecords = new WeakMap();
  *   placeholder: true,
  *   compress: true,
  *   compressOptions: [ // Default for this options
- *     imagemin.gifsicle({interlaced: true}),
- *     imagemin.jpegtran({progressive: true}),
- *     imagemin.optipng({optimizationLevel: 5}),
- *     imagemin.svgo()
+ *     gifsicle({interlaced: true}),
+ *     mozjpeg({quality: 90, progressive: true}),
+ *     optipng({optimizationLevel: 5}),
+ *     svgo()
  *   ],
  *   verbose: true
  * }));
@@ -104,39 +150,3 @@ export default function optimizeImage(options = {}) {
 
   return task;
 }
-
-/**
- * gifsicle plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {gifsicle} from '@hidoo/gulp-task-optimize-image';
- */
-export const gifsicle = imagemin.gifsicle;
-
-/**
- * jpegtran plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {jpegtran} from '@hidoo/gulp-task-optimize-image';
- */
-export const jpegtran = imagemin.jpegtran;
-
-/**
- * optipng plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {optipng} from '@hidoo/gulp-task-optimize-image';
- */
-export const optipng = imagemin.optipng;
-
-/**
- * svgo plugins for imagemin
- * @type {Function}
- *
- * @example
- * import {svgo} from '@hidoo/gulp-task-optimize-image';
- */
-export const svgo = imagemin.svgo;

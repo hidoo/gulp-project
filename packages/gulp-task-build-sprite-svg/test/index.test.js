@@ -3,7 +3,8 @@
 import assert from 'assert';
 import fs from 'fs';
 import rimraf from 'rimraf';
-import buildSprite from '../src';
+import imagemin from 'gulp-imagemin';
+import buildSprite, {svgo} from '../src';
 
 describe('gulp-task-build-sprite-svg', () => {
   const path = {
@@ -88,6 +89,13 @@ describe('gulp-task-build-sprite-svg', () => {
       assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
       assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
       done();
+    });
+  });
+
+  describe('exports imagemin plugins', () => {
+
+    it('should be accessible to imagemin plugins', () => {
+      assert(imagemin.svgo === svgo);
     });
   });
 

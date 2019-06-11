@@ -34,7 +34,7 @@
     "babel-preset-power-assert": "^3.0.0",
     "cross-env": "^5.2.0",
     "documentation": "^11.0.0",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "mocha": "^6.1.4",
     "npm-run-all": "^4.1.5",
     "power-assert": "^1.6.1",
@@ -52,6 +52,6 @@
     "vinyl-buffer": "^1.0.1"
   },
   "peerDependencies": {
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.2"
   }
 }

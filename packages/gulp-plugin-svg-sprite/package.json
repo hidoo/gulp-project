@@ -45,6 +45,6 @@
     "power-assert": "^1.6.1"
   },
   "peerDependencies": {
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.2"
   }
 }

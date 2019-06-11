@@ -5,7 +5,27 @@ import fs from 'fs';
 import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
+import getPixels from 'get-pixels';
+import fileType from 'file-type';
 import imageEvenizer from '../src';
+
+/**
+ * get array of uint8array from buffers
+ * @param {Buffer} buffers array of buffer of image
+ * @return {Promise}
+ */
+function getUint8ArraysFromBuffers(buffers) {
+  return Promise.all(buffers.map((buffer) => new Promise((resolve, reject) => {
+    const {mime} = fileType(buffer);
+
+    getPixels(buffer, mime, (error, pixels) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(pixels.data);
+    });
+  })));
+}
 
 describe('gulp-plugin-image-evenizer', () => {
 
@@ -57,31 +77,41 @@ describe('gulp-plugin-image-evenizer', () => {
       ]
     ];
 
-    return await Promise.all(cases.map(([path, expected]) => new Promise((resolve, reject) => {
+    return await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
       const plugin = imageEvenizer({verbose: false}),
-            src = fs.readFileSync(path, {encode: null}),
+            srcBuffer = fs.readFileSync(path, {encode: null}),
+            expectedBuffer = fs.readFileSync(expectedPath),
             fakeFile = new Vinyl({
               path: path,
-              contents: Buffer.from(src)
+              contents: Buffer.from(srcBuffer)
             });
+      let evenizedBuffer = null;
 
       plugin.once('data', (file) => {
-        const [width, height, expectedPath] = expected,
-              dimentions = sizeOf(file.contents),
-              countDiffPixels = pixelmatch(
-                file.contents,
-                fs.readFileSync(expectedPath),
-                null,
-                width, height, {threshold: 0.1}
-              );
+        const dimentions = sizeOf(file.contents);
 
         assert(file.isBuffer());
         assert(dimentions.width === width);
         assert(dimentions.height === height);
-        assert(countDiffPixels === 0);
+        evenizedBuffer = file.contents;
       });
       plugin.on('error', reject);
-      plugin.on('end', resolve);
+      plugin.on('end', () => {
+        getUint8ArraysFromBuffers([evenizedBuffer, expectedBuffer])
+          .then((pixels) => {
+            const [evenizedPixels, expectedPixels] = pixels,
+                  countDiffPixels = pixelmatch(
+                    evenizedPixels,
+                    expectedPixels,
+                    null,
+                    width, height, {threshold: 0.1}
+                  );
+
+            assert(countDiffPixels === 0);
+            return resolve();
+          })
+          .catch((error) => reject(error));
+      });
 
       plugin.write(fakeFile);
 

@@ -5,8 +5,52 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
+import getPixels from 'get-pixels';
+import fileType from 'file-type';
 import imagemin from 'gulp-imagemin';
 import optimizeImage, {gifsicle, jpegtran, optipng, svgo} from '../src';
+
+/**
+ * get array of uint8array from buffers
+ * @param {Array<Buffer>} buffers array of buffer of image
+ * @return {Promise}
+ */
+function getUint8ArraysFromBuffers(buffers) {
+  return Promise.all(buffers.map((buffer) => new Promise((resolve, reject) => {
+    const {mime} = fileType(buffer);
+
+    getPixels(buffer, mime, (error, pixels) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(pixels.data);
+    });
+  })));
+}
+
+/**
+ * compare pixels
+ * @param {Array} params array of parameter
+ * @return {Promise}
+ */
+function comparePixels(params) {
+  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise((resolve, reject) =>
+    getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
+      .then((pixels) => {
+        const [actualPixels, expectedPixels] = pixels,
+              countDiffPixels = pixelmatch(
+                actualPixels,
+                expectedPixels,
+                null,
+                width, height, {threshold: 0.1}
+              );
+
+        assert(countDiffPixels === 0);
+        return resolve();
+      })
+      .catch((error) => reject(error))
+  )));
+}
 
 describe('gulp-task-optimize-image', () => {
   const path = {
@@ -20,22 +64,33 @@ describe('gulp-task-optimize-image', () => {
   );
 
   it('should out to "options.dest" if argument "options.src" is set.', (done) => {
-    const task = optimizeImage({
-      src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
-      dest: path.dest
-    });
+    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'],
+          task = optimizeImage({
+            src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+            dest: path.dest
+          });
 
     task().on('finish', () => {
-      ['jpg', 'png', 'gif', 'svg', 'ico'].forEach((ext) => {
+      const promise = Promise.all(cases.map((ext) => new Promise((resolve, reject) => {
         const actual = fs.readFileSync(`${path.dest}/sample.${ext}`, {encode: null}),
               expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {encode: null}),
-              {width, height} = sizeOf(actual),
-              countDiffPixels = pixelmatch(actual, expected, null, width, height, {threshold: 0.1});
+              {width, height} = sizeOf(actual);
 
         assert(actual);
-        assert(countDiffPixels === 0);
-      });
-      done();
+        if (ext === 'svg' || ext === 'ico') {
+          assert.deepStrictEqual(actual, expected);
+          resolve();
+        }
+        else {
+          comparePixels([[actual, expected, width, height]])
+            .then(resolve)
+            .catch(reject);
+        }
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
     });
   });
 
@@ -52,17 +107,21 @@ describe('gulp-task-optimize-image', () => {
           });
 
     task().on('finish', () => {
-      cases.forEach(([basename, ext, [width, height]]) => {
+      const promise = Promise.all(cases.map(([basename, ext, [width, height]]) => new Promise((resolve, reject) => {
         const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null}),
               expected = fs.readFileSync(`${path.expected}/${basename}.evenized.${ext}`, {encode: null}),
-              dimentions = sizeOf(expected),
-              countDiffPixels = pixelmatch(actual, expected, null, width, height, {threshold: 0.1});
+              dimentions = sizeOf(expected);
 
         assert(dimentions.width === width);
         assert(dimentions.height === height);
-        assert(countDiffPixels === 0);
-      });
-      done();
+        comparePixels([[actual, expected, width, height]])
+          .then(resolve)
+          .catch(reject);
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
     });
   });
 
@@ -80,34 +139,45 @@ describe('gulp-task-optimize-image', () => {
           });
 
     task().on('finish', () => {
-      cases.forEach(([basename, ext]) => {
+      const promise = Promise.all(cases.map(([basename, ext]) => new Promise((resolve, reject) => {
         const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null}),
               placeholder = fs.readFileSync(`${path.dest}/${basename}.placeholder.png`, {encode: null}),
               expected = fs.readFileSync(`${path.expected}/${basename}.original.${ext}`, {encode: null}),
               placeholderExpected = fs.readFileSync(`${path.expected}/${basename}.placeholder.png`, {encode: null}),
               dimentions = sizeOf(expected),
-              placeholderDimentions = sizeOf(placeholder),
-              countDiffPixels = pixelmatch(actual, expected, null, dimentions.width, dimentions.height, {threshold: 0.1}),
-              placeholderCountDiffPixels = pixelmatch(placeholder, placeholderExpected, null, placeholderDimentions.width, placeholderDimentions.height, {threshold: 0.1});
+              placeholderDimentions = sizeOf(placeholder);
 
         assert(placeholderDimentions.width === dimentions.width);
         assert(placeholderDimentions.height === dimentions.height);
-        assert(countDiffPixels === 0);
-        assert(placeholderCountDiffPixels === 0);
-      });
-      done();
+
+        if (ext === 'svg') {
+          assert.deepStrictEqual(actual, expected);
+          resolve();
+        }
+        else {
+          comparePixels([[actual, expected, dimentions.width, dimentions.height]])
+            .then(() => comparePixels([[placeholder, placeholderExpected, placeholderDimentions.width, placeholderDimentions.height]]))
+            .then(resolve)
+            .catch(reject);
+        }
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
     });
   });
 
   it('should out compressed files to "options.dest" if argument "options.compress" is true.', (done) => {
-    const task = optimizeImage({
-      src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
-      dest: path.dest,
-      compress: true
-    });
+    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'],
+          task = optimizeImage({
+            src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+            dest: path.dest,
+            compress: true
+          });
 
     task().on('finish', () => {
-      ['jpg', 'png', 'gif', 'svg'].forEach((ext) => {
+      const promise = Promise.all(cases.map((ext) => new Promise((resolve) => {
         const actual = fs.readFileSync(`${path.dest}/sample.${ext}`, {encode: null});
 
         if (ext === 'ico') {
@@ -115,15 +185,20 @@ describe('gulp-task-optimize-image', () => {
 
           assert(actual);
           assert.deepEqual(actual, expected);
+          resolve();
         }
         else {
           const expected = fs.readFileSync(`${path.expected}/sample.compressed.${ext}`, {encode: null});
 
           assert(actual);
           assert.deepEqual(actual, expected);
+          resolve();
         }
-      });
-      done();
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
     });
   });
 

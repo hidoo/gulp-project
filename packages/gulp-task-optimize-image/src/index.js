@@ -4,7 +4,7 @@ import cond from 'gulp-if';
 import filter from 'gulp-filter';
 import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
-import mozjpeg from 'imagemin-mozjpeg';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
 import errorHandler from '@hidoo/gulp-util-error-handler';
@@ -34,7 +34,7 @@ export const jpegtran = imagemin.jpegtran;
  * @example
  * import {mozjpeg} from '@hidoo/gulp-task-optimize-image';
  */
-export {default as mozjpeg} from 'imagemin-mozjpeg';
+export const mozjpeg = imageminMozjpeg;
 
 /**
  * optipng plugins for imagemin

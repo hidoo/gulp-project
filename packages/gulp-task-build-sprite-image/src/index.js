@@ -4,7 +4,7 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
 import imagemin from 'gulp-imagemin';
-import mozjpeg from 'imagemin-mozjpeg';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
@@ -36,7 +36,7 @@ export const jpegtran = imagemin.jpegtran;
  * @example
  * import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
  */
-export {default as mozjpeg} from 'imagemin-mozjpeg';
+export const mozjpeg = imageminMozjpeg;
 
 /**
  * optipng plugins for imagemin

@@ -75,7 +75,7 @@ const DEFAULT_OPTIONS = {
  *   destCss: '/path/to/dest/css',
  *   imgName: 'sprite.svg',
  *   cssName: 'sprite.styl',
- *   imgPath: './path/from/css/to/sprite/sprite.svg'
+ *   imgPath: './path/from/css/to/sprite/sprite.svg',
  *   padding: 10,
  *   layout: 'vertical',
  *   cssTemplate: '/path/to/template/stylus.hbs',

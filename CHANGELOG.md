@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* **gulp-plugin-image-evenizer:** fix problem of alpha channel gif ([23e2a97](https://github.com/hidoo/gulp-project/commit/23e2a97))
+* **gulp-task-build-js-rollup:** fix deprecated options ([e29c525](https://github.com/hidoo/gulp-project/commit/e29c525))
+* **package:** support overrideBrowserslist option of Autoprefixer ([7cb296c](https://github.com/hidoo/gulp-project/commit/7cb296c))
+* **package:** update file-type to version 11.0.0 ([a0fda82](https://github.com/hidoo/gulp-project/commit/a0fda82))
+* **package:** update gulp-filter to version 6.0.0 ([143f2e1](https://github.com/hidoo/gulp-project/commit/143f2e1))
+* **package:** update gulp-imagemin to version 6.0.0 ([57bcf74](https://github.com/hidoo/gulp-project/commit/57bcf74))
+* **package:** update gulp-imagemin to version 6.0.0 ([9fac9fd](https://github.com/hidoo/gulp-project/commit/9fac9fd))
+* **package:** update gulp-imagemin to version 6.0.0 ([8943844](https://github.com/hidoo/gulp-project/commit/8943844))
+* **package:** update merge-stream to version 2.0.0 ([fb56dc3](https://github.com/hidoo/gulp-project/commit/fb56dc3))
+* **package:** update merge-stream to version 2.0.0 ([acffa97](https://github.com/hidoo/gulp-project/commit/acffa97))
+* **package:** update pixelmatch to version 5.0.2 ([a743fde](https://github.com/hidoo/gulp-project/commit/a743fde)), closes [#268](https://github.com/hidoo/gulp-project/issues/268)
+* **package:** update pixelmatch to version 5.0.2 ([9745b8d](https://github.com/hidoo/gulp-project/commit/9745b8d)), closes [#268](https://github.com/hidoo/gulp-project/issues/268)
+* **package:** update rollup-plugin-commonjs to version 10.0.0 ([e31ed22](https://github.com/hidoo/gulp-project/commit/e31ed22))
+* **package:** update rollup-plugin-license to version 0.9.0 ([4868fb9](https://github.com/hidoo/gulp-project/commit/4868fb9))
+* **package:** update rollup-plugin-node-resolve to version 5.0.1 ([ea349bf](https://github.com/hidoo/gulp-project/commit/ea349bf)), closes [#249](https://github.com/hidoo/gulp-project/issues/249)
+* **package:** update uncss to version 0.17.0 ([d1348ba](https://github.com/hidoo/gulp-project/commit/d1348ba))
+* **packages:** fix build error by documentation.js ([2275360](https://github.com/hidoo/gulp-project/commit/2275360))
+
+
+### Features
+
+* **gulp-task-build-sprite-image:** add feature to optimized by mozjpeg ([cac498d](https://github.com/hidoo/gulp-project/commit/cac498d))
+* **gulp-task-build-sprite-svg:** add feature to be accessible to svgo ([4a25503](https://github.com/hidoo/gulp-project/commit/4a25503))
+* **gulp-task-optimize-image:** add feature to optimized by mozjpeg ([35f4f4e](https://github.com/hidoo/gulp-project/commit/35f4f4e))
+
+
+
+
+
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
 
 

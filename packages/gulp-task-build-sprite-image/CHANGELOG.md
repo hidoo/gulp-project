@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* **package:** update gulp-imagemin to version 6.0.0 ([8943844](https://github.com/hidoo/gulp-project/commit/8943844))
+* **package:** update merge-stream to version 2.0.0 ([acffa97](https://github.com/hidoo/gulp-project/commit/acffa97))
+* **package:** update pixelmatch to version 5.0.2 ([9745b8d](https://github.com/hidoo/gulp-project/commit/9745b8d)), closes [#268](https://github.com/hidoo/gulp-project/issues/268)
+* **packages:** fix build error by documentation.js ([2275360](https://github.com/hidoo/gulp-project/commit/2275360))
+
+
+### Features
+
+* **gulp-task-build-sprite-image:** add feature to optimized by mozjpeg ([cac498d](https://github.com/hidoo/gulp-project/commit/cac498d))
+
+
+
+
+
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-sprite-image

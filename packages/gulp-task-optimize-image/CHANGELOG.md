@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* **package:** update gulp-filter to version 6.0.0 ([143f2e1](https://github.com/hidoo/gulp-project/commit/143f2e1))
+* **package:** update gulp-imagemin to version 6.0.0 ([57bcf74](https://github.com/hidoo/gulp-project/commit/57bcf74))
+* **package:** update pixelmatch to version 5.0.2 ([a743fde](https://github.com/hidoo/gulp-project/commit/a743fde)), closes [#268](https://github.com/hidoo/gulp-project/issues/268)
+* **packages:** fix build error by documentation.js ([2275360](https://github.com/hidoo/gulp-project/commit/2275360))
+
+
+### Features
+
+* **gulp-task-optimize-image:** add feature to optimized by mozjpeg ([35f4f4e](https://github.com/hidoo/gulp-project/commit/35f4f4e))
+
+
+
+
+
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
 
 **Note:** Version bump only for package @hidoo/gulp-task-optimize-image

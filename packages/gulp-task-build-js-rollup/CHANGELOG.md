@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* **gulp-task-build-js-rollup:** fix deprecated options ([e29c525](https://github.com/hidoo/gulp-project/commit/e29c525))
+* **package:** update rollup-plugin-commonjs to version 10.0.0 ([e31ed22](https://github.com/hidoo/gulp-project/commit/e31ed22))
+* **package:** update rollup-plugin-license to version 0.9.0 ([4868fb9](https://github.com/hidoo/gulp-project/commit/4868fb9))
+* **package:** update rollup-plugin-node-resolve to version 5.0.1 ([ea349bf](https://github.com/hidoo/gulp-project/commit/ea349bf)), closes [#249](https://github.com/hidoo/gulp-project/issues/249)
+
+
+
+
+
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup

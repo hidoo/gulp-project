@@ -2,6 +2,7 @@ import write from './write';
 import render from './render';
 import formatCode from './formatCode';
 
+/* eslint-disable max-statements */
 /**
  * generate dot files
  * @param {String} src source path
@@ -36,6 +37,14 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
     await render(`${src}/.eslintignore.hbs`, options)
       .then((output) => write(output, `${dest}/.eslintignore`, {verbose}));
 
+    await render(`${src}/.huskyrc.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/.huskyrc.js`, {verbose}));
+
+    await render(`${src}/.lintstagedrc.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/.lintstagedrc.js`, {verbose}));
+
     await render(`${src}/.editorconfig.hbs`, options)
       .then((output) => write(output, `${dest}/.editorconfig`, {verbose}));
 
@@ -49,3 +58,4 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
     throw error;
   }
 }
+/* eslint-enable max-statements */

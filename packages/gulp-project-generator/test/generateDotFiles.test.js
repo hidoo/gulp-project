@@ -41,7 +41,9 @@ describe('generateDotFiles', () => {
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes'],
-      ['.gitignore', '.gitignore']
+      ['.gitignore', '.gitignore'],
+      ['.huskyrc.js', '.huskyrc.js'],
+      ['.lintstagedrc.js', '.lintstagedrc.js']
     ];
 
     files.forEach((file) => {
@@ -71,7 +73,9 @@ describe('generateDotFiles', () => {
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes'],
-      ['.gitignore', '.gitignore']
+      ['.gitignore', '.gitignore'],
+      ['.huskyrc.js', '.huskyrc.js'],
+      ['.lintstagedrc.js', '.lintstagedrc.js']
     ];
 
     files.forEach((file) => {
@@ -102,7 +106,9 @@ describe('generateDotFiles', () => {
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
-      ['.gitignore', '.gitignore']
+      ['.gitignore', '.gitignore'],
+      ['.huskyrc.js', '.huskyrc-conventional-commits.js'],
+      ['.lintstagedrc.js', '.lintstagedrc.js']
     ];
 
     files.forEach((file) => {

@@ -48,9 +48,6 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'test', command: 'npm-run-all -s test:*'},
           {name: 'test:lint', command: 'eslint .'}
         ],
-        huskyHooks = [
-          {name: 'pre-commit', command: 'lint-staged'}
-        ],
         {verbose} = options;
 
   if (options.css) {
@@ -147,9 +144,6 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'version:changelog', command: 'conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0'},
       {name: 'version:commit', command: 'git add .'}
     );
-    huskyHooks.push(
-      {name: 'commit-msg', command: 'commitlint -E HUSKY_GIT_PARAMS'}
-    );
   }
 
   const json = {
@@ -169,17 +163,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
     devDependencies: devDependencies
       .sort((a, b) => a.name.localeCompare(b.name))
       .reduce((prev, current) => ({...prev, [current.name]: current.version}), {}),
-    dependencies: {},
-    husky: {
-      hooks: huskyHooks
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .reduce((prev, current) => ({...prev, [current.name]: current.command}), {})
-    },
-    'lint-staged': {
-      '**/*.js': [
-        'eslint'
-      ]
-    }
+    dependencies: {}
   };
 
   try {

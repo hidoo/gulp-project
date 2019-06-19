@@ -63,16 +63,5 @@
     "power-assert": "^1.6.1",
     "rimraf": "^2.6.3"
   },
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "eslint"
-    ]
-  }
+  "dependencies": {}
 }

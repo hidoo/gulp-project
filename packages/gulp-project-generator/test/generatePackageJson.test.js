@@ -62,7 +62,7 @@ describe('generatePackageJson', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/package-conventional-changelog.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+          expected = fs.readFileSync(`${path.expected}/package-conventional-commits.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);

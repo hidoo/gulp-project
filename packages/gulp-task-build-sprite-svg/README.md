@@ -56,7 +56,9 @@ return build svg sprite sheet task
     -   `options.imgPath` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path in css
     -   `options.padding` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** padding between image in sprite sheet (optional, default `2`)
     -   `options.layout` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** layout for generate sprite sheet（one of [packed|vertical|horizontal]） (optional, default `'packed'`)
+    -   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of [stylus|scss]). (optional, default `'stylus'`)
     -   `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
+          `options.cssPreprocessor` is ignored if this value is specified.
           see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
     -   `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
@@ -81,7 +83,8 @@ task('sprite', buildSprite({
   imgPath: './path/from/css/to/sprite/sprite.svg',
   padding: 10,
   layout: 'vertical',
-  cssTemplate: '/path/to/template/stylus.hbs',
+  cssPreprocessor: 'scss',
+  cssTemplate: '/path/to/template/scss.hbs',
   cssHandlebarsHelpers: {hoge: (value) => value},
   compress: true,
   compressOptions: [ // Default for this options

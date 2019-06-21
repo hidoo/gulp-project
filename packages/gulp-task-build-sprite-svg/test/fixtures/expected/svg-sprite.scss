@@ -1,0 +1,53 @@
+
+
+@if not variable-exists("sprites") {
+  $sprites: () !global;
+}
+
+$sprites: map-merge($sprites, (
+  "svg-sprite": (
+    "image": "./svg-sprite.svg"
+  )
+));
+
+
+$sprites: map-merge($sprites, (
+  "sample-a": (
+    "elastic-width": 1em,
+    "elastic-height": 1em,
+    "elastic-background-width": 212.5%,
+    "elastic-background-height": 106.25%,
+    "elastic-offset-x": -0.03125em,
+    "elastic-offset-y": -0.03125em,
+    "rounded-height": 64px,
+    "image": "./svg-sprite.svg",
+    "offset-x": -2.0px,
+    "offset-y": -2.0px,
+    "width": 64.0px,
+    "height": 64.0px,
+    "total-width": 136.0px,
+    "total-height": 68.0px
+  )
+));
+
+
+
+$sprites: map-merge($sprites, (
+  "sample-b": (
+    "elastic-width": 1em,
+    "elastic-height": 1em,
+    "elastic-background-width": 212.5%,
+    "elastic-background-height": 106.25%,
+    "elastic-offset-x": -1.09375em,
+    "elastic-offset-y": -0.03125em,
+    "rounded-height": 64px,
+    "image": "./svg-sprite.svg",
+    "offset-x": -70.0px,
+    "offset-y": -2.0px,
+    "width": 64.0px,
+    "height": 64.0px,
+    "total-width": 136.0px,
+    "total-height": 68.0px
+  )
+));
+

@@ -57,6 +57,13 @@ export const optipng = imagemin.optipng;
 export const svgo = imagemin.svgo;
 
 /**
+ * path of css templates
+ * @type {String}
+ */
+const pathStylusTemplate = path.resolve(__dirname, '../template/stylus.hbs');
+const pathScssTemplate = path.resolve(__dirname, '../template/scss.hbs');
+
+/**
 * task default options.
  * @type {Object}
  */
@@ -71,7 +78,8 @@ const DEFAULT_OPTIONS = {
   padding: 2,
   algorithm: 'binary-tree',
   engine: 'pixelsmith',
-  cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
+  cssPreprocessor: 'stylus',
+  cssTemplate: '',
   cssHandlebarsHelpers: helpers,
   evenize: false,
   compress: false,
@@ -100,7 +108,9 @@ const DEFAULT_OPTIONS = {
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
  * @param {String} [options.engine='pixelsmith'] - engine for generate sprite sheet.
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
+ * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|scss]).
  * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
+ *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
  * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
  * @param {Boolean} [options.evenize=false] - apply evenize or not
@@ -122,11 +132,12 @@ const DEFAULT_OPTIONS = {
  *   destCss: '/path/to/dest/css',
  *   imgName: 'sprite.png',
  *   cssName: 'sprite.styl',
- *   imgPath: './path/from/css/to/sprite/sprite.png'
+ *   imgPath: './path/from/css/to/sprite/sprite.png',
  *   padding: 10,
  *   algorithm: 'top-down',
  *   engine: 'pixelsmith',
- *   cssTemplate: '/path/to/template/stylus.hbs',
+ *   cssPreprocessor: 'scss',
+ *   cssTemplate: '/path/to/template/scss.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   evenize: true,
  *   compress: true,
@@ -141,6 +152,11 @@ const DEFAULT_OPTIONS = {
  */
 export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
+
+  if (!opts.cssTemplate) {
+    opts.cssTemplate = opts.cssPreprocessor === 'scss' ?
+      pathScssTemplate : pathStylusTemplate;
+  }
 
   // define task
   const task = () => {

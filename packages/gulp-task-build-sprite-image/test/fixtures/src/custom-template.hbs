@@ -1,0 +1,11 @@
+{{#each items}}
+
+.sprite-{{ this.name }} {
+  width: {{ this.px.width }};
+  height: {{ this.px.height }};
+  background-image: url("{{{ this.escaped_image }}}");
+  background-position: {{ this.px.offset_x }} {{ this.px.offset_y }};
+  background-size: {{ this.px.total_width }} {{ this.px.total_height }};
+}
+
+{{/each}}

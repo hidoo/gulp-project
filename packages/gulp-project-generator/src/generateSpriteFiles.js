@@ -68,25 +68,18 @@ export default async function generateSpriteFiles(src = '', dest = '', options =
 
   const {verbose} = options;
 
-  try {
-    if (!options.sprite) {
-      return;
-    }
-
-    await render(`${src}/task/sprite.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/sprite.js`, {verbose}));
-
-    if (options.multiDevice) {
-      await copyAssetsForMultiDeviceDevice(src, dest, options);
-    }
-    else {
-      await copyAssetsForSingleDevice(src, dest, options);
-    }
-
+  if (!options.sprite) {
     return;
   }
-  catch (error) {
-    throw error;
+
+  await render(`${src}/task/sprite.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/task/sprite.js`, {verbose}));
+
+  if (options.multiDevice) {
+    await copyAssetsForMultiDeviceDevice(src, dest, options);
+  }
+  else {
+    await copyAssetsForSingleDevice(src, dest, options);
   }
 }

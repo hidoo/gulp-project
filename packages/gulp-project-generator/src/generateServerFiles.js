@@ -21,17 +21,12 @@ export default async function generateServerFiles(src = '', dest = '', options =
 
   const {verbose} = options;
 
-  try {
-    if (options.server) {
-      await render(`${src}/task/server.js.hbs`, options)
-        .then((output) => formatCode(output))
-        .then((output) => write(output, `${dest}/task/server.js`, {verbose}));
+  if (options.server) {
+    await render(`${src}/task/server.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/task/server.js`, {verbose}));
 
-      await mkdir(`${dest}/src/server`, {verbose});
-      await copy(`${src}/src/server/**/*.{js,hbs}`, `${dest}/src/server`, {verbose});
-    }
-  }
-  catch (error) {
-    throw error;
+    await mkdir(`${dest}/src/server`, {verbose});
+    await copy(`${src}/src/server/**/*.{js,hbs}`, `${dest}/src/server`, {verbose});
   }
 }

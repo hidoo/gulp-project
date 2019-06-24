@@ -21,7 +21,8 @@ describe('formatCode', () => {
         assert(typeof output === 'string');
         assert.deepStrictEqual(output.trim(), expected.toString().trim());
       })
-      .then(() => done());
+      .then(() => done())
+      .catch((error) => done(error));
   });
 
 });

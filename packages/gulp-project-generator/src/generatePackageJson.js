@@ -29,7 +29,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'babel-eslint', version: '^10.0.2'},
           {name: 'commander', version: '^2.19.0'},
           {name: 'cross-env', version: '^5.2.0'},
-          {name: 'eslint', version: '^5.16.0'},
+          {name: 'eslint', version: '^6.0.0'},
           {name: 'gulp', version: '^4.0.2'},
           {name: 'husky', version: '^2.4.1'},
           {name: 'lint-staged', version: '^8.2.1'},
@@ -166,10 +166,5 @@ export default async function generatePackageJson(name = '', dest = '', options 
     dependencies: {}
   };
 
-  try {
-    await write(JSON.stringify(json, null, '  '), `${dest}/package.json`, {verbose});
-  }
-  catch (error) {
-    throw error;
-  }
+  return await write(JSON.stringify(json, null, '  '), `${dest}/package.json`, {verbose});
 }

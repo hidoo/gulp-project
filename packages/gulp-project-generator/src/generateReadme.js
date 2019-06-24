@@ -22,11 +22,6 @@ export default async function generateReadme(name = '', src = '', dest = '', opt
 
   const {verbose} = options;
 
-  try {
-    await render(`${src}/README.md.hbs`, {...options, name})
-      .then((output) => write(output, `${dest}/README.md`, {verbose}));
-  }
-  catch (error) {
-    throw error;
-  }
+  await render(`${src}/README.md.hbs`, {...options, name})
+    .then((output) => write(output, `${dest}/README.md`, {verbose}));
 }

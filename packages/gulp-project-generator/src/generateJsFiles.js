@@ -61,25 +61,20 @@ export default async function generateJsFiles(src = '', dest = '', options = {})
 
   const {verbose} = options;
 
-  try {
-    if (!options.js) {
-      return;
-    }
-
-    await render(`${src}/task/js.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/js.js`, {verbose}));
-
-    if (options.multiDevice) {
-      await copyAssetsForMultiDeviceDevice(src, dest, options);
-    }
-    else {
-      await copyAssetsForSingleDevice(src, dest, options);
-    }
-
+  if (!options.js) {
     return;
   }
-  catch (error) {
-    throw error;
+
+  await render(`${src}/task/js.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/task/js.js`, {verbose}));
+
+  if (options.multiDevice) {
+    await copyAssetsForMultiDeviceDevice(src, dest, options);
   }
+  else {
+    await copyAssetsForSingleDevice(src, dest, options);
+  }
+
+  return;
 }

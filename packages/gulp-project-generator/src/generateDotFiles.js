@@ -20,42 +20,37 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
 
   const {verbose} = options;
 
-  try {
-    await render(`${src}/.babelrc.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.babelrc.js`, {verbose}));
+  await render(`${src}/.babelrc.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/.babelrc.js`, {verbose}));
 
-    if (options.conventionalCommits) {
-      await render(`${src}/.commitlintrc.js.hbs`, options)
-        .then((output) => write(output, `${dest}/.commitlintrc.js`, {verbose}));
-    }
-
-    await render(`${src}/.eslintrc.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));
-
-    await render(`${src}/.eslintignore.hbs`, options)
-      .then((output) => write(output, `${dest}/.eslintignore`, {verbose}));
-
-    await render(`${src}/.huskyrc.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.huskyrc.js`, {verbose}));
-
-    await render(`${src}/.lintstagedrc.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.lintstagedrc.js`, {verbose}));
-
-    await render(`${src}/.editorconfig.hbs`, options)
-      .then((output) => write(output, `${dest}/.editorconfig`, {verbose}));
-
-    await render(`${src}/.gitignore.hbs`, options)
-      .then((output) => write(output, `${dest}/.gitignore`, {verbose}));
-
-    await render(`${src}/.gitattributes.hbs`, options)
-      .then((output) => write(output, `${dest}/.gitattributes`, {verbose}));
+  if (options.conventionalCommits) {
+    await render(`${src}/.commitlintrc.js.hbs`, options)
+      .then((output) => write(output, `${dest}/.commitlintrc.js`, {verbose}));
   }
-  catch (error) {
-    throw error;
-  }
+
+  await render(`${src}/.eslintrc.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));
+
+  await render(`${src}/.eslintignore.hbs`, options)
+    .then((output) => write(output, `${dest}/.eslintignore`, {verbose}));
+
+  await render(`${src}/.huskyrc.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/.huskyrc.js`, {verbose}));
+
+  await render(`${src}/.lintstagedrc.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/.lintstagedrc.js`, {verbose}));
+
+  await render(`${src}/.editorconfig.hbs`, options)
+    .then((output) => write(output, `${dest}/.editorconfig`, {verbose}));
+
+  await render(`${src}/.gitignore.hbs`, options)
+    .then((output) => write(output, `${dest}/.gitignore`, {verbose}));
+
+  await render(`${src}/.gitattributes.hbs`, options)
+    .then((output) => write(output, `${dest}/.gitattributes`, {verbose}));
 }
 /* eslint-enable max-statements */

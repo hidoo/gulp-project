@@ -185,7 +185,7 @@
       return store[key] || (store[key] = value !== undefined ? value : {});
     })('versions', []).push({
       version: _core.version,
-      mode: 'global',
+      mode:  'global',
       copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
     });
   });

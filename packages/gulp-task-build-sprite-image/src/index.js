@@ -108,7 +108,7 @@ const DEFAULT_OPTIONS = {
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
  * @param {String} [options.engine='pixelsmith'] - engine for generate sprite sheet.
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
- * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|scss]).
+ * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|sass]).
  * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
  *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
@@ -136,8 +136,8 @@ const DEFAULT_OPTIONS = {
  *   padding: 10,
  *   algorithm: 'top-down',
  *   engine: 'pixelsmith',
- *   cssPreprocessor: 'scss',
- *   cssTemplate: '/path/to/template/scss.hbs',
+ *   cssPreprocessor: 'sass',
+ *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   evenize: true,
  *   compress: true,
@@ -154,7 +154,7 @@ export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
   if (!opts.cssTemplate) {
-    opts.cssTemplate = opts.cssPreprocessor === 'scss' ?
+    opts.cssTemplate = opts.cssPreprocessor === 'sass' ?
       pathScssTemplate : pathStylusTemplate;
   }
 

@@ -170,7 +170,7 @@ describe('gulp-task-build-sprite-image', () => {
     });
   });
 
-  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "scss".', (done) => {
+  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass".', (done) => {
     const task = buildSprite({
       src: `${path.src}/**/sample-*.png`,
       destImg: `${path.dest}`,
@@ -178,7 +178,7 @@ describe('gulp-task-build-sprite-image', () => {
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.scss',
       imgPath: './image-sprite.png',
-      cssPreprocessor: 'scss'
+      cssPreprocessor: 'sass'
     });
 
     task().on('finish', () => {

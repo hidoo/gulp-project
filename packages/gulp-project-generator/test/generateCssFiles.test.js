@@ -77,6 +77,25 @@ describe('generateCssFiles', () => {
     assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
+  it('should generate files css task if argument options.css is true and argument options.cssPreprocessor is "sass".', async () => {
+    await generateCssFiles(path.src, path.dest, {css: true, cssPreprocessor: 'sass'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-css-sass.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/css/README.md',
+            '/src/css/main.scss'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
   it('should generate files css task if argument options.css is true and argument options.multiDevice is true.', async () => {
     await generateCssFiles(path.src, path.dest, {css: true, multiDevice: true});
 
@@ -115,6 +134,27 @@ describe('generateCssFiles', () => {
             '/src/css/mobile/deps/sample-a.css',
             '/src/css/mobile/deps/sample-b.css',
             '/src/css/mobile/main.styl'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
+  it('should generate files css task if argument options.css is true and argument options.multiDevice is true and options.cssPreprocessor is "sass".', async () => {
+    await generateCssFiles(path.src, path.dest, {css: true, multiDevice: true, cssPreprocessor: 'sass'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/css.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-css-multi-device-sass.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/css/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/css/desktop/README.md',
+            '/src/css/desktop/main.scss',
+            '/src/css/mobile/README.md',
+            '/src/css/mobile/main.scss'
           ];
 
     assert(actualTask);

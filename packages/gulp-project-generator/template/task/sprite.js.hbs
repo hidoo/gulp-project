@@ -45,6 +45,7 @@ function buildDesktopOptions(options = {}) {
     destImg: config.path.destSpriteDesktop,
     destCss: config.path.srcCssDesktop,
     imgPath: `${pathToSpriteDesktop}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}scss{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }
@@ -60,6 +61,7 @@ function buildMobileOptions(options = {}) {
     destImg: config.path.destSpriteMobile,
     destCss: config.path.srcCssMobile,
     imgPath: `${pathToSpriteMobile}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}scss{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }
@@ -75,6 +77,7 @@ function buildOptions(options = {}) {
     destImg: config.path.destSprite,
     destCss: config.path.srcCss,
     imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}scss{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }
@@ -87,7 +90,7 @@ function buildOptions(options = {}) {
     name: 'sprite:desktop:main',
     src: `${config.path.srcSpriteDesktop}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
-    cssName: '_sprite_sample.styl',
+    cssName: '_sprite_sample.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}',
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}
@@ -96,7 +99,7 @@ function buildOptions(options = {}) {
     name: 'sprite:mobile:main',
     src: `${config.path.srcSpriteMobile}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
-    cssName: '_sprite_sample.styl',
+    cssName: '_sprite_sample.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}',
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}
@@ -137,7 +140,7 @@ function buildOptions(options = {}) {
     name: 'sprite:main',
     src: `${config.path.srcSprite}/**/sample-*.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}`,
     imgName: 'sample.{{#is spriteType 'svg'}}svg{{/is}}{{#is spriteType 'image'}}png{{/is}}',
-    cssName: '_sprite_sample.styl',
+    cssName: '_sprite_sample.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}',
     {{#is spriteType 'image'}}
       evenize: false,
     {{/is}}

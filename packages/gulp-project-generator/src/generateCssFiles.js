@@ -12,10 +12,13 @@ import formatCode from './formatCode';
  * @return {Promise}
  */
 async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+  const {verbose} = options,
+        ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
   await mkdir(`${dest}/src/css`, {verbose});
-  await copy(`${src}/src/css/**/*.{styl,md}`, `${dest}/src/css`, {verbose});
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css`, {verbose});
+  await render(`${src}/src/css/README.md.hbs`, options)
+    .then((output) => write(output, `${dest}/src/css/README.md`, {verbose}));
 
   if (options.cssDeps) {
     await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css`, {verbose});
@@ -30,12 +33,17 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
  * @return {Promise}
  */
 async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+  const {verbose} = options,
+        ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
   await mkdir(`${dest}/src/css/desktop`, {verbose});
   await mkdir(`${dest}/src/css/mobile`, {verbose});
-  await copy(`${src}/src/css/**/*.{styl,md}`, `${dest}/src/css/desktop`, {verbose});
-  await copy(`${src}/src/css/**/*.{styl,md}`, `${dest}/src/css/mobile`, {verbose});
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/desktop`, {verbose});
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/mobile`, {verbose});
+  await render(`${src}/src/css/README.md.hbs`, options)
+    .then((output) => write(output, `${dest}/src/css/desktop/README.md`, {verbose}));
+  await render(`${src}/src/css/README.md.hbs`, options)
+    .then((output) => write(output, `${dest}/src/css/mobile/README.md`, {verbose}));
 
   if (options.cssDeps) {
     await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/desktop`, {verbose});

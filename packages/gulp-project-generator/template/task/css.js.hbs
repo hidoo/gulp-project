@@ -2,7 +2,11 @@
  * import modules
  */
 import gulp from 'gulp';
+{{#is cssPreprocessor 'sass'}}
+import buildCss from '@hidoo/gulp-task-build-css-sass';
+{{else}}
 import buildCss from '@hidoo/gulp-task-build-css-stylus';
+{{/is}}
 {{#if cssDeps}}
 import {concatCss} from '@hidoo/gulp-task-concat';
 {{/if}}
@@ -17,14 +21,14 @@ import * as config from '../config';
   // define main task
   const mainDesktop = buildCss({
     name: 'css:desktop:main',
-    src: `${config.path.srcCssDesktop}/main.styl`,
+    src: `${config.path.srcCssDesktop}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
     dest: `${config.path.destCssDesktop}`,
     filename: 'main.css',
     compress: config.compress
   });
   const mainMobile = buildCss({
     name: 'css:mobile:main',
-    src: `${config.path.srcCssMobile}/main.styl`,
+    src: `${config.path.srcCssMobile}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
     dest: `${config.path.destCssMobile}`,
     filename: 'main.css',
     compress: config.compress
@@ -58,7 +62,7 @@ import * as config from '../config';
   const watchDesktop = () => {
     gulp.watch(
       [
-        `${config.path.srcCssDesktop}/*.styl`
+        `${config.path.srcCssDesktop}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
       ],
       mainDesktop
     );
@@ -74,7 +78,7 @@ import * as config from '../config';
   const watchMobile = () => {
     gulp.watch(
       [
-        `${config.path.srcCssMobile}/*.styl`
+        `${config.path.srcCssMobile}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
       ],
       mainMobile
     );
@@ -109,7 +113,7 @@ import * as config from '../config';
   // define main task
   export const main = buildCss({
     name: 'css:main',
-    src: `${config.path.srcCss}/main.styl`,
+    src: `${config.path.srcCss}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
     dest: `${config.path.destCss}`,
     filename: 'main.css',
     compress: config.compress
@@ -133,7 +137,7 @@ import * as config from '../config';
   export const watch = () => {
     gulp.watch(
       [
-        `${config.path.srcCss}/*.styl`
+        `${config.path.srcCss}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
       ],
       main
     );

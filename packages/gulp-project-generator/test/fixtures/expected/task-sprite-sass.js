@@ -3,7 +3,7 @@
  */
 import {relative} from 'path';
 import gulp from 'gulp';
-import buildSprite from '@hidoo/gulp-task-build-sprite-image';
+import buildSprite from '@hidoo/gulp-task-build-sprite-svg';
 
 /**
  * import modules - local
@@ -34,7 +34,7 @@ function buildOptions(options = {}) {
     destImg: config.path.destSprite,
     destCss: config.path.srcCss,
     imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
-    cssPreprocessor: 'stylus',
+    cssPreprocessor: 'scss',
     compress: config.compress
   };
 }
@@ -42,17 +42,16 @@ function buildOptions(options = {}) {
 // define main task
 export const main = buildSprite(buildOptions({
   name: 'sprite:main',
-  src: `${config.path.srcSprite}/**/sample-*.png`,
-  imgName: 'sample.png',
-  cssName: '_sprite_sample.styl',
-  evenize: false
+  src: `${config.path.srcSprite}/**/sample-*.svg`,
+  imgName: 'sample.svg',
+  cssName: '_sprite_sample.scss'
 }));
 
 // define watch task
 export const watch = () => {
   gulp.watch(
     [
-      `${config.path.srcSprite}/**/sample-*.png`
+      `${config.path.srcSprite}/**/sample-*.svg`
     ],
     main
   );

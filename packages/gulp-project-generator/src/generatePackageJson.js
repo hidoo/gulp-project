@@ -51,9 +51,16 @@ export default async function generatePackageJson(name = '', dest = '', options 
         {verbose} = options;
 
   if (options.css) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-build-css-stylus', version: gulpProjectVersion}
-    );
+    if (options.cssPreprocessor === 'sass') {
+      devDependencies.push(
+        {name: '@hidoo/gulp-task-build-css-sass', version: gulpProjectVersion}
+      );
+    }
+    else {
+      devDependencies.push(
+        {name: '@hidoo/gulp-task-build-css-stylus', version: gulpProjectVersion}
+      );
+    }
   }
   if (options.cssDeps) {
     devDependencies.push(

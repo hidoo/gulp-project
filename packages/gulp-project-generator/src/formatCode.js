@@ -1,4 +1,5 @@
 import eslint from 'eslint';
+import parser from 'babel-eslint';
 
 /* eslint-disable quote-props, no-magic-numbers */
 const defaultRules = {
@@ -39,6 +40,8 @@ export default function formatCode(src = '', rules = {}) {
   }
 
   const linter = new eslint.Linter();
+
+  linter.defineParser('babel-eslint', parser);
 
   return new Promise((resolve) => {
     const results = linter.verifyAndFix(src, {

@@ -19,12 +19,7 @@ export default async function generateGulpfile(src = '', dest = '', options = {}
 
   const {verbose} = options;
 
-  try {
-    await render(`${src}/gulpfile.babel.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/gulpfile.babel.js`, {verbose}));
-  }
-  catch (error) {
-    throw error;
-  }
+  await render(`${src}/gulpfile.babel.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/gulpfile.babel.js`, {verbose}));
 }

@@ -51,25 +51,18 @@ export default async function generateImageFiles(src = '', dest = '', options = 
 
   const {verbose} = options;
 
-  try {
-    if (!options.image) {
-      return;
-    }
-
-    await render(`${src}/task/image.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/image.js`, {verbose}));
-
-    if (options.multiDevice) {
-      await copyAssetsForMultiDeviceDevice(src, dest, options);
-    }
-    else {
-      await copyAssetsForSingleDevice(src, dest, options);
-    }
-
+  if (!options.image) {
     return;
   }
-  catch (error) {
-    throw error;
+
+  await render(`${src}/task/image.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/task/image.js`, {verbose}));
+
+  if (options.multiDevice) {
+    await copyAssetsForMultiDeviceDevice(src, dest, options);
+  }
+  else {
+    await copyAssetsForSingleDevice(src, dest, options);
   }
 }

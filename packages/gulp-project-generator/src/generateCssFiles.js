@@ -60,25 +60,18 @@ export default async function generateCssFiles(src = '', dest = '', options = {}
 
   const {verbose} = options;
 
-  try {
-    if (!options.css) {
-      return;
-    }
-
-    await render(`${src}/task/css.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/css.js`, {verbose}));
-
-    if (options.multiDevice) {
-      await copyAssetsForMultiDeviceDevice(src, dest, options);
-    }
-    else {
-      await copyAssetsForSingleDevice(src, dest, options);
-    }
-
+  if (!options.css) {
     return;
   }
-  catch (error) {
-    throw error;
+
+  await render(`${src}/task/css.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/task/css.js`, {verbose}));
+
+  if (options.multiDevice) {
+    await copyAssetsForMultiDeviceDevice(src, dest, options);
+  }
+  else {
+    await copyAssetsForSingleDevice(src, dest, options);
   }
 }

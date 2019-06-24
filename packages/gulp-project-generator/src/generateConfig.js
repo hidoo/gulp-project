@@ -18,13 +18,8 @@ export default async function generateConfig(src = '', dest = '', options = {}) 
   }
 
   const {verbose} = options;
+  const output = await render(`${src}/config.js.hbs`, options);
+  const formated = await formatCode(output);
 
-  try {
-    await render(`${src}/config.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/config.js`, {verbose}));
-  }
-  catch (error) {
-    throw error;
-  }
+  return await write(formated, `${dest}/config.js`, {verbose});
 }

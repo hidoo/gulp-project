@@ -29,25 +29,20 @@ import pkg from '../package.json';
  * @return {Promise<Boolean>}
  */
 async function comfirmForce(dest = '', options = {}) {
-  try {
-    if (await isEmptyDir(dest) || options.force) {
-      return true;
+  if (await isEmptyDir(dest) || options.force) {
+    return true;
+  }
+
+  const results = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'confirm',
+      message: `${dest} is not empty directory, continue?`,
+      default: false
     }
+  ]);
 
-    const results = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'confirm',
-        message: `${dest} is not empty directory, continue?`,
-        default: false
-      }
-    ]);
-
-    return results.confirm;
-  }
-  catch (error) {
-    throw error;
-  }
+  return results.confirm;
 }
 
 /**
@@ -64,26 +59,21 @@ async function inputProjectName(dest = '', options = {}) {
   const name = typeof options.name === 'string' && options.name !== '' ?
     options.name : createProjectName(dest);
 
-  try {
-    if (options.interactive) {
-      const results = await inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Please input name of the project.',
-            default: () => name || '',
-            transformer: (value) => createProjectName(value)
-          }
-        ]);
+  if (options.interactive) {
+    const results = await inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: 'Please input name of the project.',
+          default: () => name || '',
+          transformer: (value) => createProjectName(value)
+        }
+      ]);
 
-      return results.name;
-    }
-    return name;
+    return results.name;
   }
-  catch (error) {
-    throw error;
-  }
+  return name;
 }
 
 /**
@@ -92,96 +82,91 @@ async function inputProjectName(dest = '', options = {}) {
  * @return {Promise<Object>}
  */
 async function choiseOptions(options = {}) {
-  try {
-    if (options.interactive) {
-      const results = await inquirer
-        .prompt([
-          {
-            type: 'confirm',
-            name: 'multiDevice',
-            message: 'Enable multi-device mode?',
-            default: false,
-            when: () => !options.multiDevice
-          },
-          {
-            type: 'confirm',
-            name: 'conventionalCommits',
-            message: 'Set up tools for conventional commits?',
-            default: Boolean(options.conventionalCommits)
-          },
-          {
-            type: 'checkbox',
-            name: 'tasks',
-            message: 'Please select the task you need for the project.',
-            choices: [
-              {name: 'css', checked: options.css},
-              {name: 'html', checked: options.html},
-              {name: 'js', checked: options.js},
-              {name: 'sprite', checked: options.css && options.sprite},
-              {name: 'styleguide', checked: options.css && options.styleguide},
-              {name: 'image', checked: options.image},
-              {name: 'server', checked: options.server}
-            ],
-            filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
-            validate: (choices) => {
-              if (!Object.keys(choices).length) {
-                return 'You must choose at least one task.';
-              }
-              return true;
+  if (options.interactive) {
+    const results = await inquirer
+      .prompt([
+        {
+          type: 'confirm',
+          name: 'multiDevice',
+          message: 'Enable multi-device mode?',
+          default: false,
+          when: () => !options.multiDevice
+        },
+        {
+          type: 'confirm',
+          name: 'conventionalCommits',
+          message: 'Set up tools for conventional commits?',
+          default: Boolean(options.conventionalCommits)
+        },
+        {
+          type: 'checkbox',
+          name: 'tasks',
+          message: 'Please select the task you need for the project.',
+          choices: [
+            {name: 'css', checked: options.css},
+            {name: 'html', checked: options.html},
+            {name: 'js', checked: options.js},
+            {name: 'sprite', checked: options.css && options.sprite},
+            {name: 'styleguide', checked: options.css && options.styleguide},
+            {name: 'image', checked: options.image},
+            {name: 'server', checked: options.server}
+          ],
+          filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
+          validate: (choices) => {
+            if (!Object.keys(choices).length) {
+              return 'You must choose at least one task.';
             }
-          },
-          {
-            type: 'checkbox',
-            name: 'depsTasks',
-            message: 'Please select the dependency task you need for the project.',
-            choices: (answers) => [
-              answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
-              answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
-            ].filter((choice) => choice),
-            filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
-            when: (answers) => answers.tasks.css || answers.tasks.js
-          },
-          {
-            type: 'list',
-            name: 'jsBundler',
-            message: 'Please select the JavaScript bundler.',
-            choices: [
-              {name: 'browserify'},
-              {name: 'rollup'}
-            ],
-            default: () => options.jsBundler,
-            when: (answers) => answers.tasks.js
-          },
-          {
-            type: 'list',
-            name: 'spriteType',
-            message: 'Please select the sprite sheet source type.',
-            choices: [
-              {name: 'svg'},
-              {name: 'image'}
-            ],
-            default: () => options.spriteType,
-            when: (answers) => answers.tasks.sprite
+            return true;
           }
-        ]);
+        },
+        {
+          type: 'checkbox',
+          name: 'depsTasks',
+          message: 'Please select the dependency task you need for the project.',
+          choices: (answers) => [
+            answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
+            answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
+          ].filter((choice) => choice),
+          filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
+          when: (answers) => answers.tasks.css || answers.tasks.js
+        },
+        {
+          type: 'list',
+          name: 'jsBundler',
+          message: 'Please select the JavaScript bundler.',
+          choices: [
+            {name: 'browserify'},
+            {name: 'rollup'}
+          ],
+          default: () => options.jsBundler,
+          when: (answers) => answers.tasks.js
+        },
+        {
+          type: 'list',
+          name: 'spriteType',
+          message: 'Please select the sprite sheet source type.',
+          choices: [
+            {name: 'svg'},
+            {name: 'image'}
+          ],
+          default: () => options.spriteType,
+          when: (answers) => answers.tasks.sprite
+        }
+      ]);
 
-      return {
-        force: options.force,
-        interactive: options.interactive,
-        multiDevice: options.multiDevice || results.multiDevice,
-        conventionalCommits: results.conventionalCommits,
-        ...results.tasks,
-        ...results.depsTasks,
-        jsBundler: results.jsBundler,
-        spriteType: results.spriteType,
-        verbose: options.verbose
-      };
-    }
-    return options;
+    return {
+      force: options.force,
+      interactive: options.interactive,
+      multiDevice: options.multiDevice || results.multiDevice,
+      conventionalCommits: results.conventionalCommits,
+      ...results.tasks,
+      ...results.depsTasks,
+      jsBundler: results.jsBundler,
+      spriteType: results.spriteType,
+      verbose: options.verbose
+    };
   }
-  catch (error) {
-    throw error;
-  }
+  return options;
 }
 
 /**
@@ -191,71 +176,66 @@ async function choiseOptions(options = {}) {
  * @return {Promise<Object>}
  */
 async function confirmConfig(name = '', options = {}) {
-  try {
-    if (options.interactive) {
+  if (options.interactive) {
 
+    console.log('');
+    console.log(`  ${chalk.white('Project Name:')}`);
+    console.log(`    ${chalk.cyan(name)}`);
+
+    if (options.multiDevice) {
       console.log('');
-      console.log(`  ${chalk.white('Project Name:')}`);
-      console.log(`    ${chalk.cyan(name)}`);
-
-      if (options.multiDevice) {
-        console.log('');
-        console.log(`  ${chalk.white('Multi-device Mode:')}`);
-        console.log(`    ${chalk.cyan(options.multiDevice)}`);
-      }
-
-      if (options.conventionalCommits) {
-        console.log('');
-        console.log(`  ${chalk.white('Use Conventional Commits:')}`);
-        console.log(`    ${chalk.cyan(options.conventionalCommits)}`);
-      }
-
-      console.log('');
-      console.log(`  ${chalk.white('Tasks:')}`);
-      Object.keys(options).sort().forEach((key) => {
-        if (
-          key !== 'interactive' &&
-          key !== 'force' &&
-          key !== 'conventionalCommits' &&
-          key !== 'multiDevice' &&
-          key !== 'verbose' &&
-          key !== 'jsBundler' &&
-          key !== 'spriteType'
-        ) {
-          console.log(`    ${chalk.grey('+')} ${chalk.cyan(key)}`);
-        }
-      });
-
-      if (options.js && options.jsBundler) {
-        console.log('');
-        console.log(`  ${chalk.white('JavaScript Bundler:')}`);
-        console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.jsBundler)}`);
-      }
-
-      if (options.sprite && options.spriteType) {
-        console.log('');
-        console.log(`  ${chalk.white('Sprite sheet type:')}`);
-        console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.spriteType)}`);
-      }
-
-      console.log('');
-
-      const results = await inquirer.prompt([
-        {
-          type: 'confirm',
-          name: 'confirm',
-          message: 'Is this OK?',
-          default: false
-        }
-      ]);
-
-      return results.confirm;
+      console.log(`  ${chalk.white('Multi-device Mode:')}`);
+      console.log(`    ${chalk.cyan(options.multiDevice)}`);
     }
-    return true;
+
+    if (options.conventionalCommits) {
+      console.log('');
+      console.log(`  ${chalk.white('Use Conventional Commits:')}`);
+      console.log(`    ${chalk.cyan(options.conventionalCommits)}`);
+    }
+
+    console.log('');
+    console.log(`  ${chalk.white('Tasks:')}`);
+    Object.keys(options).sort().forEach((key) => {
+      if (
+        key !== 'interactive' &&
+        key !== 'force' &&
+        key !== 'conventionalCommits' &&
+        key !== 'multiDevice' &&
+        key !== 'verbose' &&
+        key !== 'jsBundler' &&
+        key !== 'spriteType'
+      ) {
+        console.log(`    ${chalk.grey('+')} ${chalk.cyan(key)}`);
+      }
+    });
+
+    if (options.js && options.jsBundler) {
+      console.log('');
+      console.log(`  ${chalk.white('JavaScript Bundler:')}`);
+      console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.jsBundler)}`);
+    }
+
+    if (options.sprite && options.spriteType) {
+      console.log('');
+      console.log(`  ${chalk.white('Sprite sheet type:')}`);
+      console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.spriteType)}`);
+    }
+
+    console.log('');
+
+    const results = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'confirm',
+        message: 'Is this OK?',
+        default: false
+      }
+    ]);
+
+    return results.confirm;
   }
-  catch (error) {
-    throw error;
-  }
+  return true;
 }
 
 /**
@@ -273,63 +253,58 @@ async function main(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" must be not empty string.');
   }
 
-  try {
-    if (!await comfirmForce(dest, options)) {
-      console.log('');
-      console.log(chalk.bold.yellow('Aborting.'));
-      return false;
-    }
-
-    const name = await inputProjectName(dest, options),
-          opts = await choiseOptions(options);
-
-    // disable forcely in relation to --no-css
-    if (!opts.css) {
-      opts.cssDeps = false;
-      opts.sprite = false;
-      opts.styleguide = false;
-    }
-
-    // disable forcely in relation to --no-js
-    if (!opts.js) {
-      opts.jsDeps = false;
-    }
-
-    if (!await confirmConfig(name, opts)) {
-      return main(src, dest, options);
-    }
-
+  if (!await comfirmForce(dest, options)) {
     console.log('');
-    console.log(chalk.white('Prepare directories:'));
-    rimraf.sync(dest);
-    await mkdir(`${dest}/src`, {verbose: opts.verbose});
-    await mkdir(`${dest}/task`, {verbose: opts.verbose});
-    console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
-
-    console.log('');
-    console.log(chalk.white('Generate files:'));
-    await generateReadme(name, src, dest, opts);
-    await generatePackageJson(name, dest, opts);
-    await generateConfig(src, dest, opts);
-    await generateGulpfile(src, dest, opts);
-    await generateDotFiles(src, dest, opts);
-    await generateCssFiles(src, dest, opts);
-    await generateHtmlFiles(src, dest, opts);
-    await generateImageFiles(src, dest, opts);
-    await generateJsFiles(src, dest, opts);
-    await generateServerFiles(src, dest, opts);
-    await generateSpriteFiles(src, dest, opts);
-    await generateStyleguideFiles(src, dest, opts);
-    console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
-
-    console.log('');
-    console.log(chalk.bold.green('New project is generated successfully.'));
-
-    return true;
+    console.log(chalk.bold.yellow('Aborting.'));
+    return false;
   }
-  catch (error) {
-    throw error;
+
+  const name = await inputProjectName(dest, options),
+        opts = await choiseOptions(options);
+
+  // disable forcely in relation to --no-css
+  if (!opts.css) {
+    opts.cssDeps = false;
+    opts.sprite = false;
+    opts.styleguide = false;
   }
+
+  // disable forcely in relation to --no-js
+  if (!opts.js) {
+    opts.jsDeps = false;
+  }
+
+  if (!await confirmConfig(name, opts)) {
+    return main(src, dest, options);
+  }
+
+  console.log('');
+  console.log(chalk.white('Prepare directories:'));
+  rimraf.sync(dest);
+  await mkdir(`${dest}/src`, {verbose: opts.verbose});
+  await mkdir(`${dest}/task`, {verbose: opts.verbose});
+  console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
+
+  console.log('');
+  console.log(chalk.white('Generate files:'));
+  await generateReadme(name, src, dest, opts);
+  await generatePackageJson(name, dest, opts);
+  await generateConfig(src, dest, opts);
+  await generateGulpfile(src, dest, opts);
+  await generateDotFiles(src, dest, opts);
+  await generateCssFiles(src, dest, opts);
+  await generateHtmlFiles(src, dest, opts);
+  await generateImageFiles(src, dest, opts);
+  await generateJsFiles(src, dest, opts);
+  await generateServerFiles(src, dest, opts);
+  await generateSpriteFiles(src, dest, opts);
+  await generateStyleguideFiles(src, dest, opts);
+  console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
+
+  console.log('');
+  console.log(chalk.bold.green('New project is generated successfully.'));
+
+  return true;
 }
 
 program

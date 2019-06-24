@@ -59,25 +59,18 @@ export default async function generateHtmlFiles(src = '', dest = '', options = {
 
   const {verbose} = options;
 
-  try {
-    if (!options.html) {
-      return;
-    }
-
-    await render(`${src}/task/html.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/html.js`, {verbose}));
-
-    if (options.multiDevice) {
-      await copyAssetsForMultiDeviceDevice(src, dest, options);
-    }
-    else {
-      await copyAssetsForSingleDevice(src, dest, options);
-    }
-
+  if (!options.html) {
     return;
   }
-  catch (error) {
-    throw error;
+
+  await render(`${src}/task/html.js.hbs`, options)
+    .then((output) => formatCode(output))
+    .then((output) => write(output, `${dest}/task/html.js`, {verbose}));
+
+  if (options.multiDevice) {
+    await copyAssetsForMultiDeviceDevice(src, dest, options);
+  }
+  else {
+    await copyAssetsForSingleDevice(src, dest, options);
   }
 }

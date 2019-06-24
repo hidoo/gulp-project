@@ -62,7 +62,7 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.imgPath - destination image path in css
  * @param {Number} [options.padding=2] - padding between image in sprite sheet
  * @param {String} [options.layout='packed'] - layout for generate sprite sheet（one of [packed|vertical|horizontal]）
- * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|scss]).
+ * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|sass]).
  * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
  *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
@@ -88,8 +88,8 @@ const DEFAULT_OPTIONS = {
  *   imgPath: './path/from/css/to/sprite/sprite.svg',
  *   padding: 10,
  *   layout: 'vertical',
- *   cssPreprocessor: 'scss',
- *   cssTemplate: '/path/to/template/scss.hbs',
+ *   cssPreprocessor: 'sass',
+ *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   compress: true,
  *   compressOptions: [ // Default for this options
@@ -102,7 +102,7 @@ export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
   if (!opts.cssTemplate) {
-    opts.cssTemplate = opts.cssPreprocessor === 'scss' ?
+    opts.cssTemplate = opts.cssPreprocessor === 'sass' ?
       pathScssTemplate : pathStylusTemplate;
   }
 

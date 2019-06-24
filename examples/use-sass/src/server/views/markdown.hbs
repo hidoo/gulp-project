@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>{{title}}</title>
+    <meta name="keywords" content="{{keywords}}" />
+    <meta name="description" content="{{description}}" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" />
+    <style>
+    .markdown-body {
+      box-sizing: border-box;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
+    .markdown-body pre {
+      background-color: #282c34;
+    }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="markdown-body">
+{{#markdown}}
+{{{this.content}}}
+{{/markdown}}
+    </div>
+
+  </body>
+</html>

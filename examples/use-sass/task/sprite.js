@@ -34,7 +34,7 @@ function buildOptions(options = {}) {
     destImg: config.path.destSprite,
     destCss: config.path.srcCss,
     imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
-    cssPreprocessor: 'stylus',
+    cssPreprocessor: 'sass',
     compress: config.compress
   };
 }
@@ -44,7 +44,7 @@ export const main = buildSprite(buildOptions({
   name: 'sprite:main',
   src: `${config.path.srcSprite}/**/sample-*.svg`,
   imgName: 'sample.svg',
-  cssName: '_sprite_sample.styl'
+  cssName: '_sprite_sample.scss'
 }));
 
 // define watch task

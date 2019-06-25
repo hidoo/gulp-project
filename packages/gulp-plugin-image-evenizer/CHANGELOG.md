@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
+
+
+### Bug Fixes
+
+* **package:** update file-type to version 12.0.0 ([84ea96a](https://github.com/hidoo/gulp-project/commit/84ea96a))
+
+
+
+
+
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
 
 

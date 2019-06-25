@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
+
+
+### Bug Fixes
+
+* **build-sprite-svg:** change value of cssPreprocessor to "sass" ([247f5b1](https://github.com/hidoo/gulp-project/commit/247f5b1))
+
+
+### Features
+
+* **build-sprite-svg:** add cssPreprocessor options ([18f63ac](https://github.com/hidoo/gulp-project/commit/18f63ac))
+
+
+
+
+
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
 
 

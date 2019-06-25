@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
+
+
+### Bug Fixes
+
+* **build-sprite-image:** change value of cssPreprocessor to "sass" ([aa20870](https://github.com/hidoo/gulp-project/commit/aa20870))
+* **build-sprite-svg:** change value of cssPreprocessor to "sass" ([247f5b1](https://github.com/hidoo/gulp-project/commit/247f5b1))
+* **generator:** change options.cssPreprocessor of sprite task to "sass" ([8a939d9](https://github.com/hidoo/gulp-project/commit/8a939d9))
+* **generator:** fix formatCode and fix no-useless-catch error ([7358e14](https://github.com/hidoo/gulp-project/commit/7358e14))
+* **package:** update eslint to version 6.0.0 ([e3c6572](https://github.com/hidoo/gulp-project/commit/e3c6572))
+* **package:** update file-type to version 12.0.0 ([84ea96a](https://github.com/hidoo/gulp-project/commit/84ea96a))
+
+
+### Features
+
+* **build-css-sass:** add node-sass-magic-importer as default importer ([eee5a5d](https://github.com/hidoo/gulp-project/commit/eee5a5d))
+* **build-css-sass:** add task that build css by sass for gulp ([f9d0e70](https://github.com/hidoo/gulp-project/commit/f9d0e70))
+* **build-sprite-image:** add cssPreprocessor options ([98ce445](https://github.com/hidoo/gulp-project/commit/98ce445))
+* **build-sprite-svg:** add cssPreprocessor options ([18f63ac](https://github.com/hidoo/gulp-project/commit/18f63ac))
+* **generator:** add options.cssPreprocessor ([41ef543](https://github.com/hidoo/gulp-project/commit/41ef543))
+* **generator:** change config of husky and lint-staged to rc file ([6676b6e](https://github.com/hidoo/gulp-project/commit/6676b6e))
+
+
+
+
+
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
 
 

@@ -56,7 +56,7 @@ return build svg sprite sheet task
     -   `options.imgPath` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path in css
     -   `options.padding` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** padding between image in sprite sheet (optional, default `2`)
     -   `options.layout` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** layout for generate sprite sheet（one of [packed|vertical|horizontal]） (optional, default `'packed'`)
-    -   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of [stylus|scss]). (optional, default `'stylus'`)
+    -   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of [stylus|sass]). (optional, default `'stylus'`)
     -   `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
           `options.cssPreprocessor` is ignored if this value is specified.
           see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
@@ -83,8 +83,8 @@ task('sprite', buildSprite({
   imgPath: './path/from/css/to/sprite/sprite.svg',
   padding: 10,
   layout: 'vertical',
-  cssPreprocessor: 'scss',
-  cssTemplate: '/path/to/template/scss.hbs',
+  cssPreprocessor: 'sass',
+  cssTemplate: '/path/to/template/sass.hbs',
   cssHandlebarsHelpers: {hoge: (value) => value},
   compress: true,
   compressOptions: [ // Default for this options

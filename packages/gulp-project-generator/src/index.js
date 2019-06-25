@@ -132,6 +132,17 @@ async function choiseOptions(options = {}) {
         },
         {
           type: 'list',
+          name: 'cssPreprocessor',
+          message: 'Please select the CSS preprocessor.',
+          choices: [
+            {name: 'stylus'},
+            {name: 'sass'}
+          ],
+          default: () => options.cssPreprocessor,
+          when: (answers) => answers.tasks.css
+        },
+        {
+          type: 'list',
           name: 'jsBundler',
           message: 'Please select the JavaScript bundler.',
           choices: [
@@ -161,6 +172,7 @@ async function choiseOptions(options = {}) {
       conventionalCommits: results.conventionalCommits,
       ...results.tasks,
       ...results.depsTasks,
+      cssPreprocessor: results.cssPreprocessor,
       jsBundler: results.jsBundler,
       spriteType: results.spriteType,
       verbose: options.verbose
@@ -203,12 +215,19 @@ async function confirmConfig(name = '', options = {}) {
         key !== 'conventionalCommits' &&
         key !== 'multiDevice' &&
         key !== 'verbose' &&
+        key !== 'cssPreprocessor' &&
         key !== 'jsBundler' &&
         key !== 'spriteType'
       ) {
         console.log(`    ${chalk.grey('+')} ${chalk.cyan(key)}`);
       }
     });
+
+    if (options.css && options.cssPreprocessor) {
+      console.log('');
+      console.log(`  ${chalk.white('CSS Preprocessor:')}`);
+      console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.cssPreprocessor)}`);
+    }
 
     if (options.js && options.jsBundler) {
       console.log('');
@@ -324,6 +343,7 @@ program
   .option('--no-server', 'Disable local dev server.')
   .option('--no-sprite', 'Disable sprite sheet build task. (Enable forcely when --no-css specified.)')
   .option('--no-styleguide', 'Disable styleguide build task. (Enable forcely when --no-css specified.)')
+  .option('--css-preprocessor [lang]', 'Select CSS preprocessor. [stylus|sass]', /^(stylus|sass)$/, 'stylus')
   .option('--js-bundler [bundler]', 'Select JavaScript bundler. [browserify|rollup]', /^(browserify|rollup)$/, 'browserify')
   .option('--sprite-type [type]', 'Select sprite sheet source type. [svg|image]', /^(svg|image)$/, 'svg')
   .option('--verbose', 'Enable output logs.')

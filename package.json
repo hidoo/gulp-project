@@ -15,6 +15,7 @@
     "build:examples": "npm-run-all -s build:examples:*",
     "build:examples:single-device": "lerna exec 'npm run generate -- ../../examples/single-device --no-interactive --force' --scope @hidoo/gulp-project-generator",
     "build:examples:multi-device": "lerna exec 'npm run generate -- ../../examples/multi-device --no-interactive --force --multi-device' --scope @hidoo/gulp-project-generator",
+    "build:examples:sass": "lerna exec 'npm run generate -- ../../examples/use-sass --no-interactive --force --css-preprocessor sass' --scope @hidoo/gulp-project-generator",
     "postbuild": "npm run bootstrap",
     "test": "npm-run-all -s test:lint test:packages test:examples",
     "test:lint": "eslint .",

@@ -1,0 +1,18 @@
+
+.sprite-sample-a {
+  width: 65px;
+  height: 62px;
+  background-image: url("./image-sprite.png");
+  background-position: 0px 0px;
+  background-size: 132px 62px;
+}
+
+
+.sprite-sample-b {
+  width: 65px;
+  height: 62px;
+  background-image: url("./image-sprite.png");
+  background-position: -67px 0px;
+  background-size: 132px 62px;
+}
+

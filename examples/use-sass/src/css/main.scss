@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+body {
+  color: #000;
+  background-color: #fff;
+}
+
+/*
+Variations
+
+Block Example
+
+Markup: <div class="{{modifier_class}}  mod-box">
+  <div class="{{modifier_class}}__container  mod-box__container">
+    <!-- some content here -->
+  </div>
+</div>
+
+block-x-x-x - Default style
+
+Style guide: block.x.x.x
+*/
+.block-x-x-x {
+
+  &__container {
+  }
+}

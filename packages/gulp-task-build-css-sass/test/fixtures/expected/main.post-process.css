@@ -1,0 +1,30 @@
+.hoge {
+  padding: 10px;
+  transition-duration: 0.3s;
+  background-color: black;
+}
+
+.hoge__element {
+  padding: 10px;
+}
+
+.hoge--modifier {
+  padding: 10px;
+}
+
+.c__element {
+  margin: 10px;
+}
+
+.c--modifier {
+  padding: 10px;
+}
+
+@media (min-width: 500px) and (max-width: 600px) {
+  .hoge {
+    color: #fff;
+  }
+  .hoge {
+    font-size: 1rem;
+  }
+}

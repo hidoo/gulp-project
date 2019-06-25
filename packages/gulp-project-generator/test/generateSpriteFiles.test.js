@@ -75,6 +75,25 @@ describe('generateSpriteFiles', () => {
     assert.deepStrictEqual(actualAssetList, expectedAssetList);
   });
 
+  it('should generate files for svg sprite sheet task if argument options.sprite is true and argument options.cssPreprocessor is "sass".', async () => {
+    await generateSpriteFiles(path.src, path.dest, {sprite: true, cssPreprocessor: 'sass', spriteType: 'svg'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/sprite.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-sprite-sass.js`),
+          actualAssetList = glob.sync(`${path.dest}/src/sprite/**/*`, {nodir: true})
+            .map((filepath) => filepath.replace(path.dest, ''))
+            .sort(),
+          expectedAssetList = [
+            '/src/sprite/sample-a.svg',
+            '/src/sprite/sample-b.svg'
+          ];
+
+    assert(actualTask);
+    assert(Array.isArray(actualAssetList));
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+    assert.deepStrictEqual(actualAssetList, expectedAssetList);
+  });
+
   it('should generate files for svg sprite sheet task if argument options.sprite is true and argument options.multiDevice is true.', async () => {
     await generateSpriteFiles(path.src, path.dest, {sprite: true, multiDevice: true, spriteType: 'svg'});
 

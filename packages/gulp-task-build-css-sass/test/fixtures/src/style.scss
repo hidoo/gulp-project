@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+.block {
+  padding: 10px;
+
+  // autoprefixer testing
+  transition-duration: 0.3s;
+
+  // cssmqpacker testing
+  @media (min-width: 500px) and (max-width: 600px) {
+    color: #fff;
+  }
+  @media (min-width: 500px) and (max-width: 600px) {
+    font-size: 1rem;
+  }
+
+  // NODE_ENV variable testing
+  $NODE_ENV: env("NODE_ENV");
+  @if $NODE_ENV == 'test' {
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+  &__element {
+    padding: 10px;
+  }
+  &--modifier {
+    padding: 10px;
+  }
+}
+
+// importer testing
+@import "{ .component as .c } from component";

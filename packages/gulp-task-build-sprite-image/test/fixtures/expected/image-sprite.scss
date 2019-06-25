@@ -1,0 +1,45 @@
+
+
+@if not variable-exists("sprites") {
+  $sprites: () !global;
+}
+
+$sprites: map-merge($sprites, (
+  "image-sprite": (
+    "total-width": 132px,
+    "total-height": 62px,
+    "image": "./image-sprite.png"
+  )
+));
+
+
+$sprites: map-merge($sprites, (
+  "sample-a": (
+    "x": 0px,
+    "y": 0px,
+    "offset-x": 0px,
+    "offset-y": 0px,
+    "width": 65px,
+    "height": 62px,
+    "total-width": 132px,
+    "total-height": 62px,
+    "image": "./image-sprite.png"
+  )
+));
+
+
+
+$sprites: map-merge($sprites, (
+  "sample-b": (
+    "x": 67px,
+    "y": 0px,
+    "offset-x": -67px,
+    "offset-y": 0px,
+    "width": 65px,
+    "height": 62px,
+    "total-width": 132px,
+    "total-height": 62px,
+    "image": "./image-sprite.png"
+  )
+));
+

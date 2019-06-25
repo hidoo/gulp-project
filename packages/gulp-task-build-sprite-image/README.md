@@ -116,7 +116,9 @@ return build image sprite sheet task
           see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'binary-tree'`)
     -   `options.engine` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** engine for generate sprite sheet.
           see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'pixelsmith'`)
+    -   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of [stylus|scss]). (optional, default `'stylus'`)
     -   `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
+          "options.cssPreprocessor" is ignored if this value is specified.
           see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
     -   `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
     -   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
@@ -139,11 +141,12 @@ task('sprite', buildSprite({
   destCss: '/path/to/dest/css',
   imgName: 'sprite.png',
   cssName: 'sprite.styl',
-  imgPath: './path/from/css/to/sprite/sprite.png'
+  imgPath: './path/from/css/to/sprite/sprite.png',
   padding: 10,
   algorithm: 'top-down',
   engine: 'pixelsmith',
-  cssTemplate: '/path/to/template/stylus.hbs',
+  cssPreprocessor: 'scss',
+  cssTemplate: '/path/to/template/scss.hbs',
   cssHandlebarsHelpers: {hoge: (value) => value},
   evenize: true,
   compress: true,

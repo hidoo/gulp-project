@@ -61,7 +61,7 @@ describe('gulp-task-build-sprite-image', () => {
   };
 
   afterEach((done) =>
-    rimraf(`${path.dest}/*.{png,styl,gz}`, done)
+    rimraf(`${path.dest}/*.{png,css,scss,styl,gz}`, done)
   );
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
@@ -159,6 +159,61 @@ describe('gulp-task-build-sprite-image', () => {
             actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
             expectedImage = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.png`),
             expectedCss = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.styl`),
+            {width, height} = sizeOf(expectedImage);
+
+      assert(actualImage);
+      assert(actualCss);
+      assert.equal(String(actualCss), String(expectedCss));
+      comparePixels([[actualImage, expectedImage, width, height]])
+        .then(() => done(null))
+        .catch((error) => done(error));
+    });
+  });
+
+  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass".', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.png`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'image-sprite.png',
+      cssName: 'image-sprite.scss',
+      imgPath: './image-sprite.png',
+      cssPreprocessor: 'sass'
+    });
+
+    task().on('finish', () => {
+      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
+            actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
+            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.scss`),
+            {width, height} = sizeOf(expectedImage);
+
+      assert(actualImage);
+      assert(actualCss);
+      assert.equal(String(actualCss), String(expectedCss));
+      comparePixels([[actualImage, expectedImage, width, height]])
+        .then(() => done(null))
+        .catch((error) => done(error));
+    });
+  });
+
+  it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.png`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'image-sprite.png',
+      cssName: 'image-sprite.css',
+      imgPath: './image-sprite.png',
+      cssPreprocessor: 'stylus',
+      cssTemplate: `${path.src}/custom-template.hbs`
+    });
+
+    task().on('finish', () => {
+      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
+            actualCss = fs.readFileSync(`${path.dest}/image-sprite.css`),
+            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.css`),
             {width, height} = sizeOf(expectedImage);
 
       assert(actualImage);

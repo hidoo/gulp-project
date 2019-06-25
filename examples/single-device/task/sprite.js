@@ -34,6 +34,7 @@ function buildOptions(options = {}) {
     destImg: config.path.destSprite,
     destCss: config.path.srcCss,
     imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: 'stylus',
     compress: config.compress
   };
 }

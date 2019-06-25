@@ -14,7 +14,7 @@ describe('gulp-task-build-sprite-svg', () => {
   };
 
   afterEach((done) =>
-    rimraf(`${path.dest}/*.{svg,styl,gz}`, done)
+    rimraf(`${path.dest}/*.{svg,css,scss,styl,gz}`, done)
   );
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
@@ -83,6 +83,57 @@ describe('gulp-task-build-sprite-svg', () => {
             actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
             expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.with-parameters.svg`),
             expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.with-parameters.styl`);
+
+      assert(actualSvg);
+      assert(actualCss);
+      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
+      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      done();
+    });
+  });
+
+  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass".', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.svg`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'svg-sprite.svg',
+      cssName: 'svg-sprite.scss',
+      imgPath: './svg-sprite.svg',
+      cssPreprocessor: 'sass'
+    });
+
+    task().on('finish', () => {
+      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
+            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
+            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.scss`);
+
+      assert(actualSvg);
+      assert(actualCss);
+      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
+      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      done();
+    });
+  });
+
+  it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.svg`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'svg-sprite.svg',
+      cssName: 'svg-sprite.css',
+      imgPath: './svg-sprite.svg',
+      cssPreprocessor: 'stylus',
+      cssTemplate: `${path.src}/custom-template.hbs`
+    });
+
+    task().on('finish', () => {
+      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
+            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.css`),
+            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.css`);
 
       assert(actualSvg);
       assert(actualCss);

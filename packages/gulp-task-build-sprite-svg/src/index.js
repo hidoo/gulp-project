@@ -20,6 +20,13 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 export const svgo = imagemin.svgo;
 
 /**
+ * path of css templates
+ * @type {String}
+ */
+const pathStylusTemplate = path.resolve(__dirname, '../template/stylus.hbs');
+const pathScssTemplate = path.resolve(__dirname, '../template/scss.hbs');
+
+/**
  * task default options.
  * @type {Object}
  */
@@ -33,7 +40,8 @@ const DEFAULT_OPTIONS = {
   imgPath: null,
   padding: 2,
   layout: 'packed',
-  cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
+  cssPreprocessor: 'stylus',
+  cssTemplate: '',
   cssHandlebarsHelpers: helpers,
   compress: false,
   compressOptions: [
@@ -54,7 +62,9 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.imgPath - destination image path in css
  * @param {Number} [options.padding=2] - padding between image in sprite sheet
  * @param {String} [options.layout='packed'] - layout for generate sprite sheet（one of [packed|vertical|horizontal]）
+ * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|sass]).
  * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
+ *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
  * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
  * @param {Boolean} [options.compress=false] - compress file or not
@@ -78,7 +88,8 @@ const DEFAULT_OPTIONS = {
  *   imgPath: './path/from/css/to/sprite/sprite.svg',
  *   padding: 10,
  *   layout: 'vertical',
- *   cssTemplate: '/path/to/template/stylus.hbs',
+ *   cssPreprocessor: 'sass',
+ *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   compress: true,
  *   compressOptions: [ // Default for this options
@@ -89,6 +100,11 @@ const DEFAULT_OPTIONS = {
  */
 export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
+
+  if (!opts.cssTemplate) {
+    opts.cssTemplate = opts.cssPreprocessor === 'sass' ?
+      pathScssTemplate : pathStylusTemplate;
+  }
 
   // define task
   const task = () => {

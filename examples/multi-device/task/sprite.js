@@ -35,6 +35,7 @@ function buildDesktopOptions(options = {}) {
     destImg: config.path.destSpriteDesktop,
     destCss: config.path.srcCssDesktop,
     imgPath: `${pathToSpriteDesktop}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: 'stylus',
     compress: config.compress
   };
 }
@@ -50,6 +51,7 @@ function buildMobileOptions(options = {}) {
     destImg: config.path.destSpriteMobile,
     destCss: config.path.srcCssMobile,
     imgPath: `${pathToSpriteMobile}/${options.imgName}${cacheParameter}`,
+    cssPreprocessor: 'stylus',
     compress: config.compress
   };
 }

@@ -1,0 +1,45 @@
+{{#each items}}
+
+{{!--
+  only first time
+--}}
+{{#if @first}}
+
+{{!--
+  define "$sptites" valiable in global if not defined.
+--}}
+@if not variable-exists("sprites") {
+  $sprites: () !global;
+}
+
+{{!--
+  add sprite sheet common data on sprite sheet basename.
+--}}
+$sprites: map-merge($sprites, (
+  "{{ basename @root.spritesheet.escaped_image }}": (
+    "total-width": {{ @root.spritesheet.px.width }},
+    "total-height": {{ @root.spritesheet.px.height }},
+    "image": "{{{ @root.spritesheet.escaped_image }}}"
+  )
+));
+
+{{/if}}
+
+{{!--
+  add each image data by image basename.
+--}}
+$sprites: map-merge($sprites, (
+  "{{ this.name }}": (
+    "x": {{ this.px.x }},
+    "y": {{ this.px.y }},
+    "offset-x": {{ this.px.offset_x }},
+    "offset-y": {{ this.px.offset_y }},
+    "width": {{ this.px.width }},
+    "height": {{ this.px.height }},
+    "total-width": {{ this.px.total_width }},
+    "total-height": {{ this.px.total_height }},
+    "image": "{{{ this.escaped_image }}}"
+  )
+));
+
+{{/each}}

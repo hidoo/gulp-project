@@ -124,4 +124,53 @@ describe('examples', () => {
 
   });
 
+  describe('use-sass', () => {
+    const examplePath = path.resolve(__dirname, '../examples/use-sass'),
+          exampleDestPath = path.resolve(examplePath, './public');
+
+    afterEach((done) =>
+      rimraf(exampleDestPath, done)
+    );
+
+    it('should generate files to ./public directory.', async () => {
+      process.chdir(examplePath);
+
+      await new Promise((resolve, reject) => childProcess.exec('npm run dev:build', (error) => {
+        if (error) {
+          reject(error);
+        }
+        else {
+          resolve();
+        }
+      }));
+
+      const actual = glob.sync(`${exampleDestPath}/**/*`, {nodir: true})
+              .map((filepath) => filepath.replace(exampleDestPath, ''))
+              .sort(),
+            extected = [
+              '/css/README.md',
+              '/css/bundle.css',
+              '/css/main.css',
+              '/images/sample.gif',
+              '/images/sample.jpg',
+              '/images/sample.png',
+              '/images/sample.svg',
+              '/images/sprites/sample.svg',
+              '/index.html',
+              '/js/bundle.js',
+              '/js/main.js',
+              '/page-list.html',
+              '/styleguide/index.html',
+              '/styleguide/kss-assets/atom-one-dark.less',
+              '/styleguide/kss-assets/kss.css',
+              '/styleguide/kss-assets/kss.js',
+              '/styleguide/kss-assets/kss.less',
+              '/styleguide/section-block.html'
+            ];
+
+      assert.deepStrictEqual(actual, extected);
+    });
+
+  });
+
 });

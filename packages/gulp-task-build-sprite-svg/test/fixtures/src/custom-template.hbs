@@ -1,0 +1,11 @@
+{{#each shapes}}
+
+.sprite-{{ this.name }} {
+  width: {{ this.px.width }}px;
+  height: {{ this.px.height }}px;
+  background-image: url("{{{ ../imgPath }}}");
+  background-position: {{ this.px.offset_x }}px {{ this.px.offset_y }}px;
+  background-size: {{ this.px.total_width }}px {{ this.px.total_height }}px;
+}
+
+{{/each}}

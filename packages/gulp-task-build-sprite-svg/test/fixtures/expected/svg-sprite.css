@@ -1,0 +1,18 @@
+
+.sprite-sample-a {
+  width: 64.0px;
+  height: 64.0px;
+  background-image: url("./svg-sprite.svg");
+  background-position: -2.0px -2.0px;
+  background-size: 136.0px 68.0px;
+}
+
+
+.sprite-sample-b {
+  width: 64.0px;
+  height: 64.0px;
+  background-image: url("./svg-sprite.svg");
+  background-position: -70.0px -2.0px;
+  background-size: 136.0px 68.0px;
+}
+

@@ -51,7 +51,7 @@
     "commander": "^2.19.0",
     "conventional-changelog-cli": "^2.0.5",
     "cross-env": "^5.2.0",
-    "eslint": "^6.0.0",
+    "eslint": "^6.0.1",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "husky": "^2.5.0",

@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@hidoo/gulp-plugin-image-evenizer": "^0.9.0",
-    "@hidoo/gulp-plugin-image-placeholder": "^0.9.0",
+    "@hidoo/gulp-plugin-image-placeholder": "^0.10.0",
     "@hidoo/gulp-util-error-handler": "^0.9.0",
     "gulp-filter": "^6.0.0",
     "gulp-gzip": "^1.4.2",

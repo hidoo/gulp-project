@@ -3,6 +3,7 @@ import {src, dest} from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import sass from 'gulp-sass';
+import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import cssmqpacker from 'css-mqpacker';
@@ -134,6 +135,7 @@ export default function buildCss(options = {}) {
     // additinal sass options
     const mergedSassOptions = {
       ...sassOptions,
+      importer: magicImporter(),
       functions: {
         ...DEFAULT_FUNCTIONS,
         ...sassOptions.functions

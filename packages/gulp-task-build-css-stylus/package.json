@@ -52,7 +52,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-stylus": "^2.7.0",
     "postcss-csso": "^3.0.0",
-    "postcss-uncss": "^0.16.1",
+    "postcss-uncss": "^0.17.0",
     "postcss-url": "^8.0.0",
     "uncss": "^0.17.0"
   },

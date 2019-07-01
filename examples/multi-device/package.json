@@ -48,7 +48,7 @@
     "eslint": "^6.0.1",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
-    "husky": "^2.5.0",
+    "husky": "^2.7.0",
     "jsdom": "^15.1.1",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^8.2.1",

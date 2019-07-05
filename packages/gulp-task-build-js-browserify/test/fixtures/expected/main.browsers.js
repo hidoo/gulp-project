@@ -248,11 +248,11 @@ $export($export.S + $export.F * !require('./_descriptors'), 'Object', { definePr
 
 var _esm = _interopRequireDefault(require("./modules/esm"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var commonJsModule = require('./modules/cjs');
 
-(0, _esm.default)();
+(0, _esm["default"])();
 commonJsModule();
 
 },{"./modules/cjs":21,"./modules/esm":22}],21:[function(require,module,exports){
@@ -276,7 +276,7 @@ require("core-js/modules/es6.object.define-property");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = esModule;
+exports["default"] = esModule;
 
 /**
  * ESModules 形式のモジュール

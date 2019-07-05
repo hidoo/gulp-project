@@ -21,9 +21,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
   const gulpProjectVersion = `^${pkg.version}`;
 
   const devDependencies = [
-          {name: '@babel/core', version: '^7.4.0'},
-          {name: '@babel/preset-env', version: '^7.4.2'},
-          {name: '@babel/register', version: '^7.4.0'},
+          {name: '@babel/core', version: '^7.5.0'},
+          {name: '@babel/preset-env', version: '^7.5.0'},
+          {name: '@babel/register', version: '^7.4.4'},
           {name: '@hidoo/eslint-config', version: '^0.1.4'},
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
           {name: 'babel-eslint', version: '^10.0.2'},
@@ -79,7 +79,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.js) {
     devDependencies.push(
-      {name: '@babel/polyfill', version: '^7.4.0'},
+      {name: '@babel/polyfill', version: '^7.4.4'},
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
       {name: 'jsdom', version: '^15.1.1'},
       {name: 'jsdom-global', version: '^3.0.2'},

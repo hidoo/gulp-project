@@ -1,45 +1,51 @@
-
-
-@if not variable-exists("sprites") {
+// define $sptites valiable in global if not defined.
+@if not global-variable-exists("sprites") {
   $sprites: () !global;
 }
 
-$sprites: map-merge($sprites, (
-  "image-sprite": (
-    "total-width": 132px,
-    "total-height": 62px,
-    "image": "./image-sprite.png"
-  )
-));
+// local scope
+@if global-variable-exists("sprites") {
+  $items: ();
 
+  // add each image data by image basename.
+  // + includes shape's sizes both elastic and fixed pixel
+  $items: map-merge(
+    $items,
+    (
+      "sample-a": (
+        "width": 65px,
+        "height": 62px,
+        "total-width": 132px,
+        "total-height": 62px,
+        "offset-x": 0px,
+        "offset-y": 0px,
+        "image": "./image-sprite.png"
+      )
+    )
+  );
+  $items: map-merge(
+    $items,
+    (
+      "sample-b": (
+        "width": 65px,
+        "height": 62px,
+        "total-width": 132px,
+        "total-height": 62px,
+        "offset-x": -67px,
+        "offset-y": 0px,
+        "image": "./image-sprite.png"
+      )
+    )
+  );
 
-$sprites: map-merge($sprites, (
-  "sample-a": (
-    "x": 0px,
-    "y": 0px,
-    "offset-x": 0px,
-    "offset-y": 0px,
-    "width": 65px,
-    "height": 62px,
-    "total-width": 132px,
-    "total-height": 62px,
-    "image": "./image-sprite.png"
-  )
-));
-
-
-
-$sprites: map-merge($sprites, (
-  "sample-b": (
-    "x": 67px,
-    "y": 0px,
-    "offset-x": -67px,
-    "offset-y": 0px,
-    "width": 65px,
-    "height": 62px,
-    "total-width": 132px,
-    "total-height": 62px,
-    "image": "./image-sprite.png"
-  )
-));
-
+  // add spritesheet common data on spritesheet basename.
+  $sprites: map-merge(
+    $sprites,
+    (
+      "image-sprite": (
+        "image": "./image-sprite.png",
+        "items": $items
+      )
+    )
+  );
+}

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **build-sprite-image:** change format of scss spritesheet ([c37012d](https://github.com/hidoo/gulp-project/commit/c37012d))
+* **package:** update gulp-if to version 3.0.0 ([0686668](https://github.com/hidoo/gulp-project/commit/0686668))
+
+
+
+
+
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
 
 

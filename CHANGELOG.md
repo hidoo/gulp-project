@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **build-sprite-image:** change format of scss spritesheet ([c37012d](https://github.com/hidoo/gulp-project/commit/c37012d))
+* **build-sprite-svg:** change format of scss spritesheet ([0bff483](https://github.com/hidoo/gulp-project/commit/0bff483))
+* **package:** update cssom to version 0.4.1 ([2d29f2f](https://github.com/hidoo/gulp-project/commit/2d29f2f)), closes [#309](https://github.com/hidoo/gulp-project/issues/309)
+* **package:** update gulp-if to version 3.0.0 ([279b44f](https://github.com/hidoo/gulp-project/commit/279b44f))
+* **package:** update gulp-if to version 3.0.0 ([26b748f](https://github.com/hidoo/gulp-project/commit/26b748f))
+* **package:** update gulp-if to version 3.0.0 ([f597ba9](https://github.com/hidoo/gulp-project/commit/f597ba9))
+* **package:** update gulp-if to version 3.0.0 ([0686668](https://github.com/hidoo/gulp-project/commit/0686668))
+* **package:** update gulp-if to version 3.0.0 ([b179089](https://github.com/hidoo/gulp-project/commit/b179089))
+* **package:** update gulp-if to version 3.0.0 ([e2a5189](https://github.com/hidoo/gulp-project/commit/e2a5189))
+* **package:** update gulp-if to version 3.0.0 ([dc615cb](https://github.com/hidoo/gulp-project/commit/dc615cb))
+* **package:** update gulp-if to version 3.0.0 ([eb3d966](https://github.com/hidoo/gulp-project/commit/eb3d966))
+* **package:** update gulp-if to version 3.0.0 ([bc62233](https://github.com/hidoo/gulp-project/commit/bc62233))
+* **package:** update postcss-uncss to version 0.17.0 ([83cc3a5](https://github.com/hidoo/gulp-project/commit/83cc3a5))
+* **package:** update postcss-uncss to version 0.17.0 ([6e8c135](https://github.com/hidoo/gulp-project/commit/6e8c135))
+
+
+
+
+
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
 
 

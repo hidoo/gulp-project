@@ -1,49 +1,51 @@
-{{#each shapes}}
+{{#each shapes~}}
 
-{{!--
-  only first time
---}}
-{{#if @first}}
-
-{{!--
-  define "$sptites" valiable in global if not defined.
---}}
-@if not variable-exists("sprites") {
+{{#if @first~}}
+// define $sptites valiable in global if not defined.
+@if not global-variable-exists("sprites") {
   $sprites: () !global;
 }
 
-{{!--
-  add sprite sheet common data on sprite sheet basename.
---}}
-$sprites: map-merge($sprites, (
-  "{{ ../spriteName }}": (
-    "image": "{{{ ../imgPath }}}"
-  )
-));
+// local scope
+@if global-variable-exists("sprites") {
+  $items: ();
 
+  // add each image data by image basename.
+  // + includes shape's sizes both elastic and fixed pixel
 {{/if}}
+  $items: map-merge(
+    $items,
+    (
+      "{{ this.name }}": (
+        "elastic-width": {{ this.elasticWidth }}em,
+        "elastic-height": {{ this.elasticHeight }}em,
+        "elastic-background-width": {{ this.elasticBackgroundWidth }}%,
+        "elastic-background-height": {{ this.elasticBackgroundHeight }}%,
+        "elastic-offset-x": {{ this.elasticOffsetX }}em,
+        "elastic-offset-y": {{ this.elasticOffsetY }}em,
+        "rounded-height": {{ this.roundedHeight }}px,
+        "width": {{ this.px.width }}px,
+        "height": {{ this.px.height }}px,
+        "total-width": {{ this.px.total_width }}px,
+        "total-height": {{ this.px.total_height }}px,
+        "offset-x": {{ this.px.offset_x }}px,
+        "offset-y": {{ this.px.offset_y }}px,
+        "image": "{{{ ../imgPath }}}"
+      )
+    )
+  );
+{{#if @last}}
 
-{{!--
-  add each image data by image basename.
-  + includes shape's sizes both elastic and fixed pixel
---}}
-$sprites: map-merge($sprites, (
-  "{{ this.name }}": (
-    "elastic-width": {{ this.elasticWidth }}em,
-    "elastic-height": {{ this.elasticHeight }}em,
-    "elastic-background-width": {{ this.elasticBackgroundWidth }}%,
-    "elastic-background-height": {{ this.elasticBackgroundHeight }}%,
-    "elastic-offset-x": {{ this.elasticOffsetX }}em,
-    "elastic-offset-y": {{ this.elasticOffsetY }}em,
-    "rounded-height": {{ this.roundedHeight }}px,
-    "image": "{{{ ../imgPath }}}",
-    "offset-x": {{ this.px.offset_x }}px,
-    "offset-y": {{ this.px.offset_y }}px,
-    "width": {{ this.px.width }}px,
-    "height": {{ this.px.height }}px,
-    "total-width": {{ this.px.total_width }}px,
-    "total-height": {{ this.px.total_height }}px
-  )
-));
-
+  // add spritesheet common data on spritesheet basename.
+  $sprites: map-merge(
+    $sprites,
+    (
+      "{{ ../spriteName }}": (
+        "image": "{{{ ../imgPath }}}",
+        "items": $items
+      )
+    )
+  );
+}
+{{/if}}
 {{/each}}

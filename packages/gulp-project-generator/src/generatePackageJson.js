@@ -31,7 +31,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'cross-env', version: '^5.2.0'},
           {name: 'eslint', version: '^6.1.0'},
           {name: 'gulp', version: '^4.0.2'},
-          {name: 'husky', version: '^3.0.1'},
+          {name: 'husky', version: '^3.0.2'},
           {name: 'lint-staged', version: '^9.2.1'},
           {name: 'npm-run-all', version: '^4.1.5'},
           {name: 'rimraf', version: '^2.6.3'}

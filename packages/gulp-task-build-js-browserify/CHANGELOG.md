@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* **package:** remove @babel/polyfill from dependencies ([466b1b6](https://github.com/hidoo/gulp-project/commit/466b1b6))
+
+
+
+
+
 # [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
 
 

@@ -1,5 +1,5 @@
 --require @babel/register
---require @core-js
+--require core-js
 --require jsdom-global/register
 --recursive
 --ui bdd

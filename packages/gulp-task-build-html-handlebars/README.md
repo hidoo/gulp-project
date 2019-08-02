@@ -109,7 +109,7 @@ path (when file is `subdir/index.hbs`):
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

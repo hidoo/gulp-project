@@ -138,7 +138,7 @@ Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

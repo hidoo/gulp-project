@@ -37,7 +37,7 @@ task('sprite', () => {
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

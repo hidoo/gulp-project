@@ -23,7 +23,7 @@ const babelOptions = mergeBabelrc('/path/to/.babelrc.js', {
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

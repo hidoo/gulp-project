@@ -4,9 +4,10 @@ node_js:
   - "12"
   - "10"
   - "8"
+before_install:
+  - npm install -g yarn
 install:
-  - npm cache verify
-  - npm install --no-package-lock
+  - yarn
+  - yarn bootstrap
 cache:
-  directories:
-    - "$HOME/.npm"
+  yarn: true

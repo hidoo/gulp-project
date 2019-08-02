@@ -53,7 +53,7 @@ Options:
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

@@ -30,7 +30,7 @@ task('evenize', () => src('/path/to/src')
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

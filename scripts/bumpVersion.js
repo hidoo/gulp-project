@@ -42,21 +42,21 @@ async function bumpVersion(argv = []) {
     }
 
     await task('build packages', async () =>
-      await exec('npm run build:packages')
+      await exec('yarn build:packages')
     );
     await task('test packages', async () => {
-      await exec('npm run test:lint');
-      return await exec(`npm run test:packages -- --concurrency ${concurrency}`);
+      await exec('yarn test:lint');
+      return await exec(`yarn test:packages --concurrency ${concurrency}`);
     });
     await task(`bump version to ${semver}`, async () =>
       await exec(`lerna version ${semver} --force-publish --no-push --no-git-tag-version -y`)
     );
     await task('build examples', async () => {
-      await exec('npm run build:examples');
+      await exec('yarn build:examples');
       return await exec('lerna bootstrap');
     });
     await task('test examples', async () =>
-      await exec('npm run test:examples')
+      await exec('yarn test:examples')
     );
 
     const lernaJson = require('../lerna.json');

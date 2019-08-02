@@ -61,7 +61,7 @@ Returns **DestroyableTransform**
 ## Test
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 ## License

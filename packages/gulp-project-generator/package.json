@@ -15,7 +15,7 @@
     "template/"
   ],
   "scripts": {
-    "start": "npm run generate -- ../../examples/dev --verbose --force",
+    "start": "yarn generate ../../examples/dev --verbose --force",
     "generate": "cross-env NODE_ENV=development babel-node ./src/index.js",
     "prebuild": "rimraf ./lib",
     "build": "babel ./src --out-dir ./lib",

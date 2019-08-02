@@ -79,12 +79,13 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.js) {
     devDependencies.push(
-      {name: '@babel/polyfill', version: '^7.4.4'},
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
+      {name: 'core-js', version: '^2.6.9'},
       {name: 'jsdom', version: '^15.1.1'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^6.2.0'},
-      {name: 'power-assert', version: '^1.6.1'}
+      {name: 'power-assert', version: '^1.6.1'},
+      {name: 'regenerator-runtime', version: '^0.13.3'}
     );
     scripts.push(
       {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts'}

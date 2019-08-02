@@ -1,0 +1,22 @@
+# maxos files
+.DS_Store
+._*
+
+# cache files
+*.swp
+*.cache
+
+# diff files
+*.diff
+
+# log files
+*.log
+
+# npm
+node_modules/
+
+# sources
+src/**/_sprite_*.scss
+
+# distributions
+public/

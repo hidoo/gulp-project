@@ -120,4 +120,38 @@ describe('generateDotFiles', () => {
     });
   });
 
+  it('should generate dot files if argument options.css is true and options.cssPreprocessor is "sass".', async () => {
+    await generateDotFiles(path.src, path.dest, {
+      css: true,
+      html: true,
+      image: true,
+      js: true,
+      server: true,
+      sprite: true,
+      styleguide: true,
+      cssPreprocessor: 'sass'
+    });
+
+    const files = [
+      ['.babelrc.js', '.babelrc.js'],
+      ['.editorconfig', '.editorconfig-sass'],
+      ['.eslintignore', '.eslintignore'],
+      ['.eslintrc.js', '.eslintrc.js'],
+      ['.gitattributes', '.gitattributes'],
+      ['.gitignore', '.gitignore-sass'],
+      ['.huskyrc.js', '.huskyrc.js'],
+      ['.lintstagedrc.js', '.lintstagedrc-sass.js'],
+      ['.stylelintignore', '.stylelintignore'],
+      ['.stylelintrc.js', '.stylelintrc.js']
+    ];
+
+    files.forEach((file) => {
+      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
+            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    });
+  });
+
 });

@@ -2,11 +2,7 @@ module.exports = {
   '**/*.js': [
     'eslint'
   ],
-  {{#if this.css}}
-  {{#is cssPreprocessor 'sass'}}
   '**/*.scss': [
     'stylelint --syntax scss'
-  ],
-  {{/is}}
-  {{/if}}
+  ]
 };

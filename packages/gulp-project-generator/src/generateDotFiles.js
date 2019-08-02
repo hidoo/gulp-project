@@ -29,6 +29,15 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
       .then((output) => write(output, `${dest}/.commitlintrc.js`, {verbose}));
   }
 
+  if (options.css && options.cssPreprocessor === 'sass') {
+    await render(`${src}/.stylelintrc.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/.stylelintrc.js`, {verbose}));
+
+    await render(`${src}/.stylelintignore.hbs`, options)
+      .then((output) => write(output, `${dest}/.stylelintignore`, {verbose}));
+  }
+
   await render(`${src}/.eslintrc.js.hbs`, options)
     .then((output) => formatCode(output))
     .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));

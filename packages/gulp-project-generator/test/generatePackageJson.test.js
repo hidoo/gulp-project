@@ -68,4 +68,27 @@ describe('generatePackageJson', () => {
     assert.deepStrictEqual(actual, expected);
   });
 
+  it('should generate package.json if argument options.css is true and options.cssPreprocessor is "sass".', async () => {
+    await generatePackageJson('hoge-project', path.dest, {
+      css: true,
+      cssDeps: true,
+      html: true,
+      image: true,
+      js: true,
+      jsDeps: true,
+      server: true,
+      sprite: true,
+      styleguide: true,
+      jsBundler: 'browserify',
+      spriteType: 'svg',
+      cssPreprocessor: 'sass'
+    });
+
+    const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
+          expected = fs.readFileSync(`${path.expected}/package-sass.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+
+    assert(actual);
+    assert.deepStrictEqual(actual, expected);
+  });
+
 });

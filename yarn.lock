@@ -1206,12 +1206,12 @@
   resolved "https://registry.yarnpkg.com/@hidoo/eslint-config/-/eslint-config-0.1.4.tgz#0752a3ee266d0398be45ae905d1e8ececa882d81"
   integrity sha512-p3YvRupYiLwbHdarhvzHZwkRbwLnngGfXb3lSYsu3ocwf6Jn74IGh5vRvFm+nuH6UpLyzrAQfU6TVyqduY4exQ==
 
-"@hidoo/express-engine-handlebars@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.1.9.tgz#8e9e8defd00473c05210bafc83838124264e53c0"
-  integrity sha512-XmyXKDn6yyAhmmh+7a9VPX8sjUGVkEKZhumMzMsUn08vRPsnG88mnTv2Gu0UrHvcz2WNxDdYuYNU0AIb2QOLTg==
+"@hidoo/express-engine-handlebars@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.6.0.tgz#71362978e9f9294812c3889cdad73812be555d7f"
+  integrity sha512-W6Q+UftkLAGkId9cvRZIGlKbD/bhncqyFsuXhg0vjDfPpctFZoiAPm4Qe9VCRQN9XJ31uLQ8cPVgwxJGHlzzmg==
   dependencies:
-    "@hidoo/handlebars-helpers" "^0.5.1"
+    "@hidoo/handlebars-helpers" "^0.6.0"
     glob "^7.1.4"
     glob-parent "^5.0.0"
     handlebars "^4.1.2"

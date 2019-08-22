@@ -15,6 +15,7 @@
 # npm
 package.json export-ignore
 package-lock.json export-ignore
+yarn.lock export-ignore
 
 # gulp
 gulpfile.babel.js export-ignore

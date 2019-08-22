@@ -25,7 +25,8 @@
       ],
       "ignore": [
         "babelify",
-        "browserify"
+        "browserify",
+        "core-js"
       ]
     }
   }

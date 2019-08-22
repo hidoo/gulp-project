@@ -1218,7 +1218,7 @@
     handlebars-layouts "^3.1.4"
     vinyl "^2.2.0"
 
-"@hidoo/handlebars-helpers@^0.6.0":
+"@hidoo/handlebars-helpers@0.6.0", "@hidoo/handlebars-helpers@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.6.0.tgz#fd614c1b6af2a77103e164152955e75b9b637d97"
   integrity sha512-xYcd3dLiDfhQ3k9xk5woguo8XTa5BuxVX0AUDQztn+pZoyKUqdlFyM76EgfurDfC8KPffGILjpPn23puCwePlQ==
@@ -1226,6 +1226,16 @@
     highlight.js "9.15.8"
     marked "0.7.0"
     path-browserify "1.0.0"
+
+"@hidoo/kss-builder@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@hidoo/kss-builder/-/kss-builder-0.3.1.tgz#eae38f145dabb4d7d89a1f303e2b68d1a68b3cb9"
+  integrity sha512-jF1Xk3DA2CghbhWe/C6g9XjiK9fXSHtD9HzI7ip0GYqfp7AGNBm+purQvGi0FyqPIKLcwRsNgV91Mg4EgtEkww==
+  dependencies:
+    "@hidoo/handlebars-helpers" "0.6.0"
+    "@hidoo/unit" "^0.3.0"
+    glob "7.1.4"
+    highlight.js "9.15.9"
 
 "@hidoo/stylelint-config@^0.1.0":
   version "0.1.0"
@@ -1242,6 +1252,11 @@
     stylelint-scss "^3.9.2"
     stylelint-selector-no-empty "^1.0.7"
     stylelint-selector-tag-no-without-class "^2.0.0"
+
+"@hidoo/unit@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/unit/-/unit-0.3.0.tgz#6bb7e0d3e33888dcc841ff90d01419502d9d38fe"
+  integrity sha512-2xvWaBMSKnYuef/RmpyzRclqmn3dbiGPzfKVD/BoITywWPlqYwevolnB+Szc+z2+S+Bom4O+pnHgPTebCrWFcg==
 
 "@lerna/add@3.16.2":
   version "3.16.2"
@@ -7598,7 +7613,7 @@ highlight.js@9.15.8:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.8.tgz#f344fda123f36f1a65490e932cf90569e4999971"
   integrity sha512-RrapkKQWwE+wKdF73VsOa2RQdIoO3mxwJ4P8mhbI6KYJUraUHRKM5w5zQQKXNk0xNL4UVRdulV9SBJcmzJNzVA==
 
-highlight.js@^9.12.0, highlight.js@^9.15.5:
+highlight.js@9.15.9, highlight.js@^9.12.0, highlight.js@^9.15.5:
   version "9.15.9"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.9.tgz#865257da1dbb4a58c4552d46c4b3854f77f0e6d5"
   integrity sha512-M0zZvfLr5p0keDMCAhNBp03XJbKBxUx5AfyfufMdFMEP4N/Xj6dh0IqC75ys7BAzceR34NgcvXjupRVaHBPPVQ==

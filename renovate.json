@@ -1,5 +1,79 @@
 {
   "extends": [
     "config:base"
+  ],
+  "timezone": "Asia/Tokyo",
+  "labels": [
+    "renovate"
+  ],
+  "patch": {
+    "automerge": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "updateTypes": [
+        "major"
+      ],
+      "labels": [
+        "major update"
+      ]
+    },
+    {
+      "groupName": "do not major update packages",
+      "groupSlug": "do-not-major",
+      "packagePatterns": [
+        "core-js"
+      ],
+      "major": {
+        "enabled": false
+      }
+    },
+    {
+      "groupName": "do not automerge packages",
+      "groupSlug": "do-not-automerge",
+      "packagePatterns": [
+        "@babel/core",
+        "@babel/preset-env",
+        "@babel/register",
+        "@commitlint/cli",
+        "@commitlint/config-conventional",
+        "@hidoo/eslint-config",
+        "@hidoo/express-engine-handlebars",
+        "@hidoo/stylelint-config",
+        "babel-eslint",
+        "babel-preset-power-assert",
+        "browser-sync",
+        "commander",
+        "conventional-changelog-cli",
+        "core-js",
+        "cross-env",
+        "eslint",
+        "express",
+        "gulp",
+        "husky",
+        "jsdom",
+        "jsdom-global",
+        "lint-staged",
+        "mocha",
+        "npm-run-all",
+        "power-assert",
+        "rimraf",
+        "regenerator-runtime",
+        "stylelint"
+      ],
+      "automerge": false
+    }
+  ],
+  "ignoreDeps": [
+    "babelify",
+    "browserify"
+  ],
+  "ignorePaths": [
+    "examples/**",
+    "packages/gulp-project-generator/text/fuxtures/**",
+    "packages/gulp-task-build-styleguide-kss/builder/**"
   ]
 }

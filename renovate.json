@@ -32,39 +32,122 @@
       }
     },
     {
-      "groupName": "do not automerge packages",
-      "groupSlug": "do-not-automerge",
+      "groupName": "do not automerge @babel packages",
+      "groupSlug": "do-not-automerge-babel",
       "packagePatterns": [
         "@babel/core",
         "@babel/preset-env",
         "@babel/register",
+        "babel-preset-power-assert"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge @commitlint packages",
+      "groupSlug": "do-not-automerge-commitlint",
+      "packagePatterns": [
         "@commitlint/cli",
         "@commitlint/config-conventional",
+        "conventional-changelog-cli"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge eslint packages",
+      "groupSlug": "do-not-automerge-eslint",
+      "packagePatterns": [
         "@hidoo/eslint-config",
-        "@hidoo/express-engine-handlebars",
-        "@hidoo/stylelint-config",
         "babel-eslint",
-        "babel-preset-power-assert",
-        "browser-sync",
-        "commander",
-        "conventional-changelog-cli",
-        "core-js",
-        "cross-env",
-        "eslint",
-        "express",
-        "gulp",
-        "husky",
-        "jsdom",
-        "jsdom-global",
-        "lint-staged",
-        "mocha",
-        "npm-run-all",
-        "power-assert",
-        "rimraf",
-        "regenerator-runtime",
+        "eslint"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge stylelint packages",
+      "groupSlug": "do-not-automerge-stylelint",
+      "packagePatterns": [
+        "@hidoo/stylelint-config",
         "stylelint"
       ],
-      "automerge": false
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge polyfill packages",
+      "groupSlug": "do-not-automerge-polyfill",
+      "packagePatterns": [
+        "core-js",
+        "regenerator-runtime"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge express packages",
+      "groupSlug": "do-not-automerge-express",
+      "packagePatterns": [
+        "@hidoo/express-engine-handlebars",
+        "express"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge warkflow packages",
+      "groupSlug": "do-not-automerge-warkflow",
+      "packagePatterns": [
+        "cross-env",
+        "husky",
+        "lint-staged",
+        "npm-run-all",
+        "rimraf"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge test packages",
+      "groupSlug": "do-not-automerge-test",
+      "packagePatterns": [
+        "jsdom",
+        "jsdom-global",
+        "mocha",
+        "power-assert"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
+    },
+    {
+      "groupName": "do not automerge packages",
+      "groupSlug": "do-not-automerge",
+      "packagePatterns": [
+        "browser-sync",
+        "commander",
+        "gulp"
+      ],
+      "automerge": false,
+      "patch": {
+        "automerge": false
+      }
     }
   ],
   "ignoreDeps": [
@@ -73,7 +156,7 @@
   ],
   "ignorePaths": [
     "examples/**",
-    "packages/gulp-project-generator/text/fuxtures/**",
+    "packages/gulp-project-generator/test/fixtures/expected/**",
     "packages/gulp-task-build-styleguide-kss/builder/**"
   ]
 }

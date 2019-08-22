@@ -47,7 +47,7 @@
     "babel-eslint": "^10.0.2",
     "babel-preset-power-assert": "^3.0.0",
     "browser-sync": "^2.26.7",
-    "commander": "^2.19.0",
+    "commander": "^3.0.0",
     "conventional-changelog-cli": "^2.0.5",
     "core-js": "^2.6.9",
     "cross-env": "^5.2.0",

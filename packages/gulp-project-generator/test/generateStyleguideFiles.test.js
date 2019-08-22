@@ -67,4 +67,14 @@ describe('generateStyleguideFiles', () => {
     assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
   });
 
+  it('should generate files for styleguide task if argument options.styleguide is true and options.cssPreprocessor is "sass".', async () => {
+    await generateStyleguideFiles(path.src, path.dest, {styleguide: true, js: true, cssPreprocessor: 'sass'});
+
+    const actualTask = fs.readFileSync(`${path.dest}/task/styleguide.js`),
+          expectedTask = fs.readFileSync(`${path.expected}/task-styleguide-sass.js`);
+
+    assert(actualTask);
+    assert.deepStrictEqual(actualTask.toString().trim(), expectedTask.toString().trim());
+  });
+
 });

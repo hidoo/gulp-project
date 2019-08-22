@@ -34,7 +34,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'husky', version: '^3.0.2'},
           {name: 'lint-staged', version: '^9.2.1'},
           {name: 'npm-run-all', version: '^4.1.5'},
-          {name: 'rimraf', version: '^2.6.3'}
+          {name: 'rimraf', version: '^3.0.0'}
         ],
         scripts = [
           {name: 'start', command: 'npm run dev'},

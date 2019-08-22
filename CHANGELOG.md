@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
+
+
+### Bug Fixes
+
+* **examples:** update commander to version 3.0.0 ([478bc79](https://github.com/hidoo/gulp-project/commit/478bc79))
+* **generator:** fix to add dotfiles in .gitattributes ([12ba430](https://github.com/hidoo/gulp-project/commit/12ba430))
+* **generator:** fix to add dotfiles of stylelint in .gitattributes ([65b3f36](https://github.com/hidoo/gulp-project/commit/65b3f36))
+* **generator:** update commander to version 3.0.0 ([ba13406](https://github.com/hidoo/gulp-project/commit/ba13406))
+* **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([8a3fb91](https://github.com/hidoo/gulp-project/commit/8a3fb91))
+* **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([310349e](https://github.com/hidoo/gulp-project/commit/310349e))
+* **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([ff69e75](https://github.com/hidoo/gulp-project/commit/ff69e75))
+* **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([88017f7](https://github.com/hidoo/gulp-project/commit/88017f7))
+* **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([c9056f2](https://github.com/hidoo/gulp-project/commit/c9056f2))
+* **package:** update commander to version 3.0.0 ([20dd0ec](https://github.com/hidoo/gulp-project/commit/20dd0ec))
+* **package:** update rollup-plugin-license to version 0.12.1 ([0b3bd90](https://github.com/hidoo/gulp-project/commit/0b3bd90)), closes [#340](https://github.com/hidoo/gulp-project/issues/340)
+
+
+### Features
+
+* **generator:** add yarn.lock to .gitattributes ([af9c774](https://github.com/hidoo/gulp-project/commit/af9c774))
+* **generator:** use @hidoo/kss-builder if options.cssPreprocessor is sass ([844fa19](https://github.com/hidoo/gulp-project/commit/844fa19))
+
+
+
+
+
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
 
 

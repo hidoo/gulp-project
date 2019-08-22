@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
+
+
+### Bug Fixes
+
+* **package:** update rollup-plugin-license to version 0.12.1 ([0b3bd90](https://github.com/hidoo/gulp-project/commit/0b3bd90)), closes [#340](https://github.com/hidoo/gulp-project/issues/340)
+
+
+
+
+
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
 
 

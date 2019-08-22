@@ -11,13 +11,8 @@
 .babelrc.js export-ignore
 .huskyrc.js export-ignore
 .lintstagedrc.js export-ignore
-{{#if this.conventionalCommits}}
-.commitlintrc.js export-ignore
-{{/if}}
-{{#is cssPreprocessor 'sass'}}
 .stylelintrc.js export-ignore
 .stylelintignore export-ignore
-{{/is}}
 
 # npm
 package.json export-ignore
@@ -33,13 +28,9 @@ task/ export-ignore
 src/ export-ignore
 
 # distributions
-{{#if this.html}}
 public/**/page-list.html export-ignore
-{{/if}}
-{{#if this.styleguide}}
 public/**/styleguide/ export-ignore
 public/**/css/*.md export-ignore
-{{/if}}
 
 # docs
 README.md export-ignore

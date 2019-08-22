@@ -137,7 +137,7 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig-sass'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.js', '.eslintrc.js'],
-      ['.gitattributes', '.gitattributes'],
+      ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
       ['.huskyrc.js', '.huskyrc.js'],
       ['.lintstagedrc.js', '.lintstagedrc-sass.js'],

@@ -1,7 +1,6 @@
 # gulp-project
 
 [![Build Status](https://travis-ci.com/hidoo/gulp-project.svg?branch=master)](https://travis-ci.com/hidoo/gulp-project)
-[![Greenkeeper badge](https://badges.greenkeeper.io/hidoo/gulp-project.svg)](https://greenkeeper.io/)
 
 > This is the monorepo for gulp project packages.
 

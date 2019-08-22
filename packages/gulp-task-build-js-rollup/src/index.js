@@ -101,7 +101,7 @@ export default function buildJs(options = {}) {
       .then((bundle) => bundle.generate(outputOptions(opts)))
       .then(({output}) => {
 
-        for (const chunkOrAsset of output) {
+        for (const chunkOrAsset of output) { // eslint-disable-line no-unused-vars
           if (chunkOrAsset.isAsset) {
             throw new Error('"Asset" is not support.');
           }

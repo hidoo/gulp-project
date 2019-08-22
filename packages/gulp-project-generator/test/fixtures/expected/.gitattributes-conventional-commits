@@ -9,11 +9,14 @@
 .eslintrc.js export-ignore
 .eslintignore export-ignore
 .babelrc.js export-ignore
+.huskyrc.js export-ignore
+.lintstagedrc.js export-ignore
 .commitlintrc.js export-ignore
 
 # npm
 package.json export-ignore
 package-lock.json export-ignore
+yarn.lock export-ignore
 
 # gulp
 gulpfile.babel.js export-ignore

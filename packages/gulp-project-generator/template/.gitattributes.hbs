@@ -9,13 +9,20 @@
 .eslintrc.js export-ignore
 .eslintignore export-ignore
 .babelrc.js export-ignore
+.huskyrc.js export-ignore
+.lintstagedrc.js export-ignore
 {{#if this.conventionalCommits}}
 .commitlintrc.js export-ignore
 {{/if}}
+{{#is cssPreprocessor 'sass'}}
+.stylelintrc.js export-ignore
+.stylelintignore export-ignore
+{{/is}}
 
 # npm
 package.json export-ignore
 package-lock.json export-ignore
+yarn.lock export-ignore
 
 # gulp
 gulpfile.babel.js export-ignore

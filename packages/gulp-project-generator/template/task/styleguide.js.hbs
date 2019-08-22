@@ -43,14 +43,20 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
     src: `${config.path.srcStyleguideDesktop}`,
     dest: `${config.path.destStyleguideDesktop}`,
     css: [`${pathToCssDesktop}/main.css`],
-    js: [{{#if this.js}}`${pathToJsDesktop}/main.js`{{/if}}]
+    js: [{{#if this.js}}`${pathToJsDesktop}/main.js`{{/if}}],
+    {{#is this.cssPreprocessor 'sass'}}
+    builder: '@hidoo/kss-builder'
+    {{/is}}
   });
   const buildMobile = buildStyleguide({
     name: 'styleguide:mobile:build',
     src: `${config.path.srcStyleguideMobile}`,
     dest: `${config.path.destStyleguideMobile}`,
     css: [`${pathToCssMobile}/main.css`],
-    js: [{{#if this.js}}`${pathToJsMobile}/main.js`{{/if}}]
+    js: [{{#if this.js}}`${pathToJsMobile}/main.js`{{/if}}],
+    {{#is this.cssPreprocessor 'sass'}}
+    builder: '@hidoo/kss-builder'
+    {{/is}}
   });
 
   // define prebuild task
@@ -113,7 +119,10 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
     src: `${config.path.srcStyleguide}`,
     dest: `${config.path.destStyleguide}`,
     css: [`${pathToCss}/main.css`],
-    js: [{{#if this.js}}`${pathToJs}/main.js`{{/if}}]
+    js: [{{#if this.js}}`${pathToJs}/main.js`{{/if}}],
+    {{#is this.cssPreprocessor 'sass'}}
+    builder: '@hidoo/kss-builder'
+    {{/is}}
   });
 
   // define prebuild task

@@ -3,6 +3,9 @@
     "config:base"
   ],
   "timezone": "Asia/Tokyo",
+  "schedule": [
+    "every weekend"
+  ],
   "labels": [
     "renovate"
   ],
@@ -108,8 +111,8 @@
       }
     },
     {
-      "groupName": "do not automerge warkflow packages",
-      "groupSlug": "do-not-automerge-warkflow",
+      "groupName": "do not automerge workflow packages",
+      "groupSlug": "do-not-automerge-workflow",
       "packagePatterns": [
         "cross-env",
         "husky",

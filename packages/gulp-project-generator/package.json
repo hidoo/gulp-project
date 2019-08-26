@@ -44,10 +44,10 @@
   },
   "dependencies": {
     "@hidoo/handlebars-helpers": "^0.6.0",
-    "babel-eslint": "^10.0.2",
+    "babel-eslint": "^10.0.3",
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
-    "eslint": "^6.2.1",
+    "eslint": "^6.2.2",
     "glob": "^7.1.4",
     "glob-parent": "^5.0.0",
     "handlebars": "^4.1.2",

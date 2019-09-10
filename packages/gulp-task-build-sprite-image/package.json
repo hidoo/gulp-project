@@ -46,17 +46,17 @@
   "dependencies": {
     "@hidoo/gulp-plugin-image-evenizer": "^0.13.0",
     "@hidoo/gulp-util-error-handler": "^0.13.0",
-    "@hidoo/handlebars-helpers": "^0.6.0",
-    "gulp-if": "^3.0.0",
-    "gulp-imagemin": "^6.0.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp.spritesmith": "^6.9.0",
-    "image-size": "^0.7.4",
-    "imagemin-mozjpeg": "^8.0.0",
-    "merge-stream": "^2.0.0",
-    "vinyl-buffer": "^1.0.1"
+    "@hidoo/handlebars-helpers": "0.6.0",
+    "gulp-if": "3.0.0",
+    "gulp-imagemin": "6.0.0",
+    "gulp-plumber": "1.2.1",
+    "gulp.spritesmith": "6.9.0",
+    "image-size": "0.7.4",
+    "imagemin-mozjpeg": "8.0.0",
+    "merge-stream": "2.0.0",
+    "vinyl-buffer": "1.0.1"
   },
   "peerDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": ">=4.0.2"
   }
 }

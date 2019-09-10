@@ -24,9 +24,9 @@
     "test:unit": "cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
-    "@babel/register": "^7.4.4",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.0",
     "@hidoo/eslint-config": "^0.1.4",
     "@hidoo/express-engine-handlebars": "^0.6.0",
     "@hidoo/gulp-task-build-css-sass": "^0.0.0",

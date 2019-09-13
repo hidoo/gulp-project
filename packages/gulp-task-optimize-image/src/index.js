@@ -11,6 +11,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
  * gifsicle plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -20,6 +21,7 @@ export const gifsicle = imagemin.gifsicle;
 
 /**
  * jpegtran plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -29,6 +31,7 @@ export const jpegtran = imagemin.jpegtran;
 
 /**
  * mozjpeg plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -38,6 +41,7 @@ export const mozjpeg = imageminMozjpeg;
 
 /**
  * optipng plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -47,6 +51,7 @@ export const optipng = imagemin.optipng;
 
 /**
  * svgo plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -56,6 +61,7 @@ export const svgo = imagemin.svgo;
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -76,12 +82,14 @@ const DEFAULT_OPTIONS = {
 
 /**
  * record last run time
+ *
  * @type {WeakMap}
  */
 const lastRunRecords = new WeakMap();
 
 /**
  * return image optimize task
+ *
  * @param {Object} options - option
  * @param {String} [options.name='optimize:image'] - task name (use as displayName)
  * @param {String} options.src - source path
@@ -97,7 +105,12 @@ const lastRunRecords = new WeakMap();
  *
  * @example
  * import {task} from 'gulp';
- * import optimizeImage, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-optimize-image';
+ * import optimizeImage, {
+ *   gifsicle,
+ *   mozjpeg,
+ *   optipng,
+ *   svgo
+ * } from '@hidoo/gulp-task-optimize-image';
  *
  * task('image', optimizeImage({
  *   name: 'image:main',
@@ -106,7 +119,8 @@ const lastRunRecords = new WeakMap();
  *   evenize: true,
  *   placeholder: true,
  *   compress: true,
- *   compressOptions: [ // Default for this options
+ *   // Default for this options
+ *   compressOptions: [
  *     gifsicle({interlaced: true}),
  *     mozjpeg({quality: 90, progressive: true}),
  *     optipng({optimizationLevel: 5}),

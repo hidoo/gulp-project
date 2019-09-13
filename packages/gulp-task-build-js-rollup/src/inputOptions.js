@@ -11,13 +11,13 @@ import licenseOptions from './licenseOptions';
 
 /**
  * handle rollup.js warnings
+ *
  * @param {Object} warnings warning object
  * @return {void}
  */
 function handleOnWarn(warnings) {
   const {loc, frame, message} = warnings;
 
-  /* eslint-disable no-console */
   if (loc) {
     log.warn(`${loc.file} (${loc.line}:${loc.column}) ${message}`);
     if (frame) {
@@ -27,11 +27,11 @@ function handleOnWarn(warnings) {
   else {
     log.warn(message);
   }
-  /* eslint-enable no-console */
 }
 
 /**
  * return input options for rollup.js
+ *
  * @param {DEFAULT_OPTIONS} options option
  * @return {Object}
  */
@@ -45,7 +45,7 @@ export default function inputOptions(options = {}) {
     return {
       input: '',
       plugins: defaultPlugins,
-      onwarn: () => {}
+      onwarn() {} // eslint-disable-line no-empty-function
     };
   }
 
@@ -65,13 +65,13 @@ export default function inputOptions(options = {}) {
     return {
       input: options.src || input,
       plugins: Array.isArray(plugins) ? newPlugins.concat(plugins) : newPlugins,
-      onwarn: options.verbose ? handleOnWarn : () => {},
+      onwarn: options.verbose ? handleOnWarn : () => {}, // eslint-disable-line no-empty-function
       ...restInputOptions
     };
   }
   return {
     input: options.src || '',
     plugins: defaultPlugins,
-    onwarn: options.verbose ? handleOnWarn : () => {}
+    onwarn: options.verbose ? handleOnWarn : () => {} // eslint-disable-line no-empty-function
   };
 }

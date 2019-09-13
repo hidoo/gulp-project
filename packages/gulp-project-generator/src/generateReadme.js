@@ -3,6 +3,7 @@ import render from './render';
 
 /**
  * generate README
+ *
  * @param {String} name project name
  * @param {String} src source path
  * @param {String} dest destination path

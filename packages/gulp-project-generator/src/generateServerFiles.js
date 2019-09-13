@@ -6,6 +6,7 @@ import formatCode from './formatCode';
 
 /**
  * generate local dev server files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

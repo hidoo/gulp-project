@@ -1,10 +1,11 @@
-/* eslint-disable max-len, max-statements, no-console */
+/* eslint max-len: off, max-statements: off, prefer-named-capture-group: off */
 
 import path from 'path';
 import chalk from 'chalk';
 import program from 'commander';
 import inquirer from 'inquirer';
 import rimraf from 'rimraf';
+import pkg from '../package.json';
 import mkdir from './mkdir';
 import isEmptyDir from './isEmptyDir';
 import createProjectName from './createProjectName';
@@ -20,10 +21,10 @@ import generateJsFiles from './generateJsFiles';
 import generateServerFiles from './generateServerFiles';
 import generateSpriteFiles from './generateSpriteFiles';
 import generateStyleguideFiles from './generateStyleguideFiles';
-import pkg from '../package.json';
 
 /**
  * return force generate or not
+ *
  * @param {String} dest destination path
  * @param {Object} options command line options
  * @return {Promise<Boolean>}
@@ -35,10 +36,10 @@ async function comfirmForce(dest = '', options = {}) {
 
   const results = await inquirer.prompt([
     {
-      type: 'confirm',
-      name: 'confirm',
-      message: `${dest} is not empty directory, continue?`,
-      default: false
+      'type': 'confirm',
+      'name': 'confirm',
+      'message': `${dest} is not empty directory, continue?`,
+      'default': false
     }
   ]);
 
@@ -47,6 +48,7 @@ async function comfirmForce(dest = '', options = {}) {
 
 /**
  * return user inputted project name
+ *
  * @param {String} dest destination path
  * @param {Object} options command line options
  * @return {Promise<String>}
@@ -63,11 +65,11 @@ async function inputProjectName(dest = '', options = {}) {
     const results = await inquirer
       .prompt([
         {
-          type: 'input',
-          name: 'name',
-          message: 'Please input name of the project.',
-          default: () => name || '',
-          transformer: (value) => createProjectName(value)
+          'type': 'input',
+          'name': 'name',
+          'message': 'Please input name of the project.',
+          'default': () => name || '',
+          'transformer': (value) => createProjectName(value)
         }
       ]);
 
@@ -78,6 +80,7 @@ async function inputProjectName(dest = '', options = {}) {
 
 /**
  * return user choiced options
+ *
  * @param {Object} options command line options
  * @return {Promise<Object>}
  */
@@ -86,17 +89,17 @@ async function choiseOptions(options = {}) {
     const results = await inquirer
       .prompt([
         {
-          type: 'confirm',
-          name: 'multiDevice',
-          message: 'Enable multi-device mode?',
-          default: false,
-          when: () => !options.multiDevice
+          'type': 'confirm',
+          'name': 'multiDevice',
+          'message': 'Enable multi-device mode?',
+          'default': false,
+          'when': () => !options.multiDevice
         },
         {
-          type: 'confirm',
-          name: 'conventionalCommits',
-          message: 'Set up tools for conventional commits?',
-          default: Boolean(options.conventionalCommits)
+          'type': 'confirm',
+          'name': 'conventionalCommits',
+          'message': 'Set up tools for conventional commits?',
+          'default': Boolean(options.conventionalCommits)
         },
         {
           type: 'checkbox',
@@ -111,8 +114,8 @@ async function choiseOptions(options = {}) {
             {name: 'image', checked: options.image},
             {name: 'server', checked: options.server}
           ],
-          filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
-          validate: (choices) => {
+          filter: (choices) => choices.reduce((prev, current) => { return {...prev, [current]: true}; }, {}),
+          validate(choices) {
             if (!Object.keys(choices).length) {
               return 'You must choose at least one task.';
             }
@@ -127,41 +130,41 @@ async function choiseOptions(options = {}) {
             answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
             answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
           ].filter((choice) => choice),
-          filter: (choices) => choices.reduce((prev, current) => ({...prev, [current]: true}), {}),
+          filter: (choices) => choices.reduce((prev, current) => { return {...prev, [current]: true}; }, {}),
           when: (answers) => answers.tasks.css || answers.tasks.js
         },
         {
-          type: 'list',
-          name: 'cssPreprocessor',
-          message: 'Please select the CSS preprocessor.',
-          choices: [
+          'type': 'list',
+          'name': 'cssPreprocessor',
+          'message': 'Please select the CSS preprocessor.',
+          'choices': [
             {name: 'stylus'},
             {name: 'sass'}
           ],
-          default: () => options.cssPreprocessor,
-          when: (answers) => answers.tasks.css
+          'default': () => options.cssPreprocessor,
+          'when': (answers) => answers.tasks.css
         },
         {
-          type: 'list',
-          name: 'jsBundler',
-          message: 'Please select the JavaScript bundler.',
-          choices: [
+          'type': 'list',
+          'name': 'jsBundler',
+          'message': 'Please select the JavaScript bundler.',
+          'choices': [
             {name: 'browserify'},
             {name: 'rollup'}
           ],
-          default: () => options.jsBundler,
-          when: (answers) => answers.tasks.js
+          'default': () => options.jsBundler,
+          'when': (answers) => answers.tasks.js
         },
         {
-          type: 'list',
-          name: 'spriteType',
-          message: 'Please select the sprite sheet source type.',
-          choices: [
+          'type': 'list',
+          'name': 'spriteType',
+          'message': 'Please select the sprite sheet source type.',
+          'choices': [
             {name: 'svg'},
             {name: 'image'}
           ],
-          default: () => options.spriteType,
-          when: (answers) => answers.tasks.sprite
+          'default': () => options.spriteType,
+          'when': (answers) => answers.tasks.sprite
         }
       ]);
 
@@ -183,6 +186,7 @@ async function choiseOptions(options = {}) {
 
 /**
  * return merged options to user choices
+ *
  * @param {String} name project name
  * @param {Object} options command line options
  * @return {Promise<Object>}
@@ -208,20 +212,22 @@ async function confirmConfig(name = '', options = {}) {
 
     console.log('');
     console.log(`  ${chalk.white('Tasks:')}`);
-    Object.keys(options).sort().forEach((key) => {
-      if (
-        key !== 'interactive' &&
-        key !== 'force' &&
-        key !== 'conventionalCommits' &&
-        key !== 'multiDevice' &&
-        key !== 'verbose' &&
-        key !== 'cssPreprocessor' &&
-        key !== 'jsBundler' &&
-        key !== 'spriteType'
-      ) {
-        console.log(`    ${chalk.grey('+')} ${chalk.cyan(key)}`);
-      }
-    });
+    Object.keys(options)
+      .sort()
+      .forEach((key) => {
+        if (
+          key !== 'interactive' &&
+          key !== 'force' &&
+          key !== 'conventionalCommits' &&
+          key !== 'multiDevice' &&
+          key !== 'verbose' &&
+          key !== 'cssPreprocessor' &&
+          key !== 'jsBundler' &&
+          key !== 'spriteType'
+        ) {
+          console.log(`    ${chalk.grey('+')} ${chalk.cyan(key)}`);
+        }
+      });
 
     if (options.css && options.cssPreprocessor) {
       console.log('');
@@ -245,10 +251,10 @@ async function confirmConfig(name = '', options = {}) {
 
     const results = await inquirer.prompt([
       {
-        type: 'confirm',
-        name: 'confirm',
-        message: 'Is this OK?',
-        default: false
+        'type': 'confirm',
+        'name': 'confirm',
+        'message': 'Is this OK?',
+        'default': false
       }
     ]);
 
@@ -259,6 +265,7 @@ async function confirmConfig(name = '', options = {}) {
 
 /**
  * main process
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {Object} options command line options

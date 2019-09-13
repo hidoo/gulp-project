@@ -3,7 +3,7 @@
   "version": "0.13.0",
   "description": "Command line tool that generate gulp project scaffold.",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.5.0"
   },
   "main": "lib/index.js",
   "bin": {

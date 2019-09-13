@@ -13,6 +13,7 @@ import buildSprite, {gifsicle, jpegtran, mozjpeg, optipng, svgo} from '../src';
 
 /**
  * get array of uint8array from buffers
+ *
  * @param {Array<Buffer>} buffers array of buffer of image
  * @return {Promise}
  */
@@ -31,19 +32,22 @@ function getUint8ArraysFromBuffers(buffers) {
 
 /**
  * compare pixels
+ *
  * @param {Array} params array of parameter
  * @return {Promise}
  */
 function comparePixels(params) {
-  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise((resolve, reject) =>
-    getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
+  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise(
+    (resolve, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
       .then((pixels) => {
         const [actualPixels, expectedPixels] = pixels,
               countDiffPixels = pixelmatch(
                 actualPixels,
                 expectedPixels,
                 null,
-                width, height, {threshold: 0.1}
+                width,
+                height,
+                {threshold: 0.1}
               );
 
         assert(countDiffPixels === 0);
@@ -60,9 +64,9 @@ describe('gulp-task-build-sprite-image', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{png,css,scss,styl,gz}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{png,css,scss,styl,gz}`, done);
+  });
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
     const task = buildSprite({

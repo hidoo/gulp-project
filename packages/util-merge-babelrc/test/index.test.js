@@ -1,4 +1,4 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+/* eslint no-empty-function: off */
 
 import assert from 'assert';
 import path from 'path';
@@ -179,8 +179,13 @@ describe('gulp-util-merge-babelrc', () => {
   });
 
   describe('mergeBabelrc', () => {
-    const babelrcPath = path.resolve(process.cwd(), '.babelrc.js');
-    const babelrc = require(babelrcPath); // eslint-disable-line global-require
+    let babelrcPath = null;
+    let babelrc = null;
+
+    before(() => {
+      babelrcPath = path.resolve(process.cwd(), '.babelrc.js');
+      babelrc = require(babelrcPath); // eslint-disable-line global-require, import/no-dynamic-require
+    });
 
     it('should return merged babelrc.', () => {
       const cases = [

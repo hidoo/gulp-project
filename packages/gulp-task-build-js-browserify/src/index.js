@@ -15,6 +15,7 @@ import mergeBabelrc from '@hidoo/util-merge-babelrc';
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -33,6 +34,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return javascript build task by browserify
+ *
  * @param {Object} options - options
  * @param {String} [options.name='build:js'] - task name (use as displayName)
  * @param {String} options.src - source path
@@ -57,7 +59,7 @@ const DEFAULT_OPTIONS = {
  * task('js', buildJs({
  *   name: 'js:main',
  *   src: '/path/to/js/main.js',
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
  *   filename: 'main.js',
  *   suffix: '.hoge',
  *   browsers: ['> 0.1% in JP'],
@@ -71,16 +73,20 @@ const DEFAULT_OPTIONS = {
 export default function buildJs(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},
         {browsers, useBuiltIns, corejs, babelrc, verbose} = opts,
-        babelifyOptions = mergeBabelrc(babelrc, {
-          presets: [
-            ['@babel/preset-env', {
-              targets: {browsers},
-              useBuiltIns: useBuiltIns,
-              corejs: corejs,
-              debug: verbose
-            }]
-          ]
-        }, {verbose});
+        babelifyOptions = mergeBabelrc(
+          babelrc,
+          {
+            presets: [
+              ['@babel/preset-env', {
+                targets: {browsers},
+                useBuiltIns,
+                corejs,
+                debug: verbose
+              }]
+            ]
+          },
+          {verbose}
+        );
 
   // define task
   const task = () => {

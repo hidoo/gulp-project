@@ -53,7 +53,7 @@ task('placeholder', () => src('/path/to/src')
     suffix: 'placehold',
     verbose: true
   }))
-  .pipe(dest('/path/to/dest'))):
+  .pipe(dest('/path/to/dest')));
 ```
 
 Returns **DestroyableTransform** 

@@ -15,6 +15,7 @@ import concatSourceMap from './concatSourceMap';
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -37,6 +38,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return javascript build task by rollup.js
+ *
  * @param {Object} options - options
  * @param {String} [options.name='build:js'] - task name (use as displayName)
  * @param {String} options.src - source path
@@ -81,10 +83,10 @@ const DEFAULT_OPTIONS = {
  *   useBuiltIns: false,
  *   corejs: 3,
  *   babelrc: '/path/to/.babelrc.js',
- *   inputOptions: {...},
- *   outputOptions: {...},
- *   nodeResolveOptions: {...},
- *   commonjsOptions: {...},
+ *   inputOptions: {},
+ *   outputOptions: {},
+ *   nodeResolveOptions: {},
+ *   commonjsOptions: {},
  *   compress: true,
  *   verbose: true
  * }));
@@ -97,11 +99,11 @@ export default function buildJs(options = {}) {
     const {filename, suffix, compress} = opts,
           stream = through.obj();
 
-    return rollup(inputOptions(opts))
+    const transformedStream = await rollup(inputOptions(opts))
       .then((bundle) => bundle.generate(outputOptions(opts)))
       .then(({output}) => {
 
-        for (const chunkOrAsset of output) { // eslint-disable-line no-unused-vars
+        for (const chunkOrAsset of output) {
           if (chunkOrAsset.isAsset) {
             throw new Error('"Asset" is not support.');
           }
@@ -130,6 +132,8 @@ export default function buildJs(options = {}) {
         errorHandler(error);
         stream.emit('end');
       });
+
+    return transformedStream;
   };
 
   // add displayName (used as task name for gulp)

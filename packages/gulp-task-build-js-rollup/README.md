@@ -75,10 +75,10 @@ task('js', buildJs({
   useBuiltIns: false,
   corejs: 3,
   babelrc: '/path/to/.babelrc.js',
-  inputOptions: {...},
-  outputOptions: {...},
-  nodeResolveOptions: {...},
-  commonjsOptions: {...},
+  inputOptions: {},
+  outputOptions: {},
+  nodeResolveOptions: {},
+  commonjsOptions: {},
   compress: true,
   verbose: true
 }));

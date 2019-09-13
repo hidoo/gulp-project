@@ -87,7 +87,8 @@ task('sprite', buildSprite({
   cssTemplate: '/path/to/template/sass.hbs',
   cssHandlebarsHelpers: {hoge: (value) => value},
   compress: true,
-  compressOptions: [ // Default for this options
+  // Default for this options
+  compressOptions: [
     svgo()
   ],
   verbose: true

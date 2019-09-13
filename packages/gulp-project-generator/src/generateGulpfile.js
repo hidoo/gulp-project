@@ -4,6 +4,7 @@ import formatCode from './formatCode';
 
 /**
  * generate gulpfile
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

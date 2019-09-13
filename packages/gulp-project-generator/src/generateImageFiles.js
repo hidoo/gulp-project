@@ -6,6 +6,7 @@ import formatCode from './formatCode';
 
 /**
  * copy assets for single device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -15,11 +16,12 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
   const {verbose} = options;
 
   await mkdir(`${dest}/src/image`, {verbose});
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image`, {verbose}); // eslint-disable-line max-len
+  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image`, {verbose});
 }
 
 /**
  * copy assets for multi device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -30,12 +32,13 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
 
   await mkdir(`${dest}/src/image/desktop`, {verbose});
   await mkdir(`${dest}/src/image/mobile`, {verbose});
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/desktop`, {verbose}); // eslint-disable-line max-len
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/mobile`, {verbose}); // eslint-disable-line max-len
+  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/desktop`, {verbose});
+  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/mobile`, {verbose});
 }
 
 /**
  * generate image files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

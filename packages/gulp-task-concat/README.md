@@ -70,14 +70,14 @@ import {concatJs} from '@hidoo/gulp-task-concat';
 task('concat:js', concatJs({
   name: 'js:deps',
   src: [
-    '/path/to/js/a.js'
-    '/path/to/js/b.js'
+    '/path/to/js/a.js',
+    '/path/to/js/b.js',
     '/path/to/js/c.js'
   ],
   dest: '/path/to/dest',
   filename: 'deps.js',
   suffix: '.hoge',
-  banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+  banner: '/*! copyright <%= pkg.author %> * /\n',
   compress: true
 }));
 ```
@@ -108,14 +108,14 @@ import {concatCss} from '@hidoo/gulp-task-concat';
 task('concat:css', concatCss({
   name: 'css:deps',
   src: [
-    '/path/to/css/a.css'
-    '/path/to/css/b.css'
+    '/path/to/css/a.css',
+    '/path/to/css/b.css',
     '/path/to/css/c.css'
   ],
   dest: '/path/to/dest',
   filename: 'deps.css',
   suffix: '.hoge',
-  banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+  banner: '/*! copyright <%= pkg.author %> * /\n',
   compress: true
 }));
 ```

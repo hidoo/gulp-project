@@ -17,7 +17,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  pkg = require(path.resolve(process.cwd(), 'package.json')); // eslint-disable-line global-require
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -25,6 +26,7 @@ catch (error) {
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -39,6 +41,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return javascript concat task
+ *
  * @param {Object} options options
  * @param {String} [options.name='build:asset'] - task name (use as displayName)
  * @param {Array<String>} options.src - source path
@@ -56,14 +59,14 @@ const DEFAULT_OPTIONS = {
  * task('concat:js', concatJs({
  *   name: 'js:deps',
  *   src: [
- *     '/path/to/js/a.js'
- *     '/path/to/js/b.js'
+ *     '/path/to/js/a.js',
+ *     '/path/to/js/b.js',
  *     '/path/to/js/c.js'
  *   ],
  *   dest: '/path/to/dest',
  *   filename: 'deps.js',
  *   suffix: '.hoge',
- *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   compress: true
  * }));
  */
@@ -97,6 +100,7 @@ export function concatJs(options = {}) {
 
 /**
  * return css concat task
+ *
  * @param {Object} options options
  * @param {String} [options.name='build:asset'] - task name (use as displayName)
  * @param {Array<String>} options.src - source path
@@ -114,14 +118,14 @@ export function concatJs(options = {}) {
  * task('concat:css', concatCss({
  *   name: 'css:deps',
  *   src: [
- *     '/path/to/css/a.css'
- *     '/path/to/css/b.css'
+ *     '/path/to/css/a.css',
+ *     '/path/to/css/b.css',
  *     '/path/to/css/c.css'
  *   ],
  *   dest: '/path/to/dest',
  *   filename: 'deps.css',
  *   suffix: '.hoge',
- *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   compress: true
  * }));
  */

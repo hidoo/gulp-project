@@ -7,15 +7,19 @@ import rimraf from 'rimraf';
 import generateReadme from '../src/generateReadme';
 
 describe('generateReadme', () => {
-  const path = {
-    src: resolve(__dirname, '../template'),
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let path = null;
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/.*`, done)
-  );
+  before(() => {
+    path = {
+      src: resolve(__dirname, '../template'),
+      dest: `${__dirname}/fixtures/dest`,
+      expected: `${__dirname}/fixtures/expected`
+    };
+  });
+
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise.', (done) => {
     const actual = generateReadme('hoge-project', path.src, path.dest, {});

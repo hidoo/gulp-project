@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "This is the monorepo for gulp project packages.",
   "private": true,
+  "files": [],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "release:version": "node ./scripts/bumpVersion.js",

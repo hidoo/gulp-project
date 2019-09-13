@@ -42,6 +42,7 @@ fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
 
 /**
  * clean dest task
+ *
  * @param {Function} done callback
  * @return {void}
  */
@@ -49,12 +50,14 @@ export const clean = (done) => rimraf(`${config.path.dest}/*`, done);
 
 /**
  * server task
+ *
  * @type {Function}
  */
 export {default as server} from './task/server';
 
 /**
  * return skip task
+ *
  * @param {String} name task name
  * @return {Function}
  */
@@ -67,6 +70,7 @@ export const skip = (name = 'skip') => {
 
 /**
  * build task
+ *
  * @return {Function}
  */
 export const build = gulp.parallel(
@@ -98,6 +102,7 @@ export const build = gulp.parallel(
 
 /**
  * file observe task
+ *
  * @return {Function}
  */
 export const watch = gulp.parallel(
@@ -121,6 +126,7 @@ export const watch = gulp.parallel(
 
 /**
  * default task
+ *
  * @return {Function}
  */
 export default gulp.series(

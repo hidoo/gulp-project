@@ -1,4 +1,4 @@
-/* eslint-disable strict, no-var, prefer-arrow-callback */
+/* eslint strict: off, no-var: off, func-names: off, prefer-arrow-callback: off */
 (function() {
 
   'use strict';
@@ -14,42 +14,46 @@
   );
 
   elements.forEach(function(element) {
-    element.addEventListener('click', function() {
-      var isDark = hasClass(element, THEME_CLASS_NAME_DARK),
-          isLight = hasClass(element, THEME_CLASS_NAME_LIGHT),
-          isRed = hasClass(element, THEME_CLASS_NAME_RED),
-          isGreen = hasClass(element, THEME_CLASS_NAME_GREEN),
-          isBlue = hasClass(element, THEME_CLASS_NAME_BLUE);
+    element.addEventListener(
+      'click',
+      function() {
+        var isDark = hasClass(element, THEME_CLASS_NAME_DARK),
+            isLight = hasClass(element, THEME_CLASS_NAME_LIGHT),
+            isRed = hasClass(element, THEME_CLASS_NAME_RED),
+            isGreen = hasClass(element, THEME_CLASS_NAME_GREEN),
+            isBlue = hasClass(element, THEME_CLASS_NAME_BLUE);
 
-      if (isDark) {
-        addClass(element, THEME_CLASS_NAME_LIGHT);
-        removeClass(element, THEME_CLASS_NAME_DARK);
-      }
-      else if (isLight) {
-        addClass(element, THEME_CLASS_NAME_RED);
-        removeClass(element, THEME_CLASS_NAME_LIGHT);
-      }
-      else if (isRed) {
-        addClass(element, THEME_CLASS_NAME_GREEN);
-        removeClass(element, THEME_CLASS_NAME_RED);
-      }
-      else if (isGreen) {
-        addClass(element, THEME_CLASS_NAME_BLUE);
-        removeClass(element, THEME_CLASS_NAME_GREEN);
-      }
-      else if (isBlue) {
-        removeClass(element, THEME_CLASS_NAME_BLUE);
-      }
-      else {
-        addClass(element, THEME_CLASS_NAME_DARK);
-      }
-    }, false);
+        if (isDark) {
+          addClass(element, THEME_CLASS_NAME_LIGHT);
+          removeClass(element, THEME_CLASS_NAME_DARK);
+        }
+        else if (isLight) {
+          addClass(element, THEME_CLASS_NAME_RED);
+          removeClass(element, THEME_CLASS_NAME_LIGHT);
+        }
+        else if (isRed) {
+          addClass(element, THEME_CLASS_NAME_GREEN);
+          removeClass(element, THEME_CLASS_NAME_RED);
+        }
+        else if (isGreen) {
+          addClass(element, THEME_CLASS_NAME_BLUE);
+          removeClass(element, THEME_CLASS_NAME_GREEN);
+        }
+        else if (isBlue) {
+          removeClass(element, THEME_CLASS_NAME_BLUE);
+        }
+        else {
+          addClass(element, THEME_CLASS_NAME_DARK);
+        }
+      },
+      false
+    );
   });
 
   /**
    * return html classNames
+   *
    * @param {HTMLElement} element target element
-   * @param {String} className html class name
    * @return {void}
    */
   function getClassNames(element) {
@@ -60,6 +64,7 @@
 
   /**
    * return has html class or not
+   *
    * @param {HTMLElement} element target element
    * @param {String} className html class name
    * @return {void}
@@ -70,6 +75,7 @@
 
   /**
    * add html class
+   *
    * @param {HTMLElement} element target element
    * @param {String} className html class name
    * @return {void}
@@ -86,6 +92,7 @@
 
   /**
    * remove html class
+   *
    * @param {HTMLElement} element target element
    * @param {String} className html class name
    * @return {void}

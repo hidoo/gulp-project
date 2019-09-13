@@ -13,9 +13,9 @@ describe('gulp-task-build-sprite-svg', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{svg,css,scss,styl,gz}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{svg,css,scss,styl,gz}`, done);
+  });
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
     const task = buildSprite({

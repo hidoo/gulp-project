@@ -5,7 +5,11 @@ import path from 'path';
 import commonjsOptions from '../src/commonjsOptions';
 
 describe('commonjsOptions', () => {
-  const cwdNodeModules = path.resolve(process.cwd(), 'node_modules/**');
+  let cwdNodeModules = null;
+
+  before(() => {
+    cwdNodeModules = path.resolve(process.cwd(), 'node_modules/**');
+  });
 
   it('should return merged rollup-plugin-commonjs options.', () => {
     const cases = [

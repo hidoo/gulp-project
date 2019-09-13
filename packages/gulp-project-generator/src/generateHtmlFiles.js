@@ -6,6 +6,7 @@ import formatCode from './formatCode';
 
 /**
  * copy assets for single device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -18,11 +19,12 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
   await copy(`${src}/src/html/**/*.hbs`, `${dest}/src/html`, {verbose});
 
   await mkdir(`${dest}/src/data`, {verbose});
-  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose}); // eslint-disable-line max-len
+  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose});
 }
 
 /**
  * copy assets for multi device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -39,11 +41,12 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
   await copy(`${src}/src/html/layouts/**/*.hbs`, `${dest}/src/html/layouts`, {verbose});
 
   await mkdir(`${dest}/src/data`, {verbose});
-  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose}); // eslint-disable-line max-len
+  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose});
 }
 
 /**
  * generate html files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

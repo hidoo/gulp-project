@@ -2,12 +2,14 @@ import glob from 'glob';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * same as options of glob
+   *
    * @type {Object}
    */
   glob: {}
@@ -15,6 +17,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return directory is empty or not
+ *
  * @param {String} dest destination path
  * @param {DEFAULT_OPTIONS} options options
  * @param {Object} options.glob same as options of glob

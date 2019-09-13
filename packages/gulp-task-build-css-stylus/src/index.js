@@ -19,7 +19,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  pkg = require(path.resolve(process.cwd(), 'package.json')); // eslint-disable-line global-require
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -27,6 +28,7 @@ catch (error) {
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -48,6 +50,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return css build task by stylus
+ *
  * @param  {Object} options - options
  * @param  {String} [options.name='build:css'] - task name (use as displayName)
  * @param  {String} options.src - source path
@@ -76,14 +79,14 @@ const DEFAULT_OPTIONS = {
  * task('css', buildCss({
  *   name: 'css:main',
  *   src: '/path/to/stylus/main.styl',
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
  *   filename: 'styles.css',
  *   suffix: '.hoge',
  *   browsers: ['> 0.1% in JP'],
- *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   stylusOptions: {rawDefine: {}},
  *   url: 'inline',
- *   urlOptions: {basePath: path.resolve(process.cwd(), 'src/images'},
+ *   urlOptions: {basePath: path.resolve(process.cwd(), 'src/images')},
  *   uncssTargets: ['/path/to/html/target.html'],
  *   uncssIgnore: ['.ignore-selector'],
  *   additionalProcess: (root) => root,

@@ -1,7 +1,8 @@
 /**
  * return message
+ *
  * @return {String}
  */
-export default function() {
+export default function sampleEsm() {
   return 'This is ES Module sample.';
 }

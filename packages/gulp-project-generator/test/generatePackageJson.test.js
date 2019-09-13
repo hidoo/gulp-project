@@ -7,14 +7,18 @@ import generatePackageJson from '../src/generatePackageJson';
 import pkg from '../package.json';
 
 describe('generatePackageJson', () => {
-  const path = {
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let path = null;
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/.*`, done)
-  );
+  before(() => {
+    path = {
+      dest: `${__dirname}/fixtures/dest`,
+      expected: `${__dirname}/fixtures/expected`
+    };
+  });
+
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise.', (done) => {
     const actual = generatePackageJson('hoge-project', path.dest, {});

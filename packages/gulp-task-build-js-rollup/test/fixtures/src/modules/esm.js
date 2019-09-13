@@ -1,5 +1,6 @@
 /**
  * ESModules 形式のモジュール
+ *
  * @return {void}
  */
 export default function esModule() {

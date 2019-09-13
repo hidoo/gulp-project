@@ -12,9 +12,9 @@ describe('gulp-task-build-css-sass', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{css,gz}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{css,gz}`, done);
+  });
 
   it('should out to "main.css" if argument "options" is default.', (done) => {
     const task = buildCss({
@@ -230,10 +230,10 @@ describe('gulp-task-build-css-sass', () => {
     const task = buildCss({
       src: `${path.src}/style.scss`,
       dest: path.dest,
-      additionalProcess: (root) => {
+      additionalProcess(root) {
         root.walkRules(/\.block/, (rule) => {
-          rule.selectors = rule.selectors.map((selector) =>
-            selector.trim().replace(/\.block/, '.hoge')
+          rule.selectors = rule.selectors.map(
+            (selector) => selector.trim().replace(/\.block/, '.hoge')
           );
         });
 

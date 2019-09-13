@@ -8,6 +8,7 @@ import buildStyleguide from '../src';
 
 /**
  * replace version number in license comment
+ *
  * @param {String} code target source code
  * @return {String}
  */
@@ -22,9 +23,9 @@ describe('gulp-task-build-styleguide-kss', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/**/*.{html,css,js,less}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/**/*.{html,css,js,less}`, done);
+  });
 
   it('should output files to "options.dest" if argument "options" is minimal settings.', (done) => {
     const task = buildStyleguide({

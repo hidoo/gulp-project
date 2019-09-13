@@ -11,6 +11,7 @@ import imageEvenizer from '../src';
 
 /**
  * get array of uint8array from buffers
+ *
  * @param {Buffer} buffers array of buffer of image
  * @return {Promise}
  */
@@ -77,12 +78,12 @@ describe('gulp-plugin-image-evenizer', () => {
       ]
     ];
 
-    return await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
+    await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
       const plugin = imageEvenizer({verbose: false}),
             srcBuffer = fs.readFileSync(path, {encode: null}),
             expectedBuffer = fs.readFileSync(expectedPath),
             fakeFile = new Vinyl({
-              path: path,
+              path,
               contents: Buffer.from(srcBuffer)
             });
       let evenizedBuffer = null;
@@ -104,7 +105,9 @@ describe('gulp-plugin-image-evenizer', () => {
                     evenizedPixels,
                     expectedPixels,
                     null,
-                    width, height, {threshold: 0.1}
+                    width,
+                    height,
+                    {threshold: 0.1}
                   );
 
             assert(countDiffPixels === 0);
@@ -124,11 +127,11 @@ describe('gulp-plugin-image-evenizer', () => {
       [`${__dirname}/fixtures/animation.gif`, [9, 9]]
     ];
 
-    return await Promise.all(cases.map(([path, [width, height]]) => new Promise((resolve, reject) => {
+    await Promise.all(cases.map(([path, [width, height]]) => new Promise((resolve, reject) => {
       const plugin = imageEvenizer({verbose: false}),
             src = fs.readFileSync(path, {encode: null}),
             fakeFile = new Vinyl({
-              path: path,
+              path,
               contents: Buffer.from(src)
             });
 

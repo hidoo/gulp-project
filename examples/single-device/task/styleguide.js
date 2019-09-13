@@ -13,12 +13,14 @@ import * as config from '../config';
 
 /**
  * relative path from styleguide to css
+ *
  * @type {String}
  */
 const pathToCss = relative(config.path.destStyleguide, config.path.destCss);
 
 /**
  * relative path from styleguide to js
+ *
  * @type {String}
  */
 const pathToJs = relative(config.path.destStyleguide, config.path.destJs);

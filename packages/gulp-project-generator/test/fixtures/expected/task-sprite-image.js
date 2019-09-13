@@ -12,6 +12,7 @@ import * as config from '../config';
 
 /**
  * url parameter for browser cache
+ *
  * @type {String}
  */
 const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disable-line no-process-env
@@ -19,12 +20,14 @@ const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disabl
 
 /**
  * relative path from css to sprite
+ *
  * @type {String}
  */
 const pathToSprite = relative(config.path.destCss, config.path.destSprite);
 
 /**
  * return merged build options
+ *
  * @param {Object} options build task options
  * @return {Object}
  */

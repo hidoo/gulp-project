@@ -81,7 +81,8 @@ describe('babelOptions', () => {
       ],
       [
         {babelrc: `${process.cwd()}/.babelrc.js`},
-        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [],
+        {
+          babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [],
           presets: [
             ['@babel/preset-env', {
               modules: false,

@@ -1,6 +1,7 @@
 /**
  * return source code including sourcemap that encoded to a base64
  * + include sourcemap when NODE_ENV is 'development'
+ *
  * @param {Object} result source code object generate by rollup.js
  * @return {String}
  */

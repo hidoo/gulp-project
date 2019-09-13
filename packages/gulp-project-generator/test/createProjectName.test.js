@@ -1,5 +1,3 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'assert';
 import createProjectName from '../src/createProjectName';
 

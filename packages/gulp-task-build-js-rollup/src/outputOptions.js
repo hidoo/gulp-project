@@ -1,6 +1,6 @@
-
 /**
  * return input options for rollup.js
+ *
  * @param {DEFAULT_OPTIONS} options option
  * @return {Object}
  */

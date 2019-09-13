@@ -11,6 +11,7 @@ import app from '../src/server/app';
 
 /**
  * return start local server task
+ *
  * @return {Function<Promise>}
  */
 const server = () => new Promise((resolve, reject) => {

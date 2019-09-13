@@ -55,22 +55,25 @@ import buildHtml from '@hidoo/gulp-task-build-html-handlebars';
 task('html', buildHtml({
   name: 'html:main',
   src: '/path/to/html/*.hbs',
-  dest: '/path/to/dest'
+  dest: '/path/to/dest',
   extname: '.php',
   partials: '/path/to/html/partials/*.hbs',
   layouts: '/path/to/html/layouts/*.hbs',
   helpers: '/path/to/html/helpers/*.js',
   data: '/path/to/html/data/*.{json,yaml}',
   compress: true,
-  compressOptions: { // Default for this options
+  // Default for this options
+  compressOptions: {
     caseSensitive: true,
     collapseWhitespace: true,
     conservativeCollapse: true,
     preserveLineBreaks: true,
     ignoreCustomFragments: [
-      /<\?[\s\S]*?\?>/, // php start end tags
-      /<\/?mt:?[\s\S]*?>/i, // cms tags
-      /<\$mt:?[\s\S]*?\$>/i // cms tags
+      // php start end tags
+      /<\?[\s\S]*?\?>/,
+      // cms tags
+      /<\/?mt:?[\s\S]*?>/i,
+      /<\$mt:?[\s\S]*?\$>/i
     ]
   },
   onFilesParsed: (context) => context,

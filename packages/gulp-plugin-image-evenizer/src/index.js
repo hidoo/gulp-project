@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers, max-statements */
+/* eslint no-magic-numbers: off, max-statements: off */
 
 import through from 'through2';
 import PluginError from 'plugin-error';
@@ -13,6 +13,7 @@ import log from 'fancy-log';
 
 /**
  * check number is odd or not
+ *
  * @param {Number} value number
  * @return {Boolean}
  */
@@ -22,6 +23,7 @@ function isOdd(value = 0) {
 
 /**
  * debug for ndarray of pixels
+ *
  * @param {Vinyl} file vinyl of image file
  * @param {View4duint8} pixels ndarray of pixels
  * @return {void}
@@ -32,7 +34,6 @@ function debug(file, pixels) { // eslint-disable-line no-unused-vars
         channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
         data = chunk(chunk([...pixels.data], channels), width);
 
-  /* eslint-disable no-console */
   console.log(`
     file: ${file.basename}
     pixels:
@@ -47,11 +48,11 @@ function debug(file, pixels) { // eslint-disable-line no-unused-vars
 ${data.map((row) => row.map((el) => `[${el.join(' ')}]`).join(' ')).join('\n')}
 ---
   `);
-  /* eslint-enable no-console */
 }
 
 /**
  * plugin default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -62,12 +63,14 @@ const DEFAULT_OPTIONS = {
 
 /**
  * plugin name.
+ *
  * @type {String}
  */
 const PLUGIN_NAME = 'gulp-plugin-image-evenizer';
 
 /**
  * return evenized image if image width or height is odd number.
+ *
  * @param {DEFAULT_OPTIONS} options option
  * @return {DestroyableTransform}
  *
@@ -77,7 +80,7 @@ const PLUGIN_NAME = 'gulp-plugin-image-evenizer';
  *
  * task('evenize', () => src('/path/to/src')
  *   .pipe(imageEvenizer())
- *   .pipe(dest('/path/to/dest'))):
+ *   .pipe(dest('/path/to/dest')));
  */
 export default function imageEvenizer(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
@@ -176,7 +179,7 @@ export default function imageEvenizer(options = {}) {
         return getStream.buffer(savePixels(evenizedPixels, ext, saveOptions))
           .then((buffer) => {
             if (opts.verbose) {
-              log(`${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`); // eslint-disable-line max-len
+              log(`${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`);
             }
             file.contents = buffer;
             return done(null, file);

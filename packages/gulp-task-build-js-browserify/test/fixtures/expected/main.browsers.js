@@ -279,6 +279,7 @@ commonJsModule();
 'use strict';
 /**
  * Common JS 形式のモジュール
+ *
  * @return {void}
  */
 
@@ -299,6 +300,7 @@ exports["default"] = esModule;
 
 /**
  * ESModules 形式のモジュール
+ *
  * @return {void}
  */
 function esModule() {

@@ -1,5 +1,3 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'assert';
 import fs from 'fs';
 import rimraf from 'rimraf';
@@ -11,9 +9,9 @@ describe('copy', () => {
     dest: `${__dirname}/fixtures/dest`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise that includes Array of copied filepath.', (done) => {
     const actual = copy(`${path.src}/*.{txt,md}`, path.dest, {verbose: false});
@@ -35,8 +33,8 @@ describe('copy', () => {
       ['*.md', ['sample.md']]
     ];
 
-    await Promise.all(cases.map(([pattern, files]) =>
-      copy(`${path.src}/${pattern}`, path.dest, {verbose: false})
+    await Promise.all(cases.map(
+      ([pattern, files]) => copy(`${path.src}/${pattern}`, path.dest, {verbose: false})
         .then(() => files.forEach((file) => {
           const actual = fs.readFileSync(`${path.dest}/${file}`),
                 expected = fs.readFileSync(`${path.src}/${file}`);

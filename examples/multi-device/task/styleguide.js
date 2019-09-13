@@ -13,6 +13,7 @@ import * as config from '../config';
 
 /**
  * relative path from styleguide to css
+ *
  * @type {String}
  */
 const pathToCssDesktop = relative(config.path.destStyleguideDesktop, config.path.destCssDesktop); // eslint-disable-line max-len
@@ -20,6 +21,7 @@ const pathToCssMobile = relative(config.path.destStyleguideMobile, config.path.d
 
 /**
  * relative path from styleguide to js
+ *
  * @type {String}
  */
 const pathToJsDesktop = relative(config.path.destStyleguideDesktop, config.path.destJsDesktop); // eslint-disable-line max-len

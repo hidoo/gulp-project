@@ -20,7 +20,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  pkg = require(path.resolve(process.cwd(), 'package.json')); // eslint-disable-line global-require
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -28,20 +29,22 @@ catch (error) {
 
 /**
  * default custom sass functions
+ *
  * @type {Object}
  */
 const DEFAULT_FUNCTIONS = {
 
   /**
    * add "env" function that get value from process.env
+   *
    * @param {String} key key
    * @param {Function} done callback function when call asynchronously
    * @return {void|sass.compiler.types.String}
    */
   'env($key)': (key, done) => {
-    const k = key.getValue(),
+    const name = key.getValue(),
           result = new sass.compiler.types.String(
-            process.env[k] || '' // eslint-disable-line no-process-env
+            process.env[name] || '' // eslint-disable-line no-process-env
           );
 
     if (typeof done === 'function') {
@@ -53,6 +56,7 @@ const DEFAULT_FUNCTIONS = {
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -74,6 +78,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return css build task by sass
+ *
  * @param  {Object} options - options
  * @param  {String} [options.name='build:css'] - task name (use as displayName)
  * @param  {String} options.src - source path
@@ -106,10 +111,10 @@ const DEFAULT_OPTIONS = {
  *   filename: 'styles.css',
  *   suffix: '.hoge',
  *   browsers: ['> 0.1% in JP'],
- *   banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+ *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   sassOptions: {outputStyle: 'nested'},
  *   url: 'inline',
- *   urlOptions: {basePath: path.resolve(process.cwd()), 'src/images'},
+ *   urlOptions: {basePath: path.resolve(process.cwd(), 'src/images')},
  *   uncssTargets: ['/path/to/html/target.html'],
  *   uncssIgnore: ['.ignore-selector'],
  *   additionalProcess: (root) => root,

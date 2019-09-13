@@ -1,5 +1,5 @@
 module.exports = {
-  extends: [
+  'extends': [
     '@hidoo/stylelint-config/scss'
   ]
 };

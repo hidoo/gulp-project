@@ -6,6 +6,7 @@ import formatCode from './formatCode';
 
 /**
  * copy assets for single device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -27,6 +28,7 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
 
 /**
  * copy assets for multi device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -53,6 +55,7 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
 
 /**
  * generate css files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

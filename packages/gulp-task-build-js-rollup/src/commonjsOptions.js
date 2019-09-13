@@ -2,6 +2,7 @@ import path from 'path';
 
 /**
  * return options for rollup-plugin-commonjs
+ *
  * @param {DEFAULT_OPTIONS} options option
  * @return {Object}
  */

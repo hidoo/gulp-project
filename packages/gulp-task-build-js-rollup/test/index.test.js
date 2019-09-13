@@ -9,6 +9,7 @@ import buildJs from '../src';
 
 /**
  * replace version number in license comment
+ *
  * @param {String} code target source code
  * @return {String}
  */
@@ -22,17 +23,20 @@ describe('gulp-task-build-js-rollup', () => {
     dest: `${__dirname}/fixtures/dest`,
     expected: `${__dirname}/fixtures/expected`
   };
+  let commonjsOptions = null;
 
-  const commonjsOptions = {
-    include: [
-      '../../node_modules/**',
-      `${resolve(process.cwd(), `${__dirname}/fixtures/src`)}/**`
-    ]
-  };
+  before(() => {
+    commonjsOptions = {
+      include: [
+        '../../node_modules/**',
+        `${resolve(process.cwd(), `${__dirname}/fixtures/src`)}/**`
+      ]
+    };
+  });
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{js,gz}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{js,gz}`, done);
+  });
 
   it('should out to "main.js" if argument "options" is default.', (done) => {
     const task = buildJs({

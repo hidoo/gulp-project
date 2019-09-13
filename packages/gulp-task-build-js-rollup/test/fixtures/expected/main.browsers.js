@@ -1196,6 +1196,7 @@
 
   /**
    * ESModules 形式のモジュール
+   *
    * @return {void}
    */
   function esModule() {
@@ -1206,6 +1207,7 @@
   // eslint-disable-next-line strict
   /**
    * Common JS 形式のモジュール
+   *
    * @return {void}
    */
 

@@ -54,7 +54,7 @@
     "postcss-csso": "3.0.0",
     "postcss-uncss": "0.17.0",
     "postcss-url": "8.0.0",
-    "uncss": "0.17.0"
+    "uncss": "0.17.2"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

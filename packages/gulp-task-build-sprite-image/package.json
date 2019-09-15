@@ -51,7 +51,7 @@
     "gulp-imagemin": "6.0.0",
     "gulp-plumber": "1.2.1",
     "gulp.spritesmith": "6.9.0",
-    "image-size": "0.7.4",
+    "image-size": "0.7.5",
     "imagemin-mozjpeg": "8.0.0",
     "merge-stream": "2.0.0",
     "vinyl-buffer": "1.0.1"

@@ -29,7 +29,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'babel-eslint', version: '^10.0.3'},
           {name: 'commander', version: '^3.0.1'},
           {name: 'cross-env', version: '^5.2.1'},
-          {name: 'eslint', version: '^6.3.0'},
+          {name: 'eslint', version: '^6.4.0'},
           {name: 'gulp', version: '^4.0.2'},
           {name: 'husky', version: '^3.0.5'},
           {name: 'lint-staged', version: '^9.2.5'},

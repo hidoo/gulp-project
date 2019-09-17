@@ -178,13 +178,10 @@ describe('examples', () => {
               '/styleguide/index.html',
               '/styleguide/kss-assets/css/CHANGELOG.md',
               '/styleguide/kss-assets/css/README.md',
-              '/styleguide/kss-assets/css/main.css',
               '/styleguide/kss-assets/css/main.min.css',
               '/styleguide/kss-assets/css/main.min.css.gz',
               '/styleguide/kss-assets/images/favicon.ico',
               '/styleguide/kss-assets/images/touchicon.png',
-              '/styleguide/kss-assets/images/touchicon.psd',
-              '/styleguide/kss-assets/js/main.js',
               '/styleguide/kss-assets/js/main.min.js',
               '/styleguide/kss-assets/js/main.min.js.gz',
               '/styleguide/section-block.html'

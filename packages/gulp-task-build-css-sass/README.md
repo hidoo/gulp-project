@@ -78,10 +78,10 @@ task('css', buildCss({
   filename: 'styles.css',
   suffix: '.hoge',
   browsers: ['> 0.1% in JP'],
-  banner: '/*! copyright <%= pkg.author %> *\/\n', // end of comment is not need to escape actually.
+  banner: '/*! copyright <%= pkg.author %> * /\n',
   sassOptions: {outputStyle: 'nested'},
   url: 'inline',
-  urlOptions: {basePath: path.resolve(process.cwd()), 'src/images'},
+  urlOptions: {basePath: path.resolve(process.cwd(), 'src/images')},
   uncssTargets: ['/path/to/html/target.html'],
   uncssIgnore: ['.ignore-selector'],
   additionalProcess: (root) => root,

@@ -6,7 +6,7 @@ import pathDepth from '../src/pathDepth';
 describe('pathDepth', () => {
 
   it('should throw TypeError if argument "path" is not string.', () => {
-    const invalidValues = [0, [], {}, () => {}]; // eslint-disable-line no-magic-numbers
+    const invalidValues = [0, [], {}, () => {}]; // eslint-disable-line no-empty-function
 
     invalidValues.forEach((value) => {
       try {

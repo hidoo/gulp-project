@@ -1,8 +1,7 @@
-/* eslint-disable strict, no-console */
-(function(window) {
+/* eslint strict: off, no-console: off */
+(function main(window) {
   'use strict';
 
   console.log('sample-b.js', window);
 
 })(window);
-/* eslint-enable strict, no-console */

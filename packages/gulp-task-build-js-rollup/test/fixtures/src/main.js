@@ -1,3 +1,4 @@
+/* eslint max-classes-per-file: off */
 import esModule from './modules/esm';
 import commonJsModule from './modules/cjs';
 
@@ -8,6 +9,7 @@ class Es2015Class {
   constructor() {
     this.name = 'es2015-class';
   }
+
   print() {
     console.log(this.name); // eslint-disable-line no-console
   }

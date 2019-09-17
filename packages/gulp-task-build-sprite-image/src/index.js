@@ -13,6 +13,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
  * gifsicle plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -22,6 +23,7 @@ export const gifsicle = imagemin.gifsicle;
 
 /**
  * jpegtran plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -31,6 +33,7 @@ export const jpegtran = imagemin.jpegtran;
 
 /**
  * mozjpeg plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -40,6 +43,7 @@ export const mozjpeg = imageminMozjpeg;
 
 /**
  * optipng plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -49,6 +53,7 @@ export const optipng = imagemin.optipng;
 
 /**
  * svgo plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -58,13 +63,15 @@ export const svgo = imagemin.svgo;
 
 /**
  * path of css templates
+ *
  * @type {String}
  */
 const pathStylusTemplate = path.resolve(__dirname, '../template/stylus.hbs');
 const pathScssTemplate = path.resolve(__dirname, '../template/scss.hbs');
 
 /**
-* task default options.
+ * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -94,6 +101,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return build image sprite sheet task
+ *
  * @param {Object} options - option
  * @param {String} [options.name='build:sprite'] - task name (use as displayName)
  * @param {String} options.src - source path
@@ -123,7 +131,12 @@ const DEFAULT_OPTIONS = {
  *
  * @example
  * import {task} from 'gulp';
- * import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
+ * import buildSprite, {
+ *   gifsicle,
+ *   mozjpeg,
+ *   optipng,
+ *   svgo
+ * } from '@hidoo/gulp-task-build-sprite-image';
  *
  * task('sprite', buildSprite({
  *   name: 'sprite:main',
@@ -141,7 +154,8 @@ const DEFAULT_OPTIONS = {
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   evenize: true,
  *   compress: true,
- *   compressOptions: [ // Default for this options
+ *   // Default for this options
+ *   compressOptions: [
  *     gifsicle({interlaced: true}),
  *     mozjpeg({quality: 90, progressive: true}),
  *     optipng({optimizationLevel: 5}),

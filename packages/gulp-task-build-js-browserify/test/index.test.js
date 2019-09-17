@@ -8,6 +8,7 @@ import buildJs from '../src';
 
 /**
  * replace version number in license comment
+ *
  * @param {String} code target source code
  * @return {String}
  */
@@ -22,9 +23,9 @@ describe('gulp-task-build-js-browserify', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{js,gz}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{js,gz}`, done);
+  });
 
   it('should out to "main.js" if argument "options" is default.', (done) => {
     const task = buildJs({

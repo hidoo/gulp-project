@@ -6,6 +6,7 @@ import formatCode from './formatCode';
 
 /**
  * copy assets for single device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -20,7 +21,7 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
       await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite`, {verbose});
       break;
     case 'image':
-      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite`, {verbose}); // eslint-disable-line max-len
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite`, {verbose});
       break;
     default:
   }
@@ -28,6 +29,7 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
 
 /**
  * copy assets for multi device mode
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -44,8 +46,8 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
       await copy(`${src}/src/sprite/**/*.svg`, `${dest}/src/sprite/mobile`, {verbose});
       break;
     case 'image':
-      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/desktop`, {verbose}); // eslint-disable-line max-len
-      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/mobile`, {verbose}); // eslint-disable-line max-len
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/desktop`, {verbose});
+      await copy(`${src}/src/sprite/**/*.{jpg,jpeg,png,gif}`, `${dest}/src/sprite/mobile`, {verbose});
       break;
     default:
   }
@@ -53,6 +55,7 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
 
 /**
  * generate sprite sheet files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

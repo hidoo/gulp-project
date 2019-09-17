@@ -6,13 +6,17 @@ import mkdir from '../src/mkdir';
 import isEmptyDir from '../src/isEmptyDir';
 
 describe('isEmptyDir', () => {
-  const path = {
-    dest: `${__dirname}/fixtures/dest`
-  };
+  let path = null;
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*`, done)
-  );
+  before(() => {
+    path = {
+      dest: `${__dirname}/fixtures/dest`
+    };
+  });
+
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise includes false if argument "dest" is not empty directory.', (done) => {
     mkdir(`${path.dest}/hoge/fuga`)

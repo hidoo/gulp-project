@@ -3,6 +3,7 @@ import SVGSpriter from 'svg-sprite';
 /**
  * initialize SVGSpriter
  * + most options are decisive, only some values can be changed
+ *
  * @param {Object} options options
  * @param {Object} options.padding padding between image in sprite sheet
  * @param {Object} options.layout layout for generate sprite sheet（one of packed, vertical, and horizontal）

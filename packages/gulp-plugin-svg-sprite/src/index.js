@@ -10,6 +10,7 @@ import configureSVGSpriter from './configureSVGSpriter';
 
 /**
  * plugin default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -38,6 +39,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * plugin name.
+ *
  * @type {String}
  */
 const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
@@ -45,6 +47,7 @@ const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
 /* eslint-disable max-statements */
 /**
  * return svg sprite sheet
+ *
  * @param {DEFAULT_OPTIONS} options options
  * @return {DestroyableTransform}
  *
@@ -61,7 +64,7 @@ const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
  *     stream.css.pipe(dest('/path/to/dest')),
  *     stream.svg.pipe(dest('/path/to/dest'))
  *   );
- * };
+ * });
  */
 export default function svgSprite(options) {
   const opts = {...DEFAULT_OPTIONS, ...options};
@@ -75,7 +78,7 @@ export default function svgSprite(options) {
   if (typeof opts.imgPath !== 'string') {
     throw new PluginError(PLUGIN_NAME, 'Argument "options.imgPath" is required.');
   }
-  if (!fs.existsSync(opts.cssTemplate)) {
+  if (!fs.existsSync(opts.cssTemplate)) { // eslint-disable-line no-sync
     throw new PluginError(PLUGIN_NAME, 'Argument "options.cssTemplate" is required.');
   }
 
@@ -91,17 +94,20 @@ export default function svgSprite(options) {
 
   // add helpers to Handlebars instance
   if (cssHandlebarsHelpers) {
-    Object.entries(cssHandlebarsHelpers).forEach(([name, helper]) =>
-      handlebars.registerHelper(name, helper)
+    Object.entries(cssHandlebarsHelpers).forEach(
+      ([name, helper]) => handlebars.registerHelper(name, helper)
     );
   }
 
   // evaluate template
-  const template = handlebars.compile(fs.readFileSync(cssTemplate, 'utf8'));
+  const template = handlebars.compile(
+    fs.readFileSync(cssTemplate, 'utf8') // eslint-disable-line no-sync
+  );
 
   /**
    * process that transform each file
    * + add svg files to SVGSpriter
+   *
    * @param {Vinyl} file Vinyl file
    * @param {String} enc encoding
    * @param {Function} done callback
@@ -131,6 +137,7 @@ export default function svgSprite(options) {
   /**
    * process that flush
    * + generate sprite sheet
+   *
    * @param {Function} done callback
    * @return {void}
    */
@@ -169,8 +176,8 @@ export default function svgSprite(options) {
         // resource is .styl
         else if (type === 'styl') {
           const contents = template({
-            spriteName: path.basename(imgPath.replace(/(\?|#).*$/g, ''), '.svg'),
-            imgPath: imgPath,
+            spriteName: path.basename(imgPath.replace(/(\?|#).*$/g, ''), '.svg'), // eslint-disable-line prefer-named-capture-group
+            imgPath,
             shapes: reshapeTemplateVars(data.css)
           });
 

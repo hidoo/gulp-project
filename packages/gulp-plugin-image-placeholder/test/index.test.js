@@ -12,6 +12,7 @@ import imagePlaceholder from '../src';
 
 /**
  * get array of uint8array from buffers
+ *
  * @param {Array<Buffer>} buffers array of buffer of image
  * @return {Promise}
  */
@@ -30,19 +31,22 @@ function getUint8ArraysFromBuffers(buffers) {
 
 /**
  * compare pixels
+ *
  * @param {Array} params array of parameter
  * @return {Promise}
  */
 function comparePixels(params) {
-  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise((resolve, reject) =>
-    getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
+  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise(
+    (resolve, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
       .then((pixels) => {
         const [actualPixels, expectedPixels] = pixels,
               countDiffPixels = pixelmatch(
                 actualPixels,
                 expectedPixels,
                 null,
-                width, height, {threshold: 0.1}
+                width,
+                height,
+                {threshold: 0.1}
               );
 
         assert(countDiffPixels === 0);
@@ -72,13 +76,13 @@ describe('gulp-plugin-image-placeholder', () => {
     ]
   ];
 
-  it('should out original image and placeholder image if options is default.', async () =>
+  it('should out original image and placeholder image if options is default.', async () => {
     await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
       const plugin = imagePlaceholder({verbose: false}),
             srcBuffer = fs.readFileSync(path, {encode: null}),
             expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
             fakeFile = new Vinyl({
-              path: path,
+              path,
               contents: Buffer.from(srcBuffer)
             });
 
@@ -116,16 +120,16 @@ describe('gulp-plugin-image-placeholder', () => {
       plugin.write(fakeFile);
 
       plugin.end();
-    })))
-  );
+    })));
+  });
 
-  it('should out placeholder image only if options.append is false.', async () =>
+  it('should out placeholder image only if options.append is false.', async () => {
     await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
       const plugin = imagePlaceholder({append: false, verbose: false}),
             srcBuffer = fs.readFileSync(path, {encode: null}),
             expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
             fakeFile = new Vinyl({
-              path: path,
+              path,
               contents: Buffer.from(srcBuffer)
             });
 
@@ -153,16 +157,16 @@ describe('gulp-plugin-image-placeholder', () => {
       plugin.write(fakeFile);
 
       plugin.end();
-    })))
-  );
+    })));
+  });
 
-  it('should out placeholder image to filepath that applied specified suffix', async () =>
+  it('should out placeholder image to filepath that applied specified suffix', async () => {
     await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
       const plugin = imagePlaceholder({suffix: 'hoge', verbose: false}),
             srcBuffer = fs.readFileSync(path, {encode: null}),
             expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
             fakeFile = new Vinyl({
-              path: path,
+              path,
               contents: Buffer.from(srcBuffer)
             });
 
@@ -201,7 +205,7 @@ describe('gulp-plugin-image-placeholder', () => {
       plugin.write(fakeFile);
 
       plugin.end();
-    })))
-  );
+    })));
+  });
 
 });

@@ -1,5 +1,3 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'assert';
 import fs from 'fs';
 import cheerio from 'cheerio';
@@ -11,9 +9,9 @@ describe('gulp-plugin-svg-sprite', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  it('should return optimized svg string', async () => {
+  it('should return optimized svg string', () => {
     const result = optimizeSvg(fs.readFileSync(`${path.src}/not-optimized.svg`)),
-          $ = cheerio.load(result, {ignoreWhitespace: true, xmlMode: true});
+          $ = cheerio.load(result, {ignoreWhitespace: true, xmlMode: true}); // eslint-disable-line id-length
 
     const $styles = $('style'),
           $notRootSvg = $('svg').filter((index, svg) => $(svg).parent()[0]),

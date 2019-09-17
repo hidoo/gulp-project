@@ -4,13 +4,18 @@ import CSSOM from 'cssom';
 /**
  * optimize svg markup
  * + delete unnecessary values output from adobe photoshop assets
+ *
  * @param {String} contents svg contents
  * @return {String}
  */
 export default function optimizeSvg(contents = '') {
 
   // load to parser
-  const $ = cheerio.load(contents, {ignoreWhitespace: true, xmlMode: true});
+  // eslint-disable-next-line id-length
+  const $ = cheerio.load(contents, {
+    ignoreWhitespace: true,
+    xmlMode: true
+  });
 
   // process each <svg> element
   $('svg').each((index, svg) => {

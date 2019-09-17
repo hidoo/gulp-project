@@ -16,12 +16,14 @@ import pathDepth from './pathDepth';
 
 /**
  * task name.
+ *
  * @type {String}
  */
 const TASK_NAME = 'gulp-task-build-html-handlebars';
 
 /**
  * get context data from files
+ *
  * @param {String} pattern glob pattern
  * @param {Object} options options
  * @param {HandlebarsEnvironment} options.handlebars Handlrbars instance
@@ -56,6 +58,7 @@ function getContextFromFiles(pattern, options = {}) {
 /**
  * get context data from front matter
  * + add path information of files included in Vinyl
+ *
  * @param {Vinyl} file Vinyl file
  * @param {Object} options options
  * @param {Object} options.context additinal data
@@ -85,6 +88,7 @@ function getContextFromFrontMatter(file, options = {}) {
 /**
  * sort vinyl stream by filename
  * + it sort to be end of sorting, if filename is like "pagelist".
+ *
  * @param {Object} options options
  * @param {String} options.extname extname
  * @return {Number}
@@ -93,7 +97,7 @@ function sortByFilename(options = {}) {
   const extname = options.extname || '.html',
         pattern = new RegExp(`page-?list${extname}$`);
 
-  return (a, b) => {
+  return (a, b) => { // eslint-disable-line id-length
     const aIsMatch = pattern.test(a.path),
           bIsMatch = pattern.test(b.path);
 
@@ -109,6 +113,7 @@ function sortByFilename(options = {}) {
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -145,6 +150,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return html build task by handlebars
+ *
  * @param  {Object} options - options
  * @param  {String} [options.name='build:html'] - task name (use as displayName)
  * @param  {String} options.src - source path
@@ -169,22 +175,25 @@ const DEFAULT_OPTIONS = {
  * task('html', buildHtml({
  *   name: 'html:main',
  *   src: '/path/to/html/*.hbs',
- *   dest: '/path/to/dest'
+ *   dest: '/path/to/dest',
  *   extname: '.php',
  *   partials: '/path/to/html/partials/*.hbs',
  *   layouts: '/path/to/html/layouts/*.hbs',
  *   helpers: '/path/to/html/helpers/*.js',
  *   data: '/path/to/html/data/*.{json,yaml}',
  *   compress: true,
- *   compressOptions: { // Default for this options
+ *   // Default for this options
+ *   compressOptions: {
  *     caseSensitive: true,
  *     collapseWhitespace: true,
  *     conservativeCollapse: true,
  *     preserveLineBreaks: true,
  *     ignoreCustomFragments: [
- *       /<\?[\s\S]*?\?>/, // php start end tags
- *       /<\/?mt:?[\s\S]*?>/i, // cms tags
- *       /<\$mt:?[\s\S]*?\$>/i // cms tags
+ *       // php start end tags
+ *       /<\?[\s\S]*?\?>/,
+ *       // cms tags
+ *       /<\/?mt:?[\s\S]*?>/i,
+ *       /<\$mt:?[\s\S]*?\$>/i
  *     ]
  *   },
  *   onFilesParsed: (context) => context,
@@ -208,8 +217,8 @@ export default function buildHtml(options = {}) {
           };
 
     // add default helpers from @hidoo/handlebars-helpers
-    Object.entries(helpers).forEach(([name, helper]) =>
-      handlebars.registerHelper(name, helper)
+    Object.entries(helpers).forEach(
+      ([name, helper]) => handlebars.registerHelper(name, helper)
     );
 
     return src(opts.src)

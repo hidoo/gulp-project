@@ -24,7 +24,7 @@ describe('inputOptions', () => {
         {input: '/path/to/src'}
       ],
       [
-        {src: '/path/to/src', inputOptions: {plugins: [() => {}]}},
+        {src: '/path/to/src', inputOptions: {plugins: [() => {}]}}, // eslint-disable-line no-empty-function
         {input: '/path/to/src'}
       ],
       [

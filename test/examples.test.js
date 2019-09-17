@@ -9,12 +9,17 @@ const assert = require('assert'),
 describe('examples', () => {
 
   describe('single-device', () => {
-    const examplePath = path.resolve(__dirname, '../examples/single-device'),
-          exampleDestPath = path.resolve(examplePath, './public');
+    let examplePath = null,
+        exampleDestPath = null;
 
-    afterEach((done) =>
-      rimraf(exampleDestPath, done)
-    );
+    before(() => {
+      examplePath = path.resolve(__dirname, '../examples/single-device');
+      exampleDestPath = path.resolve(examplePath, './public');
+    });
+
+    afterEach((done) => {
+      rimraf(exampleDestPath, done);
+    });
 
     it('should generate files to ./public directory.', async () => {
       process.chdir(examplePath);
@@ -58,12 +63,17 @@ describe('examples', () => {
   });
 
   describe('multi-device', () => {
-    const examplePath = path.resolve(__dirname, '../examples/multi-device'),
-          exampleDestPath = path.resolve(examplePath, './public');
+    let examplePath = null,
+        exampleDestPath = null;
 
-    afterEach((done) =>
-      rimraf(exampleDestPath, done)
-    );
+    before(() => {
+      examplePath = path.resolve(__dirname, '../examples/multi-device');
+      exampleDestPath = path.resolve(examplePath, './public');
+    });
+
+    afterEach((done) => {
+      rimraf(exampleDestPath, done);
+    });
 
     it('should generate files to ./public directory.', async () => {
       process.chdir(examplePath);
@@ -125,12 +135,17 @@ describe('examples', () => {
   });
 
   describe('use-sass', () => {
-    const examplePath = path.resolve(__dirname, '../examples/use-sass'),
-          exampleDestPath = path.resolve(examplePath, './public');
+    let examplePath = null,
+        exampleDestPath = null;
 
-    afterEach((done) =>
-      rimraf(exampleDestPath, done)
-    );
+    before(() => {
+      examplePath = path.resolve(__dirname, '../examples/use-sass');
+      exampleDestPath = path.resolve(examplePath, './public');
+    });
+
+    afterEach((done) => {
+      rimraf(exampleDestPath, done);
+    });
 
     it('should generate files to ./public directory.', async () => {
       process.chdir(examplePath);

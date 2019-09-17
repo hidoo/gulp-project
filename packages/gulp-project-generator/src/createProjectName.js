@@ -2,6 +2,7 @@ import path from 'path';
 
 /**
  * create project name from project basename
+ *
  * @param {String} dirname path name
  * @return {String}
  */

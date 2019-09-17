@@ -2,6 +2,7 @@ import os from 'os';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -18,6 +19,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return current ip addresses in local network.
+ *
  * @param {Object} options options
  * @return {Array}
  *

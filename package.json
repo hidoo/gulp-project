@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "This is the monorepo for gulp project packages.",
   "private": true,
+  "files": [],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "release:version": "node ./scripts/bumpVersion.js",
@@ -29,8 +30,7 @@
   "devDependencies": {
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
-    "@hidoo/eslint-config": "0.1.4",
-    "babel-eslint": "10.0.3",
+    "@hidoo/eslint-config": "0.2.0",
     "chalk": "2.4.2",
     "cross-env": "5.2.1",
     "eslint": "6.4.0",

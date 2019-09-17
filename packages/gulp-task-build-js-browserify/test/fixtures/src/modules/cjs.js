@@ -3,6 +3,7 @@
 
 /**
  * Common JS 形式のモジュール
+ *
  * @return {void}
  */
 module.exports = function commonJsModule() {

@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers, max-statements */
+/* eslint no-magic-numbers: off */
 
 import path from 'path';
 import through from 'through2';
@@ -12,12 +12,14 @@ import log from 'fancy-log';
 
 /**
  * plugin name.
+ *
  * @type {String}
  */
 const PLUGIN_NAME = 'gulp-plugin-image-placeholder';
 
 /**
  * plugin default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -28,6 +30,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return placeholder image.
+ *
  * @param {Object} options option
  * @param {Boolean} [options.append=true] append placeholder or not
  * @param {String} [options.suffix='placeholder'] placeholder image suffix
@@ -44,12 +47,12 @@ const DEFAULT_OPTIONS = {
  *     suffix: 'placehold',
  *     verbose: true
  *   }))
- *   .pipe(dest('/path/to/dest'))):
+ *   .pipe(dest('/path/to/dest')));
  */
 export default function imagePlaceholder(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
-  return through.obj(function(file, enc, done) {
+  return through.obj(function transform(file, enc, done) {
     if (file.isStream()) {
       throw new PluginError(PLUGIN_NAME, 'Stream is not support.');
     }

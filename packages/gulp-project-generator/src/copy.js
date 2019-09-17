@@ -7,18 +7,21 @@ import * as log from './log';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * same as options of glob
+   *
    * @type {Object}
    */
   glob: {},
 
   /**
    * out log or not
+   *
    * @type {Boolean}
    */
   verbose: true
@@ -26,6 +29,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * copy files by specified blob patten
+ *
  * @param {String} pattern glob pattern of source path
  * @param {String} dest destination path
  * @param {DEFAULT_OPTIONS} options options

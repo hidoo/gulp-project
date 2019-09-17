@@ -7,14 +7,19 @@ import Handlebars from 'handlebars';
 import svgSprite from '../src';
 
 describe('gulp-plugin-svg-sprite', () => {
-  const path = {
-          src: `${__dirname}/fixtures/src`,
-          expected: `${__dirname}/fixtures/expected`
-        },
-        srcs = [
-          `${path.src}/sample-a.svg`,
-          `${path.src}/sample-b.svg`
-        ];
+  let path = null,
+      srcs = null;
+
+  before(() => {
+    path = {
+      src: `${__dirname}/fixtures/src`,
+      expected: `${__dirname}/fixtures/expected`
+    };
+    srcs = [
+      `${path.src}/sample-a.svg`,
+      `${path.src}/sample-b.svg`
+    ];
+  });
 
   it('should out css and svg to specified path.', async () => {
     const options = {
@@ -23,7 +28,7 @@ describe('gulp-plugin-svg-sprite', () => {
       imgPath: './sample.svg'
     };
 
-    return await new Promise((resolve) => {
+    await new Promise((resolve) => {
       const stream = svgSprite({...options});
 
       stream.once('data', (file) => {
@@ -67,7 +72,7 @@ describe('gulp-plugin-svg-sprite', () => {
       padding: 10
     };
 
-    return await new Promise((resolve) => {
+    await new Promise((resolve) => {
       const stream = svgSprite({...options});
 
       stream.once('data', (file) => {
@@ -111,7 +116,7 @@ describe('gulp-plugin-svg-sprite', () => {
       layout: 'vertical'
     };
 
-    return await new Promise((resolve) => {
+    await new Promise((resolve) => {
       const stream = svgSprite({...options});
 
       stream.once('data', (file) => {
@@ -155,7 +160,7 @@ describe('gulp-plugin-svg-sprite', () => {
       cssTemplate: `${path.src}/template.hbs`
     };
 
-    return await new Promise((resolve) => {
+    await new Promise((resolve) => {
       const stream = svgSprite({...options});
 
       stream.once('data', (file) => {
@@ -202,7 +207,7 @@ describe('gulp-plugin-svg-sprite', () => {
       }
     };
 
-    return await new Promise((resolve) => {
+    await new Promise((resolve) => {
       const stream = svgSprite({...options});
 
       stream.once('data', (file) => {

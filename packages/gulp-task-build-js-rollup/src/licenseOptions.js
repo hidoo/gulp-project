@@ -1,5 +1,6 @@
 /**
  * return options for rollup-plugin-license
+ *
  * @return {Object}
  */
 export default function licenseOptions() {

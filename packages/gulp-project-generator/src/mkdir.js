@@ -4,18 +4,21 @@ import * as log from './log';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * same as options of mkdirp
+   *
    * @type {Object}
    */
   mkdirp: {},
 
   /**
    * out log or not
+   *
    * @type {Boolean}
    */
   verbose: false
@@ -23,6 +26,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * make directory
+ *
  * @param {String} dest destination path
  * @param {DEFAULT_OPTIONS} options options
  * @param {Object} options.mkdirp same as options of mkdirp

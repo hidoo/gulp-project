@@ -3,6 +3,7 @@ import log from 'fancy-log';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -17,6 +18,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return normalize presets
+ *
  * @param {Array} presets presets
  * @return {Array}
  */
@@ -40,6 +42,7 @@ export function normalizeBabelPresets(presets = []) {
 
 /**
  * return specified name preset
+ *
  * @param {String} name preset name
  * @param {Array} presets presets
  * @return {Array}
@@ -62,6 +65,7 @@ export function findBabelPreset(name = '', presets = []) {
 
 /**
  * return merged babelrc presets
+ *
  * @param {Array} presets babelrc presets
  * @param {Array} source target of merge
  * @param {DEFAULT_OPTIONS} options option
@@ -106,17 +110,20 @@ export function mergeBabelPresets(presets = [], source = [], options = {}) {
         if (opts.targets && Array.isArray(options.presetEnvAllowTargets)) {
           opts.targets = Object.entries(opts.targets)
             .filter(([key]) => options.presetEnvAllowTargets.includes(key))
-            .reduce((prev, [key, value]) => ({...prev, [key]: value}), {});
+            .reduce((prev, [key, value]) => {
+              return {...prev, [key]: value};
+            }, {});
         }
       }
 
       return [name, opts];
     })
-    .sort((a, b) => a[0].localeCompare(b[0]));
+    .sort((a, b) => a[0].localeCompare(b[0])); // eslint-disable-line id-length
 }
 
 /**
  * return merged babelrc plugins
+ *
  * @param {Array} plugins babelrc plugins
  * @param {Array} source target of merge
  * @return {Array}
@@ -136,26 +143,31 @@ export function mergeBabelPlugins(plugins = [], source = []) {
 
 /**
  * return merged babelrc
- * @param {String} path path to babelrc
- * @param {Object} source target of merge
- * @param {DEFAULT_OPTIONS} options options
+ *
+ * @param {String} [path=''] path to babelrc
+ * @param {Object} [source={}] target of merge
+ * @param {DEFAULT_OPTIONS} [options={}] options
  * @return {Object}
  *
  * @example
  * import mergeBabelrc from '@hidoo/gulp-util-merge-babelrc';
  *
  * const babelOptions = mergeBabelrc('/path/to/.babelrc.js', {
- *   presets: [...],
- *   plugins: [...],
+ *   presets: [
+ *     // some presets ...
+ *   ],
+ *   plugins: [
+ *     // some presets ...
+ *   ],
  *   useBuiltIns: 'usege'
  * });
  */
-export default function mergeBabelrc(path = '', source, options = {}) {
+export default function mergeBabelrc(path = '', source = {}, options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
   let babelrc = {};
 
   if (typeof path === 'string' && path !== '') {
-    babelrc = require(path); // eslint-disable-line global-require
+    babelrc = require(path); // eslint-disable-line global-require, import/no-dynamic-require
     if (opts.verbose) {
       log.info(`Using babelrc: ${path}`);
     }

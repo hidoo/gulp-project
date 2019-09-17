@@ -1,5 +1,6 @@
 /**
  * reshape variables for template
+ *
  * @param {Object} vars variables for template
  * @return {Array}
  */
@@ -29,7 +30,6 @@ export default function reshapeTemplateVars(vars = {}) {
       elasticBackgroundHeight: totalHeight / height * RATE,
       elasticOffsetX: offsetX / height,
       elasticOffsetY: offsetY / height,
-
 
       // shape's fixed pixel sizes (same as gulp.spritesmith)
       px: {

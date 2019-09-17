@@ -55,7 +55,7 @@ import buildJs from '@hidoo/gulp-task-build-js-browserify';
 task('js', buildJs({
   name: 'js:main',
   src: '/path/to/js/main.js',
-  dest: '/path/to/dest'
+  dest: '/path/to/dest',
   filename: 'main.js',
   suffix: '.hoge',
   browsers: ['> 0.1% in JP'],

@@ -1,7 +1,7 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
 import assert from 'assert';
-import sample from '../';
+import sample from '..';
 
 describe('js/lib/sample-esm', () => {
 

@@ -1,5 +1,3 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'assert';
 import fs from 'fs';
 import {resolve} from 'path';
@@ -7,15 +5,19 @@ import rimraf from 'rimraf';
 import generateConfig from '../src/generateConfig';
 
 describe('generateConfig', () => {
-  const path = {
-    src: resolve(__dirname, '../template'),
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let path = null;
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/.*`, done)
-  );
+  before(() => {
+    path = {
+      src: resolve(__dirname, '../template'),
+      dest: `${__dirname}/fixtures/dest`,
+      expected: `${__dirname}/fixtures/expected`
+    };
+  });
+
+  afterEach((done) => {
+    rimraf(`${path.dest}/.*`, done);
+  });
 
   it('should return Promise.', (done) => {
     const actual = generateConfig(path.src, path.dest, {});

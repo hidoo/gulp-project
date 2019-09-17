@@ -12,9 +12,9 @@ describe('gulp-task-build-html-handlebars', () => {
     expected: `${__dirname}/fixtures/expected`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{html,php}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{html,php}`, done);
+  });
 
   it('should out to "options.dest" if argument "options" is default.', (done) => {
     const task = buildHtml({
@@ -139,7 +139,7 @@ describe('gulp-task-build-html-handlebars', () => {
       src: `${path.src}/index.data.hbs`,
       dest: path.dest,
       data: `${path.src}/data/**/valid.yml`,
-      onFilesParsed: (data) => {
+      onFilesParsed(data) {
         if (data.data && data.data.site && data.data.site.title && data.data.site.description) {
           data.data.site = {
             title: 'hoge',
@@ -181,7 +181,7 @@ describe('gulp-task-build-html-handlebars', () => {
     const task = buildHtml({
       src: `${path.src}/index.hbs`,
       dest: path.dest,
-      onFrontMatterParsed: (data) => {
+      onFrontMatterParsed(data) {
         if (data.seo && data.seo.title && data.seo.description) {
           data.seo = {
             title: 'hoge',

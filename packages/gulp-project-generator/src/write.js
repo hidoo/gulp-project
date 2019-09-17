@@ -5,18 +5,21 @@ import * as log from './log';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * same as options of fs.writeFile
+   *
    * @type {Object}
    */
   writeFile: {},
 
   /**
    * out log or not
+   *
    * @type {Boolean}
    */
   verbose: false
@@ -24,6 +27,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * write to file
+ *
  * @param {String} src source content
  * @param {String} dest destination path
  * @param {DEFAULT_OPTIONS} options options

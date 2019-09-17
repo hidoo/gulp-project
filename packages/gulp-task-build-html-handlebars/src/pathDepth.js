@@ -1,5 +1,6 @@
 /**
  * return path depth string from path string
+ *
  * @param {String} path path string
  * @return {String}
  */
@@ -15,5 +16,7 @@ export default function pathDepth(path = '') {
 
   const depthCount = (path.match(/\//g) || []).length;
 
-  return Array.from(Array(depthCount)).map(() => '../').join('') || './';
+  return Array.from(Array(depthCount))
+    .map(() => '../')
+    .join('') || './';
 }

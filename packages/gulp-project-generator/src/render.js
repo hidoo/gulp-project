@@ -5,6 +5,7 @@ import * as helpers from '@hidoo/handlebars-helpers';
 
 /**
  * render file from template
+ *
  * @param {String} src source path of template
  * @param {Object} context template context
  * @return {Promise<String>}
@@ -16,12 +17,12 @@ export default function render(src = '', context = {}) {
 
   const hbs = Handlebars.create();
 
-  Object.entries(helpers).forEach(([name, helper]) =>
-    hbs.registerHelper(name, helper)
+  Object.entries(helpers).forEach(
+    ([name, helper]) => hbs.registerHelper(name, helper)
   );
 
-  const promise = new Promise((resolve, reject) =>
-    fs.readFile(path.resolve(src), (error, content) => {
+  const promise = new Promise(
+    (resolve, reject) => fs.readFile(path.resolve(src), (error, content) => {
       if (error) {
         return reject(error);
       }

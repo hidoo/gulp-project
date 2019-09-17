@@ -4,6 +4,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -14,6 +15,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return copy files task
+ *
  * @param {Object} options - options
  * @param {String} [options.name='copy:asset'] - task name (use as displayName)
  * @param {String} options.src - source path

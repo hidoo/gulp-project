@@ -8,7 +8,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  pkg = require(path.resolve(process.cwd(), 'package.json')); // eslint-disable-line global-require
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
   console.error('Failed to load package.json.'); // eslint-disable-line no-console
@@ -19,6 +20,7 @@ catch (error) {
  * Handlebars templates.
  * + Fixed handling of Promise (Bluebird) in original KssBuilderHandlebars.
  * + original: <https://github.com/kss-node/kss-node/blob/master/builder/base/handlebars/kss_builder_base_handlebars.js>
+ *
  * @class KssBuilderHandlebars
  */
 class KssBuilderHandlebars extends KssBuilderBase {
@@ -34,25 +36,25 @@ class KssBuilderHandlebars extends KssBuilderBase {
     // + can use like {{ options.xxxx }} in styleguide template
     this.addOptionDefinitions({
       title: {
-        group: 'Style guide:',
-        string: true,
-        multiple: false,
-        describe: 'Title of the style guide',
-        default: pkg.name || ''
+        'group': 'Style guide:',
+        'string': true,
+        'multiple': false,
+        'describe': 'Title of the style guide',
+        'default': pkg.name || ''
       },
       version: {
-        group: 'Style guide:',
-        string: true,
-        multiple: false,
-        describe: 'Version of the style guide',
-        default: pkg.version || '0.0.0'
+        'group': 'Style guide:',
+        'string': true,
+        'multiple': false,
+        'describe': 'Version of the style guide',
+        'default': pkg.version || '0.0.0'
       },
       author: {
-        group: 'Style guide:',
-        string: true,
-        multiple: false,
-        describe: 'Author of the style guide',
-        default: pkg.author || ''
+        'group': 'Style guide:',
+        'string': true,
+        'multiple': false,
+        'describe': 'Author of the style guide',
+        'default': pkg.author || ''
       }
     });
   }
@@ -63,8 +65,8 @@ class KssBuilderHandlebars extends KssBuilderBase {
    *   added to version 3.0.0-beta.17 or later.
    *
    * @param {KssStyleGuide} styleGuide The KSS style guide in object format.
-   * @param {object} options The options necessary to use this helper method.
-   * @returns {Promise.<KssStyleGuide>} A `Promise` object resolving to a
+   * @param {Object} options The options necessary to use this helper method.
+   * @return {Promise.<KssStyleGuide>} A `Promise` object resolving to a
    *   `KssStyleGuide` object.
    */
   buildGuide(styleGuide, options) {
@@ -93,7 +95,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
    * guide is built.
    *
    * @param {KssStyleGuide} styleGuide The KSS style guide in object format.
-   * @returns {Promise.<null>} A `Promise` object resolving to `null`.
+   * @return {Promise.<null>} A `Promise` object resolving to `null`.
    */
   prepare(styleGuide) {
 
@@ -109,8 +111,8 @@ class KssBuilderHandlebars extends KssBuilderBase {
       this.Handlebars = Handlebars.create();
 
       // add helpers
-      Object.entries(helpers).forEach(([name, func]) =>
-        this.Handlebars.registerHelper(name, func)
+      Object.entries(helpers).forEach(
+        ([name, func]) => this.Handlebars.registerHelper(name, func)
       );
 
       // + Create a new destination directory.
@@ -128,7 +130,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
    * Build the HTML files of the style guide given a KssStyleGuide object.
    *
    * @param {KssStyleGuide} styleGuide The KSS style guide in object format.
-   * @returns {Promise.<KssStyleGuide>} A `Promise` object resolving to a
+   * @return {Promise.<KssStyleGuide>} A `Promise` object resolving to a
    *   `KssStyleGuide` object.
    */
   build(styleGuide) {
@@ -175,7 +177,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
 
         // require() returns a cached object. We want an independent clone of
         // the object so we can make changes without affecting the original.
-        context = require(jsonpath); // eslint-disable-line global-require
+        context = require(jsonpath); // eslint-disable-line global-require, import/no-dynamic-require
         context = JSON.parse(JSON.stringify(context));
       }
       catch (error) {
@@ -186,13 +188,13 @@ class KssBuilderHandlebars extends KssBuilderBase {
     });
 
     // Returns a promise to get a template by name.
-    options.getTemplate = (name) => new Promise((resolve) =>
-      resolve(this.Handlebars.compile(`{{> ${name}}}`))
+    options.getTemplate = (name) => new Promise(
+      (resolve) => resolve(this.Handlebars.compile(`{{> ${name}}}`))
     );
 
     // Returns a promise to get a template's markup by name.
-    options.getTemplateMarkup = (name) => new Promise((resolve) =>
-      resolve(this.Handlebars.partials[name])
+    options.getTemplateMarkup = (name) => new Promise(
+      (resolve) => resolve(this.Handlebars.partials[name])
     );
 
     // Renders a template and returns the markup.

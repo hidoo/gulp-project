@@ -3,6 +3,7 @@ import log from 'fancy-log';
 
 /**
  * Handling task error.
+ *
  * @param {Error} error Error Object
  * @return {void}
  *
@@ -26,5 +27,5 @@ export default function errorHandler(error) {
     return;
   }
 
-  log.error(`${red(name)}${pluginInfo}${grey(fileInfo)}${detail ? `, detail: ${grey(detail)}` : ''}`); // eslint-disable-line max-len
+  log.error(`${red(name)}${pluginInfo}${grey(fileInfo)}${detail ? `, detail: ${grey(detail)}` : ''}`);
 }

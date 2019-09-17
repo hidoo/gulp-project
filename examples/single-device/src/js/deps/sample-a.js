@@ -1,5 +1,5 @@
-/* eslint-disable strict, no-console, no-process-env */
-(function(window) {
+/* eslint strict: off, no-console: off, no-process-env: off*/
+(function main(window) {
   'use strict';
 
   console.log('sample-a.js', window);
@@ -9,4 +9,3 @@
   }
 
 })(window);
-/* eslint-enable strict, no-console */

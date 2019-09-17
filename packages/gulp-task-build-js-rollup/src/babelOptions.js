@@ -2,6 +2,7 @@ import mergeBabelrc from '@hidoo/util-merge-babelrc';
 
 /**
  * return options for rollup-plugin-babel
+ *
  * @param {DEFAULT_OPTIONS} options option
  * @return {Object}
  */

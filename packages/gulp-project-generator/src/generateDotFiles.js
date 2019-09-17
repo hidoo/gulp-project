@@ -5,6 +5,7 @@ import formatCode from './formatCode';
 /* eslint-disable max-statements */
 /**
  * generate dot files
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options

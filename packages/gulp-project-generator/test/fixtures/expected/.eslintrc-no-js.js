@@ -5,16 +5,6 @@ module.exports = {
     '@hidoo/eslint-config/+babel'
   ],
   'overrides': [
-    // for Mocha
-    {
-      'files': [
-        '**/*.spec.js',
-        '**/*.test.js'
-      ],
-      'extends': [
-        '@hidoo/eslint-config/+mocha'
-      ]
-    },
     // for Node
     {
       'files': [

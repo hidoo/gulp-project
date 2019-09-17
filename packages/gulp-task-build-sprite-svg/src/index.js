@@ -12,6 +12,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
  * svgo plugins for imagemin
+ *
  * @type {Function}
  *
  * @example
@@ -21,6 +22,7 @@ export const svgo = imagemin.svgo;
 
 /**
  * path of css templates
+ *
  * @type {String}
  */
 const pathStylusTemplate = path.resolve(__dirname, '../template/stylus.hbs');
@@ -28,6 +30,7 @@ const pathScssTemplate = path.resolve(__dirname, '../template/scss.hbs');
 
 /**
  * task default options.
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
@@ -52,6 +55,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * return build svg sprite sheet task
+ *
  * @param {Object} options option
  * @param {String} [options.name='build:sprite'] - task name (use as displayName)
  * @param {String} options.src - source path
@@ -92,7 +96,8 @@ const DEFAULT_OPTIONS = {
  *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   compress: true,
- *   compressOptions: [ // Default for this options
+ *   // Default for this options
+ *   compressOptions: [
  *     svgo()
  *   ],
  *   verbose: true

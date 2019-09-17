@@ -8,15 +8,19 @@ import glob from 'glob';
 import generateServerFiles from '../src/generateServerFiles';
 
 describe('generateServerFiles', () => {
-  const path = {
-    src: resolve(__dirname, '../template'),
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let path = null;
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*`, done)
-  );
+  before(() => {
+    path = {
+      src: resolve(__dirname, '../template'),
+      dest: `${__dirname}/fixtures/dest`,
+      expected: `${__dirname}/fixtures/expected`
+    };
+  });
+
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise.', (done) => {
     const actual = generateServerFiles(path.src, path.dest, {});

@@ -9,9 +9,9 @@ describe('mkdir', () => {
     dest: `${__dirname}/fixtures/dest`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*`, done);
+  });
 
   it('should return Promise includes String of created directory path.', (done) => {
     const actual = mkdir(`${path.dest}/hoge`, {verbose: false});

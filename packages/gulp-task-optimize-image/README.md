@@ -114,7 +114,12 @@ return image optimize task
 
 ```javascript
 import {task} from 'gulp';
-import optimizeImage, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-optimize-image';
+import optimizeImage, {
+  gifsicle,
+  mozjpeg,
+  optipng,
+  svgo
+} from '@hidoo/gulp-task-optimize-image';
 
 task('image', optimizeImage({
   name: 'image:main',
@@ -123,7 +128,8 @@ task('image', optimizeImage({
   evenize: true,
   placeholder: true,
   compress: true,
-  compressOptions: [ // Default for this options
+  // Default for this options
+  compressOptions: [
     gifsicle({interlaced: true}),
     mozjpeg({quality: 90, progressive: true}),
     optipng({optimizationLevel: 5}),

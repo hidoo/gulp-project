@@ -4,6 +4,7 @@ import * as status from '../constants/statusCode';
 
 /**
  * show README
+ *
  * @param {Request} req request object
  * @param {Response} res response object
  * @return {Promise}
@@ -11,8 +12,8 @@ import * as status from '../constants/statusCode';
 export async function readme(req, res) {
   const filepath = path.resolve(process.cwd(), './README.md');
 
-  const results = await new Promise((resolve) =>
-    fs.readFile(filepath, (error, content) => resolve({
+  const results = await new Promise(
+    (resolve) => fs.readFile(filepath, (error, content) => resolve({
       error, content: content ? content.toString() : null
     }))
   );
@@ -26,5 +27,4 @@ export async function readme(req, res) {
     title: `README`,
     content: results.content
   });
-  return;
 }

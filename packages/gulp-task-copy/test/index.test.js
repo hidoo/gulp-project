@@ -11,9 +11,9 @@ describe('gulp-task-copy', () => {
     dest: `${__dirname}/fixtures/dest`
   };
 
-  afterEach((done) =>
-    rimraf(`${path.dest}/*.{css,js,png,jpg,gif,svg}`, done)
-  );
+  afterEach((done) => {
+    rimraf(`${path.dest}/*.{css,js,png,jpg,gif,svg}`, done);
+  });
 
   it('should out to "options.dest" if argument "options" is default.', (done) => {
     const task = copy({

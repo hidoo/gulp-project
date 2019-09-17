@@ -132,7 +132,12 @@ return build image sprite sheet task
 
 ```javascript
 import {task} from 'gulp';
-import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
+import buildSprite, {
+  gifsicle,
+  mozjpeg,
+  optipng,
+  svgo
+} from '@hidoo/gulp-task-build-sprite-image';
 
 task('sprite', buildSprite({
   name: 'sprite:main',
@@ -150,7 +155,8 @@ task('sprite', buildSprite({
   cssHandlebarsHelpers: {hoge: (value) => value},
   evenize: true,
   compress: true,
-  compressOptions: [ // Default for this options
+  // Default for this options
+  compressOptions: [
     gifsicle({interlaced: true}),
     mozjpeg({quality: 90, progressive: true}),
     optipng({optimizationLevel: 5}),

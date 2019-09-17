@@ -4,6 +4,7 @@ import formatCode from './formatCode';
 
 /**
  * generate config
+ *
  * @param {String} src source path
  * @param {String} dest destination path
  * @param {OPTIONS} options command line options
@@ -21,5 +22,5 @@ export default async function generateConfig(src = '', dest = '', options = {}) 
   const output = await render(`${src}/config.js.hbs`, options);
   const formated = await formatCode(output);
 
-  return await write(formated, `${dest}/config.js`, {verbose});
+  await write(formated, `${dest}/config.js`, {verbose});
 }

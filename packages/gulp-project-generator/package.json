@@ -50,7 +50,7 @@
     "eslint": "6.4.0",
     "glob": "7.1.4",
     "glob-parent": "5.0.0",
-    "handlebars": "4.2.0",
+    "handlebars": "4.2.1",
     "inquirer": "7.0.0",
     "mkdirp": "0.5.1"
   }

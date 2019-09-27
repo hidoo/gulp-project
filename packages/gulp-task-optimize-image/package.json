@@ -52,7 +52,7 @@
     "gulp-imagemin": "6.1.0",
     "gulp-plumber": "1.2.1",
     "imagemin-mozjpeg": "8.0.0",
-    "pixelmatch": "5.0.2"
+    "pixelmatch": "5.1.0"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

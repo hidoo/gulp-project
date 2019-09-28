@@ -7516,10 +7516,10 @@ handlebars-wax@^6.1.0:
     object-assign "^4.1.1"
     require-glob "^3.2.0"
 
-handlebars@4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.2.1.tgz#dc69c0e61604224f0c23b38b5b6741db210b57da"
-  integrity sha512-bqPIlDk06UWbVEIFoYj+LVo42WhK96J+b25l7hbFDpxrOXMphFM3fNIm+cluwg4Pk2jiLjWU5nHQY7igGE75NQ==
+handlebars@4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.3.4.tgz#aab065294c27ad16ff4e711240a7288d2753306d"
+  integrity sha512-vvpo6mpK4ScNC1DbGRZ2d5BznS6ht0r1hi20RivsibMc6jNvFAeZQ6qk5VNspo6SOwVOJQbjHyBCpuS7BzA1pw==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"

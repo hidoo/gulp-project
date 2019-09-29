@@ -36,7 +36,7 @@
     "mocha": "6.2.0",
     "power-assert": "1.6.1",
     "rimraf": "3.0.0",
-    "sinon": "7.4.2",
+    "sinon": "7.5.0",
     "strip-ansi": "5.2.0"
   }
 }

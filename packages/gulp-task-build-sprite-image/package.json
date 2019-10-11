@@ -32,7 +32,7 @@
     "@babel/preset-env": "7.6.2",
     "@babel/register": "7.6.2",
     "babel-preset-power-assert": "3.0.0",
-    "cross-env": "6.0.0",
+    "cross-env": "6.0.3",
     "documentation": "12.1.2",
     "file-type": "12.3.0",
     "get-pixels": "3.3.2",

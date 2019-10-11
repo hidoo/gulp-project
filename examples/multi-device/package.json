@@ -44,7 +44,7 @@
     "commander": "^3.0.2",
     "core-js": "2.6.9",
     "cross-env": "^6.0.0",
-    "eslint": "^6.5.0",
+    "eslint": "^6.5.1",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "husky": "^3.0.7",

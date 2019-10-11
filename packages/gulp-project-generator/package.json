@@ -31,9 +31,9 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.6.2",
+    "@babel/cli": "7.6.4",
     "@babel/core": "7.6.2",
-    "@babel/node": "7.6.2",
+    "@babel/node": "7.6.3",
     "@babel/preset-env": "7.6.2",
     "@babel/register": "7.6.2",
     "babel-preset-power-assert": "3.0.0",

@@ -48,7 +48,7 @@
     "chalk": "2.4.2",
     "commander": "3.0.2",
     "eslint": "6.5.1",
-    "glob": "7.1.4",
+    "glob": "7.1.5",
     "glob-parent": "5.1.0",
     "handlebars": "4.4.3",
     "inquirer": "7.0.0",

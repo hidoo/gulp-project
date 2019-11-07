@@ -51,7 +51,7 @@
     "gulp-rename": "1.4.0",
     "gulp-replace": "1.0.0",
     "gulp-uglify": "3.0.2",
-    "postcss-csso": "3.0.0"
+    "postcss-csso": "4.0.0"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

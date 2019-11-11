@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency lodash.merge to v4.6.2 ([5751e6a](https://github.com/hidoo/gulp-project/commit/5751e6a38e8ba091981f8b49bf1e1cbf36e27f0a))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 **Note:** Version bump only for package @hidoo/util-merge-babelrc

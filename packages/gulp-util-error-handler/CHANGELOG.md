@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v3 ([4a7a845](https://github.com/hidoo/gulp-project/commit/4a7a845d0a78700b2730b18d7205cbe74cfbfccd))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 **Note:** Version bump only for package @hidoo/gulp-util-error-handler

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency file-type to v12.0.1 ([1a06f02](https://github.com/hidoo/gulp-project/commit/1a06f02e10445d23932efa973e1849ec47e2d6bf))
+* **deps:** update dependency file-type to v12.3.0 ([7b6a149](https://github.com/hidoo/gulp-project/commit/7b6a14934f4c12d24f65093f71ea7c5fae990b4d))
+* **deps:** update dependency pixelmatch to v5.1.0 ([d193871](https://github.com/hidoo/gulp-project/commit/d193871ea2b5991ae222690f53d91eedebb20353))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 **Note:** Version bump only for package @hidoo/gulp-plugin-image-evenizer

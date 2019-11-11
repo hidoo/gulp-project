@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-imagemin to v6.1.1 ([bd09bee](https://github.com/hidoo/gulp-project/commit/bd09bee9ebcbf06949efbabfe52c705e8e98009b))
+* **deps:** update dependency pixelmatch to v5.1.0 ([d193871](https://github.com/hidoo/gulp-project/commit/d193871ea2b5991ae222690f53d91eedebb20353))
+* **deps:** update do not automerge packages ([704649b](https://github.com/hidoo/gulp-project/commit/704649b0cd5068b38310bd4c93a84d25bc8e9c30))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 **Note:** Version bump only for package @hidoo/gulp-task-optimize-image

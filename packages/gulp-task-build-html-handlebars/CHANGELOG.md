@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency handlebars to v4.2.0 ([ec1ae4e](https://github.com/hidoo/gulp-project/commit/ec1ae4e5d9cb699920a7a230068201bc66a4178d))
+* **deps:** update dependency handlebars to v4.2.1 ([e810b2e](https://github.com/hidoo/gulp-project/commit/e810b2edbd6a0ac14867cb14b5b84d837992db16))
+* **deps:** update dependency handlebars to v4.3.4 ([52dbb02](https://github.com/hidoo/gulp-project/commit/52dbb0205437a319375d8968e4b4b4d97318966e))
+* **deps:** update dependency handlebars to v4.4.0 ([ee34b98](https://github.com/hidoo/gulp-project/commit/ee34b980565bdc30b58bc4ecd2322f8c9cee4db1))
+* **deps:** update dependency handlebars to v4.4.2 ([d4cd8f2](https://github.com/hidoo/gulp-project/commit/d4cd8f229e5b54dc8bd58f4bd12680fddf7311ce))
+* **deps:** update dependency handlebars to v4.4.3 ([2557462](https://github.com/hidoo/gulp-project/commit/2557462f602f94eb488720d11e8e8ad22ee645c8))
+* **deps:** update dependency handlebars to v4.4.5 ([fd6064c](https://github.com/hidoo/gulp-project/commit/fd6064cb274ab0845b8699063dbc8481dc830a9e))
+* **deps:** update dependency handlebars to v4.5.1 ([e2da8de](https://github.com/hidoo/gulp-project/commit/e2da8dea23556dae936344d76fffd8f819163ffe))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 

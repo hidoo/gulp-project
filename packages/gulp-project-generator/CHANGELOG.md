@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update babel dependencies ([454a258](https://github.com/hidoo/gulp-project/commit/454a25802f0537f9eae326b67f384e16fc21be98))
+* **deps:** update dependency chalk to v3 ([4a7a845](https://github.com/hidoo/gulp-project/commit/4a7a845d0a78700b2730b18d7205cbe74cfbfccd))
+* **deps:** update dependency commander to v3.0.2 ([f39bb52](https://github.com/hidoo/gulp-project/commit/f39bb52baec1330828ce988cf8c9af27d5b1c30d))
+* **deps:** update dependency commander to v4 ([bcedab9](https://github.com/hidoo/gulp-project/commit/bcedab948ed319425d6bfab91fb5931d76c66ddc))
+* **deps:** update dependency eslint to v6.4.0 ([608e27d](https://github.com/hidoo/gulp-project/commit/608e27d59cfa5f147666083a5987a9112bdfb1ec))
+* **deps:** update dependency eslint to v6.5.0 ([93c834b](https://github.com/hidoo/gulp-project/commit/93c834be133f140af13464b6d61aa804fd337dee))
+* **deps:** update dependency eslint to v6.5.1 ([f03411a](https://github.com/hidoo/gulp-project/commit/f03411af20d0979b0a458587db290ac854560804))
+* **deps:** update dependency eslint to v6.6.0 ([f21ff96](https://github.com/hidoo/gulp-project/commit/f21ff9607008144d9877cd9239253b4f7d05679e))
+* **deps:** update dependency eslint to v6.6.0 ([318afa6](https://github.com/hidoo/gulp-project/commit/318afa662e3bdf00d4ec240025c96a8851777592))
+* **deps:** update dependency glob to v7.1.5 ([5bbf36f](https://github.com/hidoo/gulp-project/commit/5bbf36fe72a6fd915786135d5c9dbb0f5ab85e9c))
+* **deps:** update dependency glob to v7.1.6 ([571f7fb](https://github.com/hidoo/gulp-project/commit/571f7fbd184cf94f7c7080d611a0f2c6102912fb))
+* **deps:** update dependency glob-parent to v5.1.0 ([5e55bcc](https://github.com/hidoo/gulp-project/commit/5e55bcc07cf405f47f4ab711a9d9ca918d61b330))
+* **deps:** update dependency handlebars to v4.2.0 ([ec1ae4e](https://github.com/hidoo/gulp-project/commit/ec1ae4e5d9cb699920a7a230068201bc66a4178d))
+* **deps:** update dependency handlebars to v4.2.1 ([e810b2e](https://github.com/hidoo/gulp-project/commit/e810b2edbd6a0ac14867cb14b5b84d837992db16))
+* **deps:** update dependency handlebars to v4.3.4 ([52dbb02](https://github.com/hidoo/gulp-project/commit/52dbb0205437a319375d8968e4b4b4d97318966e))
+* **deps:** update dependency handlebars to v4.4.0 ([ee34b98](https://github.com/hidoo/gulp-project/commit/ee34b980565bdc30b58bc4ecd2322f8c9cee4db1))
+* **deps:** update dependency handlebars to v4.4.2 ([d4cd8f2](https://github.com/hidoo/gulp-project/commit/d4cd8f229e5b54dc8bd58f4bd12680fddf7311ce))
+* **deps:** update dependency handlebars to v4.4.3 ([2557462](https://github.com/hidoo/gulp-project/commit/2557462f602f94eb488720d11e8e8ad22ee645c8))
+* **deps:** update dependency handlebars to v4.4.5 ([fd6064c](https://github.com/hidoo/gulp-project/commit/fd6064cb274ab0845b8699063dbc8481dc830a9e))
+* **deps:** update dependency handlebars to v4.5.1 ([e2da8de](https://github.com/hidoo/gulp-project/commit/e2da8dea23556dae936344d76fffd8f819163ffe))
+* **deps:** update dependency inquirer to v7 ([1a7fcf1](https://github.com/hidoo/gulp-project/commit/1a7fcf13010bb59bcb4a9bcc809c2e3c676cf8ec))
+* **deps:** update dependency mocha to v6.2.2 ([8e4b56a](https://github.com/hidoo/gulp-project/commit/8e4b56a9dd4e16cacc0edd138b65449ebecf3b43))
+* **deps:** update do not automerge packages ([00783ae](https://github.com/hidoo/gulp-project/commit/00783ae5339799f124435f60a47bb0337a53a9fe))
+
+
+
+
+
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 

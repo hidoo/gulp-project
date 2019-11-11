@@ -23,7 +23,7 @@
   "author": "hidoo",
   "license": "MIT",
   "dependencies": {
-    "chalk": "2.4.2"
+    "chalk": "3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.6.4",

@@ -3,7 +3,7 @@
  *
  * @hidoo/gulp-task-build-js-rollup:
  * author: hidoo
- * version: 0.13.0
+ * version: 0.0.0
  *
  * core-js:
  * license: MIT

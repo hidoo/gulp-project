@@ -48,7 +48,7 @@
     "@hidoo/gulp-util-error-handler": "^0.14.0",
     "@hidoo/handlebars-helpers": "0.6.1",
     "gulp-if": "3.0.0",
-    "gulp-imagemin": "6.1.1",
+    "gulp-imagemin": "6.2.0",
     "gulp-plumber": "1.2.1",
     "gulp.spritesmith": "6.11.0",
     "image-size": "0.8.3",

@@ -32,7 +32,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'eslint', version: '^6.6.0'},
           {name: 'gulp', version: '^4.0.2'},
           {name: 'husky', version: '^3.0.9'},
-          {name: 'lint-staged', version: '^9.4.2'},
+          {name: 'lint-staged', version: '^9.4.3'},
           {name: 'npm-run-all', version: '^4.1.5'},
           {name: 'rimraf', version: '^3.0.0'}
         ],

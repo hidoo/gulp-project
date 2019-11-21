@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-imagemin to v6.2.0 ([f0d6393](https://github.com/hidoo/gulp-project/commit/f0d63936463340450d7bf0d1cd73d946b28e0e6c))
+
+
+
+
+
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
 
 

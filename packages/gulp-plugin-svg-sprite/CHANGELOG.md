@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cssom to v0.4.4 ([316a719](https://github.com/hidoo/gulp-project/commit/316a719e7fa321b23f52f518aee987bac7b8b863))
+* **deps:** update dependency handlebars to v4.5.2 ([8911b37](https://github.com/hidoo/gulp-project/commit/8911b3777257796283c810e1bd1d3497b6dceb54))
+
+
+
+
+
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
 
 

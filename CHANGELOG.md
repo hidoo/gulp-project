@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/data-from to v0.1.3 ([a806cf6](https://github.com/hidoo/gulp-project/commit/a806cf66e5fc1a567986bd459caf9b1dbc7b1e57))
+* **deps:** update dependency @hidoo/handlebars-helpers to v0.6.1 ([8cb2eca](https://github.com/hidoo/gulp-project/commit/8cb2eca7e0029077f2e3381c514c025d51b350d1))
+* **deps:** update dependency cssom to v0.4.4 ([316a719](https://github.com/hidoo/gulp-project/commit/316a719e7fa321b23f52f518aee987bac7b8b863))
+* **deps:** update dependency gulp-imagemin to v6.2.0 ([f0d6393](https://github.com/hidoo/gulp-project/commit/f0d63936463340450d7bf0d1cd73d946b28e0e6c))
+* **deps:** update dependency handlebars to v4.5.2 ([8911b37](https://github.com/hidoo/gulp-project/commit/8911b3777257796283c810e1bd1d3497b6dceb54))
+* **deps:** update dependency rollup to v1.26.5 ([4a51724](https://github.com/hidoo/gulp-project/commit/4a517249457b35dc761bb7440aaad01c6fc7d381))
+* **deps:** update dependency rollup to v1.27.0 ([16bf3ef](https://github.com/hidoo/gulp-project/commit/16bf3ef7322cfa20b7de9e2cb1d728683628b471))
+
+
+
+
+
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
 
 

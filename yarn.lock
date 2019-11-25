@@ -1584,7 +1584,7 @@
     json5 "2.1.1"
     lodash.merge "4.6.2"
 
-"@hidoo/eslint-config@0.3.0":
+"@hidoo/eslint-config@0.3.0", "@hidoo/eslint-config@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@hidoo/eslint-config/-/eslint-config-0.3.0.tgz#3d90c3924a30817a8a057cfbb8e772f33e4bdfa9"
   integrity sha512-nHzyAI8DqeztVGCofk93B+XzHyvdnr8+DsVzGLrKHtx0vzaJ9KOc1n8s3/62oMq2Oi+MR3lGxB6kPmcy1R8pHA==
@@ -1594,19 +1594,6 @@
     eslint-plugin-import "2.18.2"
     eslint-plugin-jsdoc "18.1.4"
     eslint-plugin-mocha "6.2.2"
-    eslint-plugin-node "10.0.0"
-    eslint-plugin-sort-class-members "1.6.0"
-
-"@hidoo/eslint-config@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@hidoo/eslint-config/-/eslint-config-0.2.0.tgz#59d3c7ca395a076436a9edebb274a31260d136a5"
-  integrity sha512-68U37Yf6OO3viHcloawL89NPTaqqf6yVlOCRfc+NOU9oJu+jcc5bL0fKkwTLl+EPqIbmDGQ0y0no9P7CEzGi7g==
-  dependencies:
-    babel-eslint "10.0.3"
-    eslint-plugin-eslint-comments "3.1.2"
-    eslint-plugin-import "2.18.2"
-    eslint-plugin-jsdoc "15.9.2"
-    eslint-plugin-mocha "6.1.1"
     eslint-plugin-node "10.0.0"
     eslint-plugin-sort-class-members "1.6.0"
 
@@ -4536,11 +4523,6 @@ commander@~2.8.1:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-comment-parser@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.6.2.tgz#b71e8fcacad954bea616779391838150d0096dcb"
-  integrity sha512-Wdms0Q8d4vvb2Yk72OwZjwNWtMklbC5Re7lD9cjCP/AG1fhocmc0TrxGBBAXPLy8fZQPrfHGgyygwI0lA7pbzA==
-
 comment-parser@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.7.0.tgz#9dc1f689a60d81fbcaf867d3c9eba3eb061ccfc1"
@@ -6246,18 +6228,6 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jsdoc@15.9.2:
-  version "15.9.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.9.2.tgz#fe02042ed6d2e140dc7710afd129382712c95101"
-  integrity sha512-dJjIWFJlh4ti3CegWYN0jUUdjEsWvJ8TZJ/cMQldioVLxMmU3UZeZsHzxYcCicJwSVhQ+uGm+dbUyEIm0slX3Q==
-  dependencies:
-    comment-parser "^0.6.2"
-    debug "^4.1.1"
-    jsdoctypeparser "5.0.1"
-    lodash "^4.17.15"
-    object.entries-ponyfill "^1.0.1"
-    regextras "^0.6.1"
-
 eslint-plugin-jsdoc@18.1.4:
   version "18.1.4"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-18.1.4.tgz#462b49f17acf3cc29b15c0eb124caaadf39be128"
@@ -6271,13 +6241,6 @@ eslint-plugin-jsdoc@18.1.4:
     regextras "^0.6.1"
     semver "^6.3.0"
     spdx-expression-parse "^3.0.0"
-
-eslint-plugin-mocha@6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.1.1.tgz#5a036f2f806e1a5fb7d19f7538ebeff3afb15377"
-  integrity sha512-p/otruG425jRYDa28HjbBYYXoFNzq3Qp++gn5dbE44Kz4NvmIsSUKSV1T+RLYUcZOcdJKKAftXbaqkHFqReKoA==
-  dependencies:
-    ramda "^0.26.1"
 
 eslint-plugin-mocha@6.2.2:
   version "6.2.2"
@@ -6330,7 +6293,7 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
-eslint@6.7.1:
+eslint@6.7.1, eslint@^6.7.1:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.7.1.tgz#269ccccec3ef60ab32358a44d147ac209154b919"
   integrity sha512-UWzBS79pNcsDSxgxbdjkmzn/B6BhsXMfUaOHnNwyE8nD+Q6pyT96ow2MccVayUTV4yMid4qLhMiQaywctRkBLA==
@@ -6364,49 +6327,6 @@ eslint@6.7.1:
     mkdirp "^0.5.1"
     natural-compare "^1.4.0"
     optionator "^0.8.3"
-    progress "^2.0.0"
-    regexpp "^2.0.1"
-    semver "^6.1.2"
-    strip-ansi "^5.2.0"
-    strip-json-comments "^3.0.1"
-    table "^5.2.3"
-    text-table "^0.2.0"
-    v8-compile-cache "^2.0.3"
-
-eslint@^6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.6.0.tgz#4a01a2fb48d32aacef5530ee9c5a78f11a8afd04"
-  integrity sha512-PpEBq7b6qY/qrOmpYQ/jTMDYfuQMELR4g4WI1M/NaSDDD/bdcMb+dj4Hgks7p41kW2caXsPsEZAEAyAgjVVC0g==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    ajv "^6.10.0"
-    chalk "^2.1.0"
-    cross-spawn "^6.0.5"
-    debug "^4.0.1"
-    doctrine "^3.0.0"
-    eslint-scope "^5.0.0"
-    eslint-utils "^1.4.3"
-    eslint-visitor-keys "^1.1.0"
-    espree "^6.1.2"
-    esquery "^1.0.1"
-    esutils "^2.0.2"
-    file-entry-cache "^5.0.1"
-    functional-red-black-tree "^1.0.1"
-    glob-parent "^5.0.0"
-    globals "^11.7.0"
-    ignore "^4.0.6"
-    import-fresh "^3.0.0"
-    imurmurhash "^0.1.4"
-    inquirer "^7.0.0"
-    is-glob "^4.0.0"
-    js-yaml "^3.13.1"
-    json-stable-stringify-without-jsonify "^1.0.1"
-    levn "^0.3.0"
-    lodash "^4.17.14"
-    minimatch "^3.0.4"
-    mkdirp "^0.5.1"
-    natural-compare "^1.4.0"
-    optionator "^0.8.2"
     progress "^2.0.0"
     regexpp "^2.0.1"
     semver "^6.1.2"
@@ -7618,7 +7538,7 @@ globals-docs@^2.4.0:
   resolved "https://registry.yarnpkg.com/globals-docs/-/globals-docs-2.4.1.tgz#d16887709f4a15eb22d97e96343591f87a2ee3db"
   integrity sha512-qpPnUKkWnz8NESjrCvnlGklsgiQzlq+rcCxoG5uNQ+dNA7cFMCmn231slLAwS2N/PlkzZ3COL8CcS10jXmLHqg==
 
-globals@^11.1.0, globals@^11.7.0:
+globals@^11.1.0:
   version "11.12.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
@@ -9387,11 +9307,6 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
-
-jsdoctypeparser@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-5.0.1.tgz#0d6bc09bb8bebeca5a588fcd508228d2189409a3"
-  integrity sha512-dYwcK6TKzvq+ZKtbp4sbQSW9JMo6s+4YFfUs5D/K7bZsn3s1NhEhZ+jmIPzby0HbkbECBe+hNPEa6a+E21o94w==
 
 jsdoctypeparser@^6.0.0:
   version "6.0.0"
@@ -11694,7 +11609,7 @@ optimist@^0.6.1:
     minimist "~0.0.1"
     wordwrap "~0.0.2"
 
-optionator@^0.8.1, optionator@^0.8.2:
+optionator@^0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.2.tgz#364c5e409d3f4d6301d6c0b4c05bba50180aeb64"
   integrity sha1-NkxeQJ0/TWMB1sC0wFu6UBgK62Q=

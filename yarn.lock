@@ -1584,7 +1584,20 @@
     json5 "2.1.1"
     lodash.merge "4.6.2"
 
-"@hidoo/eslint-config@0.2.0", "@hidoo/eslint-config@^0.2.0":
+"@hidoo/eslint-config@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/eslint-config/-/eslint-config-0.3.0.tgz#3d90c3924a30817a8a057cfbb8e772f33e4bdfa9"
+  integrity sha512-nHzyAI8DqeztVGCofk93B+XzHyvdnr8+DsVzGLrKHtx0vzaJ9KOc1n8s3/62oMq2Oi+MR3lGxB6kPmcy1R8pHA==
+  dependencies:
+    babel-eslint "10.0.3"
+    eslint-plugin-eslint-comments "3.1.2"
+    eslint-plugin-import "2.18.2"
+    eslint-plugin-jsdoc "18.1.4"
+    eslint-plugin-mocha "6.2.2"
+    eslint-plugin-node "10.0.0"
+    eslint-plugin-sort-class-members "1.6.0"
+
+"@hidoo/eslint-config@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@hidoo/eslint-config/-/eslint-config-0.2.0.tgz#59d3c7ca395a076436a9edebb274a31260d136a5"
   integrity sha512-68U37Yf6OO3viHcloawL89NPTaqqf6yVlOCRfc+NOU9oJu+jcc5bL0fKkwTLl+EPqIbmDGQ0y0no9P7CEzGi7g==
@@ -4528,6 +4541,11 @@ comment-parser@^0.6.2:
   resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.6.2.tgz#b71e8fcacad954bea616779391838150d0096dcb"
   integrity sha512-Wdms0Q8d4vvb2Yk72OwZjwNWtMklbC5Re7lD9cjCP/AG1fhocmc0TrxGBBAXPLy8fZQPrfHGgyygwI0lA7pbzA==
 
+comment-parser@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.7.0.tgz#9dc1f689a60d81fbcaf867d3c9eba3eb061ccfc1"
+  integrity sha512-m0SGP0RFO4P3hIBlIor4sBFPe5Y4HUeGgo/UZK/1Zdea5eUiqxroQ3lFqBDDSfWo9z9Q6LLnt2u0JqwacVEd/A==
+
 commenting@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/commenting/-/commenting-1.1.0.tgz#fae14345c6437b8554f30bc6aa6c1e1633033590"
@@ -6240,10 +6258,31 @@ eslint-plugin-jsdoc@15.9.2:
     object.entries-ponyfill "^1.0.1"
     regextras "^0.6.1"
 
+eslint-plugin-jsdoc@18.1.4:
+  version "18.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-18.1.4.tgz#462b49f17acf3cc29b15c0eb124caaadf39be128"
+  integrity sha512-X3jXbAZAFwr2xZXpz8cyozDuu9ea2eWf8qiIgmgUbAo3vs8xWL0g4hVmCo/Pwg5T2qL6/+iksY3m+xjmd8NAig==
+  dependencies:
+    comment-parser "^0.7.0"
+    debug "^4.1.1"
+    jsdoctypeparser "^6.0.0"
+    lodash "^4.17.15"
+    object.entries-ponyfill "^1.0.1"
+    regextras "^0.6.1"
+    semver "^6.3.0"
+    spdx-expression-parse "^3.0.0"
+
 eslint-plugin-mocha@6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.1.1.tgz#5a036f2f806e1a5fb7d19f7538ebeff3afb15377"
   integrity sha512-p/otruG425jRYDa28HjbBYYXoFNzq3Qp++gn5dbE44Kz4NvmIsSUKSV1T+RLYUcZOcdJKKAftXbaqkHFqReKoA==
+  dependencies:
+    ramda "^0.26.1"
+
+eslint-plugin-mocha@6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.2.2.tgz#6ef4b78bd12d744beb08a06e8209de330985100d"
+  integrity sha512-oNhPzfkT6Q6CJ0HMVJ2KLxEWG97VWGTmuHOoRcDLE0U88ugUyFNV9wrT2XIt5cGtqc5W9k38m4xTN34L09KhBA==
   dependencies:
     ramda "^0.26.1"
 
@@ -6291,7 +6330,50 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
-eslint@6.6.0, eslint@^6.6.0:
+eslint@6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.7.1.tgz#269ccccec3ef60ab32358a44d147ac209154b919"
+  integrity sha512-UWzBS79pNcsDSxgxbdjkmzn/B6BhsXMfUaOHnNwyE8nD+Q6pyT96ow2MccVayUTV4yMid4qLhMiQaywctRkBLA==
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    ajv "^6.10.0"
+    chalk "^2.1.0"
+    cross-spawn "^6.0.5"
+    debug "^4.0.1"
+    doctrine "^3.0.0"
+    eslint-scope "^5.0.0"
+    eslint-utils "^1.4.3"
+    eslint-visitor-keys "^1.1.0"
+    espree "^6.1.2"
+    esquery "^1.0.1"
+    esutils "^2.0.2"
+    file-entry-cache "^5.0.1"
+    functional-red-black-tree "^1.0.1"
+    glob-parent "^5.0.0"
+    globals "^12.1.0"
+    ignore "^4.0.6"
+    import-fresh "^3.0.0"
+    imurmurhash "^0.1.4"
+    inquirer "^7.0.0"
+    is-glob "^4.0.0"
+    js-yaml "^3.13.1"
+    json-stable-stringify-without-jsonify "^1.0.1"
+    levn "^0.3.0"
+    lodash "^4.17.14"
+    minimatch "^3.0.4"
+    mkdirp "^0.5.1"
+    natural-compare "^1.4.0"
+    optionator "^0.8.3"
+    progress "^2.0.0"
+    regexpp "^2.0.1"
+    semver "^6.1.2"
+    strip-ansi "^5.2.0"
+    strip-json-comments "^3.0.1"
+    table "^5.2.3"
+    text-table "^0.2.0"
+    v8-compile-cache "^2.0.3"
+
+eslint@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.6.0.tgz#4a01a2fb48d32aacef5530ee9c5a78f11a8afd04"
   integrity sha512-PpEBq7b6qY/qrOmpYQ/jTMDYfuQMELR4g4WI1M/NaSDDD/bdcMb+dj4Hgks7p41kW2caXsPsEZAEAyAgjVVC0g==
@@ -6684,7 +6766,7 @@ fast-json-stable-stringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
   integrity sha1-1RQsDK7msRifh9OnYREGT4bIu/I=
 
-fast-levenshtein@~2.0.4:
+fast-levenshtein@~2.0.4, fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
@@ -7540,6 +7622,13 @@ globals@^11.1.0, globals@^11.7.0:
   version "11.12.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
+
+globals@^12.1.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-12.3.0.tgz#1e564ee5c4dded2ab098b0f88f24702a3c56be13"
+  integrity sha512-wAfjdLgFsPZsklLJvOBUBmzYE8/CwhEqSBEMRXA3qxIiNtyqvjYurAtIfDh6chlEPUfmTY3MnZh5Hfh4q0UlIw==
+  dependencies:
+    type-fest "^0.8.1"
 
 globby@^10.0.0, globby@^10.0.1:
   version "10.0.1"
@@ -9303,6 +9392,11 @@ jsdoctypeparser@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-5.0.1.tgz#0d6bc09bb8bebeca5a588fcd508228d2189409a3"
   integrity sha512-dYwcK6TKzvq+ZKtbp4sbQSW9JMo6s+4YFfUs5D/K7bZsn3s1NhEhZ+jmIPzby0HbkbECBe+hNPEa6a+E21o94w==
+
+jsdoctypeparser@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-6.0.0.tgz#b6778772339138cbddb6c7b0d182d105afe1d8ae"
+  integrity sha512-61VtBXLkHfOFSIdp/VDVNMksxK0ID0cPTNvxDR92tPA6K7r2AX0OcJegYxhJIwtpWKU4p3D9L3U02hhlP1kQLQ==
 
 jsdom-global@^3.0.2:
   version "3.0.2"
@@ -11611,6 +11705,18 @@ optionator@^0.8.1, optionator@^0.8.2:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
     wordwrap "~1.0.0"
+
+optionator@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
+  integrity sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==
+  dependencies:
+    deep-is "~0.1.3"
+    fast-levenshtein "~2.0.6"
+    levn "~0.3.0"
+    prelude-ls "~1.1.2"
+    type-check "~0.3.2"
+    word-wrap "~1.2.3"
 
 optipng-bin@^6.0.0:
   version "6.0.0"
@@ -15641,6 +15747,11 @@ type-fest@^0.6.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.6.0.tgz#8d2a2370d3df886eb5c90ada1c5bf6188acf838b"
   integrity sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
 
+type-fest@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
+  integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
@@ -16512,6 +16623,11 @@ winston@^3.1.0:
     stack-trace "0.0.x"
     triple-beam "^1.3.0"
     winston-transport "^4.3.0"
+
+word-wrap@~1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
+  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
 
 wordwrap@0.0.2:
   version "0.0.2"

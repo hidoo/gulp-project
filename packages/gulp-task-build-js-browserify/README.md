@@ -60,7 +60,7 @@ task('js', buildJs({
   suffix: '.hoge',
   browsers: ['> 0.1% in JP'],
   useBuiltIns: false,
-  corejs: 3,
+  corejs: 2,
   babelrc: '/path/to/.babelrc.js',
   compress: true,
   verbose: true

@@ -41,7 +41,7 @@ return javascript build task by rollup.js
     -   `options.useBuiltIns` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean))** use polyfill or not.
           see: [useBuiltIns in @babel/preset-env](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) (optional, default `'usage'`)
     -   `options.corejs` **([Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number) \| [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** specify core-js version
-          see: [corejs in @babel/preset-env](https://github.com/zloirock/core-js#babelpreset-env) (optional, default `2`)
+          see: [corejs in @babel/preset-env](https://github.com/zloirock/core-js#babelpreset-env) (optional, default `3`)
     -   `options.babelrc` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** babelrc path.
           see: [Merged with this function](./src/babelOptions.js) (optional, default `path.resolve(process.cwd(),'.babelrc.js')`)
     -   `options.inputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** input options for rollup.js.
@@ -73,7 +73,7 @@ task('js', buildJs({
   suffix: '.hoge',
   browsers: ['> 0.1% in JP'],
   useBuiltIns: false,
-  corejs: 3,
+  corejs: 2,
   babelrc: '/path/to/.babelrc.js',
   inputOptions: {},
   outputOptions: {},

@@ -101,7 +101,8 @@ describe('gulp-task-build-js-rollup', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      corejs: 3,
+      browsers: ['> 0.1% in JP', 'ie >= 8'],
+      corejs: 2,
       commonjsOptions
     });
 

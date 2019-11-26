@@ -41,7 +41,7 @@ return javascript build task by browserify
     -   `options.useBuiltIns` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean))** use polyfill or not.
           see: [useBuiltIns in @babel/preset-env](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) (optional, default `'usage'`)
     -   `options.corejs` **([Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number) \| [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** specify core-js version (Recommend setting with options.useBuiltIns: 'entry')
-          see: [corejs in @babel/preset-env](https://github.com/zloirock/core-js#babelpreset-env) (optional, default `2`)
+          see: [corejs in @babel/preset-env](https://github.com/zloirock/core-js#babelpreset-env) (optional, default `3`)
     -   `options.babelrc` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** babelrc path (optional, default `path.resolve(process.cwd(),'.babelrc.js')`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
@@ -60,7 +60,7 @@ task('js', buildJs({
   suffix: '.hoge',
   browsers: ['> 0.1% in JP'],
   useBuiltIns: false,
-  corejs: 3,
+  corejs: 2,
   babelrc: '/path/to/.babelrc.js',
   compress: true,
   verbose: true

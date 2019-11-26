@@ -82,6 +82,7 @@ describe('gulp-task-build-js-browserify', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
+      browsers: ['> 0.1% in JP', 'ie >= 8'],
       useBuiltIns: false
     });
 
@@ -99,8 +100,8 @@ describe('gulp-task-build-js-browserify', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      useBuiltIns: 'entry',
-      corejs: 3
+      browsers: ['> 0.1% in JP', 'ie >= 8'],
+      corejs: 2
     });
 
     task().on('finish', () => {

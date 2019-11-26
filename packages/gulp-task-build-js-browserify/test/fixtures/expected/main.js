@@ -19,7 +19,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var commonJsModule = require('./modules/cjs');
 
 (0, _esm.default)();
-commonJsModule();
+commonJsModule(); // apply polyfill for ie8
+
+[].forEach(function (item) {
+  return item;
+});
 
 },{"./modules/cjs":2,"./modules/esm":3}],2:[function(require,module,exports){
 // eslint-disable-next-line strict

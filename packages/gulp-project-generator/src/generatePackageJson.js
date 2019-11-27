@@ -46,7 +46,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'static:build', command: 'gulp build'},
           {name: 'static:watch', command: 'gulp watch'},
           {name: 'test', command: 'npm-run-all -s test:*'},
-          {name: 'test:lint', command: 'eslint .'}
+          {name: 'test:lint', command: 'npm-run-all -s test:lint:*'},
+          {name: 'test:lint:js', command: 'eslint .'}
         ],
         {verbose} = options;
 
@@ -57,6 +58,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
         {name: '@hidoo/stylelint-config', version: '^0.4.0'},
         {name: '@hidoo/kss-builder', version: '^0.4.0'},
         {name: 'stylelint', version: '^11.0.0'}
+      );
+      scripts.push(
+        {name: 'test:lint:css', command: 'stylelint --syntax scss ./**/*.scss'}
       );
     }
     else {

@@ -20,7 +20,9 @@
     "static:server": "gulp server",
     "static:watch": "gulp watch",
     "test": "npm-run-all -s test:*",
-    "test:lint": "eslint .",
+    "test:lint": "npm-run-all -s test:lint:*",
+    "test:lint:css": "stylelint --syntax scss ./**/*.scss",
+    "test:lint:js": "eslint .",
     "test:unit": "cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts"
   },
   "devDependencies": {

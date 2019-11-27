@@ -7,7 +7,7 @@
  *
  * core-js:
  * license: MIT
- * version: 2.6.9
+ * version: 2.6.10
  */
 
 (function () {
@@ -26,7 +26,7 @@
 
 	var _core = createCommonjsModule(function (module) {
 	  var core = module.exports = {
-	    version: '2.6.9'
+	    version: '2.6.10'
 	  };
 	  if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 	});

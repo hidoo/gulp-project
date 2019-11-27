@@ -60,6 +60,15 @@ describe('examples', () => {
       assert.deepStrictEqual(actual, extected);
     });
 
+    it('should pass test.', async () => {
+      await new Promise((resolve, reject) => childProcess.execFile('npm', ['test'], (error, stdout) => {
+        if (error) {
+          reject(new Error(stdout));
+        }
+        resolve(stdout);
+      }));
+    });
+
   });
 
   describe('multi-device', () => {
@@ -132,6 +141,15 @@ describe('examples', () => {
       assert.deepStrictEqual(actual, extected);
     });
 
+    it('should pass test.', async () => {
+      await new Promise((resolve, reject) => childProcess.execFile('npm', ['test'], (error, stdout) => {
+        if (error) {
+          reject(new Error(stdout));
+        }
+        resolve(stdout);
+      }));
+    });
+
   });
 
   describe('use-sass', () => {
@@ -188,6 +206,15 @@ describe('examples', () => {
             ];
 
       assert.deepStrictEqual(actual, extected);
+    });
+
+    it('should pass test.', async () => {
+      await new Promise((resolve, reject) => childProcess.execFile('npm', ['test'], (error, stdout) => {
+        if (error) {
+          reject(new Error(stdout));
+        }
+        resolve(stdout);
+      }));
     });
 
   });

@@ -31,7 +31,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'cross-env', version: '^6.0.3'},
           {name: 'eslint', version: '^6.7.1'},
           {name: 'gulp', version: '^4.0.2'},
-          {name: 'husky', version: '^3.0.9'},
+          {name: 'husky', version: '^3.1.0'},
           {name: 'lint-staged', version: '^9.4.3'},
           {name: 'npm-run-all', version: '^4.1.5'},
           {name: 'rimraf', version: '^3.0.0'}
@@ -46,7 +46,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'static:build', command: 'gulp build'},
           {name: 'static:watch', command: 'gulp watch'},
           {name: 'test', command: 'npm-run-all -s test:*'},
-          {name: 'test:lint', command: 'eslint .'}
+          {name: 'test:lint', command: 'npm-run-all -s test:lint:*'},
+          {name: 'test:lint:js', command: 'eslint .'}
         ],
         {verbose} = options;
 
@@ -57,6 +58,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
         {name: '@hidoo/stylelint-config', version: '^0.4.0'},
         {name: '@hidoo/kss-builder', version: '^0.4.0'},
         {name: 'stylelint', version: '^11.0.0'}
+      );
+      scripts.push(
+        {name: 'test:lint:css', command: 'stylelint --syntax scss ./**/*.scss'}
       );
     }
     else {

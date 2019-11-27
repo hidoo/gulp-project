@@ -1,3 +1,4 @@
+// stylelint-disable number-no-trailing-zeros
 // define $sptites valiable in global if not defined.
 @if not global-variable-exists("sprites") {
   $sprites: () !global;

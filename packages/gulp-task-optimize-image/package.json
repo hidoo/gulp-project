@@ -46,7 +46,6 @@
     "@hidoo/gulp-plugin-image-evenizer": "^0.14.1",
     "@hidoo/gulp-plugin-image-placeholder": "^0.14.1",
     "@hidoo/gulp-util-error-handler": "^0.14.1",
-    "gulp-filter": "6.0.0",
     "gulp-gzip": "1.4.2",
     "gulp-if": "3.0.0",
     "gulp-imagemin": "6.2.0",

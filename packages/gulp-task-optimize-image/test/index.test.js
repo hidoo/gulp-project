@@ -209,6 +209,56 @@ describe('gulp-task-optimize-image', () => {
     });
   });
 
+  it('should throw no error if task run multiple.', async () => {
+    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'];
+
+    await Promise.all(cases.map((ext) => {
+      const srcPath = `${path.src}/sample.${ext}`,
+            actualPath = `${path.dest}/sample.${ext}`,
+            task = optimizeImage({
+              src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+              dest: path.dest,
+              evenize: true,
+              placeholder: true,
+              compress: true
+            });
+
+      // 1st build
+      const firstBuild = new Promise((resolve) => task().on('finish', resolve));
+
+      return firstBuild
+        .then(() => {
+          const expectedTime = new Date();
+
+          // modify files
+          return new Promise((resolve, reject) => {
+            fs.utimes(srcPath, expectedTime, expectedTime, (error) => {
+              if (error) {
+                reject(error);
+              }
+              resolve(expectedTime);
+            });
+          });
+        })
+        .then((expectedTime) => new Promise((resolve, reject) => {
+
+          // check dest file is modified or not
+          task()
+            .on('finish', () => {
+              fs.stat(actualPath, (error, stats) => {
+                if (error) {
+                  reject(error);
+                }
+
+                assert(expectedTime, stats.atimeMs);
+                assert(expectedTime, stats.mtimeMs);
+                resolve();
+              });
+            });
+        }));
+    }));
+  });
+
   describe('exports imagemin plugins', () => {
 
     it('should be accessible to imagemin plugins', () => {

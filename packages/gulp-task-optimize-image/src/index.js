@@ -1,7 +1,6 @@
-import {src, dest} from 'gulp';
+import {src, dest, lastRun} from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
-import filter from 'gulp-filter';
 import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
 import imageminMozjpeg from 'imagemin-mozjpeg';
@@ -81,13 +80,6 @@ const DEFAULT_OPTIONS = {
 };
 
 /**
- * record last run time
- *
- * @type {WeakMap}
- */
-const lastRunRecords = new WeakMap();
-
-/**
  * return image optimize task
  *
  * @param {Object} options - option
@@ -131,30 +123,23 @@ const lastRunRecords = new WeakMap();
  */
 export default function optimizeImage(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},
-        isImage = filter('**/*.{jpg,jpeg,gif,png}', {restore: true}),
-        isSvg = filter('**/*.svg', {restore: true}),
-        isntIco = filter(['**', '!**/*.ico'], {restore: true});
+        isImage = '**/*.{jpg,jpeg,gif,png}',
+        isSvg = '**/*.svg',
+        isntIco = '!**/*.ico';
 
   // define task
-  // + record last run time to lastRunRecords that use for incremental build.
   const task = () => {
-    const {evenize, placeholder, compress, compressOptions, verbose} = opts;
+    const {evenize, placeholder, compress, compressOptions, verbose} = opts,
+          since = lastRun(task);
 
-    return src(opts.src, {since: lastRunRecords.get(task)})
-      .on('end', () => lastRunRecords.set(task, new Date()))
+    return src(opts.src, {since})
       .pipe(plumber({errorHandler}))
-      .pipe(isImage)
-      .pipe(cond(evenize, imageEvenizer({verbose})))
-      .pipe(isImage.restore)
-      .pipe(isntIco)
-      .pipe(cond(placeholder, imagePlaceholder({append: true, verbose})))
-      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
-      .pipe(isntIco.restore)
+      .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
+      .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
+      .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))
       .pipe(dest(opts.dest))
-      .pipe(isSvg)
-      .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)))
-      .pipe(isSvg.restore);
+      .pipe(cond(isSvg, cond(compress, gzip({append: true}))))
+      .pipe(cond(isSvg, cond(compress, dest(opts.dest))));
   };
 
   // add displayName (used as task name for gulp)

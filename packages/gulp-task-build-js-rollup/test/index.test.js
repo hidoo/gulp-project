@@ -8,13 +8,15 @@ import pkg from '../package.json';
 import buildJs from '../src';
 
 /**
- * replace version number in license comment
+ * replace version number in source code
  *
  * @param {String} code target source code
  * @return {String}
  */
 function replaceVersion(code = '') {
-  return code.replace(' * version: 0.0.0', ` * version: ${pkg.version}`);
+  return code
+    .replace(/<core-js version>/g, pkg.devDependencies['core-js'])
+    .replace(/<pkg version>/g, pkg.version);
 }
 
 describe('gulp-task-build-js-rollup', () => {

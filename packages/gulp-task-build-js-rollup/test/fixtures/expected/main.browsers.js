@@ -3,11 +3,11 @@
  *
  * @hidoo/gulp-task-build-js-rollup:
  * author: hidoo
- * version: 0.0.0
+ * version: <pkg version>
  *
  * core-js:
  * license: MIT
- * version: 3.4.2
+ * version: <core-js version>
  */
 
 (function () {
@@ -209,7 +209,7 @@
 	(module.exports = function (key, value) {
 	  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
 	})('versions', []).push({
-	  version: '3.4.2',
+	  version: '<core-js version>',
 	  mode:  'global',
 	  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 	});

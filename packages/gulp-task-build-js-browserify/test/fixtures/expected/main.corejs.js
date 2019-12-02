@@ -5,7 +5,7 @@
  * @hidoo/gulp-task-build-js-browserify:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: hidoo
- *   version: 0.0.0
+ *   version: <pkg version>
  *
  * core-js:
  *   license: MIT (http://opensource.org/licenses/MIT)

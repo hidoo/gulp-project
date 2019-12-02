@@ -14,7 +14,7 @@
     "build": "npm-run-all -p build:*",
     "build:lib": "babel ./src --out-dir ./lib",
     "build:doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
-    "test": "cross-env NODE_ENV=test mocha"
+    "test": "cross-env NODE_ENV=test mocha ./test/*.test.js"
   },
   "keywords": [
     "gulp",
@@ -31,7 +31,7 @@
     "@babel/preset-env": "7.7.1",
     "@babel/register": "7.7.0",
     "babel-preset-power-assert": "3.0.0",
-    "core-js": "3.4.2",
+    "core-js": "3.4.5",
     "cross-env": "6.0.3",
     "documentation": "12.1.4",
     "gulp": "4.0.2",

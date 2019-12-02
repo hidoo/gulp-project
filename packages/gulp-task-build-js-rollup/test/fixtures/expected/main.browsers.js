@@ -215,11 +215,15 @@
 	});
 	});
 
-	var functionToString = shared('native-function-to-string', Function.toString);
+	var functionToString = Function.toString;
+
+	var inspectSource = shared('inspectSource', function (it) {
+	  return functionToString.call(it);
+	});
 
 	var WeakMap = global_1.WeakMap;
 
-	var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(functionToString.call(WeakMap));
+	var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
 
 	var id = 0;
 	var postfix = Math.random();
@@ -293,11 +297,7 @@
 	var redefine = createCommonjsModule(function (module) {
 	var getInternalState = internalState.get;
 	var enforceInternalState = internalState.enforce;
-	var TEMPLATE = String(functionToString).split('toString');
-
-	shared('inspectSource', function (it) {
-	  return functionToString.call(it);
-	});
+	var TEMPLATE = String(String).split('String');
 
 	(module.exports = function (O, key, value, options) {
 	  var unsafe = options ? !!options.unsafe : false;
@@ -320,7 +320,7 @@
 	  else createNonEnumerableProperty(O, key, value);
 	// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
 	})(Function.prototype, 'toString', function toString() {
-	  return typeof this == 'function' && getInternalState(this).source || functionToString.call(this);
+	  return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
 	});
 	});
 

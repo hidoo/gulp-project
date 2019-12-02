@@ -25,16 +25,6 @@
       ]
     },
     {
-      "groupName": "do not major update packages",
-      "groupSlug": "do-not-major",
-      "packageNames": [
-        "core-js"
-      ],
-      "major": {
-        "enabled": false
-      }
-    },
-    {
       "groupName": "do not automerge @babel packages",
       "groupSlug": "do-not-automerge-babel",
       "packageNames": [

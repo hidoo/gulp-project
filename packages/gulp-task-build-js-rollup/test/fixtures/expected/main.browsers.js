@@ -205,6 +205,21 @@
 
 	var sharedStore = store;
 
+	var functionToString = Function.toString;
+
+	// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+	if (typeof sharedStore.inspectSource != 'function') {
+	  sharedStore.inspectSource = function (it) {
+	    return functionToString.call(it);
+	  };
+	}
+
+	var inspectSource = sharedStore.inspectSource;
+
+	var WeakMap = global_1.WeakMap;
+
+	var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+
 	var shared = createCommonjsModule(function (module) {
 	(module.exports = function (key, value) {
 	  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
@@ -214,16 +229,6 @@
 	  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 	});
 	});
-
-	var functionToString = Function.toString;
-
-	var inspectSource = shared('inspectSource', function (it) {
-	  return functionToString.call(it);
-	});
-
-	var WeakMap = global_1.WeakMap;
-
-	var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
 
 	var id = 0;
 	var postfix = Math.random();

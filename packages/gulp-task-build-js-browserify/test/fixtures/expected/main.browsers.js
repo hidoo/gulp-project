@@ -399,15 +399,20 @@ module.exports = fails(function () {
 } : Object;
 
 },{"../internals/classof-raw":8,"../internals/fails":16}],23:[function(require,module,exports){
-var shared = require('../internals/shared');
+var store = require('../internals/shared-store');
 
 var functionToString = Function.toString;
 
-module.exports = shared('inspectSource', function (it) {
-  return functionToString.call(it);
-});
+// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+if (typeof store.inspectSource != 'function') {
+  store.inspectSource = function (it) {
+    return functionToString.call(it);
+  };
+}
 
-},{"../internals/shared":44}],24:[function(require,module,exports){
+module.exports = store.inspectSource;
+
+},{"../internals/shared-store":43}],24:[function(require,module,exports){
 var NATIVE_WEAK_MAP = require('../internals/native-weak-map');
 var global = require('../internals/global');
 var isObject = require('../internals/is-object');

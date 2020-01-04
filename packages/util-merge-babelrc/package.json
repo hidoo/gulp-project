@@ -33,7 +33,7 @@
     "@babel/register": "7.7.7",
     "babel-preset-power-assert": "3.0.0",
     "cross-env": "6.0.3",
-    "mocha": "6.2.2",
+    "mocha": "7.0.0",
     "power-assert": "1.6.1"
   }
 }

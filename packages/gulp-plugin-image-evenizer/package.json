@@ -30,7 +30,7 @@
     "get-stream": "5.1.0",
     "lodash.chunk": "4.2.0",
     "lodash.flattendeep": "4.4.0",
-    "ndarray": "1.0.18",
+    "ndarray": "1.0.19",
     "plugin-error": "1.0.1",
     "save-pixels": "2.3.4",
     "through2": "3.0.1"

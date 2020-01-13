@@ -31,7 +31,7 @@
     "@babel/preset-env": "7.7.7",
     "@babel/register": "7.7.7",
     "babel-preset-power-assert": "3.0.0",
-    "core-js": "3.6.0",
+    "core-js": "3.6.4",
     "cross-env": "6.0.3",
     "documentation": "12.1.4",
     "gulp": "4.0.2",

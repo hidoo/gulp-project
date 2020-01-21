@@ -3,7 +3,7 @@
   "version": "0.14.1",
   "description": "Plugin that build svg sprite sheet for gulp.",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "main": "lib/index.js",
   "files": [

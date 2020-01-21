@@ -169,8 +169,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
     'author': '',
     'files': [],
     'engines': {
-      node: '>=8.0.0',
-      npm: '>=5.0.0'
+      node: '>=10.0.0',
+      npm: '>=6.0.0'
     },
     /* eslint-disable id-length */
     'scripts': scripts

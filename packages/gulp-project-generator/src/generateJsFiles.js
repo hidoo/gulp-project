@@ -16,7 +16,7 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
   const {verbose} = options;
 
   await mkdir(`${dest}/src/js`, {verbose});
-  await copy(`${src}/src/js/**/*.{js,opts}`, `${dest}/src/js`, {verbose});
+  await copy(`${src}/src/js/**/*.js`, `${dest}/src/js`, {verbose});
 
   if (options.jsDeps) {
     await copy(`${src}/src/jsDeps/**/*.js`, `${dest}/src/js`, {verbose});
@@ -36,7 +36,6 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
 
   await mkdir(`${dest}/src/js/desktop`, {verbose});
   await mkdir(`${dest}/src/js/mobile`, {verbose});
-  await copy(`${src}/src/js/*.opts`, `${dest}/src/js`, {verbose});
   await copy(`${src}/src/js/**/*.js`, `${dest}/src/js/desktop`, {verbose});
   await copy(`${src}/src/js/**/*.js`, `${dest}/src/js/mobile`, {verbose});
 

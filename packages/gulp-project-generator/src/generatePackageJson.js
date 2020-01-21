@@ -95,7 +95,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'regenerator-runtime', version: '^0.13.3'}
     );
     scripts.push(
-      {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts'}
+      {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js'}
     );
     switch (options.jsBundler) {
       case 'browserify':

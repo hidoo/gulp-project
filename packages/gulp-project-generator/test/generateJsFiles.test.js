@@ -54,8 +54,7 @@ describe('generateJsFiles', () => {
             '/src/js/lib/sample-cjs/test/index.test.js',
             '/src/js/lib/sample-esm/index.js',
             '/src/js/lib/sample-esm/test/index.test.js',
-            '/src/js/main.js',
-            '/src/js/mocha.opts'
+            '/src/js/main.js'
           ];
 
     assert(actualTask);
@@ -77,8 +76,7 @@ describe('generateJsFiles', () => {
             '/src/js/lib/sample-cjs/test/index.test.js',
             '/src/js/lib/sample-esm/index.js',
             '/src/js/lib/sample-esm/test/index.test.js',
-            '/src/js/main.js',
-            '/src/js/mocha.opts'
+            '/src/js/main.js'
           ];
 
     assert(actualTask);
@@ -102,8 +100,7 @@ describe('generateJsFiles', () => {
             '/src/js/lib/sample-cjs/test/index.test.js',
             '/src/js/lib/sample-esm/index.js',
             '/src/js/lib/sample-esm/test/index.test.js',
-            '/src/js/main.js',
-            '/src/js/mocha.opts'
+            '/src/js/main.js'
           ];
 
     assert(actualTask);
@@ -130,8 +127,7 @@ describe('generateJsFiles', () => {
             '/src/js/mobile/lib/sample-cjs/test/index.test.js',
             '/src/js/mobile/lib/sample-esm/index.js',
             '/src/js/mobile/lib/sample-esm/test/index.test.js',
-            '/src/js/mobile/main.js',
-            '/src/js/mocha.opts'
+            '/src/js/mobile/main.js'
           ];
 
     assert(actualTask);
@@ -162,8 +158,7 @@ describe('generateJsFiles', () => {
             '/src/js/mobile/lib/sample-cjs/test/index.test.js',
             '/src/js/mobile/lib/sample-esm/index.js',
             '/src/js/mobile/lib/sample-esm/test/index.test.js',
-            '/src/js/mobile/main.js',
-            '/src/js/mocha.opts'
+            '/src/js/mobile/main.js'
           ];
 
     assert(actualTask);

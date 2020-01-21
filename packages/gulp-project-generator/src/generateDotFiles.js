@@ -39,6 +39,12 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
       .then((output) => write(output, `${dest}/.stylelintignore`, {verbose}));
   }
 
+  if (options.js) {
+    await render(`${src}/.mocharc.js.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/.mocharc.js`, {verbose}));
+  }
+
   await render(`${src}/.eslintrc.js.hbs`, options)
     .then((output) => formatCode(output))
     .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));

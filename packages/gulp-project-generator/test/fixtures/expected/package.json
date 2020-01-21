@@ -22,7 +22,7 @@
     "test": "npm-run-all -s test:*",
     "test:lint": "npm-run-all -s test:lint:*",
     "test:lint:js": "eslint .",
-    "test:unit": "cross-env NODE_ENV=test mocha ./src/js/**/*.test.js --opts ./src/js/mocha.opts"
+    "test:unit": "cross-env NODE_ENV=test mocha ./src/js/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

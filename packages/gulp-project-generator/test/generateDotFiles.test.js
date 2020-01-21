@@ -47,7 +47,8 @@ describe('generateDotFiles', () => {
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
       ['.huskyrc.js', '.huskyrc.js'],
-      ['.lintstagedrc.js', '.lintstagedrc.js']
+      ['.lintstagedrc.js', '.lintstagedrc.js'],
+      ['.mocharc.js', '.mocharc.js']
     ];
 
     files.forEach((file) => {
@@ -79,7 +80,8 @@ describe('generateDotFiles', () => {
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
       ['.huskyrc.js', '.huskyrc.js'],
-      ['.lintstagedrc.js', '.lintstagedrc.js']
+      ['.lintstagedrc.js', '.lintstagedrc.js'],
+      ['.mocharc.js', '.mocharc.js']
     ];
 
     files.forEach((file) => {
@@ -112,7 +114,8 @@ describe('generateDotFiles', () => {
       ['.gitattributes', '.gitattributes-conventional-commits'],
       ['.gitignore', '.gitignore'],
       ['.huskyrc.js', '.huskyrc-conventional-commits.js'],
-      ['.lintstagedrc.js', '.lintstagedrc.js']
+      ['.lintstagedrc.js', '.lintstagedrc.js'],
+      ['.mocharc.js', '.mocharc.js']
     ];
 
     files.forEach((file) => {
@@ -145,8 +148,40 @@ describe('generateDotFiles', () => {
       ['.gitignore', '.gitignore-sass'],
       ['.huskyrc.js', '.huskyrc.js'],
       ['.lintstagedrc.js', '.lintstagedrc-sass.js'],
+      ['.mocharc.js', '.mocharc.js'],
       ['.stylelintignore', '.stylelintignore'],
       ['.stylelintrc.js', '.stylelintrc.js']
+    ];
+
+    files.forEach((file) => {
+      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
+            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    });
+  });
+
+  it('should generate dot files if argument options.js is false.', async () => {
+    await generateDotFiles(path.src, path.dest, {
+      css: true,
+      html: true,
+      image: true,
+      js: false,
+      server: true,
+      sprite: true,
+      styleguide: true
+    });
+
+    const files = [
+      ['.babelrc.js', '.babelrc-no-js.js'],
+      ['.editorconfig', '.editorconfig'],
+      ['.eslintignore', '.eslintignore'],
+      ['.eslintrc.js', '.eslintrc-no-js.js'],
+      ['.gitattributes', '.gitattributes'],
+      ['.gitignore', '.gitignore'],
+      ['.huskyrc.js', '.huskyrc.js'],
+      ['.lintstagedrc.js', '.lintstagedrc.js']
     ];
 
     files.forEach((file) => {

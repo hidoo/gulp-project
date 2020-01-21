@@ -44,18 +44,6 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 import {gifsicle} from '@hidoo/gulp-task-optimize-image';
 ```
 
-### jpegtran
-
-jpegtran plugins for imagemin
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
-#### Examples
-
-```javascript
-import {jpegtran} from '@hidoo/gulp-task-optimize-image';
-```
-
 ### mozjpeg
 
 mozjpeg plugins for imagemin

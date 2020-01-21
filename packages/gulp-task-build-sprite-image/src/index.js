@@ -4,7 +4,6 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
 import imagemin from 'gulp-imagemin';
-import imageminMozjpeg from 'imagemin-mozjpeg';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
@@ -22,16 +21,6 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 export const gifsicle = imagemin.gifsicle;
 
 /**
- * jpegtran plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {jpegtran} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const jpegtran = imagemin.jpegtran;
-
-/**
  * mozjpeg plugins for imagemin
  *
  * @type {Function}
@@ -39,7 +28,7 @@ export const jpegtran = imagemin.jpegtran;
  * @example
  * import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
  */
-export const mozjpeg = imageminMozjpeg;
+export const mozjpeg = imagemin.mozjpeg;
 
 /**
  * optipng plugins for imagemin

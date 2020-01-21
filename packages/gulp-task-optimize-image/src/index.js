@@ -3,7 +3,6 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
-import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
 import errorHandler from '@hidoo/gulp-util-error-handler';
@@ -19,16 +18,6 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 export const gifsicle = imagemin.gifsicle;
 
 /**
- * jpegtran plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {jpegtran} from '@hidoo/gulp-task-optimize-image';
- */
-export const jpegtran = imagemin.jpegtran;
-
-/**
  * mozjpeg plugins for imagemin
  *
  * @type {Function}
@@ -36,7 +25,7 @@ export const jpegtran = imagemin.jpegtran;
  * @example
  * import {mozjpeg} from '@hidoo/gulp-task-optimize-image';
  */
-export const mozjpeg = imageminMozjpeg;
+export const mozjpeg = imagemin.mozjpeg;
 
 /**
  * optipng plugins for imagemin

@@ -8,8 +8,7 @@ import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import fileType from 'file-type';
 import imagemin from 'gulp-imagemin';
-import {default as origMozjpeg} from 'imagemin-mozjpeg';
-import optimizeImage, {gifsicle, jpegtran, mozjpeg, optipng, svgo} from '../src';
+import optimizeImage, {gifsicle, mozjpeg, optipng, svgo} from '../src';
 
 /**
  * get array of uint8array from buffers
@@ -263,8 +262,7 @@ describe('gulp-task-optimize-image', () => {
 
     it('should be accessible to imagemin plugins', () => {
       assert(imagemin.gifsicle === gifsicle);
-      assert(imagemin.jpegtran === jpegtran);
-      assert(origMozjpeg === mozjpeg);
+      assert(imagemin.mozjpeg === mozjpeg);
       assert(imagemin.optipng === optipng);
       assert(imagemin.svgo === svgo);
     });

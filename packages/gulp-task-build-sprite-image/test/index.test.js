@@ -8,8 +8,7 @@ import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import fileType from 'file-type';
 import imagemin from 'gulp-imagemin';
-import {default as origMozjpeg} from 'imagemin-mozjpeg';
-import buildSprite, {gifsicle, jpegtran, mozjpeg, optipng, svgo} from '../src';
+import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src';
 
 /**
  * get array of uint8array from buffers
@@ -233,8 +232,7 @@ describe('gulp-task-build-sprite-image', () => {
 
     it('should be accessible to imagemin plugins', () => {
       assert(imagemin.gifsicle === gifsicle);
-      assert(imagemin.jpegtran === jpegtran);
-      assert(origMozjpeg === mozjpeg);
+      assert(imagemin.mozjpeg === mozjpeg);
       assert(imagemin.optipng === optipng);
       assert(imagemin.svgo === svgo);
     });

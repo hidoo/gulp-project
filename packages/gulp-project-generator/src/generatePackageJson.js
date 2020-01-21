@@ -150,8 +150,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.conventionalCommits) {
     devDependencies.push(
-      {name: '@commitlint/cli', version: '^8.2.0'},
-      {name: '@commitlint/config-conventional', version: '^8.2.0'},
+      {name: '@commitlint/cli', version: '^8.3.5'},
+      {name: '@commitlint/config-conventional', version: '^8.3.4'},
       {name: 'conventional-changelog-cli', version: '^2.0.5'}
     );
     scripts.push(

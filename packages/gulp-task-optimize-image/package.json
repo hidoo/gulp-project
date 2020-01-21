@@ -48,7 +48,7 @@
     "@hidoo/gulp-util-error-handler": "^0.14.1",
     "gulp-gzip": "1.4.2",
     "gulp-if": "3.0.0",
-    "gulp-imagemin": "6.2.0",
+    "gulp-imagemin": "7.1.0",
     "gulp-plumber": "1.2.1",
     "imagemin-mozjpeg": "8.0.0",
     "pixelmatch": "5.1.0"

@@ -8,7 +8,7 @@ import getStream from 'get-stream';
 import ndarray from 'ndarray';
 import getPixels from 'get-pixels';
 import savePixels from 'save-pixels';
-import fileType from 'file-type';
+import FileType from 'file-type';
 import log from 'fancy-log';
 
 /**
@@ -96,29 +96,26 @@ export default function imageEvenizer(options = {}) {
       return done(null, file);
     }
 
-    const {ext, mime} = fileType(file.contents),
-          isJpg = (/^jpe?g$/i).test(ext),
-          isGif = (/^gif$/i).test(ext),
-          fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
-          saveOptions = isJpg ? {quality: 100} : {},
-          channels = 4;
-
-    const promise = new Promise((resolve, reject) => {
-      getPixels(file.contents, mime, (error, pixels) => {
-        if (error) {
-          return reject(error);
-        }
-        return resolve(pixels);
-      });
-    });
-
-    return promise
-      .then((pixels) => {
+    return FileType.fromBuffer(file.contents)
+      .then(({ext, mime}) => new Promise((resolve, reject) => {
+        getPixels(file.contents, mime, (error, pixels) => {
+          if (error) {
+            return reject(error);
+          }
+          return resolve({pixels, ext});
+        });
+      }))
+      .then(({pixels, ext}) => {
         const hasFrames = pixels.shape.length === 4,
               width = hasFrames ? pixels.shape[1] : pixels.shape[0],
               height = hasFrames ? pixels.shape[2] : pixels.shape[1],
               isOddWidth = isOdd(width),
-              isOddHeight = isOdd(height);
+              isOddHeight = isOdd(height),
+              isJpg = (/^jpe?g$/i).test(ext),
+              isGif = (/^gif$/i).test(ext),
+              fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
+              saveOptions = isJpg ? {quality: 100} : {},
+              channels = 4;
 
         // ignore animation gif and even size image
         if (hasFrames && pixels.shape[0] > 1 || !isOddWidth && !isOddHeight) {

@@ -6,7 +6,7 @@ import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
-import fileType from 'file-type';
+import FileType from 'file-type';
 import imageEvenizer from '../src';
 
 /**
@@ -16,16 +16,17 @@ import imageEvenizer from '../src';
  * @return {Promise}
  */
 function getUint8ArraysFromBuffers(buffers) {
-  return Promise.all(buffers.map((buffer) => new Promise((resolve, reject) => {
-    const {mime} = fileType(buffer);
-
-    getPixels(buffer, mime, (error, pixels) => {
-      if (error) {
-        return reject(error);
-      }
-      return resolve(pixels.data);
-    });
-  })));
+  return Promise.all(
+    buffers.map((buffer) => FileType.fromBuffer(buffer)
+      .then(({mime}) => new Promise((resolve, reject) => {
+        getPixels(buffer, mime, (error, pixels) => {
+          if (error) {
+            return reject(error);
+          }
+          return resolve(pixels.data);
+        });
+      })))
+  );
 }
 
 describe('gulp-plugin-image-evenizer', () => {

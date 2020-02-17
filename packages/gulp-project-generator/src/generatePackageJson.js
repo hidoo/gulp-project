@@ -144,8 +144,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.styleguide) {
     devDependencies.push(
-      {name: '@hidoo/gulp-task-build-styleguide-kss', version: gulpProjectVersion},
-      {name: '@hidoo/gulp-task-copy', version: gulpProjectVersion}
+      {name: '@hidoo/gulp-task-build-styleguide-kss', version: gulpProjectVersion}
     );
   }
   if (options.conventionalCommits) {

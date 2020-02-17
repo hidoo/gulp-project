@@ -4,7 +4,6 @@
 import {relative} from 'path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
-import copy from '@hidoo/gulp-task-copy';
 
 /**
  * import modules - local
@@ -39,49 +38,29 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
 
 {{#if multiDevice}}
 
-  // define build task
-  const buildDesktop = buildStyleguide({
+  // define main task
+  const mainDesktop = buildStyleguide({
     name: 'styleguide:desktop:build',
     src: `${config.path.srcStyleguideDesktop}`,
     dest: `${config.path.destStyleguideDesktop}`,
     css: [`${pathToCssDesktop}/main.css`],
     js: [{{#if this.js}}`${pathToJsDesktop}/main.js`{{/if}}],
+    homepage: `${config.path.srcCssDesktop}/README.md`,
     {{#is this.cssPreprocessor 'sass'}}
     builder: '@hidoo/kss-builder'
     {{/is}}
   });
-  const buildMobile = buildStyleguide({
+  const mainMobile = buildStyleguide({
     name: 'styleguide:mobile:build',
     src: `${config.path.srcStyleguideMobile}`,
     dest: `${config.path.destStyleguideMobile}`,
     css: [`${pathToCssMobile}/main.css`],
     js: [{{#if this.js}}`${pathToJsMobile}/main.js`{{/if}}],
+    homepage: `${config.path.srcCssMobile}/README.md`,
     {{#is this.cssPreprocessor 'sass'}}
     builder: '@hidoo/kss-builder'
     {{/is}}
   });
-
-  // define prebuild task
-  const prebuildDesktop = copy({
-    name: 'styleguide:desktop:prebuild',
-    src: `${config.path.srcCssDesktop}/*.md`,
-    dest: config.path.srcStyleguideDesktop
-  });
-  const prebuildMobile = copy({
-    name: 'styleguide:mobile:prebuild',
-    src: `${config.path.srcCssMobile}/*.md`,
-    dest: config.path.srcStyleguideMobile
-  });
-
-  // define main task
-  const mainDesktop = gulp.series(
-    prebuildDesktop,
-    buildDesktop
-  );
-  const mainMobile = gulp.series(
-    prebuildMobile,
-    buildMobile
-  );
 
   // define watch task
   const watchDesktop = () => {
@@ -115,30 +94,18 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
 
 {{else}}
 
-  // define build task
-  export const build = buildStyleguide({
+  // define main task
+  export const main = buildStyleguide({
     name: 'styleguide:build',
     src: `${config.path.srcStyleguide}`,
     dest: `${config.path.destStyleguide}`,
     css: [`${pathToCss}/main.css`],
     js: [{{#if this.js}}`${pathToJs}/main.js`{{/if}}],
+    homepage: `${config.path.srcCss}/README.md`,
     {{#is this.cssPreprocessor 'sass'}}
     builder: '@hidoo/kss-builder'
     {{/is}}
   });
-
-  // define prebuild task
-  export const prebuild = copy({
-    name: 'styleguide:prebuild',
-    src: `${config.path.srcCss}/*.md`,
-    dest: config.path.srcStyleguide
-  });
-
-  // define main task
-  export const main = gulp.series(
-    prebuild,
-    build
-  );
 
   // define watch task
   export const watch = () => {

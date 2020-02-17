@@ -37,7 +37,6 @@ describe('examples', () => {
               .map((filepath) => filepath.replace(exampleDestPath, ''))
               .sort(),
             extected = [
-              '/css/README.md',
               '/css/bundle.css',
               '/css/main.css',
               '/images/sample.gif',
@@ -100,7 +99,6 @@ describe('examples', () => {
               .map((filepath) => filepath.replace(exampleDestPath, ''))
               .sort(),
             extected = [
-              '/css/README.md',
               '/css/bundle.css',
               '/css/main.css',
               '/images/sample.gif',
@@ -111,7 +109,6 @@ describe('examples', () => {
               '/index.html',
               '/js/bundle.js',
               '/js/main.js',
-              '/mobile/css/README.md',
               '/mobile/css/bundle.css',
               '/mobile/css/main.css',
               '/mobile/images/sample.gif',
@@ -181,7 +178,6 @@ describe('examples', () => {
               .map((filepath) => filepath.replace(exampleDestPath, ''))
               .sort(),
             extected = [
-              '/css/README.md',
               '/css/bundle.css',
               '/css/main.css',
               '/images/sample.gif',

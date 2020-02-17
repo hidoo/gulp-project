@@ -37,7 +37,6 @@
     "@hidoo/gulp-task-build-sprite-svg": "^0.0.0",
     "@hidoo/gulp-task-build-styleguide-kss": "^0.0.0",
     "@hidoo/gulp-task-concat": "^0.0.0",
-    "@hidoo/gulp-task-copy": "^0.0.0",
     "@hidoo/gulp-task-optimize-image": "^0.0.0",
     "@hidoo/kss-builder": "^0.4.0",
     "@hidoo/stylelint-config": "^0.4.0",

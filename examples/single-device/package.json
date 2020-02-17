@@ -36,7 +36,6 @@
     "@hidoo/gulp-task-build-sprite-svg": "^0.14.1",
     "@hidoo/gulp-task-build-styleguide-kss": "^0.14.1",
     "@hidoo/gulp-task-concat": "^0.14.1",
-    "@hidoo/gulp-task-copy": "^0.14.1",
     "@hidoo/gulp-task-optimize-image": "^0.14.1",
     "@hidoo/util-fancy-print": "^0.14.1",
     "@hidoo/util-local-ip": "^0.14.1",

@@ -36,8 +36,8 @@ return build styleguide task by kss
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.css` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** css paths that load to styleguide (optional, default `[]`)
     -   `options.js` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** javascript paths that load to styleguide (optional, default `[]`)
-    -   `options.homepage` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** markdown filename that load to styleguide.
-          it must be located in the same directory with options.src (optional, default `'README.md'`)
+    -   `options.homepage` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** markdown path that load to styleguide.
+          it must be located in the same directory with options.src (optional, default `path.resolve(options.source,'README.md')`)
     -   `options.placeholder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** modifier string (optional, default `'{{modifier_class}}'`)
     -   `options.nav-depth` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** navigation depth to display (optional, default `2`)
     -   `options.mask` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** masking of file that includes kss comments (optional, default `'*.css'`)
@@ -57,7 +57,7 @@ task('styleguide', buildStyleguide({
   'dest': '/path/to/dest',
   'css': ['./path/from/styleguide/to/css/extra.css'],
   'js': ['./path/from/styleguide/to/js/extra.js'],
-  'homepage': 'README.md',
+  'homepage': '/path/to/README.md',
   'placeholder': '{{modifier_class}}',
   'nav-depth': 2,
   'mask': '*.css',

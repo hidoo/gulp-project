@@ -53,7 +53,7 @@ describe('gulp-task-build-styleguide-kss', () => {
     const task = buildStyleguide({
       src: `${path.src}`,
       dest: `${path.dest}`,
-      homepage: 'hoge.md'
+      homepage: `${path.src}/hoge.md`
     });
 
     task()

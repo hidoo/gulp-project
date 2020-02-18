@@ -54,14 +54,13 @@ export default function mkdir(dest = '', options = {}) {
       if (results.exists) {
         return resolve(results.dest);
       }
-      return mkdirp(results.dest, opts.mkdirp, (error) => {
-        if (error) {
-          return reject(error);
-        }
-        if (opts.verbose) {
-          log.outPath(results.dest);
-        }
-        return resolve(results.dest);
-      });
+      return mkdirp(results.dest, opts.mkdirp)
+        .then((made) => {
+          if (opts.verbose) {
+            log.outPath(made);
+          }
+          resolve(made);
+        })
+        .catch((error) => reject(error));
     }));
 }

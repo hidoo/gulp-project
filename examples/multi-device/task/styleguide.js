@@ -4,7 +4,6 @@
 import {relative} from 'path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
-import copy from '@hidoo/gulp-task-copy';
 
 /**
  * import modules - local
@@ -27,43 +26,23 @@ const pathToCssMobile = relative(config.path.destStyleguideMobile, config.path.d
 const pathToJsDesktop = relative(config.path.destStyleguideDesktop, config.path.destJsDesktop); // eslint-disable-line max-len
 const pathToJsMobile = relative(config.path.destStyleguideMobile, config.path.destJsMobile); // eslint-disable-line max-len
 
-// define build task
-const buildDesktop = buildStyleguide({
+// define main task
+const mainDesktop = buildStyleguide({
   name: 'styleguide:desktop:build',
   src: `${config.path.srcStyleguideDesktop}`,
   dest: `${config.path.destStyleguideDesktop}`,
   css: [`${pathToCssDesktop}/main.css`],
-  js: [`${pathToJsDesktop}/main.js`]
+  js: [`${pathToJsDesktop}/main.js`],
+  homepage: `${config.path.srcCssDesktop}/README.md`
 });
-const buildMobile = buildStyleguide({
+const mainMobile = buildStyleguide({
   name: 'styleguide:mobile:build',
   src: `${config.path.srcStyleguideMobile}`,
   dest: `${config.path.destStyleguideMobile}`,
   css: [`${pathToCssMobile}/main.css`],
-  js: [`${pathToJsMobile}/main.js`]
+  js: [`${pathToJsMobile}/main.js`],
+  homepage: `${config.path.srcCssMobile}/README.md`
 });
-
-// define prebuild task
-const prebuildDesktop = copy({
-  name: 'styleguide:desktop:prebuild',
-  src: `${config.path.srcCssDesktop}/*.md`,
-  dest: config.path.srcStyleguideDesktop
-});
-const prebuildMobile = copy({
-  name: 'styleguide:mobile:prebuild',
-  src: `${config.path.srcCssMobile}/*.md`,
-  dest: config.path.srcStyleguideMobile
-});
-
-// define main task
-const mainDesktop = gulp.series(
-  prebuildDesktop,
-  buildDesktop
-);
-const mainMobile = gulp.series(
-  prebuildMobile,
-  buildMobile
-);
 
 // define watch task
 const watchDesktop = () => {

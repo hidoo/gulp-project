@@ -13,7 +13,6 @@ const DEFAULT_OPTIONS = {
   'dest': null,
   'css': [],
   'js': [],
-  'homepage': 'README.md',
   'placeholder': '{{modifier_class}}',
   'nav-depth': 2,
   'mask': '*.css',
@@ -30,7 +29,7 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.dest - destination path
  * @param {Array<String>} [options.css=[]] - css paths that load to styleguide
  * @param {Array<String>} [options.js=[]] - javascript paths that load to styleguide
- * @param {String} [options.homepage='README.md'] - markdown filename that load to styleguide.
+ * @param {String} [options.homepage=path.resolve(options.source, 'README.md')] - markdown path that load to styleguide.
  *   it must be located in the same directory with options.src
  * @param {String} [options.placeholder='{{modifier_class}}'] - modifier string
  * @param {Number} [options.nav-depth=2] - navigation depth to display
@@ -50,7 +49,7 @@ const DEFAULT_OPTIONS = {
  *   'dest': '/path/to/dest',
  *   'css': ['./path/from/styleguide/to/css/extra.css'],
  *   'js': ['./path/from/styleguide/to/js/extra.js'],
- *   'homepage': 'README.md',
+ *   'homepage': '/path/to/README.md',
  *   'placeholder': '{{modifier_class}}',
  *   'nav-depth': 2,
  *   'mask': '*.css',
@@ -64,6 +63,11 @@ export default function kssBuildTask(options = {}) {
   // to fit original kss options
   opts.source = opts.src;
   opts.destination = opts.dest;
+
+  // compatibility before kss v3.0.0-beta.25
+  if (typeof opts.homepage === 'undefined') {
+    opts.homepage = path.resolve(opts.source, 'README.md');
+  }
 
   // delete unnecessary properties,
   // because occurs error if that remains

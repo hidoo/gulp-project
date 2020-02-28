@@ -98,17 +98,18 @@ describe('gulp-task-build-js-browserify', () => {
     });
   });
 
-  it('should out to "main.js" that polyfilled by specified version of core-js if argument "options.corejs" is set.', (done) => {
+  it('should out to "main.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
+      src: `${path.src}/use-corejs.js`,
       dest: path.dest,
-      browsers: ['> 0.1% in JP', 'ie >= 8'],
-      corejs: 2
+      filename: 'use-corejs.js',
+      browsers: ['> 0.1% in JP', 'ie >= 11'],
+      corejs: {version: 3, proposals: true}
     });
 
     task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.corejs.js`).toString().trim());
+      const actual = fs.readFileSync(`${path.dest}/use-corejs.js`).toString().trim(),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/use-corejs.js`).toString().trim());
 
       assert(actual);
       assert.deepStrictEqual(actual, expected);

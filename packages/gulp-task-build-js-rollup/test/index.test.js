@@ -25,16 +25,6 @@ describe('gulp-task-build-js-rollup', () => {
     dest: `${__dirname}/fixtures/dest`,
     expected: `${__dirname}/fixtures/expected`
   };
-  let commonjsOptions = null;
-
-  before(() => {
-    commonjsOptions = {
-      include: [
-        '../../node_modules/**',
-        `${resolve(process.cwd(), `${__dirname}/fixtures/src`)}/**`
-      ]
-    };
-  });
 
   afterEach((done) => {
     rimraf(`${path.dest}/*.{js,gz}`, done);
@@ -43,8 +33,7 @@ describe('gulp-task-build-js-rollup', () => {
   it('should out to "main.js" if argument "options" is default.', (done) => {
     const task = buildJs({
       src: `${path.src}/main.js`,
-      dest: path.dest,
-      commonjsOptions
+      dest: path.dest
     });
 
     task()
@@ -63,8 +52,7 @@ describe('gulp-task-build-js-rollup', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      filename: 'hoge.js',
-      commonjsOptions
+      filename: 'hoge.js'
     });
 
     task()
@@ -83,13 +71,13 @@ describe('gulp-task-build-js-rollup', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      browsers: ['> 0.1% in JP', 'ie >= 8'],
-      commonjsOptions
+      filename: 'main.browsers.js',
+      browsers: ['> 0.1% in JP', 'ie >= 8']
     });
 
     task()
       .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+        const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim(),
               expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
 
         assert(actual);
@@ -99,19 +87,39 @@ describe('gulp-task-build-js-rollup', () => {
       .catch((error) => done(error));
   });
 
-  it('should out to "main.js" that polyfilled by specified version of core-js if argument "options.corejs" is set.', (done) => {
+  it('should out to "main.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
+      src: `${path.src}/use-corejs.js`,
       dest: path.dest,
-      browsers: ['> 0.1% in JP', 'ie >= 8'],
-      corejs: 2,
-      commonjsOptions
+      filename: 'use-corejs.js',
+      browsers: ['> 0.1% in JP', 'ie >= 11'],
+      corejs: {version: 3, proposals: true}
     });
 
     task()
       .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.corejs.js`).toString().trim());
+        const actual = fs.readFileSync(`${path.dest}/use-corejs.js`).toString().trim(),
+              expected = replaceVersion(fs.readFileSync(`${path.expected}/use-corejs.js`).toString().trim());
+
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+        done();
+      }))
+      .catch((error) => done(error));
+  });
+
+  it('should out to "main.js" that use react.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/use-react.js`,
+      dest: path.dest,
+      filename: 'use-react.js',
+      babelrc: resolve(process.cwd(), `${__dirname}/fixtures/src/use-react.babelrc.js`)
+    });
+
+    task()
+      .then((stream) => stream.on('finish', () => {
+        const actual = fs.readFileSync(`${path.dest}/use-react.js`).toString().trim(),
+              expected = replaceVersion(fs.readFileSync(`${path.expected}/use-react.js`).toString().trim());
 
         assert(actual);
         assert.deepStrictEqual(actual, expected);
@@ -124,7 +132,6 @@ describe('gulp-task-build-js-rollup', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      commonjsOptions,
       compress: true
     });
 
@@ -149,7 +156,6 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${path.src}/main.js`,
       dest: path.dest,
       suffix: '.hoge',
-      commonjsOptions,
       compress: true
     });
 
@@ -174,7 +180,6 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${path.src}/main.js`,
       dest: path.dest,
       suffix: '',
-      commonjsOptions,
       compress: true
     });
 

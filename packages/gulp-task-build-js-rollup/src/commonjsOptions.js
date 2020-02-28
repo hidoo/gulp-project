@@ -1,5 +1,3 @@
-import path from 'path';
-
 /**
  * return options for rollup-plugin-commonjs
  *
@@ -8,17 +6,8 @@ import path from 'path';
  */
 export default function commonjsOptions(options) {
   const defaultOptions = {
-    sourceMap: false,
-    include: [
-      path.resolve(process.cwd(), 'node_modules/**')
-    ]
+    sourceMap: false
   };
-
-  if (options && typeof options.src === 'string') {
-    defaultOptions.include.push(
-      `${path.resolve(process.cwd(), path.dirname(options.src))}/**`
-    );
-  }
 
   if (
     options && options.commonjsOptions &&
@@ -27,10 +16,7 @@ export default function commonjsOptions(options) {
   ) {
     return {
       ...defaultOptions,
-      ...options.commonjsOptions,
-      include: Array.isArray(options.commonjsOptions.include) ?
-        defaultOptions.include.concat(options.commonjsOptions.include) :
-        defaultOptions.include
+      ...options.commonjsOptions
     };
   }
   return defaultOptions;

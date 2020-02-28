@@ -57,8 +57,8 @@ export default function inputOptions(options = {}) {
     const {input, plugins, ...restInputOptions} = options.inputOptions;
     const newPlugins = [
       resolve(nodeResolveOptions(options)),
-      commonjs(commonjsOptions(options)),
       babel(babelOptions(options)),
+      commonjs(commonjsOptions(options)),
       ...defaultPlugins
     ];
 

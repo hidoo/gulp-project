@@ -157,6 +157,7 @@
   "ignorePaths": [
     "examples/**",
     "packages/gulp-project-generator/test/fixtures/expected/**",
-    "packages/gulp-task-build-styleguide-kss/builder/**"
+    "packages/gulp-task-build-styleguide-kss/builder/**",
+    "packages/gulp-task-build-styleguide-kss/test/fixtures/expected/**"
   ]
 }

@@ -56,7 +56,6 @@
       "groupSlug": "do-not-automerge-eslint",
       "packageNames": [
         "@hidoo/eslint-config",
-        "babel-eslint",
         "eslint"
       ],
       "automerge": false,

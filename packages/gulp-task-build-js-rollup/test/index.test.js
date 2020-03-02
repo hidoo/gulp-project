@@ -30,41 +30,39 @@ describe('gulp-task-build-js-rollup', () => {
     rimraf(`${path.dest}/*.{js,gz}`, done);
   });
 
-  it('should out to "main.js" if argument "options" is default.', (done) => {
+  it('should out to "main.js" if argument "options" is default.', async () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest
     });
+    const stream = await task();
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    await new Promise((done) => stream.on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.equal(actual, expected);
+      done();
+    }));
   });
 
-  it('should out to specified file name if argument "options.filename" is set.', (done) => {
+  it('should out to specified file name if argument "options.filename" is set.', async () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
       filename: 'hoge.js'
     });
+    const stream = await task();
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/hoge.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    await new Promise((done) => stream.on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/hoge.js`).toString().trim(),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.equal(actual, expected);
+      done();
+    }));
   });
 
   it('should out to "main.js" that transformed for target browsers if argument "options.browsers" is set.', (done) => {
@@ -72,7 +70,7 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${path.src}/main.js`,
       dest: path.dest,
       filename: 'main.browsers.js',
-      browsers: ['> 0.1% in JP', 'ie >= 8']
+      browsers: 'chrome >= 50'
     });
 
     task()
@@ -87,12 +85,12 @@ describe('gulp-task-build-js-rollup', () => {
       .catch((error) => done(error));
   });
 
-  it('should out to "main.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
+  it('should out to "use-corejs.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
     const task = buildJs({
       src: `${path.src}/use-corejs.js`,
       dest: path.dest,
       filename: 'use-corejs.js',
-      browsers: ['> 0.1% in JP', 'ie >= 11'],
+      browsers: 'ie >= 11',
       corejs: {version: 3, proposals: true}
     });
 
@@ -108,7 +106,7 @@ describe('gulp-task-build-js-rollup', () => {
       .catch((error) => done(error));
   });
 
-  it('should out to "main.js" that use react.', (done) => {
+  it('should out to "use-react.js" that transformed for jsx if @babel/preset-react use.', (done) => {
     const task = buildJs({
       src: `${path.src}/use-react.js`,
       dest: path.dest,

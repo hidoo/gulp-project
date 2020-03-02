@@ -141,6 +141,42 @@ describe('gulp-util-merge-babelrc', () => {
           [['@babel/preset-env', {targets: {node: 'current', browsers: 'hoge'}}]]
         ],
         [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]],
+          {},
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]]
+        ],
+        [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]],
+          {presetEnvAllowTargets: ['node']},
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]]
+        ],
+        [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]],
+          {presetEnvAllowTargets: ['browsers']},
+          [['@babel/preset-env', {targets: ['> 0.5% in JP', 'ie >= 10']}]]
+        ],
+        [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]],
+          {},
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]]
+        ],
+        [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]],
+          {presetEnvAllowTargets: ['node']},
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]]
+        ],
+        [
+          [['@babel/preset-env', {targets: {node: 'current'}}]],
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]],
+          {presetEnvAllowTargets: ['browsers']},
+          [['@babel/preset-env', {targets: '> 0.5% in JP, ie >= 10'}]]
+        ],
+        [
           [['@babel/env', {targets: {node: 'current', hoge: 'piyo'}}]],
           [['@babel/env', {targets: {browsers: 'hoge'}}]],
           {presetEnvAllowTargets: ['node', 'browsers']},

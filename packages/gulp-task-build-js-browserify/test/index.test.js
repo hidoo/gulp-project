@@ -66,12 +66,13 @@ describe('gulp-task-build-js-browserify', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      browsers: ['> 0.1% in JP', 'ie >= 8']
+      filename: 'main.browsers.js',
+      browsers: 'chrome >= 50'
     });
 
     task().on('finish', () => {
-      // remove license comment before compare source code (for travis CI)
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim().replace(/^[\s\S]*?\*\//m, ''),
+      // remove license comment before compare source code (for CI)
+      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim().replace(/^[\s\S]*?\*\//m, ''),
             expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim().replace(/^[\s\S]*?\*\//m, ''));
 
       assert(actual);
@@ -84,7 +85,6 @@ describe('gulp-task-build-js-browserify', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
-      browsers: ['> 0.1% in JP', 'ie >= 8'],
       useBuiltIns: false
     });
 
@@ -128,14 +128,12 @@ describe('gulp-task-build-js-browserify', () => {
       const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
             actualMin = fs.readFileSync(`${path.dest}/main.min.js`).toString().trim(),
             actualGz = fs.readFileSync(`${path.dest}/main.min.js.gz`),
-            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim()),
-            expectedMin = replaceVersion(fs.readFileSync(`${path.expected}/main.min.js`).toString().trim());
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual, expected);
-      assert.deepStrictEqual(actualMin, expectedMin);
       done();
     });
   });
@@ -152,14 +150,12 @@ describe('gulp-task-build-js-browserify', () => {
       const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
             actualMin = fs.readFileSync(`${path.dest}/main.hoge.js`).toString().trim(),
             actualGz = fs.readFileSync(`${path.dest}/main.hoge.js.gz`),
-            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim()),
-            expectedMin = replaceVersion(fs.readFileSync(`${path.expected}/main.min.js`).toString().trim());
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
       assert(actualMin);
       assert(actualGz);
       assert.deepStrictEqual(actual, expected);
-      assert.deepStrictEqual(actualMin, expectedMin);
       done();
     });
   });

@@ -78,7 +78,7 @@ export default function buildJs(options = {}) {
           {
             presets: [
               ['@babel/preset-env', {
-                targets: {browsers},
+                targets: browsers || {},
                 useBuiltIns,
                 corejs,
                 debug: verbose

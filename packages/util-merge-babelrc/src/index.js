@@ -107,12 +107,19 @@ export function mergeBabelPresets(presets = [], source = [], options = {}) {
         }
 
         // merge targets options by options.presetEnvAllowTargets value
-        if (opts.targets && Array.isArray(options.presetEnvAllowTargets)) {
-          opts.targets = Object.entries(opts.targets)
-            .filter(([key]) => options.presetEnvAllowTargets.includes(key))
-            .reduce((prev, [key, value]) => {
-              return {...prev, [key]: value};
-            }, {});
+        if (opts.targets) {
+          if (
+            typeof opts.targets === 'object' &&
+            !Array.isArray(opts.targets) &&
+            opts.targets !== null &&
+            Array.isArray(options.presetEnvAllowTargets)
+          ) {
+            opts.targets = Object.entries(opts.targets)
+              .filter(([key]) => options.presetEnvAllowTargets.includes(key))
+              .reduce((prev, [key, value]) => {
+                return {...prev, [key]: value};
+              }, {});
+          }
         }
       }
 

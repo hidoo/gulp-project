@@ -16,7 +16,7 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: []},
+            targets: {},
             useBuiltIns: false,
             debug: false
           }]
@@ -27,7 +27,7 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: []},
+            targets: {},
             useBuiltIns: false,
             debug: false
           }]
@@ -38,7 +38,7 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: []},
+            targets: {},
             useBuiltIns: false,
             debug: true
           }]
@@ -49,7 +49,7 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: []},
+            targets: {},
             useBuiltIns: 'usage',
             corejs: 3,
             debug: false
@@ -61,7 +61,7 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: []},
+            targets: {},
             useBuiltIns: 'usage',
             corejs: 2,
             debug: false
@@ -73,7 +73,18 @@ describe('babelOptions', () => {
         {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {browsers: ['> 0.1% in JP', 'ie >= 8']},
+            targets: ['> 0.1% in JP', 'ie >= 8'],
+            useBuiltIns: false,
+            debug: false
+          }]
+        ]}
+      ],
+      [
+        {browsers: '> 0.1% in JP, ie >= 8'},
+        {babelrc: false, externalHelpers: false, exclude: 'node_modules/**', plugins: [], presets: [
+          ['@babel/preset-env', {
+            modules: false,
+            targets: '> 0.1% in JP, ie >= 8',
             useBuiltIns: false,
             debug: false
           }]
@@ -86,7 +97,7 @@ describe('babelOptions', () => {
           presets: [
             ['@babel/preset-env', {
               modules: false,
-              targets: {browsers: []},
+              targets: {},
               useBuiltIns: false,
               debug: false
             }]

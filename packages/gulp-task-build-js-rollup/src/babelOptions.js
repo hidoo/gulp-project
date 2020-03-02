@@ -24,7 +24,7 @@ export default function babelOptions(options = {}) {
     presets: [
       ['@babel/preset-env', {
         modules: false,
-        targets: {browsers: options.browsers ? options.browsers : []},
+        targets: options.browsers || {},
         useBuiltIns: options.useBuiltIns ? options.useBuiltIns : false,
         corejs: options.corejs ? options.corejs : 3, // eslint-disable-line no-magic-numbers
         debug: options.verbose ? options.verbose : false

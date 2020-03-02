@@ -1,11 +1,13 @@
 import log from 'fancy-log';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
 import nodeResolveOptions from './nodeResolveOptions';
 import commonjsOptions from './commonjsOptions';
+import jsonOptions from './jsonOptions';
 import babelOptions from './babelOptions';
 import licenseOptions from './licenseOptions';
 
@@ -57,6 +59,7 @@ export default function inputOptions(options = {}) {
     const {input, plugins, ...restInputOptions} = options.inputOptions;
     const newPlugins = [
       resolve(nodeResolveOptions(options)),
+      json(jsonOptions(options)),
       babel(babelOptions(options)),
       commonjs(commonjsOptions(options)),
       ...defaultPlugins

@@ -32,6 +32,7 @@ const DEFAULT_OPTIONS = {
   outputOptions: {},
   aliasOptions: {},
   nodeResolveOptions: {},
+  jsonOptions: {},
   commonjsOptions: {},
   compress: false,
   verbose: false
@@ -63,12 +64,15 @@ const DEFAULT_OPTIONS = {
  * @param {Object} [options.aliasOptions] - options for @rollup/plugin-alias.
  *   see: {@link ./src/aliasOptions.js Merged with this function}.
  *   see: {@link https://github.com/rollup/plugins/tree/master/packages/alias @rollup/plugin-alias}
- * @param {Object} [options.nodeResolveOptions] - options for rollup-plugin-node-resolve.
+ * @param {Object} [options.nodeResolveOptions] - options for @rollup/plugin-node-resolve.
  *   see: {@link ./src/nodeResolveOptions.js Merged with this function}.
- *   see: {@link https://github.com/rollup/rollup-plugin-node-resolve rollup-plugin-node-resolve}
- * @param {Object} [options.commonjsOptions] - options for rollup-plugin-commonjs.
+ *   see: {@link https://github.com/rollup/plugins/tree/master/packages/node-resolve @rollup/plugin-node-resolve}
+ * @param {Object} [options.jsonOptions] - options for @rollup/plugin-json.
+ *   see: {@link ./src/jsonOptions.js Merged with this function}.
+ *   see: {@link https://github.com/rollup/plugins/tree/master/packages/json @rollup/plugin-json}
+ * @param {Object} [options.commonjsOptions] - options for @rollup/plugin-commonjs.
  *   see: {@link ./src/commonjsOptions.js Merged with this function}.
- *   see: {@link https://github.com/rollup/rollup-plugin-commonjs rollup-plugin-commonjs}
+ *   see: {@link https://github.com/rollup/plugins/tree/master/packages/commonjs @rollup/plugin-commonjs}
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Promise>}
@@ -91,6 +95,7 @@ const DEFAULT_OPTIONS = {
  *   outputOptions: {},
  *   aliasOptions: {},
  *   nodeResolveOptions: {},
+ *   jsonOptions: {},
  *   commonjsOptions: {},
  *   compress: true,
  *   verbose: true

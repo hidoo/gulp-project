@@ -30,6 +30,7 @@ const DEFAULT_OPTIONS = {
   babelrc: path.resolve(process.cwd(), '.babelrc.js'),
   inputOptions: {},
   outputOptions: {},
+  aliasOptions: {},
   nodeResolveOptions: {},
   commonjsOptions: {},
   compress: false,
@@ -59,6 +60,9 @@ const DEFAULT_OPTIONS = {
  * @param {Object} [options.outputOptions] - output options for rollup.js.
  *   see: {@link ./src/outputOptions.js Merged with this function}.
  *   see: {@link https://rollupjs.org/guide/en#outputoptions outputOptions in JavaScript API of rollup.js}
+ * @param {Object} [options.aliasOptions] - options for @rollup/plugin-alias.
+ *   see: {@link ./src/aliasOptions.js Merged with this function}.
+ *   see: {@link https://github.com/rollup/plugins/tree/master/packages/alias @rollup/plugin-alias}
  * @param {Object} [options.nodeResolveOptions] - options for rollup-plugin-node-resolve.
  *   see: {@link ./src/nodeResolveOptions.js Merged with this function}.
  *   see: {@link https://github.com/rollup/rollup-plugin-node-resolve rollup-plugin-node-resolve}
@@ -85,6 +89,7 @@ const DEFAULT_OPTIONS = {
  *   babelrc: '/path/to/.babelrc.js',
  *   inputOptions: {},
  *   outputOptions: {},
+ *   aliasOptions: {},
  *   nodeResolveOptions: {},
  *   commonjsOptions: {},
  *   compress: true,

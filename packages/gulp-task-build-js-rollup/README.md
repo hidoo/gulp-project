@@ -50,6 +50,9 @@ return javascript build task by rollup.js
     -   `options.outputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** output options for rollup.js.
           see: [Merged with this function](./src/outputOptions.js).
           see: [outputOptions in JavaScript API of rollup.js](https://rollupjs.org/guide/en#outputoptions)
+    -   `options.aliasOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-alias.
+          see: [Merged with this function](./src/aliasOptions.js).
+          see: [@rollup/plugin-alias](https://github.com/rollup/plugins/tree/master/packages/alias)
     -   `options.nodeResolveOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for rollup-plugin-node-resolve.
           see: [Merged with this function](./src/nodeResolveOptions.js).
           see: [rollup-plugin-node-resolve](https://github.com/rollup/rollup-plugin-node-resolve)
@@ -77,6 +80,7 @@ task('js', buildJs({
   babelrc: '/path/to/.babelrc.js',
   inputOptions: {},
   outputOptions: {},
+  aliasOptions: {},
   nodeResolveOptions: {},
   commonjsOptions: {},
   compress: true,

@@ -50,12 +50,18 @@ return javascript build task by rollup.js
     -   `options.outputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** output options for rollup.js.
           see: [Merged with this function](./src/outputOptions.js).
           see: [outputOptions in JavaScript API of rollup.js](https://rollupjs.org/guide/en#outputoptions)
-    -   `options.nodeResolveOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for rollup-plugin-node-resolve.
+    -   `options.aliasOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-alias.
+          see: [Merged with this function](./src/aliasOptions.js).
+          see: [@rollup/plugin-alias](https://github.com/rollup/plugins/tree/master/packages/alias)
+    -   `options.nodeResolveOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-node-resolve.
           see: [Merged with this function](./src/nodeResolveOptions.js).
-          see: [rollup-plugin-node-resolve](https://github.com/rollup/rollup-plugin-node-resolve)
-    -   `options.commonjsOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for rollup-plugin-commonjs.
+          see: [@rollup/plugin-node-resolve](https://github.com/rollup/plugins/tree/master/packages/node-resolve)
+    -   `options.jsonOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-json.
+          see: [Merged with this function](./src/jsonOptions.js).
+          see: [@rollup/plugin-json](https://github.com/rollup/plugins/tree/master/packages/json)
+    -   `options.commonjsOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-commonjs.
           see: [Merged with this function](./src/commonjsOptions.js).
-          see: [rollup-plugin-commonjs](https://github.com/rollup/rollup-plugin-commonjs)
+          see: [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
@@ -77,7 +83,9 @@ task('js', buildJs({
   babelrc: '/path/to/.babelrc.js',
   inputOptions: {},
   outputOptions: {},
+  aliasOptions: {},
   nodeResolveOptions: {},
+  jsonOptions: {},
   commonjsOptions: {},
   compress: true,
   verbose: true

@@ -6,7 +6,7 @@
  */
 export default function nodeResolveOptions(options) {
   const defaultOptions = {
-    mainFields: ['module', 'jsnext', 'main']
+    mainFields: ['browser', 'module', 'jsnext', 'main']
   };
 
   if (

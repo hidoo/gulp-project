@@ -126,6 +126,52 @@ describe('gulp-task-build-js-rollup', () => {
       .catch((error) => done(error));
   });
 
+  it('should out to "import-json.js" that convert JSON to ES6 modules if ".json" files import.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/import-json.js`,
+      dest: path.dest,
+      filename: 'import-json.js'
+    });
+
+    task()
+      .then((stream) => stream.on('finish', () => {
+        const actual = fs.readFileSync(`${path.dest}/import-json.js`).toString().trim(),
+              expected = replaceVersion(fs.readFileSync(`${path.expected}/import-json.js`).toString().trim());
+
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+        done();
+      }))
+      .catch((error) => done(error));
+  });
+
+  it('should out to "alias.js" that resolved modules by alias if options.aliasOptions is set.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/child/grand-child/alias.js`,
+      dest: path.dest,
+      filename: 'alias.js',
+      aliasOptions: {
+        entries: [
+          {
+            find: '~',
+            replacement: `${resolve(path.src)}`
+          }
+        ]
+      }
+    });
+
+    task()
+      .then((stream) => stream.on('finish', () => {
+        const actual = fs.readFileSync(`${path.dest}/alias.js`).toString().trim(),
+              expected = replaceVersion(fs.readFileSync(`${path.expected}/alias.js`).toString().trim());
+
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+        done();
+      }))
+      .catch((error) => done(error));
+  });
+
   it('should out to "main.min.js" and "main.min.js.gz" if argument "options.compress" is set.', (done) => {
     const task = buildJs({
       src: `${path.src}/main.js`,

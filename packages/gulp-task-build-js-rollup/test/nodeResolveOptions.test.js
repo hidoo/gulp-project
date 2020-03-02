@@ -9,19 +9,19 @@ describe('nodeResolveOptions', () => {
     const cases = [
       [
         null,
-        {mainFields: ['module', 'jsnext', 'main']}
+        {mainFields: ['browser', 'module', 'jsnext', 'main']}
       ],
       [
         [],
-        {mainFields: ['module', 'jsnext', 'main']}
+        {mainFields: ['browser', 'module', 'jsnext', 'main']}
       ],
       [
         {},
-        {mainFields: ['module', 'jsnext', 'main']}
+        {mainFields: ['browser', 'module', 'jsnext', 'main']}
       ],
       [
         {nodeResolveOptions: {hoge: 'fuga'}},
-        {mainFields: ['module', 'jsnext', 'main'], hoge: 'fuga'}
+        {mainFields: ['browser', 'module', 'jsnext', 'main'], hoge: 'fuga'}
       ],
       [
         {nodeResolveOptions: {mainFields: ['module', 'main']}},

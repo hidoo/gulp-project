@@ -2044,7 +2044,7 @@
     glob "7.1.6"
     highlight.js "9.16.2"
 
-"@hidoo/stylelint-config@^0.4.0":
+"@hidoo/stylelint-config@^0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@hidoo/stylelint-config/-/stylelint-config-0.4.1.tgz#57012d0a3f80fcade65aaf672b1c32fe40631d8e"
   integrity sha512-5dPTIALwU+d6FNfXIwpXcr0IK5by8jR3H9z7qx7W2XnPUIymLFDWZMn1U2cNRFBo5qVy5XcwuNI1x4UzCtUpgQ==

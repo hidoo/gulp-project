@@ -25,7 +25,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: '@babel/core', version: '^7.8.6'},
           {name: '@babel/preset-env', version: '^7.8.6'},
           {name: '@babel/register', version: '^7.8.6'},
-          {name: '@hidoo/eslint-config', version: '^0.3.0'},
+          {name: '@hidoo/eslint-config', version: '^0.4.0'},
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
           {name: 'commander', version: '^4.1.1'},
           {name: 'cross-env', version: '^7.0.0'},
@@ -55,9 +55,9 @@ export default async function generatePackageJson(name = '', dest = '', options 
     if (options.cssPreprocessor === 'sass') {
       devDependencies.push(
         {name: '@hidoo/gulp-task-build-css-sass', version: gulpProjectVersion},
-        {name: '@hidoo/stylelint-config', version: '^0.4.0'},
-        {name: '@hidoo/kss-builder', version: '^0.4.0'},
-        {name: 'stylelint', version: '^11.0.0'}
+        {name: '@hidoo/stylelint-config', version: '^0.4.1'},
+        {name: '@hidoo/kss-builder', version: '^0.4.1'},
+        {name: 'stylelint', version: '^13.2.0'}
       );
       scripts.push(
         {name: 'test:lint:css', command: 'stylelint --syntax scss ./**/*.scss'}
@@ -87,8 +87,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
   if (options.js) {
     devDependencies.push(
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'core-js', version: '^3.6.0'},
-      {name: 'jsdom', version: '^15.1.1'},
+      {name: 'core-js', version: '^3.6.4'},
+      {name: 'jsdom', version: '^16.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^7.1.0'},
       {name: 'power-assert', version: '^1.6.1'},
@@ -118,7 +118,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.server) {
     devDependencies.push(
-      {name: '@hidoo/express-engine-handlebars', version: '^0.6.0'},
+      {name: '@hidoo/express-engine-handlebars', version: '^0.7.0'},
       {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
       {name: 'browser-sync', version: '^2.26.7'},
       {name: 'express', version: '^4.17.1'}

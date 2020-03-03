@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-js-browserify",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Task that build javascript by browserify for gulp.",
   "engines": {
     "node": ">=10.0.0"
@@ -42,8 +42,8 @@
     "rimraf": "3.0.2"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.14.1",
-    "@hidoo/util-merge-babelrc": "^0.14.1",
+    "@hidoo/gulp-util-error-handler": "^0.15.0",
+    "@hidoo/util-merge-babelrc": "^0.15.0",
     "babelify": "9.0.0",
     "browserify": "13.3.0",
     "envify": "4.1.0",

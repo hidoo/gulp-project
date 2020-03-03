@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v9.7.2 ([9f0bab7](https://github.com/hidoo/gulp-project/commit/9f0bab702060b041b1db0a113ea630c82b775ed2))
+* **deps:** update dependency autoprefixer to v9.7.3 ([6819be9](https://github.com/hidoo/gulp-project/commit/6819be98ca63c79a472de3d9a876275fd62d359d))
+* **deps:** update dependency autoprefixer to v9.7.4 ([a753159](https://github.com/hidoo/gulp-project/commit/a75315996bb9ffeb0eeea0b785733fa5d39b1776))
+* **deps:** update dependency gulp-rename to v2 ([08756b4](https://github.com/hidoo/gulp-project/commit/08756b4bd6c82f2d906ecfb45e9de214e5c2d78c))
+* **deps:** update dependency uncss to v0.17.3 ([3035f51](https://github.com/hidoo/gulp-project/commit/3035f51fbbe2c70138eb85adb5dd09b22243f4a0))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-css-stylus

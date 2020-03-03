@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency babel-eslint to v10.1.0 ([4e42deb](https://github.com/hidoo/gulp-project/commit/4e42debb5502a7ede22e3da8a2634d1889c2e77d))
+* **deps:** update dependency commander to v4.1.0 ([7466612](https://github.com/hidoo/gulp-project/commit/7466612b3373639b97a174ec487303c1c8540a32))
+* **deps:** update dependency commander to v4.1.1 ([3026746](https://github.com/hidoo/gulp-project/commit/30267467a94fa68b5e8d6b6a8a29f960db36ec26))
+* **deps:** update dependency eslint to v6.7.2 ([cc4ca99](https://github.com/hidoo/gulp-project/commit/cc4ca99ca7d6bb10e33eff97158f2a0ebfcbffb2))
+* **deps:** update dependency eslint to v6.8.0 ([e7bf97a](https://github.com/hidoo/gulp-project/commit/e7bf97a98a8deed45e0f7f31945ef9bd746fe620))
+* **deps:** update dependency handlebars to v4.5.3 ([eefba29](https://github.com/hidoo/gulp-project/commit/eefba297263939c82b05c0aee9cc4e7398d3a3eb))
+* **deps:** update dependency handlebars to v4.7.2 ([927a8c1](https://github.com/hidoo/gulp-project/commit/927a8c1006e33e8f2974a81a391b807477c61a39))
+* **deps:** update dependency handlebars to v4.7.3 ([5c0c762](https://github.com/hidoo/gulp-project/commit/5c0c762cb11653ce6cf04068cf39aafedc3500bc))
+* **deps:** update dependency inquirer to v7.0.1 ([6947c65](https://github.com/hidoo/gulp-project/commit/6947c6572807b97b8e359856f052a194b7cb8a82))
+* **deps:** update dependency inquirer to v7.0.2 ([d5edb22](https://github.com/hidoo/gulp-project/commit/d5edb22d7cd024608cc10e50965920c63faa034b))
+* **deps:** update dependency inquirer to v7.0.3 ([a05d193](https://github.com/hidoo/gulp-project/commit/a05d1931ba2f52dee677f3b5ad8d1e8f2767b7f0))
+* **deps:** update dependency inquirer to v7.0.4 ([818ef96](https://github.com/hidoo/gulp-project/commit/818ef966f4c26da995609503b281df8a669aeb8b))
+* **deps:** update dependency inquirer to v7.0.5 ([1e1aa3e](https://github.com/hidoo/gulp-project/commit/1e1aa3e441a6162de7268c46270b68b4f35d257d))
+* **deps:** update dependency mkdirp to v1 ([f43326f](https://github.com/hidoo/gulp-project/commit/f43326fb2b1b74bf13cfebe3cb658d09b936430b))
+* **generator:** change mocha.opts to .mocharc.js ([6e91b0f](https://github.com/hidoo/gulp-project/commit/6e91b0f67348d3fd4495239115e55809f5ddacef))
+* **generator:** change to use promise I/F of mkdirp ([914940d](https://github.com/hidoo/gulp-project/commit/914940d7b8d1d5804a599c9cde2070225cecfd71))
+* **generator:** remove node v8 support ([4ed30c9](https://github.com/hidoo/gulp-project/commit/4ed30c9780fca3415b3fe4c83535b245641a2877))
+
+
+### Features
+
+* **generator:** add task for stylelint to npm-scripts ([8068fd2](https://github.com/hidoo/gulp-project/commit/8068fd2df653660fa7534a3a7efa1e1589989e38))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 

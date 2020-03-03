@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ndarray to v1.0.19 ([8ab3ef2](https://github.com/hidoo/gulp-project/commit/8ab3ef2f6fca3149f20442a9ace2778d8251d873))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+* **plugin-image-evenizer:** fix to use FileType.fromBuffer ([db093dd](https://github.com/hidoo/gulp-project/commit/db093ddb269d9fd659aff234a73fb58cb30223e4))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 **Note:** Version bump only for package @hidoo/gulp-plugin-image-evenizer

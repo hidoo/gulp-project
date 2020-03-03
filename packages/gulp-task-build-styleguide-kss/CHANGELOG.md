@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **build-styleguide-kss:** maintain compatibility before 3.0.0-beta.25 ([2f6c8b6](https://github.com/hidoo/gulp-project/commit/2f6c8b6561851018efe3d8c7fabc64e29ec9a074)), closes [/github.com/kss-node/kss-node/commit/1d9b08c975fcdb7edf2a910e45f1a307f3d3f661#diff-acb589513dba3b533821b519a1f4af8aL127](https://github.com//github.com/kss-node/kss-node/commit/1d9b08c975fcdb7edf2a910e45f1a307f3d3f661/issues/diff-acb589513dba3b533821b519a1f4af8aL127)
+* **deps:** update dependency handlebars to v4.5.3 ([eefba29](https://github.com/hidoo/gulp-project/commit/eefba297263939c82b05c0aee9cc4e7398d3a3eb))
+* **deps:** update dependency handlebars to v4.7.2 ([927a8c1](https://github.com/hidoo/gulp-project/commit/927a8c1006e33e8f2974a81a391b807477c61a39))
+* **deps:** update dependency handlebars to v4.7.3 ([5c0c762](https://github.com/hidoo/gulp-project/commit/5c0c762cb11653ce6cf04068cf39aafedc3500bc))
+* **deps:** update dependency kss to v3.0.0 ([d427cd5](https://github.com/hidoo/gulp-project/commit/d427cd5656941b89fab02012a43124590702ded1))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 

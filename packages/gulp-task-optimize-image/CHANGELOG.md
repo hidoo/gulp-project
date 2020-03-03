@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-imagemin to v7 ([2270335](https://github.com/hidoo/gulp-project/commit/2270335f1a7f7e623e1602578574a0c7adace355))
+* **optimize-image:** fix issue that error when task run multiple ([da81308](https://github.com/hidoo/gulp-project/commit/da813084d36118fc94604c52a3fa6debe368d25d))
+* **optimize-image:** remove jpegtran ([aa5835a](https://github.com/hidoo/gulp-project/commit/aa5835a0cb3286360bf0c636814a6089b56b8fe6))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 

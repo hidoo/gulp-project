@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **build-js-browserify:** change default value of corejs option to 3 ([c5272d8](https://github.com/hidoo/gulp-project/commit/c5272d8fcdd9bd5ed48919fbee402e3c9ae487e3))
+* **build-js-browserify:** fix to use options.targets directly ([a6e0cf3](https://github.com/hidoo/gulp-project/commit/a6e0cf378cd50df596ed3824a27a9b00ac5ae8ac))
+* **deps:** update dependency gulp-rename to v2 ([08756b4](https://github.com/hidoo/gulp-project/commit/08756b4bd6c82f2d906ecfb45e9de214e5c2d78c))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-browserify

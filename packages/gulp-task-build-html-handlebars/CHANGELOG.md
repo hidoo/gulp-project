@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-rename to v2 ([08756b4](https://github.com/hidoo/gulp-project/commit/08756b4bd6c82f2d906ecfb45e9de214e5c2d78c))
+* **deps:** update dependency handlebars to v4.5.3 ([eefba29](https://github.com/hidoo/gulp-project/commit/eefba297263939c82b05c0aee9cc4e7398d3a3eb))
+* **deps:** update dependency handlebars to v4.7.2 ([927a8c1](https://github.com/hidoo/gulp-project/commit/927a8c1006e33e8f2974a81a391b807477c61a39))
+* **deps:** update dependency handlebars to v4.7.3 ([5c0c762](https://github.com/hidoo/gulp-project/commit/5c0c762cb11653ce6cf04068cf39aafedc3500bc))
+* **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
+
+
+
+
+
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 

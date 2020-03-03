@@ -2025,16 +2025,7 @@
     marked "0.7.0"
     path-browserify "1.0.0"
 
-"@hidoo/handlebars-helpers@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.6.1.tgz#b8a665e3e822b4b6084bda109227de5787008e10"
-  integrity sha512-kRq6dT7OBU51Dd//bJze7SlVpl7nFy9QKzYAy+j3hPOEFYCSce+RCPIYJMJ9vpCFzlhU+b56RUt/Jb6M5lS37w==
-  dependencies:
-    highlight.js "9.16.2"
-    marked "0.7.0"
-    path-browserify "1.0.0"
-
-"@hidoo/handlebars-helpers@^0.7.0":
+"@hidoo/handlebars-helpers@0.7.0", "@hidoo/handlebars-helpers@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.7.0.tgz#0c7e2827bd3baa10ce9ed0c3868095c2d3217a79"
   integrity sha512-8f6YLbqdW97SvnQokiZTDP62QyY5h/ZfGPEf24QMEOvDjtuYnZaxRJOx3zG3kaJato5Rvb2LzLc/ZzE5fx0z4Q==

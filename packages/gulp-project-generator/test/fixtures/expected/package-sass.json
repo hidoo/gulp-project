@@ -29,7 +29,7 @@
     "@babel/core": "^7.8.6",
     "@babel/preset-env": "^7.8.6",
     "@babel/register": "^7.8.6",
-    "@hidoo/eslint-config": "^0.3.0",
+    "@hidoo/eslint-config": "^0.4.0",
     "@hidoo/express-engine-handlebars": "^0.6.0",
     "@hidoo/gulp-task-build-css-sass": "^0.0.0",
     "@hidoo/gulp-task-build-html-handlebars": "^0.0.0",

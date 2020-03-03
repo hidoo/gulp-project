@@ -2004,15 +2004,15 @@
     eslint-plugin-node "11.0.0"
     eslint-plugin-sort-class-members "1.6.0"
 
-"@hidoo/express-engine-handlebars@^0.6.0":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.6.1.tgz#142690b34a13c29943087c0cc55e750e0db63c6c"
-  integrity sha512-I6blKbMFxQJVPF/LutvcbUZdyVKll2zw3B0Folo4WI6sahJOM8kH17C0Jch887bUdMxQxvrMsgwhN5KsaY6ynw==
+"@hidoo/express-engine-handlebars@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.7.0.tgz#7c0770a25d7496b5dbe0124f11475366f438f10c"
+  integrity sha512-d44XnIkCwWucLFeH0EJEoVCcY4yWy/6BCAI0MCf+6C88zg3Fgk2fUYvD1JQl7Egcs1a0w95Gu5W4qssaYiAsgA==
   dependencies:
-    "@hidoo/handlebars-helpers" "^0.6.1"
+    "@hidoo/handlebars-helpers" "^0.7.0"
     glob "7.1.6"
     glob-parent "5.1.0"
-    handlebars "4.5.1"
+    handlebars "4.7.3"
     handlebars-layouts "3.1.4"
     vinyl "2.2.0"
 
@@ -2025,13 +2025,22 @@
     marked "0.7.0"
     path-browserify "1.0.0"
 
-"@hidoo/handlebars-helpers@0.6.1", "@hidoo/handlebars-helpers@^0.6.1":
+"@hidoo/handlebars-helpers@0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.6.1.tgz#b8a665e3e822b4b6084bda109227de5787008e10"
   integrity sha512-kRq6dT7OBU51Dd//bJze7SlVpl7nFy9QKzYAy+j3hPOEFYCSce+RCPIYJMJ9vpCFzlhU+b56RUt/Jb6M5lS37w==
   dependencies:
     highlight.js "9.16.2"
     marked "0.7.0"
+    path-browserify "1.0.0"
+
+"@hidoo/handlebars-helpers@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.7.0.tgz#0c7e2827bd3baa10ce9ed0c3868095c2d3217a79"
+  integrity sha512-8f6YLbqdW97SvnQokiZTDP62QyY5h/ZfGPEf24QMEOvDjtuYnZaxRJOx3zG3kaJato5Rvb2LzLc/ZzE5fx0z4Q==
+  dependencies:
+    highlight.js "9.18.1"
+    marked "0.8.0"
     path-browserify "1.0.0"
 
 "@hidoo/kss-builder@^0.4.0":
@@ -8721,7 +8730,7 @@ highlight.js@9.16.2, highlight.js@^9.15.5:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.16.2.tgz#68368d039ffe1c6211bcc07e483daf95de3e403e"
   integrity sha512-feMUrVLZvjy0oC7FVJQcSQRqbBq9kwqnYE4+Kj9ZjbHh3g+BisiPgF49NyQbVLNdrL/qqZr3Ca9yOKwgn2i/tw==
 
-highlight.js@^9.15.6:
+highlight.js@9.18.1, highlight.js@^9.15.6:
   version "9.18.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
   integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
@@ -10938,6 +10947,11 @@ marked@0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
+
+marked@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
+  integrity sha512-MyUe+T/Pw4TZufHkzAfDj6HarCBWia2y27/bhuYkTaiUnfDYFnCP3KUN+9oM7Wi6JA2rymtVYbQu3spE0GCmxQ==
 
 matchdep@^2.0.0:
   version "2.0.0"

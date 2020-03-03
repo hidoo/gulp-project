@@ -118,7 +118,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   }
   if (options.server) {
     devDependencies.push(
-      {name: '@hidoo/express-engine-handlebars', version: '^0.6.0'},
+      {name: '@hidoo/express-engine-handlebars', version: '^0.7.0'},
       {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
       {name: 'browser-sync', version: '^2.26.7'},
       {name: 'express', version: '^4.17.1'}

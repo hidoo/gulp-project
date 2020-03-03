@@ -38,7 +38,7 @@
     "@hidoo/gulp-task-build-styleguide-kss": "^0.14.1",
     "@hidoo/gulp-task-concat": "^0.14.1",
     "@hidoo/gulp-task-optimize-image": "^0.14.1",
-    "@hidoo/kss-builder": "^0.4.0",
+    "@hidoo/kss-builder": "^0.4.1",
     "@hidoo/stylelint-config": "^0.4.0",
     "@hidoo/util-fancy-print": "^0.14.1",
     "@hidoo/util-local-ip": "^0.14.1",

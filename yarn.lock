@@ -2034,7 +2034,7 @@
     marked "0.8.0"
     path-browserify "1.0.0"
 
-"@hidoo/kss-builder@^0.4.0":
+"@hidoo/kss-builder@^0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@hidoo/kss-builder/-/kss-builder-0.4.1.tgz#2a514dcf4ecd60805fc6a800d6b054ff67dacdd8"
   integrity sha512-JhWuYv4Nh76dpJbxl4M+AMoYFWdPS8YWT8WjhDGLe0xIiLLftmv++2eguZdMEbklp5hHBPxD2dQZ9JqQu8ZToQ==

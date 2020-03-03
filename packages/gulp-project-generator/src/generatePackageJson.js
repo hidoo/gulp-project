@@ -56,7 +56,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
       devDependencies.push(
         {name: '@hidoo/gulp-task-build-css-sass', version: gulpProjectVersion},
         {name: '@hidoo/stylelint-config', version: '^0.4.0'},
-        {name: '@hidoo/kss-builder', version: '^0.4.0'},
+        {name: '@hidoo/kss-builder', version: '^0.4.1'},
         {name: 'stylelint', version: '^11.0.0'}
       );
       scripts.push(

@@ -45,13 +45,13 @@
     "babel-preset-power-assert": "^3.0.0",
     "browser-sync": "^2.26.7",
     "commander": "^4.1.1",
-    "core-js": "^3.6.0",
+    "core-js": "^3.6.4",
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "husky": "^4.2.3",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.2.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.8",
     "mocha": "^7.1.0",
@@ -59,7 +59,7 @@
     "power-assert": "^1.6.1",
     "regenerator-runtime": "^0.13.3",
     "rimraf": "^3.0.2",
-    "stylelint": "^11.0.0"
+    "stylelint": "^13.2.0"
   },
   "dependencies": {}
 }

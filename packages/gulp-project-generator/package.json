@@ -51,7 +51,7 @@
     "glob": "7.1.6",
     "glob-parent": "5.1.0",
     "handlebars": "4.7.3",
-    "inquirer": "7.0.5",
+    "inquirer": "7.0.6",
     "mkdirp": "1.0.3"
   }
 }

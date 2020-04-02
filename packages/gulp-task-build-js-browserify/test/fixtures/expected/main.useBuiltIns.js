@@ -14,11 +14,11 @@
 
 var _esm = _interopRequireDefault(require("./modules/esm"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var commonJsModule = require('./modules/cjs');
 
-(0, _esm["default"])();
+(0, _esm.default)();
 commonJsModule(); // apply polyfill for ie8
 
 [].forEach(function (item) {
@@ -45,7 +45,7 @@ module.exports = function commonJsModule() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = esModule;
+exports.default = esModule;
 
 /**
  * ESModules 形式のモジュール

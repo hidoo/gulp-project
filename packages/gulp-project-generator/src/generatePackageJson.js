@@ -90,7 +90,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'core-js', version: '^3.6.4'},
       {name: 'jsdom', version: '^16.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
-      {name: 'mocha', version: '^7.1.0'},
+      {name: 'mocha', version: '^7.1.1'},
       {name: 'power-assert', version: '^1.6.1'},
       {name: 'regenerator-runtime', version: '^0.13.5'}
     );

@@ -16,8 +16,7 @@
    * @return {Component}
    */
   function Hoge(props) {
-    return (/*#__PURE__*/React.createElement("div", null, props.hoge)
-    );
+    return React.createElement("div", null, props.hoge);
   }
 
   return Hoge;

@@ -92,7 +92,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^7.1.0'},
       {name: 'power-assert', version: '^1.6.1'},
-      {name: 'regenerator-runtime', version: '^0.13.3'}
+      {name: 'regenerator-runtime', version: '^0.13.5'}
     );
     scripts.push(
       {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js'}

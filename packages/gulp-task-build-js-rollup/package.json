@@ -57,7 +57,7 @@
     "gulp-uglify": "3.0.2",
     "rollup": "2.6.1",
     "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-license": "0.13.0",
+    "rollup-plugin-license": "0.14.0",
     "through2": "3.0.1",
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0"

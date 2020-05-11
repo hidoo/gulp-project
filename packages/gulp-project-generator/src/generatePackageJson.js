@@ -27,7 +27,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: '@babel/register', version: '^7.9.0'},
           {name: '@hidoo/eslint-config', version: '^0.4.0'},
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
-          {name: 'commander', version: '^4.1.1'},
+          {name: 'commander', version: '^5.1.0'},
           {name: 'cross-env', version: '^7.0.2'},
           {name: 'eslint', version: '^6.8.0'},
           {name: 'gulp', version: '^4.0.2'},

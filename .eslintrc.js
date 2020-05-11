@@ -35,11 +35,11 @@ module.exports = {
     },
     // for template and fixture
     {
-      'files': [
+      files: [
         'packages/**/template/**/*.js',
         'packages/**/test/fixtures/**/*.js'
       ],
-      'rules': {
+      rules: {
         'no-console': 'error',
         'import/no-unresolved': 'off',
         'node/no-extraneous-import': 'off'

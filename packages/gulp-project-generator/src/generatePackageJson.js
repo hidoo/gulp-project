@@ -22,8 +22,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
   const gulpProjectVersion = `^${pkg.version}`;
 
   const devDependencies = [
-          {name: '@babel/core', version: '^7.9.0'},
-          {name: '@babel/preset-env', version: '^7.9.0'},
+          {name: '@babel/core', version: '^7.9.6'},
+          {name: '@babel/preset-env', version: '^7.9.6'},
           {name: '@babel/register', version: '^7.9.0'},
           {name: '@hidoo/eslint-config', version: '^0.4.0'},
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},

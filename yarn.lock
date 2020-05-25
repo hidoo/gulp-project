@@ -12492,6 +12492,11 @@ p-waterfall@^1.0.0:
   dependencies:
     p-reduce "^1.0.0"
 
+package-name-regex@1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/package-name-regex/-/package-name-regex-1.0.8.tgz#4b8388cace6cc415f462ab4a269583d9a2d9f131"
+  integrity sha512-g3vB2J62dLqf4m50VM4tJUC4sixw3JB+Igd0cF3P/gJhAvmvsmFEV2eWZTeLbwfkKEWTf3+gwQ2C6JFFRxWHEQ==
+
 pad@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/pad/-/pad-3.2.0.tgz#be7a1d1cb6757049b4ad5b70e71977158fea95d1"
@@ -14466,10 +14471,10 @@ rollup-plugin-babel@4.4.0:
     "@babel/helper-module-imports" "^7.0.0"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-license@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-license/-/rollup-plugin-license-2.0.1.tgz#ec471ea63e3f819a8e4169593185b59dc9f7ac56"
-  integrity sha512-w+9JIMj3rHKsI0rYDpFtzAyYZsMCDL5KLDyeb4LXGWtahcgcPbr/XwMD0yozWf4X50AbImYDTdmCHiZS3rUl0A==
+rollup-plugin-license@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-license/-/rollup-plugin-license-2.1.0.tgz#f372f2ec4defbab34ccaca51a76c2c836a2e860d"
+  integrity sha512-HvwwqCbG+//hAwGxOce+XadsEooq79SqDu3z2GTwU2y1rFQ/uqT5JbCzcmauFII+nKZ0/N2BzG76ZuP7OdfU7A==
   dependencies:
     commenting "1.1.0"
     glob "7.1.6"
@@ -14477,6 +14482,7 @@ rollup-plugin-license@2.0.1:
     magic-string "0.25.7"
     mkdirp "1.0.4"
     moment "2.25.1"
+    package-name-regex "1.0.8"
     spdx-expression-validate "2.0.0"
     spdx-satisfies "5.0.0"
 

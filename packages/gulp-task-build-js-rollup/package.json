@@ -45,7 +45,7 @@
   "dependencies": {
     "@hidoo/gulp-util-error-handler": "^0.15.0",
     "@hidoo/util-merge-babelrc": "^0.15.0",
-    "@rollup/plugin-alias": "3.1.0",
+    "@rollup/plugin-alias": "3.1.1",
     "@rollup/plugin-commonjs": "11.1.0",
     "@rollup/plugin-json": "4.0.3",
     "@rollup/plugin-node-resolve": "8.0.0",

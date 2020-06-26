@@ -33,7 +33,7 @@
     "ndarray": "1.0.19",
     "plugin-error": "1.0.1",
     "save-pixels": "2.3.4",
-    "through2": "3.0.1"
+    "through2": "3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",

@@ -6069,10 +6069,10 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-documentation@13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/documentation/-/documentation-13.0.1.tgz#3b540451f54998851e4d6b7e616e49df46a0372d"
-  integrity sha512-lFNDhc287R0W9k+tlmDyE9+L9x1HOePLJm6zv2tqiEzoin6yPURJz6GSYhL0KMMB7HPCi1brdxwYWXiuHrvBdA==
+documentation@13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/documentation/-/documentation-13.0.2.tgz#fd1ec7a1daebfbd5b14a8dca8b9d36cba32f5b85"
+  integrity sha512-pupdwmk51DZyRFxhnadYfN8CxjH5g7L20sIyWkm0u+Zk3J2NByy4CmygVfhv22rm4gHrm69qiHI7SqQ6HuNbeQ==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/generator" "^7.9.4"
@@ -6139,7 +6139,7 @@ documentation@13.0.1:
     vinyl "^2.1.0"
     vinyl-fs "^3.0.2"
     vue-template-compiler "^2.5.16"
-    yargs "^12.0.2"
+    yargs "^15.3.1"
 
 doiuse@^4.2.0:
   version "4.2.0"

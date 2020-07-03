@@ -44,7 +44,7 @@
     "cross-env": "7.0.2",
     "image-size": "0.8.3",
     "mocha": "7.1.2",
-    "pixelmatch": "5.2.0",
+    "pixelmatch": "5.2.1",
     "power-assert": "1.6.1",
     "rimraf": "3.0.2",
     "vinyl": "2.2.0"

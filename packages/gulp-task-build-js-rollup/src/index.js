@@ -3,11 +3,10 @@ import {dest} from 'gulp';
 import cond from 'gulp-if';
 import gzip from 'gulp-gzip';
 import rename from 'gulp-rename';
-import uglify from 'gulp-uglify';
+import terser from 'gulp-terser';
 import {rollup} from 'rollup';
 import through from 'through2';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
+import Vinyl from 'vinyl';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import inputOptions from './inputOptions';
 import outputOptions from './outputOptions';
@@ -43,9 +42,9 @@ const DEFAULT_OPTIONS = {
  *
  * @param {Object} options - options
  * @param {String} [options.name='build:js'] - task name (use as displayName)
- * @param {String} options.src - source path
+ * @param {Array<String>|String} options.src - source path
  * @param {String} options.dest - destination path
- * @param {String} [options.filename='main.js'] - destination filename
+ * @param {Array<String>|String} [options.filename='main.js'] - destination filename
  * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {Array<String>} [options.browsers] - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
@@ -106,34 +105,40 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = async () => {
-    const {filename, suffix, compress} = opts,
-          stream = through.obj();
+    const {suffix, compress} = opts;
+    const stream = through.obj();
+    const filenames = Array.isArray(opts.filename) ?
+      [...opts.filename] : [opts.filename];
 
     const transformedStream = await rollup(inputOptions(opts))
       .then((bundle) => bundle.generate(outputOptions(opts)))
       .then(({output}) => {
 
         for (const chunkOrAsset of output) {
-          if (chunkOrAsset.isAsset) {
-            throw new Error('"Asset" is not support.');
+          if (chunkOrAsset.type === 'asset') {
+            throw new Error('"asset" is not support.');
           }
 
-          const {code, map} = chunkOrAsset;
+          const {code, map, fileName, isEntry} = chunkOrAsset;
+          const filename = isEntry ? filenames.shift() : null;
 
-          // add code and sourcemap to stream,
-          // and add null that indicates write completion
-          stream.push(concatSourceMap({code, map}));
-          stream.push(null);
+          // add code and sourcemap to stream as vinyl file
+          stream.push(new Vinyl({
+            path: filename || fileName,
+            contents: Buffer.from(concatSourceMap({code, map})),
+            isEntry
+          }));
         }
+
+        // add null that indicates write completion
+        stream.push(null);
 
         // transform from nodejs stream to vinyl stream,
         // and flush as gulp task
         return stream
-          .pipe(source(filename))
-          .pipe(buffer())
           .pipe(dest(opts.dest))
-          .pipe(cond(compress, rename({suffix})))
-          .pipe(cond(compress, uglify({output: {comments: 'some'}})))
+          .pipe(cond((file) => file.isEntry && compress, rename({suffix})))
+          .pipe(cond(compress, terser({format: {comments: 'some'}})))
           .pipe(cond(compress, dest(opts.dest)))
           .pipe(cond(compress, gzip({append: true})))
           .pipe(cond(compress, dest(opts.dest)));

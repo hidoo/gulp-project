@@ -15,8 +15,9 @@
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-	function createCommonjsModule(fn, module) {
-		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	function createCommonjsModule(fn) {
+	  var module = { exports: {} };
+		return fn(module, module.exports), module.exports;
 	}
 
 	var check = function (it) {
@@ -24,7 +25,7 @@
 	};
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-	var global_1 =
+	var global$1 =
 	  // eslint-disable-next-line no-undef
 	  check(typeof globalThis == 'object' && globalThis) ||
 	  check(typeof window == 'object' && window) ||
@@ -47,20 +48,20 @@
 	});
 
 	var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
-	var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+	var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
 	// Nashorn ~ JDK8 bug
-	var NASHORN_BUG = getOwnPropertyDescriptor && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
+	var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
 	// `Object.prototype.propertyIsEnumerable` method implementation
 	// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
-	var f = NASHORN_BUG ? function propertyIsEnumerable(V) {
-	  var descriptor = getOwnPropertyDescriptor(this, V);
+	var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
+	  var descriptor = getOwnPropertyDescriptor$1(this, V);
 	  return !!descriptor && descriptor.enumerable;
 	} : nativePropertyIsEnumerable;
 
 	var objectPropertyIsEnumerable = {
-		f: f
+		f: f$4
 	};
 
 	var createPropertyDescriptor = function (bitmap, value) {
@@ -123,11 +124,11 @@
 
 	var hasOwnProperty = {}.hasOwnProperty;
 
-	var has = function (it, key) {
+	var has$1 = function (it, key) {
 	  return hasOwnProperty.call(it, key);
 	};
 
-	var document = global_1.document;
+	var document = global$1.document;
 	// typeof document.createElement is 'object' in old IE
 	var EXISTS = isObject(document) && isObject(document.createElement);
 
@@ -146,17 +147,17 @@
 
 	// `Object.getOwnPropertyDescriptor` method
 	// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
-	var f$1 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+	var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
 	  O = toIndexedObject(O);
 	  P = toPrimitive(P, true);
 	  if (ie8DomDefine) try {
 	    return nativeGetOwnPropertyDescriptor(O, P);
 	  } catch (error) { /* empty */ }
-	  if (has(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
+	  if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
 	};
 
 	var objectGetOwnPropertyDescriptor = {
-		f: f$1
+		f: f$3
 	};
 
 	var anObject = function (it) {
@@ -194,16 +195,16 @@
 
 	var setGlobal = function (key, value) {
 	  try {
-	    createNonEnumerableProperty(global_1, key, value);
+	    createNonEnumerableProperty(global$1, key, value);
 	  } catch (error) {
-	    global_1[key] = value;
+	    global$1[key] = value;
 	  } return value;
 	};
 
 	var SHARED = '__core-js_shared__';
-	var store = global_1[SHARED] || setGlobal(SHARED, {});
+	var store$1 = global$1[SHARED] || setGlobal(SHARED, {});
 
-	var sharedStore = store;
+	var sharedStore = store$1;
 
 	var functionToString = Function.toString;
 
@@ -216,16 +217,16 @@
 
 	var inspectSource = sharedStore.inspectSource;
 
-	var WeakMap = global_1.WeakMap;
+	var WeakMap$1 = global$1.WeakMap;
 
-	var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+	var nativeWeakMap = typeof WeakMap$1 === 'function' && /native code/.test(inspectSource(WeakMap$1));
 
 	var shared = createCommonjsModule(function (module) {
 	(module.exports = function (key, value) {
 	  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
 	})('versions', []).push({
 	  version: '<core-js version>',
-	  mode:  'global',
+	  mode: 'global',
 	  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
 	});
 	});
@@ -243,13 +244,13 @@
 	  return keys[key] || (keys[key] = uid(key));
 	};
 
-	var hiddenKeys = {};
+	var hiddenKeys$1 = {};
 
-	var WeakMap$1 = global_1.WeakMap;
-	var set, get, has$1;
+	var WeakMap = global$1.WeakMap;
+	var set, get, has;
 
 	var enforce = function (it) {
-	  return has$1(it) ? get(it) : set(it, {});
+	  return has(it) ? get(it) : set(it, {});
 	};
 
 	var getterFor = function (TYPE) {
@@ -262,39 +263,39 @@
 	};
 
 	if (nativeWeakMap) {
-	  var store$1 = new WeakMap$1();
-	  var wmget = store$1.get;
-	  var wmhas = store$1.has;
-	  var wmset = store$1.set;
+	  var store = new WeakMap();
+	  var wmget = store.get;
+	  var wmhas = store.has;
+	  var wmset = store.set;
 	  set = function (it, metadata) {
-	    wmset.call(store$1, it, metadata);
+	    wmset.call(store, it, metadata);
 	    return metadata;
 	  };
 	  get = function (it) {
-	    return wmget.call(store$1, it) || {};
+	    return wmget.call(store, it) || {};
 	  };
-	  has$1 = function (it) {
-	    return wmhas.call(store$1, it);
+	  has = function (it) {
+	    return wmhas.call(store, it);
 	  };
 	} else {
 	  var STATE = sharedKey('state');
-	  hiddenKeys[STATE] = true;
+	  hiddenKeys$1[STATE] = true;
 	  set = function (it, metadata) {
 	    createNonEnumerableProperty(it, STATE, metadata);
 	    return metadata;
 	  };
 	  get = function (it) {
-	    return has(it, STATE) ? it[STATE] : {};
+	    return has$1(it, STATE) ? it[STATE] : {};
 	  };
-	  has$1 = function (it) {
-	    return has(it, STATE);
+	  has = function (it) {
+	    return has$1(it, STATE);
 	  };
 	}
 
 	var internalState = {
 	  set: set,
 	  get: get,
-	  has: has$1,
+	  has: has,
 	  enforce: enforce,
 	  getterFor: getterFor
 	};
@@ -309,10 +310,10 @@
 	  var simple = options ? !!options.enumerable : false;
 	  var noTargetGet = options ? !!options.noTargetGet : false;
 	  if (typeof value == 'function') {
-	    if (typeof key == 'string' && !has(value, 'name')) createNonEnumerableProperty(value, 'name', key);
+	    if (typeof key == 'string' && !has$1(value, 'name')) createNonEnumerableProperty(value, 'name', key);
 	    enforceInternalState(value).source = TEMPLATE.join(typeof key == 'string' ? key : '');
 	  }
-	  if (O === global_1) {
+	  if (O === global$1) {
 	    if (simple) O[key] = value;
 	    else setGlobal(key, value);
 	    return;
@@ -329,15 +330,15 @@
 	});
 	});
 
-	var path = global_1;
+	var path = global$1;
 
-	var aFunction = function (variable) {
+	var aFunction$1 = function (variable) {
 	  return typeof variable == 'function' ? variable : undefined;
 	};
 
 	var getBuiltIn = function (namespace, method) {
-	  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global_1[namespace])
-	    : path[namespace] && path[namespace][method] || global_1[namespace] && global_1[namespace][method];
+	  return arguments.length < 2 ? aFunction$1(path[namespace]) || aFunction$1(global$1[namespace])
+	    : path[namespace] && path[namespace][method] || global$1[namespace] && global$1[namespace][method];
 	};
 
 	var ceil = Math.ceil;
@@ -349,27 +350,27 @@
 	  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
 	};
 
-	var min = Math.min;
+	var min$1 = Math.min;
 
 	// `ToLength` abstract operation
 	// https://tc39.github.io/ecma262/#sec-tolength
 	var toLength = function (argument) {
-	  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+	  return argument > 0 ? min$1(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 	};
 
 	var max = Math.max;
-	var min$1 = Math.min;
+	var min = Math.min;
 
 	// Helper for a popular repeating case of the spec:
 	// Let integer be ? ToInteger(index).
 	// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
 	var toAbsoluteIndex = function (index, length) {
 	  var integer = toInteger(index);
-	  return integer < 0 ? max(integer + length, 0) : min$1(integer, length);
+	  return integer < 0 ? max(integer + length, 0) : min(integer, length);
 	};
 
 	// `Array.prototype.{ indexOf, includes }` methods implementation
-	var createMethod = function (IS_INCLUDES) {
+	var createMethod$1 = function (IS_INCLUDES) {
 	  return function ($this, el, fromIndex) {
 	    var O = toIndexedObject($this);
 	    var length = toLength(O.length);
@@ -391,10 +392,10 @@
 	var arrayIncludes = {
 	  // `Array.prototype.includes` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
-	  includes: createMethod(true),
+	  includes: createMethod$1(true),
 	  // `Array.prototype.indexOf` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
-	  indexOf: createMethod(false)
+	  indexOf: createMethod$1(false)
 	};
 
 	var indexOf = arrayIncludes.indexOf;
@@ -405,9 +406,9 @@
 	  var i = 0;
 	  var result = [];
 	  var key;
-	  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key);
+	  for (key in O) !has$1(hiddenKeys$1, key) && has$1(O, key) && result.push(key);
 	  // Don't enum bug & hidden keys
-	  while (names.length > i) if (has(O, key = names[i++])) {
+	  while (names.length > i) if (has$1(O, key = names[i++])) {
 	    ~indexOf(result, key) || result.push(key);
 	  }
 	  return result;
@@ -424,22 +425,22 @@
 	  'valueOf'
 	];
 
-	var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype');
+	var hiddenKeys = enumBugKeys.concat('length', 'prototype');
 
 	// `Object.getOwnPropertyNames` method
 	// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
-	var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-	  return objectKeysInternal(O, hiddenKeys$1);
+	var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+	  return objectKeysInternal(O, hiddenKeys);
 	};
 
 	var objectGetOwnPropertyNames = {
-		f: f$3
+		f: f$1
 	};
 
-	var f$4 = Object.getOwnPropertySymbols;
+	var f = Object.getOwnPropertySymbols;
 
 	var objectGetOwnPropertySymbols = {
-		f: f$4
+		f: f
 	};
 
 	// all object keys, includes non-enumerable and symbols
@@ -455,7 +456,7 @@
 	  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
 	  for (var i = 0; i < keys.length; i++) {
 	    var key = keys[i];
-	    if (!has(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
+	    if (!has$1(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
 	  }
 	};
 
@@ -479,7 +480,7 @@
 
 	var isForced_1 = isForced;
 
-	var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
+	var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
 
 
 
@@ -506,16 +507,16 @@
 	  var STATIC = options.stat;
 	  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
 	  if (GLOBAL) {
-	    target = global_1;
+	    target = global$1;
 	  } else if (STATIC) {
-	    target = global_1[TARGET] || setGlobal(TARGET, {});
+	    target = global$1[TARGET] || setGlobal(TARGET, {});
 	  } else {
-	    target = (global_1[TARGET] || {}).prototype;
+	    target = (global$1[TARGET] || {}).prototype;
 	  }
 	  if (target) for (key in source) {
 	    sourceProperty = source[key];
 	    if (options.noTargetGet) {
-	      descriptor = getOwnPropertyDescriptor$1(target, key);
+	      descriptor = getOwnPropertyDescriptor(target, key);
 	      targetProperty = descriptor && descriptor.value;
 	    } else targetProperty = target[key];
 	    FORCED = isForced_1(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
@@ -533,7 +534,7 @@
 	  }
 	};
 
-	var aFunction$1 = function (it) {
+	var aFunction = function (it) {
 	  if (typeof it != 'function') {
 	    throw TypeError(String(it) + ' is not a function');
 	  } return it;
@@ -541,7 +542,7 @@
 
 	// optional / simple context binding
 	var functionBindContext = function (fn, that, length) {
-	  aFunction$1(fn);
+	  aFunction(fn);
 	  if (that === undefined) return fn;
 	  switch (length) {
 	    case 0: return function () {
@@ -587,12 +588,12 @@
 	  && typeof Symbol.iterator == 'symbol';
 
 	var WellKnownSymbolsStore = shared('wks');
-	var Symbol$1 = global_1.Symbol;
+	var Symbol$1 = global$1.Symbol;
 	var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
 
 	var wellKnownSymbol = function (name) {
-	  if (!has(WellKnownSymbolsStore, name)) {
-	    if (nativeSymbol && has(Symbol$1, name)) WellKnownSymbolsStore[name] = Symbol$1[name];
+	  if (!has$1(WellKnownSymbolsStore, name)) {
+	    if (nativeSymbol && has$1(Symbol$1, name)) WellKnownSymbolsStore[name] = Symbol$1[name];
 	    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
 	  } return WellKnownSymbolsStore[name];
 	};
@@ -617,7 +618,7 @@
 	var push = [].push;
 
 	// `Array.prototype.{ forEach, map, filter, some, every, find, findIndex }` methods implementation
-	var createMethod$1 = function (TYPE) {
+	var createMethod = function (TYPE) {
 	  var IS_MAP = TYPE == 1;
 	  var IS_FILTER = TYPE == 2;
 	  var IS_SOME = TYPE == 3;
@@ -653,25 +654,25 @@
 	var arrayIteration = {
 	  // `Array.prototype.forEach` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-	  forEach: createMethod$1(0),
+	  forEach: createMethod(0),
 	  // `Array.prototype.map` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.map
-	  map: createMethod$1(1),
+	  map: createMethod(1),
 	  // `Array.prototype.filter` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.filter
-	  filter: createMethod$1(2),
+	  filter: createMethod(2),
 	  // `Array.prototype.some` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.some
-	  some: createMethod$1(3),
+	  some: createMethod(3),
 	  // `Array.prototype.every` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.every
-	  every: createMethod$1(4),
+	  every: createMethod(4),
 	  // `Array.prototype.find` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.find
-	  find: createMethod$1(5),
+	  find: createMethod(5),
 	  // `Array.prototype.findIndex` method
 	  // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
-	  findIndex: createMethod$1(6)
+	  findIndex: createMethod(6)
 	};
 
 	var arrayMethodIsStrict = function (METHOD_NAME, argument) {
@@ -688,12 +689,12 @@
 	var thrower = function (it) { throw it; };
 
 	var arrayMethodUsesToLength = function (METHOD_NAME, options) {
-	  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
+	  if (has$1(cache, METHOD_NAME)) return cache[METHOD_NAME];
 	  if (!options) options = {};
 	  var method = [][METHOD_NAME];
-	  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
-	  var argument0 = has(options, 0) ? options[0] : thrower;
-	  var argument1 = has(options, 1) ? options[1] : undefined;
+	  var ACCESSORS = has$1(options, 'ACCESSORS') ? options.ACCESSORS : false;
+	  var argument0 = has$1(options, 0) ? options[0] : thrower;
+	  var argument1 = has$1(options, 1) ? options[1] : undefined;
 
 	  return cache[METHOD_NAME] = !!method && !fails(function () {
 	    if (ACCESSORS && !descriptors) return true;

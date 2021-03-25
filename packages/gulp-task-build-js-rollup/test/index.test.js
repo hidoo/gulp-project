@@ -42,7 +42,7 @@ describe('gulp-task-build-js-rollup', () => {
             expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
-      assert.equal(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       done();
     }));
   });
@@ -60,7 +60,7 @@ describe('gulp-task-build-js-rollup', () => {
             expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
-      assert.equal(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       done();
     }));
   });
@@ -234,6 +234,44 @@ describe('gulp-task-build-js-rollup', () => {
 
         assert(actualMin);
         assert(actualGz);
+        done();
+      }))
+      .catch((error) => done(error));
+  });
+
+  it('should out splitted codes if use dynamic "import" syntax and set optiions.outputOptions.format to "es".', (done) => {
+    const entries = [
+      'entry.js'
+    ];
+    const dynamicDeps = [
+      'hoge.js',
+      'fuga.js'
+    ];
+    const task = buildJs({
+      src: entries.map((file) => `${path.src}/code-splitting/${file}`),
+      dest: path.dest,
+      browsers: 'chrome >= 80',
+      outputOptions: {
+        format: 'es',
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js'
+      },
+
+      // specify an empty string,
+      // if you want to give priority to outputOptions.entryFileNames
+      filename: ''
+    });
+
+    task()
+      .then((stream) => stream.on('finish', () => {
+        [...entries, ...dynamicDeps].forEach((file) => {
+          const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim();
+          const expected = replaceVersion(fs.readFileSync(`${path.expected}/code-splitting/${file}`).toString().trim());
+
+          assert(actual);
+          assert.deepStrictEqual(actual, expected);
+        });
+
         done();
       }))
       .catch((error) => done(error));

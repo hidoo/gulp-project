@@ -31,7 +31,7 @@
     "handlebars": "4.7.6",
     "plugin-error": "1.0.1",
     "svg-sprite": "1.5.0",
-    "through2": "3.0.2",
+    "through2": "4.0.2",
     "vinyl": "2.2.0"
   },
   "devDependencies": {

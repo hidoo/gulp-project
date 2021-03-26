@@ -43,7 +43,7 @@
   "dependencies": {
     "@hidoo/gulp-util-error-handler": "^0.15.0",
     "@hidoo/handlebars-helpers": "0.8.0",
-    "handlebars": "4.7.6",
+    "handlebars": "4.7.7",
     "kss": "3.0.1"
   },
   "peerDependencies": {

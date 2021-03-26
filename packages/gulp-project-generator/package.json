@@ -51,7 +51,7 @@
     "fs-extra": "9.1.0",
     "glob": "7.1.6",
     "glob-parent": "5.1.2",
-    "handlebars": "4.7.6",
+    "handlebars": "4.7.7",
     "inquirer": "7.3.3",
     "mkdirp": "1.0.4"
   }

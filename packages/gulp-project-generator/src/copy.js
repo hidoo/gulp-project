@@ -62,8 +62,8 @@ export default function copy(pattern = '', dest = '', options = {}) {
       const destPath = path.resolve(dest, srcPath.replace(`${globBase}${path.sep}`, '')),
             destDir = path.dirname(destPath);
 
-      return mkdir(destDir, {verbose: opts.verbose})
-        .then(() => new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => mkdir(destDir, {verbose: opts.verbose})
+        .then(() => {
           fs.copyFile(srcPath, destPath, (error) => {
             if (error) {
               return reject(error);

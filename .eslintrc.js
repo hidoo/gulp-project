@@ -1,7 +1,8 @@
 module.exports = {
   'root': true,
   'extends': [
-    '@hidoo/eslint-config'
+    '@hidoo/eslint-config',
+    '@hidoo/eslint-config/+babel'
   ],
   'overrides': [
     // for Mocha

@@ -36,9 +36,14 @@ describe('copy', () => {
     await Promise.all(cases.map(
       ([pattern, files]) => copy(`${path.src}/${pattern}`, path.dest, {verbose: false})
         .then(() => files.forEach((file) => {
-          const actual = fs.readFileSync(`${path.dest}/${file}`),
-                expected = fs.readFileSync(`${path.src}/${file}`);
+          const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim(),
+                expected = fs.readFileSync(`${path.src}/${file}`).toString().trim();
 
+          // eslint-disable-next-line no-console
+          console.log(`
+src:  ${path.src}/${file}', ${expected}
+dest: ${path.dest}/${file}', ${actual}
+          `);
           assert(actual);
           assert.deepStrictEqual(actual, expected);
         }))

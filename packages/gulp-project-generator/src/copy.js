@@ -1,5 +1,5 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs-extra';
 import glob from 'glob';
 import globParent from 'glob-parent';
 import mkdir from './mkdir';
@@ -37,7 +37,7 @@ const DEFAULT_OPTIONS = {
  * @param {Boolean} options.verbose out log or not
  * @return {Promise<Array<String>>}
  */
-export default function copy(pattern = '', dest = '', options = {}) {
+export default async function copy(pattern = '', dest = '', options = {}) {
   if (typeof pattern !== 'string') {
     throw new TypeError('Argument "pattern" is not string.');
   }
@@ -45,34 +45,31 @@ export default function copy(pattern = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        globBase = globParent(pattern);
+  const opts = {...DEFAULT_OPTIONS, ...options};
+  const globBase = globParent(pattern);
 
-  const promise = new Promise((resolve, reject) => {
-    glob(pattern, opts.glob, (error, srcPaths) => {
+  const srcPaths = await new Promise((resolve, reject) => {
+    glob(pattern, opts.glob, (error, paths) => {
       if (error) {
         return reject(error);
       }
-      return resolve(srcPaths);
+      return resolve(paths);
     });
   });
 
-  return promise
-    .then((srcPaths) => Promise.all(srcPaths.map((srcPath) => {
-      const destPath = path.resolve(dest, srcPath.replace(`${globBase}${path.sep}`, '')),
-            destDir = path.dirname(destPath);
+  const destPaths = await Promise.all(srcPaths.map((srcPath) => {
+    const destPath = path.resolve(dest, srcPath.replace(`${globBase}${path.sep}`, ''));
+    const destDir = path.dirname(destPath);
 
-      return new Promise((resolve, reject) => mkdir(destDir, {verbose: opts.verbose})
-        .then(() => {
-          fs.copyFile(srcPath, destPath, (error) => {
-            if (error) {
-              return reject(error);
-            }
-            if (opts.verbose) {
-              log.outPath(destPath);
-            }
-            return resolve(destPath);
-          });
-        }));
-    })));
+    return mkdir(destDir, {verbose: opts.verbose})
+      .then(() => fs.copy(srcPath, destPath))
+      .then(() => {
+        if (opts.verbose) {
+          log.outPath(destPath);
+        }
+        return destPath;
+      });
+  }));
+
+  return destPaths;
 }

@@ -42,7 +42,7 @@
     "@babel/register": "7.9.0",
     "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.2",
-    "documentation": "13.0.2",
+    "documentation": "13.2.0",
     "file-type": "16.3.0",
     "get-pixels": "3.3.2",
     "mocha": "7.1.2",

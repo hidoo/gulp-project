@@ -32,7 +32,10 @@ export function normalizeBabelPresets(presets = []) {
   return presets.map((preset) => {
     // return as it if preset is array and first element in preset is valid string
     if (Array.isArray(preset) && typeof preset[0] === 'string' && preset[0] !== '') {
-      return preset;
+      const name = preset[0];
+      const opts = preset[1] || {};
+
+      return [name, opts];
     }
     // return wrapped preset with array if preset is valid string
     else if (typeof preset === 'string' && preset !== '') {

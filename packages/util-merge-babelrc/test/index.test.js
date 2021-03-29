@@ -22,7 +22,7 @@ describe('gulp-util-merge-babelrc', () => {
         [() => {}, []],
         [[], []],
         [['preset-name-1'], [['preset-name-1', {}]]],
-        [[['preset-name-2']], [['preset-name-2']]],
+        [[['preset-name-2']], [['preset-name-2', {}]]],
         [[['preset-name-3', {}]], [['preset-name-3', {}]]]
       ];
 
@@ -273,10 +273,12 @@ describe('gulp-util-merge-babelrc', () => {
           '',
           {},
           {
+            ...babelrc,
             plugins: [],
-            presets: [],
-            targets: 'defaults',
-            ...babelrc
+            presets: [
+              ['@babel/preset-env', {}]
+            ],
+            targets: 'defaults'
           }
         ],
         [

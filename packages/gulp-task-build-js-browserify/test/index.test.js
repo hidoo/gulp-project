@@ -67,7 +67,26 @@ describe('gulp-task-build-js-browserify', () => {
       src: `${path.src}/main.js`,
       dest: path.dest,
       filename: 'main.browsers.js',
-      browsers: 'chrome >= 50'
+      browsers: 'ie >= 8'
+    });
+
+    task().on('finish', () => {
+      // remove license comment before compare source code (for CI)
+      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim().replace(/^[\s\S]*?\*\//m, ''),
+            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim().replace(/^[\s\S]*?\*\//m, ''));
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
+  });
+
+  it('should out to "main.js" that transformed for target browsers if argument "options.targets" is set.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest,
+      filename: 'main.browsers.js',
+      targets: 'ie >= 8'
     });
 
     task().on('finish', () => {
@@ -85,11 +104,12 @@ describe('gulp-task-build-js-browserify', () => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
+      filename: 'main.useBuiltIns.js',
       useBuiltIns: false
     });
 
     task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
+      const actual = fs.readFileSync(`${path.dest}/main.useBuiltIns.js`).toString().trim(),
             expected = replaceVersion(fs.readFileSync(`${path.expected}/main.useBuiltIns.js`).toString().trim());
 
       assert(actual);

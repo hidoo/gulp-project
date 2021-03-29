@@ -664,10 +664,10 @@ require('./es.global-this');
 },{"./es.global-this":44}],46:[function(require,module,exports){
 "use strict";
 
-require("core-js/modules/esnext.global-this");
+require("core-js/modules/esnext.global-this.js");
 
 // use ECMAScript proposals
 // eslint-disable-next-line no-console
 console.log(globalThis.Array === Array);
 
-},{"core-js/modules/esnext.global-this":45}]},{},[46]);
+},{"core-js/modules/esnext.global-this.js":45}]},{},[46]);

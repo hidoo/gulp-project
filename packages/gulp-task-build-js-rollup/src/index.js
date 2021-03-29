@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS = {
   dest: null,
   filename: 'main.js',
   suffix: '.min',
-  browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
+  targets: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   useBuiltIns: 'usage',
   corejs: 3,
   babelrc: path.resolve(process.cwd(), '.babelrc.js'),
@@ -46,8 +46,9 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.dest - destination path
  * @param {Array<String>|String} [options.filename='main.js'] - destination filename
  * @param {String} [options.suffix='.min'] - suffix when compressed
- * @param {Array<String>} [options.browsers] - target browsers.
+ * @param {Array<String>} [options.targets] - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
+ * @param {Array<String>} [options.browsers] - alias of options.targets.
  * @param {String|Boolean} [options.useBuiltIns='usage'] - use polyfill or not.
  *   see: {@link https://babeljs.io/docs/en/babel-preset-env#usebuiltins useBuiltIns in @babel/preset-env}
  * @param {Number|String|Object} [options.corejs=3] - specify core-js version
@@ -86,7 +87,7 @@ const DEFAULT_OPTIONS = {
  *   dest: '/path/to/dest',
  *   filename: 'main.js',
  *   suffix: '.hoge',
- *   browsers: ['> 0.1% in JP'],
+ *   targets: ['> 0.1% in JP'],
  *   useBuiltIns: false,
  *   corejs: 2,
  *   babelrc: '/path/to/.babelrc.js',

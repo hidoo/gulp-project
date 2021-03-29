@@ -70,7 +70,27 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${path.src}/main.js`,
       dest: path.dest,
       filename: 'main.browsers.js',
-      browsers: 'chrome >= 50'
+      browsers: 'ie >= 8'
+    });
+
+    task()
+      .then((stream) => stream.on('finish', () => {
+        const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim(),
+              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
+
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+        done();
+      }))
+      .catch((error) => done(error));
+  });
+
+  it('should out to "main.js" that transformed for target browsers if argument "options.targets" is set.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest,
+      filename: 'main.browsers.js',
+      targets: 'ie >= 8'
     });
 
     task()
@@ -90,7 +110,7 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${path.src}/use-corejs.js`,
       dest: path.dest,
       filename: 'use-corejs.js',
-      browsers: 'ie >= 11',
+      targets: 'ie >= 8',
       corejs: {version: 3, proposals: true}
     });
 
@@ -250,7 +270,7 @@ describe('gulp-task-build-js-rollup', () => {
     const task = buildJs({
       src: entries.map((file) => `${path.src}/code-splitting/${file}`),
       dest: path.dest,
-      browsers: 'chrome >= 80',
+      targets: 'chrome >= 80',
       outputOptions: {
         format: 'es',
         entryFileNames: '[name].js',

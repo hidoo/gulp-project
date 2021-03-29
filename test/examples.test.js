@@ -190,8 +190,6 @@ describe('examples', () => {
               '/js/main.js',
               '/page-list.html',
               '/styleguide/index.html',
-              '/styleguide/kss-assets/css/CHANGELOG.md',
-              '/styleguide/kss-assets/css/README.md',
               '/styleguide/kss-assets/css/main.min.css',
               '/styleguide/kss-assets/css/main.min.css.gz',
               '/styleguide/kss-assets/images/favicon.ico',

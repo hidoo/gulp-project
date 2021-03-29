@@ -212,7 +212,7 @@ module.exports = function (namespace, method) {
 };
 
 },{"../internals/global":13,"../internals/path":31}],13:[function(require,module,exports){
-(function (global){
+(function (global){(function (){
 var check = function (it) {
   return it && it.Math == Math && it;
 };
@@ -227,7 +227,7 @@ module.exports =
   // eslint-disable-next-line no-new-func
   Function('return this')();
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],14:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 
@@ -664,10 +664,10 @@ require('./es.global-this');
 },{"./es.global-this":44}],46:[function(require,module,exports){
 "use strict";
 
-require("core-js/modules/esnext.global-this");
+require("core-js/modules/esnext.global-this.js");
 
 // use ECMAScript proposals
 // eslint-disable-next-line no-console
 console.log(globalThis.Array === Array);
 
-},{"core-js/modules/esnext.global-this":45}]},{},[46]);
+},{"core-js/modules/esnext.global-this.js":45}]},{},[46]);

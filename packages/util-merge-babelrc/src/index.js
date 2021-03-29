@@ -12,6 +12,9 @@ const DEFAULT_OPTIONS = {
   // in @babel/preset-env options
   presetEnvAllowTargets: ['browsers'],
 
+  // remove env fields or not
+  removeEnv: false,
+
   // out log or not
   verbose: false
 };
@@ -29,7 +32,10 @@ export function normalizeBabelPresets(presets = []) {
   return presets.map((preset) => {
     // return as it if preset is array and first element in preset is valid string
     if (Array.isArray(preset) && typeof preset[0] === 'string' && preset[0] !== '') {
-      return preset;
+      const name = preset[0];
+      const opts = preset[1] || {};
+
+      return [name, opts];
     }
     // return wrapped preset with array if preset is valid string
     else if (typeof preset === 'string' && preset !== '') {
@@ -61,6 +67,33 @@ export function findBabelPreset(name = '', presets = []) {
     return Array.isArray(target) ? target : [target];
   }
   return [];
+}
+
+/**
+ * hoist target value from options of @babel/preset-env
+ *
+ * @param {Array} presets babelrc presets
+ * @return {Array}
+ */
+export function hoistTargetsFromPresetEnv(presets = []) {
+  let targets = null;
+
+  const reducedPresets = presets.map(([name, opts]) => {
+    const preset = [name];
+
+    if (!targets && (name === '@babel/preset-env' || name === '@babel/env')) {
+      if (opts && opts.targets) {
+        targets = opts.targets;
+        delete opts.targets;
+      }
+    }
+    if (opts) {
+      preset.push(opts);
+    }
+    return preset;
+  });
+
+  return [targets, reducedPresets];
 }
 
 /**
@@ -172,18 +205,39 @@ export function mergeBabelPlugins(plugins = [], source = []) {
 export default function mergeBabelrc(path = '', source = {}, options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
   let babelrc = {};
+  let targets = null;
 
   if (typeof path === 'string' && path !== '') {
     babelrc = require(path); // eslint-disable-line global-require, import/no-dynamic-require
     if (opts.verbose) {
       log.info(`Using babelrc: ${path}`);
     }
+    if (options.removeEnv && babelrc.env) {
+      delete babelrc.env;
+    }
+  }
+
+  const [hoistedTargets, presets] = hoistTargetsFromPresetEnv(
+    mergeBabelPresets(babelrc.presets, source.presets, opts)
+  );
+
+  targets = source.targets || hoistedTargets;
+
+  // set 'default'
+  // if targets is empty object or empty array
+  if (
+    targets &&
+    typeof targets === 'object' &&
+    !Object.keys(targets).length
+  ) {
+    targets = null;
   }
 
   return {
     ...babelrc,
     ...source,
-    presets: mergeBabelPresets(babelrc.presets, source.presets, opts),
+    targets: targets || 'defaults',
+    presets,
     plugins: mergeBabelPlugins(babelrc.plugins, source.plugins)
   };
 }

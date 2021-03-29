@@ -5,4 +5,5 @@ esModule();
 commonJsModule();
 
 // apply polyfill for ie8
-[].forEach((item) => item);
+// eslint-disable-next-line no-console
+[].forEach((item) => console.log(item));

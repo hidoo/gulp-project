@@ -20,9 +20,10 @@ var commonJsModule = require('./modules/cjs');
 
 (0, _esm.default)();
 commonJsModule(); // apply polyfill for ie8
+// eslint-disable-next-line no-console
 
 [].forEach(function (item) {
-  return item;
+  return console.log(item);
 });
 
 },{"./modules/cjs":2,"./modules/esm":3}],2:[function(require,module,exports){

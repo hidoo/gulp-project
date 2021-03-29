@@ -21,10 +21,10 @@ export default function babelOptions(options = {}) {
 
   const overrideOptions = {
     ...defaultOptions,
+    targets: options.browsers || options.targets || null,
     presets: [
       ['@babel/preset-env', {
         modules: false,
-        targets: options.browsers || {},
         useBuiltIns: options.useBuiltIns ? options.useBuiltIns : false,
         corejs: options.corejs ? options.corejs : 3, // eslint-disable-line no-magic-numbers
         debug: options.verbose ? options.verbose : false
@@ -33,6 +33,7 @@ export default function babelOptions(options = {}) {
   };
 
   return mergeBabelrc(options.babelrc || '', overrideOptions, {
+    removeEnv: true,
     verbose: options.verbose ? options.verbose : false
   });
 }

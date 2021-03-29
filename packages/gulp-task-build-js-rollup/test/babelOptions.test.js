@@ -9,86 +9,79 @@ describe('babelOptions', () => {
     const cases = [
       [
         null,
-        {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: []}
+        {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [], targets: 'defaults'}
       ],
       [
         [],
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {},
             useBuiltIns: false,
             debug: false
           }]
-        ]}
+        ], targets: 'defaults'}
       ],
       [
         {},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {},
             useBuiltIns: false,
             debug: false
           }]
-        ]}
+        ], targets: 'defaults'}
       ],
       [
         {verbose: true},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {},
             useBuiltIns: false,
             debug: true
           }]
-        ]}
+        ], targets: 'defaults'}
       ],
       [
         {useBuiltIns: 'usage'},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {},
             useBuiltIns: 'usage',
             corejs: 3,
             debug: false
           }]
-        ]}
+        ], targets: 'defaults'}
       ],
       [
         {useBuiltIns: 'usage', corejs: 2},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: {},
             useBuiltIns: 'usage',
             corejs: 2,
             debug: false
           }]
-        ]}
+        ], targets: 'defaults'}
       ],
       [
         {browsers: ['> 0.1% in JP', 'ie >= 8']},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: ['> 0.1% in JP', 'ie >= 8'],
             useBuiltIns: false,
             debug: false
           }]
-        ]}
+        ], targets: ['> 0.1% in JP', 'ie >= 8']}
       ],
       [
         {browsers: '> 0.1% in JP, ie >= 8'},
         {babelrc: false, babelHelpers: 'bundled', exclude: 'node_modules/**', plugins: [], presets: [
           ['@babel/preset-env', {
             modules: false,
-            targets: '> 0.1% in JP, ie >= 8',
             useBuiltIns: false,
             debug: false
           }]
-        ]}
+        ], targets: '> 0.1% in JP, ie >= 8'}
       ],
       [
         {babelrc: `${process.cwd()}/.babelrc.js`},
@@ -97,18 +90,11 @@ describe('babelOptions', () => {
           presets: [
             ['@babel/preset-env', {
               modules: false,
-              targets: {},
               useBuiltIns: false,
               debug: false
             }]
           ],
-          env: {
-            test: {
-              presets: [
-                'power-assert'
-              ]
-            }
-          }
+          targets: 'defaults'
         }
       ]
     ];

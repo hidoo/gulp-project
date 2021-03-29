@@ -5,6 +5,7 @@ import path from 'path';
 import mergeBabelrc, {
   normalizeBabelPresets,
   findBabelPreset,
+  hoistTargetsFromPresetEnv,
   mergeBabelPresets,
   mergeBabelPlugins
 } from '../src';
@@ -21,7 +22,7 @@ describe('gulp-util-merge-babelrc', () => {
         [() => {}, []],
         [[], []],
         [['preset-name-1'], [['preset-name-1', {}]]],
-        [[['preset-name-2']], [['preset-name-2']]],
+        [[['preset-name-2']], [['preset-name-2', {}]]],
         [[['preset-name-3', {}]], [['preset-name-3', {}]]]
       ];
 
@@ -50,6 +51,48 @@ describe('gulp-util-merge-babelrc', () => {
 
       cases.forEach(([name, presets, expected]) => {
         const actual = findBabelPreset(name, presets);
+
+        assert(Array.isArray(actual));
+        assert.deepStrictEqual(actual, expected);
+      });
+    });
+
+  });
+
+  describe('hoistTargetsFromPresetEnv', () => {
+
+    it('should return targets value and presets.', () => {
+      const cases = [
+        [
+          [
+            ['hoge'],
+            ['fuga']
+          ],
+          [
+            null,
+            [
+              ['hoge'],
+              ['fuga']
+            ]
+          ]
+        ],
+        [
+          [
+            ['@babel/preset-env', {targets: {browsers: 'hoge'}}],
+            ['fuga']
+          ],
+          [
+            {browsers: 'hoge'},
+            [
+              ['@babel/preset-env', {}],
+              ['fuga']
+            ]
+          ]
+        ]
+      ];
+
+      cases.forEach(([presets, expected]) => {
+        const actual = hoistTargetsFromPresetEnv(presets);
 
         assert(Array.isArray(actual));
         assert.deepStrictEqual(actual, expected);
@@ -229,13 +272,50 @@ describe('gulp-util-merge-babelrc', () => {
           babelrcPath,
           '',
           {},
-          {plugins: [], presets: [], ...babelrc}
+          {
+            ...babelrc,
+            plugins: [],
+            presets: [
+              ['@babel/preset-env', {}]
+            ],
+            targets: 'defaults'
+          }
         ],
         [
           babelrcPath,
-          {plugins: ['aaaa', 'bbb'], presets: [['@babel/preset-env', {targets: {browsers: 'hoge'}}]]},
+          {
+            plugins: ['aaaa', 'bbb'],
+            presets: [
+              ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
+            ]
+          },
           {},
-          {...babelrc, plugins: ['aaaa', 'bbb'], presets: [['@babel/preset-env', {targets: {browsers: 'hoge'}}]]}
+          {
+            ...babelrc,
+            plugins: ['aaaa', 'bbb'],
+            presets: [
+              ['@babel/preset-env', {}]
+            ],
+            targets: {browsers: 'hoge'}
+          }
+        ],
+        [
+          babelrcPath,
+          {
+            plugins: ['aaaa', 'bbb'],
+            presets: [
+              ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
+            ]
+          },
+          {removeEnv: true},
+          {
+            ...(() => delete {...babelrc}.env)(),
+            plugins: ['aaaa', 'bbb'],
+            presets: [
+              ['@babel/preset-env', {}]
+            ],
+            targets: {browsers: 'hoge'}
+          }
         ]
       ];
 

@@ -27,10 +27,10 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "7.13.10",
-    "@babel/core": "7.9.6",
-    "@babel/preset-env": "7.9.6",
+    "@babel/core": "7.13.13",
+    "@babel/preset-env": "7.13.12",
     "@babel/preset-react": "7.13.13",
-    "@babel/register": "7.9.0",
+    "@babel/register": "7.13.8",
     "babel-preset-power-assert": "3.0.0",
     "core-js": "3.6.5",
     "cross-env": "7.0.2",

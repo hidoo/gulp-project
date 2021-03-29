@@ -390,7 +390,7 @@ module.exports = function (namespace, method) {
 };
 
 },{"../internals/global":20,"../internals/path":40}],20:[function(require,module,exports){
-(function (global){
+(function (global){(function (){
 var check = function (it) {
   return it && it.Math == Math && it;
 };
@@ -405,7 +405,7 @@ module.exports =
   // eslint-disable-next-line no-new-func
   Function('return this')();
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],21:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 

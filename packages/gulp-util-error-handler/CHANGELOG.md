@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v4 ([9bb8ebd](https://github.com/hidoo/gulp-project/commit/9bb8ebd25e12c71ffaa680681b18ede5fbd2e926))
+* **deps:** update dependency chalk to v4.1.0 ([5bf12c1](https://github.com/hidoo/gulp-project/commit/5bf12c12c3f069c09a1d61ed76073e007d02a724))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

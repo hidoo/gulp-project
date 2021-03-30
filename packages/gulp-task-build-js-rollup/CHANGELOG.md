@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **build-js-rollup:** correspond to changes of targets in babel options ([cc1dcd3](https://github.com/hidoo/gulp-project/commit/cc1dcd393f217505d28ae127c2653bae2d85629d))
+* **deps:** update dependency @rollup/plugin-alias to v3.1.0 ([6a15c8f](https://github.com/hidoo/gulp-project/commit/6a15c8f5b65937b271fee1f2ca5a5006b45ef6f2))
+* **deps:** update dependency @rollup/plugin-alias to v3.1.1 ([dc736c6](https://github.com/hidoo/gulp-project/commit/dc736c662d6f800ed5539527048b06f5043034ff))
+* **deps:** update dependency @rollup/plugin-commonjs to v11.1.0 ([122f24d](https://github.com/hidoo/gulp-project/commit/122f24daa10d24692b96f0df320d2a473743a314))
+* **deps:** update dependency @rollup/plugin-commonjs to v18 ([4385afa](https://github.com/hidoo/gulp-project/commit/4385afa197cf7812887e723dcfdf44ca69572830))
+* **deps:** update dependency @rollup/plugin-json to v4.0.3 ([2d7a820](https://github.com/hidoo/gulp-project/commit/2d7a820eab2691909d656edfefdafb38c1b54460))
+* **deps:** update dependency @rollup/plugin-node-resolve to v11 ([ed6be2a](https://github.com/hidoo/gulp-project/commit/ed6be2addd4047ff4d5ee58a7d296c44fcf81ffb))
+* **deps:** update dependency @rollup/plugin-node-resolve to v7.1.2 ([cf85bcc](https://github.com/hidoo/gulp-project/commit/cf85bcc3900602ee7e659a57d10390c7957f2c4e))
+* **deps:** update dependency @rollup/plugin-node-resolve to v7.1.3 ([370f68f](https://github.com/hidoo/gulp-project/commit/370f68f9e2a11c19fc8c206ceb22c8c3bb73387b))
+* **deps:** update dependency @rollup/plugin-node-resolve to v8 ([5645592](https://github.com/hidoo/gulp-project/commit/5645592e8519a78d60e8713df0cb9a95db9a9f59))
+* **deps:** update dependency @rollup/plugin-node-resolve to v8.0.1 ([99f5431](https://github.com/hidoo/gulp-project/commit/99f54318800feaa1c3f9713aeebb307496657681))
+* **deps:** update dependency @rollup/plugin-replace to v2.3.2 ([0b80f99](https://github.com/hidoo/gulp-project/commit/0b80f9964bd9e0bcff9c0ab2416c3726ea1247a4))
+* **deps:** update dependency @rollup/plugin-replace to v2.3.3 ([9235d65](https://github.com/hidoo/gulp-project/commit/9235d65b5eed9a3f0bf7b4377ab1edc73b07d7a2))
+* **deps:** update dependency @rollup/plugin-replace to v2.4.2 ([d25c301](https://github.com/hidoo/gulp-project/commit/d25c301059f0fd647fd7721fe67b733e48207066))
+* **deps:** update dependency rollup to v1.32.1 ([3a8b841](https://github.com/hidoo/gulp-project/commit/3a8b8411e93cfcdaf38da2e6bea56204d3b7598e))
+* **deps:** update dependency rollup to v2 ([619f5d6](https://github.com/hidoo/gulp-project/commit/619f5d63dbe8de595a5f5b3a237182cd3c6ce66d))
+* **deps:** update dependency rollup to v2.10.2 ([1cb36d6](https://github.com/hidoo/gulp-project/commit/1cb36d604cc334d4eab1bbaf85eb854a82e01b0d))
+* **deps:** update dependency rollup to v2.10.7 ([8cefc2d](https://github.com/hidoo/gulp-project/commit/8cefc2d02a730e58b4730793b3f4db20066976fe))
+* **deps:** update dependency rollup to v2.10.8 ([e2d4cc1](https://github.com/hidoo/gulp-project/commit/e2d4cc14b76e81e03777faa50ceafca831b06b42))
+* **deps:** update dependency rollup to v2.10.9 ([51f5973](https://github.com/hidoo/gulp-project/commit/51f5973bb9b65ca1adebdd1b2d9533ad6dfa6a2b))
+* **deps:** update dependency rollup to v2.3.3 ([df797b3](https://github.com/hidoo/gulp-project/commit/df797b3d003aa2ccf5e5fff499e1333ea7ea452e))
+* **deps:** update dependency rollup to v2.3.5 ([48aebd6](https://github.com/hidoo/gulp-project/commit/48aebd69a0ebd37e4650d2852eb6d8845e1ead5d))
+* **deps:** update dependency rollup to v2.6.1 ([81e54a1](https://github.com/hidoo/gulp-project/commit/81e54a1243557b2a0af95fe39854e4819fda92b9))
+* **deps:** update dependency rollup to v2.7.2 ([d0d6d3c](https://github.com/hidoo/gulp-project/commit/d0d6d3c894e67f3f19f591ef61199b84741574bd))
+* **deps:** update dependency rollup to v2.7.6 ([f7fdc64](https://github.com/hidoo/gulp-project/commit/f7fdc64597625501726cac63ffd1cb91c4f54090))
+* **deps:** update dependency rollup to v2.9.0 ([901356f](https://github.com/hidoo/gulp-project/commit/901356f87ec7a05383f3f416a29945ebc7db2e3d))
+* **deps:** update dependency rollup to v2.9.1 ([f786993](https://github.com/hidoo/gulp-project/commit/f786993908e159c1e60d0b8cb8f043df74c35127))
+* **deps:** update dependency rollup-plugin-babel to v4.4.0 ([e295531](https://github.com/hidoo/gulp-project/commit/e29553114c69ceb7c217d543c2a31f4a297a01d7))
+* **deps:** update dependency rollup-plugin-license to v0.14.0 ([c613c72](https://github.com/hidoo/gulp-project/commit/c613c728d1667417ea5650643fd3e1b4fd44cf87))
+* **deps:** update dependency rollup-plugin-license to v2 ([41ed8f6](https://github.com/hidoo/gulp-project/commit/41ed8f651150dc3679234bb7e5d563e8b31ef43b))
+* **deps:** update dependency rollup-plugin-license to v2.0.1 ([97dd977](https://github.com/hidoo/gulp-project/commit/97dd9779b5a045c09dd3563c00953efc98218c8d))
+* **deps:** update dependency rollup-plugin-license to v2.1.0 ([d9eb0aa](https://github.com/hidoo/gulp-project/commit/d9eb0aa4341cd434f8e2d8524608921462b74eef))
+* **deps:** update dependency through2 to v3.0.2 ([d1f5174](https://github.com/hidoo/gulp-project/commit/d1f5174ec68f3a4aecd61352de711643c69f3162))
+* **deps:** update dependency through2 to v4 ([a152c88](https://github.com/hidoo/gulp-project/commit/a152c8870b65622b13a91d3897ba68acd90b99dc))
+* **deps:** update dependency vinyl to v2.2.1 ([631bd8b](https://github.com/hidoo/gulp-project/commit/631bd8b558b3eb5577854f5ad3e96b8a6e1aed6a))
+
+
+### Features
+
+* **build-js-rollup:** update deps and support code splitting ([3bfa07e](https://github.com/hidoo/gulp-project/commit/3bfa07e816cb77825076f1b6cf12bc3c2dde8feb))
+
+
+### Reverts
+
+* fix deps to exact version in packages ([b6ea59f](https://github.com/hidoo/gulp-project/commit/b6ea59fd4f852e0484faa8099a3c2fd2bb0cb35b))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

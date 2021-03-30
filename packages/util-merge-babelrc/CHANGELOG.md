@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **merge-babelrc:** fix normalizeBabelPresets to complement preset opts ([19de5bb](https://github.com/hidoo/gulp-project/commit/19de5bb55555512e1cba630a5447b8591c37a170))
+* **util-merge-babelrc:** change to move targets field to top level ([7a220aa](https://github.com/hidoo/gulp-project/commit/7a220aa73134d570556eff8c7ebd69aaf72188c3))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

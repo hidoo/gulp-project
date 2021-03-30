@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/handlebars-helpers to v0.8.0 ([ad5e4ad](https://github.com/hidoo/gulp-project/commit/ad5e4ad55179780bcd326b1e0a51247b6a92483c))
+* **deps:** update dependency pixelmatch to v5.2.0 ([7ba8965](https://github.com/hidoo/gulp-project/commit/7ba89657e650206f44c51e7aa08d65b2489763d8))
+* **deps:** update dependency pixelmatch to v5.2.1 ([3614eeb](https://github.com/hidoo/gulp-project/commit/3614eebb06c6d7edf158c39fb0f7851c53bdbf7d))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

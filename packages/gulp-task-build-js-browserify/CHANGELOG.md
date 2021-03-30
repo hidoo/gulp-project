@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **build-js-browserify:** correspond to changes of babel options.targets ([76f79f0](https://github.com/hidoo/gulp-project/commit/76f79f0d8d75c7145ee41c1228b6da3cc46dbc83))
+
+
+### Reverts
+
+* fix deps to exact version in packages ([b6ea59f](https://github.com/hidoo/gulp-project/commit/b6ea59fd4f852e0484faa8099a3c2fd2bb0cb35b))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

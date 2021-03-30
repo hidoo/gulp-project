@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-plugin-image-placeholder",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "Plugin that add image of placeholder for gulp.",
   "engines": {
     "node": ">=10.0.0"

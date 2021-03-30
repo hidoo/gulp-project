@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v9.7.5 ([6810020](https://github.com/hidoo/gulp-project/commit/6810020cf3fa8c2401bdff1b35abaa6f9d07997c))
+* **deps:** update dependency autoprefixer to v9.7.6 ([e1800f5](https://github.com/hidoo/gulp-project/commit/e1800f5280ab432a9400502d9f7ce52720fc8b4c))
+* **deps:** update dependency autoprefixer to v9.8.6 ([370af25](https://github.com/hidoo/gulp-project/commit/370af253b212bd4543ea02cbd6aed8a8336a200f))
+* **deps:** update dependency gulp-sass to v4.1.0 ([8025afe](https://github.com/hidoo/gulp-project/commit/8025afebfb941c93e198313434a7e9660c8686d0))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

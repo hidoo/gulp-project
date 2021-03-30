@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/handlebars-helpers to v0.8.0 ([ad5e4ad](https://github.com/hidoo/gulp-project/commit/ad5e4ad55179780bcd326b1e0a51247b6a92483c))
+* **deps:** update dependency chalk to v4 ([9bb8ebd](https://github.com/hidoo/gulp-project/commit/9bb8ebd25e12c71ffaa680681b18ede5fbd2e926))
+* **deps:** update dependency chalk to v4.1.0 ([5bf12c1](https://github.com/hidoo/gulp-project/commit/5bf12c12c3f069c09a1d61ed76073e007d02a724))
+* **deps:** update dependency commander to v5 ([1db5691](https://github.com/hidoo/gulp-project/commit/1db56917b5dfc16bf78af470dbd786677eeb24c2))
+* **deps:** update dependency commander to v5.1.0 ([b8b6ac0](https://github.com/hidoo/gulp-project/commit/b8b6ac008618145de295db54351227fa3ba0c141))
+* **deps:** update dependency commander to v7 ([c46ba63](https://github.com/hidoo/gulp-project/commit/c46ba6385fdec420dfe2c336aaa1d84ad8840c22))
+* **deps:** update dependency eslint to v7 ([248bc17](https://github.com/hidoo/gulp-project/commit/248bc17f938eae5f1b519fee5f56337f22a5f423))
+* **deps:** update dependency glob-parent to v5.1.1 ([206d9e3](https://github.com/hidoo/gulp-project/commit/206d9e3bae00a706542f4496bd4a200dcd997c15))
+* **deps:** update dependency glob-parent to v5.1.2 ([ad9f291](https://github.com/hidoo/gulp-project/commit/ad9f291cc458f039f4b03384628ecef532a4fa78))
+* **deps:** update dependency handlebars to v4.7.5 ([f1eaf53](https://github.com/hidoo/gulp-project/commit/f1eaf5335235f709e97105faa1b90752efb7786e))
+* **deps:** update dependency handlebars to v4.7.6 ([a384624](https://github.com/hidoo/gulp-project/commit/a384624596500fe8fb285b278cfa06c33d855321))
+* **deps:** update dependency handlebars to v4.7.7 ([72cdffa](https://github.com/hidoo/gulp-project/commit/72cdffaabf2bb65e1695d21fe51ab3a5ab29ce49))
+* **deps:** update dependency inquirer to v7.0.6 ([dcc4285](https://github.com/hidoo/gulp-project/commit/dcc42853ab5dc6294d7724a22d413014217068f7))
+* **deps:** update dependency inquirer to v7.0.7 ([5c4b6bb](https://github.com/hidoo/gulp-project/commit/5c4b6bb76beec95339540836f439c05e931e22b6))
+* **deps:** update dependency inquirer to v7.1.0 ([c91df8c](https://github.com/hidoo/gulp-project/commit/c91df8c55e8ce501e0bcfe69862d03b10d14f8ff))
+* **deps:** update dependency inquirer to v7.3.3 ([061539c](https://github.com/hidoo/gulp-project/commit/061539ceba36db17f380bedc44d7d1a3b51939b7))
+* **deps:** update dependency mkdirp to v1.0.4 ([589cfa8](https://github.com/hidoo/gulp-project/commit/589cfa8fc81661babdc7fe5426b37a1bf201d44f))
+* **generator:** fix to fail test case ([a4c2822](https://github.com/hidoo/gulp-project/commit/a4c282211a0793a8d1ea956e291c7bc24b25c2c2))
+* **generator:** fixed in response to changes of commander ([3d8d9c5](https://github.com/hidoo/gulp-project/commit/3d8d9c56434afabb5058f68fd67895c32c6189d9))
+* **generator:** tweaks copy function ([7bcfa16](https://github.com/hidoo/gulp-project/commit/7bcfa16befd670db92f53a904e80395674758b15))
+* **generator:** update packages and fix babelrc ([d9de88a](https://github.com/hidoo/gulp-project/commit/d9de88a1c9497ff595a04c1599c8071dd06b6bc3))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

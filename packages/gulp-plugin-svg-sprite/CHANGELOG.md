@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cheerio to v1.0.0-rc.5 ([2d261fd](https://github.com/hidoo/gulp-project/commit/2d261fdd89fd3f179a607fc4d4a460e5ef9348d3))
+* **deps:** update dependency handlebars to v4.7.5 ([f1eaf53](https://github.com/hidoo/gulp-project/commit/f1eaf5335235f709e97105faa1b90752efb7786e))
+* **deps:** update dependency handlebars to v4.7.6 ([a384624](https://github.com/hidoo/gulp-project/commit/a384624596500fe8fb285b278cfa06c33d855321))
+* **deps:** update dependency handlebars to v4.7.7 ([72cdffa](https://github.com/hidoo/gulp-project/commit/72cdffaabf2bb65e1695d21fe51ab3a5ab29ce49))
+* **deps:** update dependency through2 to v3.0.2 ([d1f5174](https://github.com/hidoo/gulp-project/commit/d1f5174ec68f3a4aecd61352de711643c69f3162))
+* **deps:** update dependency through2 to v4 ([a152c88](https://github.com/hidoo/gulp-project/commit/a152c8870b65622b13a91d3897ba68acd90b99dc))
+* **deps:** update dependency vinyl to v2.2.1 ([631bd8b](https://github.com/hidoo/gulp-project/commit/631bd8b558b3eb5577854f5ad3e96b8a6e1aed6a))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

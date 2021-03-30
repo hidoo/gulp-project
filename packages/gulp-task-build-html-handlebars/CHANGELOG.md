@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/data-from to v0.3.0 ([4fc92ff](https://github.com/hidoo/gulp-project/commit/4fc92ff168e3ef6ffd5d9ae8bb23bf2783e9e5cb))
+* **deps:** update dependency @hidoo/handlebars-helpers to v0.8.0 ([ad5e4ad](https://github.com/hidoo/gulp-project/commit/ad5e4ad55179780bcd326b1e0a51247b6a92483c))
+* **deps:** update dependency handlebars to v4.7.5 ([f1eaf53](https://github.com/hidoo/gulp-project/commit/f1eaf5335235f709e97105faa1b90752efb7786e))
+* **deps:** update dependency handlebars to v4.7.6 ([a384624](https://github.com/hidoo/gulp-project/commit/a384624596500fe8fb285b278cfa06c33d855321))
+* **deps:** update dependency handlebars to v4.7.7 ([72cdffa](https://github.com/hidoo/gulp-project/commit/72cdffaabf2bb65e1695d21fe51ab3a5ab29ce49))
+
+
+
+
+
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
 
 

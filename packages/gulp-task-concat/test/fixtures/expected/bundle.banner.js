@@ -1,5 +1,5 @@
 /* copyright hidoo */
-/* eslint-disable strict, no-console, no-process-env, func-names */
+/* eslint-disable strict, no-console, node/no-process-env, func-names */
 (function(window) {
   'use strict';
 
@@ -10,7 +10,7 @@
   }
 
 })(window);
-/* eslint-enable strict, no-console, no-process-env, func-names */
+/* eslint-enable strict, no-console, node/no-process-env, func-names */
 
 /* eslint-disable strict, no-console, func-names */
 (function(window) {

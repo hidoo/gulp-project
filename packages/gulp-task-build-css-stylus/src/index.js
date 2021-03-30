@@ -19,7 +19,7 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require
   pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
@@ -115,7 +115,7 @@ export default function buildCss(options = {}) {
       ...stylusOptions,
       rawDefine: {
         ...stylusOptions.rawDefine,
-        NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-line no-process-env
+        NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-line node/no-process-env
       }
     };
 

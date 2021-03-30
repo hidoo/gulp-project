@@ -1,4 +1,4 @@
-/* eslint strict: off, no-console: off, no-process-env: off*/
+/* eslint strict: off, no-console: off, node/no-process-env: off*/
 (function main(window) {
   'use strict';
 

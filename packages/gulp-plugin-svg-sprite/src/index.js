@@ -78,7 +78,7 @@ export default function svgSprite(options) {
   if (typeof opts.imgPath !== 'string') {
     throw new PluginError(PLUGIN_NAME, 'Argument "options.imgPath" is required.');
   }
-  if (!fs.existsSync(opts.cssTemplate)) { // eslint-disable-line no-sync
+  if (!fs.existsSync(opts.cssTemplate)) { // eslint-disable-line node/no-sync
     throw new PluginError(PLUGIN_NAME, 'Argument "options.cssTemplate" is required.');
   }
 
@@ -101,7 +101,7 @@ export default function svgSprite(options) {
 
   // evaluate template
   const template = handlebars.compile(
-    fs.readFileSync(cssTemplate, 'utf8') // eslint-disable-line no-sync
+    fs.readFileSync(cssTemplate, 'utf8') // eslint-disable-line node/no-sync
   );
 
   /**

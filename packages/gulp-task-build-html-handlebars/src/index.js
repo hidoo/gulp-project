@@ -211,7 +211,7 @@ export default function buildHtml(options = {}) {
           context = getContextFromFiles(opts.data, {onParsed: onFilesParsed, handlebars, verbose}), // eslint-disable-line max-len
           pages = [],
           addtionalContext = {
-            NODE_ENV: process.env.NODE_ENV || 'development', // eslint-disable-line no-process-env
+            NODE_ENV: process.env.NODE_ENV || 'development', // eslint-disable-line node/no-process-env
             compress,
             pages
           };

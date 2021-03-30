@@ -1,6 +1,7 @@
 /**
  * import modules
  */
+import path from 'path';
 import express from 'express';
 import expressEngineHandlebars from '@hidoo/express-engine-handlebars';
 
@@ -14,12 +15,12 @@ import apiRouter from './routes/api';
 const app = express();
 
 // view settings
-app.set('views', `${__dirname}/views`);
+app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine('hbs', expressEngineHandlebars({
-  layouts: `${__dirname}/views/layouts/**/*.hbs`,
-  partials: `${__dirname}/views/partials/**/*.hbs`,
-  helpers: `${__dirname}/views/helpers/**/*.js`
+  layouts: path.resolve(__dirname, 'views/layouts/**/*.hbs'),
+  partials: path.resolve(__dirname, 'views/partials/**/*.hbs'),
+  helpers: path.resolve(__dirname, 'views/helpers/**/*.js')
 }));
 
 // registering routes

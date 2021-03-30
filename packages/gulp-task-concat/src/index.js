@@ -17,7 +17,7 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require
   pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
@@ -80,7 +80,7 @@ export function concatJs(options = {}) {
     return src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(concat(filename || 'bundle.js'))
-      .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line no-process-env
+      .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line node/no-process-env
       .pipe(header(banner, {pkg}))
       .pipe(dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))

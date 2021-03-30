@@ -41,7 +41,7 @@ function handleOnWarn(warnings) {
  */
 export default function inputOptions(options = {}) {
   const defaultPlugins = [
-    replace({'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`}), // eslint-disable-line no-process-env,
+    replace({'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`}), // eslint-disable-line node/no-process-env,
     license(licenseOptions())
   ];
 

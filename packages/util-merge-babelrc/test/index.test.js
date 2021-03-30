@@ -263,7 +263,7 @@ describe('gulp-util-merge-babelrc', () => {
 
     before(() => {
       babelrcPath = path.resolve(process.cwd(), '.babelrc.js');
-      babelrc = require(babelrcPath); // eslint-disable-line global-require, import/no-dynamic-require
+      babelrc = require(babelrcPath); // eslint-disable-line import/no-dynamic-require
     });
 
     it('should return merged babelrc.', () => {

@@ -8,7 +8,7 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line import/no-dynamic-require
   pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
@@ -177,7 +177,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
 
         // require() returns a cached object. We want an independent clone of
         // the object so we can make changes without affecting the original.
-        context = require(jsonpath); // eslint-disable-line global-require, import/no-dynamic-require
+        context = require(jsonpath); // eslint-disable-line import/no-dynamic-require
         context = JSON.parse(JSON.stringify(context));
       }
       catch (error) {

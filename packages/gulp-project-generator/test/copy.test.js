@@ -39,11 +39,6 @@ describe('copy', () => {
           const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim(),
                 expected = fs.readFileSync(`${path.src}/${file}`).toString().trim();
 
-          // eslint-disable-next-line no-console
-          console.log(`
-src:  ${path.src}/${file}', ${expected}
-dest: ${path.dest}/${file}', ${actual}
-          `);
           assert(actual);
           assert.deepStrictEqual(actual, expected);
         }))

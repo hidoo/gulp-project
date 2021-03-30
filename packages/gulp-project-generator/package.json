@@ -46,7 +46,7 @@
     "@hidoo/handlebars-helpers": "0.8.0",
     "babel-eslint": "10.1.0",
     "chalk": "4.1.0",
-    "commander": "5.1.0",
+    "commander": "7.2.0",
     "eslint": "7.0.0",
     "fs-extra": "9.1.0",
     "glob": "7.1.6",

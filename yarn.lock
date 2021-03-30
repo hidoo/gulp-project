@@ -1272,16 +1272,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@hidoo/data-from@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@hidoo/data-from/-/data-from-0.3.0.tgz#2a0ee1ecd4085974fabd85802dc99aaa759af2b3"
-  integrity sha512-Kt4RXw64knGfTSyzBZzFHzUMsPkF8jB/faxTgcbEgTk23oy93DwJTwTkD3Ql802Cx8l1LrcqjiFMVAY6VVep2w==
+"@hidoo/data-from@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@hidoo/data-from/-/data-from-0.3.1.tgz#d4c25c1059fd5f311349c5664e40d10f047d0c76"
+  integrity sha512-i7bW+HH2srdew6ynX6SRx3r4B1gQWm5OAoK7mYbfQLYs0wkFNgLtvu594SAWv7DhAOaT2XmYyYahhOIaGLyTWA==
   dependencies:
-    front-matter "3.1.0"
+    front-matter "4.0.2"
     glob "7.1.6"
-    handlebars "4.7.6"
-    js-yaml "3.13.1"
-    json5 "2.1.3"
+    handlebars "4.7.7"
+    js-yaml "4.0.0"
+    json5 "2.2.0"
     lodash.merge "4.6.2"
 
 "@hidoo/eslint-config@0.6.0", "@hidoo/eslint-config@^0.6.0":
@@ -1297,19 +1297,19 @@
     eslint-plugin-node "11.1.0"
     eslint-plugin-sort-class-members "1.7.0"
 
-"@hidoo/express-engine-handlebars@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.7.0.tgz#7c0770a25d7496b5dbe0124f11475366f438f10c"
-  integrity sha512-d44XnIkCwWucLFeH0EJEoVCcY4yWy/6BCAI0MCf+6C88zg3Fgk2fUYvD1JQl7Egcs1a0w95Gu5W4qssaYiAsgA==
+"@hidoo/express-engine-handlebars@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.8.1.tgz#1057983cea49556c5c4013dcd594089e25f95aff"
+  integrity sha512-Ad+EKZuEFwb+tM8xi7OdNePyEOKIgDoV3c1dIYl4bAl4FQ3Vh4a4QZ4RYM+Mha5YBoD8W/kVcCh7acoJ281KAw==
   dependencies:
-    "@hidoo/handlebars-helpers" "^0.7.0"
+    "@hidoo/handlebars-helpers" "^0.8.1"
     glob "7.1.6"
-    glob-parent "5.1.0"
-    handlebars "4.7.3"
+    glob-parent "5.1.2"
+    handlebars "4.7.7"
     handlebars-layouts "3.1.4"
-    vinyl "2.2.0"
+    vinyl "2.2.1"
 
-"@hidoo/handlebars-helpers@0.7.0", "@hidoo/handlebars-helpers@^0.7.0":
+"@hidoo/handlebars-helpers@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.7.0.tgz#0c7e2827bd3baa10ce9ed0c3868095c2d3217a79"
   integrity sha512-8f6YLbqdW97SvnQokiZTDP62QyY5h/ZfGPEf24QMEOvDjtuYnZaxRJOx3zG3kaJato5Rvb2LzLc/ZzE5fx0z4Q==
@@ -1318,13 +1318,13 @@
     marked "0.8.0"
     path-browserify "1.0.0"
 
-"@hidoo/handlebars-helpers@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.8.0.tgz#c6c1089fa0f28162c7f73f014293cabd814f88cc"
-  integrity sha512-ZL/ugAJ5o9cx4NoRbowNBwssNFOYqYvei30wP8BoGarDZPMLiWpJZswsM4Sv/v4dHPQjF0OIsBSPGbeWrk8hiw==
+"@hidoo/handlebars-helpers@0.8.1", "@hidoo/handlebars-helpers@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.8.1.tgz#a08bfd01b8c0a14b4c429bf00243316b6dc82c2b"
+  integrity sha512-+cuOuVRjSmqqwzinpplCrnWOxKQEVvpZCQaq3BtyqNhigDAnFABYvuKp/yFUjJQYCpFL2VcvoX54rLoakL13+A==
   dependencies:
-    highlight.js "10.0.1"
-    marked "1.0.0"
+    highlight.js "10.4.1"
+    marked "2.0.1"
     path-browserify "1.0.1"
 
 "@hidoo/kss-builder@^0.4.1":
@@ -7201,10 +7201,10 @@ from2@^2.1.1:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
 
-front-matter@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/front-matter/-/front-matter-3.1.0.tgz#a0b758c3c6c39ce43e107dd0909a57d42964c2de"
-  integrity sha512-RFEK8N6waWTdwBZOPNEtvwMjZ/hUfpwXkYUYkmmOhQGdhSulXhWrFwiUhdhkduLDiIwbROl/faF1X/PC/GGRMw==
+front-matter@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/front-matter/-/front-matter-4.0.2.tgz#b14e54dc745cfd7293484f3210d15ea4edd7f4d5"
+  integrity sha512-I8ZuJ/qG92NWX8i5x1Y8qyj3vizhXS31OxjKDu3LKP+7/qBgfIKValiZIEwoVoJKUHlhWtYrktkxV1XsX+pPlg==
   dependencies:
     js-yaml "^3.13.1"
 
@@ -7546,13 +7546,6 @@ github-slugger@^1.0.0, github-slugger@^1.2.1:
   integrity sha512-gwJScWVNhFYSRDvURk/8yhcFBee6aFjye2a7Lhb2bUyRulpIoek9p0I9Kt7PT67d/nUlZbFu8L9RLiA0woQN8Q==
   dependencies:
     emoji-regex ">=6.0.0 <=6.1.1"
-
-glob-parent@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.0.tgz#5f4c1d1e748d30cd73ad2944b3577a81b081e8c2"
-  integrity sha512-qjtRgnIVmOfnKUE3NJAQEdk+lKrxfw8t5ke7SXtfMTHcjsBfOfWXCQfdb30zfDoZQ2IRSIiidmjtbHZPZ++Ihw==
-  dependencies:
-    is-glob "^4.0.1"
 
 glob-parent@5.1.2, glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@^5.1.1, glob-parent@~5.1.0:
   version "5.1.2"
@@ -8085,29 +8078,6 @@ handlebars-wax@^6.1.0:
     object-assign "^4.1.1"
     require-glob "^3.2.0"
 
-handlebars@4.7.3:
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.3.tgz#8ece2797826886cf8082d1726ff21d2a022550ee"
-  integrity sha512-SRGwSYuNfx8DwHD/6InAPzD6RgeruWLT+B8e8a7gGs8FWgHzlExpTFMEq2IA6QpAfOClpKHy6+8IqTjeBCu6Kg==
-  dependencies:
-    neo-async "^2.6.0"
-    optimist "^0.6.1"
-    source-map "^0.6.1"
-  optionalDependencies:
-    uglify-js "^3.1.4"
-
-handlebars@4.7.6:
-  version "4.7.6"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.6.tgz#d4c05c1baf90e9945f77aa68a7a219aa4a7df74e"
-  integrity sha512-1f2BACcBfiwAfStCKZNrUCgqNZkGsAT7UM3kkYtXuLo0KnaVfjKOyf7PRzB6++aK9STyT1Pd2ZCPe3EGOXleXA==
-  dependencies:
-    minimist "^1.2.5"
-    neo-async "^2.6.0"
-    source-map "^0.6.1"
-    wordwrap "^1.0.0"
-  optionalDependencies:
-    uglify-js "^3.1.4"
-
 handlebars@4.7.7, handlebars@^4.1.0, handlebars@^4.6.0, handlebars@^4.7.6:
   version "4.7.7"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.7.tgz#9ce33416aad02dbd6c8fafa8240d5d98004945a1"
@@ -8319,6 +8289,11 @@ highlight.js@10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.0.1.tgz#32ba25ee532291b86d1480b809a7e38bcd7f6dfe"
   integrity sha512-l1HB5S9nmBuvurFIOPbpeJv4psKh2MyKCTOYRK/E6dwRXkbG96PLH7amP/xpGNyZOK8OWqv45DxLS/ZAIb3n9w==
+
+highlight.js@10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.4.1.tgz#d48fbcf4a9971c4361b3f95f302747afe19dbad0"
+  integrity sha512-yR5lWvNz7c85OhVAEAeFhVCc/GV4C30Fjzc/rCP0aCWzc1UUOPUk55dK/qdwTZHBvMZo+eZ2jpk62ndX/xMFlg==
 
 highlight.js@9.18.1:
   version "9.18.1"
@@ -9447,14 +9422,6 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
-  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
 js-yaml@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
@@ -9611,14 +9578,7 @@ json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
-json5@2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.3.tgz#c9b0f7fa9233bfe5807fe66fcf3a5617ed597d43"
-  integrity sha512-KXPvOm8K9IJKFM0bmdn8QXh7udDh1g/giieX0NLCaMnb4hEiVFqnop2ImTXCc5e0/oHz3LTqmHGtExn5hfMkOA==
-  dependencies:
-    minimist "^1.2.5"
-
-json5@^2.1.2:
+json5@2.2.0, json5@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
   integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
@@ -10578,10 +10538,10 @@ marked@0.8.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
   integrity sha512-MyUe+T/Pw4TZufHkzAfDj6HarCBWia2y27/bhuYkTaiUnfDYFnCP3KUN+9oM7Wi6JA2rymtVYbQu3spE0GCmxQ==
 
-marked@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-1.0.0.tgz#d35784245a04871e5988a491e28867362e941693"
-  integrity sha512-Wo+L1pWTVibfrSr+TTtMuiMfNzmZWiOPeO7rZsQUY5bgsxpHesBEcIWJloWVTFnrMXnf/TL30eTFSGJddmQAng==
+marked@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.1.tgz#5e7ed7009bfa5c95182e4eb696f85e948cefcee3"
+  integrity sha512-5+/fKgMv2hARmMW7DOpykr2iLhl0NgjyELk5yn92iE7z8Se1IS9n3UsFm86hFXIkvMBmVxki8+ckcpjBeyo/hw==
 
 matchdep@^2.0.0:
   version "2.0.0"
@@ -10945,11 +10905,6 @@ minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
-  integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
 
 minipass-collect@^1.0.2:
   version "1.0.2"
@@ -11861,14 +11816,6 @@ opn@5.3.0:
   integrity sha512-bYJHo/LOmoTd+pfiYhfZDnf9zekVJrY+cnS2a5F2x+w5ppvTqObojTP7WiFG+kVZs9Inw+qQ/lw7TroWwhdd2g==
   dependencies:
     is-wsl "^1.1.0"
-
-optimist@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
-  integrity sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
-  dependencies:
-    minimist "~0.0.1"
-    wordwrap "~0.0.2"
 
 optionator@^0.8.1:
   version "0.8.3"
@@ -16903,18 +16850,6 @@ vinyl-sourcemaps-apply@^0.2.0, vinyl-sourcemaps-apply@^0.2.1:
   dependencies:
     source-map "^0.5.1"
 
-vinyl@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/vinyl/-/vinyl-2.2.0.tgz#d85b07da96e458d25b2ffe19fece9f2caa13ed86"
-  integrity sha512-MBH+yP0kC/GQ5GwBqrTPTzEfiiLjta7hTtvQtbxBgTeSXsmKQRQecjibMbxIXzVT3Y9KJK+drOz1/k+vsu8Nkg==
-  dependencies:
-    clone "^2.1.1"
-    clone-buffer "^1.0.0"
-    clone-stats "^1.0.0"
-    cloneable-readable "^1.0.0"
-    remove-trailing-separator "^1.0.1"
-    replace-ext "^1.0.0"
-
 vinyl@2.2.1, vinyl@^2.0.0, vinyl@^2.1.0, vinyl@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/vinyl/-/vinyl-2.2.1.tgz#23cfb8bbab5ece3803aa2c0a1eb28af7cbba1974"
@@ -17153,11 +17088,6 @@ wordwrap@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
-
-wordwrap@~0.0.2:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
-  integrity sha1-o9XabNXAvAAI03I0u68b7WMFkQc=
 
 workerpool@6.1.0:
   version "6.1.0"

@@ -3,7 +3,11 @@
 /**
  * import modules
  */
+{{#if this.multiDevice}}
+import {Command, InvalidOptionArgumentError} from 'commander';
+{{else}}
 import {Command} from 'commander';
+{{/if}}
 {{#if this.server}}
 import ips from '@hidoo/util-local-ip';
 {{/if}}
@@ -31,10 +35,22 @@ const cli = new Command()
   .option('--ui', 'enable debug ui or not.')
 {{/if}}
 {{#if this.multiDevice}}
-  .option('--skip-device <device>', 'skip target device tasks.', /^(desktop|mobile)$/)
+  .option('--skip-device <device>', 'skip target device tasks.', (value) => {
+    if (!['desktop', 'mobile'].includes(value)) {
+      throw new InvalidOptionArgumentError();
+    }
+    return value;
+  })
 {{/if}}
   .option('--compress', 'enable file compress or not.')
   .parse(process.argv);
+
+/**
+ * cli option values
+ *
+ * @return {Object}
+ */
+const opts = cli.opts();
 
 {{#if this.server}}
 /**
@@ -43,11 +59,11 @@ const cli = new Command()
  * @type {Object}
  */
 export const serverOptions = {
-  host: String(cli.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
-  port: Number(cli.port || process.env.SERVER_PORT) || 8000,
-  protocol: String(cli.protocol || process.env.SERVER_PROTOCOL || 'http'),
-  open: cli.open || process.env.SERVER_OPEN || false,
-  ui: Boolean(cli.ui || process.env.SERVER_UI) || false
+  host: String(opts.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
+  port: Number(opts.port || process.env.SERVER_PORT) || 8000,
+  protocol: String(opts.protocol || process.env.SERVER_PROTOCOL || 'http'),
+  open: opts.open || process.env.SERVER_OPEN || false,
+  ui: Boolean(opts.ui || process.env.SERVER_UI) || false
 };
 {{/if}}
 
@@ -57,7 +73,7 @@ export const serverOptions = {
  *
  * @type {String}
  */
-export const skipDevice = cli.skipDevice || '';
+export const skipDevice = opts.skipDevice || '';
 {{/if}}
 
 /**
@@ -66,7 +82,7 @@ export const skipDevice = cli.skipDevice || '';
  *
  * @type {Boolean}
  */
-export const compress = cli.compress || process.env.NODE_ENV !== 'development' || false;
+export const compress = opts.compress || process.env.NODE_ENV !== 'development' || false;
 
 /**
  * package.json

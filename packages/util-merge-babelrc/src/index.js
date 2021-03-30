@@ -208,7 +208,7 @@ export default function mergeBabelrc(path = '', source = {}, options = {}) {
   let targets = null;
 
   if (typeof path === 'string' && path !== '') {
-    babelrc = require(path); // eslint-disable-line global-require, import/no-dynamic-require
+    babelrc = require(path); // eslint-disable-line node/global-require, import/no-dynamic-require
     if (opts.verbose) {
       log.info(`Using babelrc: ${path}`);
     }

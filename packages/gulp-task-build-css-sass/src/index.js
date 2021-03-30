@@ -20,7 +20,7 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require
   pkg = require(path.resolve(process.cwd(), 'package.json'));
 }
 catch (error) {
@@ -44,7 +44,7 @@ const DEFAULT_FUNCTIONS = {
   'env($key)': (key, done) => {
     const name = key.getValue(),
           result = new sass.compiler.types.String(
-            process.env[name] || '' // eslint-disable-line no-process-env
+            process.env[name] || '' // eslint-disable-line node/no-process-env
           );
 
     if (typeof done === 'function') {

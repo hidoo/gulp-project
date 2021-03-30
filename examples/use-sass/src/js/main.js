@@ -1,4 +1,4 @@
-/* eslint no-console: off, no-process-env: off*/
+/* eslint no-console: off, node/no-process-env: off */
 
 import sampleEsm from './lib/sample-esm';
 import sampleCjs from './lib/sample-cjs';

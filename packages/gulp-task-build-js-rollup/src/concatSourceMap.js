@@ -9,7 +9,7 @@ export default function concatSourceMap(result = {}) {
   const {code, map} = result;
   let inline = '';
 
-  // eslint-disable-next-line no-process-env
+  // eslint-disable-next-line node/no-process-env
   if (map && process.env.NODE_ENV === 'development') {
     inline = Buffer.from(JSON.stringify(map)).toString('base64');
     inline = `//# sourceMappingURL=data:application/json;charset=utf-8;base64,${inline}`;

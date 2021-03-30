@@ -61,7 +61,7 @@ async function bumpVersion(argv = []) {
       await exec('yarn test:examples');
     });
 
-    const lernaJson = require('../lerna.json'); // eslint-disable-line global-require
+    const lernaJson = require('../lerna.json'); // eslint-disable-line node/global-require
     const version = `v${lernaJson.version}`;
     const commitMsg = util.format(lernaJson.command.publish.message, version);
 

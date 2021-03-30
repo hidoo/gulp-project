@@ -23,7 +23,7 @@ import server from './task/server';
 fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
   {
     label: 'NODE_ENV',
-    value: process.env.NODE_ENV // eslint-disable-line no-process-env
+    value: process.env.NODE_ENV // eslint-disable-line node/no-process-env
   },
   {
     label: 'Compress Flag',

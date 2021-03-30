@@ -2,7 +2,7 @@
 
 import path from 'path';
 import chalk from 'chalk';
-import program from 'commander';
+import program, {InvalidOptionArgumentError} from 'commander';
 import inquirer from 'inquirer';
 import rimraf from 'rimraf';
 import pkg from '../package.json';
@@ -333,6 +333,21 @@ async function main(src = '', dest = '', options = {}) {
   return true;
 }
 
+/**
+ * select arguments
+ *
+ * @param {Array<String>} validValues valid values
+ * @return {Function}
+ */
+function select(validValues = []) {
+  return (value) => {
+    if (!validValues.includes(value)) {
+      throw new InvalidOptionArgumentError();
+    }
+    return value;
+  };
+}
+
 program
   .version(pkg.version, '-v, --version')
   .usage('<dir> [options]')
@@ -350,9 +365,9 @@ program
   .option('--no-server', 'Disable local dev server.')
   .option('--no-sprite', 'Disable sprite sheet build task. (Enable forcely when --no-css specified.)')
   .option('--no-styleguide', 'Disable styleguide build task. (Enable forcely when --no-css specified.)')
-  .option('--css-preprocessor [lang]', 'Select CSS preprocessor. [stylus|sass]', /^(stylus|sass)$/, 'stylus')
-  .option('--js-bundler [bundler]', 'Select JavaScript bundler. [browserify|rollup]', /^(browserify|rollup)$/, 'browserify')
-  .option('--sprite-type [type]', 'Select sprite sheet source type. [svg|image]', /^(svg|image)$/, 'svg')
+  .option('--css-preprocessor [lang]', 'Select CSS preprocessor. [stylus|sass]', select(['stylus', 'sass']), 'stylus')
+  .option('--js-bundler [bundler]', 'Select JavaScript bundler. [browserify|rollup]', select(['browserify', 'rollup']), 'browserify')
+  .option('--sprite-type [type]', 'Select sprite sheet source type. [svg|image]', select(['svg', 'image']), 'svg')
   .option('--verbose', 'Enable output logs.')
   .parse(process.argv);
 

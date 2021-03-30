@@ -87,12 +87,12 @@ export default async function generatePackageJson(name = '', dest = '', options 
   if (options.js) {
     devDependencies.push(
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'core-js', version: '^3.6.5'},
+      {name: 'core-js', version: '^3.9.1'},
       {name: 'jsdom', version: '^16.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^8.3.2'},
       {name: 'power-assert', version: '^1.6.1'},
-      {name: 'regenerator-runtime', version: '^0.13.5'}
+      {name: 'regenerator-runtime', version: '^0.13.7'}
     );
     scripts.push(
       {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js'}

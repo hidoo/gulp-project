@@ -290,7 +290,7 @@ describe('gulp-task-optimize-image', () => {
       const srcPath = `${path.src}/sample.${ext}`,
             actualPath = `${path.dest}/sample.${ext}`,
             task = optimizeImage({
-              src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+              src: `${path.src}/sample.${ext}`,
               dest: path.dest,
               evenize: true,
               placeholder: true,
@@ -299,7 +299,9 @@ describe('gulp-task-optimize-image', () => {
             });
 
       // 1st build
-      const firstBuild = new Promise((resolve) => task().on('finish', resolve));
+      const firstBuild = new Promise((resolve) => task().on('finish', () => {
+        resolve();
+      }));
 
       return firstBuild
         .then(() => {
@@ -325,12 +327,13 @@ describe('gulp-task-optimize-image', () => {
                   reject(error);
                 }
 
-                assert(expectedTime, stats.atimeMs);
-                assert(expectedTime, stats.mtimeMs);
+                assert(expectedTime <= new Date(stats.atimeMs));
+                assert(expectedTime <= new Date(stats.mtimeMs));
                 resolve();
               });
             });
-        }));
+        }))
+        .finally(() => Promise.resolve());
     }));
   });
 

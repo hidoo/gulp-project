@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
+
+
+### Bug Fixes
+
+* **optimize-image:** move webp process to after evenize ([78b58da](https://github.com/hidoo/gulp-project/commit/78b58dae995a0821601faf2201640b9deb40ccce))
+
+
+### Features
+
+* **optimize-image:** add options.webp ([8ab7d15](https://github.com/hidoo/gulp-project/commit/8ab7d150478eed5a09fc7dea4da56552692f00e8))
+
+
+
+
+
 # [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
 
 

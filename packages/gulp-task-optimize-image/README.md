@@ -92,6 +92,7 @@ return image optimize task
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
     -   `options.placeholder` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** generate placeholder image or not (optional, default `false`)
+    -   `options.webp` **([Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) \| [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** generate webp or not. use as webp options if object specified. (optional, default `false`)
     -   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
     -   `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
           see: [DEFAULT_OPTIONS](./src/index.js).
@@ -115,6 +116,9 @@ task('image', optimizeImage({
   dest: '/path/to/dest',
   evenize: true,
   placeholder: true,
+  webp: {
+    method: 6
+  },
   compress: true,
   // Default for this options
   compressOptions: [

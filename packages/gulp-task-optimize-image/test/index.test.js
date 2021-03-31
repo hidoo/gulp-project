@@ -65,7 +65,7 @@ describe('gulp-task-optimize-image', () => {
   };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*.{jpg,jpeg,png,gif,svg,svg.gz,ico}`, done);
+    rimraf(`${path.dest}/*.{jpg,jpeg,png,gif,svg,svg.gz,ico,webp}`, done);
   });
 
   it('should out to "options.dest" if argument "options.src" is set.', (done) => {
@@ -173,6 +173,80 @@ describe('gulp-task-optimize-image', () => {
     });
   });
 
+  it('should out webp images to "options.dest" if argument "options.webp" is true.', (done) => {
+    const cases = [
+      ['10x9', 'jpg'],
+      ['9x10', 'png'],
+      ['9x9', 'gif'],
+      ['sample', 'svg']
+    ];
+    const task = optimizeImage({
+      src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
+      dest: path.dest,
+      webp: true
+    });
+
+    task().on('finish', () => {
+      const promise = Promise.all(cases.map(([basename, ext]) => new Promise((resolve) => {
+        const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null});
+        const expected = fs.readFileSync(`${path.expected}/${basename}.original.${ext}`, {encode: null});
+
+        if (ext === 'svg') {
+          assert.deepStrictEqual(actual, expected);
+        }
+        else {
+          const webp = fs.readFileSync(`${path.dest}/${basename}.${ext}.webp`, {encode: null});
+          const webpExpected = fs.readFileSync(`${path.expected}/${basename}.${ext}.webp`, {encode: null});
+
+          assert.deepStrictEqual(actual, expected);
+          assert.deepStrictEqual(webp, webpExpected);
+        }
+        resolve();
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
+    });
+  });
+
+  it('should out webp images to "options.dest" if argument "options.webp" is object.', (done) => {
+    const cases = [
+      ['10x9', 'jpg'],
+      ['9x10', 'png'],
+      ['9x9', 'gif'],
+      ['sample', 'svg']
+    ];
+    const task = optimizeImage({
+      src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
+      dest: path.dest,
+      webp: {keepExtname: false}
+    });
+
+    task().on('finish', () => {
+      const promise = Promise.all(cases.map(([basename, ext]) => new Promise((resolve) => {
+        const actual = fs.readFileSync(`${path.dest}/${basename}.${ext}`, {encode: null});
+        const expected = fs.readFileSync(`${path.expected}/${basename}.original.${ext}`, {encode: null});
+
+        if (ext === 'svg') {
+          assert.deepStrictEqual(actual, expected);
+        }
+        else {
+          const webp = fs.readFileSync(`${path.dest}/${basename}.webp`, {encode: null});
+          const webpExpected = fs.readFileSync(`${path.expected}/${basename}.${ext}.webp`, {encode: null});
+
+          assert.deepStrictEqual(actual, expected);
+          assert.deepStrictEqual(webp, webpExpected);
+        }
+        resolve();
+      })));
+
+      promise
+        .then(() => done(null))
+        .catch((error) => done(error));
+    });
+  });
+
   it('should out compressed files to "options.dest" if argument "options.compress" is true.', (done) => {
     const cases = ['jpg', 'png', 'gif', 'svg', 'ico'],
           task = optimizeImage({
@@ -190,7 +264,7 @@ describe('gulp-task-optimize-image', () => {
           const expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {encode: null});
 
           assert(actual);
-          assert.deepEqual(actual, expected);
+          assert.deepStrictEqual(actual, expected);
           resolve();
         }
         else {
@@ -198,7 +272,7 @@ describe('gulp-task-optimize-image', () => {
                 expected = fs.readFileSync(expectedPath, {encode: null});
 
           assert(actual);
-          assert.deepEqual(actual, expected);
+          assert.deepStrictEqual(actual, expected);
           resolve();
         }
       })));
@@ -216,15 +290,18 @@ describe('gulp-task-optimize-image', () => {
       const srcPath = `${path.src}/sample.${ext}`,
             actualPath = `${path.dest}/sample.${ext}`,
             task = optimizeImage({
-              src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+              src: `${path.src}/sample.${ext}`,
               dest: path.dest,
               evenize: true,
               placeholder: true,
+              webp: true,
               compress: true
             });
 
       // 1st build
-      const firstBuild = new Promise((resolve) => task().on('finish', resolve));
+      const firstBuild = new Promise((resolve) => task().on('finish', () => {
+        resolve();
+      }));
 
       return firstBuild
         .then(() => {
@@ -250,12 +327,13 @@ describe('gulp-task-optimize-image', () => {
                   reject(error);
                 }
 
-                assert(expectedTime, stats.atimeMs);
-                assert(expectedTime, stats.mtimeMs);
+                assert(expectedTime <= new Date(stats.atimeMs));
+                assert(expectedTime <= new Date(stats.mtimeMs));
                 resolve();
               });
             });
-        }));
+        }))
+        .finally(() => Promise.resolve());
     }));
   });
 

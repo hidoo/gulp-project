@@ -20,7 +20,9 @@ $ npx @hidoo/gulp-project-generator /path/to/my-new-project
 ## Packages
 
 + [@hidoo/gulp-plugin-image-evenizer](./packages/gulp-plugin-image-evenizer)
++ [@hidoo/gulp-plugin-image-placeholder](./packages/gulp-plugin-image-placeholder)
 + [@hidoo/gulp-plugin-svg-sprite](./packages/gulp-plugin-svg-sprite)
++ [@hidoo/gulp-plugin-webp](./packages/gulp-plugin-webp)
 + [@hidoo/gulp-project-generator](./packages/gulp-project-generator)
 + [@hidoo/gulp-task-build-css-sass](./packages/gulp-task-build-css-sass)
 + [@hidoo/gulp-task-build-css-stylus](./packages/gulp-task-build-css-stylus)

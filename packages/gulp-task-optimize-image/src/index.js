@@ -5,6 +5,7 @@ import imagemin from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
+import webp from '@hidoo/gulp-plugin-webp';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
@@ -58,6 +59,7 @@ const DEFAULT_OPTIONS = {
   dest: null,
   evenize: false,
   placeholder: false,
+  webp: false,
   compress: false,
   compressOptions: [
     gifsicle({interlaced: true}),
@@ -77,6 +79,7 @@ const DEFAULT_OPTIONS = {
  * @param {String} options.dest - destination path
  * @param {Boolean} [options.evenize=false] - apply evenize or not
  * @param {Boolean} [options.placeholder=false] - generate placeholder image or not
+ * @param {Boolean|Object} [options.webp=false] - generate webp or not. use as webp options if object specified.
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Array} [options.compressOptions] - compress options.
  *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
@@ -99,6 +102,9 @@ const DEFAULT_OPTIONS = {
  *   dest: '/path/to/dest',
  *   evenize: true,
  *   placeholder: true,
+ *   webp: {
+ *     method: 6
+ *   },
  *   compress: true,
  *   // Default for this options
  *   compressOptions: [
@@ -111,18 +117,31 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function optimizeImage(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        isImage = '**/*.{jpg,jpeg,gif,png}',
-        isSvg = '**/*.svg',
-        isntIco = '!**/*.ico';
+  const opts = {...DEFAULT_OPTIONS, ...options};
+  const isImage = '**/*.{jpg,jpeg,gif,png}';
+  const isSvg = '**/*.svg';
+  const isntIco = '!**/*.ico';
 
   // define task
   const task = () => {
-    const {evenize, placeholder, compress, compressOptions, verbose} = opts,
-          since = lastRun(task);
+    const {evenize, placeholder, compress, compressOptions, verbose} = opts;
+    const since = lastRun(task);
+    let webpOptions = {verbose};
+
+    if (
+      opts.webp &&
+      typeof opts.webp === 'object' &&
+      !Array.isArray(opts.webp)
+    ) {
+      webpOptions = {
+        verbose,
+        ...opts.webp
+      };
+    }
 
     return src(opts.src, {since})
       .pipe(plumber({errorHandler}))
+      .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
       .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
       .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
       .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))

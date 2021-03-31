@@ -141,8 +141,8 @@ export default function optimizeImage(options = {}) {
 
     return src(opts.src, {since})
       .pipe(plumber({errorHandler}))
-      .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
       .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
+      .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
       .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
       .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))
       .pipe(dest(opts.dest))

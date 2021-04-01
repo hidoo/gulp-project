@@ -4,11 +4,9 @@
   transition-duration: 0.3s;
   background-color: black;
 }
-
 .block__element {
   padding: 10px;
 }
-
 .block--modifier {
   padding: 10px;
 }
@@ -16,11 +14,9 @@
 .c__element {
   margin: 10px;
 }
-
 .c--modifier {
   padding: 10px;
 }
-
 @media (min-width: 500px) and (max-width: 600px) {
   .block {
     color: #fff;

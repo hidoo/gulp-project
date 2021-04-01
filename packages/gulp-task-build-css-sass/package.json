@@ -44,18 +44,20 @@
     "autoprefixer": "9.8.6",
     "css-mqpacker": "7.0.0",
     "fancy-log": "1.3.3",
+    "fibers": "5.0.0",
     "gulp-gzip": "1.4.2",
     "gulp-header": "2.0.9",
     "gulp-if": "3.0.0",
-    "gulp-plumber": "1.2.1",
     "gulp-postcss": "8.0.0",
     "gulp-rename": "2.0.0",
-    "gulp-sass": "4.1.0",
     "node-sass-magic-importer": "5.3.2",
     "postcss-csso": "4.0.0",
     "postcss-uncss": "0.17.0",
     "postcss-url": "8.0.0",
-    "uncss": "0.17.3"
+    "sass": "1.32.8",
+    "through2": "4.0.2",
+    "uncss": "0.17.3",
+    "vinyl": "2.2.1"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

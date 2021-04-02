@@ -94,15 +94,12 @@ const render = util.promisify(sass.render).bind(sass);
  * @return {Array<Function>}
  */
 function getProcesses(options = {}) {
-  const processes = [];
-
-  // add default post css process
-  processes.push(
+  const processes = [
     autoprefixer({
       overrideBrowserslist: options.browsers || options.targets || []
-    })
-  );
-  processes.push(cssmqpacker);
+    }),
+    cssmqpacker
+  ];
 
   // add post css process by postcss-url
   if (
@@ -190,6 +187,7 @@ export default function buildCss(options = {}) {
     const stream = through.obj();
     const filename = opts.filename || path.basename(opts.src);
     const sassOptions = opts.sassOptions || {};
+    const processes = getProcesses(opts);
     const compiler = render({
       file: opts.src,
       ...sassOptions,
@@ -218,7 +216,7 @@ export default function buildCss(options = {}) {
       });
 
     return stream
-      .pipe(postcss(getProcesses(opts)))
+      .pipe(postcss(processes))
       .pipe(header(opts.banner, {pkg}))
       .pipe(dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))

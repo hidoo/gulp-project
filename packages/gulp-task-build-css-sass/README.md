@@ -51,11 +51,12 @@ return css build task by sass
     -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
     -   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'main.css'`)
     -   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
-    -   `options.browsers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** target browsers.
+    -   `options.targets` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** target browsers.
           see: [default target browsers](http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4)
+    -   `options.browsers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** alias of options.targets.
     -   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
     -   `options.sassOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** sass options.
-          see: [gulp-sass options](https://www.npmjs.com/package/gulp-sass#options) (optional, default `{outputStyle:'expanded'}`)
+          see: [sass options](https://sass-lang.com/documentation/js-api#options) (optional, default `{outputStyle:'expanded'}`)
     -   `options.url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of processing of url() (one of [inline|copy|rebase])
           see: <https://www.npmjs.com/package/postcss-url> (optional, default `null`)
     -   `options.urlOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options of processing of url()
@@ -77,7 +78,7 @@ task('css', buildCss({
   dest: '/path/to/dest',
   filename: 'styles.css',
   suffix: '.hoge',
-  browsers: ['> 0.1% in JP'],
+  targets: ['> 0.1% in JP'],
   banner: '/*! copyright <%= pkg.author %> * /\n',
   sassOptions: {outputStyle: 'nested'},
   url: 'inline',

@@ -1,8 +1,11 @@
 import path from 'path';
-import {src, dest} from 'gulp';
-import plumber from 'gulp-plumber';
+import util from 'util';
+import {dest} from 'gulp';
 import cond from 'gulp-if';
-import sass from 'gulp-sass';
+import through from 'through2';
+import Vinyl from 'vinyl';
+import sass from 'sass';
+import Fiber from 'fibers';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -43,7 +46,7 @@ const DEFAULT_FUNCTIONS = {
    */
   'env($key)': (key, done) => {
     const name = key.getValue(),
-          result = new sass.compiler.types.String(
+          result = new sass.types.String(
             process.env[name] || '' // eslint-disable-line node/no-process-env
           );
 
@@ -65,7 +68,7 @@ const DEFAULT_OPTIONS = {
   dest: null,
   filename: 'main.css',
   suffix: '.min',
-  browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
+  targets: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
   sassOptions: {outputStyle: 'expanded'},
   url: null,
@@ -77,6 +80,59 @@ const DEFAULT_OPTIONS = {
 };
 
 /**
+ * promisifed sass.render
+ *
+ * @param {Object} options options of sass.render
+ * @return {Promise<Object>}
+ */
+const render = util.promisify(sass.render).bind(sass);
+
+/**
+ * get post css processes
+ *
+ * @param {DEFAULT_OPTIONS} options - options
+ * @return {Array<Function>}
+ */
+function getProcesses(options = {}) {
+  const processes = [
+    autoprefixer({
+      overrideBrowserslist: options.browsers || options.targets || []
+    }),
+    cssmqpacker
+  ];
+
+  // add post css process by postcss-url
+  if (
+    typeof options.url === 'string' &&
+    ['inline', 'copy', 'rebase'].includes(options.url)
+  ) {
+    processes.push(url({
+      basePath: path.dirname(options.src),
+      ...options.urlOptions,
+      url: options.url
+    }));
+  }
+
+  // add post css process if options.uncssTargets is valid
+  if (
+    Array.isArray(options.uncssTargets) &&
+    Boolean(options.uncssTargets.length)
+  ) {
+    processes.push(uncss({
+      html: options.uncssTargets,
+      ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
+    }));
+  }
+
+  // add post css process if options.additionalProcess is valid
+  if (typeof options.additionalProcess === 'function') {
+    processes.push(options.additionalProcess);
+  }
+
+  return processes;
+}
+
+/**
  * return css build task by sass
  *
  * @param  {Object} options - options
@@ -85,11 +141,12 @@ const DEFAULT_OPTIONS = {
  * @param  {String} options.dest - destination path
  * @param  {String} [options.filename='main.css'] - destination filename
  * @param  {String} [options.suffix='.min'] - suffix when compressed
- * @param  {Array<String>} [options.browsers] - target browsers.
+ * @param  {Array<String>} [options.targets] - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
+ * @param  {Array<String>} [options.browsers] - alias of options.targets.
  * @param  {String} [options.banner=''] - license comments
  * @param  {Object} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
- *   see: {@link https://www.npmjs.com/package/gulp-sass#options gulp-sass options}
+ *   see: {@link https://sass-lang.com/documentation/js-api#options sass options}
  * @param  {String} [options.url=null] - type of processing of url() (one of [inline|copy|rebase])
  *   see: {@link https://www.npmjs.com/package/postcss-url}
  * @param  {Object} [options.urlOptions={}] - options of processing of url()
@@ -110,7 +167,7 @@ const DEFAULT_OPTIONS = {
  *   dest: '/path/to/dest',
  *   filename: 'styles.css',
  *   suffix: '.hoge',
- *   browsers: ['> 0.1% in JP'],
+ *   targets: ['> 0.1% in JP'],
  *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   sassOptions: {outputStyle: 'nested'},
  *   url: 'inline',
@@ -126,61 +183,41 @@ export default function buildCss(options = {}) {
 
   // define task
   const task = () => {
-    const {
-            filename, suffix, browsers, banner,
-            uncssTargets, uncssIgnore,
-            additionalProcess,
-            compress
-          } = opts,
-          extname = path.extname(filename),
-          basename = path.basename(filename, extname),
-          sassOptions = opts.sassOptions || {},
-          postProcesses = [];
-
-    // additinal sass options
-    const mergedSassOptions = {
+    const {suffix, compress} = opts;
+    const stream = through.obj();
+    const filename = opts.filename || path.basename(opts.src);
+    const sassOptions = opts.sassOptions || {};
+    const processes = getProcesses(opts);
+    const compiler = render({
+      file: opts.src,
       ...sassOptions,
+      fiber: Fiber,
       importer: magicImporter(),
       functions: {
         ...DEFAULT_FUNCTIONS,
         ...sassOptions.functions
       }
-    };
+    });
 
-    // add default post css process
-    postProcesses.push(autoprefixer({overrideBrowserslist: browsers}));
-    postProcesses.push(cssmqpacker);
+    compiler
+      .then(({css}) => {
+        // add code to stream as vinyl file
+        stream.push(new Vinyl({
+          path: filename,
+          contents: Buffer.from(css)
+        }));
 
-    // add post css process by postcss-url
-    if (
-      typeof opts.url === 'string' &&
-      ['inline', 'copy', 'rebase'].includes(opts.url)
-    ) {
-      postProcesses.push(url({
-        ...opts.urlOptions,
-        url: opts.url
-      }));
-    }
+        // add null that indicates write completion
+        stream.push(null);
+      })
+      .catch((error) => {
+        errorHandler(error);
+        stream.emit('end');
+      });
 
-    // add post css process if opts.uncssTargets is valid
-    if (Array.isArray(uncssTargets) && Boolean(uncssTargets.length)) {
-      postProcesses.push(uncss({
-        html: uncssTargets,
-        ignore: Array.isArray(uncssIgnore) ? uncssIgnore : []
-      }));
-    }
-
-    // add post css process if opts.additionalProcess is valid
-    if (typeof additionalProcess === 'function') {
-      postProcesses.push(additionalProcess);
-    }
-
-    return src(opts.src)
-      .pipe(plumber({errorHandler}))
-      .pipe(sass(mergedSassOptions))
-      .pipe(postcss([...postProcesses]))
-      .pipe(header(banner, {pkg}))
-      .pipe(rename({basename, extname}))
+    return stream
+      .pipe(postcss(processes))
+      .pipe(header(opts.banner, {pkg}))
       .pipe(dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, postcss([csso({restructure: false})])))

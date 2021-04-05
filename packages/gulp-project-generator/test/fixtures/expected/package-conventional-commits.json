@@ -28,9 +28,9 @@
     "version:commit": "git add ."
   },
   "devDependencies": {
-    "@babel/core": "^7.13.13",
+    "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
-    "@babel/register": "^7.13.8",
+    "@babel/register": "^7.13.14",
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@hidoo/eslint-config": "^0.6.0",

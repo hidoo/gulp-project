@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.block {
+  @media (min-width: 600px) {
+    color: #fff;
+  }
+  @media (min-width: 500px) and (max-width: 599px) {
+    font-size: 1rem;
+  }
+  @media (min-width: 500px) and (max-width: 599px) {
+    color: #aaa;
+  }
+  @media (max-width: 499px) {
+    color: #444;
+  }
+}

@@ -9,7 +9,7 @@ import Fiber from 'fibers';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
-import cssmqpacker from 'css-mqpacker';
+import sortMediaQueries from 'postcss-sort-media-queries';
 import uncss from 'postcss-uncss';
 import csso from 'postcss-csso';
 import url from 'postcss-url';
@@ -71,6 +71,7 @@ const DEFAULT_OPTIONS = {
   targets: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
   sassOptions: {outputStyle: 'expanded'},
+  sortMediaQueries: 'mobile-first',
   url: null,
   urlOptions: {},
   uncssTargets: [],
@@ -98,7 +99,9 @@ function getProcesses(options = {}) {
     autoprefixer({
       overrideBrowserslist: options.browsers || options.targets || []
     }),
-    cssmqpacker
+    sortMediaQueries({
+      sort: options.sortMediaQueries
+    })
   ];
 
   // add post css process by postcss-url
@@ -147,6 +150,8 @@ function getProcesses(options = {}) {
  * @param  {String} [options.banner=''] - license comments
  * @param  {Object} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
  *   see: {@link https://sass-lang.com/documentation/js-api#options sass options}
+ * @param  {String|Function} [options.sortMediaQueries='mobile-first'] - sort type for media queries.
+ *   see: {@link https://www.npmjs.com/package/postcss-sort-media-queries}
  * @param  {String} [options.url=null] - type of processing of url() (one of [inline|copy|rebase])
  *   see: {@link https://www.npmjs.com/package/postcss-url}
  * @param  {Object} [options.urlOptions={}] - options of processing of url()

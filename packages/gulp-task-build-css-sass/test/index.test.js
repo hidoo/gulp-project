@@ -155,6 +155,24 @@ describe('gulp-task-build-css-sass', () => {
     });
   });
 
+  it('should out to "main.css" that sorted media queries by specified type if argument "options.sortMediaQueries" is set.', (done) => {
+    const task = buildCss({
+      src: `${path.src}/style.sort-media-queries.scss`,
+      dest: path.dest,
+      sortMediaQueries: 'mobile-first',
+      compress: false
+    });
+
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.css`);
+      const expected = fs.readFileSync(`${path.expected}/main.sort-media-queries.css`);
+
+      assert(actual);
+      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
+      done();
+    });
+  });
+
   it('should out to "main.css" that not process url() value if argument "options.url" is not set.', (done) => {
     const task = buildCss({
       src: `${path.src}/style.url.scss`,

@@ -60,7 +60,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@7.13.14", "@babel/core@>=7.9.0", "@babel/core@^7.13.13":
+"@babel/core@7.13.14", "@babel/core@>=7.9.0", "@babel/core@^7.13.14":
   version "7.13.14"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.13.14.tgz#8e46ebbaca460a63497c797e574038ab04ae6d06"
   integrity sha512-wZso/vyF4ki0l0znlgM4inxbdrUvCb+cVz8grxDq+6C9k6qbqoIJteQOKicaKjCipU3ISV+XedCqpL2RJJVehA==
@@ -1059,7 +1059,7 @@
   resolved "https://registry.yarnpkg.com/@babel/preset-stage-0/-/preset-stage-0-7.8.3.tgz#b6a0eca1a3b72e07f9caf58f998e97568028f6f5"
   integrity sha512-+l6FlG1j73t4wh78W41StbcCz0/9a1/y+vxfnjtHl060kSmcgMfGzK9MEkLvrCOXfhp9RCX+d88sm6rOqxEIEQ==
 
-"@babel/register@7.13.14", "@babel/register@^7.13.8":
+"@babel/register@7.13.14", "@babel/register@^7.13.14", "@babel/register@^7.13.8":
   version "7.13.14"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.13.14.tgz#bbfa8f4f027c2ebc432e8e69e078b632605f2d9b"
   integrity sha512-iyw0hUwjh/fzN8qklVqZodbyWjEBOG0KdDnBOpv3zzIgK3NmuRXBmIXH39ZBdspkn8LTHvSboN+oYb4MT43+9Q==

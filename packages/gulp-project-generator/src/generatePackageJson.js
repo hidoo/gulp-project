@@ -87,7 +87,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   if (options.js) {
     devDependencies.push(
       {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'core-js', version: '^3.9.1'},
+      {name: 'core-js', version: '^3.10.0'},
       {name: 'jsdom', version: '^16.2.0'},
       {name: 'jsdom-global', version: '^3.0.2'},
       {name: 'mocha', version: '^8.3.2'},

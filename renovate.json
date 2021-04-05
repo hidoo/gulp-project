@@ -147,6 +147,15 @@
       "packagePatterns": [
         "^gulp-"
       ]
+    },
+    {
+      "groupName": "post-css packages",
+      "groupSlug": "post-css-packages",
+      "packagePatterns": [
+        "^postcss$",
+        "^postcss-",
+        "^gulp-postcss$"
+      ]
     }
   ],
   "ignoreDeps": [

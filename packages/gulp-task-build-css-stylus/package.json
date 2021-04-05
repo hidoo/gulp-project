@@ -51,7 +51,7 @@
     "gulp-postcss": "9.0.0",
     "gulp-rename": "2.0.0",
     "gulp-stylus": "2.7.0",
-    "postcss-csso": "4.0.0",
+    "postcss-csso": "5.0.0",
     "postcss-uncss": "0.17.0",
     "postcss-url": "8.0.0",
     "uncss": "0.17.3"

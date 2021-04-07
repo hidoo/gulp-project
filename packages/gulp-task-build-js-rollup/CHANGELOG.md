@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
+
+
+### Bug Fixes
+
+* **build-js-rollup:** change task to returns stream ([f4b2650](https://github.com/hidoo/gulp-project/commit/f4b2650b4ab4d20b489482cd59c9fc253162a64d))
+* **deps:** update dependency rollup to v2.44.0 ([a27245e](https://github.com/hidoo/gulp-project/commit/a27245e0874274cd9e81a566e4c0628595c650be))
+
+
+
+
+
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup

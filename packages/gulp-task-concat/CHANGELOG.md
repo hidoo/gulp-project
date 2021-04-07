@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
+
+
+### Bug Fixes
+
+* **deps:** add postcss to dependencies ([15dbb35](https://github.com/hidoo/gulp-project/commit/15dbb351d2f81860f3ef3700887e835adeb8bf99))
+* **deps:** update dependency gulp-postcss to v9 ([6e9ab3b](https://github.com/hidoo/gulp-project/commit/6e9ab3bdb7ca71e597aa211ce51d26775cc2f899))
+* **deps:** update dependency postcss-csso to v5 ([b933329](https://github.com/hidoo/gulp-project/commit/b93332954d06d0cbd5781fd65f191219b2b3358a))
+
+
+
+
+
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-task-concat

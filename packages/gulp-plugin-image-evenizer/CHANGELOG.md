@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency get-stream to v6 ([2023bd2](https://github.com/hidoo/gulp-project/commit/2023bd20c95d493acd90f358d89aad69ec1a5e46))
+
+
+
+
+
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-plugin-image-evenizer

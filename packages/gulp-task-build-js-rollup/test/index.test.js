@@ -1,8 +1,9 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+/* eslint max-len: off, no-magic-numbers: off, max-statements: off */
 
 import assert from 'assert';
 import fs from 'fs';
 import {resolve} from 'path';
+import gulp from 'gulp';
 import rimraf from 'rimraf';
 import pkg from '../package.json';
 import buildJs from '../src';
@@ -30,39 +31,37 @@ describe('gulp-task-build-js-rollup', () => {
     rimraf(`${path.dest}/*.{js,gz}`, done);
   });
 
-  it('should out to "main.js" if argument "options" is default.', async () => {
+  it('should out to "main.js" if argument "options" is default.', (done) => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest
     });
-    const stream = await task();
 
-    await new Promise((done) => stream.on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
       assert.deepStrictEqual(actual, expected);
       done();
-    }));
+    });
   });
 
-  it('should out to specified file name if argument "options.filename" is set.', async () => {
+  it('should out to specified file name if argument "options.filename" is set.', (done) => {
     const task = buildJs({
       src: `${path.src}/main.js`,
       dest: path.dest,
       filename: 'hoge.js'
     });
-    const stream = await task();
 
-    await new Promise((done) => stream.on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/hoge.js`).toString().trim(),
-            expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/hoge.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
       assert(actual);
       assert.deepStrictEqual(actual, expected);
       done();
-    }));
+    });
   });
 
   it('should out to "main.js" that transformed for target browsers if argument "options.browsers" is set.', (done) => {
@@ -73,16 +72,14 @@ describe('gulp-task-build-js-rollup', () => {
       browsers: 'ie >= 8'
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "main.js" that transformed for target browsers if argument "options.targets" is set.', (done) => {
@@ -93,16 +90,14 @@ describe('gulp-task-build-js-rollup', () => {
       targets: 'ie >= 8'
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "use-corejs.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
@@ -114,16 +109,14 @@ describe('gulp-task-build-js-rollup', () => {
       corejs: {version: 3, proposals: true}
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/use-corejs.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/use-corejs.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/use-corejs.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/use-corejs.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "use-react.js" that transformed for jsx if @babel/preset-react use.', (done) => {
@@ -134,16 +127,14 @@ describe('gulp-task-build-js-rollup', () => {
       babelrc: resolve(process.cwd(), `${__dirname}/fixtures/src/use-react.babelrc.js`)
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/use-react.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/use-react.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/use-react.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/use-react.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "import-json.js" that convert JSON to ES6 modules if ".json" files import.', (done) => {
@@ -153,16 +144,14 @@ describe('gulp-task-build-js-rollup', () => {
       filename: 'import-json.js'
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/import-json.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/import-json.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/import-json.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/import-json.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "alias.js" that resolved modules by alias if options.aliasOptions is set.', (done) => {
@@ -180,16 +169,14 @@ describe('gulp-task-build-js-rollup', () => {
       }
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/alias.js`).toString().trim(),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/alias.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/alias.js`).toString().trim();
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/alias.js`).toString().trim());
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "main.min.js" and "main.min.js.gz" if argument "options.compress" is set.', (done) => {
@@ -199,20 +186,18 @@ describe('gulp-task-build-js-rollup', () => {
       compress: true
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-              actualMin = fs.readFileSync(`${path.dest}/main.min.js`).toString().trim(),
-              actualGz = fs.readFileSync(`${path.dest}/main.min.js.gz`),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
+      const actualMin = fs.readFileSync(`${path.dest}/main.min.js`).toString().trim();
+      const actualGz = fs.readFileSync(`${path.dest}/main.min.js.gz`);
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
-        assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "main.hoge.js" and "main.hoge.js.gz" if argument "options.compress" is set and argument "options.suffix" is ".hoge".', (done) => {
@@ -223,20 +208,18 @@ describe('gulp-task-build-js-rollup', () => {
       compress: true
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-              actualMin = fs.readFileSync(`${path.dest}/main.hoge.js`).toString().trim(),
-              actualGz = fs.readFileSync(`${path.dest}/main.hoge.js.gz`),
-              expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    task().on('finish', () => {
+      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
+      const actualMin = fs.readFileSync(`${path.dest}/main.hoge.js`).toString().trim();
+      const actualGz = fs.readFileSync(`${path.dest}/main.hoge.js.gz`);
+      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
 
-        assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(actual, expected);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actual);
+      assert(actualMin);
+      assert(actualGz);
+      assert.deepStrictEqual(actual, expected);
+      done();
+    });
   });
 
   it('should out to "main.js" and "main.js.gz" if argument "options.compress" is set and argument "options.suffix" is empty string.', (done) => {
@@ -247,16 +230,14 @@ describe('gulp-task-build-js-rollup', () => {
       compress: true
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        const actualMin = fs.readFileSync(`${path.dest}/main.js`).toString().trim(),
-              actualGz = fs.readFileSync(`${path.dest}/main.js.gz`);
+    task().on('finish', () => {
+      const actualMin = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
+      const actualGz = fs.readFileSync(`${path.dest}/main.js.gz`);
 
-        assert(actualMin);
-        assert(actualGz);
-        done();
-      }))
-      .catch((error) => done(error));
+      assert(actualMin);
+      assert(actualGz);
+      done();
+    });
   });
 
   it('should out splitted codes if use dynamic "import" syntax and set optiions.outputOptions.format to "es".', (done) => {
@@ -282,19 +263,49 @@ describe('gulp-task-build-js-rollup', () => {
       filename: ''
     });
 
-    task()
-      .then((stream) => stream.on('finish', () => {
-        [...entries, ...dynamicDeps].forEach((file) => {
-          const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim();
-          const expected = replaceVersion(fs.readFileSync(`${path.expected}/code-splitting/${file}`).toString().trim());
+    task().on('finish', () => {
+      [...entries, ...dynamicDeps].forEach((file) => {
+        const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim();
+        const expected = replaceVersion(fs.readFileSync(`${path.expected}/code-splitting/${file}`).toString().trim());
 
-          assert(actual);
-          assert.deepStrictEqual(actual, expected);
-        });
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+      });
 
+      done();
+    });
+  });
+
+  it('should not stop process if throw error.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/error.js`,
+      dest: path.dest,
+      compress: false
+    });
+
+    task().on('finish', done);
+  });
+
+  it('should call next task after files were outputted in gulp.series.', (done) => {
+    const task = buildJs({
+      src: `${path.src}/main.js`,
+      dest: path.dest
+    });
+
+    const build = gulp.series(
+      task,
+      (cb) => {
+        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
+        const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+
+        assert(actual);
+        assert.deepStrictEqual(actual, expected);
+        cb();
         done();
-      }))
-      .catch((error) => done(error));
+      }
+    );
+
+    build();
   });
 
 });

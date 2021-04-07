@@ -75,7 +75,7 @@ const DEFAULT_OPTIONS = {
  *   see: {@link https://github.com/rollup/plugins/tree/master/packages/commonjs @rollup/plugin-commonjs}
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Boolean} [options.verbose=false] - out log or not
- * @return {Function<Promise>}
+ * @return {Function<Stream>}
  *
  * @example
  * import {task} from 'gulp';
@@ -105,16 +105,20 @@ export default function buildJs(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
   // define task
-  const task = async () => {
+  const task = () => {
     const {suffix, compress} = opts;
     const stream = through.obj();
     const filenames = Array.isArray(opts.filename) ?
       [...opts.filename] : [opts.filename];
+    const inputOpts = inputOptions(opts);
 
-    const transformedStream = await rollup(inputOptions(opts))
-      .then((bundle) => bundle.generate(outputOptions(opts)))
+    rollup(inputOpts)
+      .then((bundle) => {
+        const outputOpts = outputOptions(opts);
+
+        return bundle.generate(outputOpts);
+      })
       .then(({output}) => {
-
         for (const chunkOrAsset of output) {
           if (chunkOrAsset.type === 'asset') {
             throw new Error('"asset" is not support.');
@@ -133,23 +137,19 @@ export default function buildJs(options = {}) {
 
         // add null that indicates write completion
         stream.push(null);
-
-        // transform from nodejs stream to vinyl stream,
-        // and flush as gulp task
-        return stream
-          .pipe(dest(opts.dest))
-          .pipe(cond((file) => file.isEntry && compress, rename({suffix})))
-          .pipe(cond(compress, terser({format: {comments: 'some'}})))
-          .pipe(cond(compress, dest(opts.dest)))
-          .pipe(cond(compress, gzip({append: true})))
-          .pipe(cond(compress, dest(opts.dest)));
       })
       .catch((error) => {
         errorHandler(error);
         stream.emit('end');
       });
 
-    return transformedStream;
+    return stream
+      .pipe(dest(opts.dest))
+      .pipe(cond((file) => file.isEntry && compress, rename({suffix})))
+      .pipe(cond(compress, terser({format: {comments: 'some'}})))
+      .pipe(cond(compress, dest(opts.dest)))
+      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

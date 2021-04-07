@@ -4,5 +4,6 @@ packages/**/lib/*
 packages/**/test/fixtures/dest/*
 packages/**/test/fixtures/expected/*
 packages/gulp-project-generator/test/fixtures/src/formatCode/*
+packages/gulp-task-build-js-rollup/test/fixtures/src/error.js
 examples/**/node_modules/*
 examples/**/public/*

@@ -52,7 +52,7 @@
     "gulp-replace": "1.0.0",
     "gulp-uglify": "3.0.2",
     "postcss": "8.2.9",
-    "postcss-csso": "5.0.0"
+    "postcss-csso": "5.0.1"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

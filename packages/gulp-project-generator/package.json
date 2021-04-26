@@ -45,7 +45,7 @@
   "dependencies": {
     "@hidoo/handlebars-helpers": "0.8.1",
     "babel-eslint": "10.1.0",
-    "chalk": "4.1.0",
+    "chalk": "4.1.1",
     "commander": "7.2.0",
     "eslint": "7.23.0",
     "fs-extra": "9.1.0",

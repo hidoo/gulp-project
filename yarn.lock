@@ -2230,6 +2230,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
+"@types/expect@^1.20.4":
+  version "1.20.4"
+  resolved "https://registry.yarnpkg.com/@types/expect/-/expect-1.20.4.tgz#8288e51737bf7e3ab5d7c77bfa695883745264e5"
+  integrity sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==
+
 "@types/glob@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
@@ -2259,6 +2264,11 @@
   version "14.14.37"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
   integrity sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
+
+"@types/node@^14.14.41":
+  version "14.14.43"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.43.tgz#26bcbb0595b305400e8ceaf9a127a7f905ae49c8"
+  integrity sha512-3pwDJjp1PWacPTpH0LcfhgjvurQvrZFBrC6xxjaUEZ7ifUtT32jtjPxEMMblpqd2Mvx+k8haqQJLQxolyGN/cQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2294,6 +2304,14 @@
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
   integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
+
+"@types/vinyl@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/vinyl/-/vinyl-2.0.4.tgz#9a7a8071c8d14d3a95d41ebe7135babe4ad5995a"
+  integrity sha512-2o6a2ixaVI2EbwBPg1QYLGQoHK56p/8X/sGfKbFC8N6sY9lfjsMf/GprtkQkSya0D4uRiutRZ2BWj7k3JvLsAQ==
+  dependencies:
+    "@types/expect" "^1.20.4"
+    "@types/node" "*"
 
 "@ungap/promise-all-settled@1.1.2":
   version "1.1.2"
@@ -7719,11 +7737,13 @@ gulp-rename@2.0.0:
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-2.0.0.tgz#9bbc3962b0c0f52fc67cd5eaff6c223ec5b9cf6c"
   integrity sha512-97Vba4KBzbYmR5VBs9mWmK+HwIf5mj+/zioxfZhOKeXtx5ZjBk57KFlePf5nxq9QsTtFl0ejnHE3zTC9MHXqyQ==
 
-gulp-replace@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/gulp-replace/-/gulp-replace-1.1.1.tgz#ecb15cafa6df3cf2735aad5765be491be8b36eeb"
-  integrity sha512-gzVZ15/q2+6w7PmZy5zUO5V0s+IGrGz1a2RgImt4mo6eChZgHFbHKKEn52uWkDShhSijdeNz05HcxFN7HNSBKA==
+gulp-replace@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/gulp-replace/-/gulp-replace-1.1.2.tgz#41e0d2bef2ebf5b40ccb616bc0475694ca983c87"
+  integrity sha512-rsZs3IbCCJNB0h+oVYbhzz07MjaaawCuGkMDQgRzbZ71Wh+pU+8RyZaw1N0ji3i40uefacrLIKHhVk88BWeoYQ==
   dependencies:
+    "@types/node" "^14.14.41"
+    "@types/vinyl" "^2.0.4"
     istextorbinary "^3.0.0"
     replacestream "^4.0.3"
     yargs-parser ">=5.0.0-security.0"
@@ -12521,7 +12541,7 @@ postcss-value-parser@^4.1.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss@8.2.12:
+postcss@8.2.12, postcss@^8.1.10:
   version "8.2.12"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.12.tgz#81248a1a87e0f575cc594a99a08207fd1c4addc4"
   integrity sha512-BJnGT5+0q2tzvs6oQfnY2NpEJ7rIXNfBnZtQOKCIsweeWXBXeDd5k31UgTdS3d/c02ouspufn37mTaHWkJyzMQ==
@@ -12547,15 +12567,6 @@ postcss@^7.0.0, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.2
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
-
-postcss@^8.1.10:
-  version "8.2.12"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.12.tgz#81248a1a87e0f575cc594a99a08207fd1c4addc4"
-  integrity sha512-BJnGT5+0q2tzvs6oQfnY2NpEJ7rIXNfBnZtQOKCIsweeWXBXeDd5k31UgTdS3d/c02ouspufn37mTaHWkJyzMQ==
-  dependencies:
-    colorette "^1.2.2"
-    nanoid "^3.1.22"
-    source-map "^0.6.1"
 
 postcss@^8.1.4, postcss@^8.2.4:
   version "8.2.9"

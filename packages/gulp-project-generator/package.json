@@ -50,7 +50,7 @@
     "eslint": "7.23.0",
     "fs-extra": "9.1.0",
     "glob": "7.1.7",
-    "glob-parent": "5.1.2",
+    "glob-parent": "6.0.0",
     "handlebars": "4.7.7",
     "inquirer": "7.3.3",
     "mkdirp": "1.0.4"

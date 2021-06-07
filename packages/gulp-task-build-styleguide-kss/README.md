@@ -30,20 +30,21 @@ return build styleguide task by kss
 
 #### Parameters
 
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
-    -   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:styleguide'`)
-    -   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
-    -   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
-    -   `options.css` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** css paths that load to styleguide (optional, default `[]`)
-    -   `options.js` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** javascript paths that load to styleguide (optional, default `[]`)
-    -   `options.homepage` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** markdown path that load to styleguide.
-          it must be located in the same directory with options.src (optional, default `path.resolve(options.source,'README.md')`)
-    -   `options.placeholder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** modifier string (optional, default `'{{modifier_class}}'`)
-    -   `options.nav-depth` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** navigation depth to display (optional, default `2`)
-    -   `options.mask` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** masking of file that includes kss comments (optional, default `'*.css'`)
-    -   `options.builder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** builder path.
-          see: [default builder](./builder) (optional, default `path.resolve(__dirname,'../builder')`)
-    -   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
+
+    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:styleguide'`)
+    *   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
+    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+    *   `options.css` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** css paths that load to styleguide (optional, default `[]`)
+    *   `options.js` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** javascript paths that load to styleguide (optional, default `[]`)
+    *   `options.homepage` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** markdown path that load to styleguide.
+        it must be located in the same directory with options.src (optional, default `path.resolve(options.source,'README.md')`)
+    *   `options.placeholder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** modifier string (optional, default `'{{modifier_class}}'`)
+    *   `options.nav-depth` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** navigation depth to display (optional, default `2`)
+    *   `options.mask` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** masking of file that includes kss comments (optional, default `'*.css'`)
+    *   `options.builder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** builder path.
+        see: [default builder](./builder) (optional, default `path.resolve(__dirname,'../builder')`)
+    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
@@ -66,7 +67,7 @@ task('styleguide', buildStyleguide({
 }));
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)&lt;[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>** 
 
 ## Test
 

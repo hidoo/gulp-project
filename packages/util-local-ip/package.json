@@ -3,7 +3,7 @@
   "version": "0.18.0",
   "description": "Utility that get current ip address in local network.",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "main": "lib/index.js",
   "files": [

@@ -57,7 +57,7 @@
     "gulp-rename": "2.0.0",
     "gulp-terser": "2.0.1",
     "rollup": "2.51.0",
-    "rollup-plugin-license": "2.3.0",
+    "rollup-plugin-license": "2.5.0",
     "through2": "4.0.2",
     "vinyl": "2.2.1"
   },

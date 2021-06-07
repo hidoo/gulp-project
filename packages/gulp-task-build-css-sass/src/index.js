@@ -5,7 +5,6 @@ import cond from 'gulp-if';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import sass from 'sass';
-import Fiber from 'fibers';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -191,7 +190,6 @@ export default function buildCss(options = {}) {
     const compiler = render({
       file: opts.src,
       ...sassOptions,
-      fiber: Fiber,
       importer: magicImporter(),
       functions: {
         ...DEFAULT_FUNCTIONS,

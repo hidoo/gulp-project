@@ -1,5 +1,5 @@
 module.exports = {
-  targets: {node: 10},
+  targets: {node: 12},
   presets: [
     ['@babel/preset-env']
   ],

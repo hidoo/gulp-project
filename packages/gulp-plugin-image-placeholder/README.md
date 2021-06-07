@@ -21,10 +21,10 @@ task('placeholder', () => src('/path/to/src')
 
 ## Supported formats
 
--   PNG
--   JPEG
--   GIF
--   SVG
+*   PNG
+*   JPEG
+*   GIF
+*   SVG
 
 ## API
 
@@ -36,10 +36,11 @@ return placeholder image.
 
 #### Parameters
 
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
-    -   `options.append` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** append placeholder or not (optional, default `true`)
-    -   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** placeholder image suffix (optional, default `'placeholder'`)
-    -   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
+
+    *   `options.append` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** append placeholder or not (optional, default `true`)
+    *   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** placeholder image suffix (optional, default `'placeholder'`)
+    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 

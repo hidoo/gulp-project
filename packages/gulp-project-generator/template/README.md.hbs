@@ -4,7 +4,7 @@
 
 ## Dependencies
 
-+ [Node.js](https://nodejs.org/) (10.0.0+)
++ [Node.js](https://nodejs.org/) (12.0.0+)
 
 ## Installation
 

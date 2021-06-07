@@ -327,8 +327,8 @@ describe('gulp-task-optimize-image', () => {
                   reject(error);
                 }
 
-                assert(expectedTime <= new Date(stats.atimeMs));
-                assert(expectedTime <= new Date(stats.mtimeMs));
+                assert(expectedTime <= stats.atime);
+                assert(expectedTime <= stats.mtime);
                 resolve();
               });
             });

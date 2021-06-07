@@ -30,7 +30,7 @@
     "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.3",
     "ip-regex": "4.3.0",
-    "mocha": "8.3.2",
+    "mocha": "8.4.0",
     "power-assert": "1.6.1"
   }
 }

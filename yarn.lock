@@ -1372,6 +1372,13 @@
     glob "7.1.6"
     highlight.js "10.7.1"
 
+"@hidoo/sass-importer@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/sass-importer/-/sass-importer-0.5.0.tgz#95bc54900a8ea819eeb00906a6d6edf19b348590"
+  integrity sha512-1EI7dXZgfMQ1YbOLph8hTO38VTbL37S9v73Mx2oRBp4ur7KQbUHg0+MsfDl+LyujWSat0utIosSyRI6zHPF+6Q==
+  dependencies:
+    resolve "1.20.0"
+
 "@hidoo/stylelint-config@^0.4.4":
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/@hidoo/stylelint-config/-/stylelint-config-0.4.4.tgz#3405f66c234a2f48932bd8836fe2ef8efcfb9165"
@@ -1387,6 +1394,11 @@
     stylelint-scss "3.19.0"
     stylelint-selector-no-empty "1.0.8"
     stylelint-selector-tag-no-without-class "2.0.3"
+
+"@hidoo/unit@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/unit/-/unit-0.5.0.tgz#aaf8e65fa23ffb63fb805ab6e6720fe18a229673"
+  integrity sha512-CkMN092/apZCnfK9bPZPRoWEI6H2cbl077+IFMNX2C+K2vZZ58C9+yCKUFZNQIanaTqlthh28k5TUX4afU5Fxg==
 
 "@hidoo/unit@^0.4.4":
   version "0.4.4"
@@ -5627,11 +5639,6 @@ detect-indent@^6.0.0:
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
   integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
 
-detect-libc@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
-  integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
-
 detect-newline@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
@@ -6891,13 +6898,6 @@ fecha@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.0.tgz#3ffb6395453e3f3efff850404f0a59b6747f5f41"
   integrity sha512-aN3pcx/DSmtyoovUudctc8+6Hl4T+hI9GBBHLjA76jdZl7+b1sgh5g4k+u/GL3dTy1/pnYzKp69FpJ0OicE3Wg==
-
-fibers@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/fibers/-/fibers-5.0.0.tgz#3a60e0695b3ee5f6db94e62726716fa7a59acc41"
-  integrity sha512-UpGv/YAZp7mhKHxDvC1tColrroGRX90sSvh8RMZV9leo+e5+EkRVgCEZPlmXeo3BUNQTZxUaVdLskq1Q2FyCPg==
-  dependencies:
-    detect-libc "^1.0.3"
 
 figures@^1.3.5:
   version "1.7.0"
@@ -13845,7 +13845,7 @@ resolve@1.1.7:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
   integrity sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
 
-resolve@^1.1.3, resolve@^1.1.4, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.16.0, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.3.2, resolve@^1.4.0, resolve@^1.8.1:
+resolve@1.20.0, resolve@^1.1.3, resolve@^1.1.4, resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.16.0, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.3.2, resolve@^1.4.0, resolve@^1.8.1:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==

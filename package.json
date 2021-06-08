@@ -23,7 +23,8 @@
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
     "install": "lerna bootstrap",
-    "postinstall": "yarn build:packages"
+    "postinstall": "yarn build:packages",
+    "prepare": "husky install"
   },
   "author": "hidoo",
   "license": "MIT",

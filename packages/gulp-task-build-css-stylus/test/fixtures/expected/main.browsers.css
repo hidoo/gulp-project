@@ -1,8 +1,7 @@
 @charset "utf-8";
 .block {
   padding: 10px;
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
+  transition-duration: 0.3s;
   background-color: #000;
 }
 .block__element {

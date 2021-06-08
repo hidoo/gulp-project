@@ -29,7 +29,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
           {name: 'commander', version: '^7.2.0'},
           {name: 'cross-env', version: '^7.0.3'},
-          {name: 'eslint', version: '^7.23.0'},
+          {name: 'eslint', version: '^7.28.0'},
           {name: 'gulp', version: '^4.0.2'},
           {name: 'husky', version: '^4.3.8'},
           {name: 'lint-staged', version: '^10.5.4'},

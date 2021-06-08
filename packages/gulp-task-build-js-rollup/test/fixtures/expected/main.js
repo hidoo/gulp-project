@@ -19,7 +19,6 @@
     console.log('This is ES Module.');
   }
 
-  // eslint-disable-next-line strict
   /**
    * Common JS 形式のモジュール
    *

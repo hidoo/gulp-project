@@ -31,8 +31,8 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'cross-env', version: '^7.0.3'},
           {name: 'eslint', version: '^7.23.0'},
           {name: 'gulp', version: '^4.0.2'},
-          {name: 'husky', version: '^4.3.8'},
-          {name: 'lint-staged', version: '^10.5.4'},
+          {name: 'husky', version: '^6.0.0'},
+          {name: 'lint-staged', version: '^11.0.0'},
           {name: 'npm-run-all', version: '^4.1.5'},
           {name: 'rimraf', version: '^3.0.2'}
         ],
@@ -40,6 +40,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
           {name: 'start', command: 'npm run dev'},
           {name: 'dev', command: 'cross-env NODE_ENV=development gulp'},
           {name: 'dev:build', command: 'cross-env NODE_ENV=development npm-run-all -s static:clean static:build'},
+          {name: 'prepare', command: 'husky install'},
           {name: 'prod', command: 'cross-env NODE_ENV=production gulp'},
           {name: 'prod:build', command: 'cross-env NODE_ENV=production npm-run-all -s static:clean static:build'},
           {name: 'static:clean', command: 'gulp clean'},

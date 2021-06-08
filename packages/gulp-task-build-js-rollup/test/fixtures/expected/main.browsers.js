@@ -20,7 +20,7 @@
 	};
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-	var global$d =
+	var global$c =
 	  // eslint-disable-next-line es/no-global-this -- safe
 	  check(typeof globalThis == 'object' && globalThis) ||
 	  check(typeof window == 'object' && window) ||
@@ -80,7 +80,7 @@
 	};
 
 	var fails$4 = fails$6;
-	var classof$2 = classofRaw;
+	var classof$1 = classofRaw;
 
 	var split = ''.split;
 
@@ -90,7 +90,7 @@
 	  // eslint-disable-next-line no-prototype-builtins -- safe
 	  return !Object('z').propertyIsEnumerable(0);
 	}) ? function (it) {
-	  return classof$2(it) == 'String' ? split.call(it, '') : Object(it);
+	  return classof$1(it) == 'String' ? split.call(it, '') : Object(it);
 	} : Object;
 
 	// `RequireObjectCoercible` abstract operation
@@ -127,16 +127,26 @@
 	  throw TypeError("Can't convert object to primitive value");
 	};
 
-	var hasOwnProperty = {}.hasOwnProperty;
+	var requireObjectCoercible = requireObjectCoercible$2;
 
-	var has$6 = function (it, key) {
-	  return hasOwnProperty.call(it, key);
+	// `ToObject` abstract operation
+	// https://tc39.es/ecma262/#sec-toobject
+	var toObject$2 = function (argument) {
+	  return Object(requireObjectCoercible(argument));
 	};
 
-	var global$c = global$d;
+	var toObject$1 = toObject$2;
+
+	var hasOwnProperty = {}.hasOwnProperty;
+
+	var has$6 = Object.hasOwn || function hasOwn(it, key) {
+	  return hasOwnProperty.call(toObject$1(it), key);
+	};
+
+	var global$b = global$c;
 	var isObject$3 = isObject$5;
 
-	var document = global$c.document;
+	var document = global$b.document;
 	// typeof document.createElement is 'object' in old IE
 	var EXISTS = isObject$3(document) && isObject$3(document.createElement);
 
@@ -223,22 +233,22 @@
 
 	var redefine$1 = {exports: {}};
 
-	var global$b = global$d;
+	var global$a = global$c;
 	var createNonEnumerableProperty$3 = createNonEnumerableProperty$4;
 
 	var setGlobal$3 = function (key, value) {
 	  try {
-	    createNonEnumerableProperty$3(global$b, key, value);
+	    createNonEnumerableProperty$3(global$a, key, value);
 	  } catch (error) {
-	    global$b[key] = value;
+	    global$a[key] = value;
 	  } return value;
 	};
 
-	var global$a = global$d;
+	var global$9 = global$c;
 	var setGlobal$2 = setGlobal$3;
 
 	var SHARED = '__core-js_shared__';
-	var store$3 = global$a[SHARED] || setGlobal$2(SHARED, {});
+	var store$3 = global$9[SHARED] || setGlobal$2(SHARED, {});
 
 	var sharedStore = store$3;
 
@@ -246,7 +256,7 @@
 
 	var functionToString = Function.toString;
 
-	// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+	// this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
 	if (typeof store$2.inspectSource != 'function') {
 	  store$2.inspectSource = function (it) {
 	    return functionToString.call(it);
@@ -255,10 +265,10 @@
 
 	var inspectSource$2 = store$2.inspectSource;
 
-	var global$9 = global$d;
+	var global$8 = global$c;
 	var inspectSource$1 = inspectSource$2;
 
-	var WeakMap$1 = global$9.WeakMap;
+	var WeakMap$1 = global$8.WeakMap;
 
 	var nativeWeakMap = typeof WeakMap$1 === 'function' && /native code/.test(inspectSource$1(WeakMap$1));
 
@@ -293,7 +303,7 @@
 	var hiddenKeys$3 = {};
 
 	var NATIVE_WEAK_MAP = nativeWeakMap;
-	var global$8 = global$d;
+	var global$7 = global$c;
 	var isObject$1 = isObject$5;
 	var createNonEnumerableProperty$2 = createNonEnumerableProperty$4;
 	var objectHas = has$6;
@@ -301,7 +311,8 @@
 	var sharedKey = sharedKey$1;
 	var hiddenKeys$2 = hiddenKeys$3;
 
-	var WeakMap = global$8.WeakMap;
+	var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
+	var WeakMap = global$7.WeakMap;
 	var set, get, has$4;
 
 	var enforce = function (it) {
@@ -317,12 +328,13 @@
 	  };
 	};
 
-	if (NATIVE_WEAK_MAP) {
+	if (NATIVE_WEAK_MAP || shared$1.state) {
 	  var store = shared$1.state || (shared$1.state = new WeakMap());
 	  var wmget = store.get;
 	  var wmhas = store.has;
 	  var wmset = store.set;
 	  set = function (it, metadata) {
+	    if (wmhas.call(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    wmset.call(store, it, metadata);
 	    return metadata;
@@ -337,6 +349,7 @@
 	  var STATE = sharedKey('state');
 	  hiddenKeys$2[STATE] = true;
 	  set = function (it, metadata) {
+	    if (objectHas(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    createNonEnumerableProperty$2(it, STATE, metadata);
 	    return metadata;
@@ -357,7 +370,7 @@
 	  getterFor: getterFor
 	};
 
-	var global$7 = global$d;
+	var global$6 = global$c;
 	var createNonEnumerableProperty$1 = createNonEnumerableProperty$4;
 	var has$3 = has$6;
 	var setGlobal$1 = setGlobal$3;
@@ -382,7 +395,7 @@
 	      state.source = TEMPLATE.join(typeof key == 'string' ? key : '');
 	    }
 	  }
-	  if (O === global$7) {
+	  if (O === global$6) {
 	    if (simple) O[key] = value;
 	    else setGlobal$1(key, value);
 	    return;
@@ -398,20 +411,20 @@
 	  return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
 	});
 
-	var global$6 = global$d;
+	var global$5 = global$c;
 
-	var path$1 = global$6;
+	var path$1 = global$5;
 
 	var path = path$1;
-	var global$5 = global$d;
+	var global$4 = global$c;
 
 	var aFunction$2 = function (variable) {
 	  return typeof variable == 'function' ? variable : undefined;
 	};
 
 	var getBuiltIn$2 = function (namespace, method) {
-	  return arguments.length < 2 ? aFunction$2(path[namespace]) || aFunction$2(global$5[namespace])
-	    : path[namespace] && path[namespace][method] || global$5[namespace] && global$5[namespace][method];
+	  return arguments.length < 2 ? aFunction$2(path[namespace]) || aFunction$2(global$4[namespace])
+	    : path[namespace] && path[namespace][method] || global$4[namespace] && global$4[namespace][method];
 	};
 
 	var objectGetOwnPropertyNames = {};
@@ -576,7 +589,7 @@
 
 	var isForced_1 = isForced$1;
 
-	var global$4 = global$d;
+	var global$3 = global$c;
 	var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
 	var createNonEnumerableProperty = createNonEnumerableProperty$4;
 	var redefine = redefine$1.exports;
@@ -604,11 +617,11 @@
 	  var STATIC = options.stat;
 	  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
 	  if (GLOBAL) {
-	    target = global$4;
+	    target = global$3;
 	  } else if (STATIC) {
-	    target = global$4[TARGET] || setGlobal(TARGET, {});
+	    target = global$3[TARGET] || setGlobal(TARGET, {});
 	  } else {
-	    target = (global$4[TARGET] || {}).prototype;
+	    target = (global$3[TARGET] || {}).prototype;
 	  }
 	  if (target) for (key in source) {
 	    sourceProperty = source[key];
@@ -662,33 +675,20 @@
 	  };
 	};
 
-	var requireObjectCoercible = requireObjectCoercible$2;
-
-	// `ToObject` abstract operation
-	// https://tc39.es/ecma262/#sec-toobject
-	var toObject$1 = function (argument) {
-	  return Object(requireObjectCoercible(argument));
-	};
-
-	var classof$1 = classofRaw;
+	var classof = classofRaw;
 
 	// `IsArray` abstract operation
 	// https://tc39.es/ecma262/#sec-isarray
 	// eslint-disable-next-line es/no-array-isarray -- safe
 	var isArray$1 = Array.isArray || function isArray(arg) {
-	  return classof$1(arg) == 'Array';
+	  return classof(arg) == 'Array';
 	};
-
-	var classof = classofRaw;
-	var global$3 = global$d;
-
-	var engineIsNode = classof(global$3.process) == 'process';
 
 	var getBuiltIn = getBuiltIn$2;
 
 	var engineUserAgent = getBuiltIn('navigator', 'userAgent') || '';
 
-	var global$2 = global$d;
+	var global$2 = global$c;
 	var userAgent = engineUserAgent;
 
 	var process = global$2.process;
@@ -698,7 +698,7 @@
 
 	if (v8) {
 	  match = v8.split('.');
-	  version = match[0] + match[1];
+	  version = match[0] < 4 ? 1 : match[0] + match[1];
 	} else if (userAgent) {
 	  match = userAgent.match(/Edge\/(\d+)/);
 	  if (!match || match[1] >= 74) {
@@ -709,17 +709,19 @@
 
 	var engineV8Version = version && +version;
 
-	var IS_NODE = engineIsNode;
+	/* eslint-disable es/no-symbol -- required for testing */
+
 	var V8_VERSION = engineV8Version;
 	var fails$1 = fails$6;
 
 	// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
 	var nativeSymbol = !!Object.getOwnPropertySymbols && !fails$1(function () {
-	  // eslint-disable-next-line es/no-symbol -- required for testing
-	  return !Symbol.sham &&
-	    // Chrome 38 Symbol has incorrect toString conversion
+	  var symbol = Symbol();
+	  // Chrome 38 Symbol has incorrect toString conversion
+	  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
+	  return !String(symbol) || !(Object(symbol) instanceof Symbol) ||
 	    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-	    (IS_NODE ? V8_VERSION === 38 : V8_VERSION > 37 && V8_VERSION < 41);
+	    !Symbol.sham && V8_VERSION && V8_VERSION < 41;
 	});
 
 	/* eslint-disable es/no-symbol -- required for testing */
@@ -730,7 +732,7 @@
 	  && !Symbol.sham
 	  && typeof Symbol.iterator == 'symbol';
 
-	var global$1 = global$d;
+	var global$1 = global$c;
 	var shared = shared$3.exports;
 	var has = has$6;
 	var uid = uid$2;
@@ -774,7 +776,7 @@
 
 	var bind = functionBindContext;
 	var IndexedObject = indexedObject;
-	var toObject = toObject$1;
+	var toObject = toObject$2;
 	var toLength = toLength$2;
 	var arraySpeciesCreate = arraySpeciesCreate$1;
 

@@ -95,17 +95,17 @@
 
 	// `RequireObjectCoercible` abstract operation
 	// https://tc39.es/ecma262/#sec-requireobjectcoercible
-	var requireObjectCoercible$1 = function (it) {
+	var requireObjectCoercible$2 = function (it) {
 	  if (it == undefined) throw TypeError("Can't call method on " + it);
 	  return it;
 	};
 
 	// toObject with fallback for non-array-like ES3 strings
 	var IndexedObject = indexedObject;
-	var requireObjectCoercible = requireObjectCoercible$1;
+	var requireObjectCoercible$1 = requireObjectCoercible$2;
 
 	var toIndexedObject$3 = function (it) {
-	  return IndexedObject(requireObjectCoercible(it));
+	  return IndexedObject(requireObjectCoercible$1(it));
 	};
 
 	var isObject$4 = function (it) {
@@ -127,10 +127,20 @@
 	  throw TypeError("Can't convert object to primitive value");
 	};
 
+	var requireObjectCoercible = requireObjectCoercible$2;
+
+	// `ToObject` abstract operation
+	// https://tc39.es/ecma262/#sec-toobject
+	var toObject$1 = function (argument) {
+	  return Object(requireObjectCoercible(argument));
+	};
+
+	var toObject = toObject$1;
+
 	var hasOwnProperty = {}.hasOwnProperty;
 
-	var has$5 = function (it, key) {
-	  return hasOwnProperty.call(it, key);
+	var has$5 = Object.hasOwn || function hasOwn(it, key) {
+	  return hasOwnProperty.call(toObject(it), key);
 	};
 
 	var global$a = global$b;
@@ -246,7 +256,7 @@
 
 	var functionToString = Function.toString;
 
-	// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+	// this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
 	if (typeof store$2.inspectSource != 'function') {
 	  store$2.inspectSource = function (it) {
 	    return functionToString.call(it);
@@ -301,6 +311,7 @@
 	var sharedKey = sharedKey$1;
 	var hiddenKeys$2 = hiddenKeys$3;
 
+	var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
 	var WeakMap = global$6.WeakMap;
 	var set, get, has$3;
 
@@ -317,12 +328,13 @@
 	  };
 	};
 
-	if (NATIVE_WEAK_MAP) {
+	if (NATIVE_WEAK_MAP || shared.state) {
 	  var store = shared.state || (shared.state = new WeakMap());
 	  var wmget = store.get;
 	  var wmhas = store.has;
 	  var wmset = store.set;
 	  set = function (it, metadata) {
+	    if (wmhas.call(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    wmset.call(store, it, metadata);
 	    return metadata;
@@ -337,6 +349,7 @@
 	  var STATE = sharedKey('state');
 	  hiddenKeys$2[STATE] = true;
 	  set = function (it, metadata) {
+	    if (objectHas(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    createNonEnumerableProperty$2(it, STATE, metadata);
 	    return metadata;

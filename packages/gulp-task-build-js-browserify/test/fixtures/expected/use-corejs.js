@@ -231,13 +231,15 @@ module.exports =
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],14:[function(require,module,exports){
+var toObject = require('../internals/to-object');
+
 var hasOwnProperty = {}.hasOwnProperty;
 
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
+module.exports = Object.hasOwn || function hasOwn(it, key) {
+  return hasOwnProperty.call(toObject(it), key);
 };
 
-},{}],15:[function(require,module,exports){
+},{"../internals/to-object":42}],15:[function(require,module,exports){
 module.exports = {};
 
 },{}],16:[function(require,module,exports){
@@ -273,7 +275,7 @@ var store = require('../internals/shared-store');
 
 var functionToString = Function.toString;
 
-// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+// this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
 if (typeof store.inspectSource != 'function') {
   store.inspectSource = function (it) {
     return functionToString.call(it);
@@ -292,6 +294,7 @@ var shared = require('../internals/shared-store');
 var sharedKey = require('../internals/shared-key');
 var hiddenKeys = require('../internals/hidden-keys');
 
+var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
 var WeakMap = global.WeakMap;
 var set, get, has;
 
@@ -308,12 +311,13 @@ var getterFor = function (TYPE) {
   };
 };
 
-if (NATIVE_WEAK_MAP) {
+if (NATIVE_WEAK_MAP || shared.state) {
   var store = shared.state || (shared.state = new WeakMap());
   var wmget = store.get;
   var wmhas = store.has;
   var wmset = store.set;
   set = function (it, metadata) {
+    if (wmhas.call(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
     wmset.call(store, it, metadata);
     return metadata;
@@ -328,6 +332,7 @@ if (NATIVE_WEAK_MAP) {
   var STATE = sharedKey('state');
   hiddenKeys[STATE] = true;
   set = function (it, metadata) {
+    if (objectHas(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
     createNonEnumerableProperty(it, STATE, metadata);
     return metadata;
@@ -410,7 +415,7 @@ exports.f = DESCRIPTORS ? $defineProperty : function defineProperty(O, P, Attrib
   return O;
 };
 
-},{"../internals/an-object":1,"../internals/descriptors":7,"../internals/ie8-dom-define":16,"../internals/to-primitive":42}],25:[function(require,module,exports){
+},{"../internals/an-object":1,"../internals/descriptors":7,"../internals/ie8-dom-define":16,"../internals/to-primitive":43}],25:[function(require,module,exports){
 var DESCRIPTORS = require('../internals/descriptors');
 var propertyIsEnumerableModule = require('../internals/object-property-is-enumerable');
 var createPropertyDescriptor = require('../internals/create-property-descriptor');
@@ -433,7 +438,7 @@ exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDes
   if (has(O, P)) return createPropertyDescriptor(!propertyIsEnumerableModule.f.call(O, P), O[P]);
 };
 
-},{"../internals/create-property-descriptor":6,"../internals/descriptors":7,"../internals/has":14,"../internals/ie8-dom-define":16,"../internals/object-property-is-enumerable":29,"../internals/to-indexed-object":39,"../internals/to-primitive":42}],26:[function(require,module,exports){
+},{"../internals/create-property-descriptor":6,"../internals/descriptors":7,"../internals/has":14,"../internals/ie8-dom-define":16,"../internals/object-property-is-enumerable":29,"../internals/to-indexed-object":39,"../internals/to-primitive":43}],26:[function(require,module,exports){
 var internalObjectKeys = require('../internals/object-keys-internal');
 var enumBugKeys = require('../internals/enum-bug-keys');
 
@@ -575,7 +580,7 @@ module.exports = function (key) {
   return keys[key] || (keys[key] = uid(key));
 };
 
-},{"../internals/shared":37,"../internals/uid":43}],36:[function(require,module,exports){
+},{"../internals/shared":37,"../internals/uid":44}],36:[function(require,module,exports){
 var global = require('../internals/global');
 var setGlobal = require('../internals/set-global');
 
@@ -641,6 +646,15 @@ module.exports = function (argument) {
 };
 
 },{"../internals/to-integer":40}],42:[function(require,module,exports){
+var requireObjectCoercible = require('../internals/require-object-coercible');
+
+// `ToObject` abstract operation
+// https://tc39.es/ecma262/#sec-toobject
+module.exports = function (argument) {
+  return Object(requireObjectCoercible(argument));
+};
+
+},{"../internals/require-object-coercible":33}],43:[function(require,module,exports){
 var isObject = require('../internals/is-object');
 
 // `ToPrimitive` abstract operation
@@ -656,7 +670,7 @@ module.exports = function (input, PREFERRED_STRING) {
   throw TypeError("Can't convert object to primitive value");
 };
 
-},{"../internals/is-object":21}],43:[function(require,module,exports){
+},{"../internals/is-object":21}],44:[function(require,module,exports){
 var id = 0;
 var postfix = Math.random();
 
@@ -664,7 +678,7 @@ module.exports = function (key) {
   return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
 };
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var $ = require('../internals/export');
 var global = require('../internals/global');
 
@@ -674,11 +688,11 @@ $({ global: true }, {
   globalThis: global
 });
 
-},{"../internals/export":10,"../internals/global":13}],45:[function(require,module,exports){
+},{"../internals/export":10,"../internals/global":13}],46:[function(require,module,exports){
 // TODO: Remove from `core-js@4`
 require('./es.global-this');
 
-},{"./es.global-this":44}],46:[function(require,module,exports){
+},{"./es.global-this":45}],47:[function(require,module,exports){
 "use strict";
 
 require("core-js/modules/esnext.global-this.js");
@@ -687,4 +701,4 @@ require("core-js/modules/esnext.global-this.js");
 // eslint-disable-next-line no-console
 console.log(globalThis.Array === Array);
 
-},{"core-js/modules/esnext.global-this.js":45}]},{},[46]);
+},{"core-js/modules/esnext.global-this.js":46}]},{},[47]);

@@ -1,4 +1,4 @@
-import fs from 'fs';
+import {promises as fs} from 'fs';
 import path from 'path';
 import mkdir from './mkdir';
 import * as log from './log';
@@ -48,15 +48,11 @@ export default function write(src = '', dest = '', options = {}) {
         destDir = path.dirname(destPath);
 
   return mkdir(destDir, {verbose: opts.verbose})
-    .then(() => new Promise((resolve, reject) => {
-      fs.writeFile(destPath, src, opts.writeFile, (error) => {
-        if (error) {
-          return reject(error);
-        }
-        if (opts.verbose) {
-          log.outPath(dest);
-        }
-        return resolve(dest);
-      });
-    }));
+    .then(() => fs.writeFile(destPath, src, opts.writeFile))
+    .then(() => {
+      if (opts.verbose) {
+        log.outPath(dest);
+      }
+      return dest;
+    });
 }

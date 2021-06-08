@@ -46,7 +46,7 @@ describe('generateDotFiles', () => {
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
-      ['.huskyrc.js', '.huskyrc.js'],
+      ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.js', '.lintstagedrc.js'],
       ['.mocharc.js', '.mocharc.js']
     ];
@@ -79,7 +79,7 @@ describe('generateDotFiles', () => {
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
-      ['.huskyrc.js', '.huskyrc.js'],
+      ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.js', '.lintstagedrc.js'],
       ['.mocharc.js', '.mocharc.js']
     ];
@@ -113,7 +113,8 @@ describe('generateDotFiles', () => {
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
       ['.gitignore', '.gitignore'],
-      ['.huskyrc.js', '.huskyrc-conventional-commits.js'],
+      ['.husky/commit-msg', '.husky-commit-msg'],
+      ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.js', '.lintstagedrc.js'],
       ['.mocharc.js', '.mocharc.js']
     ];
@@ -146,7 +147,7 @@ describe('generateDotFiles', () => {
       ['.eslintrc.js', '.eslintrc.js'],
       ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
-      ['.huskyrc.js', '.huskyrc.js'],
+      ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.js', '.lintstagedrc-sass.js'],
       ['.mocharc.js', '.mocharc.js'],
       ['.stylelintignore', '.stylelintignore'],
@@ -180,7 +181,7 @@ describe('generateDotFiles', () => {
       ['.eslintrc.js', '.eslintrc-no-js.js'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
-      ['.huskyrc.js', '.huskyrc.js'],
+      ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.js', '.lintstagedrc.js']
     ];
 

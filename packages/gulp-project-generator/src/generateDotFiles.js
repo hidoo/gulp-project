@@ -52,9 +52,19 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
   await render(`${src}/.eslintignore.hbs`, options)
     .then((output) => write(output, `${dest}/.eslintignore`, {verbose}));
 
-  await render(`${src}/.huskyrc.js.hbs`, options)
-    .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/.huskyrc.js`, {verbose}));
+  await render(`${src}/.husky-pre-commit.hbs`, options)
+    .then((output) => write(output, `${dest}/.husky/pre-commit`, {
+      verbose,
+      writeFile: {mode: parseInt('0755', 8)}
+    }));
+
+  if (options.conventionalCommits) {
+    await render(`${src}/.husky-commit-msg.hbs`, options)
+      .then((output) => write(output, `${dest}/.husky/commit-msg`, {
+        verbose,
+        writeFile: {mode: parseInt('0755', 8)}
+      }));
+  }
 
   await render(`${src}/.lintstagedrc.js.hbs`, options)
     .then((output) => formatCode(output))

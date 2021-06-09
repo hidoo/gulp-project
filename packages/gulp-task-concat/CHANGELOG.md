@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-replace to v1.1.1 ([7820db0](https://github.com/hidoo/gulp-project/commit/7820db0288395b0e39fc5607e38062c551a00ac6))
+* **deps:** update dependency gulp-replace to v1.1.2 ([28ea7bf](https://github.com/hidoo/gulp-project/commit/28ea7bf0e036e21e85fd14d3cc32308377461ffa))
+* **deps:** update dependency gulp-replace to v1.1.3 ([94626ae](https://github.com/hidoo/gulp-project/commit/94626ae6f7e6e8887a8bf186b738a3ed2a30c94c))
+* **deps:** update dependency postcss to v8.2.10 ([8e7ed2b](https://github.com/hidoo/gulp-project/commit/8e7ed2b90eececcc011662e9abbc4fe4f9884285))
+* **deps:** update dependency postcss to v8.2.12 ([a1cbdbb](https://github.com/hidoo/gulp-project/commit/a1cbdbb83099c6b22c9fc41b3c4f6b8fbd796334))
+* **deps:** update dependency postcss to v8.2.13 ([8deca22](https://github.com/hidoo/gulp-project/commit/8deca22cb7b15fb91e7932e130c6884f8488029a))
+* **deps:** update dependency postcss to v8.2.14 ([2212b55](https://github.com/hidoo/gulp-project/commit/2212b55331c519c84ec184d0391af01105625a30))
+* **deps:** update dependency postcss to v8.3.0 ([761ec3e](https://github.com/hidoo/gulp-project/commit/761ec3e55a8ff5ba85fb2f903cf542f5f9b9d25b))
+* **deps:** update dependency postcss-csso to v5.0.1 ([40b623c](https://github.com/hidoo/gulp-project/commit/40b623ceac0340b1c40e776547fd29b85569b347))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 

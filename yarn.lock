@@ -1341,19 +1341,19 @@
     eslint-plugin-node "11.1.0"
     eslint-plugin-sort-class-members "1.7.0"
 
-"@hidoo/express-engine-handlebars@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.8.1.tgz#1057983cea49556c5c4013dcd594089e25f95aff"
-  integrity sha512-Ad+EKZuEFwb+tM8xi7OdNePyEOKIgDoV3c1dIYl4bAl4FQ3Vh4a4QZ4RYM+Mha5YBoD8W/kVcCh7acoJ281KAw==
+"@hidoo/express-engine-handlebars@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@hidoo/express-engine-handlebars/-/express-engine-handlebars-0.8.2.tgz#43f757e0d78eedb93546ef187fa28b086c3856a2"
+  integrity sha512-VfhXq6o8rk4VRKsB2+jKHq1BQ0JR2kWX9Xz7exUAr3LP7gKP4XoB0FhzjTmkV0kcD1sJT82p1O3e1u/narTS8Q==
   dependencies:
-    "@hidoo/handlebars-helpers" "^0.8.1"
-    glob "7.1.6"
-    glob-parent "5.1.2"
+    "@hidoo/handlebars-helpers" "^0.8.2"
+    glob "7.1.7"
+    glob-parent "6.0.0"
     handlebars "4.7.7"
     handlebars-layouts "3.1.4"
     vinyl "2.2.1"
 
-"@hidoo/handlebars-helpers@0.8.1", "@hidoo/handlebars-helpers@^0.8.1":
+"@hidoo/handlebars-helpers@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.8.1.tgz#a08bfd01b8c0a14b4c429bf00243316b6dc82c2b"
   integrity sha512-+cuOuVRjSmqqwzinpplCrnWOxKQEVvpZCQaq3BtyqNhigDAnFABYvuKp/yFUjJQYCpFL2VcvoX54rLoakL13+A==
@@ -1362,7 +1362,7 @@
     marked "2.0.1"
     path-browserify "1.0.1"
 
-"@hidoo/handlebars-helpers@0.8.2":
+"@hidoo/handlebars-helpers@0.8.2", "@hidoo/handlebars-helpers@^0.8.2":
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/@hidoo/handlebars-helpers/-/handlebars-helpers-0.8.2.tgz#ef97934cd16c1fd0c2e0873b52b9bcf640cb20f2"
   integrity sha512-ENsec0Sw0UYgagg69IVnnECQSLSwu5Ng5AMYN0XtiTqZt7TIOmPvr1uxh+y4Ts5C4gR3ewTCLSEBDTSqE98zrQ==
@@ -7576,13 +7576,6 @@ github-slugger@^1.2.1:
   dependencies:
     emoji-regex ">=6.0.0 <=6.1.1"
 
-glob-parent@5.1.2, glob-parent@^5.1.0, glob-parent@^5.1.1, glob-parent@^5.1.2, glob-parent@~5.1.0:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
-  integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
-  dependencies:
-    is-glob "^4.0.1"
-
 glob-parent@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-6.0.0.tgz#f851b59b388e788f3a44d63fab50382b2859c33c"
@@ -7597,6 +7590,13 @@ glob-parent@^3.0.0, glob-parent@^3.1.0:
   dependencies:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
+
+glob-parent@^5.1.0, glob-parent@^5.1.1, glob-parent@^5.1.2, glob-parent@~5.1.0:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
+  integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
+  dependencies:
+    is-glob "^4.0.1"
 
 glob-stream@^6.1.0:
   version "6.1.0"

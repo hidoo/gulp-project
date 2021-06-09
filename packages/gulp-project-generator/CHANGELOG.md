@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v4.1.1 ([e76efd0](https://github.com/hidoo/gulp-project/commit/e76efd0ac99e55320244fc85d85ff7d494d9ca3b))
+* **deps:** update dependency eslint to v7.28.0 ([867b0ed](https://github.com/hidoo/gulp-project/commit/867b0ed389fe1deec664e02f09ec0bc60d2e1e97))
+* **deps:** update dependency fs-extra to v10 ([dc3dc8e](https://github.com/hidoo/gulp-project/commit/dc3dc8e449a5cda96a1bcdb65a10b9cb2d04dd48))
+* **deps:** update dependency glob to v7.1.7 ([4699b73](https://github.com/hidoo/gulp-project/commit/4699b737025ad14165241e38f293c4aa0255b423))
+* **deps:** update dependency glob-parent to v6 ([eb5f824](https://github.com/hidoo/gulp-project/commit/eb5f824410deedfdc128337c680cdb7294904050))
+* **deps:** update dependency inquirer to v8 ([88b6377](https://github.com/hidoo/gulp-project/commit/88b6377caa05d2cdd00b5335495f0a2d6ee00620))
+* **generator:** change value of options.cssPreprocessor to "sass:module" by default when use sass ([aa8bd16](https://github.com/hidoo/gulp-project/commit/aa8bd1664c03a315aaefcde6d99ed236545214e0))
+* **generator:** remove node v8 support ([5395176](https://github.com/hidoo/gulp-project/commit/5395176120c9bd5527ad0000762e218ca418a8a6))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator

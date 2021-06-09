@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **build-css-sass:** remove fiber ([bbb8d53](https://github.com/hidoo/gulp-project/commit/bbb8d53a6571f731c687245139c01e9e84aa19ad))
+* **build-sprite-image:** add !default keyword to "sass:module" format spritesheet ([22b1fcf](https://github.com/hidoo/gulp-project/commit/22b1fcf5f4afaad466f02ffab66161d813402426))
+* **build-sprite-svg:** add !default keyword to "sass:module" format spritesheet ([6efccb7](https://github.com/hidoo/gulp-project/commit/6efccb7c35e402f4d2b8191b9588dc8ac4336df4))
+* **deps:** update @hidoo/handlebars-lib to version 0.8.2 ([d21494d](https://github.com/hidoo/gulp-project/commit/d21494d17e5eb17330bc30e3481cb116e04443e7))
+* **deps:** update dependency @rollup/plugin-commonjs to v18.1.0 ([1f12d94](https://github.com/hidoo/gulp-project/commit/1f12d946a7fdf193d5315d115fec598c26357ba2))
+* **deps:** update dependency @rollup/plugin-commonjs to v19 ([5e2404d](https://github.com/hidoo/gulp-project/commit/5e2404d48ab28dfd68b4fcc255ee5eddea1f7f95))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13 ([018ebca](https://github.com/hidoo/gulp-project/commit/018ebca278d8f33d33aebc83d28ee7e9cdbbc11c))
+* **deps:** update dependency autoprefixer to v10.2.6 ([cd54c8c](https://github.com/hidoo/gulp-project/commit/cd54c8c10b0000ab2b2b87ad4944609a910756cc))
+* **deps:** update dependency chalk to v4.1.1 ([e76efd0](https://github.com/hidoo/gulp-project/commit/e76efd0ac99e55320244fc85d85ff7d494d9ca3b))
+* **deps:** update dependency cheerio to v1.0.0-rc.6 ([454f41b](https://github.com/hidoo/gulp-project/commit/454f41b8cf50fdf57b469b0acb9b5fa4d2dde72b))
+* **deps:** update dependency cheerio to v1.0.0-rc.9 ([e8ef89b](https://github.com/hidoo/gulp-project/commit/e8ef89b8ba510f75bd0068e21888188b78916020))
+* **deps:** update dependency eslint to v7.28.0 ([867b0ed](https://github.com/hidoo/gulp-project/commit/867b0ed389fe1deec664e02f09ec0bc60d2e1e97))
+* **deps:** update dependency fs-extra to v10 ([dc3dc8e](https://github.com/hidoo/gulp-project/commit/dc3dc8e449a5cda96a1bcdb65a10b9cb2d04dd48))
+* **deps:** update dependency get-stream to v6.0.1 ([686e7ed](https://github.com/hidoo/gulp-project/commit/686e7ed63e8064f66af332c459425ab96e84b546))
+* **deps:** update dependency glob to v7.1.7 ([4699b73](https://github.com/hidoo/gulp-project/commit/4699b737025ad14165241e38f293c4aa0255b423))
+* **deps:** update dependency glob-parent to v6 ([eb5f824](https://github.com/hidoo/gulp-project/commit/eb5f824410deedfdc128337c680cdb7294904050))
+* **deps:** update dependency gulp-replace to v1.1.1 ([7820db0](https://github.com/hidoo/gulp-project/commit/7820db0288395b0e39fc5607e38062c551a00ac6))
+* **deps:** update dependency gulp-replace to v1.1.2 ([28ea7bf](https://github.com/hidoo/gulp-project/commit/28ea7bf0e036e21e85fd14d3cc32308377461ffa))
+* **deps:** update dependency gulp-replace to v1.1.3 ([94626ae](https://github.com/hidoo/gulp-project/commit/94626ae6f7e6e8887a8bf186b738a3ed2a30c94c))
+* **deps:** update dependency gulp.spritesmith to v6.12.1 ([fe43e59](https://github.com/hidoo/gulp-project/commit/fe43e59d1ac39899a9c54b9ae3bcb93cdb365a60))
+* **deps:** update dependency inquirer to v8 ([88b6377](https://github.com/hidoo/gulp-project/commit/88b6377caa05d2cdd00b5335495f0a2d6ee00620))
+* **deps:** update dependency postcss to v8.2.10 ([8e7ed2b](https://github.com/hidoo/gulp-project/commit/8e7ed2b90eececcc011662e9abbc4fe4f9884285))
+* **deps:** update dependency postcss to v8.2.12 ([a1cbdbb](https://github.com/hidoo/gulp-project/commit/a1cbdbb83099c6b22c9fc41b3c4f6b8fbd796334))
+* **deps:** update dependency postcss to v8.2.13 ([8deca22](https://github.com/hidoo/gulp-project/commit/8deca22cb7b15fb91e7932e130c6884f8488029a))
+* **deps:** update dependency postcss to v8.2.14 ([2212b55](https://github.com/hidoo/gulp-project/commit/2212b55331c519c84ec184d0391af01105625a30))
+* **deps:** update dependency postcss to v8.3.0 ([761ec3e](https://github.com/hidoo/gulp-project/commit/761ec3e55a8ff5ba85fb2f903cf542f5f9b9d25b))
+* **deps:** update dependency postcss-csso to v5.0.1 ([40b623c](https://github.com/hidoo/gulp-project/commit/40b623ceac0340b1c40e776547fd29b85569b347))
+* **deps:** update dependency rollup to v2.45.1 ([23e8025](https://github.com/hidoo/gulp-project/commit/23e80259ca511fecb98031b0a871a8dd3560f73d))
+* **deps:** update dependency rollup to v2.45.2 ([fe98caf](https://github.com/hidoo/gulp-project/commit/fe98caf789ee3475f6e29ba902c7cfcc458c96a5))
+* **deps:** update dependency rollup to v2.46.0 ([264d731](https://github.com/hidoo/gulp-project/commit/264d7317670066f16dd04695b11380ad41303a74))
+* **deps:** update dependency rollup to v2.47.0 ([bddf010](https://github.com/hidoo/gulp-project/commit/bddf010ed308c2335fa3f78faf8563972fb886b7))
+* **deps:** update dependency rollup to v2.51.0 ([d79db33](https://github.com/hidoo/gulp-project/commit/d79db337cfbb30f204ed545fe7fa674f10f10211))
+* **deps:** update dependency rollup-plugin-license to v2.5.0 ([a26dc7a](https://github.com/hidoo/gulp-project/commit/a26dc7a31cf0656979c5277c74a248e22fee604a))
+* **deps:** update dependency sass to v1.32.10 ([d72c89b](https://github.com/hidoo/gulp-project/commit/d72c89b30e78a78e0e2fb1cdf0622e8f011d6846))
+* **deps:** update dependency sass to v1.32.11 ([fd43df5](https://github.com/hidoo/gulp-project/commit/fd43df532e33fba981632850eb1463b8c31d9f0a))
+* **deps:** update dependency sass to v1.32.12 ([a91d3ef](https://github.com/hidoo/gulp-project/commit/a91d3ef6fec9dee938ef3cf3d0834f9e69cf2140))
+* **deps:** update dependency sass to v1.34.1 ([bf52d9f](https://github.com/hidoo/gulp-project/commit/bf52d9f5a95a5faca5010498b408ee43c76a470f))
+* **generator:** change value of options.cssPreprocessor to "sass:module" by default when use sass ([aa8bd16](https://github.com/hidoo/gulp-project/commit/aa8bd1664c03a315aaefcde6d99ed236545214e0))
+* **generator:** remove node v8 support ([5395176](https://github.com/hidoo/gulp-project/commit/5395176120c9bd5527ad0000762e218ca418a8a6))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+### Features
+
+* **build-css-sass:** add support for sass module system ([787cb80](https://github.com/hidoo/gulp-project/commit/787cb807b001f53676f0fdc6baf2df801c216a2c))
+* **build-sprite-image:** add "sass:module" variation of options.cssPreprocessor ([6f6a46d](https://github.com/hidoo/gulp-project/commit/6f6a46daea47ac703bc01ba233db17f81e74d3c8))
+* **build-sprite-svg:** add "sass:module" variation of options.cssPreprocessor ([ac0b198](https://github.com/hidoo/gulp-project/commit/ac0b1980db561feecc80bd860af19be44acc3f62))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 

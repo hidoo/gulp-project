@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @rollup/plugin-commonjs to v18.1.0 ([1f12d94](https://github.com/hidoo/gulp-project/commit/1f12d946a7fdf193d5315d115fec598c26357ba2))
+* **deps:** update dependency @rollup/plugin-commonjs to v19 ([5e2404d](https://github.com/hidoo/gulp-project/commit/5e2404d48ab28dfd68b4fcc255ee5eddea1f7f95))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13 ([018ebca](https://github.com/hidoo/gulp-project/commit/018ebca278d8f33d33aebc83d28ee7e9cdbbc11c))
+* **deps:** update dependency rollup to v2.45.1 ([23e8025](https://github.com/hidoo/gulp-project/commit/23e80259ca511fecb98031b0a871a8dd3560f73d))
+* **deps:** update dependency rollup to v2.45.2 ([fe98caf](https://github.com/hidoo/gulp-project/commit/fe98caf789ee3475f6e29ba902c7cfcc458c96a5))
+* **deps:** update dependency rollup to v2.46.0 ([264d731](https://github.com/hidoo/gulp-project/commit/264d7317670066f16dd04695b11380ad41303a74))
+* **deps:** update dependency rollup to v2.47.0 ([bddf010](https://github.com/hidoo/gulp-project/commit/bddf010ed308c2335fa3f78faf8563972fb886b7))
+* **deps:** update dependency rollup to v2.51.0 ([d79db33](https://github.com/hidoo/gulp-project/commit/d79db337cfbb30f204ed545fe7fa674f10f10211))
+* **deps:** update dependency rollup-plugin-license to v2.5.0 ([a26dc7a](https://github.com/hidoo/gulp-project/commit/a26dc7a31cf0656979c5277c74a248e22fee604a))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 

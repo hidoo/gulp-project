@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cheerio to v1.0.0-rc.6 ([454f41b](https://github.com/hidoo/gulp-project/commit/454f41b8cf50fdf57b469b0acb9b5fa4d2dde72b))
+* **deps:** update dependency cheerio to v1.0.0-rc.9 ([e8ef89b](https://github.com/hidoo/gulp-project/commit/e8ef89b8ba510f75bd0068e21888188b78916020))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 **Note:** Version bump only for package @hidoo/gulp-plugin-svg-sprite

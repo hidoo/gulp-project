@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **build-css-sass:** remove fiber ([bbb8d53](https://github.com/hidoo/gulp-project/commit/bbb8d53a6571f731c687245139c01e9e84aa19ad))
+* **deps:** update dependency autoprefixer to v10.2.6 ([cd54c8c](https://github.com/hidoo/gulp-project/commit/cd54c8c10b0000ab2b2b87ad4944609a910756cc))
+* **deps:** update dependency postcss to v8.2.10 ([8e7ed2b](https://github.com/hidoo/gulp-project/commit/8e7ed2b90eececcc011662e9abbc4fe4f9884285))
+* **deps:** update dependency postcss to v8.2.12 ([a1cbdbb](https://github.com/hidoo/gulp-project/commit/a1cbdbb83099c6b22c9fc41b3c4f6b8fbd796334))
+* **deps:** update dependency postcss to v8.2.13 ([8deca22](https://github.com/hidoo/gulp-project/commit/8deca22cb7b15fb91e7932e130c6884f8488029a))
+* **deps:** update dependency postcss to v8.2.14 ([2212b55](https://github.com/hidoo/gulp-project/commit/2212b55331c519c84ec184d0391af01105625a30))
+* **deps:** update dependency postcss to v8.3.0 ([761ec3e](https://github.com/hidoo/gulp-project/commit/761ec3e55a8ff5ba85fb2f903cf542f5f9b9d25b))
+* **deps:** update dependency postcss-csso to v5.0.1 ([40b623c](https://github.com/hidoo/gulp-project/commit/40b623ceac0340b1c40e776547fd29b85569b347))
+* **deps:** update dependency sass to v1.32.10 ([d72c89b](https://github.com/hidoo/gulp-project/commit/d72c89b30e78a78e0e2fb1cdf0622e8f011d6846))
+* **deps:** update dependency sass to v1.32.11 ([fd43df5](https://github.com/hidoo/gulp-project/commit/fd43df532e33fba981632850eb1463b8c31d9f0a))
+* **deps:** update dependency sass to v1.32.12 ([a91d3ef](https://github.com/hidoo/gulp-project/commit/a91d3ef6fec9dee938ef3cf3d0834f9e69cf2140))
+* **deps:** update dependency sass to v1.34.1 ([bf52d9f](https://github.com/hidoo/gulp-project/commit/bf52d9f5a95a5faca5010498b408ee43c76a470f))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+### Features
+
+* **build-css-sass:** add support for sass module system ([787cb80](https://github.com/hidoo/gulp-project/commit/787cb807b001f53676f0fdc6baf2df801c216a2c))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 

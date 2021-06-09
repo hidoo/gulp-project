@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **build-sprite-image:** add !default keyword to "sass:module" format spritesheet ([22b1fcf](https://github.com/hidoo/gulp-project/commit/22b1fcf5f4afaad466f02ffab66161d813402426))
+* **deps:** update @hidoo/handlebars-lib to version 0.8.2 ([d21494d](https://github.com/hidoo/gulp-project/commit/d21494d17e5eb17330bc30e3481cb116e04443e7))
+* **deps:** update dependency gulp.spritesmith to v6.12.1 ([fe43e59](https://github.com/hidoo/gulp-project/commit/fe43e59d1ac39899a9c54b9ae3bcb93cdb365a60))
+* **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
+
+
+### Features
+
+* **build-sprite-image:** add "sass:module" variation of options.cssPreprocessor ([6f6a46d](https://github.com/hidoo/gulp-project/commit/6f6a46daea47ac703bc01ba233db17f81e74d3c8))
+
+
+
+
+
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-sprite-image

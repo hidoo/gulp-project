@@ -1,0 +1,30 @@
+// stylelint-disable number-no-trailing-zeros
+{{#each shapes~}}
+{{#if @first~}}
+$sprites: (
+  "{{ ../spriteName }}": (
+    "image": "{{{ ../imgPath }}}",
+    "items": (
+{{/if}}
+      "{{ this.name }}": (
+        "elastic-width": {{ this.elasticWidth }}em,
+        "elastic-height": {{ this.elasticHeight }}em,
+        "elastic-background-width": {{ this.elasticBackgroundWidth }}%,
+        "elastic-background-height": {{ this.elasticBackgroundHeight }}%,
+        "elastic-offset-x": {{ this.elasticOffsetX }}em,
+        "elastic-offset-y": {{ this.elasticOffsetY }}em,
+        "rounded-height": {{ this.roundedHeight }}px,
+        "width": {{ this.px.width }}px,
+        "height": {{ this.px.height }}px,
+        "total-width": {{ this.px.total_width }}px,
+        "total-height": {{ this.px.total_height }}px,
+        "offset-x": {{ this.px.offset_x }}px,
+        "offset-y": {{ this.px.offset_y }}px,
+        "image": "{{{ ../imgPath }}}"
+      ),
+{{#if @last}}
+    )
+  )
+);
+{{/if}}
+{{/each}}

@@ -117,6 +117,31 @@ describe('gulp-task-build-sprite-svg', () => {
     });
   });
 
+  it('should output file that "scss:module" format to "options.destCss" if argument "options.cssPreprocessor" is "sass:module".', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.svg`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'svg-sprite.svg',
+      cssName: 'svg-sprite.scss',
+      imgPath: './svg-sprite.svg',
+      cssPreprocessor: 'sass:module'
+    });
+
+    task().on('finish', () => {
+      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
+            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
+            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite-module.scss`);
+
+      assert(actualSvg);
+      assert(actualCss);
+      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
+      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      done();
+    });
+  });
+
   it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
     const task = buildSprite({
       src: `${path.src}/**/sample-*.svg`,

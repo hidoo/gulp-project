@@ -1,0 +1,23 @@
+// stylelint-disable number-no-trailing-zeros
+{{#each items~}}
+{{#if @first~}}
+$sprites: (
+  "{{ basename @root.spritesheet.escaped_image }}": (
+    "image": "{{{ @root.spritesheet.escaped_image }}}",
+    "items": (
+{{/if}}
+      "{{ this.name }}": (
+        "width": {{ this.px.width }},
+        "height": {{ this.px.height }},
+        "total-width": {{ this.px.total_width }},
+        "total-height": {{ this.px.total_height }},
+        "offset-x": {{ this.px.offset_x }},
+        "offset-y": {{ this.px.offset_y }},
+        "image": "{{{ this.escaped_image }}}"
+      ),
+{{#if @last}}
+    )
+  )
+);
+{{/if}}
+{{/each}}

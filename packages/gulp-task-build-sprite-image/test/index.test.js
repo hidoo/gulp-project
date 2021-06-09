@@ -201,6 +201,33 @@ describe('gulp-task-build-sprite-image', () => {
     });
   });
 
+  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass:module".', (done) => {
+    const task = buildSprite({
+      src: `${path.src}/**/sample-*.png`,
+      destImg: `${path.dest}`,
+      destCss: `${path.dest}`,
+      imgName: 'image-sprite.png',
+      cssName: 'image-sprite.scss',
+      imgPath: './image-sprite.png',
+      cssPreprocessor: 'sass:module'
+    });
+
+    task().on('finish', () => {
+      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
+            actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
+            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+            expectedCss = fs.readFileSync(`${path.expected}/image-sprite-module.scss`),
+            {width, height} = sizeOf(expectedImage);
+
+      assert(actualImage);
+      assert(actualCss);
+      assert.equal(String(actualCss), String(expectedCss));
+      comparePixels([[actualImage, expectedImage, width, height]])
+        .then(() => done(null))
+        .catch((error) => done(error));
+    });
+  });
+
   it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
     const task = buildSprite({
       src: `${path.src}/**/sample-*.png`,

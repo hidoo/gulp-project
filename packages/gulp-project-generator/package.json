@@ -43,7 +43,7 @@
     "rimraf": "3.0.2"
   },
   "dependencies": {
-    "@hidoo/handlebars-helpers": "0.8.1",
+    "@hidoo/handlebars-helpers": "0.8.2",
     "babel-eslint": "10.1.0",
     "chalk": "4.1.1",
     "commander": "7.2.0",

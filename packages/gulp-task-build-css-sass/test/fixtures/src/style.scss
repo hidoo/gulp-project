@@ -1,7 +1,11 @@
 @charset "utf-8";
 
+// @hidoo/sass-importer and module system testing
+@use "@hidoo/unit/src/settings";
+
 .block {
   padding: 10px;
+  font-size: settings.$unit-font-base-size;
 
   // autoprefixer testing
   transition-duration: 0.3s;
@@ -28,5 +32,5 @@
   }
 }
 
-// importer testing
+// node-sass-magic-importer testing
 @import "{ .component as .c } from component";

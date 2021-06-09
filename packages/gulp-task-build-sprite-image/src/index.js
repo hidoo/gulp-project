@@ -53,10 +53,13 @@ export const svgo = imagemin.svgo;
 /**
  * path of css templates
  *
- * @type {String}
+ * @type {Map}
  */
-const pathStylusTemplate = path.resolve(__dirname, '../template/stylus.hbs');
-const pathScssTemplate = path.resolve(__dirname, '../template/scss.hbs');
+const TEMPLATES = new Map([
+  ['stylus', path.resolve(__dirname, '../template/stylus.hbs')],
+  ['sass', path.resolve(__dirname, '../template/scss.hbs')],
+  ['sass:module', path.resolve(__dirname, '../template/scss-module.hbs')]
+]);
 
 /**
  * task default options.
@@ -105,7 +108,7 @@ const DEFAULT_OPTIONS = {
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
  * @param {String} [options.engine='pixelsmith'] - engine for generate sprite sheet.
  *   see: {@link https://www.npmjs.com/package/gulp.spritesmith gulp.spritesmith}
- * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|sass]).
+ * @param {String} [options.cssPreprocessor='stylus'] - type of css preprocessor (one of [stylus|sass|sass:module]).
  * @param {String} [options.cssTemplate=path.resolve(__dirname, '../template/stylus.hbs')] - Handlebars template for css.
  *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
@@ -156,9 +159,11 @@ const DEFAULT_OPTIONS = {
 export default function buildSprite(options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
-  if (!opts.cssTemplate) {
-    opts.cssTemplate = opts.cssPreprocessor === 'sass' ?
-      pathScssTemplate : pathStylusTemplate;
+  if (
+    !opts.cssTemplate &&
+    TEMPLATES.has(opts.cssPreprocessor)
+  ) {
+    opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
   }
 
   // define task

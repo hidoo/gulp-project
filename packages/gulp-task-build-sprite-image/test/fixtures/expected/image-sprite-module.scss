@@ -1,0 +1,26 @@
+// stylelint-disable number-no-trailing-zeros
+$sprites: (
+  "image-sprite": (
+    "image": "./image-sprite.png",
+    "items": (
+      "sample-a": (
+        "width": 65px,
+        "height": 62px,
+        "total-width": 132px,
+        "total-height": 62px,
+        "offset-x": 0px,
+        "offset-y": 0px,
+        "image": "./image-sprite.png"
+      ),
+      "sample-b": (
+        "width": 65px,
+        "height": 62px,
+        "total-width": 132px,
+        "total-height": 62px,
+        "offset-x": -67px,
+        "offset-y": 0px,
+        "image": "./image-sprite.png"
+      ),
+    )
+  )
+) !default;

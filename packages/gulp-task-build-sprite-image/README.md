@@ -105,7 +105,7 @@ return build image sprite sheet task
         see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'binary-tree'`)
     *   `options.engine` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** engine for generate sprite sheet.
         see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'pixelsmith'`)
-    *   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of \[stylus|sass]). (optional, default `'stylus'`)
+    *   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of \[stylus|sass|sass:module]). (optional, default `'stylus'`)
     *   `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
         `options.cssPreprocessor` is ignored if this value is specified.
         see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)

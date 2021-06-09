@@ -16,6 +16,7 @@ import header from 'gulp-header';
 import rename from 'gulp-rename';
 import gzip from 'gulp-gzip';
 import log from 'fancy-log';
+import sassImporter from '@hidoo/sass-importer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 let pkg = {};
@@ -69,7 +70,11 @@ const DEFAULT_OPTIONS = {
   suffix: '.min',
   targets: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
-  sassOptions: {outputStyle: 'expanded'},
+  sassOptions: {
+    outputStyle: 'expanded',
+    functions: {},
+    importer: []
+  },
   url: null,
   urlOptions: {},
   uncssTargets: [],
@@ -185,12 +190,16 @@ export default function buildCss(options = {}) {
     const {suffix, compress} = opts;
     const stream = through.obj();
     const filename = opts.filename || path.basename(opts.src);
-    const sassOptions = opts.sassOptions || {};
+    const sassOptions = opts.sassOptions || {functions: {}, importer: []};
     const processes = getProcesses(opts);
     const compiler = render({
       file: opts.src,
       ...sassOptions,
-      importer: magicImporter(),
+      importer: [
+        sassImporter(),
+        magicImporter(),
+        ...sassOptions.importer
+      ],
       functions: {
         ...DEFAULT_FUNCTIONS,
         ...sassOptions.functions

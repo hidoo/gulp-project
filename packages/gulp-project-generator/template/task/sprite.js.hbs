@@ -48,7 +48,7 @@ function buildDesktopOptions(options = {}) {
     destImg: config.path.destSpriteDesktop,
     destCss: config.path.srcCssDesktop,
     imgPath: `${pathToSpriteDesktop}/${options.imgName}${cacheParameter}`,
-    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass{{else}}stylus{{/is}}',
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass:module{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }
@@ -65,7 +65,7 @@ function buildMobileOptions(options = {}) {
     destImg: config.path.destSpriteMobile,
     destCss: config.path.srcCssMobile,
     imgPath: `${pathToSpriteMobile}/${options.imgName}${cacheParameter}`,
-    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass{{else}}stylus{{/is}}',
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass:module{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }
@@ -82,7 +82,7 @@ function buildOptions(options = {}) {
     destImg: config.path.destSprite,
     destCss: config.path.srcCss,
     imgPath: `${pathToSprite}/${options.imgName}${cacheParameter}`,
-    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass{{else}}stylus{{/is}}',
+    cssPreprocessor: '{{#is cssPreprocessor 'sass'}}sass:module{{else}}stylus{{/is}}',
     compress: config.compress
   };
 }

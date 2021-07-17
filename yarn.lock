@@ -14187,7 +14187,20 @@ sass@1.35.2:
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
-save-pixels@2.3.4, save-pixels@~2.3.0:
+save-pixels@2.3.5:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/save-pixels/-/save-pixels-2.3.5.tgz#5f2fb7f845a3a27fd230d66bc4abce19c8b076a5"
+  integrity sha512-KJrlGCp1+fT9UD0Bux3MyFVQ54ieB+5+By/8u971BS2IQuiUctcKYMghudu/yAJebhqMK3B/Epi9vqy8QVNIUA==
+  dependencies:
+    contentstream "^1.0.0"
+    gif-encoder "~0.4.1"
+    jpeg-js "^0.3.2"
+    ndarray "^1.0.18"
+    ndarray-ops "^1.2.2"
+    pngjs-nozlib "^1.0.0"
+    through "^2.3.4"
+
+save-pixels@~2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/save-pixels/-/save-pixels-2.3.4.tgz#49d349c06b8d7c0127dbf0da24b44aca5afb59fe"
   integrity sha1-SdNJwGuNfAEn2/DaJLRKylr7Wf4=

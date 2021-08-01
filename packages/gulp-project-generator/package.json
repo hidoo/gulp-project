@@ -33,7 +33,7 @@
   "devDependencies": {
     "@babel/cli": "7.14.8",
     "@babel/core": "7.14.3",
-    "@babel/node": "7.14.7",
+    "@babel/node": "7.14.9",
     "@babel/preset-env": "7.14.4",
     "@babel/register": "7.13.16",
     "babel-preset-power-assert": "3.0.0",

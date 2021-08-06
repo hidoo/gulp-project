@@ -34,7 +34,7 @@
     "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.3",
     "documentation": "13.2.5",
-    "file-type": "16.5.2",
+    "file-type": "16.5.3",
     "get-pixels": "3.3.3",
     "gulp": "4.0.2",
     "mocha": "8.4.0",

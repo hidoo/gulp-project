@@ -52,7 +52,7 @@
     "glob": "7.1.7",
     "glob-parent": "6.0.1",
     "handlebars": "4.7.7",
-    "inquirer": "8.1.2",
+    "inquirer": "8.1.5",
     "mkdirp": "1.0.4"
   }
 }

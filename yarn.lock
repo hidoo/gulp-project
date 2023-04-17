@@ -1452,10 +1452,10 @@
     stylelint-selector-no-empty "1.0.8"
     stylelint-selector-tag-no-without-class "2.0.3"
 
-"@hidoo/unit@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@hidoo/unit/-/unit-0.5.0.tgz#aaf8e65fa23ffb63fb805ab6e6720fe18a229673"
-  integrity sha512-CkMN092/apZCnfK9bPZPRoWEI6H2cbl077+IFMNX2C+K2vZZ58C9+yCKUFZNQIanaTqlthh28k5TUX4afU5Fxg==
+"@hidoo/unit@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@hidoo/unit/-/unit-0.9.0.tgz#1caa14df94e9357e37cf4ca6e552dc79967100a7"
+  integrity sha512-2pgHRjsC+ZYSgtM6hVy03ehnrLW5tw3R1vBJHs0PAs/ppa5m8HRQuM/+559nb51lYI59EE232/LJOEJx4Uu3Kg==
 
 "@hidoo/unit@^0.4.4":
   version "0.4.4"

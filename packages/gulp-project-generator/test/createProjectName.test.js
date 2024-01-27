@@ -1,5 +1,5 @@
-import assert from 'assert';
-import createProjectName from '../src/createProjectName';
+import assert from 'node:assert';
+import createProjectName from '../src/createProjectName.js';
 
 describe('createProjectName', () => {
 

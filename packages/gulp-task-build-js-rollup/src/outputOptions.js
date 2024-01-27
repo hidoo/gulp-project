@@ -1,27 +1,33 @@
 /**
+ * default output options
+ *
+ * @type {Object}
+ */
+export const defaultOutputOptions = {
+  format: 'iife',
+  name: '',
+  sourcemap: 'inline'
+};
+
+/**
  * return input options for rollup.js
  *
  * @param {DEFAULT_OPTIONS} options option
- * @return {Object}
+ * @return {Array}
  */
 export default function outputOptions(options = {}) {
-  const defaultOptions = {
-    format: 'iife',
-    name: '',
-    sourcemap: 'inline'
-  };
+  const outputOpts = options?.outputOptions;
 
-  if (
-    options && options.outputOptions &&
-    typeof options.outputOptions === 'object' &&
-    !Array.isArray(options.outputOptions) && options.outputOptions !== null
-  ) {
-    return {
-      format: 'iife',
-      name: '',
-      sourcemap: 'inline',
-      ...options.outputOptions
-    };
+  if (Array.isArray(outputOpts)) {
+    return outputOpts;
   }
-  return defaultOptions;
+  else if (typeof outputOpts === 'object' && outputOpts !== null) {
+    return [
+      {
+        ...defaultOutputOptions,
+        ...outputOpts
+      }
+    ];
+  }
+  return [defaultOutputOptions];
 }

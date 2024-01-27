@@ -1,6 +1,6 @@
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import write from './write.js';
+import render from './render.js';
+import formatCode from './formatCode.js';
 
 /* eslint-disable max-statements */
 /**
@@ -21,33 +21,33 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
 
   const {verbose} = options;
 
-  await render(`${src}/.babelrc.js.hbs`, options)
-    .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/.babelrc.js`, {verbose}));
-
   if (options.conventionalCommits) {
-    await render(`${src}/.commitlintrc.js.hbs`, options)
-      .then((output) => write(output, `${dest}/.commitlintrc.js`, {verbose}));
+    await render(`${src}/.commitlintrc.json.hbs`, options)
+      .then((output) => write(output, `${dest}/.commitlintrc.json`, {verbose}));
   }
 
   if (options.css && options.cssPreprocessor === 'sass') {
-    await render(`${src}/.stylelintrc.js.hbs`, options)
+    await render(`${src}/.stylelintrc.json.hbs`, options)
       .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.stylelintrc.js`, {verbose}));
+      .then((output) => write(output, `${dest}/.stylelintrc.json`, {verbose}));
 
     await render(`${src}/.stylelintignore.hbs`, options)
       .then((output) => write(output, `${dest}/.stylelintignore`, {verbose}));
   }
 
   if (options.js) {
-    await render(`${src}/.mocharc.js.hbs`, options)
+    await render(`${src}/.babelrc.json.hbs`, options)
       .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/.mocharc.js`, {verbose}));
+      .then((output) => write(output, `${dest}/.babelrc.json`, {verbose}));
+
+    await render(`${src}/.mocharc.json.hbs`, options)
+      .then((output) => formatCode(output))
+      .then((output) => write(output, `${dest}/.mocharc.json`, {verbose}));
   }
 
-  await render(`${src}/.eslintrc.js.hbs`, options)
+  await render(`${src}/.eslintrc.json.hbs`, options)
     .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/.eslintrc.js`, {verbose}));
+    .then((output) => write(output, `${dest}/.eslintrc.json`, {verbose}));
 
   await render(`${src}/.eslintignore.hbs`, options)
     .then((output) => write(output, `${dest}/.eslintignore`, {verbose}));
@@ -66,9 +66,9 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
       }));
   }
 
-  await render(`${src}/.lintstagedrc.js.hbs`, options)
+  await render(`${src}/.lintstagedrc.json.hbs`, options)
     .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/.lintstagedrc.js`, {verbose}));
+    .then((output) => write(output, `${dest}/.lintstagedrc.json`, {verbose}));
 
   await render(`${src}/.editorconfig.hbs`, options)
     .then((output) => write(output, `${dest}/.editorconfig`, {verbose}));

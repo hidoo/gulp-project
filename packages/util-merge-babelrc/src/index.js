@@ -1,5 +1,13 @@
+import {createRequire} from 'node:module';
 import merge from 'lodash.merge';
 import log from 'fancy-log';
+
+/**
+ * commonjs style require
+ *
+ * @type {Function}
+ */
+const require = createRequire(import.meta.url);
 
 /**
  * default options
@@ -184,7 +192,7 @@ export function mergeBabelPlugins(plugins = [], source = []) {
 /**
  * return merged babelrc
  *
- * @param {String} [path=''] path to babelrc
+ * @param {String} [path=''] path to babelrc (Supported only .cjs or .json)
  * @param {Object} [source={}] target of merge
  * @param {DEFAULT_OPTIONS} [options={}] options
  * @return {Object}
@@ -192,7 +200,7 @@ export function mergeBabelPlugins(plugins = [], source = []) {
  * @example
  * import mergeBabelrc from '@hidoo/gulp-util-merge-babelrc';
  *
- * const babelOptions = mergeBabelrc('/path/to/.babelrc.js', {
+ * const babelOptions = mergeBabelrc('/path/to/.babelrc.json', {
  *   presets: [
  *     // some presets ...
  *   ],
@@ -208,7 +216,7 @@ export default function mergeBabelrc(path = '', source = {}, options = {}) {
   let targets = null;
 
   if (typeof path === 'string' && path !== '') {
-    babelrc = require(path); // eslint-disable-line node/global-require, import/no-dynamic-require
+    babelrc = require(path); // eslint-disable-line import/no-dynamic-require
     if (opts.verbose) {
       log.info(`Using babelrc: ${path}`);
     }

@@ -1,5 +1,6 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import fs from 'node:fs';
+import path from 'node:path';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import stylus from 'gulp-stylus';
@@ -19,8 +20,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
+  // eslint-disable-next-line node/no-sync
+  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -147,18 +148,18 @@ export default function buildCss(options = {}) {
       postProcesses.push(additionalProcess);
     }
 
-    return src(opts.src)
+    return gulp.src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(stylus(mergedStylusOptions))
       .pipe(postcss([...postProcesses]))
       .pipe(header(banner, {pkg}))
       .pipe(rename({basename, extname}))
-      .pipe(dest(opts.dest))
+      .pipe(gulp.dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, postcss([csso({restructure: false})])))
-      .pipe(cond(compress, dest(opts.dest)))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

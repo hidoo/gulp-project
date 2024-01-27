@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "root": true,
+  "extends": [
+    "@hidoo/eslint-config"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "no-promise-executor-return": "off",
+    "no-underscore-dangle": ["error", {
+      "allow": [
+        "__dirname"
+      ]
+    }],
+    "import/no-unresolved": ["error", {
+      "ignore": [
+        "^node:"
+      ]
+    }]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/gulpfile.js",
+        "**/task/**/*.js",
+        "packages/**/src/**/*.js",
+        "scripts/**/*.js"
+      ],
+      "extends": [
+        "@hidoo/eslint-config/+node"
+      ],
+      "rules": {
+        "node/file-extension-in-import": ["error", "always"],
+        "node/no-unpublished-import": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "extends": [
+        "@hidoo/eslint-config/+mocha",
+        "@hidoo/eslint-config/+node"
+      ],
+      "rules": {
+        "newline-per-chained-call": "off",
+        "mocha/no-hooks-for-single-case": "off",
+        "mocha/no-setup-in-describe": "off",
+        "node/file-extension-in-import": ["error", "always"],
+        "node/no-sync": "off"
+      }
+    },
+    {
+      "files": [
+        "packages/**/template/**/*.js",
+        "packages/**/test/fixtures/**/*.js"
+      ],
+      "rules": {
+        "no-console": "error",
+        "import/no-unresolved": "off"
+      }
+    },
+    {
+      "files": [
+        "packages/gulp-task-build-js-*/test/fixtures/**/*.js"
+      ],
+      "globals": {
+        "module": true,
+        "require": true
+      },
+      "rules": {
+        "node/file-extension-in-import": ["error", "never"]
+      }
+    }
+  ]
+}

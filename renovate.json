@@ -106,8 +106,7 @@
         "cross-env",
         "husky",
         "lint-staged",
-        "npm-run-all",
-        "rimraf"
+        "npm-run-all"
       ],
       "automerge": false,
       "patch": {

@@ -1,4 +1,4 @@
-import {grey, cyan, white} from 'chalk';
+import chalk from 'chalk';
 
 /**
  * print formatted values
@@ -35,10 +35,16 @@ export default function fancyPrint(caption = '', items = []) {
           [minWidth, caption.length, labelLength + valueLength + delimiter.length]
         );
 
-  const lf = '',
-        separator = grey(Array.from(Array(maxWidth).keys()).map(() => '+').join('')), // eslint-disable-line newline-per-chained-call
-        paddingWidth = parseInt((maxWidth - caption.length) / 2, 10), // eslint-disable-line no-magic-numbers
-        padding = Array.from(Array(paddingWidth).keys()).map(() => ' ').join(''); // eslint-disable-line newline-per-chained-call
+  const lf = '';
+  const separator = chalk.grey(
+    Array.from(Array(maxWidth).keys())
+      .map(() => '+')
+      .join('')
+  );
+  const paddingWidth = parseInt((maxWidth - caption.length) / 2, 10); // eslint-disable-line no-magic-numbers
+  const padding = Array.from(Array(paddingWidth).keys())
+    .map(() => ' ')
+    .join('');
 
   const lines = [
     separator,
@@ -49,10 +55,10 @@ export default function fancyPrint(caption = '', items = []) {
         return {label: label.padStart(labelLength, ' '), value};
       })
       .map(({label, value}) => {
-        return {label: cyan(label), value};
+        return {label: chalk.cyan(label), value};
       })
       .map(({label, value}) => {
-        return {label, value: value ? white(value) : grey(value)};
+        return {label, value: value ? chalk.white(value) : chalk.grey(value)};
       })
       .map(({label, value}) => `${label}${delimiter}${value}`),
     lf,

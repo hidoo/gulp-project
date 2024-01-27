@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-rollup';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 export const main = buildJs({

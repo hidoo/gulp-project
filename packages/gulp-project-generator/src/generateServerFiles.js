@@ -1,8 +1,8 @@
-import mkdir from './mkdir';
-import copy from './copy';
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import mkdir from './mkdir.js';
+import copy from './copy.js';
+import write from './write.js';
+import render from './render.js';
+import formatCode from './formatCode.js';
 
 /**
  * generate local dev server files

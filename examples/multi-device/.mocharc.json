@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/mocharc.json",
+  "require": [
+    "core-js",
+    "jsdom-global/register"
+  ],
+  "recursive": true,
+  "ui": "bdd",
+  "slow": 0
+}

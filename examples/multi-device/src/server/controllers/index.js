@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import * as status from '../constants/statusCode';
+import fs from 'node:fs';
+import path from 'node:path';
+import * as status from '../constants/statusCode.js';
 
 /**
  * show README

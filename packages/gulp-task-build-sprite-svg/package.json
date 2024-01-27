@@ -3,18 +3,16 @@
   "version": "0.19.0",
   "description": "Task that build svg sprite sheet for gulp.",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.0.0"
   },
-  "main": "lib/index.js",
+  "type": "module",
+  "main": "src/index.js",
   "files": [
-    "lib/",
+    "src/",
     "template/"
   ],
   "scripts": {
-    "prebuild": "rimraf ./lib",
-    "build": "npm-run-all -p build:*",
-    "build:lib": "babel ./src --out-dir ./lib",
-    "build:doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
+    "doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
     "test": "cross-env NODE_ENV=test mocha"
   },
   "keywords": [
@@ -27,18 +25,10 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.14.3",
-    "@babel/core": "7.14.3",
-    "@babel/preset-env": "7.14.4",
-    "@babel/register": "7.13.16",
-    "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.3",
     "documentation": "13.2.5",
     "gulp": "4.0.2",
-    "mocha": "8.4.0",
-    "npm-run-all": "4.1.5",
-    "power-assert": "1.6.1",
-    "rimraf": "3.0.2"
+    "mocha": "8.4.0"
   },
   "dependencies": {
     "@hidoo/gulp-plugin-svg-sprite": "^0.19.0",

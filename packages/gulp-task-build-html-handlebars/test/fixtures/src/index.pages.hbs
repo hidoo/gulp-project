@@ -4,6 +4,8 @@ seo:
   description: "page description."
 ---
 {{#each @root.pages}}
+- - -
 title: {{this.seo.title}}
 description: {{this.seo.description}}
+path: {{this.path.relative}}
 {{/each}}

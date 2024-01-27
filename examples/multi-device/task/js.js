@@ -1,14 +1,7 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
 import {concatJs} from '@hidoo/gulp-task-concat';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 const mainDesktop = buildJs({

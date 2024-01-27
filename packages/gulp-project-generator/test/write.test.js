@@ -1,17 +1,23 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
-import write from '../src/write';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import write from '../src/write.js';
 
 describe('write', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     dest: `${__dirname}/fixtures/dest`
   };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise includes String of created file path.', (done) => {

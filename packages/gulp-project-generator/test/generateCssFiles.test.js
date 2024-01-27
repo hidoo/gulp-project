@@ -1,25 +1,26 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
-import rimraf from 'rimraf';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import glob from 'glob';
-import generateCssFiles from '../src/generateCssFiles';
+import generateCssFiles from '../src/generateCssFiles.js';
 
 describe('generateCssFiles', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      src: resolve(__dirname, '../template'),
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = {
+    src: resolve(__dirname, '../template'),
+    dest: `${__dirname}/fixtures/dest`,
+    expected: `${__dirname}/fixtures/expected`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise.', (done) => {

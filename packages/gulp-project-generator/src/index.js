@@ -1,26 +1,41 @@
 /* eslint max-len: off, max-statements: off, prefer-named-capture-group: off */
 
-import path from 'path';
+import fs from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import chalk from 'chalk';
 import program, {InvalidOptionArgumentError} from 'commander';
 import inquirer from 'inquirer';
-import rimraf from 'rimraf';
-import pkg from '../package.json';
-import mkdir from './mkdir';
-import isEmptyDir from './isEmptyDir';
-import createProjectName from './createProjectName';
-import generatePackageJson from './generatePackageJson';
-import generateReadme from './generateReadme';
-import generateConfig from './generateConfig';
-import generateGulpfile from './generateGulpfile';
-import generateDotFiles from './generateDotFiles';
-import generateCssFiles from './generateCssFiles';
-import generateHtmlFiles from './generateHtmlFiles';
-import generateImageFiles from './generateImageFiles';
-import generateJsFiles from './generateJsFiles';
-import generateServerFiles from './generateServerFiles';
-import generateSpriteFiles from './generateSpriteFiles';
-import generateStyleguideFiles from './generateStyleguideFiles';
+import mkdir from './mkdir.js';
+import isEmptyDir from './isEmptyDir.js';
+import createProjectName from './createProjectName.js';
+import generatePackageJson from './generatePackageJson.js';
+import generateReadme from './generateReadme.js';
+import generateConfig from './generateConfig.js';
+import generateGulpfile from './generateGulpfile.js';
+import generateDotFiles from './generateDotFiles.js';
+import generateCssFiles from './generateCssFiles.js';
+import generateHtmlFiles from './generateHtmlFiles.js';
+import generateImageFiles from './generateImageFiles.js';
+import generateJsFiles from './generateJsFiles.js';
+import generateServerFiles from './generateServerFiles.js';
+import generateSpriteFiles from './generateSpriteFiles.js';
+import generateStyleguideFiles from './generateStyleguideFiles.js';
+
+/**
+ * commonjs style require
+ *
+ * @type {Function}
+ */
+const require = createRequire(import.meta.url);
+
+/**
+ * package information
+ *
+ * @type {Object}
+ */
+const pkg = require('../package.json');
 
 /**
  * return force generate or not
@@ -306,7 +321,7 @@ async function main(src = '', dest = '', options = {}) {
 
   console.log('');
   console.log(chalk.white('Prepare directories:'));
-  rimraf.sync(dest);
+  await fs.rm(dest, {recursive: true, force: true});
   await mkdir(`${dest}/src`, {verbose: opts.verbose});
   await mkdir(`${dest}/task`, {verbose: opts.verbose});
   console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
@@ -374,8 +389,11 @@ program
 // argument <dir> is required.
 // + show help, when <dir> is not specify.
 if (program.args.length) {
-  const sourceDir = path.resolve(__dirname, '../template'),
-        destDir = path.resolve(program.args[0]) || process.cwd();
+  const sourceDir = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../template'
+  );
+  const destDir = path.resolve(program.args[0]) || process.cwd();
 
   main(sourceDir, destDir, program.opts())
     .catch((error) => {

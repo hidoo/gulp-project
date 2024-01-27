@@ -1,4 +1,5 @@
-import path from 'path';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import kss from 'kss';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
@@ -16,7 +17,7 @@ const DEFAULT_OPTIONS = {
   'placeholder': '{{modifier_class}}',
   'nav-depth': 2,
   'mask': '*.css',
-  'builder': path.resolve(__dirname, '../builder'),
+  'builder': path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../builder'),
   'verbose': false
 };
 

@@ -1,14 +1,7 @@
-/**
- * import modules
- */
-import {relative} from 'path';
+import {relative} from 'node:path';
 import gulp from 'gulp';
 import buildSprite from '@hidoo/gulp-task-build-sprite-image';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 /**
  * url parameter for browser cache

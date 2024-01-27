@@ -1,4 +1,4 @@
-import {src, dest, lastRun} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import imagemin from 'gulp-imagemin';
@@ -125,7 +125,7 @@ export default function optimizeImage(options = {}) {
   // define task
   const task = () => {
     const {evenize, placeholder, compress, compressOptions, verbose} = opts;
-    const since = lastRun(task);
+    const since = gulp.lastRun(task);
     let webpOptions = {verbose};
 
     if (
@@ -139,15 +139,15 @@ export default function optimizeImage(options = {}) {
       };
     }
 
-    return src(opts.src, {since})
+    return gulp.src(opts.src, {since})
       .pipe(plumber({errorHandler}))
       .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
       .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
       .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
       .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))
-      .pipe(dest(opts.dest))
+      .pipe(gulp.dest(opts.dest))
       .pipe(cond(isSvg, cond(compress, gzip({append: true}))))
-      .pipe(cond(isSvg, cond(compress, dest(opts.dest))));
+      .pipe(cond(isSvg, cond(compress, gulp.dest(opts.dest))));
   };
 
   // add displayName (used as task name for gulp)

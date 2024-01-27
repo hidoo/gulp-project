@@ -3,15 +3,14 @@
   "version": "0.19.0",
   "description": "Plugin that evenize image for gulp.",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.0.0"
   },
-  "main": "lib/index.js",
+  "type":"module",
+  "main": "src/index.js",
   "files": [
-    "lib/"
+    "src/"
   ],
   "scripts": {
-    "prebuild": "rimraf ./lib",
-    "build": "babel ./src --out-dir ./lib",
     "test": "cross-env NODE_ENV=test mocha"
   },
   "keywords": [
@@ -36,17 +35,10 @@
     "through2": "4.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.3",
-    "@babel/core": "7.14.3",
-    "@babel/preset-env": "7.14.4",
-    "@babel/register": "7.13.16",
-    "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.3",
     "image-size": "1.0.0",
     "mocha": "8.4.0",
     "pixelmatch": "5.2.1",
-    "power-assert": "1.6.1",
-    "rimraf": "3.0.2",
     "vinyl": "2.2.1"
   },
   "peerDependencies": {

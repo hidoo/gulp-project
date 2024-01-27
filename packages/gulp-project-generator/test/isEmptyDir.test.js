@@ -1,21 +1,24 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import rimraf from 'rimraf';
-import mkdir from '../src/mkdir';
-import isEmptyDir from '../src/isEmptyDir';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import mkdir from '../src/mkdir.js';
+import isEmptyDir from '../src/isEmptyDir.js';
 
 describe('isEmptyDir', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      dest: `${__dirname}/fixtures/dest`
-    };
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = {
+    dest: `${__dirname}/fixtures/dest`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise includes false if argument "dest" is not empty directory.', (done) => {

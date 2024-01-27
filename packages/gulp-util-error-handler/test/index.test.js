@@ -1,19 +1,19 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
+import assert from 'node:assert';
 import sinon from 'sinon';
 import stripAnsi from 'strip-ansi';
 import log from 'fancy-log';
-import errorHandler from '../src';
+import errorHandler from '../src/index.js';
 
 describe('gulp-util-error-handler', () => {
-  let spy = null;
+  let spied = null;
 
   beforeEach(() => {
-    spy = sinon.spy(log, 'error');
+    spied = sinon.spy(log, 'error');
   });
   afterEach(() => {
-    spy.restore();
+    spied.restore();
   });
 
   it('should out formated message if argment "error" is valid.', () => {
@@ -56,7 +56,7 @@ describe('gulp-util-error-handler', () => {
     cases.forEach(([value, expected], index) => {
       errorHandler(value);
 
-      assert(stripAnsi(spy.args[index][0]) === expected);
+      assert(stripAnsi(spied.args[index][0]) === expected);
     });
   });
 });

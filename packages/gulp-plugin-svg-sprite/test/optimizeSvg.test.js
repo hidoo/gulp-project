@@ -1,9 +1,12 @@
-import assert from 'assert';
-import fs from 'fs';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import cheerio from 'cheerio';
-import optimizeSvg from '../src/optimizeSvg';
+import optimizeSvg from '../src/optimizeSvg.js';
 
 describe('gulp-plugin-svg-sprite', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src`,
     expected: `${__dirname}/fixtures/expected`

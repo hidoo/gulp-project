@@ -1,5 +1,6 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import fs from 'node:fs';
+import path from 'node:path';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import concat from 'gulp-concat';
@@ -17,8 +18,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
+  // eslint-disable-next-line node/no-sync
+  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -77,17 +78,17 @@ export function concatJs(options = {}) {
   const task = () => {
     const {filename, suffix, banner, compress} = opts;
 
-    return src(opts.src)
+    return gulp.src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(concat(filename || 'bundle.js'))
       .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line node/no-process-env
       .pipe(header(banner, {pkg}))
-      .pipe(dest(opts.dest))
+      .pipe(gulp.dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, uglify({output: {comments: 'some'}})))
-      .pipe(cond(compress, dest(opts.dest)))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)
@@ -136,16 +137,16 @@ export function concatCss(options = {}) {
   const task = () => {
     const {filename, suffix, banner, compress} = opts;
 
-    return src(opts.src)
+    return gulp.src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(concat(filename || 'bundle.css'))
       .pipe(header(banner, {pkg}))
-      .pipe(dest(opts.dest))
+      .pipe(gulp.dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, postcss([csso({restructure: false})])))
-      .pipe(cond(compress, dest(opts.dest)))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

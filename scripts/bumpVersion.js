@@ -1,7 +1,9 @@
-const os = require('os');
-const util = require('util');
-const childProcess = require('child_process');
-const chalk = require('chalk');
+import os from 'node:os';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import util from 'node:util';
+import childProcess from 'node:child_process';
+import chalk from 'node:chalk';
 
 const exec = util.promisify(childProcess.exec);
 
@@ -61,7 +63,11 @@ async function bumpVersion(argv = []) {
       await exec('yarn test:examples');
     });
 
-    const lernaJson = require('../lerna.json'); // eslint-disable-line node/global-require
+    const lernaJson = JSON.parse(
+      await fs.readFile(
+        path.resolve(process.cwd(), './lerna.json')
+      )
+    );
     const version = `v${lernaJson.version}`;
     const commitMsg = util.format(lernaJson.command.publish.message, version);
 

@@ -1,11 +1,13 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
-import {concatJs, concatCss} from '../src';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {concatJs, concatCss} from '../src/index.js';
 
 describe('gulp-task-concat', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src`,
     dest: `${__dirname}/fixtures/dest`,
@@ -13,7 +15,11 @@ describe('gulp-task-concat', () => {
   };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*.{js,css,gz}`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   describe('concatJs', () => {

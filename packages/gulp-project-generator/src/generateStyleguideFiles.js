@@ -1,6 +1,6 @@
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import write from './write.js';
+import render from './render.js';
+import formatCode from './formatCode.js';
 
 /**
  * generate styleguide files

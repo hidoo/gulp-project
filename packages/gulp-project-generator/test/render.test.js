@@ -1,9 +1,12 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import render from '../src/render';
+import assert from 'node:assert';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import render from '../src/render.js';
 
 describe('render', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src/render`
   };

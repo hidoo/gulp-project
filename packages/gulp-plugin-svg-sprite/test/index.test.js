@@ -1,12 +1,15 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import Vinyl from 'vinyl';
 import Handlebars from 'handlebars';
-import svgSprite from '../src';
+import svgSprite from '../src/index.js';
 
 describe('gulp-plugin-svg-sprite', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   let path = null,
       srcs = null;
 

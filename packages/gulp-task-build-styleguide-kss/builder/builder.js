@@ -1,8 +1,8 @@
-const fs = require('fs'),
-      path = require('path'),
-      Handlebars = require('handlebars'),
-      KssBuilderBase = require('kss/builder/base'),
-      helpers = require('@hidoo/handlebars-helpers');
+const fs = require('node:fs');
+const path = require('node:path');
+const Handlebars = require('handlebars');
+const KssBuilderBase = require('kss/builder/base/index.js');
+const helpers = require('@hidoo/handlebars-helpers');
 
 let pkg = {};
 

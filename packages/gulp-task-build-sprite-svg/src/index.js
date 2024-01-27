@@ -1,5 +1,6 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import imagemin from 'gulp-imagemin';
@@ -21,14 +22,21 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
 export const svgo = imagemin.svgo;
 
 /**
+ * dirname
+ *
+ * @type {String}
+ */
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/**
  * path of css templates
  *
  * @type {Map}
  */
 const TEMPLATES = new Map([
-  ['stylus', path.resolve(__dirname, '../template/stylus.hbs')],
-  ['sass', path.resolve(__dirname, '../template/scss.hbs')],
-  ['sass:module', path.resolve(__dirname, '../template/scss-module.hbs')]
+  ['stylus', path.resolve(dirname, '../template/stylus.hbs')],
+  ['sass', path.resolve(dirname, '../template/scss.hbs')],
+  ['sass:module', path.resolve(dirname, '../template/scss-module.hbs')]
 ]);
 
 /**
@@ -120,20 +128,20 @@ export default function buildSprite(options = {}) {
   const task = () => {
     const {compress, compressOptions, verbose} = opts;
 
-    const stream = src(opts.src)
+    const stream = gulp.src(opts.src)
       .pipe(plumber({errorHandler}))
       .pipe(svgSprite(opts));
 
     // out css stream
-    const css = stream.css.pipe(dest(opts.destCss));
+    const css = stream.css.pipe(gulp.dest(opts.destCss));
 
     // out image stream
     // + it optimize if opts.compress
     const svg = stream.svg.pipe(buffer())
       .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
-      .pipe(dest(opts.destImg))
+      .pipe(gulp.dest(opts.destImg))
       .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.destImg)));
+      .pipe(cond(compress, gulp.dest(opts.destImg)));
 
     // return merged stream
     return merge(css, svg);

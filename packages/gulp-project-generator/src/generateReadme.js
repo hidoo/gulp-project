@@ -1,5 +1,5 @@
-import write from './write';
-import render from './render';
+import write from './write.js';
+import render from './render.js';
 
 /**
  * generate README

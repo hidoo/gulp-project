@@ -1,17 +1,5 @@
 import log from 'fancy-log';
-import alias from '@rollup/plugin-alias';
-import babel from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import resolve from '@rollup/plugin-node-resolve';
-import replace from '@rollup/plugin-replace';
-import license from 'rollup-plugin-license';
-import aliasOptions from './aliasOptions';
-import commonjsOptions from './commonjsOptions';
-import jsonOptions from './jsonOptions';
-import nodeResolveOptions from './nodeResolveOptions';
-import babelOptions from './babelOptions';
-import licenseOptions from './licenseOptions';
+import configurePlugins from './configurePlugins.js';
 
 /**
  * handle rollup.js warnings
@@ -36,48 +24,25 @@ function handleOnWarn(warnings) {
 /**
  * return input options for rollup.js
  *
- * @param {DEFAULT_OPTIONS} options option
+ * @param {DEFAULT_OPTIONS} options options of @hidoo/gulp-task-build-js-rollup
  * @return {Object}
  */
-export default function inputOptions(options = {}) {
-  const defaultPlugins = [
-    replace({'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`}), // eslint-disable-line node/no-process-env,
-    license(licenseOptions())
-  ];
-
-  if (!options) {
-    return {
-      input: '',
-      plugins: defaultPlugins,
-      onwarn() {} // eslint-disable-line no-empty-function
-    };
+export default function inputOptions(options) {
+  if (!options || typeof options !== 'object' || Array.isArray(options)) {
+    throw new Error('Argument #1 "options" must be Object.');
   }
 
-  if (
-    options && options.inputOptions &&
-    typeof options.inputOptions === 'object' &&
-    !Array.isArray(options.inputOptions) && options.inputOptions !== null
-  ) {
-    const {input, plugins, ...restInputOptions} = options.inputOptions;
-    const newPlugins = [
-      alias(aliasOptions(options)),
-      resolve(nodeResolveOptions(options)),
-      json(jsonOptions(options)),
-      babel(babelOptions(options)),
-      commonjs(commonjsOptions(options)),
-      ...defaultPlugins
-    ];
+  const inputOpts = options?.inputOptions || {};
+  const input = inputOpts.input || options.src;
 
-    return {
-      input: options.src || input,
-      plugins: Array.isArray(plugins) ? newPlugins.concat(plugins) : newPlugins,
-      onwarn: options.verbose ? handleOnWarn : () => {}, // eslint-disable-line no-empty-function
-      ...restInputOptions
-    };
+  if (!input) {
+    throw new Error('Input source is not set.');
   }
+
   return {
-    input: options.src || '',
-    plugins: defaultPlugins,
+    ...inputOpts,
+    input,
+    plugins: configurePlugins(options),
     onwarn: options.verbose ? handleOnWarn : () => {} // eslint-disable-line no-empty-function
   };
 }

@@ -1,12 +1,4 @@
 /**
- * @license
- *
- * @hidoo/gulp-task-build-js-rollup:
- * author: hidoo
- * version: <pkg version>
- */
-
-/**
  * hoga
  *
  * @return {void}
@@ -20,10 +12,9 @@ function hoga() {
  *
  * @return {void}
  */
-
 function hoge() {
   hoga();
   console.log('hoge'); // eslint-disable-line no-console
 }
 
-export default hoge;
+export { hoge as default };

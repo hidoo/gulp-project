@@ -1,13 +1,15 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import FileType from 'file-type';
-import imageEvenizer from '../src';
+import imageEvenizer from '../src/index.js';
 
 /**
  * get array of uint8array from buffers
@@ -30,6 +32,7 @@ function getUint8ArraysFromBuffers(buffers) {
 }
 
 describe('gulp-plugin-image-evenizer', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
 
   it('should out evenized image if image width or height is odd number.', async () => {
     const cases = [

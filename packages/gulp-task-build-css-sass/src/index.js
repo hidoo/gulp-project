@@ -1,6 +1,7 @@
-import path from 'path';
-import util from 'util';
-import {dest} from 'gulp';
+import fs from 'node:fs';
+import path from 'node:path';
+import util from 'node:util';
+import gulp from 'gulp';
 import cond from 'gulp-if';
 import through from 'through2';
 import Vinyl from 'vinyl';
@@ -23,8 +24,8 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
+  // eslint-disable-next-line node/no-sync
+  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
 }
 catch (error) {
   log.error('Failed to load package.json.');
@@ -196,7 +197,7 @@ export default function buildCss(options = {}) {
       file: opts.src,
       ...sassOptions,
       importer: [
-        sassImporter(),
+        sassImporter.default(),
         magicImporter(),
         ...sassOptions.importer
       ],
@@ -225,12 +226,12 @@ export default function buildCss(options = {}) {
     return stream
       .pipe(postcss(processes))
       .pipe(header(opts.banner, {pkg}))
-      .pipe(dest(opts.dest))
+      .pipe(gulp.dest(opts.dest))
       .pipe(cond(compress, rename({suffix})))
       .pipe(cond(compress, postcss([csso({restructure: false})])))
-      .pipe(cond(compress, dest(opts.dest)))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
       .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

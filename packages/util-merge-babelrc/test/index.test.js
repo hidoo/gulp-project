@@ -1,16 +1,18 @@
 /* eslint no-empty-function: off */
 
-import assert from 'assert';
-import path from 'path';
+import assert from 'node:assert';
+import {createRequire} from 'node:module';
+import path from 'node:path';
 import mergeBabelrc, {
   normalizeBabelPresets,
   findBabelPreset,
   hoistTargetsFromPresetEnv,
   mergeBabelPresets,
   mergeBabelPlugins
-} from '../src';
+} from '../src/index.js';
 
 describe('gulp-util-merge-babelrc', () => {
+  const require = createRequire(import.meta.url);
 
   describe('normalizeBabelPresets', () => {
 
@@ -258,71 +260,78 @@ describe('gulp-util-merge-babelrc', () => {
   });
 
   describe('mergeBabelrc', () => {
-    let babelrcPath = null;
-    let babelrc = null;
+    const exts = ['cjs', 'json'];
 
-    before(() => {
-      babelrcPath = path.resolve(process.cwd(), '.babelrc.js');
-      babelrc = require(babelrcPath); // eslint-disable-line import/no-dynamic-require
-    });
+    exts.forEach((ext) => {
+      describe(`when .babelrc.${ext}`, () => {
+        let babelrcPath = null;
+        let babelrc = null;
 
-    it('should return merged babelrc.', () => {
-      const cases = [
-        [
-          babelrcPath,
-          '',
-          {},
-          {
-            ...babelrc,
-            plugins: [],
-            presets: [
-              ['@babel/preset-env', {}]
+        before(() => {
+          babelrcPath = path.resolve(process.cwd(), 'test', 'fixtures', `.babelrc.${ext}`);
+          babelrc = require(babelrcPath); // eslint-disable-line import/no-dynamic-require
+        });
+
+        it(`should return merged .babelrc.${ext}.`, () => {
+          const cases = [
+            [
+              babelrcPath,
+              '',
+              {},
+              {
+                ...babelrc,
+                plugins: [],
+                presets: [
+                  ['@babel/preset-env', {}]
+                ],
+                targets: 'defaults'
+              }
             ],
-            targets: 'defaults'
-          }
-        ],
-        [
-          babelrcPath,
-          {
-            plugins: ['aaaa', 'bbb'],
-            presets: [
-              ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
+            [
+              babelrcPath,
+              {
+                plugins: ['aaaa', 'bbb'],
+                presets: [
+                  ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
+                ]
+              },
+              {},
+              {
+                ...babelrc,
+                plugins: ['aaaa', 'bbb'],
+                presets: [
+                  ['@babel/preset-env', {}]
+                ],
+                targets: {browsers: 'hoge'}
+              }
+            ],
+            [
+              babelrcPath,
+              {
+                plugins: ['aaaa', 'bbb'],
+                presets: [
+                  ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
+                ]
+              },
+              {removeEnv: true},
+              {
+                ...(() => delete {...babelrc}.env)(),
+                plugins: ['aaaa', 'bbb'],
+                presets: [
+                  ['@babel/preset-env', {}]
+                ],
+                targets: {browsers: 'hoge'}
+              }
             ]
-          },
-          {},
-          {
-            ...babelrc,
-            plugins: ['aaaa', 'bbb'],
-            presets: [
-              ['@babel/preset-env', {}]
-            ],
-            targets: {browsers: 'hoge'}
-          }
-        ],
-        [
-          babelrcPath,
-          {
-            plugins: ['aaaa', 'bbb'],
-            presets: [
-              ['@babel/preset-env', {targets: {browsers: 'hoge'}}]
-            ]
-          },
-          {removeEnv: true},
-          {
-            ...(() => delete {...babelrc}.env)(),
-            plugins: ['aaaa', 'bbb'],
-            presets: [
-              ['@babel/preset-env', {}]
-            ],
-            targets: {browsers: 'hoge'}
-          }
-        ]
-      ];
+          ];
 
-      cases.forEach(([filepath, source, options, expected]) => {
-        const actual = mergeBabelrc(filepath, source, options);
+          cases.forEach(([filepath, source, options, expected]) => {
+            const actual = mergeBabelrc(filepath, source, options);
 
-        assert.deepStrictEqual(actual, expected);
+            assert.deepStrictEqual(actual, expected);
+          });
+        });
+
       });
     });
 

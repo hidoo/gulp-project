@@ -1,6 +1,6 @@
 /* eslint no-magic-numbers: off */
 
-import path from 'path';
+import path from 'node:path';
 import imageminWebp from 'imagemin-webp';
 import through from 'through2';
 import Vinyl from 'vinyl';

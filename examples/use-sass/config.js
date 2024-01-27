@@ -1,8 +1,6 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
-/**
- * import modules
- */
+import fs from 'node:fs';
 import {Command} from 'commander';
 import ips from '@hidoo/util-local-ip';
 
@@ -62,7 +60,7 @@ export const compress = opts.compress || process.env.NODE_ENV !== 'development' 
  *
  * @type {Object}
  */
-export {default as pkg} from './package.json';
+export const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 /**
  * path settings

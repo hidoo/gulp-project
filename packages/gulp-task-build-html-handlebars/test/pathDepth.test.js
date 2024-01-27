@@ -1,7 +1,7 @@
 /* eslint max-len: 0 */
 
-import assert from 'assert';
-import pathDepth from '../src/pathDepth';
+import assert from 'node:assert';
+import pathDepth from '../src/pathDepth.js';
 
 describe('pathDepth', () => {
 

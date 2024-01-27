@@ -1,9 +1,9 @@
-import path from 'path';
+import path from 'node:path';
 import fs from 'fs-extra';
 import glob from 'glob';
 import globParent from 'glob-parent';
-import mkdir from './mkdir';
-import * as log from './log';
+import mkdir from './mkdir.js';
+import * as log from './log.js';
 
 /**
  * default options

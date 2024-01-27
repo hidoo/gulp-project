@@ -1,8 +1,8 @@
-import mkdir from './mkdir';
-import copy from './copy';
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import mkdir from './mkdir.js';
+import copy from './copy.js';
+import write from './write.js';
+import render from './render.js';
+import formatCode from './formatCode.js';
 
 /**
  * copy assets for single device mode
@@ -16,10 +16,10 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
   const {verbose} = options;
 
   await mkdir(`${dest}/src/js`, {verbose});
-  await copy(`${src}/src/js/**/*.js`, `${dest}/src/js`, {verbose});
+  await copy(`${src}/src/js/**/*.{js,cjs}`, `${dest}/src/js`, {verbose});
 
   if (options.jsDeps) {
-    await copy(`${src}/src/jsDeps/**/*.js`, `${dest}/src/js`, {verbose});
+    await copy(`${src}/src/jsDeps/**/*.{js,cjs}`, `${dest}/src/js`, {verbose});
   }
 }
 
@@ -36,12 +36,12 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
 
   await mkdir(`${dest}/src/js/desktop`, {verbose});
   await mkdir(`${dest}/src/js/mobile`, {verbose});
-  await copy(`${src}/src/js/**/*.js`, `${dest}/src/js/desktop`, {verbose});
-  await copy(`${src}/src/js/**/*.js`, `${dest}/src/js/mobile`, {verbose});
+  await copy(`${src}/src/js/**/*.{js,cjs}`, `${dest}/src/js/desktop`, {verbose});
+  await copy(`${src}/src/js/**/*.{js,cjs}`, `${dest}/src/js/mobile`, {verbose});
 
   if (options.jsDeps) {
-    await copy(`${src}/src/jsDeps/**/*.js`, `${dest}/src/js/desktop`, {verbose});
-    await copy(`${src}/src/jsDeps/**/*.js`, `${dest}/src/js/mobile`, {verbose});
+    await copy(`${src}/src/jsDeps/**/*.{js,cjs}`, `${dest}/src/js/desktop`, {verbose});
+    await copy(`${src}/src/jsDeps/**/*.{js,cjs}`, `${dest}/src/js/mobile`, {verbose});
   }
 }
 

@@ -1,24 +1,25 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
-import rimraf from 'rimraf';
-import generateDotFiles from '../src/generateDotFiles';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import generateDotFiles from '../src/generateDotFiles.js';
 
 describe('generateDotFiles', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      src: resolve(__dirname, '../template'),
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = {
+    src: resolve(__dirname, '../template'),
+    dest: `${__dirname}/fixtures/dest`,
+    expected: `${__dirname}/fixtures/expected`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/.*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise.', (done) => {
@@ -40,15 +41,15 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc.json'],
+      ['.mocharc.json', '.mocharc.json']
     ];
 
     files.forEach((file) => {
@@ -73,15 +74,15 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc.json'],
+      ['.mocharc.json', '.mocharc.json']
     ];
 
     files.forEach((file) => {
@@ -106,17 +107,17 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
-      ['.commitlintrc.js', '.commitlintrc.js'],
+      ['.babelrc.json', '.babelrc.json'],
+      ['.commitlintrc.json', '.commitlintrc.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc.json'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
       ['.gitignore', '.gitignore'],
       ['.husky/commit-msg', '.husky-commit-msg'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc.json'],
+      ['.mocharc.json', '.mocharc.json']
     ];
 
     files.forEach((file) => {
@@ -141,17 +142,17 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc.json'],
       ['.editorconfig', '.editorconfig-sass'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc.json'],
       ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc-sass.js'],
-      ['.mocharc.js', '.mocharc.js'],
+      ['.lintstagedrc.json', '.lintstagedrc-sass.json'],
+      ['.mocharc.json', '.mocharc.json'],
       ['.stylelintignore', '.stylelintignore'],
-      ['.stylelintrc.js', '.stylelintrc.js']
+      ['.stylelintrc.json', '.stylelintrc.json']
     ];
 
     files.forEach((file) => {
@@ -163,7 +164,7 @@ describe('generateDotFiles', () => {
     });
   });
 
-  it('should generate dot files if argument options.js is false.', async () => {
+  it('should generate dot files if argument options.json is false.', async () => {
     await generateDotFiles(path.src, path.dest, {
       css: true,
       html: true,
@@ -175,14 +176,13 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc-no-js.js'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc-no-js.js'],
+      ['.eslintrc.json', '.eslintrc-no-js.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js']
+      ['.lintstagedrc.json', '.lintstagedrc.json']
     ];
 
     files.forEach((file) => {

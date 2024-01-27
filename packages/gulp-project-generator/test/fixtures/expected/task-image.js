@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import optimizeImage from '@hidoo/gulp-task-optimize-image';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 export const main = optimizeImage({

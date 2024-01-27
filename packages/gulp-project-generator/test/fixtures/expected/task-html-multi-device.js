@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import buildHtml from '@hidoo/gulp-task-build-html-handlebars';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 const mainDesktop = buildHtml({

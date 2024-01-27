@@ -1,14 +1,15 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import FileType from 'file-type';
 import imagemin from 'gulp-imagemin';
-import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src';
+import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src/index.js';
 
 /**
  * get array of uint8array from buffers
@@ -19,12 +20,12 @@ import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src';
 function getUint8ArraysFromBuffers(buffers) {
   return Promise.all(
     buffers.map((buffer) => FileType.fromBuffer(buffer)
-      .then(({mime}) => new Promise((resolve, reject) => {
+      .then(({mime}) => new Promise((done, reject) => {
         getPixels(buffer, mime, (error, pixels) => {
           if (error) {
             return reject(error);
           }
-          return resolve(pixels.data);
+          return done(pixels.data);
         });
       })))
   );
@@ -38,7 +39,7 @@ function getUint8ArraysFromBuffers(buffers) {
  */
 function comparePixels(params) {
   return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise(
-    (resolve, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
+    (done, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
       .then((pixels) => {
         const [actualPixels, expectedPixels] = pixels,
               countDiffPixels = pixelmatch(
@@ -51,13 +52,14 @@ function comparePixels(params) {
               );
 
         assert(countDiffPixels === 0);
-        return resolve();
+        return done();
       })
       .catch((error) => reject(error))
   )));
 }
 
 describe('gulp-task-build-sprite-image', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src`,
     dest: `${__dirname}/fixtures/dest`,
@@ -65,7 +67,11 @@ describe('gulp-task-build-sprite-image', () => {
   };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*.{png,css,scss,styl,gz}`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {

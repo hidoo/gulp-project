@@ -1,25 +1,26 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
-import rimraf from 'rimraf';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import glob from 'glob';
-import generateJsFiles from '../src/generateJsFiles';
+import generateJsFiles from '../src/generateJsFiles.js';
 
 describe('generateJsFiles', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      src: resolve(__dirname, '../template'),
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = {
+    src: resolve(__dirname, '../template'),
+    dest: `${__dirname}/fixtures/dest`,
+    expected: `${__dirname}/fixtures/expected`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise.', (done) => {
@@ -50,10 +51,10 @@ describe('generateJsFiles', () => {
             .map((filepath) => filepath.replace(path.dest, ''))
             .sort(),
           expectedAssetList = [
-            '/src/js/lib/sample-cjs/index.js',
-            '/src/js/lib/sample-cjs/test/index.test.js',
+            '/src/js/lib/sample-cjs/index.cjs',
+            '/src/js/lib/sample-cjs/index.test.js',
             '/src/js/lib/sample-esm/index.js',
-            '/src/js/lib/sample-esm/test/index.test.js',
+            '/src/js/lib/sample-esm/index.test.js',
             '/src/js/main.js'
           ];
 
@@ -72,10 +73,10 @@ describe('generateJsFiles', () => {
             .map((filepath) => filepath.replace(path.dest, ''))
             .sort(),
           expectedAssetList = [
-            '/src/js/lib/sample-cjs/index.js',
-            '/src/js/lib/sample-cjs/test/index.test.js',
+            '/src/js/lib/sample-cjs/index.cjs',
+            '/src/js/lib/sample-cjs/index.test.js',
             '/src/js/lib/sample-esm/index.js',
-            '/src/js/lib/sample-esm/test/index.test.js',
+            '/src/js/lib/sample-esm/index.test.js',
             '/src/js/main.js'
           ];
 
@@ -96,10 +97,10 @@ describe('generateJsFiles', () => {
           expectedAssetList = [
             '/src/js/deps/sample-a.js',
             '/src/js/deps/sample-b.js',
-            '/src/js/lib/sample-cjs/index.js',
-            '/src/js/lib/sample-cjs/test/index.test.js',
+            '/src/js/lib/sample-cjs/index.cjs',
+            '/src/js/lib/sample-cjs/index.test.js',
             '/src/js/lib/sample-esm/index.js',
-            '/src/js/lib/sample-esm/test/index.test.js',
+            '/src/js/lib/sample-esm/index.test.js',
             '/src/js/main.js'
           ];
 
@@ -118,15 +119,15 @@ describe('generateJsFiles', () => {
             .map((filepath) => filepath.replace(path.dest, ''))
             .sort(),
           expectedAssetList = [
-            '/src/js/desktop/lib/sample-cjs/index.js',
-            '/src/js/desktop/lib/sample-cjs/test/index.test.js',
+            '/src/js/desktop/lib/sample-cjs/index.cjs',
+            '/src/js/desktop/lib/sample-cjs/index.test.js',
             '/src/js/desktop/lib/sample-esm/index.js',
-            '/src/js/desktop/lib/sample-esm/test/index.test.js',
+            '/src/js/desktop/lib/sample-esm/index.test.js',
             '/src/js/desktop/main.js',
-            '/src/js/mobile/lib/sample-cjs/index.js',
-            '/src/js/mobile/lib/sample-cjs/test/index.test.js',
+            '/src/js/mobile/lib/sample-cjs/index.cjs',
+            '/src/js/mobile/lib/sample-cjs/index.test.js',
             '/src/js/mobile/lib/sample-esm/index.js',
-            '/src/js/mobile/lib/sample-esm/test/index.test.js',
+            '/src/js/mobile/lib/sample-esm/index.test.js',
             '/src/js/mobile/main.js'
           ];
 
@@ -147,17 +148,17 @@ describe('generateJsFiles', () => {
           expectedAssetList = [
             '/src/js/desktop/deps/sample-a.js',
             '/src/js/desktop/deps/sample-b.js',
-            '/src/js/desktop/lib/sample-cjs/index.js',
-            '/src/js/desktop/lib/sample-cjs/test/index.test.js',
+            '/src/js/desktop/lib/sample-cjs/index.cjs',
+            '/src/js/desktop/lib/sample-cjs/index.test.js',
             '/src/js/desktop/lib/sample-esm/index.js',
-            '/src/js/desktop/lib/sample-esm/test/index.test.js',
+            '/src/js/desktop/lib/sample-esm/index.test.js',
             '/src/js/desktop/main.js',
             '/src/js/mobile/deps/sample-a.js',
             '/src/js/mobile/deps/sample-b.js',
-            '/src/js/mobile/lib/sample-cjs/index.js',
-            '/src/js/mobile/lib/sample-cjs/test/index.test.js',
+            '/src/js/mobile/lib/sample-cjs/index.cjs',
+            '/src/js/mobile/lib/sample-cjs/index.test.js',
             '/src/js/mobile/lib/sample-esm/index.js',
-            '/src/js/mobile/lib/sample-esm/test/index.test.js',
+            '/src/js/mobile/lib/sample-esm/index.test.js',
             '/src/js/mobile/main.js'
           ];
 

@@ -1,256 +1,305 @@
 /* eslint max-len: off, no-magic-numbers: off, max-statements: off */
 
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
+import assert from 'node:assert';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import gulp from 'gulp';
-import rimraf from 'rimraf';
-import pkg from '../package.json';
-import buildJs from '../src';
+import buildJs from '../src/index.js';
+
+let pkg = null;
 
 /**
- * replace version number in source code
+ * read built file
  *
- * @param {String} code target source code
+ * @param {String} file filename
  * @return {String}
  */
-function replaceVersion(code = '') {
-  return code
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
+
+  return content.toString().trim()
     .replace(/<core-js version>/g, pkg.devDependencies['core-js'])
     .replace(/<pkg version>/g, pkg.version);
 }
 
 describe('gulp-task-build-js-rollup', () => {
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
 
-  afterEach((done) => {
-    rimraf(`${path.dest}/*.{js,gz}`, done);
+  before(async () => {
+    pkg = JSON.parse(
+      await fs.readFile(
+        path.resolve(process.cwd(), 'package.json')
+      )
+    );
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+
+    opts = {
+      dest: destDir,
+      inputOptions: {
+        plugins({name, factory, config}) {
+          // disable banner settings
+          if (name === 'license') {
+            config.banner = null;
+          }
+          return {name, factory, config: {...config}};
+        }
+      },
+      verbose: false
+    };
   });
 
-  it('should out to "main.js" if argument "options" is default.', (done) => {
-    const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest
-    });
-
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
-
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+  after(() => {
+    pkg = null;
+    dirname = null;
+    fixturesDir = null;
+    srcDir = null;
+    destDir = null;
+    expectedDir = null;
   });
 
-  it('should out to specified file name if argument "options.filename" is set.', (done) => {
-    const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
-      filename: 'hoge.js'
-    });
-
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/hoge.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
-
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+  afterEach(async () => {
+    await fs.rm(destDir, {recursive: true});
+    await fs.mkdir(destDir);
   });
 
-  it('should out to "main.js" that transformed for target browsers if argument "options.browsers" is set.', (done) => {
+  it('should out js file with default options.', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/main.js`
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    const actual = await readBuiltFile(`${destDir}/main.js`);
+    const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
+  });
+
+  it('should out specified named js file by options.filename.', async () => {
+    const task = buildJs({
+      ...opts,
+      src: `${srcDir}/main.js`,
+      filename: 'main.hoge.js'
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    const actual = await readBuiltFile(`${destDir}/main.hoge.js`);
+    const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
+  });
+
+  it('should out polyfilled js file by "@babel/preset-env" and options.browsers.', async () => {
+    const task = buildJs({
+      ...opts,
+      src: `${srcDir}/main.js`,
       filename: 'main.browsers.js',
       browsers: 'ie >= 8'
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.browsers.js`);
+    const expected = await readBuiltFile(`${expectedDir}/main.browsers.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.js" that transformed for target browsers if argument "options.targets" is set.', (done) => {
+  it('should out polyfilled js file by "@babel/preset-env" and options.targets.', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
-      filename: 'main.browsers.js',
+      ...opts,
+      src: `${srcDir}/main.js`,
+      filename: 'main.targets.js',
       targets: 'ie >= 8'
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.browsers.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.browsers.js`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.targets.js`);
+    const expected = await readBuiltFile(`${expectedDir}/main.browsers.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "use-corejs.js" that polyfilled by specified options of core-js if argument "options.corejs" is set.', (done) => {
+  it('should out js file with transformed jsx components by "@babel/preset-react".', async () => {
     const task = buildJs({
-      src: `${path.src}/use-corejs.js`,
-      dest: path.dest,
-      filename: 'use-corejs.js',
-      targets: 'ie >= 8',
-      corejs: {version: 3, proposals: true}
-    });
-
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/use-corejs.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/use-corejs.js`).toString().trim());
-
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
-  });
-
-  it('should out to "use-react.js" that transformed for jsx if @babel/preset-react use.', (done) => {
-    const task = buildJs({
-      src: `${path.src}/use-react.js`,
-      dest: path.dest,
-      filename: 'use-react.js',
-      babelrc: resolve(process.cwd(), `${__dirname}/fixtures/src/use-react.babelrc.js`)
-    });
-
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/use-react.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/use-react.js`).toString().trim());
-
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
-  });
-
-  it('should out to "import-json.js" that convert JSON to ES6 modules if ".json" files import.', (done) => {
-    const task = buildJs({
-      src: `${path.src}/import-json.js`,
-      dest: path.dest,
-      filename: 'import-json.js'
-    });
-
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/import-json.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/import-json.js`).toString().trim());
-
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
-  });
-
-  it('should out to "alias.js" that resolved modules by alias if options.aliasOptions is set.', (done) => {
-    const task = buildJs({
-      src: `${path.src}/child/grand-child/alias.js`,
-      dest: path.dest,
-      filename: 'alias.js',
-      aliasOptions: {
-        entries: [
-          {
-            find: '~',
-            replacement: `${resolve(path.src)}`
+      ...opts,
+      src: `${srcDir}/with-jsx.js`,
+      filename: 'with-jsx.js',
+      inputOptions: {
+        plugins({name, factory, config}) {
+          if (name === 'commonjs') {
+            config.exclude = [
+              `${srcDir}/with-jsx.js`
+            ];
           }
-        ]
+          if (name === 'license') {
+            config.banner = null;
+          }
+          return {name, factory, config: {...config}};
+        }
       }
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/alias.js`).toString().trim();
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/alias.js`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/with-jsx.js`);
+    const expected = await readBuiltFile(`${expectedDir}/with-jsx.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.min.js" and "main.min.js.gz" if argument "options.compress" is set.', (done) => {
+  it('should out js file with injected JSON by @rollup/plugin-json".', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/with-json.js`,
+      filename: 'with-json.js'
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    const actual = await readBuiltFile(`${destDir}/with-json.js`);
+    const expected = await readBuiltFile(`${expectedDir}/with-json.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
+  });
+
+  it('should out js file with resolved modules by @rollup/plugin-alias.', async () => {
+    const task = buildJs({
+      ...opts,
+      src: `${srcDir}/with-alias.js`,
+      filename: 'with-alias.js',
+      inputOptions: {
+        plugins({name, factory, config}) {
+          if (name === 'alias') {
+            config.entries = [
+              {
+                find: '~',
+                replacement: srcDir
+              }
+            ];
+          }
+          if (name === 'license') {
+            config.banner = null;
+          }
+          return {name, factory, config: {...config}};
+        }
+      }
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    const actual = await readBuiltFile(`${destDir}/with-alias.js`);
+    const expected = await readBuiltFile(`${expectedDir}/with-alias.js`);
+
+    assert(actual);
+    assert.equal(actual, expected);
+  });
+
+  it('should out minified and compressed js files by options.compress.', async () => {
+    const task = buildJs({
+      ...opts,
+      src: `${srcDir}/main.js`,
       compress: true
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
-      const actualMin = fs.readFileSync(`${path.dest}/main.min.js`).toString().trim();
-      const actualGz = fs.readFileSync(`${path.dest}/main.min.js.gz`);
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert(actualMin);
-      assert(actualGz);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+    await Promise.all(
+      ['js', 'min.js', 'min.js.gz'].map(async (ext) => {
+        if (ext === '.js') {
+          const actual = await readBuiltFile(`${destDir}/main.js`);
+          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+          assert(actual);
+          assert.equal(actual, expected);
+        }
+        else {
+          const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+          assert(actual);
+        }
+      })
+    );
   });
 
-  it('should out to "main.hoge.js" and "main.hoge.js.gz" if argument "options.compress" is set and argument "options.suffix" is ".hoge".', (done) => {
+  it('should out named minified and named compressed js files by options.compress and options.suffix.', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
-      suffix: '.hoge',
+      ...opts,
+      src: `${srcDir}/main.js`,
+      suffix: '.compressed',
       compress: true
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
-      const actualMin = fs.readFileSync(`${path.dest}/main.hoge.js`).toString().trim();
-      const actualGz = fs.readFileSync(`${path.dest}/main.hoge.js.gz`);
-      const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert(actualMin);
-      assert(actualGz);
-      assert.deepStrictEqual(actual, expected);
-      done();
-    });
+    await Promise.all(
+      ['js', 'compressed.js', 'compressed.js.gz'].map(async (ext) => {
+        if (ext === '.js') {
+          const actual = await readBuiltFile(`${destDir}/main.js`);
+          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+          assert(actual);
+          assert.equal(actual, expected);
+        }
+        else {
+          const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+          assert(actual);
+        }
+      })
+    );
   });
 
-  it('should out to "main.js" and "main.js.gz" if argument "options.compress" is set and argument "options.suffix" is empty string.', (done) => {
+  it('should out minified and compressed js files with no suffix by options.compress and empty options.suffix.', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/main.js`,
       suffix: '',
       compress: true
     });
 
-    task().on('finish', () => {
-      const actualMin = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
-      const actualGz = fs.readFileSync(`${path.dest}/main.js.gz`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualMin);
-      assert(actualGz);
-      done();
-    });
+    await Promise.all(
+      ['js', 'js.gz'].map(async (ext) => {
+        const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+        assert(actual);
+      })
+    );
   });
 
-  it('should out splitted codes if use dynamic "import" syntax and set optiions.outputOptions.format to "es".', (done) => {
+  it('should out code splitted js files with dynamic "import" syntax and "es" output format.', async () => {
     const entries = [
       'entry.js'
     ];
-    const dynamicDeps = [
+    const dependencies = [
       'hoge.js',
       'fuga.js'
     ];
     const task = buildJs({
-      src: entries.map((file) => `${path.src}/code-splitting/${file}`),
-      dest: path.dest,
+      ...opts,
+      src: entries.map((file) => `${srcDir}/code-splitting/${file}`),
+      dest: `${destDir}/code-splitting/`,
       targets: 'chrome >= 80',
       outputOptions: {
         format: 'es',
@@ -263,49 +312,83 @@ describe('gulp-task-build-js-rollup', () => {
       filename: ''
     });
 
-    task().on('finish', () => {
-      [...entries, ...dynamicDeps].forEach((file) => {
-        const actual = fs.readFileSync(`${path.dest}/${file}`).toString().trim();
-        const expected = replaceVersion(fs.readFileSync(`${path.expected}/code-splitting/${file}`).toString().trim());
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      [...entries, ...dependencies].map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/code-splitting/${file}`);
+        const expected = await readBuiltFile(`${expectedDir}/code-splitting/${file}`);
 
         assert(actual);
-        assert.deepStrictEqual(actual, expected);
-      });
-
-      done();
-    });
+        assert.deepEqual(actual, expected);
+      })
+    );
   });
 
-  it('should not stop process if throw error.', (done) => {
+  it('should out multiple format js files with array type outputOptions.', async () => {
     const task = buildJs({
-      src: `${path.src}/error.js`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/main.js`,
+      dest: `${destDir}/multiple-formats/`,
+      targets: 'chrome >= 80',
+      outputOptions: [
+        {
+          format: 'es',
+          file: 'main.es.js'
+        },
+        {
+          format: 'cjs',
+          file: 'main.cjs.js'
+        }
+      ],
+
+      // specify an empty string,
+      // if you want to give priority to outputOptions.file
+      filename: ''
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      ['es', 'cjs'].map(async (format) => {
+        const actual = await readBuiltFile(`${destDir}/multiple-formats/main.${format}.js`);
+        const expected = await readBuiltFile(`${expectedDir}/multiple-formats/main.${format}.js`);
+
+        assert(actual);
+        assert.deepEqual(actual, expected);
+      })
+    );
+  });
+
+  it('should not stop process when throw error.', async () => {
+    const task = buildJs({
+      ...opts,
+      src: `${srcDir}/error.js`,
       compress: false
     });
 
-    task().on('finish', done);
+    await new Promise((resolve) => task().on('finish', resolve));
   });
 
-  it('should call next task after files were outputted in gulp.series.', (done) => {
+  it('should call next task after files were outputted in gulp.series.', async () => {
     const task = buildJs({
-      src: `${path.src}/main.js`,
-      dest: path.dest
+      ...opts,
+      src: `${srcDir}/main.js`
     });
 
-    const build = gulp.series(
-      task,
-      (cb) => {
-        const actual = fs.readFileSync(`${path.dest}/main.js`).toString().trim();
-        const expected = replaceVersion(fs.readFileSync(`${path.expected}/main.js`).toString().trim());
+    await new Promise((resolve) => {
+      gulp.series(
+        task,
+        async () => {
+          const actual = await readBuiltFile(`${destDir}/main.js`);
+          const expected = await readBuiltFile(`${expectedDir}/main.js`);
 
-        assert(actual);
-        assert.deepStrictEqual(actual, expected);
-        cb();
-        done();
-      }
-    );
-
-    build();
+          assert(actual);
+          assert.deepEqual(actual, expected);
+          resolve();
+        }
+      )();
+    });
   });
 
 });

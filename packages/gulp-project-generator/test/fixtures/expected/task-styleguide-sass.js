@@ -1,14 +1,7 @@
-/**
- * import modules
- */
-import {relative} from 'path';
+import {relative} from 'node:path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 /**
  * relative path from styleguide to css

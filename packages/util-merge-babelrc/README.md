@@ -13,7 +13,7 @@ $ npm install --save-dev @hidoo/util-merge-babelrc
 ```js
 import mergeBabelrc from '@hidoo/util-merge-babelrc';
 
-const babelOptions = mergeBabelrc('/path/to/.babelrc.js', {
+const babelOptions = mergeBabelrc('/path/to/.babelrc.json', {
   presets: [...],
   plugins: [...],
   useBuiltIns: 'usege'

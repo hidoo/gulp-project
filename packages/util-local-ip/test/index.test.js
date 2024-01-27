@@ -1,8 +1,8 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
+import assert from 'node:assert';
 import ipRegex from 'ip-regex';
-import getLocalIps from '../src';
+import getLocalIps from '../src/index.js';
 
 describe('getLocalIps', () => {
 

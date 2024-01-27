@@ -1,14 +1,15 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import {basename, extname} from 'path';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname, basename, extname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import FileType from 'file-type';
-import imagePlaceholder from '../src';
+import imagePlaceholder from '../src/index.js';
 
 /**
  * get array of uint8array from buffers
@@ -58,6 +59,7 @@ function comparePixels(params) {
 }
 
 describe('gulp-plugin-image-placeholder', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const cases = [
     [
       `${__dirname}/fixtures/src/9x9.gif`,

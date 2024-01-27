@@ -1,23 +1,27 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
-import generatePackageJson from '../src/generatePackageJson';
-import pkg from '../package.json';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import generatePackageJson from '../src/generatePackageJson.js';
 
 describe('generatePackageJson', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
-  });
+  const require = createRequire(import.meta.url);
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const pkg = require('../package.json');
+  const path = {
+    dest: `${__dirname}/fixtures/dest`,
+    expected: `${__dirname}/fixtures/expected`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+    fs.rm(
+      path.dest,
+      {recursive: true},
+      () => fs.mkdir(path.dest, done)
+    );
   });
 
   it('should return Promise.', (done) => {

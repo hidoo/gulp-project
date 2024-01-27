@@ -1,12 +1,13 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import {dirname, basename, resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import Vinyl from 'vinyl';
 import through from 'through2';
 import Handlebars from 'handlebars';
 import PluginError from 'plugin-error';
-import optimizeSvg from './optimizeSvg';
-import reshapeTemplateVars from './reshapeTemplateVars';
-import configureSVGSpriter from './configureSVGSpriter';
+import optimizeSvg from './optimizeSvg.js';
+import reshapeTemplateVars from './reshapeTemplateVars.js';
+import configureSVGSpriter from './configureSVGSpriter.js';
 
 /**
  * plugin default options.
@@ -31,7 +32,10 @@ const DEFAULT_OPTIONS = {
   layout: 'packed',
 
   // Handlebars template for css
-  cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
+  cssTemplate: resolve(
+    dirname(fileURLToPath(import.meta.url)),
+    '../template/stylus.hbs'
+  ),
 
   // Handlebars helpers
   cssHandlebarsHelpers: null
@@ -125,7 +129,7 @@ export default function svgSprite(options) {
     }
 
     try {
-      spriter.add(file.path, path.basename(file.path), file.contents);
+      spriter.add(file.path, basename(file.path), file.contents);
       fileCount += 1; // eslint-disable-line no-magic-numbers
     }
     catch (error) {
@@ -176,7 +180,7 @@ export default function svgSprite(options) {
         // resource is .styl
         else if (type === 'styl') {
           const contents = template({
-            spriteName: path.basename(imgPath.replace(/(\?|#).*$/g, ''), '.svg'), // eslint-disable-line prefer-named-capture-group
+            spriteName: basename(imgPath.replace(/(\?|#).*$/g, ''), '.svg'), // eslint-disable-line prefer-named-capture-group
             imgPath,
             shapes: reshapeTemplateVars(data.css)
           });

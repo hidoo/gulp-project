@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import mkdirp from 'mkdirp';
-import * as log from './log';
+import * as log from './log.js';
 
 /**
  * default options

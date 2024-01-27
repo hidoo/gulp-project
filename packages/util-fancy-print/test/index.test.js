@@ -1,18 +1,18 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
+import assert from 'node:assert';
 import sinon from 'sinon';
 import stripAnsi from 'strip-ansi';
-import fancyPrint from '../src';
+import fancyPrint from '../src/index.js';
 
 describe('util-fancy-print', () => {
-  let spy = null;
+  let spied = null;
 
   beforeEach(() => {
-    spy = sinon.spy(console, 'log');
+    spied = sinon.spy(console, 'log');
   });
   afterEach(() => {
-    spy.restore();
+    spied.restore();
   });
 
   it('should print formatted values.', () => {
@@ -84,7 +84,7 @@ Fuga: 0
     cases.forEach(([caption, items, expected], index) => {
       fancyPrint(caption, items);
 
-      assert.equal(stripAnsi(spy.args[index][0]), expected.trim());
+      assert.equal(stripAnsi(spied.args[index][0]), expected.trim());
     });
 
   });

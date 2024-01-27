@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import browserSync from 'browser-sync';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
-import app from '../src/server/app';
+import * as config from '../config.js';
+import app from '../src/server/app.js';
 
 /**
  * return start local server task

@@ -1,8 +1,11 @@
-import assert from 'assert';
-import fs from 'fs';
-import formatCode from '../src/formatCode';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import formatCode from '../src/formatCode.js';
 
 describe('formatCode', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src/formatCode`,
     expected: `${__dirname}/fixtures/expected/formatCode`

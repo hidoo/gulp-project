@@ -1,24 +1,25 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-const assert = require('assert'),
-      path = require('path'),
-      childProcess = require('child_process'),
-      glob = require('glob'),
-      rimraf = require('rimraf');
+import assert from 'node:assert';
+import childProcess from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import glob from 'glob';
 
 describe('examples', () => {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
   describe('single-device', () => {
-    let examplePath = null,
-        exampleDestPath = null;
-
-    before(() => {
-      examplePath = path.resolve(__dirname, '../examples/single-device');
-      exampleDestPath = path.resolve(examplePath, './public');
-    });
+    const examplePath = path.resolve(__dirname, '../examples/single-device');
+    const exampleDestPath = path.resolve(examplePath, './public');
 
     afterEach((done) => {
-      rimraf(exampleDestPath, done);
+      fs.rm(
+        exampleDestPath,
+        {recursive: true},
+        () => fs.mkdir(exampleDestPath, done)
+      );
     });
 
     it('should generate files to ./public directory.', async () => {
@@ -71,16 +72,15 @@ describe('examples', () => {
   });
 
   describe('multi-device', () => {
-    let examplePath = null,
-        exampleDestPath = null;
-
-    before(() => {
-      examplePath = path.resolve(__dirname, '../examples/multi-device');
-      exampleDestPath = path.resolve(examplePath, './public');
-    });
+    const examplePath = path.resolve(__dirname, '../examples/multi-device');
+    const exampleDestPath = path.resolve(examplePath, './public');
 
     afterEach((done) => {
-      rimraf(exampleDestPath, done);
+      fs.rm(
+        exampleDestPath,
+        {recursive: true},
+        () => fs.mkdir(exampleDestPath, done)
+      );
     });
 
     it('should generate files to ./public directory.', async () => {
@@ -159,7 +159,11 @@ describe('examples', () => {
     });
 
     afterEach((done) => {
-      rimraf(exampleDestPath, done);
+      fs.rm(
+        exampleDestPath,
+        {recursive: true},
+        () => fs.mkdir(exampleDestPath, done)
+      );
     });
 
     it('should generate files to ./public directory.', async () => {

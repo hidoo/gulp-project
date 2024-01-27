@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import util from 'node:util';
 import childProcess from 'node:child_process';
-import chalk from 'node:chalk';
+import chalk from 'chalk';
 
 const exec = util.promisify(childProcess.exec);
 
@@ -29,7 +29,6 @@ async function task(label = '', taskFunc = async () => {}) { // eslint-disable-l
   }
 }
 
-/* eslint-disable max-statements */
 /**
  * bump version
  *
@@ -45,9 +44,6 @@ async function bumpVersion(argv = []) {
       concurrency = opts[opts.indexOf('--concurrency') + 1]; // eslint-disable-line no-magic-numbers
     }
 
-    await task('build packages', async () => {
-      await exec('yarn build:packages');
-    });
     await task('test packages', async () => {
       await exec('yarn test:lint');
       await exec(`yarn test:packages --concurrency ${concurrency}`);
@@ -56,7 +52,7 @@ async function bumpVersion(argv = []) {
       await exec(`lerna version ${semver} --force-publish --no-push --no-git-tag-version -y`);
     });
     await task('build examples', async () => {
-      await exec('yarn build:examples');
+      await exec('yarn build');
       await exec('lerna bootstrap');
     });
     await task('test examples', async () => {
@@ -83,6 +79,5 @@ async function bumpVersion(argv = []) {
     console.error(error);
   }
 }
-/* eslint-enable max-statements */
 
 bumpVersion(process.argv);

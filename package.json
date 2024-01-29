@@ -25,7 +25,7 @@
     "test:packages": "lerna run test --no-private",
     "test:examples": "cross-env NODE_ENV=test mocha",
     "install": "lerna bootstrap",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "author": "hidoo",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "glob": "7.1.7",
-    "husky": "6.0.0",
+    "husky": "9.0.6",
     "lerna": "4.0.0",
     "lint-staged": "15.2.0",
     "mocha": "10.2.0",

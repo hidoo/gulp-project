@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development gulp",
     "dev:build": "cross-env NODE_ENV=development npm-run-all -s static:clean static:build",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prod": "cross-env NODE_ENV=production gulp",
     "prod:build": "cross-env NODE_ENV=production npm-run-all -s static:clean static:build",
     "start": "npm run dev",
@@ -60,7 +60,7 @@
     "eslint": "7.28.0",
     "express": "4.17.1",
     "gulp": "4.0.2",
-    "husky": "6.0.0",
+    "husky": "9.0.6",
     "jsdom": "16.2.0",
     "jsdom-global": "3.0.2",
     "lint-staged": "15.2.0",

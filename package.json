@@ -47,5 +47,8 @@
     "examples/*",
     "packages/*"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "stylelint-no-unsupported-browser-features": "7.0.0"
+  }
 }

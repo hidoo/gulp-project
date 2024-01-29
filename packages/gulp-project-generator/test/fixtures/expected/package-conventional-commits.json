@@ -33,8 +33,8 @@
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
     "@hidoo/eslint-config": "^0.6.0",
     "@hidoo/express-engine-handlebars": "^0.8.2",
     "@hidoo/gulp-task-build-css-stylus": "^0.0.0",
@@ -57,7 +57,7 @@
     "husky": "^6.0.0",
     "jsdom": "^16.2.0",
     "jsdom-global": "^3.0.2",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^15.2.0",
     "mocha": "^8.4.0",
     "npm-run-all": "^4.1.5",
     "regenerator-runtime": "^0.14.1"

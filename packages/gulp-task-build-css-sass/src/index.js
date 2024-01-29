@@ -5,7 +5,7 @@ import gulp from 'gulp';
 import cond from 'gulp-if';
 import through from 'through2';
 import Vinyl from 'vinyl';
-import sass from 'sass';
+import * as sass from 'sass';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -184,7 +184,10 @@ function getProcesses(options = {}) {
  * }));
  */
 export default function buildCss(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = {
+    ...DEFAULT_OPTIONS,
+    ...options
+  };
 
   // define task
   const task = () => {
@@ -193,22 +196,23 @@ export default function buildCss(options = {}) {
     const filename = opts.filename || path.basename(opts.src);
     const sassOptions = opts.sassOptions || {functions: {}, importer: []};
     const processes = getProcesses(opts);
-    const compiler = render({
-      file: opts.src,
-      ...sassOptions,
-      importer: [
-        sassImporter.default(),
-        magicImporter(),
-        ...sassOptions.importer
-      ],
-      functions: {
-        ...DEFAULT_FUNCTIONS,
-        ...sassOptions.functions
-      }
-    });
 
-    compiler
-      .then(({css}) => {
+    (async () => {
+      try {
+        const {css} = await render({
+          file: opts.src,
+          ...sassOptions,
+          importer: [
+            sassImporter.default(),
+            magicImporter(),
+            ...sassOptions.importer
+          ],
+          functions: {
+            ...DEFAULT_FUNCTIONS,
+            ...sassOptions.functions
+          }
+        });
+
         // add code to stream as vinyl file
         stream.push(new Vinyl({
           path: filename,
@@ -217,11 +221,12 @@ export default function buildCss(options = {}) {
 
         // add null that indicates write completion
         stream.push(null);
-      })
-      .catch((error) => {
+      }
+      catch (error) {
         errorHandler(error);
         stream.emit('end');
-      });
+      }
+    })();
 
     return stream
       .pipe(postcss(processes))

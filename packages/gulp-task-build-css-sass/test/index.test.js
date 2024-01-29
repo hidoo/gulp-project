@@ -1,260 +1,280 @@
 /* eslint max-len: off, no-magic-numbers: off, max-statements: off */
 
 import assert from 'node:assert';
-import fs from 'node:fs';
-import {dirname} from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import gulp from 'gulp';
 import buildCss from '../src/index.js';
 
-describe('gulp-task-build-css-sass', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+/**
+ * read built file
+ *
+ * @param {String} file filename
+ * @return {String}
+ */
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
 
-  afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+  return content.toString().trim();
+}
+
+describe('gulp-task-build-css-sass', () => {
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
+
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+
+    opts = {
+      dest: destDir,
+      verbose: false
+    };
   });
 
-  it('should out to "main.css" if argument "options" is default.', (done) => {
+  afterEach(async () => {
+    await fs.rm(destDir, {recursive: true});
+    await fs.mkdir(destDir);
+  });
+
+  it('should out css file with default options.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to specified file name if argument "options.filename" is set.', (done) => {
+  it('should out specified named css file by options.filename.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       filename: 'hoge.css',
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/hoge.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/hoge.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that applied vendor-prefix for target browsers if argument "options.browsers" is set.', (done) => {
+  it('should out css file applied vendor-prefix by autoprefixer and options.browsers.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       browsers: ['android >= 2.3'],
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.browsers.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.browsers.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that applied vendor-prefix for target browsers if argument "options.targets" is set.', (done) => {
+  it('should out css file applied vendor-prefix by autoprefixer and options.targets.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       targets: ['android >= 2.3'],
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.browsers.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.browsers.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.min.css" and "main.min.css.gz" if argument "options.compress" is set.', (done) => {
+  it('should out minified and compressed css file by options.compress.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       compress: true
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const actualMin = fs.readFileSync(`${path.dest}/main.min.css`);
-      const actualGz = fs.readFileSync(`${path.dest}/main.min.css.gz`);
-      const expected = fs.readFileSync(`${path.expected}/main.css`);
-      const expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert(actualMin);
-      assert(actualGz);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      assert.deepStrictEqual(String(actualMin).trim(), String(expectedMin).trim());
-      done();
-    });
+    await Promise.all(
+      ['css', 'min.css', 'min.css.gz'].map(async (ext) => {
+        if (ext === '.css') {
+          const actual = await readBuiltFile(`${destDir}/main.js`);
+          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+          assert(actual);
+          assert.equal(actual, expected);
+        }
+        else {
+          const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+          assert(actual);
+        }
+      })
+    );
   });
 
-  it('should out to "main.hoge.css" and "main.hoge.css.gz" if argument "options.compress" is true and argument "options.suffix" is ".hoge".', (done) => {
+  it('should out named minified and named compressed css file by options.compress and options.suffix.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
-      suffix: '.hoge',
+      ...opts,
+      src: `${srcDir}/style.scss`,
+      suffix: '.compressed',
       compress: true
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const actualMin = fs.readFileSync(`${path.dest}/main.hoge.css`);
-      const actualGz = fs.readFileSync(`${path.dest}/main.hoge.css.gz`);
-      const expected = fs.readFileSync(`${path.expected}/main.css`);
-      const expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert(actualMin);
-      assert(actualGz);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      assert.deepStrictEqual(String(actualMin).trim(), String(expectedMin).trim());
-      done();
-    });
+    await Promise.all(
+      ['css', 'compressed.css', 'compressed.css.gz'].map(async (ext) => {
+        if (ext === '.css') {
+          const actual = await readBuiltFile(`${destDir}/main.js`);
+          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+
+          assert(actual);
+          assert.equal(actual, expected);
+        }
+        else {
+          const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+          assert(actual);
+        }
+      })
+    );
   });
 
-  it('should out to "main.css" and "main.css.gz" if argument "options.compress" is true and argument "options.suffix" is empty string.', (done) => {
+  it('should out minified and compressed css file with no suffix by options.compress and empty options.suffix.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       suffix: '',
       compress: true
     });
 
-    task().on('finish', () => {
-      const actualMin = fs.readFileSync(`${path.dest}/main.css`);
-      const actualGz = fs.readFileSync(`${path.dest}/main.css.gz`);
-      const expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualMin);
-      assert(actualGz);
-      assert.deepStrictEqual(String(actualMin).trim(), String(expectedMin).trim());
-      done();
-    });
+    await Promise.all(
+      ['css', 'css.gz'].map(async (ext) => {
+        const actual = await fs.readFile(`${destDir}/main.${ext}`);
+
+        assert(actual);
+      })
+    );
   });
 
-  it('should out to "main.css" that not process url() value if argument "options.url" is not set.', (done) => {
+  it('should out css file not processed url() value without options.url.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.url.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.url.scss`,
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.url-not-set.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.url-not-set.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that embed url() value if argument "options.url" is "inline".', (done) => {
+  it('should out css file embed url() value by postcss-url and options.url.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.url.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.url.scss`,
       url: 'inline',
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.url.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.url.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that embed url() value with options if argument "options.url" is "inline" and argument.urlOptions is set.', (done) => {
+  it('should out css file embed url() value with encode type by postcss-url and options.url.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.url.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.url.scss`,
       url: 'inline',
       urlOptions: {encodeType: 'base64'},
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.url-options.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.url-options.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that injected specified value if argument "options.banner" is set.', (done) => {
+  it('should out css file injected banner with options.banner.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       banner: '/*! copyright <%= pkg.author %> */\n',
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.banner.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.banner.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that removed unused CSS if argument "options.uncssTargets" is set.', (done) => {
+  it('should out css file removed unused styles by postcss-uncss and options.uncssTargets.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
-      uncssTargets: [`${path.src}/target.html`],
+      ...opts,
+      src: `${srcDir}/style.scss`,
+      uncssTargets: [`${srcDir}/target.html`],
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.remove-unused.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.remove-unused.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should out to "main.css" that applied specified process CSS if argument "options.additionalProcess" is set.', (done) => {
+  it('should out css file applied additional process with options.additionalProcess.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       additionalProcess(root) {
         root.walkRules(/\.block/, (rule) => {
           rule.selectors = rule.selectors.map(
@@ -267,47 +287,45 @@ describe('gulp-task-build-css-sass', () => {
       compress: false
     });
 
-    task().on('finish', () => {
-      const actual = fs.readFileSync(`${path.dest}/main.css`);
-      const expected = fs.readFileSync(`${path.expected}/main.post-process.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actual);
-      assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-      done();
-    });
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.post-process.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
   });
 
-  it('should not stop process if throw error.', (done) => {
+  it('should not stop process if throw error.', async () => {
     const task = buildCss({
-      src: `${path.src}/error.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/error.scss`,
       compress: false
     });
 
-    task().on('finish', done);
+    await new Promise((resolve) => task().on('finish', resolve));
   });
 
-  it('should call next task after files were outputted in gulp.series.', (done) => {
+  it('should call next task after files were outputted in gulp.series.', async () => {
     const task = buildCss({
-      src: `${path.src}/style.scss`,
-      dest: path.dest,
+      ...opts,
+      src: `${srcDir}/style.scss`,
       compress: false
     });
 
-    const build = gulp.series(
-      task,
-      (cb) => {
-        const actual = fs.readFileSync(`${path.dest}/main.css`);
-        const expected = fs.readFileSync(`${path.expected}/main.css`);
+    await new Promise((resolve) => {
+      gulp.series(
+        task,
+        async () => {
+          const actual = await readBuiltFile(`${destDir}/main.css`);
+          const expected = await readBuiltFile(`${expectedDir}/main.css`);
 
-        assert(actual);
-        assert.deepStrictEqual(String(actual).trim(), String(expected).trim());
-        cb(); // eslint-disable-line node/callback-return
-        done();
-      }
-    );
-
-    build();
+          assert(actual);
+          assert.deepEqual(actual, expected);
+          resolve();
+        }
+      )();
+    });
   });
 
 });

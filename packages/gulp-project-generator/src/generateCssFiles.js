@@ -13,13 +13,15 @@ import formatCode from './formatCode.js';
  * @return {Promise}
  */
 async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options,
-        ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
+  const {verbose} = options;
+  const ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
   await mkdir(`${dest}/src/css`, {verbose});
   await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css`, {verbose});
-  await render(`${src}/src/css/README.md.hbs`, options)
-    .then((output) => write(output, `${dest}/src/css/README.md`, {verbose}));
+
+  const output = await render(`${src}/src/css/README.md.hbs`, options);
+
+  await write(output, `${dest}/src/css/README.md`, {verbose});
 
   if (options.cssDeps) {
     await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css`, {verbose});
@@ -35,17 +37,18 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
  * @return {Promise}
  */
 async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options,
-        ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
+  const {verbose} = options;
+  const ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
   await mkdir(`${dest}/src/css/desktop`, {verbose});
   await mkdir(`${dest}/src/css/mobile`, {verbose});
   await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/desktop`, {verbose});
   await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/mobile`, {verbose});
-  await render(`${src}/src/css/README.md.hbs`, options)
-    .then((output) => write(output, `${dest}/src/css/desktop/README.md`, {verbose}));
-  await render(`${src}/src/css/README.md.hbs`, options)
-    .then((output) => write(output, `${dest}/src/css/mobile/README.md`, {verbose}));
+
+  const output = await render(`${src}/src/css/README.md.hbs`, options);
+
+  await write(output, `${dest}/src/css/desktop/README.md`, {verbose});
+  await write(output, `${dest}/src/css/mobile/README.md`, {verbose});
 
   if (options.cssDeps) {
     await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/desktop`, {verbose});
@@ -69,15 +72,16 @@ export default async function generateCssFiles(src = '', dest = '', options = {}
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
-
   if (!options.css) {
     return;
   }
 
-  await render(`${src}/task/css.js.hbs`, options)
-    .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/task/css.js`, {verbose}));
+  const {verbose} = options;
+
+  const output = await render(`${src}/task/css.js.hbs`, options);
+  const formatted = await formatCode(output);
+
+  await write(formatted, `${dest}/task/css.js`, {verbose});
 
   if (options.multiDevice) {
     await copyAssetsForMultiDeviceDevice(src, dest, options);

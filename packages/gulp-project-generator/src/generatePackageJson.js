@@ -1,6 +1,8 @@
-/* eslint max-lines-per-function: off, max-len: off, max-statements: off */
+/* eslint max-lines-per-function: off, max-statements: off */
 
-import {createRequire} from 'node:module';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import write from './write.js';
 
 /**
@@ -19,8 +21,14 @@ export default async function generatePackageJson(name = '', dest = '', options 
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const require = createRequire(import.meta.url);
-  const pkg = require('../template/package.json');
+  const pkg = JSON.parse(
+    await fs.readFile(
+      path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../template/package.json'
+      )
+    )
+  );
   const {verbose} = options;
   const scripts = [
     'start',

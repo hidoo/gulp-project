@@ -39,11 +39,9 @@
     "chalk": "4.1.1",
     "commander": "7.2.0",
     "eslint": "7.28.0",
-    "fs-extra": "10.0.0",
-    "glob": "7.1.7",
+    "glob": "10.3.10",
     "glob-parent": "6.0.0",
     "handlebars": "4.7.7",
-    "inquirer": "8.1.0",
-    "mkdirp": "1.0.4"
+    "inquirer": "8.1.0"
   }
 }

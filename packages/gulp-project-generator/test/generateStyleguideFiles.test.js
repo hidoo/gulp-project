@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import fs from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import glob from 'glob';
+import {glob} from 'glob';
 import generateStyleguideFiles from '../src/generateStyleguideFiles.js';
 
 describe('generateStyleguideFiles', () => {

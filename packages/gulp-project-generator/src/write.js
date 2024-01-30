@@ -35,7 +35,7 @@ const DEFAULT_OPTIONS = {
  * @param {Boolean} options.verbose out log or not
  * @return {Promise<String>}
  */
-export default function write(src = '', dest = '', options = {}) {
+export default async function write(src = '', dest = '', options = {}) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -43,16 +43,15 @@ export default function write(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        destPath = path.resolve(dest),
-        destDir = path.dirname(destPath);
+  const opts = {...DEFAULT_OPTIONS, ...options};
+  const destPath = path.resolve(dest);
+  const destDir = path.dirname(destPath);
 
-  return mkdir(destDir, {verbose: opts.verbose})
-    .then(() => fs.writeFile(destPath, src, opts.writeFile))
-    .then(() => {
-      if (opts.verbose) {
-        log.outPath(dest);
-      }
-      return dest;
-    });
+  await mkdir(destDir, {verbose: opts.verbose});
+  await fs.writeFile(destPath, src, opts.writeFile);
+
+  if (opts.verbose) {
+    log.outPath(dest);
+  }
+  return dest;
 }

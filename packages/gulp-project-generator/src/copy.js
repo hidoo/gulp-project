@@ -1,6 +1,6 @@
 import path from 'node:path';
-import fs from 'fs-extra';
-import glob from 'glob';
+import fs from 'node:fs/promises';
+import {glob} from 'glob';
 import globParent from 'glob-parent';
 import mkdir from './mkdir.js';
 import * as log from './log.js';
@@ -48,27 +48,17 @@ export default async function copy(pattern = '', dest = '', options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
   const globBase = globParent(pattern);
 
-  const srcPaths = await new Promise((resolve, reject) => {
-    glob(pattern, opts.glob, (error, paths) => {
-      if (error) {
-        return reject(error);
-      }
-      return resolve(paths);
-    });
-  });
-
-  const destPaths = await Promise.all(srcPaths.map((srcPath) => {
+  const srcPaths = await glob(pattern, opts.glob);
+  const destPaths = await Promise.all(srcPaths.map(async (srcPath) => {
     const destPath = path.resolve(dest, srcPath.replace(`${globBase}${path.sep}`, ''));
-    const destDir = path.dirname(destPath);
 
-    return mkdir(destDir, {verbose: opts.verbose})
-      .then(() => fs.copy(srcPath, destPath))
-      .then(() => {
-        if (opts.verbose) {
-          log.outPath(destPath);
-        }
-        return destPath;
-      });
+    await mkdir(path.dirname(destPath), {verbose: opts.verbose});
+    await fs.copyFile(srcPath, destPath);
+
+    if (opts.verbose) {
+      log.outPath(destPath);
+    }
+    return destPath;
   }));
 
   return destPaths;

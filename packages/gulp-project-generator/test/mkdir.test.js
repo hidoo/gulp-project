@@ -1,35 +1,32 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
 import assert from 'node:assert';
-import fs from 'node:fs';
-import {dirname} from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import mkdir from '../src/mkdir.js';
 
 describe('mkdir', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    dest: `${__dirname}/fixtures/dest`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let destDir = null;
 
-  afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    destDir = path.resolve(fixturesDir, 'dest');
   });
 
-  it('should return Promise includes String of created directory path.', (done) => {
-    const actual = mkdir(`${path.dest}/hoge`, {verbose: false});
+  afterEach(async () => {
+    await fs.rm(destDir, {recursive: true});
+    await fs.mkdir(destDir);
+  });
 
-    assert(actual instanceof Promise);
-    actual
-      .then((dest) => {
-        assert(typeof dest === 'string');
-        assert(dest === `${path.dest}/hoge`);
-      })
-      .then(() => done());
+  it('should return string of created directory path.', async () => {
+    const dest = await mkdir(`${destDir}/hoge`, {verbose: false});
+
+    assert(typeof dest === 'string');
+    assert(dest === `${destDir}/hoge`);
   });
 
 });

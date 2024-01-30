@@ -44,7 +44,7 @@ const pkg = require('../package.json');
  * @param {Object} options command line options
  * @return {Promise<Boolean>}
  */
-async function comfirmForce(dest = '', options = {}) {
+async function confirmForce(dest = '', options = {}) {
   if (await isEmptyDir(dest) || options.force) {
     return true;
   }
@@ -294,7 +294,7 @@ async function main(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" must be not empty string.');
   }
 
-  if (!await comfirmForce(dest, options)) {
+  if (!await confirmForce(dest, options)) {
     console.log('');
     console.log(chalk.bold.yellow('Aborting.'));
     return false;

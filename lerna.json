@@ -1,16 +1,25 @@
 {
-  "$schema": "https://json.schemastore.org/lerna.json",
+  "$schema": "https://raw.githubusercontent.com/lerna-lite/lerna-lite/main/packages/cli/schemas/lerna-schema.json",
   "npmClient": "pnpm",
-  "useWorkspaces": true,
   "version": "0.19.0",
   "command": {
+    "version": {
+      "conventionalCommits": true,
+      "gitTagVersion": false,
+      "push": false,
+      "private": false
+    },
     "publish": {
-      "message": "chore(release): publish %s",
-      "conventionalCommits": true
+      "removePackageFields": [
+        "devDependencies",
+        "scripts"
+      ]
     }
   },
   "ignoreChanges": [
     "examples/**/**",
+    "**/test/**",
     "**/CHANGELOG.md"
-  ]
+  ],
+  "includeMergedTags": true
 }

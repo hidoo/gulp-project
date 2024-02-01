@@ -1,38 +1,53 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import {createRequire} from 'node:module';
-import {dirname} from 'node:path';
+import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import generatePackageJson from '../src/generatePackageJson.js';
 
-describe('generatePackageJson', () => {
-  const require = createRequire(import.meta.url);
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const pkg = require('../package.json');
-  const path = {
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+/**
+ * read built file
+ *
+ * @param {String} file filename
+ * @return {String}
+ */
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
 
-  afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
+  return content.toString().trim()
+    .replace(
+      /"(@hidoo\/(gulp|util)-[^"]+)":\s"[^"]+"/g, // eslint-disable-line prefer-named-capture-group
+      '"$1": "<version>"'
     );
+}
+
+describe('generatePackageJson', () => {
+  let dirname = null;
+  let fixturesDir = null;
+  let destDir = null;
+  let expectedDir = null;
+
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+  });
+
+  afterEach(async () => {
+    await fs.rm(destDir, {recursive: true});
+    await fs.mkdir(destDir);
   });
 
   it('should return Promise.', (done) => {
-    const actual = generatePackageJson('hoge-project', path.dest, {});
+    const actual = generatePackageJson('hoge-project', destDir, {});
 
     assert(actual instanceof Promise);
     actual.then(() => done());
   });
 
   it('should generate package.json.', async () => {
-    await generatePackageJson('hoge-project', path.dest, {
+    await generatePackageJson('hoge-project', destDir, {
       css: true,
       cssDeps: true,
       html: true,
@@ -46,15 +61,15 @@ describe('generatePackageJson', () => {
       spriteType: 'svg'
     });
 
-    const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/pkg.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+    const actual = await readBuiltFile(`${destDir}/package.json`);
+    const expected = await readBuiltFile(`${expectedDir}/pkg.json`);
 
     assert(actual);
-    assert.deepStrictEqual(actual, expected);
+    assert.deepEqual(actual, expected);
   });
 
   it('should generate package.json if argument options.conventionalCommits is true.', async () => {
-    await generatePackageJson('hoge-project', path.dest, {
+    await generatePackageJson('hoge-project', destDir, {
       css: true,
       cssDeps: true,
       html: true,
@@ -69,15 +84,15 @@ describe('generatePackageJson', () => {
       conventionalCommits: true
     });
 
-    const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/pkg-conventional-commits.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+    const actual = await readBuiltFile(`${destDir}/package.json`);
+    const expected = await readBuiltFile(`${expectedDir}/pkg-conventional-commits.json`);
 
     assert(actual);
-    assert.deepStrictEqual(actual, expected);
+    assert.deepEqual(actual, expected);
   });
 
   it('should generate package.json if argument options.css is true and options.cssPreprocessor is "sass".', async () => {
-    await generatePackageJson('hoge-project', path.dest, {
+    await generatePackageJson('hoge-project', destDir, {
       css: true,
       cssDeps: true,
       html: true,
@@ -92,11 +107,11 @@ describe('generatePackageJson', () => {
       cssPreprocessor: 'sass'
     });
 
-    const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/pkg-sass.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+    const actual = await readBuiltFile(`${destDir}/package.json`);
+    const expected = await readBuiltFile(`${expectedDir}/pkg-sass.json`);
 
     assert(actual);
-    assert.deepStrictEqual(actual, expected);
+    assert.deepEqual(actual, expected);
   });
 
 });

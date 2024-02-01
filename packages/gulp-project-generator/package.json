@@ -18,6 +18,7 @@
   "scripts": {
     "start": "pnpm generate ../../examples/dev --verbose --force",
     "generate": "cross-env NODE_ENV=development node ./src/index.js",
+    "updateDepsVer": "node ./script/updateDepsVer.js",
     "test": "cross-env NODE_ENV=test mocha ./test/**/*.test.js"
   },
   "keywords": [

@@ -18,8 +18,9 @@ async function readBuiltFile(file) {
   const content = await fs.readFile(file);
 
   return content.toString().trim()
-    .replace(/<core-js version>/g, pkg.devDependencies['core-js'])
-    .replace(/<pkg version>/g, pkg.version);
+    // eslint-disable-next-line prefer-named-capture-group
+    .replace(/^(\s*\/\*[\s\S]*?\*\/\s*|\s*\/\/.*\n)*/, '')
+    .replace(/<core-js version>/g, pkg.devDependencies['core-js']);
 }
 
 describe('gulp-task-build-js-browserify', () => {

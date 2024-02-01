@@ -1,4 +1,4 @@
-/* eslint max-len: off, max-statements: off, prefer-named-capture-group: off */
+/* eslint max-lines-per-function: off, max-statements: off, prefer-named-capture-group: off */
 
 import fs from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -94,12 +94,12 @@ async function inputProjectName(dest = '', options = {}) {
 }
 
 /**
- * return user choiced options
+ * return user selected options
  *
  * @param {Object} options command line options
  * @return {Promise<Object>}
  */
-async function choiseOptions(options = {}) {
+async function selectedOptions(options = {}) {
   if (options.interactive) {
     const results = await inquirer
       .prompt([
@@ -129,7 +129,13 @@ async function choiseOptions(options = {}) {
             {name: 'image', checked: options.image},
             {name: 'server', checked: options.server}
           ],
-          filter: (choices) => choices.reduce((prev, current) => { return {...prev, [current]: true}; }, {}),
+          filter: (choices) =>
+            choices.reduce(
+              (prev, current) => {
+                return {...prev, [current]: true};
+              },
+              {}
+            ),
           validate(choices) {
             if (!Object.keys(choices).length) {
               return 'You must choose at least one task.';
@@ -145,7 +151,13 @@ async function choiseOptions(options = {}) {
             answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
             answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
           ].filter((choice) => choice),
-          filter: (choices) => choices.reduce((prev, current) => { return {...prev, [current]: true}; }, {}),
+          filter: (choices) =>
+            choices.reduce(
+              (prev, current) => {
+                return {...prev, [current]: true};
+              },
+              {}
+            ),
           when: (answers) => answers.tasks.css || answers.tasks.js
         },
         {
@@ -301,7 +313,7 @@ async function main(src = '', dest = '', options = {}) {
   }
 
   const name = await inputProjectName(dest, options),
-        opts = await choiseOptions(options);
+        opts = await selectedOptions(options);
 
   // disable forcely in relation to --no-css
   if (!opts.css) {
@@ -366,24 +378,84 @@ function select(validValues = []) {
 program
   .version(pkg.version, '-v, --version')
   .usage('<dir> [options]')
-  .option('--name <name>', 'set project name.')
-  .option('--force', 'Generate forcely even if <dir> is not empty.')
-  .option('--no-interactive', 'Disable interactive interface.')
-  .option('--multi-device', 'Enable multi-device mode.')
-  .option('--conventional-commits', 'Set up tools for conventional commits.')
-  .option('--no-css', 'Disable CSS build task.')
-  .option('--no-css-deps', 'Disable CSS dependency build task.')
-  .option('--no-html', 'Disable HTML build task.')
-  .option('--no-image', 'Disable image optimize task.')
-  .option('--no-js', 'Disable JavaScript build task.')
-  .option('--no-js-deps', 'Disable JavaScript dependency build task.')
-  .option('--no-server', 'Disable local dev server.')
-  .option('--no-sprite', 'Disable sprite sheet build task. (Enable forcely when --no-css specified.)')
-  .option('--no-styleguide', 'Disable styleguide build task. (Enable forcely when --no-css specified.)')
-  .option('--css-preprocessor [lang]', 'Select CSS preprocessor. [stylus|sass]', select(['stylus', 'sass']), 'stylus')
-  .option('--js-bundler [bundler]', 'Select JavaScript bundler. [browserify|rollup]', select(['browserify', 'rollup']), 'browserify')
-  .option('--sprite-type [type]', 'Select sprite sheet source type. [svg|image]', select(['svg', 'image']), 'svg')
-  .option('--verbose', 'Enable output logs.')
+  .option(
+    '--name <name>',
+    'set project name.'
+  )
+  .option(
+    '--force',
+    'Generate forcely even if <dir> is not empty.'
+  )
+  .option(
+    '--no-interactive',
+    'Disable interactive interface.'
+  )
+  .option(
+    '--multi-device',
+    'Enable multi-device mode.'
+  )
+  .option(
+    '--conventional-commits',
+    'Set up tools for conventional commits.'
+  )
+  .option(
+    '--no-css',
+    'Disable CSS build task.'
+  )
+  .option(
+    '--no-css-deps',
+    'Disable CSS dependency build task.'
+  )
+  .option(
+    '--no-html',
+    'Disable HTML build task.'
+  )
+  .option(
+    '--no-image',
+    'Disable image optimize task.'
+  )
+  .option(
+    '--no-js',
+    'Disable JavaScript build task.'
+  )
+  .option(
+    '--no-js-deps',
+    'Disable JavaScript dependency build task.'
+  )
+  .option(
+    '--no-server',
+    'Disable local dev server.'
+  )
+  .option(
+    '--no-sprite',
+    'Disable sprite sheet build task. (Enable forcely when --no-css specified.)'
+  )
+  .option(
+    '--no-styleguide',
+    'Disable styleguide build task. (Enable forcely when --no-css specified.)'
+  )
+  .option(
+    '--css-preprocessor [lang]',
+    'Select CSS preprocessor. [stylus|sass]',
+    select(['stylus', 'sass']),
+    'stylus'
+  )
+  .option(
+    '--js-bundler [bundler]',
+    'Select JavaScript bundler. [browserify|rollup]',
+    select(['browserify', 'rollup']),
+    'browserify'
+  )
+  .option(
+    '--sprite-type [type]',
+    'Select sprite sheet source type. [svg|image]',
+    select(['svg', 'image']),
+    'svg'
+  )
+  .option(
+    '--verbose',
+    'Enable output logs.'
+  )
   .parse(process.argv);
 
 // argument <dir> is required.

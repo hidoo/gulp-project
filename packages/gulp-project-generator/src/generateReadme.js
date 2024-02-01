@@ -10,7 +10,12 @@ import render from './render.js';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateReadme(name = '', src = '', dest = '', options = {}) { // eslint-disable-line max-len, max-params
+export default async function generateReadme( // eslint-disable-line max-params
+  name = '',
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof name !== 'string') {
     throw new TypeError('Argument "name" is not string.');
   }

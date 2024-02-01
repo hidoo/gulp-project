@@ -1,6 +1,6 @@
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJSON} from './format.js';
 
 /* eslint-disable max-statements */
 /**
@@ -28,7 +28,7 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
 
   if (options.css && options.cssPreprocessor === 'sass') {
     await render(`${src}/.stylelintrc.json.hbs`, options)
-      .then((output) => formatCode(output))
+      .then((output) => formatJSON(output))
       .then((output) => write(output, `${dest}/.stylelintrc.json`, {verbose}));
 
     await render(`${src}/.stylelintignore.hbs`, options)
@@ -37,16 +37,16 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
 
   if (options.js) {
     await render(`${src}/.babelrc.json.hbs`, options)
-      .then((output) => formatCode(output))
+      .then((output) => formatJSON(output))
       .then((output) => write(output, `${dest}/.babelrc.json`, {verbose}));
 
     await render(`${src}/.mocharc.json.hbs`, options)
-      .then((output) => formatCode(output))
+      .then((output) => formatJSON(output))
       .then((output) => write(output, `${dest}/.mocharc.json`, {verbose}));
   }
 
   await render(`${src}/.eslintrc.json.hbs`, options)
-    .then((output) => formatCode(output))
+    .then((output) => formatJSON(output))
     .then((output) => write(output, `${dest}/.eslintrc.json`, {verbose}));
 
   await render(`${src}/.eslintignore.hbs`, options)
@@ -67,7 +67,7 @@ export default async function generateDotFiles(src = '', dest = '', options = {}
   }
 
   await render(`${src}/.lintstagedrc.json.hbs`, options)
-    .then((output) => formatCode(output))
+    .then((output) => formatJSON(output))
     .then((output) => write(output, `${dest}/.lintstagedrc.json`, {verbose}));
 
   await render(`${src}/.editorconfig.hbs`, options)

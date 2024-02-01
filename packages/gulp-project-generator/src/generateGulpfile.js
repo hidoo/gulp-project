@@ -1,6 +1,6 @@
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJS} from './format.js';
 
 /**
  * generate gulpfile
@@ -21,6 +21,6 @@ export default async function generateGulpfile(src = '', dest = '', options = {}
   const {verbose} = options;
 
   await render(`${src}/gulpfile.js.hbs`, options)
-    .then((output) => formatCode(output))
+    .then((output) => formatJS(output))
     .then((output) => write(output, `${dest}/gulpfile.js`, {verbose}));
 }

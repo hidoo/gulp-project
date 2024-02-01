@@ -9,8 +9,14 @@ import * as config from '../config.js';
  * @type {String}
  */
 {{#if multiDevice}}
-const pathToCssDesktop = relative(config.path.destStyleguideDesktop, config.path.destCssDesktop); // eslint-disable-line max-len
-const pathToCssMobile = relative(config.path.destStyleguideMobile, config.path.destCssMobile); // eslint-disable-line max-len
+const pathToCssDesktop = relative(
+  config.path.destStyleguideDesktop,
+  config.path.destCssDesktop
+);
+const pathToCssMobile = relative(
+  config.path.destStyleguideMobile,
+  config.path.destCssMobile
+);
 {{else}}
 const pathToCss = relative(config.path.destStyleguide, config.path.destCss);
 {{/if}}
@@ -22,8 +28,14 @@ const pathToCss = relative(config.path.destStyleguide, config.path.destCss);
  * @type {String}
  */
 {{#if multiDevice}}
-const pathToJsDesktop = relative(config.path.destStyleguideDesktop, config.path.destJsDesktop); // eslint-disable-line max-len
-const pathToJsMobile = relative(config.path.destStyleguideMobile, config.path.destJsMobile); // eslint-disable-line max-len
+const pathToJsDesktop = relative(
+  config.path.destStyleguideDesktop,
+  config.path.destJsDesktop
+);
+const pathToJsMobile = relative(
+  config.path.destStyleguideMobile,
+  config.path.destJsMobile
+);
 {{else}}
 const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
 {{/if}}

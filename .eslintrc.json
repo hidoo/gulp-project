@@ -2,21 +2,14 @@
   "$schema": "https://json.schemastore.org/eslintrc.json",
   "root": true,
   "extends": [
-    "@hidoo/eslint-config"
+    "@hidoo/eslint-config",
+    "@hidoo/eslint-config/+stylistic"
   ],
-  "parserOptions": {
-    "ecmaVersion": 2020
-  },
   "rules": {
     "no-promise-executor-return": "off",
     "no-underscore-dangle": ["error", {
       "allow": [
         "__dirname"
-      ]
-    }],
-    "import/no-unresolved": ["error", {
-      "ignore": [
-        "^node:"
       ]
     }]
   },
@@ -33,7 +26,9 @@
       ],
       "rules": {
         "node/file-extension-in-import": ["error", "always"],
-        "node/no-unpublished-import": "off"
+        "node/no-unpublished-import": "off",
+        "jsdoc/no-defaults": "off",
+        "jsdoc/tag-lines": "off"
       }
     },
     {
@@ -45,7 +40,8 @@
         "@hidoo/eslint-config/+node"
       ],
       "rules": {
-        "newline-per-chained-call": "off",
+        "@stylistic/max-len": "off",
+        "@stylistic/newline-per-chained-call": "off",
         "mocha/no-hooks-for-single-case": "off",
         "mocha/no-setup-in-describe": "off",
         "node/file-extension-in-import": ["error", "always"],

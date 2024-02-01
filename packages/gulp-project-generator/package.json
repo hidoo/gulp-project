@@ -35,10 +35,10 @@
   },
   "dependencies": {
     "@hidoo/handlebars-helpers": "0.8.2",
-    "babel-eslint": "10.1.0",
+    "@stylistic/eslint-plugin-js": "1.5.4",
     "chalk": "4.1.1",
     "commander": "7.2.0",
-    "eslint": "7.28.0",
+    "eslint": "8.56.0",
     "glob": "10.3.10",
     "glob-parent": "6.0.0",
     "handlebars": "4.7.7",

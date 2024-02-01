@@ -1,6 +1,6 @@
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJS} from './format.js';
 
 /**
  * generate config
@@ -20,7 +20,7 @@ export default async function generateConfig(src = '', dest = '', options = {}) 
 
   const {verbose} = options;
   const output = await render(`${src}/config.js.hbs`, options);
-  const formatted = await formatCode(output);
+  const formatted = await formatJS(output);
 
   await write(formatted, `${dest}/config.js`, {verbose});
 }

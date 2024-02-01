@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJS} from './format.js';
 
 /**
  * copy assets for single device mode
@@ -67,7 +67,7 @@ export default async function generateHtmlFiles(src = '', dest = '', options = {
   }
 
   await render(`${src}/task/html.js.hbs`, options)
-    .then((output) => formatCode(output))
+    .then((output) => formatJS(output))
     .then((output) => write(output, `${dest}/task/html.js`, {verbose}));
 
   if (options.multiDevice) {

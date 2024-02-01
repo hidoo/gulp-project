@@ -28,7 +28,7 @@ function isOdd(value = 0) {
  * @param {View4duint8} pixels ndarray of pixels
  * @return {void}
  */
-function debug(file, pixels) { // eslint-disable-line no-unused-vars
+function debug(file, pixels) {
   const hasFrames = pixels.shape.length === 4,
         width = hasFrames ? pixels.shape[1] : pixels.shape[0],
         channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
@@ -118,6 +118,7 @@ export default function imageEvenizer(options = {}) {
               channels = 4;
 
         // ignore animation gif and even size image
+        // eslint-disable-next-line @stylistic/no-mixed-operators
         if (hasFrames && pixels.shape[0] > 1 || !isOddWidth && !isOddHeight) {
           return done(null, file);
         }
@@ -171,7 +172,11 @@ export default function imageEvenizer(options = {}) {
         }
 
         // transform array to ndarray
-        const evenizedPixels = ndarray(Uint8ClampedArray.from(flattenData), shape, stride); // eslint-disable-line max-len
+        const evenizedPixels = ndarray(
+          Uint8ClampedArray.from(flattenData),
+          shape,
+          stride
+        );
 
         return getStream.buffer(savePixels(evenizedPixels, ext, saveOptions))
           .then((buffer) => {

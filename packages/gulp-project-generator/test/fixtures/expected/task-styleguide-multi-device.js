@@ -8,16 +8,28 @@ import * as config from '../config.js';
  *
  * @type {String}
  */
-const pathToCssDesktop = relative(config.path.destStyleguideDesktop, config.path.destCssDesktop); // eslint-disable-line max-len
-const pathToCssMobile = relative(config.path.destStyleguideMobile, config.path.destCssMobile); // eslint-disable-line max-len
+const pathToCssDesktop = relative(
+  config.path.destStyleguideDesktop,
+  config.path.destCssDesktop
+);
+const pathToCssMobile = relative(
+  config.path.destStyleguideMobile,
+  config.path.destCssMobile
+);
 
 /**
  * relative path from styleguide to js
  *
  * @type {String}
  */
-const pathToJsDesktop = relative(config.path.destStyleguideDesktop, config.path.destJsDesktop); // eslint-disable-line max-len
-const pathToJsMobile = relative(config.path.destStyleguideMobile, config.path.destJsMobile); // eslint-disable-line max-len
+const pathToJsDesktop = relative(
+  config.path.destStyleguideDesktop,
+  config.path.destJsDesktop
+);
+const pathToJsMobile = relative(
+  config.path.destStyleguideMobile,
+  config.path.destJsMobile
+);
 
 // define main task
 const mainDesktop = buildStyleguide({

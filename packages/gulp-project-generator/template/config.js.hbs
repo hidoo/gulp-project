@@ -1,11 +1,7 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
 import fs from 'node:fs';
-{{#if this.multiDevice}}
-import {Command, InvalidOptionArgumentError} from 'commander';
-{{else}}
-import {Command} from 'commander';
-{{/if}}
+import commander from 'commander';
 {{#if this.server}}
 import ips from '@hidoo/util-local-ip';
 {{/if}}
@@ -22,9 +18,9 @@ if (typeof process.env.NODE_ENV !== 'string' || process.env.NODE_ENV === '') {
 /**
  * parse cli options
  *
- * @type {Command}
+ * @type {commander.Command}
  */
-const cli = new Command()
+const cli = new commander.Command()
 {{#if this.server}}
   .option('--host <ip>', 'set ip.')
   .option('--port <number>', 'set port.')
@@ -35,7 +31,7 @@ const cli = new Command()
 {{#if this.multiDevice}}
   .option('--skip-device <device>', 'skip target device tasks.', (value) => {
     if (!['desktop', 'mobile'].includes(value)) {
-      throw new InvalidOptionArgumentError();
+      throw new commander.InvalidOptionArgumentError();
     }
     return value;
   })

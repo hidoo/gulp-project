@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import * as status from '../constants/statusCode.js';
 
@@ -12,19 +12,15 @@ import * as status from '../constants/statusCode.js';
 export async function readme(req, res) {
   const filepath = path.resolve(process.cwd(), './README.md');
 
-  const results = await new Promise(
-    (resolve) => fs.readFile(filepath, (error, content) => resolve({
-      error, content: content ? content.toString() : null
-    }))
-  );
+  try {
+    const content = await fs.readFile(filepath);
 
-  if (results.error) {
-    res.status(status.NOT_FOUND).send('README.md is not Found.');
-    return;
+    res.status(status.OK).render('markdown', {
+      title: `README`,
+      content: content.toString()
+    });
   }
-
-  res.status(status.OK).render('markdown', {
-    title: `README`,
-    content: results.content
-  });
+  catch (error) {
+    res.status(status.NOT_FOUND).send('README.md is not Found.');
+  }
 }

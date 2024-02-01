@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
-    "test": "cross-env NODE_ENV=test mocha"
+    "test": "cross-env NODE_ENV=test mocha ./test/*.test.js"
   },
   "keywords": [
     "gulp",

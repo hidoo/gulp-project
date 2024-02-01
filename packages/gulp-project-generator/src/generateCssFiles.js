@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJS} from './format.js';
 
 /**
  * copy assets for single device mode
@@ -79,7 +79,7 @@ export default async function generateCssFiles(src = '', dest = '', options = {}
   const {verbose} = options;
 
   const output = await render(`${src}/task/css.js.hbs`, options);
-  const formatted = await formatCode(output);
+  const formatted = await formatJS(output);
 
   await write(formatted, `${dest}/task/css.js`, {verbose});
 

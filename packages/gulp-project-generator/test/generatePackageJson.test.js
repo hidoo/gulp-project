@@ -47,7 +47,7 @@ describe('generatePackageJson', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/package.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+          expected = fs.readFileSync(`${path.expected}/pkg.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
@@ -70,7 +70,7 @@ describe('generatePackageJson', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/package-conventional-commits.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+          expected = fs.readFileSync(`${path.expected}/pkg-conventional-commits.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
@@ -93,7 +93,7 @@ describe('generatePackageJson', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/package.json`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/package-sass.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
+          expected = fs.readFileSync(`${path.expected}/pkg-sass.json`).toString().trim().replace(/\^0.0.0/g, `^${pkg.version}`);
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);

@@ -1,7 +1,7 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
 import fs from 'node:fs';
-import {Command} from 'commander';
+import commander from 'commander';
 import ips from '@hidoo/util-local-ip';
 
 /**
@@ -16,9 +16,9 @@ if (typeof process.env.NODE_ENV !== 'string' || process.env.NODE_ENV === '') {
 /**
  * parse cli options
  *
- * @type {Command}
+ * @type {commander.Command}
  */
-const cli = new Command()
+const cli = new commander.Command()
   .option('--host <ip>', 'set ip.')
   .option('--port <number>', 'set port.')
   .option('--protocol <scheme>', 'set protocol.')

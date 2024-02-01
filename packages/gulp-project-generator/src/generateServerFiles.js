@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import formatCode from './formatCode.js';
+import {formatJS} from './format.js';
 
 /**
  * generate local dev server files
@@ -23,10 +23,10 @@ export default async function generateServerFiles(src = '', dest = '', options =
   const {verbose} = options;
 
   if (options.server) {
-    await render(`${src}/task/server.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/server.js`, {verbose}));
+    const output = await render(`${src}/task/server.js.hbs`, options);
+    const formatted = await formatJS(output);
 
+    await write(formatted, `${dest}/task/server.js`, {verbose});
     await mkdir(`${dest}/src/server`, {verbose});
     await copy(`${src}/src/server/**/*.{js,hbs}`, `${dest}/src/server`, {verbose});
   }

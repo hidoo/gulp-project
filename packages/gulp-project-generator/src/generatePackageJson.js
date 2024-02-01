@@ -3,6 +3,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {formatJSON} from './format.js';
 import write from './write.js';
 
 /**
@@ -190,5 +191,5 @@ export default async function generatePackageJson(name = '', dest = '', options 
       }, {})
   };
 
-  await write(JSON.stringify(json, null, '  '), `${dest}/package.json`, {verbose});
+  await write(formatJSON(json), `${dest}/package.json`, {verbose});
 }

@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
-    "@hidoo/eslint-config": "^0.6.0",
+    "@hidoo/eslint-config": "^1.0.0",
     "@hidoo/express-engine-handlebars": "^0.8.2",
     "@hidoo/gulp-task-build-css-stylus": "^0.0.0",
     "@hidoo/gulp-task-build-html-handlebars": "^0.0.0",
@@ -45,7 +45,7 @@
     "commander": "^7.2.0",
     "core-js": "^3.35.1",
     "cross-env": "^7.0.3",
-    "eslint": "^7.28.0",
+    "eslint": "^8.56.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "husky": "^9.0.6",

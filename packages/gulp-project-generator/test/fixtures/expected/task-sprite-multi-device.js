@@ -16,8 +16,14 @@ const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disabl
  *
  * @type {String}
  */
-const pathToSpriteDesktop = relative(config.path.destCssDesktop, config.path.destSpriteDesktop); // eslint-disable-line max-len
-const pathToSpriteMobile = relative(config.path.destCssMobile, config.path.destSpriteMobile); // eslint-disable-line max-len
+const pathToSpriteDesktop = relative(
+  config.path.destCssDesktop,
+  config.path.destSpriteDesktop
+);
+const pathToSpriteMobile = relative(
+  config.path.destCssMobile,
+  config.path.destSpriteMobile
+);
 
 /**
  * return merged build options for desktop

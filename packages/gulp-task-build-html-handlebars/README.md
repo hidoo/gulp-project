@@ -113,7 +113,7 @@ path (when file is `subdir/index.hbs`):
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

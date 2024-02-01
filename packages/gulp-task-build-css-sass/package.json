@@ -31,7 +31,7 @@
     "mocha": "10.2.0"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.19.0",
+    "@hidoo/gulp-util-error-handler": "workspace:*",
     "@hidoo/sass-importer": "0.9.0",
     "autoprefixer": "10.2.6",
     "css-mqpacker": "7.0.0",

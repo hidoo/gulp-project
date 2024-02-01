@@ -30,7 +30,7 @@ fancyPrint('project name', [
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

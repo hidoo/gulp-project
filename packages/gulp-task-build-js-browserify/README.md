@@ -74,7 +74,7 @@ Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

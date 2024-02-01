@@ -3,29 +3,30 @@
   "version": "0.0.0",
   "description": "This is the monorepo for gulp project packages.",
   "private": true,
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": "8.15.1"
+  },
   "type": "module",
   "files": [],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "release:version": "node ./scripts/bumpVersion.js",
-    "release:publish": "lerna publish from-git",
-    "dev:test": "lerna exec 'yarn test --watch' --no-private",
-    "dev:test:parallel": "yarn dev:test --parallel",
-    "dev:generator": "lerna exec 'yarn start' --scope @hidoo/gulp-project-generator",
-    "build": "npm-run-all -s build:doc build:examples",
-    "build:doc": "lerna run doc --no-private",
-    "build:examples": "npm-run-all -s build:examples:*",
-    "build:examples:single-device": "lerna exec 'yarn generate ../../examples/single-device --no-interactive --force' --scope @hidoo/gulp-project-generator",
-    "build:examples:multi-device": "lerna exec 'yarn generate ../../examples/multi-device --no-interactive --force --multi-device' --scope @hidoo/gulp-project-generator",
-    "build:examples:sass": "lerna exec 'yarn generate ../../examples/use-sass --no-interactive --force --css-preprocessor sass' --scope @hidoo/gulp-project-generator",
-    "postbuild": "yarn bootstrap",
-    "test": "npm-run-all -s test:lint test:packages test:examples",
+    "build": "pnpm run --sequential '/^build:.*/'",
+    "build:doc": "pnpm --recursive --if-present doc",
+    "build:examples": "pnpm run --sequential '/^build:examples:.*/'",
+    "build:examples:single-device": "pnpm --filter gulp-project-generator generate ../../examples/single-device --no-interactive --force",
+    "build:examples:multi-device": "pnpm --filter gulp-project-generator generate ../../examples/multi-device --no-interactive --force --multi-device",
+    "build:examples:sass": "pnpm --filter gulp-project-generator generate ../../examples/use-sass --no-interactive --force --css-preprocessor sass",
+    "bootstrap": "pnpm install --frozen-lockfile",
+    "dev:generate": "pnpm --filter gulp-project-generator start",
+    "test": "pnpm run --sequential '/^test:.*/'",
     "test:lint": "eslint .",
-    "test:packages": "lerna run test --no-private",
+    "test:packages": "pnpm --filter './packages/**' --if-present test",
     "test:examples": "cross-env NODE_ENV=test mocha",
-    "install": "lerna bootstrap",
-    "prepare": "husky"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
+    "release:version": "node ./scripts/bumpVersion.js",
+    "release:publish": "lerna publish from-git"
   },
   "author": "hidoo",
   "license": "MIT",
@@ -40,16 +41,12 @@
     "husky": "9.0.6",
     "lerna": "4.0.0",
     "lint-staged": "15.2.0",
-    "mocha": "10.2.0",
-    "npm-run-all": "4.1.5"
+    "mocha": "10.2.0"
   },
-  "workspaces": [
-    "examples/*",
-    "packages/*",
-    "!packages/**/template"
-  ],
   "dependencies": {},
-  "resolutions": {
-    "stylelint-no-unsupported-browser-features": "7.0.0"
+  "pnpm": {
+    "overrides": {
+      "stylelint-no-unsupported-browser-features": "7.0.0"
+    }
   }
 }

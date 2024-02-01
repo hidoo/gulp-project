@@ -53,7 +53,7 @@ Options:
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

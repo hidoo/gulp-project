@@ -62,7 +62,7 @@ Returns **DestroyableTransform**
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

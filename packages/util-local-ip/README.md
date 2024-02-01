@@ -20,7 +20,7 @@ const ips = getLocalIps({ipv6: false, internal: true, external: false});
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

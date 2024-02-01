@@ -33,10 +33,10 @@
     "mocha": "10.2.0"
   },
   "dependencies": {
-    "@hidoo/gulp-plugin-image-evenizer": "^0.19.0",
-    "@hidoo/gulp-plugin-image-placeholder": "^0.19.0",
-    "@hidoo/gulp-plugin-webp": "^0.19.0",
-    "@hidoo/gulp-util-error-handler": "^0.19.0",
+    "@hidoo/gulp-plugin-image-evenizer": "workspace:*",
+    "@hidoo/gulp-plugin-image-placeholder": "workspace:*",
+    "@hidoo/gulp-plugin-webp": "workspace:*",
+    "@hidoo/gulp-util-error-handler": "workspace:*",
     "gulp-gzip": "1.4.2",
     "gulp-if": "3.0.0",
     "gulp-imagemin": "7.1.0",

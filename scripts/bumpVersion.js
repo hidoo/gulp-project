@@ -45,18 +45,18 @@ async function bumpVersion(argv = []) {
     }
 
     await task('test packages', async () => {
-      await exec('yarn test:lint');
-      await exec(`yarn test:packages --concurrency ${concurrency}`);
+      await exec('pnpm test:lint');
+      await exec(`pnpm test:packages --concurrency ${concurrency}`);
     });
     await task(`bump version to ${semver}`, async () => {
       await exec(`lerna version ${semver} --force-publish --no-push --no-git-tag-version -y`);
     });
     await task('build examples', async () => {
-      await exec('yarn build');
-      await exec('lerna bootstrap');
+      await exec('pnpm build');
     });
     await task('test examples', async () => {
-      await exec('yarn test:examples');
+      await exec('pnpm install --frozen-lockfile');
+      await exec('pnpm test:examples');
     });
 
     const lernaJson = JSON.parse(

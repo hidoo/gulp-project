@@ -43,7 +43,7 @@ $ npx @hidoo/gulp-project-generator /path/to/my-new-project
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

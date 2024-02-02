@@ -14,7 +14,7 @@ async function updateDepsVer() {
   const dirname = path.dirname(fileURLToPath(import.meta.url));
   const file = path.resolve(dirname, '../template/package.json');
   const depsFiles = await glob(
-    `${path.resolve(dirname, '../../')}/{gulp,util}-*/package.json`,
+    `${path.resolve(dirname, '../../')}/gulp-*/package.json`,
     {
       ignore: '**/node_modules/**'
     }

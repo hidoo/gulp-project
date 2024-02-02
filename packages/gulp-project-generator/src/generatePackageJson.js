@@ -47,7 +47,7 @@ export default async function generatePackageJson(name = '', dest = '', options 
   ];
   const devDependencies = [
     '@hidoo/eslint-config',
-    '@hidoo/util-fancy-print',
+    'chalk',
     'commander',
     'cross-env',
     'eslint',
@@ -127,7 +127,6 @@ export default async function generatePackageJson(name = '', dest = '', options 
     );
     devDependencies.push(
       '@hidoo/express-engine-handlebars',
-      '@hidoo/util-local-ip',
       'browser-sync',
       'express'
     );

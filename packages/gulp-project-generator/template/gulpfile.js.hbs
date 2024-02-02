@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import gulp from 'gulp';
-import fancyPrint from '@hidoo/util-fancy-print';
+import chalk from 'chalk';
 import * as config from './config.js';
 {{#if this.css}}
   import * as css from './task/css.js';
@@ -24,30 +24,18 @@ import * as config from './config.js';
   import server from './task/server.js';
 {{/if}}
 
-/**
- * print values of config
+// print values of config
+/* eslint-disable node/no-process-env */
+console.log(chalk.gray.italic(`/**
+ * ${config.pkg.name.toUpperCase()}
+ * ${config.pkg.description || '(no description)'}
+ *
+ * @version ${config.pkg.version}
+ * @type {String}  NODE_ENV ${chalk.green(`'${process.env.NODE_ENV}'`)}
+ * @type {Boolean} compress ${chalk.yellow(config.compress)}
  */
-fancyPrint(`${config.pkg.name} - ${config.pkg.version}`, [
-  {
-    label: 'NODE_ENV',
-    value: process.env.NODE_ENV // eslint-disable-line node/no-process-env
-  },
-  {
-    label: 'Compress Flag',
-    value: config.compress
-  },
-  {
-    label: 'Destination',
-    value: config.path.dest
-  },
-  {{#if this.server}}
-    {
-      label: 'Local Web Server',
-      value: (({host, port, protocol}) =>
-        `${protocol}://${host}:${port}/`)(config.serverOptions)
-    },
-  {{/if}}
-]);
+`));
+/* eslint-enable node/no-process-env */
 
 /**
  * clean dest task

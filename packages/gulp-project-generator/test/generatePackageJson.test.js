@@ -16,7 +16,7 @@ async function readBuiltFile(file) {
 
   return content.toString().trim()
     .replace(
-      /"(@hidoo\/(gulp|util)-[^"]+)":\s"[^"]+"/g, // eslint-disable-line prefer-named-capture-group
+      /"(@hidoo\/gulp-[^"]+)":\s"[^"]+"/g, // eslint-disable-line prefer-named-capture-group
       '"$1": "<version>"'
     );
 }

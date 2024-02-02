@@ -2,7 +2,6 @@
 
 import fs from 'node:fs';
 import commander from 'commander';
-import ips from '@hidoo/util-local-ip';
 
 /**
  * adjust NODE_ENV
@@ -46,7 +45,7 @@ const opts = cli.opts();
  * @type {Object}
  */
 export const serverOptions = {
-  host: String(opts.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
+  host: opts.host || process.env.SERVER_HOST,
   port: Number(opts.port || process.env.SERVER_PORT) || 8000,
   protocol: String(opts.protocol || process.env.SERVER_PROTOCOL || 'http'),
   open: opts.open || process.env.SERVER_OPEN || false,

@@ -83,15 +83,12 @@ importers:
       '@hidoo/gulp-task-optimize-image':
         specifier: workspace:*
         version: link:../../packages/gulp-task-optimize-image
-      '@hidoo/util-fancy-print':
-        specifier: workspace:*
-        version: link:../../packages/util-fancy-print
-      '@hidoo/util-local-ip':
-        specifier: workspace:*
-        version: link:../../packages/util-local-ip
       browser-sync:
         specifier: ^2.26.7
         version: 2.26.14
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
       commander:
         specifier: ^7.2.0
         version: 7.2.0
@@ -167,15 +164,12 @@ importers:
       '@hidoo/gulp-task-optimize-image':
         specifier: workspace:*
         version: link:../../packages/gulp-task-optimize-image
-      '@hidoo/util-fancy-print':
-        specifier: workspace:*
-        version: link:../../packages/util-fancy-print
-      '@hidoo/util-local-ip':
-        specifier: workspace:*
-        version: link:../../packages/util-local-ip
       browser-sync:
         specifier: ^2.26.7
         version: 2.26.14
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
       commander:
         specifier: ^7.2.0
         version: 7.2.0
@@ -257,15 +251,12 @@ importers:
       '@hidoo/stylelint-config':
         specifier: ^0.9.0
         version: 0.9.0(stylelint@15.11.0)
-      '@hidoo/util-fancy-print':
-        specifier: workspace:*
-        version: link:../../packages/util-fancy-print
-      '@hidoo/util-local-ip':
-        specifier: workspace:*
-        version: link:../../packages/util-local-ip
       browser-sync:
         specifier: ^2.26.7
         version: 2.26.14
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
       commander:
         specifier: ^7.2.0
         version: 7.2.0
@@ -718,9 +709,6 @@ importers:
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
-      '@hidoo/util-merge-babelrc':
-        specifier: workspace:*
-        version: link:../util-merge-babelrc
       babelify:
         specifier: 10.0.0
         version: 10.0.0(@babel/core@7.23.7)
@@ -782,9 +770,6 @@ importers:
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
-      '@hidoo/util-merge-babelrc':
-        specifier: workspace:*
-        version: link:../util-merge-babelrc
       '@rollup/plugin-alias':
         specifier: 5.1.0
         version: 5.1.0(rollup@2.78.0)
@@ -1135,53 +1120,6 @@ importers:
       strip-ansi:
         specifier: 6.0.0
         version: 6.0.0
-
-  packages/util-fancy-print:
-    dependencies:
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
-    devDependencies:
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      mocha:
-        specifier: 10.2.0
-        version: 10.2.0
-      sinon:
-        specifier: 11.1.1
-        version: 11.1.1
-      strip-ansi:
-        specifier: 6.0.0
-        version: 6.0.0
-
-  packages/util-local-ip:
-    devDependencies:
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      ip-regex:
-        specifier: 4.3.0
-        version: 4.3.0
-      mocha:
-        specifier: 10.2.0
-        version: 10.2.0
-
-  packages/util-merge-babelrc:
-    dependencies:
-      fancy-log:
-        specifier: 1.3.3
-        version: 1.3.3
-      lodash.merge:
-        specifier: 4.6.2
-        version: 4.6.2
-    devDependencies:
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      mocha:
-        specifier: 10.2.0
-        version: 10.2.0
 
 packages:
 
@@ -5622,14 +5560,14 @@ packages:
     resolution: {integrity: sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==}
     dependencies:
       string-width: 4.2.3
-      strip-ansi: 6.0.1
+      strip-ansi: 6.0.0
       wrap-ansi: 6.2.0
 
   /cliui@7.0.4:
     resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
     dependencies:
       string-width: 4.2.3
-      strip-ansi: 6.0.1
+      strip-ansi: 6.0.0
       wrap-ansi: 7.0.0
     dev: true
 
@@ -10421,11 +10359,6 @@ packages:
 
   /iota-array@1.0.0:
     resolution: {integrity: sha512-pZ2xT+LOHckCatGQ3DcG/a+QuEqvoxqkiL7tvE8nn3uuu+f6i1TtpB5/FtWFbxUuVr5PZCx8KskuGatbJDXOWA==}
-
-  /ip-regex@4.3.0:
-    resolution: {integrity: sha512-B9ZWJxHHOHUhUjCPrMpLD4xEq35bUTClHM1S6CBU5ixQnkZmwipwgc96vAd7AAGM9TGHvJR+Uss+/Ak6UphK+Q==}
-    engines: {node: '>=8'}
-    dev: true
 
   /ip@2.0.0:
     resolution: {integrity: sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ==}
@@ -18053,7 +17986,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       string-width: 4.2.3
-      strip-ansi: 6.0.1
+      strip-ansi: 6.0.0
 
   /wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}

@@ -6,26 +6,27 @@
 
 # dot files
 .editorconfig export-ignore
-.eslintrc.js export-ignore
+.eslintrc.json export-ignore
 .eslintignore export-ignore
-.babelrc.js export-ignore
-.huskyrc.js export-ignore
-.lintstagedrc.js export-ignore
+.babelrc.json export-ignore
+.huskyrc.json export-ignore
+.lintstagedrc.json export-ignore
 {{#if this.conventionalCommits}}
-.commitlintrc.js export-ignore
+.commitlintrc.json export-ignore
 {{/if}}
 {{#is cssPreprocessor 'sass'}}
-.stylelintrc.js export-ignore
+.stylelintrc.json export-ignore
 .stylelintignore export-ignore
 {{/is}}
 
-# npm
+# package manager
 package.json export-ignore
 package-lock.json export-ignore
 yarn.lock export-ignore
+pnpm-lock.yaml export-ignore
 
 # gulp
-gulpfile.babel.js export-ignore
+gulpfile.js export-ignore
 config.js export-ignore
 task/ export-ignore
 

@@ -3,7 +3,7 @@
   "root": true,
   "extends": [
     "@hidoo/eslint-config",
-    "@hidoo/eslint-config/+babel"
+    "@hidoo/eslint-config/+stylistic"
   ],
   "overrides": [
     {

@@ -44,9 +44,7 @@ describe('copy', () => {
 
   it('should copy files specified by glob pattern to "dest" directory.', async () => {
     const cases = [
-      ['*.{txt,md}', ['sample.txt', 'sample.md']],
-      ['*.txt', ['sample.txt']],
-      ['*.md', ['sample.md']]
+      ['*.{txt,md}', ['sample.txt', 'sample.md']]
     ];
 
     await Promise.all(

@@ -17,7 +17,7 @@
     "build:example:single": "pnpm generate ../../examples/single-device --no-interactive --force",
     "build:example:multiple": "pnpm generate ../../examples/multi-device --no-interactive --force --multi-device",
     "build:example:sass": "pnpm generate ../../examples/use-sass --no-interactive --force --css-preprocessor sass",
-    "build:example:replace": "replace-in-files --regex='\"(@hidoo\/gulp-([^\"]+))\":\\s\"([^\"]+)\"' --replacement='\"$1\": \"workspace:*\"' ./examples/**/package.json",
+    "build:example:replace": "replace-in-files --regex='\"(@hidoo/gulp-([^\"]+))\":\\s\"([^\"]+)\"' --replacement='\"$1\": \"workspace:*\"' ./examples/**/package.json",
     "build:replace": "pnpm --filter gulp-project-generator updateDepsVer",
     "bootstrap": "pnpm install",
     "generate": "pnpm --filter gulp-project-generator generate",

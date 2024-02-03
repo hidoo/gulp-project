@@ -339,8 +339,8 @@ importers:
         specifier: 1.0.19
         version: 1.0.19
       plugin-error:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 2.0.1
+        version: 2.0.1
       save-pixels:
         specifier: 2.3.4
         version: 2.3.4
@@ -382,8 +382,8 @@ importers:
         specifier: 1.0.19
         version: 1.0.19
       plugin-error:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 2.0.1
+        version: 2.0.1
       save-pixels:
         specifier: 2.3.4
         version: 2.3.4
@@ -431,8 +431,8 @@ importers:
         specifier: 4.7.7
         version: 4.7.7
       plugin-error:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 2.0.1
+        version: 2.0.1
       svg-sprite:
         specifier: 1.5.0
         version: 1.5.0
@@ -462,8 +462,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       plugin-error:
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 2.0.1
+        version: 2.0.1
       through2:
         specifier: 4.0.2
         version: 4.0.2
@@ -14024,6 +14024,13 @@ packages:
       arr-diff: 4.0.0
       arr-union: 3.1.0
       extend-shallow: 3.0.2
+    dev: false
+
+  /plugin-error@2.0.1:
+    resolution: {integrity: sha512-zMakqvIDyY40xHOvzXka0kUvf40nYIuwRE8dWhti2WtjQZ31xAgBZBhxsK7vK3QbRXS1Xms/LO7B5cuAsfB2Gg==}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      ansi-colors: 1.1.0
     dev: false
 
   /plur@3.1.1:

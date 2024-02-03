@@ -4,7 +4,6 @@ import assert from 'node:assert';
 import sample from './index.js';
 
 describe('js/lib/sample-esm', () => {
-
   it('should return "message" string.', () => {
     const actual = sample();
 

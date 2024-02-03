@@ -12,7 +12,8 @@ import server from './task/server.js';
 
 // print values of config
 /* eslint-disable node/no-process-env */
-console.log(chalk.gray.italic(`/**
+console.log(
+  chalk.gray.italic(`/**
  * ${config.pkg.name.toUpperCase()}
  * ${config.pkg.description || '(no description)'}
  *
@@ -20,7 +21,8 @@ console.log(chalk.gray.italic(`/**
  * @type {String}  NODE_ENV ${chalk.green(`'${process.env.NODE_ENV}'`)}
  * @type {Boolean} compress ${chalk.yellow(config.compress)}
  */
-`));
+`)
+);
 /* eslint-enable node/no-process-env */
 
 /**
@@ -31,10 +33,9 @@ console.log(chalk.gray.italic(`/**
 export const clean = async () => {
   try {
     if (await fs.stat(config.path.dest)) {
-      await fs.rm(config.path.dest, {recursive: true});
+      await fs.rm(config.path.dest, { recursive: true });
     }
-  }
-  catch ({message}) {
+  } catch ({ message }) {
     console.warn(message);
   }
 };
@@ -44,7 +45,7 @@ export const clean = async () => {
  *
  * @type {Function}
  */
-export {default as server} from './task/server.js';
+export { default as server } from './task/server.js';
 
 /**
  * build task
@@ -54,11 +55,7 @@ export {default as server} from './task/server.js';
 export const build = gulp.parallel(
   css.deps,
   js.deps,
-  gulp.series(
-    sprite.main,
-    css.main,
-    styleguide.main
-  ),
+  gulp.series(sprite.main, css.main, styleguide.main),
   js.main,
   html.main,
   image.main
@@ -83,11 +80,4 @@ export const watch = gulp.parallel(
  *
  * @return {Function}
  */
-export default gulp.series(
-  clean,
-  build,
-  gulp.parallel(
-    server,
-    watch
-  )
-);
+export default gulp.series(clean, build, gulp.parallel(server, watch));

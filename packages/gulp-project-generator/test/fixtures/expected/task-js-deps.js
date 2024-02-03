@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
-import {concatJs} from '@hidoo/gulp-task-concat';
+import { concatJs } from '@hidoo/gulp-task-concat';
 import * as config from '../config.js';
 
 // define main task
@@ -27,16 +27,8 @@ export const deps = concatJs({
 // define watch task
 export const watch = () => {
   gulp.watch(
-    [
-      `!${config.path.srcJs}/deps/*.js`,
-      `${config.path.srcJs}/**/*.js`
-    ],
+    [`!${config.path.srcJs}/deps/*.js`, `${config.path.srcJs}/**/*.js`],
     main
   );
-  gulp.watch(
-    [
-      `${config.path.srcJs}/deps/*.js`
-    ],
-    deps
-  );
+  gulp.watch([`${config.path.srcJs}/deps/*.js`], deps);
 };

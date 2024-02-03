@@ -1,0 +1,5 @@
+*.hbs
+node_modules/*
+public/*
+CHANGELOG.md
+pnpm-lock.yaml

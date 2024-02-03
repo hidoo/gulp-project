@@ -5,7 +5,5 @@
  * @return {Component}
  */
 export default function Hoge(props) {
-  return (
-    <div>{ props.hoge }</div>
-  );
+  return <div>{props.hoge}</div>;
 }

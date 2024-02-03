@@ -2,8 +2,8 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
@@ -19,15 +19,19 @@ import imageEvenizer from '../src/index.js';
  */
 function getUint8ArraysFromBuffers(buffers) {
   return Promise.all(
-    buffers.map((buffer) => FileType.fromBuffer(buffer)
-      .then(({mime}) => new Promise((resolve, reject) => {
-        getPixels(buffer, mime, (error, pixels) => {
-          if (error) {
-            return reject(error);
-          }
-          return resolve(pixels.data);
-        });
-      })))
+    buffers.map((buffer) =>
+      FileType.fromBuffer(buffer).then(
+        ({ mime }) =>
+          new Promise((resolve, reject) => {
+            getPixels(buffer, mime, (error, pixels) => {
+              if (error) {
+                return reject(error);
+              }
+              return resolve(pixels.data);
+            });
+          })
+      )
+    )
   );
 }
 
@@ -82,77 +86,85 @@ describe('gulp-plugin-image-evenizer', () => {
       ]
     ];
 
-    await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
-      const plugin = imageEvenizer({verbose: false}),
-            srcBuffer = fs.readFileSync(path, {encode: null}),
-            expectedBuffer = fs.readFileSync(expectedPath),
-            fakeFile = new Vinyl({
-              path,
-              contents: Buffer.from(srcBuffer)
+    await Promise.all(
+      cases.map(
+        ([path, [width, height, expectedPath]]) =>
+          new Promise((resolve, reject) => {
+            const plugin = imageEvenizer({ verbose: false }),
+              srcBuffer = fs.readFileSync(path, { encode: null }),
+              expectedBuffer = fs.readFileSync(expectedPath),
+              fakeFile = new Vinyl({
+                path,
+                contents: Buffer.from(srcBuffer)
+              });
+            let evenizedBuffer = null;
+
+            plugin.once('data', (file) => {
+              const dimentions = sizeOf(file.contents);
+
+              assert(file.isBuffer());
+              assert(dimentions.width === width);
+              assert(dimentions.height === height);
+              evenizedBuffer = file.contents;
             });
-      let evenizedBuffer = null;
+            plugin.on('error', reject);
+            plugin.on('end', () => {
+              getUint8ArraysFromBuffers([evenizedBuffer, expectedBuffer])
+                .then((pixels) => {
+                  const [evenizedPixels, expectedPixels] = pixels,
+                    countDiffPixels = pixelmatch(
+                      evenizedPixels,
+                      expectedPixels,
+                      null,
+                      width,
+                      height,
+                      { threshold: 0.1 }
+                    );
 
-      plugin.once('data', (file) => {
-        const dimentions = sizeOf(file.contents);
+                  assert(countDiffPixels === 0);
+                  return resolve();
+                })
+                .catch((error) => reject(error));
+            });
 
-        assert(file.isBuffer());
-        assert(dimentions.width === width);
-        assert(dimentions.height === height);
-        evenizedBuffer = file.contents;
-      });
-      plugin.on('error', reject);
-      plugin.on('end', () => {
-        getUint8ArraysFromBuffers([evenizedBuffer, expectedBuffer])
-          .then((pixels) => {
-            const [evenizedPixels, expectedPixels] = pixels,
-                  countDiffPixels = pixelmatch(
-                    evenizedPixels,
-                    expectedPixels,
-                    null,
-                    width,
-                    height,
-                    {threshold: 0.1}
-                  );
+            plugin.write(fakeFile);
 
-            assert(countDiffPixels === 0);
-            return resolve();
+            plugin.end();
           })
-          .catch((error) => reject(error));
-      });
-
-      plugin.write(fakeFile);
-
-      plugin.end();
-    })));
+      )
+    );
   });
 
   it('should out original image if image is animation gif.', async () => {
-    const cases = [
-      [`${__dirname}/fixtures/animation.gif`, [9, 9]]
-    ];
+    const cases = [[`${__dirname}/fixtures/animation.gif`, [9, 9]]];
 
-    await Promise.all(cases.map(([path, [width, height]]) => new Promise((resolve, reject) => {
-      const plugin = imageEvenizer({verbose: false}),
-            src = fs.readFileSync(path, {encode: null}),
-            fakeFile = new Vinyl({
-              path,
-              contents: Buffer.from(src)
+    await Promise.all(
+      cases.map(
+        ([path, [width, height]]) =>
+          new Promise((resolve, reject) => {
+            const plugin = imageEvenizer({ verbose: false }),
+              src = fs.readFileSync(path, { encode: null }),
+              fakeFile = new Vinyl({
+                path,
+                contents: Buffer.from(src)
+              });
+
+            plugin.once('data', (file) => {
+              const dimentions = sizeOf(file.contents);
+
+              assert(file.isBuffer());
+              assert(dimentions.width === width);
+              assert(dimentions.height === height);
+              assert.deepStrictEqual(file.contents, src);
             });
+            plugin.on('error', reject);
+            plugin.on('end', resolve);
 
-      plugin.once('data', (file) => {
-        const dimentions = sizeOf(file.contents);
+            plugin.write(fakeFile);
 
-        assert(file.isBuffer());
-        assert(dimentions.width === width);
-        assert(dimentions.height === height);
-        assert.deepStrictEqual(file.contents, src);
-      });
-      plugin.on('error', reject);
-      plugin.on('end', resolve);
-
-      plugin.write(fakeFile);
-
-      plugin.end();
-    })));
+            plugin.end();
+          })
+      )
+    );
   });
 });

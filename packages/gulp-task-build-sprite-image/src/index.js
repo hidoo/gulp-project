@@ -1,5 +1,5 @@
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
@@ -91,9 +91,9 @@ const DEFAULT_OPTIONS = {
   evenize: false,
   compress: false,
   compressOptions: [
-    gifsicle({interlaced: true}),
-    mozjpeg({quality: 90, progressive: true}),
-    optipng({optimizationLevel: 5}),
+    gifsicle({ interlaced: true }),
+    mozjpeg({ quality: 90, progressive: true }),
+    optipng({ optimizationLevel: 5 }),
     svgo()
   ],
   verbose: false
@@ -165,22 +165,20 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildSprite(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  if (
-    !opts.cssTemplate &&
-    TEMPLATES.has(opts.cssPreprocessor)
-  ) {
+  if (!opts.cssTemplate && TEMPLATES.has(opts.cssPreprocessor)) {
     opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
   }
 
   // define task
   const task = () => {
-    const {evenize, compress, compressOptions, verbose} = opts;
+    const { evenize, compress, compressOptions, verbose } = opts;
 
-    const stream = gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
-      .pipe(cond(evenize, evenizer({verbose})))
+    const stream = gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
+      .pipe(cond(evenize, evenizer({ verbose })))
       .pipe(spritesmith(opts));
 
     // out css stream
@@ -188,8 +186,9 @@ export default function buildSprite(options = {}) {
 
     // out image stream
     // + it optimize if opts.compress
-    const image = stream.img.pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
+    const image = stream.img
+      .pipe(buffer())
+      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
       .pipe(gulp.dest(opts.destImg));
 
     // return merged stream

@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "type":"module",
+  "type": "module",
   "main": "src/index.js",
   "files": [
     "src/",

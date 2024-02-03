@@ -13,10 +13,5 @@ export const main = buildCss({
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCss}/*.styl`
-    ],
-    main
-  );
+  gulp.watch([`${config.path.srcCss}/*.styl`], main);
 };

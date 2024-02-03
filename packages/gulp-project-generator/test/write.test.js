@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import write from '../src/write.js';
 
 describe('write', () => {
@@ -16,18 +16,17 @@ describe('write', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
   it('should return string of created file path.', async () => {
     const contents = 'hoge hoge';
     const dest = `${destDir}/hoge.txt`;
-    const filePath = await write(contents, dest, {verbose: false});
+    const filePath = await write(contents, dest, { verbose: false });
 
     assert(typeof filePath === 'string');
     assert(filePath === dest);
     assert((await fs.readFile(filePath)).toString() === contents);
   });
-
 });

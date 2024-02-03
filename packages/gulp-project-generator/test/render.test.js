@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import render from '../src/render.js';
 
 describe('render', () => {
@@ -15,10 +15,11 @@ describe('render', () => {
   });
 
   it('should return string of evaluated template.', async () => {
-    const content = await render(`${srcDir}/template.hbs`, {type: 'template'});
+    const content = await render(`${srcDir}/template.hbs`, {
+      type: 'template'
+    });
 
     assert(typeof content === 'string');
     assert(content.trim() === 'This is a template text.');
   });
-
 });

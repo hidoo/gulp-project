@@ -20,8 +20,7 @@ export default function outputOptions(options = {}) {
 
   if (Array.isArray(outputOpts)) {
     return outputOpts;
-  }
-  else if (typeof outputOpts === 'object' && outputOpts !== null) {
+  } else if (typeof outputOpts === 'object' && outputOpts !== null) {
     return [
       {
         ...defaultOutputOptions,

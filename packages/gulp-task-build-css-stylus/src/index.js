@@ -20,10 +20,11 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/no-sync
-  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
-}
-catch (error) {
+  pkg = JSON.parse(
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+  );
+} catch (error) {
   log.error('Failed to load package.json.');
 }
 
@@ -40,7 +41,7 @@ const DEFAULT_OPTIONS = {
   suffix: '.min',
   browsers: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
-  stylusOptions: {rawDefine: {}},
+  stylusOptions: { rawDefine: {} },
   url: null,
   urlOptions: {},
   uncssTargets: [],
@@ -95,20 +96,24 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildCss(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
     const {
-            filename, suffix, browsers, banner,
-            uncssTargets, uncssIgnore,
-            additionalProcess,
-            compress
-          } = opts,
-          extname = path.extname(filename),
-          basename = path.basename(filename, extname),
-          stylusOptions = opts.stylusOptions || {},
-          postProcesses = [];
+        filename,
+        suffix,
+        browsers,
+        banner,
+        uncssTargets,
+        uncssIgnore,
+        additionalProcess,
+        compress
+      } = opts,
+      extname = path.extname(filename),
+      basename = path.basename(filename, extname),
+      stylusOptions = opts.stylusOptions || {},
+      postProcesses = [];
 
     // additinal stylus data
     // + always add NODE_ENV
@@ -121,7 +126,7 @@ export default function buildCss(options = {}) {
     };
 
     // add default post css process
-    postProcesses.push(autoprefixer({overrideBrowserslist: browsers}));
+    postProcesses.push(autoprefixer({ overrideBrowserslist: browsers }));
     postProcesses.push(cssmqpacker);
 
     // add post css process by postcss-url
@@ -129,18 +134,22 @@ export default function buildCss(options = {}) {
       typeof opts.url === 'string' &&
       ['inline', 'copy', 'rebase'].includes(opts.url)
     ) {
-      postProcesses.push(url({
-        ...opts.urlOptions,
-        url: opts.url
-      }));
+      postProcesses.push(
+        url({
+          ...opts.urlOptions,
+          url: opts.url
+        })
+      );
     }
 
     // add post css process if opts.uncssTargets is valid
     if (Array.isArray(uncssTargets) && Boolean(uncssTargets.length)) {
-      postProcesses.push(uncss({
-        html: uncssTargets,
-        ignore: Array.isArray(uncssIgnore) ? uncssIgnore : []
-      }));
+      postProcesses.push(
+        uncss({
+          html: uncssTargets,
+          ignore: Array.isArray(uncssIgnore) ? uncssIgnore : []
+        })
+      );
     }
 
     // add post css process if opts.additionalProcess is valid
@@ -148,17 +157,18 @@ export default function buildCss(options = {}) {
       postProcesses.push(additionalProcess);
     }
 
-    return gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(stylus(mergedStylusOptions))
       .pipe(postcss([...postProcesses]))
-      .pipe(header(banner, {pkg}))
-      .pipe(rename({basename, extname}))
+      .pipe(header(banner, { pkg }))
+      .pipe(rename({ basename, extname }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, postcss([csso({restructure: false})])))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, postcss([csso({ restructure: false })])))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

@@ -9,10 +9,10 @@ import rename from 'gulp-rename';
 import cloneDeep from 'lodash.clonedeep';
 import Handlebars from 'handlebars';
 import layouts from 'handlebars-layouts';
-import {glob} from 'glob';
+import { glob } from 'glob';
 import * as helpers from '@hidoo/handlebars-helpers';
 import errorHandler from '@hidoo/gulp-util-error-handler';
-import {fromFiles, fromFrontMatter} from '@hidoo/data-from';
+import { fromFiles, fromFrontMatter } from '@hidoo/data-from';
 import pathDepth from './pathDepth.js';
 
 /**
@@ -37,20 +37,19 @@ function getContextFromFiles(pattern, options = {}) {
     return {};
   }
 
-  const {handlebars, onParsed, verbose} = options;
+  const { handlebars, onParsed, verbose } = options;
   let context = {};
 
   try {
-    context = fromFiles(pattern, {handlebars});
+    context = fromFiles(pattern, { handlebars });
 
     if (typeof onParsed === 'function') {
       return onParsed(context);
     }
     return context;
-  }
-  catch (error) {
+  } catch (error) {
     if (verbose) {
-      errorHandler({plugin: TASK_NAME, ...error});
+      errorHandler({ plugin: TASK_NAME, ...error });
     }
     return context;
   }
@@ -68,22 +67,25 @@ function getContextFromFiles(pattern, options = {}) {
  * @return {Object}
  */
 function getContextFromFrontMatter(file, options = {}) {
-  const {contents, relative, basename, extname} = file,
-        {context, handlebars, onParsed} = options,
-        {body, attributes} = fromFrontMatter(contents.toString(), {context, handlebars}),
-        path = {
-          depth: pathDepth(relative),
-          relative,
-          basename,
-          extname
-        };
+  const { contents, relative, basename, extname } = file,
+    { context, handlebars, onParsed } = options,
+    { body, attributes } = fromFrontMatter(contents.toString(), {
+      context,
+      handlebars
+    }),
+    path = {
+      depth: pathDepth(relative),
+      relative,
+      basename,
+      extname
+    };
 
   if (typeof onParsed === 'function') {
     const processedAttributes = onParsed(attributes);
 
-    return {body, attributes: {...processedAttributes, path}};
+    return { body, attributes: { ...processedAttributes, path } };
   }
-  return {body, attributes: {...attributes, path}};
+  return { body, attributes: { ...attributes, path } };
 }
 
 /**
@@ -96,16 +98,16 @@ function getContextFromFrontMatter(file, options = {}) {
  */
 function sortByFilename(options = {}) {
   const extname = options.extname || '.html',
-        pattern = new RegExp(`page-?list${extname}$`);
+    pattern = new RegExp(`page-?list${extname}$`);
 
-  return (a, b) => { // eslint-disable-line id-length
+  // eslint-disable-next-line id-length
+  return (a, b) => {
     const aIsMatch = pattern.test(a.path),
-          bIsMatch = pattern.test(b.path);
+      bIsMatch = pattern.test(b.path);
 
     if (aIsMatch && !bIsMatch) {
       return 1; // eslint-disable-line no-magic-numbers
-    }
-    else if (!aIsMatch && bIsMatch) {
+    } else if (!aIsMatch && bIsMatch) {
       return -1; // eslint-disable-line no-magic-numbers
     }
     return a.path.localeCompare(b.path);
@@ -203,7 +205,7 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildHtml(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
@@ -224,33 +226,43 @@ export default function buildHtml(options = {}) {
     const pages = [];
 
     // add default helpers from @hidoo/handlebars-helpers
-    Object.entries(helpers).forEach(
-      ([name, helper]) => handlebars.registerHelper(name, helper)
+    Object.entries(helpers).forEach(([name, helper]) =>
+      handlebars.registerHelper(name, helper)
     );
 
-    return gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
-      .pipe(rename({extname}))
-      .pipe(sort(sortByFilename({extname})))
-      .pipe(data((file) => {
-        const {body, attributes} = getContextFromFrontMatter(file, {
-          context,
-          handlebars,
-          onParsed: onFrontMatterParsed
-        });
-
-        file.contents = Buffer.from(body);
-        pages.push(attributes);
-        return cloneDeep(attributes);
-      }))
-      .pipe(data(
-        // add helpers from options.helpers
-        () => glob(opts.helpers, {ignore: 'node_modules/**'})
-          .then((filenames) => Promise.all(filenames.map((filename) => import(filename))))
-          .then((modules) => modules.forEach(({register}) => register(handlebars)))
-      ))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
+      .pipe(rename({ extname }))
+      .pipe(sort(sortByFilename({ extname })))
       .pipe(
-        hbs({handlebars})
+        data((file) => {
+          const { body, attributes } = getContextFromFrontMatter(file, {
+            context,
+            handlebars,
+            onParsed: onFrontMatterParsed
+          });
+
+          file.contents = Buffer.from(body);
+          pages.push(attributes);
+          return cloneDeep(attributes);
+        })
+      )
+      .pipe(
+        data(
+          // add helpers from options.helpers
+          () =>
+            glob(opts.helpers, { ignore: 'node_modules/**' })
+              .then((filenames) =>
+                Promise.all(filenames.map((filename) => import(filename)))
+              )
+              .then((modules) =>
+                modules.forEach(({ register }) => register(handlebars))
+              )
+        )
+      )
+      .pipe(
+        hbs({ handlebars })
           .helpers(layouts)
           .partials(opts.layouts)
           .partials(opts.partials)
@@ -262,7 +274,7 @@ export default function buildHtml(options = {}) {
           })
       )
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, htmlmin({...compressOptions})))
+      .pipe(cond(compress, htmlmin({ ...compressOptions })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

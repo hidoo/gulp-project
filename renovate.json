@@ -1,14 +1,8 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "timezone": "Asia/Tokyo",
-  "schedule": [
-    "every weekend"
-  ],
-  "labels": [
-    "renovate"
-  ],
+  "schedule": ["every weekend"],
+  "labels": ["renovate"],
   "patch": {
     "automerge": true
   },
@@ -17,12 +11,8 @@
   },
   "packageRules": [
     {
-      "updateTypes": [
-        "major"
-      ],
-      "labels": [
-        "major update"
-      ]
+      "updateTypes": ["major"],
+      "labels": ["major update"]
     },
     {
       "groupName": "do not automerge @babel packages",
@@ -54,10 +44,7 @@
     {
       "groupName": "do not automerge eslint packages",
       "groupSlug": "do-not-automerge-eslint",
-      "packageNames": [
-        "@hidoo/eslint-config",
-        "eslint"
-      ],
+      "packageNames": ["@hidoo/eslint-config", "eslint"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -66,10 +53,7 @@
     {
       "groupName": "do not automerge stylelint packages",
       "groupSlug": "do-not-automerge-stylelint",
-      "packageNames": [
-        "@hidoo/stylelint-config",
-        "stylelint"
-      ],
+      "packageNames": ["@hidoo/stylelint-config", "stylelint"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -78,10 +62,7 @@
     {
       "groupName": "do not automerge polyfill packages",
       "groupSlug": "do-not-automerge-polyfill",
-      "packageNames": [
-        "core-js",
-        "regenerator-runtime"
-      ],
+      "packageNames": ["core-js", "regenerator-runtime"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -90,10 +71,7 @@
     {
       "groupName": "do not automerge express packages",
       "groupSlug": "do-not-automerge-express",
-      "packageNames": [
-        "@hidoo/express-engine-handlebars",
-        "express"
-      ],
+      "packageNames": ["@hidoo/express-engine-handlebars", "express"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -102,12 +80,7 @@
     {
       "groupName": "do not automerge workflow packages",
       "groupSlug": "do-not-automerge-workflow",
-      "packageNames": [
-        "cross-env",
-        "husky",
-        "lint-staged",
-        "npm-run-all"
-      ],
+      "packageNames": ["cross-env", "husky", "lint-staged", "npm-run-all"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -116,12 +89,7 @@
     {
       "groupName": "do not automerge test packages",
       "groupSlug": "do-not-automerge-test",
-      "packageNames": [
-        "jsdom",
-        "jsdom-global",
-        "mocha",
-        "power-assert"
-      ],
+      "packageNames": ["jsdom", "jsdom-global", "mocha", "power-assert"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -130,11 +98,7 @@
     {
       "groupName": "do not automerge packages",
       "groupSlug": "do-not-automerge",
-      "packageNames": [
-        "browser-sync",
-        "commander",
-        "gulp"
-      ],
+      "packageNames": ["browser-sync", "commander", "gulp"],
       "automerge": false,
       "patch": {
         "automerge": false
@@ -143,24 +107,15 @@
     {
       "groupName": "gulp plugin packages",
       "groupSlug": "gulp plugin packages",
-      "packagePatterns": [
-        "^gulp-"
-      ]
+      "packagePatterns": ["^gulp-"]
     },
     {
       "groupName": "post-css packages",
       "groupSlug": "post-css-packages",
-      "packagePatterns": [
-        "^postcss$",
-        "^postcss-",
-        "^gulp-postcss$"
-      ]
+      "packagePatterns": ["^postcss$", "^postcss-", "^gulp-postcss$"]
     }
   ],
-  "ignoreDeps": [
-    "babelify",
-    "browserify"
-  ],
+  "ignoreDeps": ["babelify", "browserify"],
   "ignorePaths": [
     "examples/**",
     "packages/gulp-project-generator/test/fixtures/expected/**",

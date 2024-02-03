@@ -2,10 +2,10 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import imagemin from 'gulp-imagemin';
-import buildSprite, {svgo} from '../src/index.js';
+import buildSprite, { svgo } from '../src/index.js';
 
 describe('gulp-task-build-sprite-svg', () => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -16,11 +16,7 @@ describe('gulp-task-build-sprite-svg', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
@@ -35,14 +31,20 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.styl`);
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
+        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.styl`);
 
       assert(actualSvg);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
@@ -60,16 +62,26 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualSvgGzip = fs.readFileSync(`${path.dest}/svg-sprite.svg.gz`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.compressed.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.compressed.styl`);
+        actualSvgGzip = fs.readFileSync(`${path.dest}/svg-sprite.svg.gz`),
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
+        expectedSvg = fs.readFileSync(
+          `${path.expected}/svg-sprite.compressed.svg`
+        ),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/svg-sprite.compressed.styl`
+        );
 
       assert(actualSvg);
       assert(actualSvgGzip);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
@@ -86,14 +98,24 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.with-parameters.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.with-parameters.styl`);
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
+        expectedSvg = fs.readFileSync(
+          `${path.expected}/svg-sprite.with-parameters.svg`
+        ),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/svg-sprite.with-parameters.styl`
+        );
 
       assert(actualSvg);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
@@ -111,14 +133,20 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.scss`);
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
+        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.scss`);
 
       assert(actualSvg);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
@@ -136,14 +164,22 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite-module.scss`);
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
+        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/svg-sprite-module.scss`
+        );
 
       assert(actualSvg);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
@@ -162,23 +198,27 @@ describe('gulp-task-build-sprite-svg', () => {
 
     task().on('finish', () => {
       const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-            actualCss = fs.readFileSync(`${path.dest}/svg-sprite.css`),
-            expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-            expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.css`);
+        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.css`),
+        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
+        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.css`);
 
       assert(actualSvg);
       assert(actualCss);
-      assert.deepStrictEqual(actualSvg.toString().trim(), expectedSvg.toString().trim());
-      assert.deepStrictEqual(actualCss.toString().trim(), expectedCss.toString().trim());
+      assert.deepStrictEqual(
+        actualSvg.toString().trim(),
+        expectedSvg.toString().trim()
+      );
+      assert.deepStrictEqual(
+        actualCss.toString().trim(),
+        expectedCss.toString().trim()
+      );
       done();
     });
   });
 
   describe('exports imagemin plugins', () => {
-
     it('should be accessible to imagemin plugins', () => {
       assert(imagemin.svgo === svgo);
     });
   });
-
 });

@@ -11,13 +11,16 @@ $ npm install --save-dev gulp@next @hidoo/gulp-task-copy
 ## Usage
 
 ```js
-import {task} from 'gulp';
-import {concatJs} from '@hidoo/gulp-task-copy';
+import { task } from 'gulp';
+import { concatJs } from '@hidoo/gulp-task-copy';
 
-task('copy', copy({
-  src: '/path/to/src',
-  dest: '/path/to/dest'
-}));
+task(
+  'copy',
+  copy({
+    src: '/path/to/src',
+    dest: '/path/to/dest'
+  })
+);
 ```
 
 ## API
@@ -30,26 +33,29 @@ return copy files task
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'copy:asset'`)
-    *   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
-    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'copy:asset'`)
+  - `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
+  - `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
-import {concatJs} from '@hidoo/gulp-task-copy';
+import { task } from 'gulp';
+import copy from '@hidoo/gulp-task-copy';
 
-task('copy', copy({
-  name: 'copy:main',
-  src: '/path/to/src',
-  dest: '/path/to/dest'
-}));
+task(
+  'copy',
+  copy({
+    name: 'copy:main',
+    src: '/path/to/src',
+    dest: '/path/to/dest'
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**
 
 ## Test
 

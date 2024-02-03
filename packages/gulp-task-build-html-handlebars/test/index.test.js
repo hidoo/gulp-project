@@ -2,8 +2,8 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import buildHtml from '../src/index.js';
 
 describe('gulp-task-build-html-handlebars', () => {
@@ -15,11 +15,7 @@ describe('gulp-task-build-html-handlebars', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should out to "options.dest" if argument "options" is default.', (done) => {
@@ -30,7 +26,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.html`),
-            expected = fs.readFileSync(`${path.expected}/index.html`);
+        expected = fs.readFileSync(`${path.expected}/index.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -47,7 +43,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.php`),
-            expected = fs.readFileSync(`${path.expected}/index.html`);
+        expected = fs.readFileSync(`${path.expected}/index.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -64,7 +60,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.html`),
-            expected = fs.readFileSync(`${path.expected}/index.compress.html`);
+        expected = fs.readFileSync(`${path.expected}/index.compress.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -81,7 +77,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.partial.html`),
-            expected = fs.readFileSync(`${path.expected}/index.partial.html`);
+        expected = fs.readFileSync(`${path.expected}/index.partial.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -98,7 +94,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.layouts.html`),
-            expected = fs.readFileSync(`${path.expected}/index.layouts.html`);
+        expected = fs.readFileSync(`${path.expected}/index.layouts.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -115,7 +111,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.helpers.html`),
-            expected = fs.readFileSync(`${path.expected}/index.helpers.html`);
+        expected = fs.readFileSync(`${path.expected}/index.helpers.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -132,7 +128,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.data.html`),
-            expected = fs.readFileSync(`${path.expected}/index.data.html`);
+        expected = fs.readFileSync(`${path.expected}/index.data.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -146,7 +142,12 @@ describe('gulp-task-build-html-handlebars', () => {
       dest: path.dest,
       data: `${path.src}/data/**/valid.yml`,
       onFilesParsed(data) {
-        if (data.data && data.data.site && data.data.site.title && data.data.site.description) {
+        if (
+          data.data &&
+          data.data.site &&
+          data.data.site.title &&
+          data.data.site.description
+        ) {
           data.data.site = {
             title: 'hoge',
             description: 'fuga.'
@@ -158,7 +159,9 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.data.html`),
-            expected = fs.readFileSync(`${path.expected}/index.on-data-files-parsed.html`);
+        expected = fs.readFileSync(
+          `${path.expected}/index.on-data-files-parsed.html`
+        );
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -175,7 +178,7 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.data.html`),
-            expected = fs.readFileSync(`${path.expected}/index.data.invalid.html`);
+        expected = fs.readFileSync(`${path.expected}/index.data.invalid.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -200,7 +203,9 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/index.html`),
-            expected = fs.readFileSync(`${path.expected}/index.on-front-matter-parsed.html`);
+        expected = fs.readFileSync(
+          `${path.expected}/index.on-front-matter-parsed.html`
+        );
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -221,7 +226,7 @@ describe('gulp-task-build-html-handlebars', () => {
     task().on('finish', () => {
       console.log('finished');
       const actual = fs.readFileSync(`${path.dest}/index.pages.html`),
-            expected = fs.readFileSync(`${path.expected}/index.pages.html`);
+        expected = fs.readFileSync(`${path.expected}/index.pages.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
@@ -237,12 +242,11 @@ describe('gulp-task-build-html-handlebars', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/file.html`),
-            expected = fs.readFileSync(`${path.expected}/file.html`);
+        expected = fs.readFileSync(`${path.expected}/file.html`);
 
       assert(actual);
       assert.equal(String(actual).trim(), String(expected).trim());
       done();
     });
   });
-
 });

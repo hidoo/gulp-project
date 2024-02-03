@@ -20,20 +20,10 @@ const mainMobile = buildCss({
 
 // define watch task
 const watchDesktop = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssDesktop}/*.scss`
-    ],
-    mainDesktop
-  );
+  gulp.watch([`${config.path.srcCssDesktop}/*.scss`], mainDesktop);
 };
 const watchMobile = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssMobile}/*.scss`
-    ],
-    mainMobile
-  );
+  gulp.watch([`${config.path.srcCssMobile}/*.scss`], mainMobile);
 };
 
 // export tasks

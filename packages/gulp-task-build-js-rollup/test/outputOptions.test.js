@@ -1,30 +1,14 @@
 /* eslint max-len: off, no-magic-numbers: off */
 
 import assert from 'node:assert';
-import outputOptions, {defaultOutputOptions} from '../src/outputOptions.js';
+import outputOptions, { defaultOutputOptions } from '../src/outputOptions.js';
 
 describe('outputOptions', () => {
-
   it('should return merged output options list.', () => {
     const cases = [
-      [
-        null,
-        [
-          defaultOutputOptions
-        ]
-      ],
-      [
-        [],
-        [
-          defaultOutputOptions
-        ]
-      ],
-      [
-        {},
-        [
-          defaultOutputOptions
-        ]
-      ],
+      [null, [defaultOutputOptions]],
+      [[], [defaultOutputOptions]],
+      [{}, [defaultOutputOptions]],
       [
         {
           outputOptions: {
@@ -78,5 +62,4 @@ describe('outputOptions', () => {
       assert.deepEqual(actual, expected);
     });
   });
-
 });

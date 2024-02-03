@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import mkdir from '../src/mkdir.js';
 import isEmptyDir from '../src/isEmptyDir.js';
 
@@ -17,7 +17,7 @@ describe('isEmptyDir', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -36,5 +36,4 @@ describe('isEmptyDir', () => {
 
     assert(isEmpty === true);
   });
-
 });

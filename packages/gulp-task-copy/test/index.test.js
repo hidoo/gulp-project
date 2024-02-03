@@ -2,8 +2,8 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import copy from '../src/index.js';
 
 describe('gulp-task-copy', () => {
@@ -14,18 +14,12 @@ describe('gulp-task-copy', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should out to "options.dest" if argument "options" is default.', (done) => {
     const task = copy({
-      src: [
-        `${path.src}/*.{css,js,png,jpg,gif,svg}`
-      ],
+      src: [`${path.src}/*.{css,js,png,jpg,gif,svg}`],
       dest: path.dest
     });
 
@@ -34,7 +28,7 @@ describe('gulp-task-copy', () => {
 
       extnames.forEach((extname) => {
         const actual = fs.readFileSync(`${path.dest}/sample.${extname}`),
-              expected = fs.readFileSync(`${path.src}/sample.${extname}`);
+          expected = fs.readFileSync(`${path.src}/sample.${extname}`);
 
         assert(actual);
         assert.deepStrictEqual(actual, expected);
@@ -42,5 +36,4 @@ describe('gulp-task-copy', () => {
       done();
     });
   });
-
 });

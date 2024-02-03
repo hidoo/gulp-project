@@ -1,4 +1,4 @@
-import {relative} from 'node:path';
+import { relative } from 'node:path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
 import * as config from '../config.js';
@@ -78,4 +78,3 @@ export const mobile = {
   main: mainMobile,
   watch: watchMobile
 };
-

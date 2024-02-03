@@ -17,8 +17,8 @@ export default async function render(src = '', context = {}) {
 
   const hbs = Handlebars.create();
 
-  Object.entries(helpers).forEach(
-    ([name, helper]) => hbs.registerHelper(name, helper)
+  Object.entries(helpers).forEach(([name, helper]) =>
+    hbs.registerHelper(name, helper)
   );
 
   const content = await fs.readFile(path.resolve(src));

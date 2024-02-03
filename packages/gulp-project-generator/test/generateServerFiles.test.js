@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {glob} from 'glob';
+import { fileURLToPath } from 'node:url';
+import { glob } from 'glob';
 import generateServerFiles from '../src/generateServerFiles.js';
 
 /**
@@ -33,7 +33,7 @@ describe('generateServerFiles', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -45,10 +45,12 @@ describe('generateServerFiles', () => {
   });
 
   it('should not generate files without options.server.', async () => {
-    await generateServerFiles(srcDir, destDir, {server: false});
+    await generateServerFiles(srcDir, destDir, { server: false });
 
-    const actual = await glob(`${destDir}/task/server.js`, {nodir: true});
-    const actualAssets = await glob.sync(`${destDir}/src/server/**/*`, {nodir: true});
+    const actual = await glob(`${destDir}/task/server.js`, { nodir: true });
+    const actualAssets = await glob.sync(`${destDir}/src/server/**/*`, {
+      nodir: true
+    });
 
     assert(Array.isArray(actual));
     assert(Array.isArray(actualAssets));
@@ -57,11 +59,13 @@ describe('generateServerFiles', () => {
   });
 
   it('should generate files for local web server task with options.server.', async () => {
-    await generateServerFiles(srcDir, destDir, {server: true});
+    await generateServerFiles(srcDir, destDir, { server: true });
 
     const actual = await readBuiltFile(`${destDir}/task/server.js`);
     const expected = await readBuiltFile(`${expectedDir}/task-server.js`);
-    const actualAssets = (await glob(`${destDir}/src/server/**/*`, {nodir: true}))
+    const actualAssets = (
+      await glob(`${destDir}/src/server/**/*`, { nodir: true })
+    )
       .map((filepath) => filepath.replace(destDir, ''))
       .sort();
 
@@ -78,11 +82,16 @@ describe('generateServerFiles', () => {
   });
 
   it('should generate files for local web server task with options.server and options.multiDevice.', async () => {
-    await generateServerFiles(srcDir, destDir, {server: true, multiDevice: true});
+    await generateServerFiles(srcDir, destDir, {
+      server: true,
+      multiDevice: true
+    });
 
     const actual = await readBuiltFile(`${destDir}/task/server.js`);
     const expected = await readBuiltFile(`${expectedDir}/task-server.js`);
-    const actualAssets = (await glob(`${destDir}/src/server/**/*`, {nodir: true}))
+    const actualAssets = (
+      await glob(`${destDir}/src/server/**/*`, { nodir: true })
+    )
       .map((filepath) => filepath.replace(destDir, ''))
       .sort();
 
@@ -97,5 +106,4 @@ describe('generateServerFiles', () => {
       '/src/server/views/markdown.hbs'
     ]);
   });
-
 });

@@ -12,11 +12,5 @@ export const main = optimizeImage({
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcImage}/**/*.{jpg,jpeg,png,gif,svg}`
-    ],
-    main
-  );
+  gulp.watch([`${config.path.srcImage}/**/*.{jpg,jpeg,png,gif,svg}`], main);
 };
-

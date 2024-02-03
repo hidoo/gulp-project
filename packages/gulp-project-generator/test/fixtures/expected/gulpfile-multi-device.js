@@ -12,7 +12,8 @@ import server from './task/server.js';
 
 // print values of config
 /* eslint-disable node/no-process-env */
-console.log(chalk.gray.italic(`/**
+console.log(
+  chalk.gray.italic(`/**
  * ${config.pkg.name.toUpperCase()}
  * ${config.pkg.description || '(no description)'}
  *
@@ -20,7 +21,8 @@ console.log(chalk.gray.italic(`/**
  * @type {String}  NODE_ENV ${chalk.green(`'${process.env.NODE_ENV}'`)}
  * @type {Boolean} compress ${chalk.yellow(config.compress)}
  */
-`));
+`)
+);
 /* eslint-enable node/no-process-env */
 
 /**
@@ -31,10 +33,9 @@ console.log(chalk.gray.italic(`/**
 export const clean = async () => {
   try {
     if (await fs.stat(config.path.dest)) {
-      await fs.rm(config.path.dest, {recursive: true});
+      await fs.rm(config.path.dest, { recursive: true });
     }
-  }
-  catch ({message}) {
+  } catch ({ message }) {
     console.warn(message);
   }
 };
@@ -44,7 +45,7 @@ export const clean = async () => {
  *
  * @type {Function}
  */
-export {default as server} from './task/server.js';
+export { default as server } from './task/server.js';
 
 /**
  * return skip task
@@ -65,30 +66,34 @@ export const skip = (name = 'skip') => {
  * @return {Function}
  */
 export const build = gulp.parallel(
-  config.skipDevice === 'desktop' ? skip('skip:build:desktop') : gulp.parallel(
-    css.desktop.deps,
-    js.desktop.deps,
-    gulp.series(
-      sprite.desktop.main,
-      css.desktop.main,
-      styleguide.desktop.main
-    ),
-    js.desktop.main,
-    html.desktop.main,
-    image.desktop.main
-  ),
-  config.skipDevice === 'mobile' ? skip('skip:build:mobile') : gulp.parallel(
-    css.mobile.deps,
-    js.mobile.deps,
-    gulp.series(
-      sprite.mobile.main,
-      css.mobile.main,
-      styleguide.mobile.main
-    ),
-    js.mobile.main,
-    html.mobile.main,
-    image.mobile.main
-  )
+  config.skipDevice === 'desktop'
+    ? skip('skip:build:desktop')
+    : gulp.parallel(
+        css.desktop.deps,
+        js.desktop.deps,
+        gulp.series(
+          sprite.desktop.main,
+          css.desktop.main,
+          styleguide.desktop.main
+        ),
+        js.desktop.main,
+        html.desktop.main,
+        image.desktop.main
+      ),
+  config.skipDevice === 'mobile'
+    ? skip('skip:build:mobile')
+    : gulp.parallel(
+        css.mobile.deps,
+        js.mobile.deps,
+        gulp.series(
+          sprite.mobile.main,
+          css.mobile.main,
+          styleguide.mobile.main
+        ),
+        js.mobile.main,
+        html.mobile.main,
+        image.mobile.main
+      )
 );
 
 /**
@@ -97,22 +102,26 @@ export const build = gulp.parallel(
  * @return {Function}
  */
 export const watch = gulp.parallel(
-  config.skipDevice === 'desktop' ? skip('skip:watch:desktop') : gulp.parallel(
-    css.desktop.watch,
-    js.desktop.watch,
-    html.desktop.watch,
-    image.desktop.watch,
-    sprite.desktop.watch,
-    styleguide.desktop.watch
-  ),
-  config.skipDevice === 'mobile' ? skip('skip:watch:mobile') : gulp.parallel(
-    css.mobile.watch,
-    js.mobile.watch,
-    html.mobile.watch,
-    image.mobile.watch,
-    sprite.mobile.watch,
-    styleguide.mobile.watch
-  )
+  config.skipDevice === 'desktop'
+    ? skip('skip:watch:desktop')
+    : gulp.parallel(
+        css.desktop.watch,
+        js.desktop.watch,
+        html.desktop.watch,
+        image.desktop.watch,
+        sprite.desktop.watch,
+        styleguide.desktop.watch
+      ),
+  config.skipDevice === 'mobile'
+    ? skip('skip:watch:mobile')
+    : gulp.parallel(
+        css.mobile.watch,
+        js.mobile.watch,
+        html.mobile.watch,
+        image.mobile.watch,
+        sprite.mobile.watch,
+        styleguide.mobile.watch
+      )
 );
 
 /**
@@ -120,11 +129,4 @@ export const watch = gulp.parallel(
  *
  * @return {Function}
  */
-export default gulp.series(
-  clean,
-  build,
-  gulp.parallel(
-    server,
-    watch
-  )
-);
+export default gulp.series(clean, build, gulp.parallel(server, watch));

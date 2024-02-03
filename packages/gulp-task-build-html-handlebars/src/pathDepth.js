@@ -10,13 +10,15 @@ export default function pathDepth(path = '') {
   }
 
   // return it as is, if absolute path
-  if ((/^\//).test(path)) {
+  if (/^\//.test(path)) {
     return path;
   }
 
   const depthCount = (path.match(/\//g) || []).length;
 
-  return Array.from(Array(depthCount))
-    .map(() => '../')
-    .join('') || './';
+  return (
+    Array.from(Array(depthCount))
+      .map(() => '../')
+      .join('') || './'
+  );
 }

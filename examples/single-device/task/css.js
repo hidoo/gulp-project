@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import buildCss from '@hidoo/gulp-task-build-css-stylus';
-import {concatCss} from '@hidoo/gulp-task-concat';
+import { concatCss } from '@hidoo/gulp-task-concat';
 import * as config from '../config.js';
 
 // define main task
@@ -26,17 +26,6 @@ export const deps = concatCss({
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCss}/*.styl`
-    ],
-    main
-  );
-  gulp.watch(
-    [
-      `${config.path.srcCss}/deps/*.css`
-    ],
-    deps
-  );
+  gulp.watch([`${config.path.srcCss}/*.styl`], main);
+  gulp.watch([`${config.path.srcCss}/deps/*.css`], deps);
 };
-

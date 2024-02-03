@@ -3,7 +3,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import buildJs from '../src/index.js';
 
 let pkg = null;
@@ -17,10 +17,14 @@ let pkg = null;
 async function readBuiltFile(file) {
   const content = await fs.readFile(file);
 
-  return content.toString().trim()
-    // eslint-disable-next-line prefer-named-capture-group
-    .replace(/^(\s*\/\*[\s\S]*?\*\/\s*|\s*\/\/.*\n)*/, '')
-    .replace(/<core-js version>/g, pkg.devDependencies['core-js']);
+  return (
+    content
+      .toString()
+      .trim()
+      // eslint-disable-next-line prefer-named-capture-group
+      .replace(/^(\s*\/\*[\s\S]*?\*\/\s*|\s*\/\/.*\n)*/, '')
+      .replace(/<core-js version>/g, pkg.devDependencies['core-js'])
+  );
 }
 
 describe('gulp-task-build-js-browserify', () => {
@@ -33,9 +37,7 @@ describe('gulp-task-build-js-browserify', () => {
 
   before(async () => {
     pkg = JSON.parse(
-      await fs.readFile(
-        path.resolve(process.cwd(), 'package.json')
-      )
+      await fs.readFile(path.resolve(process.cwd(), 'package.json'))
     );
     dirname = path.dirname(fileURLToPath(import.meta.url));
     fixturesDir = path.resolve(dirname, 'fixtures');
@@ -59,7 +61,7 @@ describe('gulp-task-build-js-browserify', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -145,8 +147,7 @@ describe('gulp-task-build-js-browserify', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -173,8 +174,7 @@ describe('gulp-task-build-js-browserify', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -201,5 +201,4 @@ describe('gulp-task-build-js-browserify', () => {
       })
     );
   });
-
 });

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
-import {dirname, basename, resolve} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname, basename, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Vinyl from 'vinyl';
 import through from 'through2';
 import Handlebars from 'handlebars';
@@ -15,7 +15,6 @@ import configureSVGSpriter from './configureSVGSpriter.js';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   // destination svg path
   imgName: null,
 
@@ -48,7 +47,7 @@ const DEFAULT_OPTIONS = {
  */
 const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
 
-/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function, max-statements */
 /**
  * return svg sprite sheet
  *
@@ -71,35 +70,48 @@ const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
  * });
  */
 export default function svgSprite(options) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   if (typeof opts.imgName !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.imgName" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.imgName" is required.'
+    );
   }
   if (typeof opts.cssName !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.cssName" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.cssName" is required.'
+    );
   }
   if (typeof opts.imgPath !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.imgPath" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.imgPath" is required.'
+    );
   }
-  if (!fs.existsSync(opts.cssTemplate)) { // eslint-disable-line node/no-sync
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.cssTemplate" is required.');
+  // eslint-disable-next-line node/no-sync
+  if (!fs.existsSync(opts.cssTemplate)) {
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.cssTemplate" is required.'
+    );
   }
 
-  const {cssTemplate, cssHandlebarsHelpers} = opts,
-        spriter = configureSVGSpriter(opts),
-        handlebars = Handlebars.create();
+  const { cssTemplate, cssHandlebarsHelpers } = opts,
+    spriter = configureSVGSpriter(opts),
+    handlebars = Handlebars.create();
 
   const stream = through.obj(transform, flush),
-        svgStream = through.obj(),
-        cssStream = through.obj();
+    svgStream = through.obj(),
+    cssStream = through.obj();
 
   let fileCount = 0;
 
   // add helpers to Handlebars instance
   if (cssHandlebarsHelpers) {
-    Object.entries(cssHandlebarsHelpers).forEach(
-      ([name, helper]) => handlebars.registerHelper(name, helper)
+    Object.entries(cssHandlebarsHelpers).forEach(([name, helper]) =>
+      handlebars.registerHelper(name, helper)
     );
   }
 
@@ -131,8 +143,7 @@ export default function svgSprite(options) {
     try {
       spriter.add(file.path, basename(file.path), file.contents);
       fileCount += 1; // eslint-disable-line no-magic-numbers
-    }
-    catch (error) {
+    } catch (error) {
       stream.emit('error', new PluginError(PLUGIN_NAME, error));
     }
     return done();
@@ -146,7 +157,7 @@ export default function svgSprite(options) {
    * @return {void}
    */
   function flush(done) {
-    const {imgName, imgPath, cssName} = opts;
+    const { imgName, imgPath, cssName } = opts;
 
     // eslint-disable-next-line no-magic-numbers
     if (fileCount <= 0) {
@@ -166,10 +177,12 @@ export default function svgSprite(options) {
           const contents = optimizeSvg(resource.contents.toString());
 
           // add file to svg stream
-          svgStream.push(new Vinyl({
-            path: imgName,
-            contents: Buffer.from(contents)
-          }));
+          svgStream.push(
+            new Vinyl({
+              path: imgName,
+              contents: Buffer.from(contents)
+            })
+          );
           svgStream.push(null);
 
           // add original file to master stream
@@ -186,10 +199,12 @@ export default function svgSprite(options) {
           });
 
           // add file to css stream
-          cssStream.push(new Vinyl({
-            path: cssName,
-            contents: Buffer.from(contents)
-          }));
+          cssStream.push(
+            new Vinyl({
+              path: cssName,
+              contents: Buffer.from(contents)
+            })
+          );
           cssStream.push(null);
         }
       });
@@ -202,4 +217,4 @@ export default function svgSprite(options) {
   stream.svg = svgStream;
   return stream;
 }
-/* eslint-enable max-statements */
+/* eslint-enable max-lines-per-function, max-statements */

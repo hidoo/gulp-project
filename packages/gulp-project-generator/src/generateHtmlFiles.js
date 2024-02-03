@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import {formatJS} from './format.js';
+import format from './format.js';
 
 /**
  * copy assets for single device mode
@@ -13,13 +13,15 @@ import {formatJS} from './format.js';
  * @return {Promise}
  */
 async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+  const { verbose } = options;
 
-  await mkdir(`${dest}/src/html`, {verbose});
-  await copy(`${src}/src/html/**/*.hbs`, `${dest}/src/html`, {verbose});
+  await mkdir(`${dest}/src/html`, { verbose });
+  await copy(`${src}/src/html/**/*.hbs`, `${dest}/src/html`, { verbose });
 
-  await mkdir(`${dest}/src/data`, {verbose});
-  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose});
+  await mkdir(`${dest}/src/data`, { verbose });
+  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {
+    verbose
+  });
 }
 
 /**
@@ -30,18 +32,32 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+async function copyAssetsForMultiDeviceDevice(
+  src = '',
+  dest = '',
+  options = {}
+) {
+  const { verbose } = options;
 
-  await mkdir(`${dest}/src/html/desktop`, {verbose});
-  await mkdir(`${dest}/src/html/mobile`, {verbose});
-  await copy(`${src}/src/html/pages/**/*.hbs`, `${dest}/src/html/desktop`, {verbose});
-  await copy(`${src}/src/html/pages/**/*.hbs`, `${dest}/src/html/mobile`, {verbose});
-  await copy(`${src}/src/html/partials/**/*.hbs`, `${dest}/src/html/partials`, {verbose});
-  await copy(`${src}/src/html/layouts/**/*.hbs`, `${dest}/src/html/layouts`, {verbose});
+  await mkdir(`${dest}/src/html/desktop`, { verbose });
+  await mkdir(`${dest}/src/html/mobile`, { verbose });
+  await copy(`${src}/src/html/pages/**/*.hbs`, `${dest}/src/html/desktop`, {
+    verbose
+  });
+  await copy(`${src}/src/html/pages/**/*.hbs`, `${dest}/src/html/mobile`, {
+    verbose
+  });
+  await copy(`${src}/src/html/partials/**/*.hbs`, `${dest}/src/html/partials`, {
+    verbose
+  });
+  await copy(`${src}/src/html/layouts/**/*.hbs`, `${dest}/src/html/layouts`, {
+    verbose
+  });
 
-  await mkdir(`${dest}/src/data`, {verbose});
-  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {verbose});
+  await mkdir(`${dest}/src/data`, { verbose });
+  await copy(`${src}/src/data/**/*.{yaml,yml,json5,json}`, `${dest}/src/data`, {
+    verbose
+  });
 }
 
 /**
@@ -52,7 +68,11 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateHtmlFiles(src = '', dest = '', options = {}) {
+export default async function generateHtmlFiles(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -60,20 +80,19 @@ export default async function generateHtmlFiles(src = '', dest = '', options = {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   if (!options.html) {
     return;
   }
 
   await render(`${src}/task/html.js.hbs`, options)
-    .then((output) => formatJS(output))
-    .then((output) => write(output, `${dest}/task/html.js`, {verbose}));
+    .then((output) => format(output))
+    .then((output) => write(output, `${dest}/task/html.js`, { verbose }));
 
   if (options.multiDevice) {
     await copyAssetsForMultiDeviceDevice(src, dest, options);
-  }
-  else {
+  } else {
     await copyAssetsForSingleDevice(src, dest, options);
   }
 }

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import {glob} from 'glob';
+import { glob } from 'glob';
 import globParent from 'glob-parent';
 import mkdir from './mkdir.js';
 import * as log from './log.js';
@@ -11,7 +11,6 @@ import * as log from './log.js';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of glob
    *
@@ -45,21 +44,26 @@ export default async function copy(pattern = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const globBase = globParent(pattern);
 
   const srcPaths = await glob(pattern, opts.glob);
-  const destPaths = await Promise.all(srcPaths.map(async (srcPath) => {
-    const destPath = path.resolve(dest, srcPath.replace(`${globBase}${path.sep}`, ''));
+  const destPaths = await Promise.all(
+    srcPaths.map(async (srcPath) => {
+      const destPath = path.resolve(
+        dest,
+        srcPath.replace(`${globBase}${path.sep}`, '')
+      );
 
-    await mkdir(path.dirname(destPath), {verbose: opts.verbose});
-    await fs.copyFile(srcPath, destPath);
+      await mkdir(path.dirname(destPath), { verbose: opts.verbose });
+      await fs.copyFile(srcPath, destPath);
 
-    if (opts.verbose) {
-      log.outPath(destPath);
-    }
-    return destPath;
-  }));
+      if (opts.verbose) {
+        log.outPath(destPath);
+      }
+      return destPath;
+    })
+  );
 
   return destPaths;
 }

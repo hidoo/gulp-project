@@ -24,7 +24,7 @@ quote_type = double
 indent_style = space
 indent_size = 2
 
-[*.yml]
+[*.yml,*.yaml]
 indent_style = space
 indent_size = 2
 

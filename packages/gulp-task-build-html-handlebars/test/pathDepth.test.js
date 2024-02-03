@@ -4,15 +4,13 @@ import assert from 'node:assert';
 import pathDepth from '../src/pathDepth.js';
 
 describe('pathDepth', () => {
-
   it('should throw TypeError if argument "path" is not string.', () => {
     const invalidValues = [0, [], {}, () => {}]; // eslint-disable-line no-empty-function
 
     invalidValues.forEach((value) => {
       try {
         pathDepth(value);
-      }
-      catch (error) {
+      } catch (error) {
         assert(error instanceof TypeError);
       }
     });
@@ -49,5 +47,4 @@ describe('pathDepth', () => {
       assert(result === expected);
     });
   });
-
 });

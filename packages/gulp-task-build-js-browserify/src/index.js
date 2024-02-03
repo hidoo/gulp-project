@@ -70,13 +70,13 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = () => {
-    const {filename, suffix, compress} = opts;
+    const { filename, suffix, compress } = opts;
 
     const bundler = browserify()
       .add(opts.src)
       .transform(babelify, babelOptions)
-      .transform(envify, {NODE_ENV: process.env.NODE_ENV}) // eslint-disable-line node/no-process-env
-      .plugin(licensify, {includePrivate: true})
+      .transform(envify, { NODE_ENV: process.env.NODE_ENV }) // eslint-disable-line node/no-process-env
+      .plugin(licensify, { includePrivate: true })
       .bundle()
       .on('error', (error) => {
         errorHandler(error);
@@ -87,10 +87,10 @@ export default function buildJs(options = {}) {
       .pipe(source(filename))
       .pipe(buffer())
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, uglify({output: {comments: 'some'}})))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, uglify({ output: { comments: 'some' } })))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

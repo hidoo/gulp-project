@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import buildCss from '@hidoo/gulp-task-build-css-stylus';
-import {concatCss} from '@hidoo/gulp-task-concat';
+import { concatCss } from '@hidoo/gulp-task-concat';
 import * as config from '../config.js';
 
 // define main task
@@ -43,32 +43,12 @@ const depsMobile = concatCss({
 
 // define watch task
 const watchDesktop = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssDesktop}/*.styl`
-    ],
-    mainDesktop
-  );
-  gulp.watch(
-    [
-      `${config.path.srcCssDesktop}/deps/*.css`
-    ],
-    depsDesktop
-  );
+  gulp.watch([`${config.path.srcCssDesktop}/*.styl`], mainDesktop);
+  gulp.watch([`${config.path.srcCssDesktop}/deps/*.css`], depsDesktop);
 };
 const watchMobile = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssMobile}/*.styl`
-    ],
-    mainMobile
-  );
-  gulp.watch(
-    [
-      `${config.path.srcCssMobile}/deps/*.css`
-    ],
-    depsMobile
-  );
+  gulp.watch([`${config.path.srcCssMobile}/*.styl`], mainMobile);
+  gulp.watch([`${config.path.srcCssMobile}/deps/*.css`], depsMobile);
 };
 
 // export tasks

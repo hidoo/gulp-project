@@ -18,10 +18,11 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/no-sync
-  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
-}
-catch (error) {
+  pkg = JSON.parse(
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+  );
+} catch (error) {
   log.error('Failed to load package.json.');
 }
 
@@ -72,22 +73,29 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export function concatJs(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
-    const {filename, suffix, banner, compress} = opts;
+    const { filename, suffix, banner, compress } = opts;
 
-    return gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(concat(filename || 'bundle.js'))
-      .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line node/no-process-env
-      .pipe(header(banner, {pkg}))
+      .pipe(
+        replace(
+          'process.env.NODE_ENV',
+          // eslint-disable-next-line node/no-process-env
+          `'${process.env.NODE_ENV || 'development'}'`
+        )
+      )
+      .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, uglify({output: {comments: 'some'}})))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, uglify({ output: { comments: 'some' } })))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
@@ -131,21 +139,22 @@ export function concatJs(options = {}) {
  * }));
  */
 export function concatCss(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
-    const {filename, suffix, banner, compress} = opts;
+    const { filename, suffix, banner, compress } = opts;
 
-    return gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(concat(filename || 'bundle.css'))
-      .pipe(header(banner, {pkg}))
+      .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, postcss([csso({restructure: false})])))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, postcss([csso({ restructure: false })])))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

@@ -1,6 +1,6 @@
 import write from './write.js';
 import render from './render.js';
-import {formatJS} from './format.js';
+import format from './format.js';
 
 /**
  * generate gulpfile
@@ -10,7 +10,11 @@ import {formatJS} from './format.js';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateGulpfile(src = '', dest = '', options = {}) {
+export default async function generateGulpfile(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -18,9 +22,9 @@ export default async function generateGulpfile(src = '', dest = '', options = {}
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   await render(`${src}/gulpfile.js.hbs`, options)
-    .then((output) => formatJS(output))
-    .then((output) => write(output, `${dest}/gulpfile.js`, {verbose}));
+    .then((output) => format(output))
+    .then((output) => write(output, `${dest}/gulpfile.js`, { verbose }));
 }

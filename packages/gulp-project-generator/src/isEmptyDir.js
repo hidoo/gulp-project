@@ -1,4 +1,4 @@
-import {glob} from 'glob';
+import { glob } from 'glob';
 
 /**
  * default options
@@ -6,7 +6,6 @@ import {glob} from 'glob';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of glob
    *
@@ -28,7 +27,7 @@ export default async function isEmptyDir(dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const destPaths = await glob(`${dest}/**/*`, opts.glob);
 
   return !destPaths.length;

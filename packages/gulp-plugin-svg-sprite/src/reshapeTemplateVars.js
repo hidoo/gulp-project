@@ -5,16 +5,16 @@
  * @return {Array}
  */
 export default function reshapeTemplateVars(vars = {}) {
-  const {shapes, padding, spriteWidth, spriteHeight} = vars;
+  const { shapes, padding, spriteWidth, spriteHeight } = vars;
 
   return shapes.map((shape) => {
     const RATE = 100,
-          totalWidth = spriteWidth,
-          totalHeight = spriteHeight,
-          width = shape.width.outer - (padding.left + padding.right),
-          height = shape.height.outer - (padding.top + padding.bottom),
-          offsetX = shape.position.absolute.x - padding.left,
-          offsetY = shape.position.absolute.y - padding.top;
+      totalWidth = spriteWidth,
+      totalHeight = spriteHeight,
+      width = shape.width.outer - (padding.left + padding.right),
+      height = shape.height.outer - (padding.top + padding.bottom),
+      offsetX = shape.position.absolute.x - padding.left,
+      offsetY = shape.position.absolute.y - padding.top;
 
     return {
       name: shape.name,
@@ -26,8 +26,8 @@ export default function reshapeTemplateVars(vars = {}) {
       // + relative value based on height
       elasticWidth: width / height,
       elasticHeight: height / height,
-      elasticBackgroundWidth: totalWidth / width * RATE,
-      elasticBackgroundHeight: totalHeight / height * RATE,
+      elasticBackgroundWidth: (totalWidth / width) * RATE,
+      elasticBackgroundHeight: (totalHeight / height) * RATE,
       elasticOffsetX: offsetX / height,
       elasticOffsetY: offsetY / height,
 

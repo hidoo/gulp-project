@@ -11,26 +11,29 @@ $ npm install --save-dev gulp@next @hidoo/gulp-task-build-sprite-image
 ## Usage
 
 ```js
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildSprite from '@hidoo/gulp-task-build-sprite-image';
 
-task('sprite', buildSprite({
-  src: '/path/to/sprite/*.png',
-  destImg: '/path/to/dest/image',
-  destCss: '/path/to/dest/css',
-  imgName: 'sprite.png',
-  cssName: 'sprite.styl',
-  imgPath: './image/sprite.png'
-}));
+task(
+  'sprite',
+  buildSprite({
+    src: '/path/to/sprite/*.png',
+    destImg: '/path/to/dest/image',
+    destCss: '/path/to/dest/css',
+    imgName: 'sprite.png',
+    cssName: 'sprite.styl',
+    imgPath: './image/sprite.png'
+  })
+);
 ```
 
 ## Supported formats
 
-*   PNG
-*   JPEG
-*   GIF (Partical support)
+- PNG
+- JPEG
+- GIF (Partical support)
 
-    *   Alpha GIF and Animated GIF are not support.
+  - Alpha GIF and Animated GIF are not support.
 
 ## API
 
@@ -45,7 +48,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Examples
 
 ```javascript
-import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+import { gifsicle } from '@hidoo/gulp-task-build-sprite-image';
 ```
 
 ### mozjpeg
@@ -57,7 +60,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Examples
 
 ```javascript
-import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
+import { mozjpeg } from '@hidoo/gulp-task-build-sprite-image';
 ```
 
 ### optipng
@@ -69,7 +72,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Examples
 
 ```javascript
-import {optipng} from '@hidoo/gulp-task-build-sprite-image';
+import { optipng } from '@hidoo/gulp-task-build-sprite-image';
 ```
 
 ### svgo
@@ -81,7 +84,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Examples
 
 ```javascript
-import {svgo} from '@hidoo/gulp-task-build-sprite-image';
+import { svgo } from '@hidoo/gulp-task-build-sprite-image';
 ```
 
 ### buildSprite
@@ -90,37 +93,37 @@ return build image sprite sheet task
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:sprite'`)
-    *   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
-    *   `options.destImg` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path
-    *   `options.destCss` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination css path
-    *   `options.imgName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image filename
-    *   `options.cssName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination css filename
-    *   `options.imgPath` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path in css
-    *   `options.padding` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** padding between image in sprite sheet.
-        see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `2`)
-    *   `options.algorithm` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** algorithm for generate sprite sheet.
-        see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'binary-tree'`)
-    *   `options.engine` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** engine for generate sprite sheet.
-        see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'pixelsmith'`)
-    *   `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of \[stylus|sass|sass:module]). (optional, default `'stylus'`)
-    *   `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
-        `options.cssPreprocessor` is ignored if this value is specified.
-        see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
-    *   `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
-    *   `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
-    *   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-    *   `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
-        see: [DEFAULT_OPTIONS](./src/index.js).
-        see: [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
-    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:sprite'`)
+  - `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
+  - `options.destImg` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path
+  - `options.destCss` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination css path
+  - `options.imgName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image filename
+  - `options.cssName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination css filename
+  - `options.imgPath` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination image path in css
+  - `options.padding` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** padding between image in sprite sheet.
+    see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `2`)
+  - `options.algorithm` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** algorithm for generate sprite sheet.
+    see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'binary-tree'`)
+  - `options.engine` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** engine for generate sprite sheet.
+    see: [gulp.spritesmith](https://www.npmjs.com/package/gulp.spritesmith) (optional, default `'pixelsmith'`)
+  - `options.cssPreprocessor` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of css preprocessor (one of \[stylus|sass|sass:module]). (optional, default `'stylus'`)
+  - `options.cssTemplate` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars template for css.
+    `options.cssPreprocessor` is ignored if this value is specified.
+    see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
+  - `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
+  - `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
+  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
+  - `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
+    see: [DEFAULT_OPTIONS](./src/index.js).
+    see: [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
+  - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildSprite, {
   gifsicle,
   mozjpeg,
@@ -128,34 +131,37 @@ import buildSprite, {
   svgo
 } from '@hidoo/gulp-task-build-sprite-image';
 
-task('sprite', buildSprite({
-  name: 'sprite:main',
-  src: '/path/to/sprite/*.png',
-  destImg: '/path/to/dest/image',
-  destCss: '/path/to/dest/css',
-  imgName: 'sprite.png',
-  cssName: 'sprite.styl',
-  imgPath: './path/from/css/to/sprite/sprite.png',
-  padding: 10,
-  algorithm: 'top-down',
-  engine: 'pixelsmith',
-  cssPreprocessor: 'sass',
-  cssTemplate: '/path/to/template/sass.hbs',
-  cssHandlebarsHelpers: {hoge: (value) => value},
-  evenize: true,
-  compress: true,
-  // Default for this options
-  compressOptions: [
-    gifsicle({interlaced: true}),
-    mozjpeg({quality: 90, progressive: true}),
-    optipng({optimizationLevel: 5}),
-    svgo()
-  ],
-  verbose: true
-}));
+task(
+  'sprite',
+  buildSprite({
+    name: 'sprite:main',
+    src: '/path/to/sprite/*.png',
+    destImg: '/path/to/dest/image',
+    destCss: '/path/to/dest/css',
+    imgName: 'sprite.png',
+    cssName: 'sprite.styl',
+    imgPath: './path/from/css/to/sprite/sprite.png',
+    padding: 10,
+    algorithm: 'top-down',
+    engine: 'pixelsmith',
+    cssPreprocessor: 'sass',
+    cssTemplate: '/path/to/template/sass.hbs',
+    cssHandlebarsHelpers: { hoge: (value) => value },
+    evenize: true,
+    compress: true,
+    // Default for this options
+    compressOptions: [
+      gifsicle({ interlaced: true }),
+      mozjpeg({ quality: 90, progressive: true }),
+      optipng({ optimizationLevel: 5 }),
+      svgo()
+    ],
+    verbose: true
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**
 
 ## Test
 

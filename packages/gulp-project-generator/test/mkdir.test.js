@@ -3,7 +3,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import mkdir from '../src/mkdir.js';
 
 describe('mkdir', () => {
@@ -18,15 +18,14 @@ describe('mkdir', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
   it('should return string of created directory path.', async () => {
-    const dest = await mkdir(`${destDir}/hoge`, {verbose: false});
+    const dest = await mkdir(`${destDir}/hoge`, { verbose: false });
 
     assert(typeof dest === 'string');
     assert(dest === `${destDir}/hoge`);
   });
-
 });

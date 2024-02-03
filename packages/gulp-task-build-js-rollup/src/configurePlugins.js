@@ -1,8 +1,8 @@
 import alias from '@rollup/plugin-alias';
-import {babel} from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import license from 'rollup-plugin-license';
 
@@ -45,13 +45,7 @@ export const defaultPluginSettings = [
     name: 'node-resolve',
     factory: nodeResolve,
     config: {
-      mainFields: [
-        'browser',
-        'module',
-        'jsnext:main',
-        'jsnext',
-        'main'
-      ]
+      mainFields: ['browser', 'module', 'jsnext:main', 'jsnext', 'main']
     }
   },
   {
@@ -73,7 +67,7 @@ export const defaultPluginSettings = [
     name: 'replace',
     factory: replace,
     config: {
-      'preventAssignment': true,
+      preventAssignment: true,
       // eslint-disable-next-line node/no-process-env
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }
@@ -82,30 +76,29 @@ export const defaultPluginSettings = [
     name: 'license',
     factory: license,
     config: {
-      /* eslint-disable @stylistic/max-len */
-      banner: '' +
-      '@license\n' +
-      '\n' +
-      '<%= pkg.title || pkg.name %>:\n' +
-      '<% if (pkg.author) { %>' +
-      '  author: <%= pkg.author %>\n' +
-      '<% } %>' +
-      '<% if (pkg.version) { %>' +
-      '  version: <%= pkg.version %>\n' +
-      '<% } %>' +
-      '<% dependencies.forEach((dependency) => { %>\n' +
-      '<%= dependency.name %>:\n' +
-      '<% if (dependency.license) { %>' +
-      '  license: <%= dependency.license %>\n' +
-      '<% } %>' +
-      '<% if (dependency.author && dependency.author.name) { %>' +
-      '  author: <%= dependency.author.name %><% if (dependency.author.email) { %> <<%= dependency.author.email %>><% } %>\n' +
-      '<% } %>' +
-      '<% if (dependency.version) { %>' +
-      '  version: <%= dependency.version %>\n' +
-      '<% } %>' +
-      '<% }) %>'
-      /* eslint-enable @stylistic/max-len */
+      banner:
+        '' +
+        '@license\n' +
+        '\n' +
+        '<%= pkg.title || pkg.name %>:\n' +
+        '<% if (pkg.author) { %>' +
+        '  author: <%= pkg.author %>\n' +
+        '<% } %>' +
+        '<% if (pkg.version) { %>' +
+        '  version: <%= pkg.version %>\n' +
+        '<% } %>' +
+        '<% dependencies.forEach((dependency) => { %>\n' +
+        '<%= dependency.name %>:\n' +
+        '<% if (dependency.license) { %>' +
+        '  license: <%= dependency.license %>\n' +
+        '<% } %>' +
+        '<% if (dependency.author && dependency.author.name) { %>' +
+        '  author: <%= dependency.author.name %><% if (dependency.author.email) { %> <<%= dependency.author.email %>><% } %>\n' +
+        '<% } %>' +
+        '<% if (dependency.version) { %>' +
+        '  version: <%= dependency.version %>\n' +
+        '<% } %>' +
+        '<% }) %>'
     }
   }
 ];
@@ -126,11 +119,7 @@ function configurePluginConfig(name, config = {}, options = {}) {
   }
 
   if (options.verbose) {
-    console.debug(
-      '[DEBUG] "%s" config: %o',
-      name,
-      config
-    );
+    console.debug('[DEBUG] "%s" config: %o', name, config);
   }
 
   return config;
@@ -143,7 +132,7 @@ function configurePluginConfig(name, config = {}, options = {}) {
  * @return {Array}
  */
 export default function configurePlugins(options = {}) {
-  const {plugins} = options?.inputOptions || {};
+  const { plugins } = options?.inputOptions || {};
 
   if (Array.isArray(plugins)) {
     return plugins;
@@ -158,7 +147,7 @@ export default function configurePlugins(options = {}) {
 
         return newSettings
           .map((_settings) => {
-            const {name, factory, config} = _settings;
+            const { name, factory, config } = _settings;
 
             if (typeof factory === 'function') {
               return factory(configurePluginConfig(name, config, options));
@@ -168,7 +157,7 @@ export default function configurePlugins(options = {}) {
           .filter((plugin) => plugin !== null);
       }
 
-      const {name, factory, config} = settings;
+      const { name, factory, config } = settings;
 
       return factory(configurePluginConfig(name, config, options));
     })

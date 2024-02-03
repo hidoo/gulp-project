@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname, resolve} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import generateConfig from '../src/generateConfig.js';
 
 describe('generateConfig', () => {
@@ -13,11 +13,7 @@ describe('generateConfig', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should return Promise.', (done) => {
@@ -41,7 +37,10 @@ describe('generateConfig', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/config.js`).toString().trim();
+      expected = fs
+        .readFileSync(`${path.expected}/config.js`)
+        .toString()
+        .trim();
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
@@ -62,10 +61,12 @@ describe('generateConfig', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/config-multi-device.js`).toString().trim();
+      expected = fs
+        .readFileSync(`${path.expected}/config-multi-device.js`)
+        .toString()
+        .trim();
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
   });
-
 });

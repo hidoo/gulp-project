@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import {formatJS} from './format.js';
+import format from './format.js';
 
 /**
  * copy assets for single device mode
@@ -13,10 +13,14 @@ import {formatJS} from './format.js';
  * @return {Promise}
  */
 async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+  const { verbose } = options;
 
-  await mkdir(`${dest}/src/image`, {verbose});
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image`, {verbose});
+  await mkdir(`${dest}/src/image`, { verbose });
+  await copy(
+    `${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`,
+    `${dest}/src/image`,
+    { verbose }
+  );
 }
 
 /**
@@ -27,13 +31,25 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+async function copyAssetsForMultiDeviceDevice(
+  src = '',
+  dest = '',
+  options = {}
+) {
+  const { verbose } = options;
 
-  await mkdir(`${dest}/src/image/desktop`, {verbose});
-  await mkdir(`${dest}/src/image/mobile`, {verbose});
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/desktop`, {verbose});
-  await copy(`${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`, `${dest}/src/image/mobile`, {verbose});
+  await mkdir(`${dest}/src/image/desktop`, { verbose });
+  await mkdir(`${dest}/src/image/mobile`, { verbose });
+  await copy(
+    `${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`,
+    `${dest}/src/image/desktop`,
+    { verbose }
+  );
+  await copy(
+    `${src}/src/image/**/*.{jpg,jpeg,png,gif,svg}`,
+    `${dest}/src/image/mobile`,
+    { verbose }
+  );
 }
 
 /**
@@ -44,7 +60,11 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateImageFiles(src = '', dest = '', options = {}) {
+export default async function generateImageFiles(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -52,20 +72,19 @@ export default async function generateImageFiles(src = '', dest = '', options = 
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   if (!options.image) {
     return;
   }
 
   await render(`${src}/task/image.js.hbs`, options)
-    .then((output) => formatJS(output))
-    .then((output) => write(output, `${dest}/task/image.js`, {verbose}));
+    .then((output) => format(output))
+    .then((output) => write(output, `${dest}/task/image.js`, { verbose }));
 
   if (options.multiDevice) {
     await copyAssetsForMultiDeviceDevice(src, dest, options);
-  }
-  else {
+  } else {
     await copyAssetsForSingleDevice(src, dest, options);
   }
 }

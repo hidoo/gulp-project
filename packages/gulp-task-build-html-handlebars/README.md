@@ -11,13 +11,16 @@ $ npm install --save-dev gulp@next @hidoo/gulp-task-build-html-handlebars
 ## Usage
 
 ```js
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildHtml from '@hidoo/gulp-task-build-html-handlebars';
 
-task('html', buildHtml({
-  src: '/path/to/html/*.hbs',
-  dest: '/path/to/dest'
-}));
+task(
+  'html',
+  buildHtml({
+    src: '/path/to/html/*.hbs',
+    dest: '/path/to/dest'
+  })
+);
 ```
 
 ## API
@@ -30,60 +33,63 @@ return html build task by handlebars
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:html'`)
-    *   `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
-    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
-    *   `options.extname` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination extname (optional, default `'.html'`)
-    *   `options.partials` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars partials files glob pattern (optional, default `''`)
-    *   `options.layouts` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars layouts files glob pattern (optional, default `''`)
-    *   `options.helpers` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars helpers files glob pattern (optional, default `''`)
-    *   `options.data` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data files glob pattern (optional, default `''`)
-    *   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-    *   `options.compressOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** compress options. (see examples for default)
-        see: [gulp-htmlmin options](https://www.npmjs.com/package/gulp-htmlmin).
-    *   `options.onFilesParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after data files parsed (optional, default `(context)=>context`)
-    *   `options.onFrontMatterParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after front matter parsed (optional, default `(context)=>context`)
-    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:html'`)
+  - `options.src` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** source path
+  - `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+  - `options.extname` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination extname (optional, default `'.html'`)
+  - `options.partials` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars partials files glob pattern (optional, default `''`)
+  - `options.layouts` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars layouts files glob pattern (optional, default `''`)
+  - `options.helpers` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars helpers files glob pattern (optional, default `''`)
+  - `options.data` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data files glob pattern (optional, default `''`)
+  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
+  - `options.compressOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** compress options. (see examples for default)
+    see: [gulp-htmlmin options](https://www.npmjs.com/package/gulp-htmlmin).
+  - `options.onFilesParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after data files parsed (optional, default `(context)=>context`)
+  - `options.onFrontMatterParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after front matter parsed (optional, default `(context)=>context`)
+  - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildHtml from '@hidoo/gulp-task-build-html-handlebars';
 
-task('html', buildHtml({
-  name: 'html:main',
-  src: '/path/to/html/*.hbs',
-  dest: '/path/to/dest',
-  extname: '.php',
-  partials: '/path/to/html/partials/*.hbs',
-  layouts: '/path/to/html/layouts/*.hbs',
-  helpers: '/path/to/html/helpers/*.js',
-  data: '/path/to/html/data/*.{json,yaml}',
-  compress: true,
-  // Default for this options
-  compressOptions: {
-    caseSensitive: true,
-    collapseWhitespace: true,
-    conservativeCollapse: true,
-    preserveLineBreaks: true,
-    ignoreCustomFragments: [
-      // php start end tags
-      /<\?[\s\S]*?\?>/,
-      // cms tags
-      /<\/?mt:?[\s\S]*?>/i,
-      /<\$mt:?[\s\S]*?\$>/i
-    ]
-  },
-  onFilesParsed: (context) => context,
-  onFrontMatterParsed: (context) => context,
-  verbose: false
-}));
+task(
+  'html',
+  buildHtml({
+    name: 'html:main',
+    src: '/path/to/html/*.hbs',
+    dest: '/path/to/dest',
+    extname: '.php',
+    partials: '/path/to/html/partials/*.hbs',
+    layouts: '/path/to/html/layouts/*.hbs',
+    helpers: '/path/to/html/helpers/*.js',
+    data: '/path/to/html/data/*.{json,yaml}',
+    compress: true,
+    // Default for this options
+    compressOptions: {
+      caseSensitive: true,
+      collapseWhitespace: true,
+      conservativeCollapse: true,
+      preserveLineBreaks: true,
+      ignoreCustomFragments: [
+        // php start end tags
+        /<\?[\s\S]*?\?>/,
+        // cms tags
+        /<\/?mt:?[\s\S]*?>/i,
+        /<\$mt:?[\s\S]*?\$>/i
+      ]
+    },
+    onFilesParsed: (context) => context,
+    onFrontMatterParsed: (context) => context,
+    verbose: false
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>**
 
 ## Template API
 

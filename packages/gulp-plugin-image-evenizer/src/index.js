@@ -30,9 +30,9 @@ function isOdd(value = 0) {
  */
 function debug(file, pixels) {
   const hasFrames = pixels.shape.length === 4,
-        width = hasFrames ? pixels.shape[1] : pixels.shape[0],
-        channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
-        data = chunk(chunk([...pixels.data], channels), width);
+    width = hasFrames ? pixels.shape[1] : pixels.shape[0],
+    channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
+    data = chunk(chunk([...pixels.data], channels), width);
 
   console.log(`
     file: ${file.basename}
@@ -56,7 +56,6 @@ ${data.map((row) => row.map((el) => `[${el.join(' ')}]`).join(' ')).join('\n')}
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   // out log or not
   verbose: false
 };
@@ -83,7 +82,7 @@ const PLUGIN_NAME = 'gulp-plugin-image-evenizer';
  *   .pipe(dest('/path/to/dest')));
  */
 export default function imageEvenizer(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return through.obj((file, enc, done) => {
     if (file.isStream()) {
@@ -97,29 +96,34 @@ export default function imageEvenizer(options = {}) {
     }
 
     return FileType.fromBuffer(file.contents)
-      .then(({ext, mime}) => new Promise((resolve, reject) => {
-        getPixels(file.contents, mime, (error, pixels) => {
-          if (error) {
-            return reject(error);
-          }
-          return resolve({pixels, ext});
-        });
-      }))
-      .then(({pixels, ext}) => {
+      .then(
+        ({ ext, mime }) =>
+          new Promise((resolve, reject) => {
+            getPixels(file.contents, mime, (error, pixels) => {
+              if (error) {
+                return reject(error);
+              }
+              return resolve({ pixels, ext });
+            });
+          })
+      )
+      .then(({ pixels, ext }) => {
         const hasFrames = pixels.shape.length === 4,
-              width = hasFrames ? pixels.shape[1] : pixels.shape[0],
-              height = hasFrames ? pixels.shape[2] : pixels.shape[1],
-              isOddWidth = isOdd(width),
-              isOddHeight = isOdd(height),
-              isJpg = (/^jpe?g$/i).test(ext),
-              isGif = (/^gif$/i).test(ext),
-              fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
-              saveOptions = isJpg ? {quality: 100} : {},
-              channels = 4;
+          width = hasFrames ? pixels.shape[1] : pixels.shape[0],
+          height = hasFrames ? pixels.shape[2] : pixels.shape[1],
+          isOddWidth = isOdd(width),
+          isOddHeight = isOdd(height),
+          isJpg = /^jpe?g$/i.test(ext),
+          isGif = /^gif$/i.test(ext),
+          fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
+          saveOptions = isJpg ? { quality: 100 } : {},
+          channels = 4;
 
         // ignore animation gif and even size image
-        // eslint-disable-next-line @stylistic/no-mixed-operators
-        if (hasFrames && pixels.shape[0] > 1 || !isOddWidth && !isOddHeight) {
+        if (
+          (hasFrames && pixels.shape[0] > 1) ||
+          (!isOddWidth && !isOddHeight)
+        ) {
           return done(null, file);
         }
 
@@ -128,17 +132,19 @@ export default function imageEvenizer(options = {}) {
         //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]],
         //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]]]
         let data = chunk(chunk([...pixels.data], channels), width),
-            newWidth = width,
-            newHeight = height;
+          newWidth = width,
+          newHeight = height;
 
         // replace [0, 0, 0, 0] to [255, 255, 255, 0] when media is gif
         if (isGif) {
-          data = data.map((row) => row.map((pixel) => {
-            if (pixel.join(',') === '0,0,0,0') {
-              return fillPixel;
-            }
-            return pixel;
-          }));
+          data = data.map((row) =>
+            row.map((pixel) => {
+              if (pixel.join(',') === '0,0,0,0') {
+                return fillPixel;
+              }
+              return pixel;
+            })
+          );
         }
 
         // fill to width that to be even
@@ -150,16 +156,19 @@ export default function imageEvenizer(options = {}) {
         // fill to height that to be even
         if (isOddHeight) {
           newHeight = newHeight + 1;
-          data = [...data, Array.from(new Array(newWidth)).map(() => fillPixel)];
+          data = [
+            ...data,
+            Array.from(new Array(newWidth)).map(() => fillPixel)
+          ];
         }
 
         // set params (example when image size is 12x10)
         // + shape -> [12, 10, 4]
         // + stride -> [4, 48, 1]
         const sizeInRow = newWidth * channels,
-              shape = [newWidth, newHeight, channels],
-              stride = [channels, sizeInRow, 1],
-              flattenData = flattenDeep(data);
+          shape = [newWidth, newHeight, channels],
+          stride = [channels, sizeInRow, 1],
+          flattenData = flattenDeep(data);
 
         // add frame to params (example when image size is 12x10)
         // + shape -> [1, 12, 10, 4]
@@ -178,10 +187,13 @@ export default function imageEvenizer(options = {}) {
           stride
         );
 
-        return getStream.buffer(savePixels(evenizedPixels, ext, saveOptions))
+        return getStream
+          .buffer(savePixels(evenizedPixels, ext, saveOptions))
           .then((buffer) => {
             if (opts.verbose) {
-              log(`${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`);
+              log(
+                `${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`
+              );
             }
             file.contents = buffer;
             return done(null, file);

@@ -7,7 +7,6 @@ import * as log from './log.js';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of mkdir
    *
@@ -37,14 +36,13 @@ export default async function mkdir(dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   let exists = false;
 
   try {
     await fs.access(dest, fs.constants.W_OK);
     exists = true;
-  }
-  catch (error) {
+  } catch (error) {
     if (error.code !== 'ENOENT') {
       throw error;
     }
@@ -54,7 +52,7 @@ export default async function mkdir(dest = '', options = {}) {
     return dest;
   }
 
-  await fs.mkdir(dest, {recursive: true, ...opts.mkdir});
+  await fs.mkdir(dest, { recursive: true, ...opts.mkdir });
 
   if (opts.verbose) {
     log.outPath(dest);

@@ -3,9 +3,5 @@
   "recursive": true,
   "ui": "bdd",
   "slow": 0,
-  "watch-ignore": [
-    "./node_modules",
-    "./.git",
-    "./test/fixtures/dest/**/*.js"
-  ]
+  "watch-ignore": ["./node_modules", "./.git", "./test/fixtures/dest/**/*.js"]
 }

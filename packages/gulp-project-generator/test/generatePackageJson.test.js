@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
-import {createRequire} from 'node:module';
+import { createRequire } from 'node:module';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import generatePackageJson from '../src/generatePackageJson.js';
 
 /**
@@ -14,7 +14,9 @@ import generatePackageJson from '../src/generatePackageJson.js';
 async function readBuiltFile(file) {
   const content = await fs.readFile(file);
 
-  return content.toString().trim()
+  return content
+    .toString()
+    .trim()
     .replace(
       /"(@hidoo\/gulp-[^"]+)":\s"[^"]+"/g, // eslint-disable-line prefer-named-capture-group
       '"$1": "<version>"'
@@ -35,7 +37,7 @@ describe('generatePackageJson', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -85,7 +87,9 @@ describe('generatePackageJson', () => {
     });
 
     const actual = await readBuiltFile(`${destDir}/package.json`);
-    const expected = await readBuiltFile(`${expectedDir}/pkg-conventional-commits.json`);
+    const expected = await readBuiltFile(
+      `${expectedDir}/pkg-conventional-commits.json`
+    );
 
     assert(actual);
     assert.deepEqual(actual, expected);
@@ -113,5 +117,4 @@ describe('generatePackageJson', () => {
     assert(actual);
     assert.deepEqual(actual, expected);
   });
-
 });

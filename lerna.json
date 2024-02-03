@@ -10,16 +10,9 @@
       "private": false
     },
     "publish": {
-      "removePackageFields": [
-        "devDependencies",
-        "scripts"
-      ]
+      "removePackageFields": ["devDependencies", "scripts"]
     }
   },
-  "ignoreChanges": [
-    "examples/**/**",
-    "**/test/**",
-    "**/CHANGELOG.md"
-  ],
+  "ignoreChanges": ["examples/**/**", "**/test/**", "**/CHANGELOG.md"],
   "includeMergedTags": true
 }

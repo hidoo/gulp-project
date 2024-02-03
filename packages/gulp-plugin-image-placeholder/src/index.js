@@ -50,7 +50,7 @@ const DEFAULT_OPTIONS = {
  *   .pipe(dest('/path/to/dest')));
  */
 export default function imagePlaceholder(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return through.obj(function transform(file, enc, done) {
     if (file.isStream()) {
@@ -64,33 +64,34 @@ export default function imagePlaceholder(options = {}) {
     }
 
     const stream = this, // eslint-disable-line no-invalid-this, consistent-this
-          {dirname, contents} = file,
-          basename = path.basename(file.path, file.extname),
-          {width, height} = sizeOf(contents),
-          saveOptions = {},
-          fillPixel = [0, 0, 0, 0],
-          channels = 4;
+      { dirname, contents } = file,
+      basename = path.basename(file.path, file.extname),
+      { width, height } = sizeOf(contents),
+      saveOptions = {},
+      fillPixel = [0, 0, 0, 0],
+      channels = 4;
 
     // set params (example when image size is 12x10)
     // + shape -> [12, 10, 4]
     // + stride -> [4, 48, 1]
     const sizeInRow = width * channels,
-          shape = [width, height, channels],
-          stride = [channels, sizeInRow, 1];
+      shape = [width, height, channels],
+      stride = [channels, sizeInRow, 1];
 
     // transform array to ndarray
     const data = Array(width * height).fill(fillPixel),
-          pixels = ndarray(Uint8ClampedArray.from(data), shape, stride);
+      pixels = ndarray(Uint8ClampedArray.from(data), shape, stride);
 
-    return getStream.buffer(savePixels(pixels, 'png', saveOptions))
+    return getStream
+      .buffer(savePixels(pixels, 'png', saveOptions))
       .then((buffer) => {
         const suffix = opts.suffix ? `.${opts.suffix}` : '',
-              placeholder = new Vinyl({
-                cwd: file.cwd,
-                base: file.base,
-                path: `${dirname}/${basename}${suffix}.png`,
-                contents: buffer
-              });
+          placeholder = new Vinyl({
+            cwd: file.cwd,
+            base: file.base,
+            path: `${dirname}/${basename}${suffix}.png`,
+            contents: buffer
+          });
 
         // append placeholder image after original image.
         if (opts.append) {

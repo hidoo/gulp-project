@@ -52,7 +52,8 @@ export const serverOptions = {
  *
  * @type {Boolean}
  */
-export const compress = opts.compress || process.env.NODE_ENV !== 'development' || false;
+export const compress =
+  opts.compress || process.env.NODE_ENV !== 'development' || false;
 
 /**
  * package.json
@@ -67,25 +68,50 @@ export const pkg = JSON.parse(fs.readFileSync('./package.json'));
  * @type {Object}
  */
 export const path = {
-
   // base
   src: './src',
   dest: './public',
 
   // source details
-  get srcCss() { return `${this.src}/css`; },
-  get srcData() { return `${this.src}/data`; },
-  get srcHtml() { return `${this.src}/html`; },
-  get srcImage() { return `${this.src}/image`; },
-  get srcJs() { return `${this.src}/js`; },
-  get srcSprite() { return `${this.src}/sprite`; },
-  get srcStyleguide() { return `${this.dest}/css`; },
+  get srcCss() {
+    return `${this.src}/css`;
+  },
+  get srcData() {
+    return `${this.src}/data`;
+  },
+  get srcHtml() {
+    return `${this.src}/html`;
+  },
+  get srcImage() {
+    return `${this.src}/image`;
+  },
+  get srcJs() {
+    return `${this.src}/js`;
+  },
+  get srcSprite() {
+    return `${this.src}/sprite`;
+  },
+  get srcStyleguide() {
+    return `${this.dest}/css`;
+  },
 
   // destinaion details
-  get destCss() { return `${this.dest}/css`; },
-  get destHtml() { return this.dest; },
-  get destImage() { return `${this.dest}/images`; },
-  get destJs() { return `${this.dest}/js`; },
-  get destSprite() { return `${this.dest}/images/sprites`; },
-  get destStyleguide() { return `${this.dest}/styleguide`; }
+  get destCss() {
+    return `${this.dest}/css`;
+  },
+  get destHtml() {
+    return this.dest;
+  },
+  get destImage() {
+    return `${this.dest}/images`;
+  },
+  get destJs() {
+    return `${this.dest}/js`;
+  },
+  get destSprite() {
+    return `${this.dest}/images/sprites`;
+  },
+  get destStyleguide() {
+    return `${this.dest}/styleguide`;
+  }
 };

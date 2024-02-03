@@ -1,5 +1,5 @@
 import * as status from '../constants/statusCode.js';
-import {pkg} from '../../../config.js';
+import { pkg } from '../../../config.js';
 
 /**
  * show project info

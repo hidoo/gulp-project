@@ -1,7 +1,5 @@
 {
   "hoge": {
-    "fuga": [
-      {"piyo": "hoge.fuga.piyo"}
-    ]
+    "fuga": [{ "piyo": "hoge.fuga.piyo" }]
   }
 }

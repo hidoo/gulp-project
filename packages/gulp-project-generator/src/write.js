@@ -9,7 +9,6 @@ import * as log from './log.js';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of fs.writeFile
    *
@@ -43,11 +42,11 @@ export default async function write(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const destPath = path.resolve(dest);
   const destDir = path.dirname(destPath);
 
-  await mkdir(destDir, {verbose: opts.verbose});
+  await mkdir(destDir, { verbose: opts.verbose });
   await fs.writeFile(destPath, src, opts.writeFile);
 
   if (opts.verbose) {

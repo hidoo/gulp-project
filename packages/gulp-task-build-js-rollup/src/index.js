@@ -3,12 +3,12 @@ import cond from 'gulp-if';
 import gzip from 'gulp-gzip';
 import rename from 'gulp-rename';
 import terser from 'gulp-terser';
-import {rollup} from 'rollup';
+import { rollup } from 'rollup';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import inputOptions from './inputOptions.js';
-import outputOptions, {defaultOutputOptions} from './outputOptions.js';
+import outputOptions, { defaultOutputOptions } from './outputOptions.js';
 import concatSourceMap from './concatSourceMap.js';
 
 /**
@@ -83,10 +83,11 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = () => {
-    const {suffix, compress} = opts;
+    const { suffix, compress } = opts;
     const stream = through.obj();
-    const filenames = Array.isArray(opts.filename) ?
-      [...opts.filename] : [opts.filename];
+    const filenames = Array.isArray(opts.filename)
+      ? [...opts.filename]
+      : [opts.filename];
 
     (async () => {
       try {
@@ -95,28 +96,29 @@ export default function buildJs(options = {}) {
           outputOptions(opts).map((op) => bundle.generate(op))
         );
 
-        for (const {output} of outputs) {
+        for (const { output } of outputs) {
           for (const chunkOrAsset of output) {
             if (chunkOrAsset.type === 'asset') {
               throw new Error('"asset" is not support.');
             }
 
-            const {code, map, fileName, isEntry} = chunkOrAsset;
+            const { code, map, fileName, isEntry } = chunkOrAsset;
             const filename = isEntry ? filenames.shift() : null;
 
             // add code and sourcemap to stream as vinyl file
-            stream.push(new Vinyl({
-              path: filename || fileName,
-              contents: Buffer.from(concatSourceMap({code, map})),
-              isEntry
-            }));
+            stream.push(
+              new Vinyl({
+                path: filename || fileName,
+                contents: Buffer.from(concatSourceMap({ code, map })),
+                isEntry
+              })
+            );
           }
         }
 
         // add null that indicates write completion
         stream.push(null);
-      }
-      catch (error) {
+      } catch (error) {
         errorHandler(error);
         stream.emit('end');
       }
@@ -124,10 +126,10 @@ export default function buildJs(options = {}) {
 
     return stream
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond((file) => file.isEntry && compress, rename({suffix})))
-      .pipe(cond(compress, terser({format: {comments: 'some'}})))
+      .pipe(cond((file) => file.isEntry && compress, rename({ suffix })))
+      .pipe(cond(compress, terser({ format: { comments: 'some' } })))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

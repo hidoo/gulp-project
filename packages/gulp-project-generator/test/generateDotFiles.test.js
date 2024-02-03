@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import generateDotFiles from '../src/generateDotFiles.js';
 
 /**
@@ -32,7 +32,7 @@ describe('generateDotFiles', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -59,6 +59,8 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
@@ -66,13 +68,15 @@ describe('generateDotFiles', () => {
       ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    await Promise.all(files.map(async (file) => {
-      const actual = await readBuiltFile(`${destDir}/${file[0]}`);
-      const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual, `should generate ${file}.`);
-      assert.deepStrictEqual(actual, expected);
-    }));
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.multiDevice is true.', async () => {
@@ -92,6 +96,8 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
@@ -99,13 +105,15 @@ describe('generateDotFiles', () => {
       ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    await Promise.all(files.map(async (file) => {
-      const actual = await readBuiltFile(`${destDir}/${file[0]}`);
-      const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual, `should generate ${file}.`);
-      assert.deepStrictEqual(actual, expected);
-    }));
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.conventionalCommits is true.', async () => {
@@ -126,6 +134,8 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
       ['.gitignore', '.gitignore-main'],
       ['.husky/commit-msg', '.husky-commit-msg'],
@@ -134,13 +144,15 @@ describe('generateDotFiles', () => {
       ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    await Promise.all(files.map(async (file) => {
-      const actual = await readBuiltFile(`${destDir}/${file[0]}`);
-      const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual, `should generate ${file}.`);
-      assert.deepStrictEqual(actual, expected);
-    }));
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.css is true and options.cssPreprocessor is "sass".', async () => {
@@ -160,6 +172,8 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig-sass'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
       ['.husky/pre-commit', '.husky-pre-commit'],
@@ -169,13 +183,15 @@ describe('generateDotFiles', () => {
       ['.stylelintrc.json', '.stylelintrc-main.json']
     ];
 
-    await Promise.all(files.map(async (file) => {
-      const actual = await readBuiltFile(`${destDir}/${file[0]}`);
-      const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual, `should generate ${file}.`);
-      assert.deepStrictEqual(actual, expected);
-    }));
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.json is false.', async () => {
@@ -193,19 +209,22 @@ describe('generateDotFiles', () => {
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
       ['.eslintrc.json', '.eslintrc-no-js.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-main.json']
     ];
 
-    await Promise.all(files.map(async (file) => {
-      const actual = await readBuiltFile(`${destDir}/${file[0]}`);
-      const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual, `should generate ${file}.`);
-      assert.deepStrictEqual(actual, expected);
-    }));
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
-
 });

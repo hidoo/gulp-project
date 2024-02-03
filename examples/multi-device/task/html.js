@@ -55,4 +55,3 @@ export const mobile = {
   main: mainMobile,
   watch: watchMobile
 };
-

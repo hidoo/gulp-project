@@ -2,8 +2,8 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {glob} from 'glob';
+import { fileURLToPath } from 'node:url';
+import { glob } from 'glob';
 
 /**
  * update dependencies version in template/package.json
@@ -22,23 +22,19 @@ async function updateDepsVer() {
   const pkg = JSON.parse(await fs.readFile(file));
   const changes = [];
 
-  await Promise.all(depsFiles.map(async (depsFile) => {
-    const {name, version} = JSON.parse(await fs.readFile(depsFile));
+  await Promise.all(
+    depsFiles.map(async (depsFile) => {
+      const { name, version } = JSON.parse(await fs.readFile(depsFile));
 
-    if (
-      pkg.devDependencies[name] &&
-      pkg.devDependencies[name] !== version
-    ) {
-      pkg.devDependencies[name] = version;
-      changes.push([name, version]);
-    }
-  }));
+      if (pkg.devDependencies[name] && pkg.devDependencies[name] !== version) {
+        pkg.devDependencies[name] = version;
+        changes.push([name, version]);
+      }
+    })
+  );
 
   if (changes.length) {
-    await fs.writeFile(
-      file,
-      `${JSON.stringify(pkg, null, '  ')}\n`
-    );
+    await fs.writeFile(file, `${JSON.stringify(pkg, null, '  ')}\n`);
 
     console.log(
       `Success to update dependencies version in %s\n\n%s\n`,

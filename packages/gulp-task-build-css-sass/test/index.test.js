@@ -3,7 +3,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import buildCss from '../src/index.js';
 
@@ -41,7 +41,7 @@ describe('gulp-task-build-css-sass', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -129,8 +129,7 @@ describe('gulp-task-build-css-sass', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -157,8 +156,7 @@ describe('gulp-task-build-css-sass', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -224,7 +222,7 @@ describe('gulp-task-build-css-sass', () => {
       ...opts,
       src: `${srcDir}/style.url.scss`,
       url: 'inline',
-      urlOptions: {encodeType: 'base64'},
+      urlOptions: { encodeType: 'base64' },
       compress: false
     });
 
@@ -265,7 +263,9 @@ describe('gulp-task-build-css-sass', () => {
     await new Promise((resolve) => task().on('finish', resolve));
 
     const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(`${expectedDir}/main.remove-unused.css`);
+    const expected = await readBuiltFile(
+      `${expectedDir}/main.remove-unused.css`
+    );
 
     assert(actual);
     assert.equal(actual, expected);
@@ -277,8 +277,8 @@ describe('gulp-task-build-css-sass', () => {
       src: `${srcDir}/style.scss`,
       additionalProcess(root) {
         root.walkRules(/\.block/, (rule) => {
-          rule.selectors = rule.selectors.map(
-            (selector) => selector.trim().replace(/\.block/, '.hoge')
+          rule.selectors = rule.selectors.map((selector) =>
+            selector.trim().replace(/\.block/, '.hoge')
           );
         });
 
@@ -290,7 +290,9 @@ describe('gulp-task-build-css-sass', () => {
     await new Promise((resolve) => task().on('finish', resolve));
 
     const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(`${expectedDir}/main.post-process.css`);
+    const expected = await readBuiltFile(
+      `${expectedDir}/main.post-process.css`
+    );
 
     assert(actual);
     assert.equal(actual, expected);
@@ -314,18 +316,14 @@ describe('gulp-task-build-css-sass', () => {
     });
 
     await new Promise((resolve) => {
-      gulp.series(
-        task,
-        async () => {
-          const actual = await readBuiltFile(`${destDir}/main.css`);
-          const expected = await readBuiltFile(`${expectedDir}/main.css`);
+      gulp.series(task, async () => {
+        const actual = await readBuiltFile(`${destDir}/main.css`);
+        const expected = await readBuiltFile(`${expectedDir}/main.css`);
 
-          assert(actual);
-          assert.deepEqual(actual, expected);
-          resolve();
-        }
-      )();
+        assert(actual);
+        assert.deepEqual(actual, expected);
+        resolve();
+      })();
     });
   });
-
 });

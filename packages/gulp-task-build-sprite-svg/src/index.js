@@ -1,5 +1,5 @@
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
@@ -58,9 +58,7 @@ const DEFAULT_OPTIONS = {
   cssTemplate: '',
   cssHandlebarsHelpers: helpers,
   compress: false,
-  compressOptions: [
-    svgo()
-  ],
+  compressOptions: [svgo()],
   verbose: false
 };
 
@@ -115,21 +113,19 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildSprite(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  if (
-    !opts.cssTemplate &&
-    TEMPLATES.has(opts.cssPreprocessor)
-  ) {
+  if (!opts.cssTemplate && TEMPLATES.has(opts.cssPreprocessor)) {
     opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
   }
 
   // define task
   const task = () => {
-    const {compress, compressOptions, verbose} = opts;
+    const { compress, compressOptions, verbose } = opts;
 
-    const stream = gulp.src(opts.src)
-      .pipe(plumber({errorHandler}))
+    const stream = gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(svgSprite(opts));
 
     // out css stream
@@ -137,10 +133,11 @@ export default function buildSprite(options = {}) {
 
     // out image stream
     // + it optimize if opts.compress
-    const svg = stream.svg.pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
+    const svg = stream.svg
+      .pipe(buffer())
+      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
       .pipe(gulp.dest(opts.destImg))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.destImg)));
 
     // return merged stream

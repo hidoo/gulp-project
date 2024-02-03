@@ -1,4 +1,4 @@
-import {relative} from 'node:path';
+import { relative } from 'node:path';
 import gulp from 'gulp';
 import buildSprite from '@hidoo/gulp-task-build-sprite-svg';
 import * as config from '../config.js';
@@ -8,8 +8,10 @@ import * as config from '../config.js';
  *
  * @type {String}
  */
-const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disable-line node/no-process-env
-  '' : `?version=${config.pkg.version}`;
+const cacheParameter =
+  process.env.NODE_ENV === 'development' // eslint-disable-line node/no-process-env
+    ? ''
+    : `?version=${config.pkg.version}`;
 
 /**
  * relative path from css to sprite
@@ -60,35 +62,29 @@ function buildMobileOptions(options = {}) {
 }
 
 // define main task
-const mainDesktop = buildSprite(buildDesktopOptions({
-  name: 'sprite:desktop:main',
-  src: `${config.path.srcSpriteDesktop}/**/sample-*.svg`,
-  imgName: 'sample.svg',
-  cssName: '_sprite_sample.styl'
-}));
-const mainMobile = buildSprite(buildMobileOptions({
-  name: 'sprite:mobile:main',
-  src: `${config.path.srcSpriteMobile}/**/sample-*.svg`,
-  imgName: 'sample.svg',
-  cssName: '_sprite_sample.styl'
-}));
+const mainDesktop = buildSprite(
+  buildDesktopOptions({
+    name: 'sprite:desktop:main',
+    src: `${config.path.srcSpriteDesktop}/**/sample-*.svg`,
+    imgName: 'sample.svg',
+    cssName: '_sprite_sample.styl'
+  })
+);
+const mainMobile = buildSprite(
+  buildMobileOptions({
+    name: 'sprite:mobile:main',
+    src: `${config.path.srcSpriteMobile}/**/sample-*.svg`,
+    imgName: 'sample.svg',
+    cssName: '_sprite_sample.styl'
+  })
+);
 
 // define watch task
 const watchDesktop = () => {
-  gulp.watch(
-    [
-      `${config.path.srcSpriteDesktop}/**/sample-*.svg`
-    ],
-    mainDesktop
-  );
+  gulp.watch([`${config.path.srcSpriteDesktop}/**/sample-*.svg`], mainDesktop);
 };
 const watchMobile = () => {
-  gulp.watch(
-    [
-      `${config.path.srcSpriteMobile}/**/sample-*.svg`
-    ],
-    mainMobile
-  );
+  gulp.watch([`${config.path.srcSpriteMobile}/**/sample-*.svg`], mainMobile);
 };
 
 // export tasks
@@ -100,4 +96,3 @@ export const mobile = {
   main: mainMobile,
   watch: watchMobile
 };
-

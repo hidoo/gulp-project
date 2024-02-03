@@ -3,5 +3,4 @@
   'use strict';
 
   console.log('sample-b.js', window);
-
 })(window);

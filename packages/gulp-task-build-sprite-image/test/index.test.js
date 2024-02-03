@@ -2,14 +2,14 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import FileType from 'file-type';
 import imagemin from 'gulp-imagemin';
-import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src/index.js';
+import buildSprite, { gifsicle, mozjpeg, optipng, svgo } from '../src/index.js';
 
 /**
  * get array of uint8array from buffers
@@ -19,15 +19,19 @@ import buildSprite, {gifsicle, mozjpeg, optipng, svgo} from '../src/index.js';
  */
 function getUint8ArraysFromBuffers(buffers) {
   return Promise.all(
-    buffers.map((buffer) => FileType.fromBuffer(buffer)
-      .then(({mime}) => new Promise((done, reject) => {
-        getPixels(buffer, mime, (error, pixels) => {
-          if (error) {
-            return reject(error);
-          }
-          return done(pixels.data);
-        });
-      })))
+    buffers.map((buffer) =>
+      FileType.fromBuffer(buffer).then(
+        ({ mime }) =>
+          new Promise((done, reject) => {
+            getPixels(buffer, mime, (error, pixels) => {
+              if (error) {
+                return reject(error);
+              }
+              return done(pixels.data);
+            });
+          })
+      )
+    )
   );
 }
 
@@ -38,24 +42,29 @@ function getUint8ArraysFromBuffers(buffers) {
  * @return {Promise}
  */
 function comparePixels(params) {
-  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise(
-    (done, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
-      .then((pixels) => {
-        const [actualPixels, expectedPixels] = pixels,
-              countDiffPixels = pixelmatch(
-                actualPixels,
-                expectedPixels,
-                null,
-                width,
-                height,
-                {threshold: 0.1}
-              );
+  return Promise.all(
+    params.map(
+      ([actualBuffer, expectedBuffer, width, height]) =>
+        new Promise((done, reject) =>
+          getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
+            .then((pixels) => {
+              const [actualPixels, expectedPixels] = pixels,
+                countDiffPixels = pixelmatch(
+                  actualPixels,
+                  expectedPixels,
+                  null,
+                  width,
+                  height,
+                  { threshold: 0.1 }
+                );
 
-        assert(countDiffPixels === 0);
-        return done();
-      })
-      .catch((error) => reject(error))
-  )));
+              assert(countDiffPixels === 0);
+              return done();
+            })
+            .catch((error) => reject(error))
+        )
+    )
+  );
 }
 
 describe('gulp-task-build-sprite-image', () => {
@@ -67,11 +76,7 @@ describe('gulp-task-build-sprite-image', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
@@ -86,10 +91,10 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.styl`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
+        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.styl`),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -113,10 +118,14 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.evenized.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.evenized.styl`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
+        expectedImage = fs.readFileSync(
+          `${path.expected}/image-sprite.evenized.png`
+        ),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/image-sprite.evenized.styl`
+        ),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -140,10 +149,14 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.compressed.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.compressed.styl`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
+        expectedImage = fs.readFileSync(
+          `${path.expected}/image-sprite.compressed.png`
+        ),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/image-sprite.compressed.styl`
+        ),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -166,10 +179,14 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.with-parameters.styl`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
+        expectedImage = fs.readFileSync(
+          `${path.expected}/image-sprite.with-parameters.png`
+        ),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/image-sprite.with-parameters.styl`
+        ),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -193,10 +210,10 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.scss`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
+        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.scss`),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -220,10 +237,12 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite-module.scss`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
+        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+        expectedCss = fs.readFileSync(
+          `${path.expected}/image-sprite-module.scss`
+        ),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -248,10 +267,10 @@ describe('gulp-task-build-sprite-image', () => {
 
     task().on('finish', () => {
       const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-            actualCss = fs.readFileSync(`${path.dest}/image-sprite.css`),
-            expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-            expectedCss = fs.readFileSync(`${path.expected}/image-sprite.css`),
-            {width, height} = sizeOf(expectedImage);
+        actualCss = fs.readFileSync(`${path.dest}/image-sprite.css`),
+        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
+        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.css`),
+        { width, height } = sizeOf(expectedImage);
 
       assert(actualImage);
       assert(actualCss);
@@ -263,7 +282,6 @@ describe('gulp-task-build-sprite-image', () => {
   });
 
   describe('exports imagemin plugins', () => {
-
     it('should be accessible to imagemin plugins', () => {
       assert(imagemin.gifsicle === gifsicle);
       assert(imagemin.mozjpeg === mozjpeg);
@@ -271,5 +289,4 @@ describe('gulp-task-build-sprite-image', () => {
       assert(imagemin.svgo === svgo);
     });
   });
-
 });

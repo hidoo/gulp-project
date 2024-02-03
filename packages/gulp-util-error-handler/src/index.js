@@ -17,15 +17,17 @@ import log from 'fancy-log';
  *   .pipe(dest('/path/to/dest')));
  */
 export default function errorHandler(error) {
-  const {name, message, line, column, file, reason, plugin} = error,
-        pluginInfo = plugin ? ` from '${chalk.cyan(plugin)}'` : '',
-        fileInfo = line && column && file ? ` in ${file} at ${line}:${column}` : '',
-        detail = `${reason || message}`;
+  const { name, message, line, column, file, reason, plugin } = error,
+    pluginInfo = plugin ? ` from '${chalk.cyan(plugin)}'` : '',
+    fileInfo = line && column && file ? ` in ${file} at ${line}:${column}` : '',
+    detail = `${reason || message}`;
 
   if (!name) {
     log.error(`${chalk.red('Error')}`);
     return;
   }
 
-  log.error(`${chalk.red(name)}${pluginInfo}${chalk.grey(fileInfo)}${detail ? `, detail: ${chalk.grey(detail)}` : ''}`);
+  log.error(
+    `${chalk.red(name)}${pluginInfo}${chalk.grey(fileInfo)}${detail ? `, detail: ${chalk.grey(detail)}` : ''}`
+  );
 }

@@ -6,7 +6,7 @@
  * @return {String}
  */
 export default function concatSourceMap(result = {}) {
-  const {code, map} = result;
+  const { code, map } = result;
   let inline = '';
 
   // eslint-disable-next-line node/no-process-env

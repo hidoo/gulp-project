@@ -1,5 +1,5 @@
 /* eslint-disable strict, no-console, func-names */
-(function() {
+(function () {
   'use strict';
 
   console.log('sample');

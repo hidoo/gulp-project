@@ -5,28 +5,19 @@ import inputOptions from '../src/inputOptions.js';
 import configurePlugins from '../src/configurePlugins.js';
 
 describe('inputOptions', () => {
-
   it('should throw error if options is not object.', () => {
-    const cases = [
-      '',
-      [],
-      null
-    ];
+    const cases = ['', [], null];
 
     cases.forEach((options) => {
       let err = null;
 
       try {
         inputOptions(options);
-      }
-      catch (error) {
+      } catch (error) {
         err = error;
       }
 
-      assert(
-        err instanceof Error,
-        `when ${typeof options} specified.`
-      );
+      assert(err instanceof Error, `when ${typeof options} specified.`);
     });
   });
 
@@ -40,8 +31,7 @@ describe('inputOptions', () => {
           input: null
         }
       });
-    }
-    catch (error) {
+    } catch (error) {
       err = error;
     }
 
@@ -88,15 +78,14 @@ describe('inputOptions', () => {
     ];
 
     cases.forEach(([options, expected]) => {
-      const {onwarn, plugins, ...actual} = inputOptions(options);
+      const { onwarn, plugins, ...actual } = inputOptions(options);
 
       assert.deepEqual(actual, expected);
       assert(typeof onwarn === 'function');
       assert.deepEqual(
-        plugins.map(({name}) => name),
-        configurePlugins(options).map(({name}) => name)
+        plugins.map(({ name }) => name),
+        configurePlugins(options).map(({ name }) => name)
       );
     });
   });
-
 });

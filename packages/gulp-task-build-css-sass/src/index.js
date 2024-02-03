@@ -24,10 +24,11 @@ let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/no-sync
-  pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
-}
-catch (error) {
+  pkg = JSON.parse(
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+  );
+} catch (error) {
   log.error('Failed to load package.json.');
 }
 
@@ -37,7 +38,6 @@ catch (error) {
  * @type {Object}
  */
 const DEFAULT_FUNCTIONS = {
-
   /**
    * add "env" function that get value from process.env
    *
@@ -47,9 +47,9 @@ const DEFAULT_FUNCTIONS = {
    */
   'env($key)': (key, done) => {
     const name = key.getValue(),
-          result = new sass.types.String(
-            process.env[name] || '' // eslint-disable-line node/no-process-env
-          );
+      result = new sass.types.String(
+        process.env[name] || '' // eslint-disable-line node/no-process-env
+      );
 
     if (typeof done === 'function') {
       return done(result);
@@ -111,11 +111,13 @@ function getProcesses(options = {}) {
     typeof options.url === 'string' &&
     ['inline', 'copy', 'rebase'].includes(options.url)
   ) {
-    processes.push(url({
-      basePath: path.dirname(options.src),
-      ...options.urlOptions,
-      url: options.url
-    }));
+    processes.push(
+      url({
+        basePath: path.dirname(options.src),
+        ...options.urlOptions,
+        url: options.url
+      })
+    );
   }
 
   // add post css process if options.uncssTargets is valid
@@ -123,10 +125,12 @@ function getProcesses(options = {}) {
     Array.isArray(options.uncssTargets) &&
     Boolean(options.uncssTargets.length)
   ) {
-    processes.push(uncss({
-      html: options.uncssTargets,
-      ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
-    }));
+    processes.push(
+      uncss({
+        html: options.uncssTargets,
+        ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
+      })
+    );
   }
 
   // add post css process if options.additionalProcess is valid
@@ -191,15 +195,15 @@ export default function buildCss(options = {}) {
 
   // define task
   const task = () => {
-    const {suffix, compress} = opts;
+    const { suffix, compress } = opts;
     const stream = through.obj();
     const filename = opts.filename || path.basename(opts.src);
-    const sassOptions = opts.sassOptions || {functions: {}, importer: []};
+    const sassOptions = opts.sassOptions || { functions: {}, importer: [] };
     const processes = getProcesses(opts);
 
     (async () => {
       try {
-        const {css} = await render({
+        const { css } = await render({
           file: opts.src,
           ...sassOptions,
           importer: [
@@ -214,15 +218,16 @@ export default function buildCss(options = {}) {
         });
 
         // add code to stream as vinyl file
-        stream.push(new Vinyl({
-          path: filename,
-          contents: Buffer.from(css)
-        }));
+        stream.push(
+          new Vinyl({
+            path: filename,
+            contents: Buffer.from(css)
+          })
+        );
 
         // add null that indicates write completion
         stream.push(null);
-      }
-      catch (error) {
+      } catch (error) {
         errorHandler(error);
         stream.emit('end');
       }
@@ -230,12 +235,12 @@ export default function buildCss(options = {}) {
 
     return stream
       .pipe(postcss(processes))
-      .pipe(header(opts.banner, {pkg}))
+      .pipe(header(opts.banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, postcss([csso({restructure: false})])))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, postcss([csso({ restructure: false })])))
       .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
+      .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 

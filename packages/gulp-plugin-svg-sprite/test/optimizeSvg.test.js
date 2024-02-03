@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import cheerio from 'cheerio';
 import optimizeSvg from '../src/optimizeSvg.js';
 
@@ -13,14 +13,16 @@ describe('gulp-plugin-svg-sprite', () => {
   };
 
   it('should return optimized svg string', () => {
-    const result = optimizeSvg(fs.readFileSync(`${path.src}/not-optimized.svg`)),
-          $ = cheerio.load(result, {ignoreWhitespace: true, xmlMode: true}); // eslint-disable-line id-length
+    const result = optimizeSvg(
+        fs.readFileSync(`${path.src}/not-optimized.svg`)
+      ),
+      $ = cheerio.load(result, { ignoreWhitespace: true, xmlMode: true }); // eslint-disable-line id-length
 
     const $styles = $('style'),
-          $notRootSvg = $('svg').filter((index, svg) => $(svg).parent()[0]),
-          $hasInlineStyle = $('[style]'),
-          $hasClass = $('[class]'),
-          $hasDataNameAttr = $('[data-name]');
+      $notRootSvg = $('svg').filter((index, svg) => $(svg).parent()[0]),
+      $hasInlineStyle = $('[style]'),
+      $hasClass = $('[class]'),
+      $hasDataNameAttr = $('[data-name]');
 
     assert(typeof result === 'string');
     assert($styles.length === 0);
@@ -30,5 +32,4 @@ describe('gulp-plugin-svg-sprite', () => {
     assert($hasClass.length === 0);
     assert($hasDataNameAttr.length === 0);
   });
-
 });

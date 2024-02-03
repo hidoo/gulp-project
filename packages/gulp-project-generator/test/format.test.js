@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-import {formatJS, formatJSON} from '../src/format.js';
+import { fileURLToPath } from 'node:url';
+import format from '../src/format.js';
 
-describe('formatCode', () => {
+describe('format', () => {
   let dirname = null;
   let fixturesDir = null;
   let srcDir = null;
@@ -17,41 +17,21 @@ describe('formatCode', () => {
     expectedDir = path.resolve(fixturesDir, 'expected', 'formatCode');
   });
 
-  describe('formatJS', () => {
+  it('should return string of formatted code by prettier.', async () => {
+    const src = await fs.readFile(`${srcDir}/sample.js`);
+    const expected = await fs.readFile(`${expectedDir}/sample.js`);
+    const actual = await format(src.toString());
 
-    it('should return string of formatted code by eslint.', async () => {
-      const src = await fs.readFile(`${srcDir}/sample.js`);
-      const expected = await fs.readFile(`${expectedDir}/sample.js`);
-      const actual = await formatJS(src.toString());
-
-      assert(typeof actual === 'string');
-      assert.deepEqual(
-        actual.toString().trim(),
-        expected.toString().trim()
-      );
-    });
-
+    assert(typeof actual === 'string');
+    assert.deepEqual(actual.toString().trim(), expected.toString().trim());
   });
 
-  describe('formatJSON', () => {
+  it('should return string of formatted json.', async () => {
+    const src = '{"hoge": "fuga", "piyo": [{"hoga": "fuge"}]}';
+    const expected = '{ "hoge": "fuga", "piyo": [{ "hoga": "fuge" }] }\n';
+    const actual = await format(src, { parser: 'json' });
 
-    it('should return string of formatted json.', async () => {
-      const src = '{"hoge": "fuga", "piyo": [{"hoga": "fuge"}]}';
-      const expected = `{
-  "hoge": "fuga",
-  "piyo": [
-    {
-      "hoga": "fuge"
-    }
-  ]
-}
-`;
-      const actual = await formatJSON(src);
-
-      assert(typeof actual === 'string');
-      assert.deepEqual(actual, expected);
-    });
-
+    assert(typeof actual === 'string');
+    assert.deepEqual(actual, expected);
   });
-
 });

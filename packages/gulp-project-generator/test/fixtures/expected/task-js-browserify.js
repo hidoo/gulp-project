@@ -13,10 +13,5 @@ export const main = buildJs({
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcJs}/**/*.js`
-    ],
-    main
-  );
+  gulp.watch([`${config.path.srcJs}/**/*.js`], main);
 };

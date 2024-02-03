@@ -55,7 +55,7 @@ const DEFAULT_OPTIONS = {
  *   .pipe(dest('/path/to/dest')));
  */
 export default function webp(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return through.obj(function transform(file, enc, done) {
     if (file.isStream()) {
@@ -69,14 +69,15 @@ export default function webp(options = {}) {
     }
 
     const stream = this; // eslint-disable-line no-invalid-this, consistent-this
-    const {dirname, extname, contents} = file;
+    const { dirname, extname, contents } = file;
     const basename = path.basename(file.path, extname);
     const instance = imageminWebp(opts);
 
     return instance(contents)
       .then((buffer) => {
-        const filename = opts.keepExtname ?
-          `${basename}${extname}.webp` : `${basename}.webp`;
+        const filename = opts.keepExtname
+          ? `${basename}${extname}.webp`
+          : `${basename}.webp`;
         const dest = path.resolve(dirname, filename);
 
         // prepend original image before webp.

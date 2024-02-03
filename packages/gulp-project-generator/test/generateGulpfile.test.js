@@ -2,8 +2,8 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname, resolve} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import generateGulpfile from '../src/generateGulpfile.js';
 
 describe('generateGulpfile', () => {
@@ -15,11 +15,7 @@ describe('generateGulpfile', () => {
   };
 
   afterEach((done) => {
-    fs.rm(
-      path.dest,
-      {recursive: true},
-      () => fs.mkdir(path.dest, done)
-    );
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should return Promise.', (done) => {
@@ -43,10 +39,13 @@ describe('generateGulpfile', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/gulpfile.js`),
-          expected = fs.readFileSync(`${path.expected}/gulpfile.js`);
+      expected = fs.readFileSync(`${path.expected}/gulpfile.js`);
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    assert.deepStrictEqual(
+      actual.toString().trim(),
+      expected.toString().trim()
+    );
   });
 
   it('should generate gulpfile if argument argument options.multiDevice is true.', async () => {
@@ -64,10 +63,12 @@ describe('generateGulpfile', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/gulpfile.js`),
-          expected = fs.readFileSync(`${path.expected}/gulpfile-multi-device.js`);
+      expected = fs.readFileSync(`${path.expected}/gulpfile-multi-device.js`);
 
     assert(actual);
-    assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+    assert.deepStrictEqual(
+      actual.toString().trim(),
+      expected.toString().trim()
+    );
   });
-
 });

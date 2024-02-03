@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
-import {concatJs} from '@hidoo/gulp-task-concat';
+import { concatJs } from '@hidoo/gulp-task-concat';
 import * as config from '../config.js';
 
 // define main task
@@ -50,12 +50,7 @@ const watchDesktop = () => {
     ],
     mainDesktop
   );
-  gulp.watch(
-    [
-      `${config.path.srcJsDesktop}/deps/*.js`
-    ],
-    depsDesktop
-  );
+  gulp.watch([`${config.path.srcJsDesktop}/deps/*.js`], depsDesktop);
 };
 const watchMobile = () => {
   gulp.watch(
@@ -65,12 +60,7 @@ const watchMobile = () => {
     ],
     mainMobile
   );
-  gulp.watch(
-    [
-      `${config.path.srcJsMobile}/deps/*.js`
-    ],
-    depsMobile
-  );
+  gulp.watch([`${config.path.srcJsMobile}/deps/*.js`], depsMobile);
 };
 
 // export tasks

@@ -1,41 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc.json",
   "root": true,
-  "extends": [
-    "@hidoo/eslint-config",
-    "@hidoo/eslint-config/+stylistic"
-  ],
+  "extends": ["@hidoo/eslint-config", "@hidoo/eslint-config/+prettier"],
   "overrides": [
     {
-      "files": [
-        "src/server/**/*.js",
-        "task/**/*.js",
-        "gulpfile.js"
-      ],
-      "extends": [
-        "@hidoo/eslint-config/+node"
-      ],
+      "files": ["src/server/**/*.js", "task/**/*.js", "gulpfile.js"],
+      "extends": ["@hidoo/eslint-config/+node"],
       "rules": {
-        "node/file-extension-in-import": [
-          "error",
-          "always"
-        ]
+        "node/file-extension-in-import": ["error", "always"]
       }
     },
     {
-      "files": [
-        "**/*.spec.js",
-        "**/*.test.js"
-      ],
-      "extends": [
-        "@hidoo/eslint-config/+mocha",
-        "@hidoo/eslint-config/+node"
-      ],
+      "files": ["**/*.spec.js", "**/*.test.js"],
+      "extends": ["@hidoo/eslint-config/+mocha", "@hidoo/eslint-config/+node"],
       "rules": {
-        "node/file-extension-in-import": [
-          "error",
-          "always"
-        ]
+        "node/file-extension-in-import": ["error", "always"]
       }
     }
   ]

@@ -20,7 +20,7 @@
 
   // NODE_ENV variable testing
   $NODE_ENV: env("NODE_ENV");
-  @if $NODE_ENV == 'test' {
+  @if $NODE_ENV == "test" {
     background-color: rgba(0, 0, 0, 1);
   }
 

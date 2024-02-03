@@ -2,8 +2,8 @@
 
 import assert from 'node:assert';
 import fs from 'node:fs';
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Vinyl from 'vinyl';
 import Handlebars from 'handlebars';
 import svgSprite from '../src/index.js';
@@ -11,17 +11,14 @@ import svgSprite from '../src/index.js';
 describe('gulp-plugin-svg-sprite', () => {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   let path = null,
-      srcs = null;
+    srcs = null;
 
   before(() => {
     path = {
       src: `${__dirname}/fixtures/src`,
       expected: `${__dirname}/fixtures/expected`
     };
-    srcs = [
-      `${path.src}/sample-a.svg`,
-      `${path.src}/sample-b.svg`
-    ];
+    srcs = [`${path.src}/sample-a.svg`, `${path.src}/sample-b.svg`];
   });
 
   it('should out css and svg to specified path.', async () => {
@@ -32,35 +29,43 @@ describe('gulp-plugin-svg-sprite', () => {
     };
 
     await new Promise((resolve) => {
-      const stream = svgSprite({...options});
+      const stream = svgSprite({ ...options });
 
       stream.once('data', (file) => {
         assert(file.isBuffer());
       });
       stream.svg.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.imgName);
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.css.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.cssName);
         assert(file.contents.toString().includes(options.imgPath));
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.on('end', resolve);
 
       srcs.forEach((src) => {
-        stream.write(new Vinyl({
-          path: src,
-          contents: fs.readFileSync(src)
-        }));
+        stream.write(
+          new Vinyl({
+            path: src,
+            contents: fs.readFileSync(src)
+          })
+        );
       });
 
       stream.end();
@@ -76,35 +81,43 @@ describe('gulp-plugin-svg-sprite', () => {
     };
 
     await new Promise((resolve) => {
-      const stream = svgSprite({...options});
+      const stream = svgSprite({ ...options });
 
       stream.once('data', (file) => {
         assert(file.isBuffer());
       });
       stream.svg.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.imgName);
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.css.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.cssName);
         assert(file.contents.toString().includes(options.imgPath));
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.on('end', resolve);
 
       srcs.forEach((src) => {
-        stream.write(new Vinyl({
-          path: src,
-          contents: fs.readFileSync(src)
-        }));
+        stream.write(
+          new Vinyl({
+            path: src,
+            contents: fs.readFileSync(src)
+          })
+        );
       });
 
       stream.end();
@@ -120,35 +133,43 @@ describe('gulp-plugin-svg-sprite', () => {
     };
 
     await new Promise((resolve) => {
-      const stream = svgSprite({...options});
+      const stream = svgSprite({ ...options });
 
       stream.once('data', (file) => {
         assert(file.isBuffer());
       });
       stream.svg.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.imgName);
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.css.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.cssName);
         assert(file.contents.toString().includes(options.imgPath));
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.on('end', resolve);
 
       srcs.forEach((src) => {
-        stream.write(new Vinyl({
-          path: src,
-          contents: fs.readFileSync(src)
-        }));
+        stream.write(
+          new Vinyl({
+            path: src,
+            contents: fs.readFileSync(src)
+          })
+        );
       });
 
       stream.end();
@@ -164,35 +185,43 @@ describe('gulp-plugin-svg-sprite', () => {
     };
 
     await new Promise((resolve) => {
-      const stream = svgSprite({...options});
+      const stream = svgSprite({ ...options });
 
       stream.once('data', (file) => {
         assert(file.isBuffer());
       });
       stream.svg.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.imgName);
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.css.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.cssName);
         assert(file.contents.toString().includes(options.imgPath));
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.on('end', resolve);
 
       srcs.forEach((src) => {
-        stream.write(new Vinyl({
-          path: src,
-          contents: fs.readFileSync(src)
-        }));
+        stream.write(
+          new Vinyl({
+            path: src,
+            contents: fs.readFileSync(src)
+          })
+        );
       });
 
       stream.end();
@@ -211,39 +240,46 @@ describe('gulp-plugin-svg-sprite', () => {
     };
 
     await new Promise((resolve) => {
-      const stream = svgSprite({...options});
+      const stream = svgSprite({ ...options });
 
       stream.once('data', (file) => {
         assert(file.isBuffer());
       });
       stream.svg.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.imgName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.imgName);
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.css.once('data', (file) => {
         const actual = file.contents,
-              expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
+          expected = fs.readFileSync(`${path.expected}/${options.cssName}`);
 
         assert(file.isBuffer());
         assert(file.path === options.cssName);
         assert(file.contents.toString().includes(options.imgPath));
-        assert.deepStrictEqual(actual.toString().trim(), expected.toString().trim());
+        assert.deepStrictEqual(
+          actual.toString().trim(),
+          expected.toString().trim()
+        );
       });
       stream.on('end', resolve);
 
       srcs.forEach((src) => {
-        stream.write(new Vinyl({
-          path: src,
-          contents: fs.readFileSync(src)
-        }));
+        stream.write(
+          new Vinyl({
+            path: src,
+            contents: fs.readFileSync(src)
+          })
+        );
       });
 
       stream.end();
     });
   });
-
 });

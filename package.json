@@ -19,7 +19,8 @@
     "build:example:sass": "pnpm generate ../../examples/use-sass --no-interactive --force --css-preprocessor sass",
     "build:example:replace": "replace-in-files --regex='\"(@hidoo/gulp-([^\"]+))\":\\s\"([^\"]+)\"' --replacement='\"$1\": \"workspace:*\"' ./examples/**/package.json",
     "build:replace": "pnpm --filter gulp-project-generator updateDepsVer",
-    "bootstrap": "pnpm install",
+    "build:bootstrap": "pnpm install",
+    "format": "prettier . --write",
     "generate": "pnpm --filter gulp-project-generator generate",
     "test": "pnpm run --sequential '/^test:.*/'",
     "test:lint": "eslint .",
@@ -27,9 +28,9 @@
     "test:examples": "cross-env NODE_ENV=test mocha",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "version:patch": "lerna version patch && pnpm run --sequential '/^(build|bootstrap|test)$/' && pnpm run version:commit",
-    "version:minor": "lerna version minor && pnpm run --sequential '/^(build|bootstrap|test)$/' && pnpm run version:commit",
-    "version:major": "lerna version major && pnpm run --sequential '/^(build|bootstrap|test)$/' && pnpm run version:commit",
+    "version:patch": "lerna version patch && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
+    "version:minor": "lerna version minor && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
+    "version:major": "lerna version major && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
     "version:commit": "git add . && git commit -m \"chore(release): publish v`node -p 'require(\"./lerna.json\").version'`\" && git tag v`node -p 'require(\"./lerna.json\").version'`",
     "release": "lerna publish from-git"
   },
@@ -48,6 +49,7 @@
     "husky": "9.0.6",
     "lint-staged": "15.2.0",
     "mocha": "10.2.0",
+    "prettier": "3.2.4",
     "replace-in-files-cli": "2.2.0"
   }
 }

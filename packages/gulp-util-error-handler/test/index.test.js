@@ -18,18 +18,9 @@ describe('gulp-util-error-handler', () => {
 
   it('should out formated message if argment "error" is valid.', () => {
     const cases = [
-      [
-        '',
-        'Error'
-      ],
-      [
-        new Error(),
-        'Error'
-      ],
-      [
-        new Error('hogehoge.'),
-        'Error, detail: hogehoge.'
-      ],
+      ['', 'Error'],
+      [new Error(), 'Error'],
+      [new Error('hogehoge.'), 'Error, detail: hogehoge.'],
       [
         {
           name: 'hoge',
@@ -37,7 +28,7 @@ describe('gulp-util-error-handler', () => {
           reason: '',
           plugin: 'hogePlugin'
         },
-        'hoge from \'hogePlugin\', detail: error from hoge.'
+        "hoge from 'hogePlugin', detail: error from hoge."
       ],
       [
         {
@@ -49,7 +40,7 @@ describe('gulp-util-error-handler', () => {
           reason: '',
           plugin: 'hogePlugin'
         },
-        'hoge from \'hogePlugin\' in /path/to/file.js at 200:5, detail: error from hoge.'
+        "hoge from 'hogePlugin' in /path/to/file.js at 200:5, detail: error from hoge."
       ]
     ];
 

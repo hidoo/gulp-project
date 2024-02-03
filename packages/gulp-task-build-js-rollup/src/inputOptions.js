@@ -8,15 +8,14 @@ import configurePlugins from './configurePlugins.js';
  * @return {void}
  */
 function handleOnWarn(warnings) {
-  const {loc, frame, message} = warnings;
+  const { loc, frame, message } = warnings;
 
   if (loc) {
     log.warn(`${loc.file} (${loc.line}:${loc.column}) ${message}`);
     if (frame) {
       log.warn(frame);
     }
-  }
-  else {
+  } else {
     log.warn(message);
   }
 }

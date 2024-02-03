@@ -1,11 +1,11 @@
 /* eslint max-lines-per-function: off, max-statements: off, prefer-named-capture-group: off */
 
 import fs from 'node:fs/promises';
-import {createRequire} from 'node:module';
+import { createRequire } from 'node:module';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
-import program, {InvalidOptionArgumentError} from 'commander';
+import program, { InvalidOptionArgumentError } from 'commander';
 import inquirer from 'inquirer';
 import mkdir from './mkdir.js';
 import isEmptyDir from './isEmptyDir.js';
@@ -45,16 +45,16 @@ const pkg = require('../package.json');
  * @return {Promise<Boolean>}
  */
 async function confirmForce(dest = '', options = {}) {
-  if (await isEmptyDir(dest) || options.force) {
+  if ((await isEmptyDir(dest)) || options.force) {
     return true;
   }
 
   const results = await inquirer.prompt([
     {
-      'type': 'confirm',
-      'name': 'confirm',
-      'message': `${dest} is not empty directory, continue?`,
-      'default': false
+      type: 'confirm',
+      name: 'confirm',
+      message: `${dest} is not empty directory, continue?`,
+      default: false
     }
   ]);
 
@@ -73,20 +73,21 @@ async function inputProjectName(dest = '', options = {}) {
     throw new TypeError('Argument "dest" must be not empty string.');
   }
 
-  const name = typeof options.name === 'string' && options.name !== '' ?
-    options.name : createProjectName(dest);
+  const name =
+    typeof options.name === 'string' && options.name !== ''
+      ? options.name
+      : createProjectName(dest);
 
   if (options.interactive) {
-    const results = await inquirer
-      .prompt([
-        {
-          'type': 'input',
-          'name': 'name',
-          'message': 'Please input name of the project.',
-          'default': () => name || '',
-          'transformer': (value) => createProjectName(value)
-        }
-      ]);
+    const results = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Please input name of the project.',
+        default: () => name || '',
+        transformer: (value) => createProjectName(value)
+      }
+    ]);
 
     return results.name;
   }
@@ -101,99 +102,88 @@ async function inputProjectName(dest = '', options = {}) {
  */
 async function selectedOptions(options = {}) {
   if (options.interactive) {
-    const results = await inquirer
-      .prompt([
-        {
-          'type': 'confirm',
-          'name': 'multiDevice',
-          'message': 'Enable multi-device mode?',
-          'default': false,
-          'when': () => !options.multiDevice
-        },
-        {
-          'type': 'confirm',
-          'name': 'conventionalCommits',
-          'message': 'Set up tools for conventional commits?',
-          'default': Boolean(options.conventionalCommits)
-        },
-        {
-          type: 'checkbox',
-          name: 'tasks',
-          message: 'Please select the task you need for the project.',
-          choices: [
-            {name: 'css', checked: options.css},
-            {name: 'html', checked: options.html},
-            {name: 'js', checked: options.js},
-            {name: 'sprite', checked: options.css && options.sprite},
-            {name: 'styleguide', checked: options.css && options.styleguide},
-            {name: 'image', checked: options.image},
-            {name: 'server', checked: options.server}
-          ],
-          filter: (choices) =>
-            choices.reduce(
-              (prev, current) => {
-                return {...prev, [current]: true};
-              },
-              {}
-            ),
-          validate(choices) {
-            if (!Object.keys(choices).length) {
-              return 'You must choose at least one task.';
-            }
-            return true;
+    const results = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'multiDevice',
+        message: 'Enable multi-device mode?',
+        default: false,
+        when: () => !options.multiDevice
+      },
+      {
+        type: 'confirm',
+        name: 'conventionalCommits',
+        message: 'Set up tools for conventional commits?',
+        default: Boolean(options.conventionalCommits)
+      },
+      {
+        type: 'checkbox',
+        name: 'tasks',
+        message: 'Please select the task you need for the project.',
+        choices: [
+          { name: 'css', checked: options.css },
+          { name: 'html', checked: options.html },
+          { name: 'js', checked: options.js },
+          { name: 'sprite', checked: options.css && options.sprite },
+          { name: 'styleguide', checked: options.css && options.styleguide },
+          { name: 'image', checked: options.image },
+          { name: 'server', checked: options.server }
+        ],
+        filter: (choices) =>
+          choices.reduce((prev, current) => {
+            return { ...prev, [current]: true };
+          }, {}),
+        validate(choices) {
+          if (!Object.keys(choices).length) {
+            return 'You must choose at least one task.';
           }
-        },
-        {
-          type: 'checkbox',
-          name: 'depsTasks',
-          message: 'Please select the dependency task you need for the project.',
-          choices: (answers) => [
-            answers.tasks.css ? {name: 'cssDeps', checked: options.cssDeps} : null,
-            answers.tasks.js ? {name: 'jsDeps', checked: options.jsDeps} : null
-          ].filter((choice) => choice),
-          filter: (choices) =>
-            choices.reduce(
-              (prev, current) => {
-                return {...prev, [current]: true};
-              },
-              {}
-            ),
-          when: (answers) => answers.tasks.css || answers.tasks.js
-        },
-        {
-          'type': 'list',
-          'name': 'cssPreprocessor',
-          'message': 'Please select the CSS preprocessor.',
-          'choices': [
-            {name: 'stylus'},
-            {name: 'sass'}
-          ],
-          'default': () => options.cssPreprocessor,
-          'when': (answers) => answers.tasks.css
-        },
-        {
-          'type': 'list',
-          'name': 'jsBundler',
-          'message': 'Please select the JavaScript bundler.',
-          'choices': [
-            {name: 'browserify'},
-            {name: 'rollup'}
-          ],
-          'default': () => options.jsBundler,
-          'when': (answers) => answers.tasks.js
-        },
-        {
-          'type': 'list',
-          'name': 'spriteType',
-          'message': 'Please select the sprite sheet source type.',
-          'choices': [
-            {name: 'svg'},
-            {name: 'image'}
-          ],
-          'default': () => options.spriteType,
-          'when': (answers) => answers.tasks.sprite
+          return true;
         }
-      ]);
+      },
+      {
+        type: 'checkbox',
+        name: 'depsTasks',
+        message: 'Please select the dependency task you need for the project.',
+        choices: (answers) =>
+          [
+            answers.tasks.css
+              ? { name: 'cssDeps', checked: options.cssDeps }
+              : null,
+            answers.tasks.js
+              ? { name: 'jsDeps', checked: options.jsDeps }
+              : null
+          ].filter((choice) => choice),
+        filter: (choices) =>
+          choices.reduce((prev, current) => {
+            return { ...prev, [current]: true };
+          }, {}),
+        when: (answers) => answers.tasks.css || answers.tasks.js
+      },
+      {
+        type: 'list',
+        name: 'cssPreprocessor',
+        message: 'Please select the CSS preprocessor.',
+        choices: [{ name: 'stylus' }, { name: 'sass' }],
+        default: () => options.cssPreprocessor,
+        when: (answers) => answers.tasks.css
+      },
+      {
+        type: 'list',
+        name: 'jsBundler',
+        message: 'Please select the JavaScript bundler.',
+        choices: [{ name: 'browserify' }, { name: 'rollup' }],
+        default: () => options.jsBundler,
+        when: (answers) => answers.tasks.js
+      },
+      {
+        type: 'list',
+        name: 'spriteType',
+        message: 'Please select the sprite sheet source type.',
+        choices: [{ name: 'svg' }, { name: 'image' }],
+        default: () => options.spriteType,
+        when: (answers) => answers.tasks.sprite
+      }
+    ]);
 
     return {
       force: options.force,
@@ -220,7 +210,6 @@ async function selectedOptions(options = {}) {
  */
 async function confirmConfig(name = '', options = {}) {
   if (options.interactive) {
-
     console.log('');
     console.log(`  ${chalk.white('Project Name:')}`);
     console.log(`    ${chalk.cyan(name)}`);
@@ -259,7 +248,9 @@ async function confirmConfig(name = '', options = {}) {
     if (options.css && options.cssPreprocessor) {
       console.log('');
       console.log(`  ${chalk.white('CSS Preprocessor:')}`);
-      console.log(`    ${chalk.grey('+')} ${chalk.cyan(options.cssPreprocessor)}`);
+      console.log(
+        `    ${chalk.grey('+')} ${chalk.cyan(options.cssPreprocessor)}`
+      );
     }
 
     if (options.js && options.jsBundler) {
@@ -278,10 +269,10 @@ async function confirmConfig(name = '', options = {}) {
 
     const results = await inquirer.prompt([
       {
-        'type': 'confirm',
-        'name': 'confirm',
-        'message': 'Is this OK?',
-        'default': false
+        type: 'confirm',
+        name: 'confirm',
+        message: 'Is this OK?',
+        default: false
       }
     ]);
 
@@ -306,14 +297,14 @@ async function main(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" must be not empty string.');
   }
 
-  if (!await confirmForce(dest, options)) {
+  if (!(await confirmForce(dest, options))) {
     console.log('');
     console.log(chalk.bold.yellow('Aborting.'));
     return false;
   }
 
   const name = await inputProjectName(dest, options),
-        opts = await selectedOptions(options);
+    opts = await selectedOptions(options);
 
   // disable forcely in relation to --no-css
   if (!opts.css) {
@@ -327,15 +318,15 @@ async function main(src = '', dest = '', options = {}) {
     opts.jsDeps = false;
   }
 
-  if (!await confirmConfig(name, opts)) {
+  if (!(await confirmConfig(name, opts))) {
     return main(src, dest, options);
   }
 
   console.log('');
   console.log(chalk.white('Prepare directories:'));
-  await fs.rm(dest, {recursive: true, force: true});
-  await mkdir(`${dest}/src`, {verbose: opts.verbose});
-  await mkdir(`${dest}/task`, {verbose: opts.verbose});
+  await fs.rm(dest, { recursive: true, force: true });
+  await mkdir(`${dest}/src`, { verbose: opts.verbose });
+  await mkdir(`${dest}/task`, { verbose: opts.verbose });
   console.log(`${chalk.grey('...')} ${chalk.green('done')}`);
 
   console.log('');
@@ -378,54 +369,18 @@ function select(validValues = []) {
 program
   .version(pkg.version, '-v, --version')
   .usage('<dir> [options]')
-  .option(
-    '--name <name>',
-    'set project name.'
-  )
-  .option(
-    '--force',
-    'Generate forcely even if <dir> is not empty.'
-  )
-  .option(
-    '--no-interactive',
-    'Disable interactive interface.'
-  )
-  .option(
-    '--multi-device',
-    'Enable multi-device mode.'
-  )
-  .option(
-    '--conventional-commits',
-    'Set up tools for conventional commits.'
-  )
-  .option(
-    '--no-css',
-    'Disable CSS build task.'
-  )
-  .option(
-    '--no-css-deps',
-    'Disable CSS dependency build task.'
-  )
-  .option(
-    '--no-html',
-    'Disable HTML build task.'
-  )
-  .option(
-    '--no-image',
-    'Disable image optimize task.'
-  )
-  .option(
-    '--no-js',
-    'Disable JavaScript build task.'
-  )
-  .option(
-    '--no-js-deps',
-    'Disable JavaScript dependency build task.'
-  )
-  .option(
-    '--no-server',
-    'Disable local dev server.'
-  )
+  .option('--name <name>', 'set project name.')
+  .option('--force', 'Generate forcely even if <dir> is not empty.')
+  .option('--no-interactive', 'Disable interactive interface.')
+  .option('--multi-device', 'Enable multi-device mode.')
+  .option('--conventional-commits', 'Set up tools for conventional commits.')
+  .option('--no-css', 'Disable CSS build task.')
+  .option('--no-css-deps', 'Disable CSS dependency build task.')
+  .option('--no-html', 'Disable HTML build task.')
+  .option('--no-image', 'Disable image optimize task.')
+  .option('--no-js', 'Disable JavaScript build task.')
+  .option('--no-js-deps', 'Disable JavaScript dependency build task.')
+  .option('--no-server', 'Disable local dev server.')
   .option(
     '--no-sprite',
     'Disable sprite sheet build task. (Enable forcely when --no-css specified.)'
@@ -452,10 +407,7 @@ program
     select(['svg', 'image']),
     'svg'
   )
-  .option(
-    '--verbose',
-    'Enable output logs.'
-  )
+  .option('--verbose', 'Enable output logs.')
   .parse(process.argv);
 
 // argument <dir> is required.
@@ -467,12 +419,10 @@ if (program.args.length) {
   );
   const destDir = path.resolve(program.args[0]) || process.cwd();
 
-  main(sourceDir, destDir, program.opts())
-    .catch((error) => {
-      console.error(error);
-      process.exitCode = 1;
-    });
-}
-else {
+  main(sourceDir, destDir, program.opts()).catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+} else {
   program.help();
 }

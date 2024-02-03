@@ -2,7 +2,7 @@ import mkdir from './mkdir.js';
 import copy from './copy.js';
 import write from './write.js';
 import render from './render.js';
-import {formatJS} from './format.js';
+import format from './format.js';
 
 /**
  * copy assets for single device mode
@@ -13,18 +13,18 @@ import {formatJS} from './format.js';
  * @return {Promise}
  */
 async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+  const { verbose } = options;
   const ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
-  await mkdir(`${dest}/src/css`, {verbose});
-  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css`, {verbose});
+  await mkdir(`${dest}/src/css`, { verbose });
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css`, { verbose });
 
   const output = await render(`${src}/src/css/README.md.hbs`, options);
 
-  await write(output, `${dest}/src/css/README.md`, {verbose});
+  await write(output, `${dest}/src/css/README.md`, { verbose });
 
   if (options.cssDeps) {
-    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css`, {verbose});
+    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css`, { verbose });
   }
 }
 
@@ -36,23 +36,35 @@ async function copyAssetsForSingleDevice(src = '', dest = '', options = {}) {
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {}) {
-  const {verbose} = options;
+async function copyAssetsForMultiDeviceDevice(
+  src = '',
+  dest = '',
+  options = {}
+) {
+  const { verbose } = options;
   const ext = options.cssPreprocessor === 'sass' ? 'scss' : 'styl';
 
-  await mkdir(`${dest}/src/css/desktop`, {verbose});
-  await mkdir(`${dest}/src/css/mobile`, {verbose});
-  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/desktop`, {verbose});
-  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/mobile`, {verbose});
+  await mkdir(`${dest}/src/css/desktop`, { verbose });
+  await mkdir(`${dest}/src/css/mobile`, { verbose });
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/desktop`, {
+    verbose
+  });
+  await copy(`${src}/src/css/**/*.${ext}`, `${dest}/src/css/mobile`, {
+    verbose
+  });
 
   const output = await render(`${src}/src/css/README.md.hbs`, options);
 
-  await write(output, `${dest}/src/css/desktop/README.md`, {verbose});
-  await write(output, `${dest}/src/css/mobile/README.md`, {verbose});
+  await write(output, `${dest}/src/css/desktop/README.md`, { verbose });
+  await write(output, `${dest}/src/css/mobile/README.md`, { verbose });
 
   if (options.cssDeps) {
-    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/desktop`, {verbose});
-    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/mobile`, {verbose});
+    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/desktop`, {
+      verbose
+    });
+    await copy(`${src}/src/cssDeps/**/*.css`, `${dest}/src/css/mobile`, {
+      verbose
+    });
   }
 }
 
@@ -64,7 +76,11 @@ async function copyAssetsForMultiDeviceDevice(src = '', dest = '', options = {})
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateCssFiles(src = '', dest = '', options = {}) {
+export default async function generateCssFiles(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -76,17 +92,16 @@ export default async function generateCssFiles(src = '', dest = '', options = {}
     return;
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   const output = await render(`${src}/task/css.js.hbs`, options);
-  const formatted = await formatJS(output);
+  const formatted = await format(output);
 
-  await write(formatted, `${dest}/task/css.js`, {verbose});
+  await write(formatted, `${dest}/task/css.js`, { verbose });
 
   if (options.multiDevice) {
     await copyAssetsForMultiDeviceDevice(src, dest, options);
-  }
-  else {
+  } else {
     await copyAssetsForSingleDevice(src, dest, options);
   }
 }

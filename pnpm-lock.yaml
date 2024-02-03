@@ -44,6 +44,9 @@ importers:
       mocha:
         specifier: 10.2.0
         version: 10.2.0
+      prettier:
+        specifier: 3.2.4
+        version: 3.2.4
       replace-in-files-cli:
         specifier: 2.2.0
         version: 2.2.0
@@ -125,6 +128,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: ^3.2.4
+        version: 3.2.4
       regenerator-runtime:
         specifier: ^0.14.1
         version: 0.14.1
@@ -206,6 +212,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: ^3.2.4
+        version: 3.2.4
       regenerator-runtime:
         specifier: ^0.14.1
         version: 0.14.1
@@ -293,6 +302,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: ^3.2.4
+        version: 3.2.4
       regenerator-runtime:
         specifier: ^0.14.1
         version: 0.14.1
@@ -483,9 +495,6 @@ importers:
       commander:
         specifier: 7.2.0
         version: 7.2.0
-      eslint:
-        specifier: 8.56.0
-        version: 8.56.0
       glob:
         specifier: 10.3.10
         version: 10.3.10
@@ -498,6 +507,9 @@ importers:
       inquirer:
         specifier: 8.1.0
         version: 8.1.0
+      prettier:
+        specifier: 3.2.4
+        version: 3.2.4
     devDependencies:
       cross-env:
         specifier: 7.0.3
@@ -14274,6 +14286,11 @@ packages:
     resolution: {integrity: sha512-ravE6m9Atw9Z/jjttRUZ+clIXogdghyZAuWJ3qEzjT+jI/dL1ifAqhZeC5VHzQp1MSt1+jxKkFNemj/iO7tVUA==}
     engines: {node: '>=4'}
     dev: false
+
+  /prettier@3.2.4:
+    resolution: {integrity: sha512-FWu1oLHKCrtpO1ypU6J0SbK2d9Ckwysq6bHj/uaCP26DxrPpppCLQRGVuqAxSTvhF00AcvDRyYrLNW7ocBhFFQ==}
+    engines: {node: '>=14'}
+    hasBin: true
 
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}

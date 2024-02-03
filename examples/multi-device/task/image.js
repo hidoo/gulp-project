@@ -19,17 +19,13 @@ const mainMobile = optimizeImage({
 // define watch task
 const watchDesktop = () => {
   gulp.watch(
-    [
-      `${config.path.srcImageDesktop}/**/*.{jpg,jpeg,png,gif,svg}`
-    ],
+    [`${config.path.srcImageDesktop}/**/*.{jpg,jpeg,png,gif,svg}`],
     mainDesktop
   );
 };
 const watchMobile = () => {
   gulp.watch(
-    [
-      `${config.path.srcImageMobile}/**/*.{jpg,jpeg,png,gif,svg}`
-    ],
+    [`${config.path.srcImageMobile}/**/*.{jpg,jpeg,png,gif,svg}`],
     mainMobile
   );
 };
@@ -43,4 +39,3 @@ export const mobile = {
   main: mainMobile,
   watch: watchMobile
 };
-

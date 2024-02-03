@@ -9,7 +9,6 @@ import CSSOM from 'cssom';
  * @return {String}
  */
 export default function optimizeSvg(contents = '') {
-
   // load to parser
   // eslint-disable-next-line id-length
   const $ = cheerio.load(contents, {
@@ -20,8 +19,8 @@ export default function optimizeSvg(contents = '') {
   // process each <svg> element
   $('svg').each((index, svg) => {
     const $svg = $(svg),
-          $style = $svg.find('style'),
-          isRoot = !$svg.parent()[0];
+      $style = $svg.find('style'),
+      isRoot = !$svg.parent()[0];
 
     // do nothing if element is root or element has not <style>
     if (isRoot || !$style[0]) {
@@ -36,8 +35,8 @@ export default function optimizeSvg(contents = '') {
     // + transform css rules of each selectors to inline style
     CSSOM.parse($style.html()).cssRules.forEach((rule) => {
       const selector = rule.selectorText,
-            style = rule.style,
-            $targets = $svg.find(selector);
+        style = rule.style,
+        $targets = $svg.find(selector);
 
       // transform css rule to inline style
       Array.from(style).forEach((prop) => $targets.css(prop, style[prop]));

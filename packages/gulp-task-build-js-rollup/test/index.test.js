@@ -3,7 +3,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import buildJs from '../src/index.js';
 
@@ -18,7 +18,9 @@ let pkg = null;
 async function readBuiltFile(file) {
   const content = await fs.readFile(file);
 
-  return content.toString().trim()
+  return content
+    .toString()
+    .trim()
     .replace(/<core-js version>/g, pkg.devDependencies['core-js'])
     .replace(/<pkg version>/g, pkg.version);
 }
@@ -33,9 +35,7 @@ describe('gulp-task-build-js-rollup', () => {
 
   before(async () => {
     pkg = JSON.parse(
-      await fs.readFile(
-        path.resolve(process.cwd(), 'package.json')
-      )
+      await fs.readFile(path.resolve(process.cwd(), 'package.json'))
     );
     dirname = path.dirname(fileURLToPath(import.meta.url));
     fixturesDir = path.resolve(dirname, 'fixtures');
@@ -46,12 +46,12 @@ describe('gulp-task-build-js-rollup', () => {
     opts = {
       dest: destDir,
       inputOptions: {
-        plugins({name, factory, config}) {
+        plugins({ name, factory, config }) {
           // disable banner settings
           if (name === 'license') {
             config.banner = null;
           }
-          return {name, factory, config: {...config}};
+          return { name, factory, config: { ...config } };
         }
       },
       verbose: false
@@ -68,7 +68,7 @@ describe('gulp-task-build-js-rollup', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, {recursive: true});
+    await fs.rm(destDir, { recursive: true });
     await fs.mkdir(destDir);
   });
 
@@ -143,16 +143,14 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${srcDir}/with-jsx.js`,
       filename: 'with-jsx.js',
       inputOptions: {
-        plugins({name, factory, config}) {
+        plugins({ name, factory, config }) {
           if (name === 'commonjs') {
-            config.exclude = [
-              `${srcDir}/with-jsx.js`
-            ];
+            config.exclude = [`${srcDir}/with-jsx.js`];
           }
           if (name === 'license') {
             config.banner = null;
           }
-          return {name, factory, config: {...config}};
+          return { name, factory, config: { ...config } };
         }
       }
     });
@@ -188,7 +186,7 @@ describe('gulp-task-build-js-rollup', () => {
       src: `${srcDir}/with-alias.js`,
       filename: 'with-alias.js',
       inputOptions: {
-        plugins({name, factory, config}) {
+        plugins({ name, factory, config }) {
           if (name === 'alias') {
             config.entries = [
               {
@@ -200,7 +198,7 @@ describe('gulp-task-build-js-rollup', () => {
           if (name === 'license') {
             config.banner = null;
           }
-          return {name, factory, config: {...config}};
+          return { name, factory, config: { ...config } };
         }
       }
     });
@@ -231,8 +229,7 @@ describe('gulp-task-build-js-rollup', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -259,8 +256,7 @@ describe('gulp-task-build-js-rollup', () => {
 
           assert(actual);
           assert.equal(actual, expected);
-        }
-        else {
+        } else {
           const actual = await fs.readFile(`${destDir}/main.${ext}`);
 
           assert(actual);
@@ -289,13 +285,8 @@ describe('gulp-task-build-js-rollup', () => {
   });
 
   it('should out code splitted js files with dynamic "import" syntax and "es" output format.', async () => {
-    const entries = [
-      'entry.js'
-    ];
-    const dependencies = [
-      'hoge.js',
-      'fuga.js'
-    ];
+    const entries = ['entry.js'];
+    const dependencies = ['hoge.js', 'fuga.js'];
     const task = buildJs({
       ...opts,
       src: entries.map((file) => `${srcDir}/code-splitting/${file}`),
@@ -317,7 +308,9 @@ describe('gulp-task-build-js-rollup', () => {
     await Promise.all(
       [...entries, ...dependencies].map(async (file) => {
         const actual = await readBuiltFile(`${destDir}/code-splitting/${file}`);
-        const expected = await readBuiltFile(`${expectedDir}/code-splitting/${file}`);
+        const expected = await readBuiltFile(
+          `${expectedDir}/code-splitting/${file}`
+        );
 
         assert(actual);
         assert.deepEqual(actual, expected);
@@ -351,8 +344,12 @@ describe('gulp-task-build-js-rollup', () => {
 
     await Promise.all(
       ['es', 'cjs'].map(async (format) => {
-        const actual = await readBuiltFile(`${destDir}/multiple-formats/main.${format}.js`);
-        const expected = await readBuiltFile(`${expectedDir}/multiple-formats/main.${format}.js`);
+        const actual = await readBuiltFile(
+          `${destDir}/multiple-formats/main.${format}.js`
+        );
+        const expected = await readBuiltFile(
+          `${expectedDir}/multiple-formats/main.${format}.js`
+        );
 
         assert(actual);
         assert.deepEqual(actual, expected);
@@ -377,18 +374,14 @@ describe('gulp-task-build-js-rollup', () => {
     });
 
     await new Promise((resolve) => {
-      gulp.series(
-        task,
-        async () => {
-          const actual = await readBuiltFile(`${destDir}/main.js`);
-          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+      gulp.series(task, async () => {
+        const actual = await readBuiltFile(`${destDir}/main.js`);
+        const expected = await readBuiltFile(`${expectedDir}/main.js`);
 
-          assert(actual);
-          assert.deepEqual(actual, expected);
-          resolve();
-        }
-      )();
+        assert(actual);
+        assert.deepEqual(actual, expected);
+        resolve();
+      })();
     });
   });
-
 });

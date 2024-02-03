@@ -33,12 +33,14 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function copy(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
-  const task = () => gulp.src(opts.src)
-    .pipe(plumber({errorHandler}))
-    .pipe(gulp.dest(opts.dest));
+  const task = () =>
+    gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
+      .pipe(gulp.dest(opts.dest));
 
   // add displayName (used as task name for gulp)
   if (typeof opts.name === 'string' && opts.name !== '') {

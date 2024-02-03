@@ -62,9 +62,9 @@ const DEFAULT_OPTIONS = {
   webp: false,
   compress: false,
   compressOptions: [
-    gifsicle({interlaced: true}),
-    mozjpeg({quality: 90, progressive: true}),
-    optipng({optimizationLevel: 5}),
+    gifsicle({ interlaced: true }),
+    mozjpeg({ quality: 90, progressive: true }),
+    optipng({ optimizationLevel: 5 }),
     svgo()
   ],
   verbose: false
@@ -117,16 +117,16 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function optimizeImage(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const isImage = '**/*.{jpg,jpeg,gif,png}';
   const isSvg = '**/*.svg';
   const isntIco = '!**/*.ico';
 
   // define task
   const task = () => {
-    const {evenize, placeholder, compress, compressOptions, verbose} = opts;
+    const { evenize, placeholder, compress, compressOptions, verbose } = opts;
     const since = gulp.lastRun(task);
-    let webpOptions = {verbose};
+    let webpOptions = { verbose };
 
     if (
       opts.webp &&
@@ -139,14 +139,25 @@ export default function optimizeImage(options = {}) {
       };
     }
 
-    return gulp.src(opts.src, {since})
-      .pipe(plumber({errorHandler}))
-      .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
+    return gulp
+      .src(opts.src, { since })
+      .pipe(plumber({ errorHandler }))
+      .pipe(cond(isImage, cond(evenize, imageEvenizer({ verbose }))))
       .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
-      .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
-      .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))
+      .pipe(
+        cond(
+          isntIco,
+          cond(placeholder, imagePlaceholder({ append: true, verbose }))
+        )
+      )
+      .pipe(
+        cond(
+          isntIco,
+          cond(compress, imagemin([...compressOptions], { verbose }))
+        )
+      )
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(isSvg, cond(compress, gzip({append: true}))))
+      .pipe(cond(isSvg, cond(compress, gzip({ append: true }))))
       .pipe(cond(isSvg, cond(compress, gulp.dest(opts.dest))));
   };
 

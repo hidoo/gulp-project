@@ -358,8 +358,8 @@ importers:
         specifier: 10.2.0
         version: 10.2.0
       pixelmatch:
-        specifier: 5.2.1
-        version: 5.2.1
+        specifier: 5.3.0
+        version: 5.3.0
       vinyl:
         specifier: 3.0.0
         version: 3.0.0
@@ -410,8 +410,8 @@ importers:
         specifier: 10.2.0
         version: 10.2.0
       pixelmatch:
-        specifier: 5.2.1
-        version: 5.2.1
+        specifier: 5.3.0
+        version: 5.3.0
 
   packages/gulp-plugin-svg-sprite:
     dependencies:
@@ -908,8 +908,8 @@ importers:
         specifier: 10.2.0
         version: 10.2.0
       pixelmatch:
-        specifier: 5.2.1
-        version: 5.2.1
+        specifier: 5.3.0
+        version: 5.3.0
 
   packages/gulp-task-build-sprite-svg:
     dependencies:
@@ -1086,8 +1086,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       pixelmatch:
-        specifier: 5.2.1
-        version: 5.2.1
+        specifier: 5.3.0
+        version: 5.3.0
     devDependencies:
       cross-env:
         specifier: 7.0.3
@@ -13978,11 +13978,11 @@ packages:
     resolution: {integrity: sha512-MnUuEycAemtSaeFSjXKW/aroV7akBbY+Sv+RkyqFjgAe73F+MR0TBWKBRDkmfWq/HiFmdavfZ1G7h4SPZXaCSg==}
     engines: {node: '>=0.10.0'}
 
-  /pixelmatch@5.2.1:
-    resolution: {integrity: sha512-WjcAdYSnKrrdDdqTcVEY7aB7UhhwjYQKYhHiBXdJef0MOaQeYpUdQ+iVyBLa5YBKS8MPVPPMX7rpOByISLpeEQ==}
+  /pixelmatch@5.3.0:
+    resolution: {integrity: sha512-o8mkY4E/+LNUf6LzX96ht6k6CEDi65k9G2rjMtBe9Oo+VPKSvl+0GKHuH/AlG+GA5LPG/i5hrekkxUc3s2HU+Q==}
     hasBin: true
     dependencies:
-      pngjs: 4.0.1
+      pngjs: 6.0.0
 
   /pixelsmith@2.4.1:
     resolution: {integrity: sha512-6lVOPf9eBd9bWfxo5efmJcAiF6y65Ui9Ir8IR8jocrj/v/8QoLWZmgnhO7KGUfqkwPLNlCBfxVdjp4QihdPmPQ==}
@@ -14053,9 +14053,9 @@ packages:
     resolution: {integrity: sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==}
     engines: {node: '>=4.0.0'}
 
-  /pngjs@4.0.1:
-    resolution: {integrity: sha512-rf5+2/ioHeQxR6IxuYNYGFytUyG3lma/WW1nsmjeHlWwtb2aByla6dkVc8pmJ9nplzkTA0q2xx7mMWrOTqT4Gg==}
-    engines: {node: '>=8.0.0'}
+  /pngjs@6.0.0:
+    resolution: {integrity: sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==}
+    engines: {node: '>=12.13.0'}
 
   /portscanner@2.1.1:
     resolution: {integrity: sha512-CUxI7PHXrWJTIPmQs1YJFyD4uesS3om2jVcgS3T1eYPyd60s1l0m7tf35Fn5KRAtV51SAD7BmImaOGf6vwhiFQ==}

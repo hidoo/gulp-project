@@ -29,7 +29,7 @@
     "file-type": "16.5.0",
     "get-pixels": "3.3.2",
     "gulp": "4.0.2",
-    "image-size": "1.0.0",
+    "image-size": "1.1.1",
     "mocha": "10.2.0"
   },
   "dependencies": {

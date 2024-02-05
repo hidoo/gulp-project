@@ -2,9 +2,7 @@
 
 import through from 'through2';
 import PluginError from 'plugin-error';
-import chunk from 'lodash.chunk';
-import flattenDeep from 'lodash.flattendeep';
-import getStream from 'get-stream';
+import arrayChunk from 'lodash.chunk';
 import ndarray from 'ndarray';
 import getPixels from 'get-pixels';
 import savePixels from 'save-pixels';
@@ -95,29 +93,28 @@ export default function imageEvenizer(options = {}) {
       return done(null, file);
     }
 
-    return FileType.fromBuffer(file.contents)
-      .then(
-        ({ ext, mime }) =>
-          new Promise((resolve, reject) => {
-            getPixels(file.contents, mime, (error, pixels) => {
-              if (error) {
-                return reject(error);
-              }
-              return resolve({ pixels, ext });
-            });
-          })
-      )
-      .then(({ pixels, ext }) => {
-        const hasFrames = pixels.shape.length === 4,
-          width = hasFrames ? pixels.shape[1] : pixels.shape[0],
-          height = hasFrames ? pixels.shape[2] : pixels.shape[1],
-          isOddWidth = isOdd(width),
-          isOddHeight = isOdd(height),
-          isJpg = /^jpe?g$/i.test(ext),
-          isGif = /^gif$/i.test(ext),
-          fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0],
-          saveOptions = isJpg ? { quality: 100 } : {},
-          channels = 4;
+    return (async () => {
+      try {
+        const { ext, mime } = await FileType.fromBuffer(file.contents);
+        const pixels = await new Promise((resolve, reject) => {
+          getPixels(file.contents, mime, (error, pxls) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(pxls);
+            }
+          });
+        });
+        const hasFrames = pixels.shape.length === 4;
+        const width = hasFrames ? pixels.shape[1] : pixels.shape[0];
+        const height = hasFrames ? pixels.shape[2] : pixels.shape[1];
+        const isOddWidth = isOdd(width);
+        const isOddHeight = isOdd(height);
+        const isJpg = /^jpe?g$/i.test(ext);
+        const isGif = /^gif$/i.test(ext);
+        const fillPixel = isJpg ? [255, 255, 255, 255] : [255, 255, 255, 0];
+        const saveOptions = isJpg ? { quality: 100 } : {};
+        const channels = 4;
 
         // ignore animation gif and even size image
         if (
@@ -131,9 +128,9 @@ export default function imageEvenizer(options = {}) {
         // [[[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]],
         //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]],
         //  [[0, 0, 0, 255], [0, 0, 0, 255], [0, 0, 0, 255]]]
-        let data = chunk(chunk([...pixels.data], channels), width),
-          newWidth = width,
-          newHeight = height;
+        let data = arrayChunk(arrayChunk([...pixels.data], channels), width);
+        let newWidth = width;
+        let newHeight = height;
 
         // replace [0, 0, 0, 0] to [255, 255, 255, 0] when media is gif
         if (isGif) {
@@ -158,21 +155,20 @@ export default function imageEvenizer(options = {}) {
           newHeight = newHeight + 1;
           data = [
             ...data,
-            Array.from(new Array(newWidth)).map(() => fillPixel)
+            ...Array.from({ length: newWidth }).map(() => fillPixel)
           ];
         }
 
         // set params (example when image size is 12x10)
         // + shape -> [12, 10, 4]
         // + stride -> [4, 48, 1]
-        const sizeInRow = newWidth * channels,
-          shape = [newWidth, newHeight, channels],
-          stride = [channels, sizeInRow, 1],
-          flattenData = flattenDeep(data);
+        const sizeInRow = newWidth * channels;
+        const shape = [newWidth, newHeight, channels];
+        const stride = [channels, sizeInRow, 1];
 
-        // add frame to params (example when image size is 12x10)
-        // + shape -> [1, 12, 10, 4]
-        // + stride -> [480, 4, 48, 1]
+        // // add frame to params (example when image size is 12x10)
+        // // + shape -> [1, 12, 10, 4]
+        // // + stride -> [480, 4, 48, 1]
         if (isGif) {
           const sizeInFrame = newWidth * newHeight * channels;
 
@@ -180,25 +176,36 @@ export default function imageEvenizer(options = {}) {
           stride.unshift(sizeInFrame);
         }
 
-        // transform array to ndarray
-        const evenizedPixels = ndarray(
-          Uint8ClampedArray.from(flattenData),
+        const newPixels = ndarray(
+          Uint8Array.from(data.flat(Infinity)),
           shape,
           stride
         );
 
-        return getStream
-          .buffer(savePixels(evenizedPixels, ext, saveOptions))
-          .then((buffer) => {
-            if (opts.verbose) {
-              log(
-                `${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`
-              );
-            }
-            file.contents = buffer;
-            return done(null, file);
-          });
-      })
-      .catch((error) => done(new PluginError(PLUGIN_NAME, error)));
+        // save pixels as buffer
+        file.contents = await new Promise((resolve, reject) => {
+          const chunks = [];
+
+          savePixels(newPixels, ext, saveOptions)
+            .on('error', reject)
+            .on('data', (chunk) => {
+              chunks.push(chunk);
+            })
+            .on('end', () => {
+              resolve(Buffer.concat(chunks));
+            });
+        });
+
+        if (opts.verbose) {
+          log(
+            `${PLUGIN_NAME}: "${file.relative}" evenize to ${newWidth}x${newHeight}.`
+          );
+        }
+
+        return done(null, file);
+      } catch (error) {
+        return done(new PluginError(PLUGIN_NAME, error));
+      }
+    })();
   });
 }

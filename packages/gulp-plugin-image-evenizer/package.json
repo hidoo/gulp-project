@@ -46,7 +46,7 @@
     "mocha": "8.4.0",
     "pixelmatch": "5.2.1",
     "power-assert": "1.6.1",
-    "rimraf": "3.0.2",
+    "rimraf": "5.0.5",
     "vinyl": "2.2.1"
   },
   "peerDependencies": {

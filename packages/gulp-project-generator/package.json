@@ -40,7 +40,7 @@
     "cross-env": "7.0.3",
     "mocha": "8.4.0",
     "power-assert": "1.6.1",
-    "rimraf": "3.0.2"
+    "rimraf": "5.0.5"
   },
   "dependencies": {
     "@hidoo/handlebars-helpers": "0.8.2",

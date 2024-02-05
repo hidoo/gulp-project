@@ -49,7 +49,7 @@
     "npm-run-all": "4.1.5",
     "pixelmatch": "5.2.1",
     "power-assert": "1.6.1",
-    "rimraf": "3.0.2"
+    "rimraf": "5.0.5"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

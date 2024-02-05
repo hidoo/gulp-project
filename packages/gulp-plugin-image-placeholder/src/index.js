@@ -1,6 +1,7 @@
 /* eslint no-magic-numbers: off, max-statements: off */
 
 import path from 'node:path';
+import util from 'node:util';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import PluginError from 'plugin-error';
@@ -8,6 +9,9 @@ import ndarray from 'ndarray';
 import savePixels from 'save-pixels';
 import sizeOf from 'image-size';
 import log from 'fancy-log';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * plugin name.

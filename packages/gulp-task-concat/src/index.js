@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import util from 'node:util';
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
@@ -13,6 +14,9 @@ import uglify from 'gulp-uglify';
 import csso from 'postcss-csso';
 import log from 'fancy-log';
 import errorHandler from '@hidoo/gulp-util-error-handler';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 let pkg = {};
 

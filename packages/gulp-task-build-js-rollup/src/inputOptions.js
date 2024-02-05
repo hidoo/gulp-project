@@ -1,5 +1,9 @@
+import util from 'node:util';
 import log from 'fancy-log';
 import configurePlugins from './configurePlugins.js';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * handle rollup.js warnings

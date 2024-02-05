@@ -1,5 +1,6 @@
 /* eslint no-magic-numbers: off, max-statements: off */
 
+import util from 'node:util';
 import through from 'through2';
 import PluginError from 'plugin-error';
 import arrayChunk from 'lodash.chunk';
@@ -8,6 +9,9 @@ import getPixels from 'get-pixels';
 import savePixels from 'save-pixels';
 import FileType from 'file-type';
 import log from 'fancy-log';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * check number is odd or not

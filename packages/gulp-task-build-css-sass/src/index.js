@@ -20,6 +20,9 @@ import log from 'fancy-log';
 import sassImporter from '@hidoo/sass-importer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
+
 let pkg = {};
 
 // try to load package.json that on current working directory

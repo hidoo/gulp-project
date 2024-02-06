@@ -1,5 +1,3 @@
-/* eslint no-magic-numbers: off */
-
 import path from 'node:path';
 import util from 'node:util';
 import imageminWebp from 'imagemin-webp';
@@ -75,10 +73,10 @@ export default function webp(options = {}) {
     const stream = this; // eslint-disable-line no-invalid-this, consistent-this
     const { dirname, extname, contents } = file;
     const basename = path.basename(file.path, extname);
-    const instance = imageminWebp(opts);
 
-    return instance(contents)
-      .then((buffer) => {
+    return (async () => {
+      try {
+        const buffer = await imageminWebp(opts)(contents);
         const filename = opts.keepExtname
           ? `${basename}${extname}.webp`
           : `${basename}.webp`;
@@ -102,8 +100,10 @@ export default function webp(options = {}) {
           })
         );
 
-        return done();
-      })
-      .catch((error) => done(new PluginError(PLUGIN_NAME, error)));
+        done();
+      } catch (error) {
+        done(new PluginError(PLUGIN_NAME, error));
+      }
+    })();
   });
 }

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
-import FileType from 'file-type';
+import { fileTypeFromBuffer } from 'file-type';
 import imagemin from 'gulp-imagemin';
 import buildSprite, { gifsicle, mozjpeg, optipng, svgo } from '../src/index.js';
 
@@ -20,7 +20,7 @@ import buildSprite, { gifsicle, mozjpeg, optipng, svgo } from '../src/index.js';
 function getUint8ArraysFromBuffers(buffers) {
   return Promise.all(
     buffers.map((buffer) =>
-      FileType.fromBuffer(buffer).then(
+      fileTypeFromBuffer(buffer).then(
         ({ mime }) =>
           new Promise((done, reject) => {
             getPixels(buffer, mime, (error, pixels) => {

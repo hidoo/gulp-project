@@ -6,7 +6,7 @@ import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
-import FileType from 'file-type';
+import { fileTypeFromBuffer } from 'file-type';
 import imagePlaceholder from '../src/index.js';
 
 /**
@@ -16,7 +16,7 @@ import imagePlaceholder from '../src/index.js';
  * @return {Promise<Uint8Array>}
  */
 async function getPixelsFromBuffer(buffer) {
-  const { mime } = await FileType.fromBuffer(buffer);
+  const { mime } = await fileTypeFromBuffer(buffer);
   const pixels = await new Promise((resolve, reject) => {
     getPixels(buffer, mime, (error, pxls) => {
       if (error) {

@@ -7,7 +7,7 @@ import arrayChunk from 'lodash.chunk';
 import ndarray from 'ndarray';
 import getPixels from 'get-pixels';
 import savePixels from 'save-pixels';
-import FileType from 'file-type';
+import { fileTypeFromBuffer } from 'file-type';
 import log from 'fancy-log';
 
 // tweaks log date color like gulp log
@@ -99,7 +99,7 @@ export default function imageEvenizer(options = {}) {
 
     return (async () => {
       try {
-        const { ext, mime } = await FileType.fromBuffer(file.contents);
+        const { ext, mime } = await fileTypeFromBuffer(file.contents);
         const pixels = await new Promise((resolve, reject) => {
           getPixels(file.contents, mime, (error, pxls) => {
             if (error) {

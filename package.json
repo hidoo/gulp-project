@@ -12,7 +12,7 @@
   "files": [],
   "scripts": {
     "build": "pnpm run --sequential '/^build:[^:]+$/'",
-    "build:doc": "pnpm run --recursive --parallel --if-present doc",
+    "build:doc": "pnpm run --recursive --parallel --if-present doc && prettier **/*.md --write",
     "build:example": "pnpm run --sequential '/^build:example:.*/'",
     "build:example:single": "pnpm generate ../../examples/single-device --no-interactive --force",
     "build:example:multiple": "pnpm generate ../../examples/multi-device --no-interactive --force --multi-device",

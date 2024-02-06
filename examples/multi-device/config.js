@@ -1,7 +1,7 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
 import fs from 'node:fs';
-import commander from 'commander';
+import { Command, InvalidArgumentError } from 'commander';
 
 /**
  * adjust NODE_ENV
@@ -15,9 +15,9 @@ if (typeof process.env.NODE_ENV !== 'string' || process.env.NODE_ENV === '') {
 /**
  * parse cli options
  *
- * @type {commander.Command}
+ * @type {Command}
  */
-const cli = new commander.Command()
+const cli = new Command()
   .option('--host <ip>', 'set ip.')
   .option('--port <number>', 'set port.')
   .option('--protocol <scheme>', 'set protocol.')
@@ -25,7 +25,7 @@ const cli = new commander.Command()
   .option('--ui', 'enable debug ui or not.')
   .option('--skip-device <device>', 'skip target device tasks.', (value) => {
     if (!['desktop', 'mobile'].includes(value)) {
-      throw new commander.InvalidOptionArgumentError();
+      throw new InvalidOptionArgumentError();
     }
     return value;
   })

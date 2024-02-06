@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
-import program, { InvalidOptionArgumentError } from 'commander';
+import { program, InvalidArgumentError } from 'commander';
 import inquirer from 'inquirer';
 import mkdir from './mkdir.js';
 import isEmptyDir from './isEmptyDir.js';
@@ -360,7 +360,7 @@ async function main(src = '', dest = '', options = {}) {
 function select(validValues = []) {
   return (value) => {
     if (!validValues.includes(value)) {
-      throw new InvalidOptionArgumentError();
+      throw new InvalidArgumentError();
     }
     return value;
   };

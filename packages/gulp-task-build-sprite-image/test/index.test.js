@@ -1,5 +1,3 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
 import fs from 'node:fs';
 import { dirname } from 'node:path';
@@ -8,7 +6,7 @@ import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import { fileTypeFromBuffer } from 'file-type';
-import imagemin from 'gulp-imagemin';
+import * as imagemin from 'gulp-imagemin';
 import buildSprite, { gifsicle, mozjpeg, optipng, svgo } from '../src/index.js';
 
 /**

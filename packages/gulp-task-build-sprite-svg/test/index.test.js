@@ -1,10 +1,8 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
 import fs from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import imagemin from 'gulp-imagemin';
+import * as imagemin from 'gulp-imagemin';
 import buildSprite, { svgo } from '../src/index.js';
 
 describe('gulp-task-build-sprite-svg', () => {

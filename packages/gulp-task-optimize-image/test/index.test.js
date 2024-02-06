@@ -1,14 +1,15 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+/* eslint max-statements: off */
 
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PNG } from 'pngjs';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import { fileTypeFromBuffer } from 'file-type';
-import imagemin from 'gulp-imagemin';
+import * as imagemin from 'gulp-imagemin';
 import optimizeImage, {
   gifsicle,
   mozjpeg,
@@ -17,219 +18,161 @@ import optimizeImage, {
 } from '../src/index.js';
 
 /**
- * get array of uint8array from buffers
+ * get pixels from buffers
  *
- * @param {Buffer} buffers array of buffer of image
- * @return {Promise}
+ * @param {Buffer} buffer buffer of image
+ * @return {Promise<Uint8Array>}
  */
-function getUint8ArraysFromBuffers(buffers) {
-  return Promise.all(
-    buffers.map((buffer) =>
-      fileTypeFromBuffer(buffer).then(
-        ({ mime }) =>
-          new Promise((done, reject) => {
-            getPixels(buffer, mime, (error, pixels) => {
-              if (error) {
-                return reject(error);
-              }
-              return done(pixels.data);
-            });
-          })
-      )
-    )
-  );
+async function getPixelsFromBuffer(buffer) {
+  const { mime } = await fileTypeFromBuffer(buffer);
+  const pixels = await new Promise((resolve, reject) => {
+    getPixels(buffer, mime, (error, pxls) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(pxls);
+      }
+    });
+  });
+
+  return pixels.data;
 }
 
+/* eslint-disable max-params */
 /**
  * compare pixels
  *
- * @param {Array} params array of parameter
- * @return {Promise}
+ * @param {Buffer} bufferA buffer A
+ * @param {Buffer} bufferB buffer B
+ * @param {Array<Number>} size width and height
+ * @param {Object} options options
+ * @return {Promise<Number>}
  */
-function comparePixels(params) {
-  return Promise.all(
-    params.map(
-      ([actualBuffer, expectedBuffer, width, height]) =>
-        new Promise((done, reject) =>
-          getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
-            .then((pixels) => {
-              const [actualPixels, expectedPixels] = pixels,
-                countDiffPixels = pixelmatch(
-                  actualPixels,
-                  expectedPixels,
-                  null,
-                  width,
-                  height,
-                  { threshold: 0.1 }
-                );
+async function comparePixels(bufferA, bufferB, size, options = {}) {
+  const [width, height] = size;
+  const { diff } = options;
+  let png = null;
 
-              assert(countDiffPixels === 0);
-              return done();
-            })
-            .catch((error) => reject(error))
-        )
-    )
+  if (diff) {
+    png = new PNG({ width, height });
+  }
+
+  const differences = pixelmatch(
+    await getPixelsFromBuffer(bufferA),
+    await getPixelsFromBuffer(bufferB),
+    png.data,
+    ...size,
+    {
+      threshold: 0.1
+    }
   );
+
+  if (png) {
+    await fs.writeFile(diff, PNG.sync.write(png));
+  }
+
+  return differences;
 }
+/* eslint-enable max-params */
 
 describe('gulp-task-optimize-image', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+    opts = {
+      src: `${srcDir}/sample.{jpg,jpeg,png,gif,svg,ico}`,
+      dest: destDir
+    };
   });
 
-  it('should out to "options.dest" if argument "options.src" is set.', (done) => {
-    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'],
-      task = optimizeImage({
-        src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
-        dest: path.dest
-      });
-
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          (ext) =>
-            new Promise((resolve, reject) => {
-              const actual = fs.readFileSync(`${path.dest}/sample.${ext}`, {
-                  encode: null
-                }),
-                expected = fs.readFileSync(`${path.expected}/sample.${ext}`, {
-                  encode: null
-                }),
-                { width, height } = sizeOf(actual);
-
-              assert(actual);
-              if (ext === 'svg' || ext === 'ico') {
-                assert.deepStrictEqual(actual, expected);
-                resolve();
-              } else {
-                comparePixels([[actual, expected, width, height]])
-                  .then(resolve)
-                  .catch(reject);
-              }
-            })
-        )
-      );
-
-      promise.then(() => done(null)).catch((error) => done(error));
-    });
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
-  it('should out evenized files to "options.dest" if argument "options.evenize" is true.', (done) => {
+  it('should out optimized images.', async () => {
+    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'];
+    const task = optimizeImage(opts);
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      cases.map(async (ext) => {
+        const actual = await fs.readFile(`${destDir}/sample.${ext}`);
+        const expected = await fs.readFile(`${expectedDir}/sample.${ext}`);
+        const dimensions = sizeOf(actual);
+
+        assert(actual);
+        if (ext === 'svg' || ext === 'ico') {
+          assert.deepEqual(actual, expected);
+        } else {
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: `${destDir}/sample.${ext}.diff.png` }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between sample.${ext} files.`
+          );
+        }
+      })
+    );
+  });
+
+  it('should out evenized optimized images with options.evenize.', async () => {
     const cases = [
-        ['10x9', 'jpg', [10, 10]],
-        ['9x10', 'png', [10, 10]],
-        ['9x9', 'gif', [10, 10]]
-      ],
-      task = optimizeImage({
-        src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
-        dest: path.dest,
-        evenize: true
-      });
-
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          ([basename, ext, [width, height]]) =>
-            new Promise((resolve, reject) => {
-              const actual = fs.readFileSync(
-                  `${path.dest}/${basename}.${ext}`,
-                  { encode: null }
-                ),
-                expected = fs.readFileSync(
-                  `${path.expected}/${basename}.evenized.${ext}`,
-                  { encode: null }
-                ),
-                dimentions = sizeOf(expected);
-
-              assert(dimentions.width === width);
-              assert(dimentions.height === height);
-              comparePixels([[actual, expected, width, height]])
-                .then(resolve)
-                .catch(reject);
-            })
-        )
-      );
-
-      promise.then(() => done(null)).catch((error) => done(error));
+      ['10x9', 'jpg', [10, 10]],
+      ['9x10', 'png', [10, 10]],
+      ['9x9', 'gif', [10, 10]]
+    ];
+    const task = optimizeImage({
+      ...opts,
+      src: cases.map(([basename, ext]) => `${srcDir}/${basename}.${ext}`),
+      evenize: true
     });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      cases.map(async ([basename, ext, [width, height]]) => {
+        const actual = await fs.readFile(`${destDir}/${basename}.${ext}`);
+        const expected = await fs.readFile(
+          `${expectedDir}/${basename}.evenized.${ext}`
+        );
+        const dimensions = sizeOf(actual);
+        const differences = await comparePixels(
+          actual,
+          expected,
+          [width, height],
+          { diff: `${destDir}/${basename}.${ext}.diff.png` }
+        );
+
+        assert.equal(dimensions.width, width);
+        assert.equal(dimensions.height, height);
+        assert.equal(
+          differences,
+          0,
+          `No differences are found between ${basename}.${ext} files.`
+        );
+      })
+    );
   });
 
-  it('should out placeholder images to "options.dest" if argument "options.placeholder" is true.', (done) => {
-    const cases = [
-        ['10x9', 'jpg'],
-        ['9x10', 'png'],
-        ['9x9', 'gif'],
-        ['sample', 'svg']
-      ],
-      task = optimizeImage({
-        src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
-        dest: path.dest,
-        placeholder: true
-      });
-
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          ([basename, ext]) =>
-            new Promise((resolve, reject) => {
-              const actual = fs.readFileSync(
-                  `${path.dest}/${basename}.${ext}`,
-                  { encode: null }
-                ),
-                placeholder = fs.readFileSync(
-                  `${path.dest}/${basename}.placeholder.png`,
-                  { encode: null }
-                ),
-                expected = fs.readFileSync(
-                  `${path.expected}/${basename}.original.${ext}`,
-                  { encode: null }
-                ),
-                placeholderExpected = fs.readFileSync(
-                  `${path.expected}/${basename}.placeholder.png`,
-                  { encode: null }
-                ),
-                dimentions = sizeOf(expected),
-                placeholderDimentions = sizeOf(placeholder);
-
-              assert(placeholderDimentions.width === dimentions.width);
-              assert(placeholderDimentions.height === dimentions.height);
-
-              if (ext === 'svg') {
-                assert.deepStrictEqual(actual, expected);
-                resolve();
-              } else {
-                comparePixels([
-                  [actual, expected, dimentions.width, dimentions.height]
-                ])
-                  .then(() =>
-                    comparePixels([
-                      [
-                        placeholder,
-                        placeholderExpected,
-                        placeholderDimentions.width,
-                        placeholderDimentions.height
-                      ]
-                    ])
-                  )
-                  .then(resolve)
-                  .catch(reject);
-              }
-            })
-        )
-      );
-
-      promise.then(() => done(null)).catch((error) => done(error));
-    });
-  });
-
-  it('should out webp images to "options.dest" if argument "options.webp" is true.', (done) => {
+  it('should out placeholder images with options.placeholder.', async () => {
     const cases = [
       ['10x9', 'jpg'],
       ['9x10', 'png'],
@@ -237,50 +180,109 @@ describe('gulp-task-optimize-image', () => {
       ['sample', 'svg']
     ];
     const task = optimizeImage({
-      src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
-      dest: path.dest,
+      ...opts,
+      src: cases.map(([basename, ext]) => `${srcDir}/${basename}.${ext}`),
+      placeholder: true
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      cases.map(async ([basename, ext]) => {
+        const expected = {
+          image: await fs.readFile(
+            `${expectedDir}/${basename}.original.${ext}`
+          ),
+          placeholder: await fs.readFile(
+            `${expectedDir}/${basename}.placeholder.png`
+          )
+        };
+        const { width, height } = sizeOf(expected.image);
+
+        const actual = await fs.readFile(`${destDir}/${basename}.${ext}`);
+        const placeholder = await fs.readFile(
+          `${destDir}/${basename}.placeholder.png`
+        );
+        const dimensions = sizeOf(placeholder);
+
+        assert.equal(dimensions.width, width);
+        assert.equal(dimensions.height, height);
+
+        if (ext === 'svg') {
+          assert.deepEqual(actual, expected.image);
+        } else {
+          assert.equal(
+            await comparePixels(actual, expected.image, [width, height], {
+              diff: `${destDir}/${basename}.${ext}.diff.png`
+            }),
+            0,
+            `No differences are found between ${basename}.${ext} files.`
+          );
+
+          assert.equal(
+            await comparePixels(
+              placeholder,
+              expected.placeholder,
+              [dimensions.width, dimensions.height],
+              { diff: `${destDir}/${basename}.placeholder.png.diff.png` }
+            ),
+            0,
+            `No differences are found between ${basename}.placeholder.png files.`
+          );
+        }
+      })
+    );
+  });
+
+  it('should out webp images with options.webp.', async () => {
+    const cases = [
+      ['10x9', 'jpg'],
+      ['9x10', 'png'],
+      ['9x9', 'gif'],
+      ['sample', 'svg']
+    ];
+    const task = optimizeImage({
+      ...opts,
+      src: cases.map(([basename, ext]) => `${srcDir}/${basename}.${ext}`),
       webp: true
     });
 
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          ([basename, ext]) =>
-            new Promise((resolve) => {
-              const actual = fs.readFileSync(
-                `${path.dest}/${basename}.${ext}`,
-                { encode: null }
-              );
-              const expected = fs.readFileSync(
-                `${path.expected}/${basename}.original.${ext}`,
-                { encode: null }
-              );
+    await new Promise((resolve) => task().on('finish', resolve));
 
-              if (ext === 'svg') {
-                assert.deepStrictEqual(actual, expected);
-              } else {
-                const webp = fs.readFileSync(
-                  `${path.dest}/${basename}.${ext}.webp`,
-                  { encode: null }
-                );
-                const webpExpected = fs.readFileSync(
-                  `${path.expected}/${basename}.${ext}.webp`,
-                  { encode: null }
-                );
+    await Promise.all(
+      cases.map(async ([basename, ext]) => {
+        const actual = await fs.readFile(`${destDir}/${basename}.${ext}`);
+        const expected = await fs.readFile(
+          `${expectedDir}/${basename}.original.${ext}`
+        );
 
-                assert.deepStrictEqual(actual, expected);
-                assert.deepStrictEqual(webp, webpExpected);
-              }
-              resolve();
-            })
-        )
-      );
+        if (ext === 'svg') {
+          assert.deepEqual(actual, expected);
+        } else {
+          const { width, height } = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [width, height],
+            { diff: `${destDir}/${basename}.${ext}.diff.png` }
+          );
 
-      promise.then(() => done(null)).catch((error) => done(error));
-    });
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${basename}.${ext} files.`
+          );
+
+          assert.deepEqual(
+            await fs.readFile(`${destDir}/${basename}.${ext}.webp`),
+            await fs.readFile(`${expectedDir}/${basename}.${ext}.webp`)
+          );
+        }
+      })
+    );
   });
 
-  it('should out webp images to "options.dest" if argument "options.webp" is object.', (done) => {
+  it('should out webp images with options.webp as object.', async () => {
     const cases = [
       ['10x9', 'jpg'],
       ['9x10', 'png'],
@@ -288,144 +290,123 @@ describe('gulp-task-optimize-image', () => {
       ['sample', 'svg']
     ];
     const task = optimizeImage({
-      src: `${path.src}/{${cases.map(([basename, ext]) => `${basename}.${ext}`).join(',')}}`,
-      dest: path.dest,
+      ...opts,
+      src: cases.map(([basename, ext]) => `${srcDir}/${basename}.${ext}`),
       webp: { keepExtname: false }
     });
 
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          ([basename, ext]) =>
-            new Promise((resolve) => {
-              const actual = fs.readFileSync(
-                `${path.dest}/${basename}.${ext}`,
-                { encode: null }
-              );
-              const expected = fs.readFileSync(
-                `${path.expected}/${basename}.original.${ext}`,
-                { encode: null }
-              );
+    await new Promise((resolve) => task().on('finish', resolve));
 
-              if (ext === 'svg') {
-                assert.deepStrictEqual(actual, expected);
-              } else {
-                const webp = fs.readFileSync(`${path.dest}/${basename}.webp`, {
-                  encode: null
-                });
-                const webpExpected = fs.readFileSync(
-                  `${path.expected}/${basename}.${ext}.webp`,
-                  { encode: null }
-                );
+    await Promise.all(
+      cases.map(async ([basename, ext]) => {
+        const actual = await fs.readFile(`${destDir}/${basename}.${ext}`);
+        const expected = await fs.readFile(
+          `${expectedDir}/${basename}.original.${ext}`
+        );
 
-                assert.deepStrictEqual(actual, expected);
-                assert.deepStrictEqual(webp, webpExpected);
-              }
-              resolve();
-            })
-        )
-      );
+        if (ext === 'svg') {
+          assert.deepEqual(actual, expected);
+        } else {
+          const { width, height } = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [width, height],
+            { diff: `${destDir}/${basename}.${ext}.diff.png` }
+          );
 
-      promise.then(() => done(null)).catch((error) => done(error));
-    });
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${basename}.${ext} files.`
+          );
+
+          assert.deepEqual(
+            await fs.readFile(`${destDir}/${basename}.webp`),
+            await fs.readFile(`${expectedDir}/${basename}.${ext}.webp`)
+          );
+        }
+      })
+    );
   });
 
-  it('should out compressed files to "options.dest" if argument "options.compress" is true.', (done) => {
-    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'],
-      task = optimizeImage({
-        src: `${path.src}/sample.{jpg,jpeg,png,gif,svg,ico}`,
-        dest: path.dest,
-        compress: true
-      });
-
-    task().on('finish', () => {
-      const promise = Promise.all(
-        cases.map(
-          (ext) =>
-            new Promise((resolve) => {
-              const actualPath = `${path.dest}/sample.${ext}`,
-                actual = fs.readFileSync(actualPath, { encode: null });
-
-              if (ext === 'ico') {
-                const expected = fs.readFileSync(
-                  `${path.expected}/sample.${ext}`,
-                  { encode: null }
-                );
-
-                assert(actual);
-                assert.deepStrictEqual(actual, expected);
-                resolve();
-              } else {
-                const expectedPath = `${path.expected}/sample.compressed.${ext}`,
-                  expected = fs.readFileSync(expectedPath, { encode: null });
-
-                assert(actual);
-                assert.deepStrictEqual(actual, expected);
-                resolve();
-              }
-            })
-        )
-      );
-
-      promise.then(() => done(null)).catch((error) => done(error));
+  it('should out compressed files with options.compress.', async () => {
+    const cases = ['jpg', 'png', 'gif', 'svg', 'ico'];
+    const task = optimizeImage({
+      ...opts,
+      compress: true
     });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      cases.map(async (ext) => {
+        const actual = await fs.readFile(`${destDir}/sample.${ext}`);
+
+        assert(actual);
+
+        if (ext === 'ico') {
+          const expected = await fs.readFile(`${expectedDir}/sample.${ext}`);
+
+          assert.deepEqual(actual, expected);
+        } else {
+          const expected = await fs.readFile(
+            `${expectedDir}/sample.compressed.${ext}`
+          );
+
+          assert.deepEqual(actual, expected, `.${ext} file is compressed.`);
+
+          if (ext !== 'svg') {
+            const { width, height } = sizeOf(actual);
+            const differences = await comparePixels(
+              actual,
+              expected,
+              [width, height],
+              { diff: `${destDir}/sample.${ext}.diff.png` }
+            );
+
+            assert.equal(
+              differences,
+              0,
+              `No differences are found between sample.${ext} files.`
+            );
+          }
+        }
+      })
+    );
   });
 
   it('should throw no error if task run multiple.', async () => {
     const cases = ['jpg', 'png', 'gif', 'svg', 'ico'];
 
     await Promise.all(
-      cases.map((ext) => {
-        const srcPath = `${path.src}/sample.${ext}`,
-          actualPath = `${path.dest}/sample.${ext}`,
-          task = optimizeImage({
-            src: `${path.src}/sample.${ext}`,
-            dest: path.dest,
-            evenize: true,
-            placeholder: true,
-            webp: true,
-            compress: true
-          });
+      cases.map(async (ext) => {
+        const src = `${srcDir}/sample.${ext}`;
+        const dest = `${destDir}/sample.${ext}`;
+        const task = optimizeImage({
+          ...opts,
+          src,
+          evenize: true,
+          placeholder: true,
+          webp: true,
+          compress: true
+        });
 
         // 1st build
-        const firstBuild = new Promise((resolve) =>
-          task().on('finish', () => {
-            resolve();
-          })
-        );
+        await new Promise((resolve) => task().on('finish', resolve));
 
-        return firstBuild
-          .then(() => {
-            const expectedTime = new Date();
+        const modifiedTime = new Date();
 
-            // modify files
-            return new Promise((resolve, reject) => {
-              fs.utimes(srcPath, expectedTime, expectedTime, (error) => {
-                if (error) {
-                  reject(error);
-                }
-                resolve(expectedTime);
-              });
-            });
-          })
-          .then(
-            (expectedTime) =>
-              new Promise((resolve, reject) => {
-                // check dest file is modified or not
-                task().on('finish', () => {
-                  fs.stat(actualPath, (error, stats) => {
-                    if (error) {
-                      reject(error);
-                    }
+        // update file modified time
+        await fs.utimes(src, modifiedTime, modifiedTime);
 
-                    assert(expectedTime <= stats.atime);
-                    assert(expectedTime <= stats.mtime);
-                    resolve();
-                  });
-                });
-              })
-          )
-          .finally(() => Promise.resolve());
+        // 2nd build
+        await new Promise((resolve) => task().on('finish', resolve));
+
+        const stats = await fs.stat(dest);
+
+        assert(modifiedTime <= stats.atime);
+        assert(modifiedTime <= stats.mtime);
       })
     );
   });

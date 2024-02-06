@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
-import imagemin from 'gulp-imagemin';
+import imagemin, { svgo } from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
@@ -19,7 +19,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @example
  * import {svgo} from '@hidoo/gulp-task-build-sprite-svg';
  */
-export const svgo = imagemin.svgo;
+export { svgo } from 'gulp-imagemin';
 
 /**
  * dirname

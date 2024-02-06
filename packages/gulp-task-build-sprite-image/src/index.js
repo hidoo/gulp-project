@@ -4,7 +4,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
-import imagemin from 'gulp-imagemin';
+import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
@@ -12,44 +12,14 @@ import evenizer from '@hidoo/gulp-plugin-image-evenizer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
- * gifsicle plugins for imagemin
+ * imagemin plugins
  *
  * @type {Function}
  *
  * @example
- * import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+ * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
  */
-export const gifsicle = imagemin.gifsicle;
-
-/**
- * mozjpeg plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const mozjpeg = imagemin.mozjpeg;
-
-/**
- * optipng plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {optipng} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const optipng = imagemin.optipng;
-
-/**
- * svgo plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {svgo} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const svgo = imagemin.svgo;
+export { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
 
 /**
  * dirname

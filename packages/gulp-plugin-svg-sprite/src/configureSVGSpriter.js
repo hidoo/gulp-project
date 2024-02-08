@@ -18,13 +18,7 @@ export default function configureSvgSpriter(options = {}) {
         padding: padding || 0, // eslint-disable-line no-magic-numbers
         box: 'content'
       },
-      transform: [
-        {
-          svgo: {
-            plugins: [{ removeTitle: true }, { removeAttrs: { attrs: 'fill' } }]
-          }
-        }
-      ]
+      transform: ['svgo']
     },
     mode: {
       css: {

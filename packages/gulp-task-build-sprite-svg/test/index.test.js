@@ -1,221 +1,265 @@
+/* eslint max-statements: off */
+
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as imagemin from 'gulp-imagemin';
 import buildSprite, { svgo } from '../src/index.js';
 
+const DEBUG = false;
+
+/**
+ * convert svg contents to dataURL
+ *
+ * @param {Buffer|String} svg svg contents
+ * @return {String}
+ */
+function toDataURL(svg) {
+  const contents = svg.toString().trim().replace(/#fff/g, '#000');
+
+  return `data:image/svg+xml,${encodeURIComponent(contents)}`;
+}
+
+/**
+ * read built file
+ *
+ * @param {String} file filename
+ * @return {String}
+ */
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
+
+  return content.toString().trim();
+}
+
 describe('gulp-task-build-sprite-svg', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
-  });
-
-  it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
-    const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+    opts = {
+      src: `${srcDir}/**/sample-*.svg`,
       imgName: 'svg-sprite.svg',
       cssName: 'svg-sprite.styl',
+      destImg: destDir,
+      destCss: destDir,
       imgPath: './svg-sprite.svg'
-    });
-
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.styl`);
-
-      assert(actualSvg);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
-      );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
-      );
-      done();
-    });
+    };
   });
 
-  it('should output compressed files to "options.destXxx" if argument "options.compress" is true.', (done) => {
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
+  });
+
+  it('should output files with minimum settings.', async () => {
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'svg-sprite.svg',
-      cssName: 'svg-sprite.styl',
-      imgPath: './svg-sprite.svg',
+      ...opts
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.svg`);
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.styl`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.styl`);
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+  });
+
+  it('should output compressed files with options.compress.', async () => {
+    const task = buildSprite({
+      ...opts,
       compress: true
     });
 
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualSvgGzip = fs.readFileSync(`${path.dest}/svg-sprite.svg.gz`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-        expectedSvg = fs.readFileSync(
-          `${path.expected}/svg-sprite.compressed.svg`
-        ),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/svg-sprite.compressed.styl`
-        );
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualSvg);
-      assert(actualSvgGzip);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/svg-sprite.compressed.svg`
       );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert(await fs.stat(`${destDir}/svg-sprite.svg.gz`));
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.styl`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/svg-sprite.compressed.styl`
       );
-      done();
-    });
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
   });
 
-  it('should output files to "options.destXxx" if argument "options.imgPath" is pathname with parameters.', (done) => {
+  it('should output files with path name and parameters in options.imgPath.', async () => {
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'svg-sprite.svg',
-      cssName: 'svg-sprite.styl',
+      ...opts,
       imgPath: './svg-sprite.svg?version=0.0.0'
     });
 
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.styl`),
-        expectedSvg = fs.readFileSync(
-          `${path.expected}/svg-sprite.with-parameters.svg`
-        ),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/svg-sprite.with-parameters.styl`
-        );
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualSvg);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/svg-sprite.with-parameters.svg`
       );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.styl`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/svg-sprite.with-parameters.styl`
       );
-      done();
-    });
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
   });
 
-  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass".', (done) => {
+  it('should output files includes scss format with options.cssPreprocessor = "sass".', async () => {
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'svg-sprite.svg',
+      ...opts,
       cssName: 'svg-sprite.scss',
-      imgPath: './svg-sprite.svg',
       cssPreprocessor: 'sass'
     });
 
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
-        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.scss`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualSvg);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
-      );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
-      );
-      done();
-    });
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.svg`);
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.scss`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.scss`);
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
   });
 
-  it('should output file that "scss:module" format to "options.destCss" if argument "options.cssPreprocessor" is "sass:module".', (done) => {
+  it('should output files includes scss module format with options.cssPreprocessor = "sass:module".', async () => {
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'svg-sprite.svg',
+      ...opts,
       cssName: 'svg-sprite.scss',
-      imgPath: './svg-sprite.svg',
       cssPreprocessor: 'sass:module'
     });
 
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.scss`),
-        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/svg-sprite-module.scss`
-        );
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualSvg);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.svg`);
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.scss`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/svg-sprite-module.scss`
       );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
-      );
-      done();
-    });
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
   });
 
-  it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
+  it('should output files includes specified format with options.cssTemplate.', async () => {
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.svg`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'svg-sprite.svg',
+      ...opts,
       cssName: 'svg-sprite.css',
-      imgPath: './svg-sprite.svg',
-      cssPreprocessor: 'stylus',
-      cssTemplate: `${path.src}/custom-template.hbs`
+      cssTemplate: `${srcDir}/custom-template.hbs`,
+
+      // ignore following options if options.cssTemplate specified
+      cssPreprocessor: 'stylus'
     });
 
-    task().on('finish', () => {
-      const actualSvg = fs.readFileSync(`${path.dest}/svg-sprite.svg`),
-        actualCss = fs.readFileSync(`${path.dest}/svg-sprite.css`),
-        expectedSvg = fs.readFileSync(`${path.expected}/svg-sprite.svg`),
-        expectedCss = fs.readFileSync(`${path.expected}/svg-sprite.css`);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualSvg);
-      assert(actualCss);
-      assert.deepStrictEqual(
-        actualSvg.toString().trim(),
-        expectedSvg.toString().trim()
-      );
-      assert.deepStrictEqual(
-        actualCss.toString().trim(),
-        expectedCss.toString().trim()
-      );
-      done();
-    });
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.svg`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.svg`);
+
+      if (DEBUG) {
+        console.log('[DEBUG] actual: "%s"', toDataURL(actual));
+        console.log('[DEBUG] expected: "%s"', toDataURL(expected));
+      }
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
+
+    {
+      const actual = await readBuiltFile(`${destDir}/svg-sprite.css`);
+      const expected = await readBuiltFile(`${expectedDir}/svg-sprite.css`);
+
+      assert(actual);
+      assert.deepStrictEqual(actual, expected);
+    }
   });
 
-  describe('exports imagemin plugins', () => {
-    it('should be accessible to imagemin plugins', () => {
+  describe('exports imagemin plugins.', () => {
+    it('should be accessible to imagemin plugins.', () => {
       assert(imagemin.svgo === svgo);
     });
   });

@@ -25,7 +25,7 @@ const cli = new Command()
   .option('--ui', 'enable debug ui or not.')
   .option('--skip-device <device>', 'skip target device tasks.', (value) => {
     if (!['desktop', 'mobile'].includes(value)) {
-      throw new InvalidOptionArgumentError();
+      throw new InvalidArgumentError();
     }
     return value;
   })

@@ -32,7 +32,7 @@ const cli = new Command()
 {{#if this.multiDevice}}
   .option('--skip-device <device>', 'skip target device tasks.', (value) => {
     if (!['desktop', 'mobile'].includes(value)) {
-      throw new InvalidOptionArgumentError();
+      throw new InvalidArgumentError();
     }
     return value;
   })

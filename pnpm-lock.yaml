@@ -512,8 +512,8 @@ importers:
         specifier: 0.9.0
         version: 0.9.0
       autoprefixer:
-        specifier: 10.2.6
-        version: 10.2.6(postcss@8.4.35)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.35)
       css-mqpacker:
         specifier: 7.0.0
         version: 7.0.0
@@ -585,8 +585,8 @@ importers:
         specifier: workspace:*
         version: link:../gulp-util-error-handler
       autoprefixer:
-        specifier: 10.2.6
-        version: 10.2.6(postcss@8.4.35)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.35)
       css-mqpacker:
         specifier: 7.0.0
         version: 7.0.0
@@ -4522,8 +4522,8 @@ packages:
     engines: {node: '>= 4.5.0'}
     hasBin: true
 
-  /autoprefixer@10.2.6(postcss@8.4.35):
-    resolution: {integrity: sha512-8lChSmdU6dCNMCQopIf4Pe5kipkAGj/fvTMslCsih0uHpOrXOPUEVOmYMMqmw3cekQkSD7EhIeuYl5y0BLdKqg==}
+  /autoprefixer@10.4.17(postcss@8.4.35):
+    resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -4531,9 +4531,9 @@ packages:
     dependencies:
       browserslist: 4.22.3
       caniuse-lite: 1.0.30001581
-      colorette: 1.2.2
-      fraction.js: 4.1.1
+      fraction.js: 4.3.7
       normalize-range: 0.1.2
+      picocolors: 1.0.0
       postcss: 8.4.35
       postcss-value-parser: 4.2.0
     dev: false
@@ -5631,10 +5631,6 @@ packages:
   /colord@2.9.3:
     resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
     dev: true
-
-  /colorette@1.2.2:
-    resolution: {integrity: sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==}
-    dev: false
 
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
@@ -8183,8 +8179,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /fraction.js@4.1.1:
-    resolution: {integrity: sha512-MHOhvvxHTfRFpF1geTK9czMIZ6xclsEor2wkIGYYq+PxcQqT7vStJqjhe6S1TenZrMZzo+wlqOufBDVepUEgPg==}
+  /fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
   /fragment-cache@0.2.1:

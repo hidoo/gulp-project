@@ -9,7 +9,6 @@ import Vinyl from 'vinyl';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import inputOptions from './inputOptions.js';
 import outputOptions, { defaultOutputOptions } from './outputOptions.js';
-import concatSourceMap from './concatSourceMap.js';
 
 /**
  * default options
@@ -98,21 +97,30 @@ export default function buildJs(options = {}) {
 
         for (const { output } of outputs) {
           for (const chunkOrAsset of output) {
-            if (chunkOrAsset.type === 'asset') {
-              throw new Error('"asset" is not support.');
+            if (
+              chunkOrAsset.type === 'asset' &&
+              typeof chunkOrAsset.source !== 'undefined'
+            ) {
+              stream.push(
+                new Vinyl({
+                  path: chunkOrAsset.fileName,
+                  contents: Buffer.from(chunkOrAsset.source),
+                  isAsset: true
+                })
+              );
+            } else {
+              const { isEntry } = chunkOrAsset;
+              const filename = isEntry ? filenames.shift() : null;
+
+              // add code and sourcemap to stream as vinyl file
+              stream.push(
+                new Vinyl({
+                  path: filename || chunkOrAsset.fileName,
+                  contents: Buffer.from(chunkOrAsset.code),
+                  isEntry
+                })
+              );
             }
-
-            const { code, map, fileName, isEntry } = chunkOrAsset;
-            const filename = isEntry ? filenames.shift() : null;
-
-            // add code and sourcemap to stream as vinyl file
-            stream.push(
-              new Vinyl({
-                path: filename || fileName,
-                contents: Buffer.from(concatSourceMap({ code, map })),
-                isEntry
-              })
-            );
           }
         }
 

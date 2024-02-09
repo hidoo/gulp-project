@@ -42,7 +42,7 @@
     "@hidoo/gulp-task-build-styleguide-kss": "^0.0.0",
     "@hidoo/gulp-task-concat": "^0.0.0",
     "@hidoo/gulp-task-optimize-image": "^0.0.0",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^3.0.2",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "conventional-changelog-cli": "^2.0.5",

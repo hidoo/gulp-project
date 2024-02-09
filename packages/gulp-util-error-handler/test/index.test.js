@@ -1,7 +1,5 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import stripAnsi from 'strip-ansi';
 import log from 'fancy-log';
 import errorHandler from '../src/index.js';
@@ -10,7 +8,7 @@ describe('gulp-util-error-handler', () => {
   let spied = null;
 
   beforeEach(() => {
-    spied = sinon.spy(log, 'error');
+    spied = spy(log, 'error');
   });
   afterEach(() => {
     spied.restore();

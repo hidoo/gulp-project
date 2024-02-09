@@ -89,7 +89,7 @@ task(
 );
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>**
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)>**&#x20;
 
 ## Template API
 

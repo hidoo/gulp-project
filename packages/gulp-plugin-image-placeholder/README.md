@@ -61,7 +61,7 @@ task('placeholder', () =>
 );
 ```
 
-Returns **DestroyableTransform**
+Returns **DestroyableTransform**&#x20;
 
 ## Test
 

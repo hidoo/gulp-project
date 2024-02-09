@@ -37,51 +37,11 @@ task(
 
 ### gifsicle
 
-gifsicle plugins for imagemin
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
-#### Examples
-
-```javascript
-import { gifsicle } from '@hidoo/gulp-task-optimize-image';
-```
-
 ### mozjpeg
-
-mozjpeg plugins for imagemin
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
-#### Examples
-
-```javascript
-import { mozjpeg } from '@hidoo/gulp-task-optimize-image';
-```
 
 ### optipng
 
-optipng plugins for imagemin
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
-#### Examples
-
-```javascript
-import { optipng } from '@hidoo/gulp-task-optimize-image';
-```
-
 ### svgo
-
-svgo plugins for imagemin
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
-#### Examples
-
-```javascript
-import { svgo } from '@hidoo/gulp-task-optimize-image';
-```
 
 ### optimizeImage
 
@@ -138,7 +98,7 @@ task(
 );
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**&#x20;
 
 ## Test
 

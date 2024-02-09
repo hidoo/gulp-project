@@ -1,6 +1,5 @@
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import generatePackageJson from '../src/generatePackageJson.js';
@@ -14,13 +13,13 @@ import generatePackageJson from '../src/generatePackageJson.js';
 async function readBuiltFile(file) {
   const content = await fs.readFile(file);
 
-  return content
-    .toString()
-    .trim()
-    .replace(
-      /"(@hidoo\/gulp-[^"]+)":\s"[^"]+"/g, // eslint-disable-line prefer-named-capture-group
-      '"$1": "<version>"'
-    );
+  return (
+    content
+      .toString()
+      .trim()
+      // eslint-disable-next-line prefer-named-capture-group
+      .replace(/"([^"]+)":\s+"\d+\.\d+\.\d+/g, '"$1": "<version>"')
+  );
 }
 
 describe('generatePackageJson', () => {
@@ -65,6 +64,8 @@ describe('generatePackageJson', () => {
 
     const actual = await readBuiltFile(`${destDir}/package.json`);
     const expected = await readBuiltFile(`${expectedDir}/pkg.json`);
+
+    console.log(actual, expected);
 
     assert(actual);
     assert.deepEqual(actual, expected);

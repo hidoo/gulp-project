@@ -159,7 +159,7 @@ export default async function generatePackageJson(
       .map((key) => [key, pkg.devDependencies[key]])
       .reduce((prev, [key, version]) => {
         if (version) {
-          prev[key] = `^${version}`;
+          prev[key] = `${version}`;
         }
         return prev;
       }, {})

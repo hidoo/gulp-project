@@ -11,12 +11,12 @@ $ npm install --save-dev gulp@next @hidoo/gulp-plugin-webp
 ## Usage
 
 ```js
-import {src, dest, task} from 'gulp';
+import { src, dest, task } from 'gulp';
 import webp from '@hidoo/gulp-plugin-webp';
 
-task('webp', () => src('/path/to/src')
-  .pipe(webp())
-  .pipe(dest('/path/to/dest')));
+task('webp', () =>
+  src('/path/to/src').pipe(webp()).pipe(dest('/path/to/dest'))
+);
 ```
 
 ## API
@@ -29,37 +29,41 @@ return webp.
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** option (optional, default `{}`)
 
-    *   `options.append` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** append webp or not (optional, default `true`)
-    *   `options.keepExtname` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** keep extname or not (optional, default `true`)
-    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+  - `options.append` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** append webp or not (optional, default `true`)
+  - `options.keepExtname` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** keep extname or not (optional, default `true`)
+  - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {src, dest, task} from 'gulp';
+import { src, dest, task } from 'gulp';
 import webp from '@hidoo/gulp-plugin-webp';
 
-task('webp', () => src('/path/to/src')
-  .pipe(webp({
-    // this plugin options
-    append: false,
-    keepExtname: false,
-    verbose: true,
+task('webp', () =>
+  src('/path/to/src')
+    .pipe(
+      webp({
+        // this plugin options
+        append: false,
+        keepExtname: false,
+        verbose: true,
 
-    // specify imagemin-webp options
-    quality: 100
-  }))
-  .pipe(dest('/path/to/dest')));
+        // specify imagemin-webp options
+        quality: 100
+      })
+    )
+    .pipe(dest('/path/to/dest'))
+);
 ```
 
-Returns **DestroyableTransform** 
+Returns **DestroyableTransform**&#x20;
 
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

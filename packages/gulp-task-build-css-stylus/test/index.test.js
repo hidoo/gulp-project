@@ -1,11 +1,13 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
-import buildCss from '../src';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import buildCss from '../src/index.js';
 
 describe('gulp-task-build-css-stylus', () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   const path = {
     src: `${__dirname}/fixtures/src`,
     dest: `${__dirname}/fixtures/dest`,
@@ -13,7 +15,7 @@ describe('gulp-task-build-css-stylus', () => {
   };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/*.{css,gz}`, done);
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should out to "main.css" if argument "options" is default.', (done) => {
@@ -25,7 +27,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.css`);
+        expected = fs.readFileSync(`${path.expected}/main.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -43,7 +45,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/hoge.css`),
-            expected = fs.readFileSync(`${path.expected}/main.css`);
+        expected = fs.readFileSync(`${path.expected}/main.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -61,7 +63,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.browsers.css`);
+        expected = fs.readFileSync(`${path.expected}/main.browsers.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -78,10 +80,10 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            actualMin = fs.readFileSync(`${path.dest}/main.min.css`),
-            actualGz = fs.readFileSync(`${path.dest}/main.min.css.gz`),
-            expected = fs.readFileSync(`${path.expected}/main.css`),
-            expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+        actualMin = fs.readFileSync(`${path.dest}/main.min.css`),
+        actualGz = fs.readFileSync(`${path.dest}/main.min.css.gz`),
+        expected = fs.readFileSync(`${path.expected}/main.css`),
+        expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
 
       assert(actual);
       assert(actualMin);
@@ -102,10 +104,10 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            actualMin = fs.readFileSync(`${path.dest}/main.hoge.css`),
-            actualGz = fs.readFileSync(`${path.dest}/main.hoge.css.gz`),
-            expected = fs.readFileSync(`${path.expected}/main.css`),
-            expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+        actualMin = fs.readFileSync(`${path.dest}/main.hoge.css`),
+        actualGz = fs.readFileSync(`${path.dest}/main.hoge.css.gz`),
+        expected = fs.readFileSync(`${path.expected}/main.css`),
+        expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
 
       assert(actual);
       assert(actualMin);
@@ -126,8 +128,8 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actualMin = fs.readFileSync(`${path.dest}/main.css`),
-            actualGz = fs.readFileSync(`${path.dest}/main.css.gz`),
-            expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
+        actualGz = fs.readFileSync(`${path.dest}/main.css.gz`),
+        expectedMin = fs.readFileSync(`${path.expected}/main.min.css`);
 
       assert(actualMin);
       assert(actualGz);
@@ -145,7 +147,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.url-not-set.css`);
+        expected = fs.readFileSync(`${path.expected}/main.url-not-set.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -163,7 +165,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.url.css`);
+        expected = fs.readFileSync(`${path.expected}/main.url.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -176,13 +178,13 @@ describe('gulp-task-build-css-stylus', () => {
       src: `${path.src}/style.url.styl`,
       dest: path.dest,
       url: 'inline',
-      urlOptions: {encodeType: 'base64'},
+      urlOptions: { encodeType: 'base64' },
       compress: false
     });
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.url-options.css`);
+        expected = fs.readFileSync(`${path.expected}/main.url-options.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -200,7 +202,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.banner.css`);
+        expected = fs.readFileSync(`${path.expected}/main.banner.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -218,7 +220,7 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.remove-unused.css`);
+        expected = fs.readFileSync(`${path.expected}/main.remove-unused.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
@@ -232,8 +234,8 @@ describe('gulp-task-build-css-stylus', () => {
       dest: path.dest,
       additionalProcess(root) {
         root.walkRules(/\.block/, (rule) => {
-          rule.selectors = rule.selectors.map(
-            (selector) => selector.trim().replace(/\.block/, '.hoge')
+          rule.selectors = rule.selectors.map((selector) =>
+            selector.trim().replace(/\.block/, '.hoge')
           );
         });
 
@@ -244,12 +246,11 @@ describe('gulp-task-build-css-stylus', () => {
 
     task().on('finish', () => {
       const actual = fs.readFileSync(`${path.dest}/main.css`),
-            expected = fs.readFileSync(`${path.expected}/main.post-process.css`);
+        expected = fs.readFileSync(`${path.expected}/main.post-process.css`);
 
       assert(actual);
       assert.equal(String(actual), String(expected));
       done();
     });
   });
-
 });

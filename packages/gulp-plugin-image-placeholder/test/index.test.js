@@ -1,212 +1,263 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
-import assert from 'assert';
-import fs from 'fs';
-import {basename, extname} from 'path';
+import assert from 'node:assert';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Vinyl from 'vinyl';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
-import FileType from 'file-type';
-import imagePlaceholder from '../src';
+import { fileTypeFromBuffer } from 'file-type';
+import imagePlaceholder from '../src/index.js';
 
 /**
- * get array of uint8array from buffers
+ * get pixels from buffers
  *
- * @param {Buffer} buffers array of buffer of image
- * @return {Promise}
+ * @param {Buffer} buffer buffer of image
+ * @return {Promise<Uint8Array>}
  */
-function getUint8ArraysFromBuffers(buffers) {
-  return Promise.all(
-    buffers.map((buffer) => FileType.fromBuffer(buffer)
-      .then(({mime}) => new Promise((resolve, reject) => {
-        getPixels(buffer, mime, (error, pixels) => {
-          if (error) {
-            return reject(error);
-          }
-          return resolve(pixels.data);
-        });
-      })))
-  );
+async function getPixelsFromBuffer(buffer) {
+  const { mime } = await fileTypeFromBuffer(buffer);
+  const pixels = await new Promise((resolve, reject) => {
+    getPixels(buffer, mime, (error, pxls) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(pxls);
+      }
+    });
+  });
+
+  return pixels.data;
 }
 
 /**
  * compare pixels
  *
- * @param {Array} params array of parameter
- * @return {Promise}
+ * @param {Buffer} bufferA buffer A
+ * @param {Buffer} bufferB buffer B
+ * @param {Array<Number>} size width and height
+ * @return {Promise<Number>}
  */
-function comparePixels(params) {
-  return Promise.all(params.map(([actualBuffer, expectedBuffer, width, height]) => new Promise(
-    (resolve, reject) => getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
-      .then((pixels) => {
-        const [actualPixels, expectedPixels] = pixels,
-              countDiffPixels = pixelmatch(
-                actualPixels,
-                expectedPixels,
-                null,
-                width,
-                height,
-                {threshold: 0.1}
-              );
+async function comparePixels(bufferA, bufferB, size) {
+  const differences = pixelmatch(
+    await getPixelsFromBuffer(bufferA),
+    await getPixelsFromBuffer(bufferB),
+    null,
+    ...size,
+    {
+      threshold: 0.1
+    }
+  );
 
-        assert(countDiffPixels === 0);
-        return resolve();
-      })
-      .catch((error) => reject(error))
-  )));
+  return differences;
 }
 
 describe('gulp-plugin-image-placeholder', () => {
-  const cases = [
-    [
-      `${__dirname}/fixtures/src/9x9.gif`,
-      [9, 9, `${__dirname}/fixtures/expected/9x9.placeholder.png`]
-    ],
-    [
-      `${__dirname}/fixtures/src/9x10.png`,
-      [9, 10, `${__dirname}/fixtures/expected/9x10.placeholder.png`]
-    ],
-    [
-      `${__dirname}/fixtures/src/10x9.jpg`,
-      [10, 9, `${__dirname}/fixtures/expected/10x9.placeholder.png`]
-    ],
-    [
-      `${__dirname}/fixtures/src/sample.svg`,
-      [64, 64, `${__dirname}/fixtures/expected/sample.placeholder.png`]
-    ]
-  ];
+  let dirname = null;
+  let fixturesDir = null;
+  let cases = null;
 
-  it('should out original image and placeholder image if options is default.', async () => {
-    await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
-      const plugin = imagePlaceholder({verbose: false}),
-            srcBuffer = fs.readFileSync(path, {encode: null}),
-            expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
-            fakeFile = new Vinyl({
-              path,
-              contents: Buffer.from(srcBuffer)
-            });
-
-      const params = [];
-      let called = 0;
-
-      plugin.on('data', (file) => {
-        const dimentions = sizeOf(file.contents);
-
-        called += 1;
-
-        // original image
-        if (called === 1) {
-          assert(file.isBuffer());
-          assert(dimentions.width === width);
-          assert(dimentions.height === height);
-          assert.deepStrictEqual(file.contents, srcBuffer);
-        }
-        // placeholder image
-        else if (called === 2) {
-          assert(file.isBuffer());
-          assert(dimentions.width === width);
-          assert(dimentions.height === height);
-          params.push([file.contents, expectedBuffer, width, height]);
-        }
-      });
-      plugin.on('error', reject);
-      plugin.on('end', () => {
-        assert(called === 2);
-        comparePixels(params)
-          .then(resolve)
-          .catch(reject);
-      });
-
-      plugin.write(fakeFile);
-
-      plugin.end();
-    })));
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    cases = [
+      [
+        path.resolve(fixturesDir, 'src', '9x9.gif'),
+        [9, 9, path.resolve(fixturesDir, 'expected', '9x9.placeholder.png')]
+      ],
+      [
+        path.resolve(fixturesDir, 'src', '9x10.png'),
+        [9, 10, path.resolve(fixturesDir, 'expected', '9x10.placeholder.png')]
+      ],
+      [
+        path.resolve(fixturesDir, 'src', '10x9.jpg'),
+        [10, 9, path.resolve(fixturesDir, 'expected', '10x9.placeholder.png')]
+      ],
+      [
+        path.resolve(fixturesDir, 'src', 'sample.svg'),
+        [
+          64,
+          64,
+          path.resolve(fixturesDir, 'expected', 'sample.placeholder.png')
+        ]
+      ]
+    ];
   });
 
-  it('should out placeholder image only if options.append is false.', async () => {
-    await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
-      const plugin = imagePlaceholder({append: false, verbose: false}),
-            srcBuffer = fs.readFileSync(path, {encode: null}),
-            expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
-            fakeFile = new Vinyl({
-              path,
+  it('should out original image and placeholder image with default options.', async () => {
+    await Promise.all(
+      cases.map(async ([src, [width, height, expected]]) => {
+        const srcBuffer = await fs.readFile(src);
+        const expectedBuffer = await fs.readFile(expected);
+
+        await new Promise((resolve, reject) => {
+          const plugin = imagePlaceholder({ verbose: false });
+          let actualBuffer = null;
+          let called = 0;
+
+          plugin.on('error', reject);
+          plugin.on('data', (file) => {
+            const dimensions = sizeOf(file.contents);
+
+            called += 1;
+
+            // original image
+            if (called === 1) {
+              assert(file.isBuffer());
+              assert.equal(dimensions.width, width);
+              assert.equal(dimensions.height, height);
+              assert.deepEqual(file.contents, srcBuffer);
+            }
+            // placeholder image
+            else if (called === 2) {
+              assert(file.isBuffer());
+              assert.equal(dimensions.width, width);
+              assert.equal(dimensions.height, height);
+              actualBuffer = file.contents;
+            }
+          });
+          plugin.on('end', async () => {
+            assert.equal(called, 2);
+
+            try {
+              assert.equal(
+                await comparePixels(actualBuffer, expectedBuffer, [
+                  width,
+                  height
+                ]),
+                0
+              );
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          });
+
+          plugin.write(
+            new Vinyl({
+              path: src,
               contents: Buffer.from(srcBuffer)
-            });
-
-      const params = [];
-      let called = 0;
-
-      plugin.on('data', (file) => {
-        const dimentions = sizeOf(file.contents);
-
-        called += 1;
-
-        assert(file.isBuffer());
-        assert(dimentions.width === width);
-        assert(dimentions.height === height);
-        params.push([file.contents, expectedBuffer, width, height]);
-      });
-      plugin.on('error', reject);
-      plugin.on('end', () => {
-        assert(called === 1);
-        comparePixels(params)
-          .then(resolve)
-          .catch(reject);
-      });
-
-      plugin.write(fakeFile);
-
-      plugin.end();
-    })));
+            })
+          );
+          plugin.end();
+        });
+      })
+    );
   });
 
-  it('should out placeholder image to filepath that applied specified suffix', async () => {
-    await Promise.all(cases.map(([path, [width, height, expectedPath]]) => new Promise((resolve, reject) => {
-      const plugin = imagePlaceholder({suffix: 'hoge', verbose: false}),
-            srcBuffer = fs.readFileSync(path, {encode: null}),
-            expectedBuffer = fs.readFileSync(expectedPath, {encode: null}),
-            fakeFile = new Vinyl({
-              path,
+  it('should out placeholder image only with options.append = false.', async () => {
+    await Promise.all(
+      cases.map(async ([src, [width, height, expected]]) => {
+        const srcBuffer = await fs.readFile(src);
+        const expectedBuffer = await fs.readFile(expected);
+
+        await new Promise((resolve, reject) => {
+          const plugin = imagePlaceholder({ append: false, verbose: false });
+          let actualBuffer = null;
+          let called = 0;
+
+          plugin.on('error', reject);
+          plugin.on('data', (file) => {
+            const dimensions = sizeOf(file.contents);
+
+            called += 1;
+
+            assert(file.isBuffer());
+            assert.equal(dimensions.width, width);
+            assert.equal(dimensions.height, height);
+            actualBuffer = file.contents;
+          });
+          plugin.on('end', async () => {
+            assert.equal(called, 1);
+
+            try {
+              assert.equal(
+                await comparePixels(actualBuffer, expectedBuffer, [
+                  width,
+                  height
+                ]),
+                0
+              );
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          });
+
+          plugin.write(
+            new Vinyl({
+              path: src,
               contents: Buffer.from(srcBuffer)
-            });
-
-      const params = [];
-      let called = 0;
-
-      plugin.on('data', (file) => {
-        const dimentions = sizeOf(file.contents);
-
-        called += 1;
-
-        // original image
-        if (called === 1) {
-          assert(file.isBuffer());
-          assert(dimentions.width === width);
-          assert(dimentions.height === height);
-          assert.deepStrictEqual(file.contents, srcBuffer);
-        }
-        // placeholder image
-        if (called === 2) {
-          assert(file.isBuffer());
-          assert(file.basename === `${basename(path, extname(path))}.hoge.png`);
-          assert(dimentions.width === width);
-          assert(dimentions.height === height);
-          params.push([file.contents, expectedBuffer, width, height]);
-        }
-      });
-      plugin.on('error', reject);
-      plugin.on('end', () => {
-        assert(called === 2);
-        comparePixels(params)
-          .then(resolve)
-          .catch(reject);
-      });
-
-      plugin.write(fakeFile);
-
-      plugin.end();
-    })));
+            })
+          );
+          plugin.end();
+        });
+      })
+    );
   });
 
+  it('should out placeholder image with options.suffix.', async () => {
+    await Promise.all(
+      cases.map(async ([src, [width, height, expected]]) => {
+        const srcBuffer = await fs.readFile(src);
+        const expectedBuffer = await fs.readFile(expected);
+
+        await new Promise((resolve, reject) => {
+          const plugin = imagePlaceholder({ suffix: 'hoge', verbose: false });
+          let actualBuffer = null;
+          let called = 0;
+
+          plugin.on('error', reject);
+          plugin.on('data', (file) => {
+            const dimensions = sizeOf(file.contents);
+
+            called += 1;
+
+            // original image
+            if (called === 1) {
+              assert(file.isBuffer());
+              assert.equal(dimensions.width, width);
+              assert.equal(dimensions.height, height);
+              assert.deepEqual(file.contents, srcBuffer);
+            }
+            // placeholder image
+            else if (called === 2) {
+              assert(file.isBuffer());
+              assert.equal(dimensions.width, width);
+              assert.equal(dimensions.height, height);
+              assert.equal(
+                file.basename,
+                `${path.basename(src, path.extname(src))}.hoge.png`
+              );
+              actualBuffer = file.contents;
+            }
+          });
+          plugin.on('end', async () => {
+            assert.equal(called, 2);
+
+            try {
+              assert.equal(
+                await comparePixels(actualBuffer, expectedBuffer, [
+                  width,
+                  height
+                ]),
+                0
+              );
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          });
+
+          plugin.write(
+            new Vinyl({
+              path: src,
+              contents: Buffer.from(srcBuffer)
+            })
+          );
+          plugin.end();
+        });
+      })
+    );
+  });
 });

@@ -1,5 +1,6 @@
-import write from './write';
-import render from './render';
+import write from './write.js';
+import format from './format.js';
+import render from './render.js';
 
 /**
  * generate README
@@ -10,7 +11,12 @@ import render from './render';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateReadme(name = '', src = '', dest = '', options = {}) { // eslint-disable-line max-len, max-params
+export default async function generateReadme( // eslint-disable-line max-params
+  name = '',
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof name !== 'string') {
     throw new TypeError('Argument "name" is not string.');
   }
@@ -21,8 +27,9 @@ export default async function generateReadme(name = '', src = '', dest = '', opt
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
-  await render(`${src}/README.md.hbs`, {...options, name})
-    .then((output) => write(output, `${dest}/README.md`, {verbose}));
+  await render(`${src}/README.md.hbs`, { ...options, name })
+    .then((output) => format(output, { parser: 'markdown' }))
+    .then((output) => write(output, `${dest}/README.md`, { verbose }));
 }

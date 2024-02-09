@@ -1,15 +1,10 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
-/**
- * import modules
- */
+import fs from 'node:fs';
 {{#if this.multiDevice}}
-import {Command, InvalidOptionArgumentError} from 'commander';
+import { Command, InvalidArgumentError } from 'commander';
 {{else}}
-import {Command} from 'commander';
-{{/if}}
-{{#if this.server}}
-import ips from '@hidoo/util-local-ip';
+import { Command } from 'commander';
 {{/if}}
 
 /**
@@ -37,7 +32,7 @@ const cli = new Command()
 {{#if this.multiDevice}}
   .option('--skip-device <device>', 'skip target device tasks.', (value) => {
     if (!['desktop', 'mobile'].includes(value)) {
-      throw new InvalidOptionArgumentError();
+      throw new InvalidArgumentError();
     }
     return value;
   })
@@ -59,7 +54,7 @@ const opts = cli.opts();
  * @type {Object}
  */
 export const serverOptions = {
-  host: String(opts.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
+  host: opts.host || process.env.SERVER_HOST,
   port: Number(opts.port || process.env.SERVER_PORT) || 8000,
   protocol: String(opts.protocol || process.env.SERVER_PROTOCOL || 'http'),
   open: opts.open || process.env.SERVER_OPEN || false,
@@ -89,7 +84,7 @@ export const compress = opts.compress || process.env.NODE_ENV !== 'development' 
  *
  * @type {Object}
  */
-export {default as pkg} from './package.json';
+export const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 /**
  * path settings

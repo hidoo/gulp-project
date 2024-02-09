@@ -3,22 +3,22 @@
   "version": "0.19.0",
   "description": "Command line tool that generate gulp project scaffold.",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
-  "main": "lib/index.js",
+  "type": "module",
+  "main": "src/index.js",
   "bin": {
     "gulp-project-generator": "bin/index.js"
   },
   "files": [
     "bin/",
-    "lib/",
+    "src/",
     "template/"
   ],
   "scripts": {
-    "start": "yarn generate ../../examples/dev --verbose --force",
-    "generate": "cross-env NODE_ENV=development babel-node ./src/index.js",
-    "prebuild": "rimraf ./lib",
-    "build": "babel ./src --out-dir ./lib",
+    "start": "pnpm generate ../../examples/dev --verbose --force",
+    "generate": "cross-env NODE_ENV=development node ./src/index.js",
+    "updateDepsVer": "node ./script/updateDepsVer.js",
     "test": "cross-env NODE_ENV=test mocha ./test/**/*.test.js"
   },
   "keywords": [
@@ -31,28 +31,17 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.16.8",
-    "@babel/core": "7.14.3",
-    "@babel/node": "7.16.8",
-    "@babel/preset-env": "7.14.4",
-    "@babel/register": "7.13.16",
-    "babel-preset-power-assert": "3.0.0",
     "cross-env": "7.0.3",
-    "mocha": "8.4.0",
-    "power-assert": "1.6.1",
-    "rimraf": "3.0.2"
+    "mocha": "10.2.0"
   },
   "dependencies": {
     "@hidoo/handlebars-helpers": "0.8.2",
-    "babel-eslint": "10.1.0",
-    "chalk": "4.1.2",
-    "commander": "7.2.0",
-    "eslint": "7.30.0",
-    "fs-extra": "10.0.0",
-    "glob": "7.2.0",
-    "glob-parent": "6.0.2",
+    "chalk": "5.3.0",
+    "commander": "12.0.0",
+    "glob": "10.3.10",
+    "glob-parent": "6.0.0",
     "handlebars": "4.7.7",
-    "inquirer": "8.1.5",
-    "mkdirp": "1.0.4"
+    "inquirer": "9.2.14",
+    "prettier": "3.2.4"
   }
 }

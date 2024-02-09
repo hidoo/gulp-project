@@ -1,8 +1,8 @@
-import mkdir from './mkdir';
-import copy from './copy';
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import mkdir from './mkdir.js';
+import copy from './copy.js';
+import write from './write.js';
+import render from './render.js';
+import format from './format.js';
 
 /**
  * generate local dev server files
@@ -12,7 +12,11 @@ import formatCode from './formatCode';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateServerFiles(src = '', dest = '', options = {}) {
+export default async function generateServerFiles(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -20,14 +24,16 @@ export default async function generateServerFiles(src = '', dest = '', options =
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   if (options.server) {
-    await render(`${src}/task/server.js.hbs`, options)
-      .then((output) => formatCode(output))
-      .then((output) => write(output, `${dest}/task/server.js`, {verbose}));
+    const output = await render(`${src}/task/server.js.hbs`, options);
+    const formatted = await format(output);
 
-    await mkdir(`${dest}/src/server`, {verbose});
-    await copy(`${src}/src/server/**/*.{js,hbs}`, `${dest}/src/server`, {verbose});
+    await write(formatted, `${dest}/task/server.js`, { verbose });
+    await mkdir(`${dest}/src/server`, { verbose });
+    await copy(`${src}/src/server/**/*.{js,hbs}`, `${dest}/src/server`, {
+      verbose
+    });
   }
 }

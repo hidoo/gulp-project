@@ -1,6 +1,6 @@
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import write from './write.js';
+import render from './render.js';
+import format from './format.js';
 
 /**
  * generate styleguide files
@@ -10,7 +10,11 @@ import formatCode from './formatCode';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateStyleguideFiles(src = '', dest = '', options = {}) {
+export default async function generateStyleguideFiles(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -18,13 +22,13 @@ export default async function generateStyleguideFiles(src = '', dest = '', optio
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
 
   if (!options.styleguide) {
     return;
   }
 
   await render(`${src}/task/styleguide.js.hbs`, options)
-    .then((output) => formatCode(output))
-    .then((output) => write(output, `${dest}/task/styleguide.js`, {verbose}));
+    .then((output) => format(output))
+    .then((output) => write(output, `${dest}/task/styleguide.js`, { verbose }));
 }

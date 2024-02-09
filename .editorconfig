@@ -15,5 +15,10 @@ quote_type = double
 indent_style = space
 indent_size = 2
 
+[*.scss]
+quote_type = double
+indent_style = space
+indent_size = 2
+
 [*.md]
 trim_trailing_whitespace = false

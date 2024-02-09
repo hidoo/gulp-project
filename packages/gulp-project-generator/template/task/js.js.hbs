@@ -1,6 +1,3 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 {{#is jsBundler 'browserify'}}
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
@@ -11,11 +8,7 @@ import buildJs from '@hidoo/gulp-task-build-js-rollup';
 {{#if jsDeps}}
 import {concatJs} from '@hidoo/gulp-task-concat';
 {{/if}}
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 {{#if multiDevice}}
 

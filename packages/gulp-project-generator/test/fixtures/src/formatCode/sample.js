@@ -1,32 +1,20 @@
-const array = [
-'a',
-'b',
-];
-
-
+const array = ['a', 'b'];
 
 const object = {
-a: 'aaaa',
-b: 'bbbb',
+  a: 'aaaa',
+  b: 'bbbb'
 };
 
-
-
-function func(a, b,) {
-
-  return {a, b};
+function func(a, b) {
+  return { a, b };
 }
-func(
-array,
-object,
-);
-
+func(array, object);
 
 var var1 = '',
   var2 = '';
 
-  let let1 = '',
-    let2 = '';
+let let1 = '',
+  let2 = '';
 
-    const const1 = '',
-      const2 = '';
+const const1 = '',
+  const2 = '';

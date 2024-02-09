@@ -1,0 +1,14 @@
+{
+  "targets": ["> 0.5% in JP", "ie >= 10", "android >= 4.4"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": "commonjs",
+        "useBuiltIns": "usage",
+        "corejs": "3",
+        "debug": false
+      }
+    ]
+  ]
+}

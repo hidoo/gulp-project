@@ -1,7 +1,7 @@
-import {promises as fs} from 'fs';
-import path from 'path';
-import mkdir from './mkdir';
-import * as log from './log';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import mkdir from './mkdir.js';
+import * as log from './log.js';
 
 /**
  * default options
@@ -9,7 +9,6 @@ import * as log from './log';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of fs.writeFile
    *
@@ -35,7 +34,7 @@ const DEFAULT_OPTIONS = {
  * @param {Boolean} options.verbose out log or not
  * @return {Promise<String>}
  */
-export default function write(src = '', dest = '', options = {}) {
+export default async function write(src = '', dest = '', options = {}) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -43,16 +42,15 @@ export default function write(src = '', dest = '', options = {}) {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        destPath = path.resolve(dest),
-        destDir = path.dirname(destPath);
+  const opts = { ...DEFAULT_OPTIONS, ...options };
+  const destPath = path.resolve(dest);
+  const destDir = path.dirname(destPath);
 
-  return mkdir(destDir, {verbose: opts.verbose})
-    .then(() => fs.writeFile(destPath, src, opts.writeFile))
-    .then(() => {
-      if (opts.verbose) {
-        log.outPath(dest);
-      }
-      return dest;
-    });
+  await mkdir(destDir, { verbose: opts.verbose });
+  await fs.writeFile(destPath, src, opts.writeFile);
+
+  if (opts.verbose) {
+    log.outPath(dest);
+  }
+  return dest;
 }

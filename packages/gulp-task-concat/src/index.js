@@ -1,5 +1,7 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import fs from 'node:fs';
+import path from 'node:path';
+import util from 'node:util';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import concat from 'gulp-concat';
@@ -13,14 +15,18 @@ import csso from 'postcss-csso';
 import log from 'fancy-log';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
+
 let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
-}
-catch (error) {
+  pkg = JSON.parse(
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+  );
+} catch (error) {
   log.error('Failed to load package.json.');
 }
 
@@ -71,23 +77,30 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export function concatJs(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
-    const {filename, suffix, banner, compress} = opts;
+    const { filename, suffix, banner, compress } = opts;
 
-    return src(opts.src)
-      .pipe(plumber({errorHandler}))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(concat(filename || 'bundle.js'))
-      .pipe(replace('process.env.NODE_ENV', `'${process.env.NODE_ENV || 'development'}'`)) // eslint-disable-line node/no-process-env
-      .pipe(header(banner, {pkg}))
-      .pipe(dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, uglify({output: {comments: 'some'}})))
-      .pipe(cond(compress, dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(
+        replace(
+          'process.env.NODE_ENV',
+          // eslint-disable-next-line node/no-process-env
+          `'${process.env.NODE_ENV || 'development'}'`
+        )
+      )
+      .pipe(header(banner, { pkg }))
+      .pipe(gulp.dest(opts.dest))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, uglify({ output: { comments: 'some' } })))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
+      .pipe(cond(compress, gzip({ append: true })))
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)
@@ -130,22 +143,23 @@ export function concatJs(options = {}) {
  * }));
  */
 export function concatCss(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
   const task = () => {
-    const {filename, suffix, banner, compress} = opts;
+    const { filename, suffix, banner, compress } = opts;
 
-    return src(opts.src)
-      .pipe(plumber({errorHandler}))
+    return gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(concat(filename || 'bundle.css'))
-      .pipe(header(banner, {pkg}))
-      .pipe(dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, postcss([csso({restructure: false})])))
-      .pipe(cond(compress, dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(header(banner, { pkg }))
+      .pipe(gulp.dest(opts.dest))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, postcss([csso({ restructure: false })])))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
+      .pipe(cond(compress, gzip({ append: true })))
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

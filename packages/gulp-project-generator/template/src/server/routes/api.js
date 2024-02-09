@@ -1,5 +1,5 @@
-import {Router} from 'express';
-import * as controller from '../controllers/api';
+import { Router } from 'express';
+import * as controller from '../controllers/api.js';
 
 // setup router
 const router = Router(); // eslint-disable-line new-cap

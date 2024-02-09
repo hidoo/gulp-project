@@ -1,6 +1,6 @@
 import piyo from './deps/piyo';
 
-import('./deps/hoge').then(({default: hoge}) => {
+import('./deps/hoge').then(({ default: hoge }) => {
   hoge();
 });
 

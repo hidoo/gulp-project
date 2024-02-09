@@ -1,7 +1,10 @@
-/* eslint max-lines-per-function: off, max-len: off, max-statements: off */
+/* eslint max-lines-per-function: off, max-statements: off */
 
-import pkg from '../package.json';
-import write from './write';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import format from './format.js';
+import write from './write.js';
 
 /**
  * generate package.json
@@ -11,7 +14,11 @@ import write from './write';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generatePackageJson(name = '', dest = '', options = {}) {
+export default async function generatePackageJson(
+  name = '',
+  dest = '',
+  options = {}
+) {
   if (typeof name !== 'string') {
     throw new TypeError('Argument "name" is not string.');
   }
@@ -19,173 +26,146 @@ export default async function generatePackageJson(name = '', dest = '', options 
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const gulpProjectVersion = `^${pkg.version}`;
-
+  const pkg = JSON.parse(
+    await fs.readFile(
+      path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../template/package.json'
+      )
+    )
+  );
+  const { verbose } = options;
+  const scripts = [
+    'start',
+    'dev',
+    'dev:build',
+    'prepare',
+    'prod',
+    'prod:build',
+    'static:clean',
+    'static:build',
+    'static:watch',
+    'format',
+    'test',
+    'test:lint',
+    'test:lint:js'
+  ];
   const devDependencies = [
-          {name: '@babel/core', version: '^7.14.3'},
-          {name: '@babel/preset-env', version: '^7.14.4'},
-          {name: '@babel/register', version: '^7.13.16'},
-          {name: '@hidoo/eslint-config', version: '^0.6.0'},
-          {name: '@hidoo/util-fancy-print', version: gulpProjectVersion},
-          {name: 'commander', version: '^7.2.0'},
-          {name: 'cross-env', version: '^7.0.3'},
-          {name: 'eslint', version: '^7.28.0'},
-          {name: 'gulp', version: '^4.0.2'},
-          {name: 'husky', version: '^6.0.0'},
-          {name: 'lint-staged', version: '^11.0.0'},
-          {name: 'npm-run-all', version: '^4.1.5'},
-          {name: 'rimraf', version: '^3.0.2'}
-        ],
-        scripts = [
-          {name: 'start', command: 'npm run dev'},
-          {name: 'dev', command: 'cross-env NODE_ENV=development gulp'},
-          {name: 'dev:build', command: 'cross-env NODE_ENV=development npm-run-all -s static:clean static:build'},
-          {name: 'prepare', command: 'husky install'},
-          {name: 'prod', command: 'cross-env NODE_ENV=production gulp'},
-          {name: 'prod:build', command: 'cross-env NODE_ENV=production npm-run-all -s static:clean static:build'},
-          {name: 'static:clean', command: 'gulp clean'},
-          {name: 'static:build', command: 'gulp build'},
-          {name: 'static:watch', command: 'gulp watch'},
-          {name: 'test', command: 'npm-run-all -s test:*'},
-          {name: 'test:lint', command: 'npm-run-all -s test:lint:*'},
-          {name: 'test:lint:js', command: 'eslint .'}
-        ],
-        {verbose} = options;
+    '@hidoo/eslint-config',
+    'chalk',
+    'commander',
+    'cross-env',
+    'eslint',
+    'gulp',
+    'husky',
+    'lint-staged',
+    'npm-run-all',
+    'prettier'
+  ];
 
   if (options.css) {
     if (options.cssPreprocessor === 'sass') {
+      scripts.push('test:lint', 'test:lint:css');
       devDependencies.push(
-        {name: '@hidoo/gulp-task-build-css-sass', version: gulpProjectVersion},
-        {name: '@hidoo/stylelint-config', version: '^0.4.4'},
-        {name: '@hidoo/kss-builder', version: '^0.4.4'},
-        {name: 'stylelint', version: '^13.2.0'}
+        '@hidoo/gulp-task-build-css-sass',
+        '@hidoo/stylelint-config',
+        '@hidoo/kss-builder',
+        'stylelint'
       );
-      scripts.push(
-        {name: 'test:lint:css', command: 'stylelint --syntax scss ./**/*.scss'}
-      );
+    } else {
+      devDependencies.push('@hidoo/gulp-task-build-css-stylus');
     }
-    else {
-      devDependencies.push(
-        {name: '@hidoo/gulp-task-build-css-stylus', version: gulpProjectVersion}
-      );
-    }
-  }
-  if (options.cssDeps) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-concat', version: gulpProjectVersion}
-    );
   }
   if (options.html) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-build-html-handlebars', version: gulpProjectVersion}
-    );
+    devDependencies.push('@hidoo/gulp-task-build-html-handlebars');
   }
   if (options.image) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-optimize-image', version: gulpProjectVersion}
-    );
+    devDependencies.push('@hidoo/gulp-task-optimize-image');
   }
   if (options.js) {
+    scripts.push('test:unit', 'test:unit:js');
     devDependencies.push(
-      {name: 'babel-preset-power-assert', version: '^3.0.0'},
-      {name: 'core-js', version: '^3.14.0'},
-      {name: 'jsdom', version: '^16.2.0'},
-      {name: 'jsdom-global', version: '^3.0.2'},
-      {name: 'mocha', version: '^8.4.0'},
-      {name: 'power-assert', version: '^1.6.1'},
-      {name: 'regenerator-runtime', version: '^0.13.7'}
-    );
-    scripts.push(
-      {name: 'test:unit', command: 'cross-env NODE_ENV=test mocha ./src/js/**/*.test.js'}
+      '@babel/core',
+      '@babel/preset-env',
+      'core-js',
+      'jsdom',
+      'jsdom-global',
+      'mocha',
+      'regenerator-runtime'
     );
     switch (options.jsBundler) {
-      case 'browserify':
-        devDependencies.push(
-          {name: '@hidoo/gulp-task-build-js-browserify', version: gulpProjectVersion}
-        );
+      case 'browserify': {
+        devDependencies.push('@hidoo/gulp-task-build-js-browserify');
         break;
-      case 'rollup':
-        devDependencies.push(
-          {name: '@hidoo/gulp-task-build-js-rollup', version: gulpProjectVersion}
-        );
+      }
+      case 'rollup': {
+        devDependencies.push('@hidoo/gulp-task-build-js-rollup');
         break;
+      }
       default:
     }
   }
-  if (options.jsDeps) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-concat', version: gulpProjectVersion}
-    );
+  if (options.cssDeps || options.jsDeps) {
+    devDependencies.push('@hidoo/gulp-task-concat');
   }
   if (options.server) {
+    scripts.push('static:server');
     devDependencies.push(
-      {name: '@hidoo/express-engine-handlebars', version: '^0.8.2'},
-      {name: '@hidoo/util-local-ip', version: gulpProjectVersion},
-      {name: 'browser-sync', version: '^2.26.7'},
-      {name: 'express', version: '^4.17.1'}
-    );
-    scripts.push(
-      {name: 'static:server', command: 'gulp server'}
+      '@hidoo/express-engine-handlebars',
+      'browser-sync',
+      'express'
     );
   }
   if (options.sprite) {
     switch (options.spriteType) {
-      case 'svg':
-        devDependencies.push(
-          {name: '@hidoo/gulp-task-build-sprite-svg', version: gulpProjectVersion}
-        );
+      case 'svg': {
+        devDependencies.push('@hidoo/gulp-task-build-sprite-svg');
         break;
-      case 'image':
-        devDependencies.push(
-          {name: '@hidoo/gulp-task-build-sprite-image', version: gulpProjectVersion}
-        );
+      }
+      case 'image': {
+        devDependencies.push('@hidoo/gulp-task-build-sprite-image');
         break;
+      }
       default:
     }
   }
   if (options.styleguide) {
-    devDependencies.push(
-      {name: '@hidoo/gulp-task-build-styleguide-kss', version: gulpProjectVersion}
-    );
+    devDependencies.push('@hidoo/gulp-task-build-styleguide-kss');
   }
   if (options.conventionalCommits) {
+    scripts.push('version', 'version:changelog', 'version:commit');
     devDependencies.push(
-      {name: '@commitlint/cli', version: '^12.1.4'},
-      {name: '@commitlint/config-conventional', version: '^12.1.4'},
-      {name: 'conventional-changelog-cli', version: '^2.0.5'}
-    );
-    scripts.push(
-      {name: 'version', command: 'npm-run-all -s test prod:build version:changelog version:commit'},
-      {name: 'version:changelog', command: 'conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0'},
-      {name: 'version:commit', command: 'git add .'}
+      '@commitlint/cli',
+      '@commitlint/config-conventional',
+      'conventional-changelog-cli'
     );
   }
 
-  const json = {
-    'name': name,
-    'version': '0.0.0',
-    'description': `${name} project. (Generated by @hidoo/gulp-project-generator)`,
-    'private': true,
-    'author': '',
-    'files': [],
-    'engines': {
-      node: '>=12.0.0',
-      npm: '>=6.0.0'
-    },
-    /* eslint-disable id-length */
-    'scripts': scripts
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .reduce((prev, current) => {
-        return {...prev, [current.name]: current.command};
+  const json = JSON.stringify({
+    ...pkg,
+    name,
+    description: `${name} project. (Generated by @hidoo/gulp-project-generator)`,
+    scripts: [...new Set(scripts)]
+      .sort((key1, key2) => key1.localeCompare(key2))
+      .map((key) => [key, pkg.scripts[key]])
+      .reduce((prev, [key, command]) => {
+        if (command) {
+          prev[key] = command;
+        }
+        return prev;
       }, {}),
-    'devDependencies': devDependencies
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .reduce((prev, current) => {
-        return {...prev, [current.name]: current.version};
-      }, {}),
-    'dependencies': {}
-    /* eslint-enable id-length */
-  };
+    devDependencies: [...new Set(devDependencies)]
+      .sort((key1, key2) => key1.localeCompare(key2))
+      .map((key) => [key, pkg.devDependencies[key]])
+      .reduce((prev, [key, version]) => {
+        if (version) {
+          prev[key] = `${version}`;
+        }
+        return prev;
+      }, {})
+  });
 
-  await write(JSON.stringify(json, null, '  '), `${dest}/package.json`, {verbose});
+  await write(await format(json, { parser: 'json' }), `${dest}/package.json`, {
+    verbose
+  });
 }

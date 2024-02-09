@@ -1,4 +1,5 @@
-import path from 'path';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import kss from 'kss';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
@@ -8,16 +9,19 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-  'name': 'build:styleguide',
-  'src': null,
-  'dest': null,
-  'css': [],
-  'js': [],
-  'placeholder': '{{modifier_class}}',
+  name: 'build:styleguide',
+  src: null,
+  dest: null,
+  css: [],
+  js: [],
+  placeholder: '{{modifier_class}}',
   'nav-depth': 2,
-  'mask': '*.css',
-  'builder': path.resolve(__dirname, '../builder'),
-  'verbose': false
+  mask: '*.css',
+  builder: path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../builder'
+  ),
+  verbose: false
 };
 
 /**
@@ -58,7 +62,7 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function kssBuildTask(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // to fit original kss options
   opts.source = opts.src;

@@ -1,14 +1,7 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
-import {concatJs} from '@hidoo/gulp-task-concat';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import { concatJs } from '@hidoo/gulp-task-concat';
+import * as config from '../config.js';
 
 // define main task
 const mainDesktop = buildJs({
@@ -57,12 +50,7 @@ const watchDesktop = () => {
     ],
     mainDesktop
   );
-  gulp.watch(
-    [
-      `${config.path.srcJsDesktop}/deps/*.js`
-    ],
-    depsDesktop
-  );
+  gulp.watch([`${config.path.srcJsDesktop}/deps/*.js`], depsDesktop);
 };
 const watchMobile = () => {
   gulp.watch(
@@ -72,12 +60,7 @@ const watchMobile = () => {
     ],
     mainMobile
   );
-  gulp.watch(
-    [
-      `${config.path.srcJsMobile}/deps/*.js`
-    ],
-    depsMobile
-  );
+  gulp.watch([`${config.path.srcJsMobile}/deps/*.js`], depsMobile);
 };
 
 // export tasks
@@ -91,4 +74,3 @@ export const mobile = {
   deps: depsMobile,
   watch: watchMobile
 };
-

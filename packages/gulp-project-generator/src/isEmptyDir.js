@@ -1,4 +1,4 @@
-import glob from 'glob';
+import { glob } from 'glob';
 
 /**
  * default options
@@ -6,7 +6,6 @@ import glob from 'glob';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * same as options of glob
    *
@@ -23,19 +22,13 @@ const DEFAULT_OPTIONS = {
  * @param {Object} options.glob same as options of glob
  * @return {Promise<Boolean>}
  */
-export default function isEmptyDir(dest = '', options = {}) {
+export default async function isEmptyDir(dest = '', options = {}) {
   if (typeof dest !== 'string') {
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
+  const destPaths = await glob(`${dest}/**/*`, opts.glob);
 
-  return new Promise((resolve, reject) => {
-    glob(`${dest}/**/*`, opts.glob, (error, destPaths) => {
-      if (error) {
-        return reject(error);
-      }
-      return resolve(!destPaths.length);
-    });
-  });
+  return !destPaths.length;
 }

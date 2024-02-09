@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import buildCss from '@hidoo/gulp-task-build-css-sass';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 const mainDesktop = buildCss({
@@ -27,20 +20,10 @@ const mainMobile = buildCss({
 
 // define watch task
 const watchDesktop = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssDesktop}/*.scss`
-    ],
-    mainDesktop
-  );
+  gulp.watch([`${config.path.srcCssDesktop}/*.scss`], mainDesktop);
 };
 const watchMobile = () => {
-  gulp.watch(
-    [
-      `${config.path.srcCssMobile}/*.scss`
-    ],
-    mainMobile
-  );
+  gulp.watch([`${config.path.srcCssMobile}/*.scss`], mainMobile);
 };
 
 // export tasks

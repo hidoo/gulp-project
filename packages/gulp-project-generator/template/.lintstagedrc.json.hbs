@@ -1,0 +1,13 @@
+{
+  "**/*.js": [
+    "eslint"
+  {{#if this.css}}
+  {{#is cssPreprocessor 'sass'}}
+  ],
+  "**/*.scss": [
+    "stylelint"
+  {{/is}}
+  {{/if}}
+  ],
+  "**/*.{js,json,ts,css,scss,md,html,yml,yaml}": ["prettier --write"]
+}

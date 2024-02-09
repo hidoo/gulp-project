@@ -1,12 +1,13 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Vinyl from 'vinyl';
 import through from 'through2';
 import Handlebars from 'handlebars';
 import PluginError from 'plugin-error';
-import optimizeSvg from './optimizeSvg';
-import reshapeTemplateVars from './reshapeTemplateVars';
-import configureSVGSpriter from './configureSVGSpriter';
+import optimizeSvg from './optimizeSvg.js';
+import reshapeTemplateVars from './reshapeTemplateVars.js';
+import configureSVGSpriter from './configureSVGSpriter.js';
 
 /**
  * plugin default options.
@@ -14,7 +15,6 @@ import configureSVGSpriter from './configureSVGSpriter';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   // destination svg path
   imgName: null,
 
@@ -31,7 +31,10 @@ const DEFAULT_OPTIONS = {
   layout: 'packed',
 
   // Handlebars template for css
-  cssTemplate: path.resolve(__dirname, '../template/stylus.hbs'),
+  cssTemplate: path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../template/stylus.hbs'
+  ),
 
   // Handlebars helpers
   cssHandlebarsHelpers: null
@@ -44,7 +47,7 @@ const DEFAULT_OPTIONS = {
  */
 const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
 
-/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function, max-statements */
 /**
  * return svg sprite sheet
  *
@@ -67,35 +70,48 @@ const PLUGIN_NAME = 'gulp-plugin-svg-sprite';
  * });
  */
 export default function svgSprite(options) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   if (typeof opts.imgName !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.imgName" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.imgName" is required.'
+    );
   }
   if (typeof opts.cssName !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.cssName" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.cssName" is required.'
+    );
   }
   if (typeof opts.imgPath !== 'string') {
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.imgPath" is required.');
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.imgPath" is required.'
+    );
   }
-  if (!fs.existsSync(opts.cssTemplate)) { // eslint-disable-line node/no-sync
-    throw new PluginError(PLUGIN_NAME, 'Argument "options.cssTemplate" is required.');
+  // eslint-disable-next-line node/no-sync
+  if (!fs.existsSync(opts.cssTemplate)) {
+    throw new PluginError(
+      PLUGIN_NAME,
+      'Argument "options.cssTemplate" is required.'
+    );
   }
 
-  const {cssTemplate, cssHandlebarsHelpers} = opts,
-        spriter = configureSVGSpriter(opts),
-        handlebars = Handlebars.create();
+  const { cssTemplate, cssHandlebarsHelpers } = opts;
+  const spriter = configureSVGSpriter(opts);
+  const handlebars = Handlebars.create();
 
-  const stream = through.obj(transform, flush),
-        svgStream = through.obj(),
-        cssStream = through.obj();
+  const stream = through.obj(transform, flush);
+  const svgStream = through.obj();
+  const cssStream = through.obj();
 
   let fileCount = 0;
 
   // add helpers to Handlebars instance
   if (cssHandlebarsHelpers) {
-    Object.entries(cssHandlebarsHelpers).forEach(
-      ([name, helper]) => handlebars.registerHelper(name, helper)
+    Object.entries(cssHandlebarsHelpers).forEach(([name, helper]) =>
+      handlebars.registerHelper(name, helper)
     );
   }
 
@@ -127,8 +143,7 @@ export default function svgSprite(options) {
     try {
       spriter.add(file.path, path.basename(file.path), file.contents);
       fileCount += 1; // eslint-disable-line no-magic-numbers
-    }
-    catch (error) {
+    } catch (error) {
       stream.emit('error', new PluginError(PLUGIN_NAME, error));
     }
     return done();
@@ -139,10 +154,10 @@ export default function svgSprite(options) {
    * + generate sprite sheet
    *
    * @param {Function} done callback
-   * @return {void}
+   * @return {Promise}
    */
   function flush(done) {
-    const {imgName, imgPath, cssName} = opts;
+    const { imgName, imgPath, cssName } = opts;
 
     // eslint-disable-next-line no-magic-numbers
     if (fileCount <= 0) {
@@ -151,51 +166,65 @@ export default function svgSprite(options) {
       stream.push(null);
       return done();
     }
-    return spriter.compile((error, result, data) => {
-      if (error) {
-        return stream.emit('error', new PluginError(PLUGIN_NAME, error));
+
+    return (async () => {
+      try {
+        const { result, data } = await spriter.compileAsync();
+
+        Object.entries(result.css).forEach(([type, resource]) => {
+          // resource is .svg
+          if (type === 'sprite') {
+            const contents = optimizeSvg(resource.contents.toString());
+
+            // add file to svg stream
+            svgStream.push(
+              new Vinyl({
+                path: imgName,
+                contents: Buffer.from(contents)
+              })
+            );
+            svgStream.push(null);
+
+            // add original file to master stream
+            // + required to notify completion of processing
+            stream.push(resource);
+          }
+          // resource is .styl
+          else if (type === 'styl') {
+            const contents = template({
+              spriteName: path.basename(
+                imgPath.replace(/(\?|#).*$/g, ''), // eslint-disable-line prefer-named-capture-group
+                '.svg'
+              ),
+              imgPath,
+              shapes: reshapeTemplateVars(data.css)
+            });
+
+            // add file to css stream
+            cssStream.push(
+              new Vinyl({
+                path: cssName,
+                contents: Buffer.from(contents)
+              })
+            );
+            cssStream.push(null);
+          }
+        });
+
+        await Promise.all([
+          new Promise((resolve) => svgStream.on('end', resolve)),
+          new Promise((resolve) => cssStream.on('end', resolve))
+        ]);
+
+        done();
+      } catch (error) {
+        done(new PluginError(PLUGIN_NAME, error));
       }
-
-      Object.entries(result.css).forEach(([type, resource]) => {
-        // resource is .svg
-        if (type === 'sprite') {
-          const contents = optimizeSvg(resource.contents.toString());
-
-          // add file to svg stream
-          svgStream.push(new Vinyl({
-            path: imgName,
-            contents: Buffer.from(contents)
-          }));
-          svgStream.push(null);
-
-          // add original file to master stream
-          // + required to notify completion of processing
-          stream.push(resource);
-          stream.push(null);
-        }
-        // resource is .styl
-        else if (type === 'styl') {
-          const contents = template({
-            spriteName: path.basename(imgPath.replace(/(\?|#).*$/g, ''), '.svg'), // eslint-disable-line prefer-named-capture-group
-            imgPath,
-            shapes: reshapeTemplateVars(data.css)
-          });
-
-          // add file to css stream
-          cssStream.push(new Vinyl({
-            path: cssName,
-            contents: Buffer.from(contents)
-          }));
-          cssStream.push(null);
-        }
-      });
-
-      return done();
-    });
+    })();
   }
 
   stream.css = cssStream;
   stream.svg = svgStream;
   return stream;
 }
-/* eslint-enable max-statements */
+/* eslint-enable max-lines-per-function, max-statements */

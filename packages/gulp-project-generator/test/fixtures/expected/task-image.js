@@ -1,13 +1,6 @@
-/**
- * import modules
- */
 import gulp from 'gulp';
 import optimizeImage from '@hidoo/gulp-task-optimize-image';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 // define main task
 export const main = optimizeImage({
@@ -19,10 +12,5 @@ export const main = optimizeImage({
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcImage}/**/*.{jpg,jpeg,png,gif,svg}`
-    ],
-    main
-  );
+  gulp.watch([`${config.path.srcImage}/**/*.{jpg,jpeg,png,gif,svg}`], main);
 };

@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import Handlebars from 'handlebars';
 import * as helpers from '@hidoo/handlebars-helpers';
 
@@ -10,27 +10,19 @@ import * as helpers from '@hidoo/handlebars-helpers';
  * @param {Object} context template context
  * @return {Promise<String>}
  */
-export default function render(src = '', context = {}) {
+export default async function render(src = '', context = {}) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
 
   const hbs = Handlebars.create();
 
-  Object.entries(helpers).forEach(
-    ([name, helper]) => hbs.registerHelper(name, helper)
+  Object.entries(helpers).forEach(([name, helper]) =>
+    hbs.registerHelper(name, helper)
   );
 
-  const promise = new Promise(
-    (resolve, reject) => fs.readFile(path.resolve(src), (error, content) => {
-      if (error) {
-        return reject(error);
-      }
-      return resolve(content.toString());
-    })
-  );
+  const content = await fs.readFile(path.resolve(src));
+  const template = hbs.compile(content.toString());
 
-  return promise
-    .then((content) => hbs.compile(content))
-    .then((template) => template(context));
+  return template(context);
 }

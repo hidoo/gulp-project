@@ -1,6 +1,6 @@
-import write from './write';
-import render from './render';
-import formatCode from './formatCode';
+import write from './write.js';
+import render from './render.js';
+import format from './format.js';
 
 /**
  * generate config
@@ -10,7 +10,11 @@ import formatCode from './formatCode';
  * @param {OPTIONS} options command line options
  * @return {Promise}
  */
-export default async function generateConfig(src = '', dest = '', options = {}) {
+export default async function generateConfig(
+  src = '',
+  dest = '',
+  options = {}
+) {
   if (typeof src !== 'string') {
     throw new TypeError('Argument "src" is not string.');
   }
@@ -18,9 +22,9 @@ export default async function generateConfig(src = '', dest = '', options = {}) 
     throw new TypeError('Argument "dest" is not string.');
   }
 
-  const {verbose} = options;
+  const { verbose } = options;
   const output = await render(`${src}/config.js.hbs`, options);
-  const formated = await formatCode(output);
+  const formatted = await format(output);
 
-  await write(formated, `${dest}/config.js`, {verbose});
+  await write(formatted, `${dest}/config.js`, { verbose });
 }

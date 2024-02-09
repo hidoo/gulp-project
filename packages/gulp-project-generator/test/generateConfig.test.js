@@ -1,22 +1,19 @@
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
-import rimraf from 'rimraf';
-import generateConfig from '../src/generateConfig';
+import assert from 'node:assert';
+import fs from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import generateConfig from '../src/generateConfig.js';
 
 describe('generateConfig', () => {
-  let path = null;
-
-  before(() => {
-    path = {
-      src: resolve(__dirname, '../template'),
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = {
+    src: resolve(__dirname, '../template'),
+    dest: `${__dirname}/fixtures/dest`,
+    expected: `${__dirname}/fixtures/expected`
+  };
 
   afterEach((done) => {
-    rimraf(`${path.dest}/.*`, done);
+    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
   });
 
   it('should return Promise.', (done) => {
@@ -40,7 +37,10 @@ describe('generateConfig', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/config.js`).toString().trim();
+      expected = fs
+        .readFileSync(`${path.expected}/config.js`)
+        .toString()
+        .trim();
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
@@ -61,10 +61,12 @@ describe('generateConfig', () => {
     });
 
     const actual = fs.readFileSync(`${path.dest}/config.js`).toString().trim(),
-          expected = fs.readFileSync(`${path.expected}/config-multi-device.js`).toString().trim();
+      expected = fs
+        .readFileSync(`${path.expected}/config-multi-device.js`)
+        .toString()
+        .trim();
 
     assert(actual);
     assert.deepStrictEqual(actual, expected);
   });
-
 });

@@ -1,31 +1,57 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+/* eslint max-len: off, no-magic-numbers: off */
 
-import assert from 'assert';
-import outputOptions from '../src/outputOptions';
+import assert from 'node:assert';
+import outputOptions, { defaultOutputOptions } from '../src/outputOptions.js';
 
 describe('outputOptions', () => {
-
-  it('should return merged output options.', () => {
+  it('should return merged output options list.', () => {
     const cases = [
+      [null, [defaultOutputOptions]],
+      [[], [defaultOutputOptions]],
+      [{}, [defaultOutputOptions]],
       [
-        null,
-        {format: 'iife', name: '', sourcemap: 'inline'}
+        {
+          outputOptions: {
+            format: 'cjs',
+            name: '',
+            sourcemap: true
+          }
+        },
+        [
+          {
+            format: 'cjs',
+            name: '',
+            sourcemap: true
+          }
+        ]
       ],
       [
-        [],
-        {format: 'iife', name: '', sourcemap: 'inline'}
-      ],
-      [
-        {},
-        {format: 'iife', name: '', sourcemap: 'inline'}
-      ],
-      [
-        {outputOptions: {format: 'cjs', name: '', sourcemap: true}},
-        {format: 'cjs', name: '', sourcemap: true}
-      ],
-      [
-        {outputOptions: {hoge: 'fuga'}},
-        {format: 'iife', name: '', sourcemap: 'inline', hoge: 'fuga'}
+        {
+          outputOptions: [
+            {
+              format: 'es',
+              name: '',
+              sourcemap: true
+            },
+            {
+              format: 'cjs',
+              name: '',
+              sourcemap: true
+            }
+          ]
+        },
+        [
+          {
+            format: 'es',
+            name: '',
+            sourcemap: true
+          },
+          {
+            format: 'cjs',
+            name: '',
+            sourcemap: true
+          }
+        ]
       ]
     ];
 
@@ -33,8 +59,7 @@ describe('outputOptions', () => {
       const actual = outputOptions(options);
 
       assert(actual);
-      assert.deepStrictEqual(actual, expected);
+      assert.deepEqual(actual, expected);
     });
   });
-
 });

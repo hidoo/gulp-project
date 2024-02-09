@@ -3,17 +3,15 @@
   "version": "0.19.0",
   "description": "Task that build javascript by browserify for gulp.",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
-  "main": "lib/index.js",
+  "type": "module",
+  "main": "src/index.js",
   "files": [
-    "lib/"
+    "src/"
   ],
   "scripts": {
-    "prebuild": "rimraf ./lib",
-    "build": "npm-run-all -p build:*",
-    "build:lib": "babel ./src --out-dir ./lib",
-    "build:doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
+    "doc": "documentation readme ./src/index.js -q -s API --markdown-toc false --document-exported",
     "test": "cross-env NODE_ENV=test mocha ./test/*.test.js --watch-ignore node_modules,.git,test/fixtures/dest"
   },
   "keywords": [
@@ -26,26 +24,19 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.16.8",
-    "@babel/core": "7.14.3",
-    "@babel/preset-env": "7.14.4",
-    "@babel/register": "7.13.16",
-    "babel-preset-power-assert": "3.0.0",
-    "core-js": "3.14.0",
+    "@babel/core": "7.23.7",
+    "@babel/preset-env": "7.23.8",
+    "core-js": "3.35.1",
     "cross-env": "7.0.3",
-    "documentation": "13.2.5",
+    "documentation": "14.0.3",
     "gulp": "4.0.2",
-    "mocha": "8.4.0",
-    "npm-run-all": "4.1.5",
-    "power-assert": "1.6.1",
-    "regenerator-runtime": "0.13.7",
-    "rimraf": "3.0.2"
+    "mocha": "10.2.0",
+    "regenerator-runtime": "0.14.1"
   },
   "dependencies": {
-    "@hidoo/gulp-util-error-handler": "^0.19.0",
-    "@hidoo/util-merge-babelrc": "^0.19.0",
-    "babelify": "9.0.0",
-    "browserify": "13.3.0",
+    "@hidoo/gulp-util-error-handler": "workspace:*",
+    "babelify": "10.0.0",
+    "browserify": "17.0.0",
     "envify": "4.1.0",
     "gulp-gzip": "1.4.2",
     "gulp-if": "3.0.0",

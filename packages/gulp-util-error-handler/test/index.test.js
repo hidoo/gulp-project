@@ -1,35 +1,24 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
-import assert from 'assert';
-import sinon from 'sinon';
+import assert from 'node:assert';
+import { spy } from 'sinon';
 import stripAnsi from 'strip-ansi';
 import log from 'fancy-log';
-import errorHandler from '../src';
+import errorHandler from '../src/index.js';
 
 describe('gulp-util-error-handler', () => {
-  let spy = null;
+  let spied = null;
 
   beforeEach(() => {
-    spy = sinon.spy(log, 'error');
+    spied = spy(log, 'error');
   });
   afterEach(() => {
-    spy.restore();
+    spied.restore();
   });
 
   it('should out formated message if argment "error" is valid.', () => {
     const cases = [
-      [
-        '',
-        'Error'
-      ],
-      [
-        new Error(),
-        'Error'
-      ],
-      [
-        new Error('hogehoge.'),
-        'Error, detail: hogehoge.'
-      ],
+      ['', 'Error'],
+      [new Error(), 'Error'],
+      [new Error('hogehoge.'), 'Error, detail: hogehoge.'],
       [
         {
           name: 'hoge',
@@ -37,7 +26,7 @@ describe('gulp-util-error-handler', () => {
           reason: '',
           plugin: 'hogePlugin'
         },
-        'hoge from \'hogePlugin\', detail: error from hoge.'
+        "hoge from 'hogePlugin', detail: error from hoge."
       ],
       [
         {
@@ -49,14 +38,14 @@ describe('gulp-util-error-handler', () => {
           reason: '',
           plugin: 'hogePlugin'
         },
-        'hoge from \'hogePlugin\' in /path/to/file.js at 200:5, detail: error from hoge.'
+        "hoge from 'hogePlugin' in /path/to/file.js at 200:5, detail: error from hoge."
       ]
     ];
 
     cases.forEach(([value, expected], index) => {
       errorHandler(value);
 
-      assert(stripAnsi(spy.args[index][0]) === expected);
+      assert(stripAnsi(spied.args[index][0]) === expected);
     });
   });
 });

@@ -1,35 +1,50 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+import assert from 'node:assert';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import generateDotFiles from '../src/generateDotFiles.js';
 
-import assert from 'assert';
-import fs from 'fs';
-import {resolve} from 'path';
-import rimraf from 'rimraf';
-import generateDotFiles from '../src/generateDotFiles';
+/**
+ * read built file
+ *
+ * @param {String} file filename
+ * @return {String}
+ */
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
+
+  return content.toString().trim();
+}
 
 describe('generateDotFiles', () => {
-  let path = null;
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
 
   before(() => {
-    path = {
-      src: resolve(__dirname, '../template'),
-      dest: `${__dirname}/fixtures/dest`,
-      expected: `${__dirname}/fixtures/expected`
-    };
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(dirname, '../template');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
   });
 
-  afterEach((done) => {
-    rimraf(`${path.dest}/.*`, done);
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
   it('should return Promise.', (done) => {
-    const actual = generateDotFiles(path.src, path.dest, {});
+    const actual = generateDotFiles(srcDir, destDir, {});
 
     assert(actual instanceof Promise);
     actual.then(() => done());
   });
 
   it('should generate dot files.', async () => {
-    await generateDotFiles(path.src, path.dest, {
+    await generateDotFiles(srcDir, destDir, {
       css: true,
       html: true,
       image: true,
@@ -40,28 +55,32 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
-      ['.gitignore', '.gitignore'],
+      ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc-main.json'],
+      ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
-            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-    });
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.multiDevice is true.', async () => {
-    await generateDotFiles(path.src, path.dest, {
+    await generateDotFiles(srcDir, destDir, {
       css: true,
       html: true,
       image: true,
@@ -73,28 +92,32 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
-      ['.gitignore', '.gitignore'],
+      ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc-main.json'],
+      ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
-            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-    });
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.conventionalCommits is true.', async () => {
-    await generateDotFiles(path.src, path.dest, {
+    await generateDotFiles(srcDir, destDir, {
       css: true,
       html: true,
       image: true,
@@ -106,30 +129,34 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
-      ['.commitlintrc.js', '.commitlintrc.js'],
+      ['.babelrc.json', '.babelrc-main.json'],
+      ['.commitlintrc.json', '.commitlintrc-main.json'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
-      ['.gitignore', '.gitignore'],
+      ['.gitignore', '.gitignore-main'],
       ['.husky/commit-msg', '.husky-commit-msg'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js'],
-      ['.mocharc.js', '.mocharc.js']
+      ['.lintstagedrc.json', '.lintstagedrc-main.json'],
+      ['.mocharc.json', '.mocharc-main.json']
     ];
 
-    files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
-            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-    });
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
   it('should generate dot files if argument options.css is true and options.cssPreprocessor is "sass".', async () => {
-    await generateDotFiles(path.src, path.dest, {
+    await generateDotFiles(srcDir, destDir, {
       css: true,
       html: true,
       image: true,
@@ -141,30 +168,34 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc.js'],
+      ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig-sass'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc.js'],
+      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc-sass.js'],
-      ['.mocharc.js', '.mocharc.js'],
+      ['.lintstagedrc.json', '.lintstagedrc-sass.json'],
+      ['.mocharc.json', '.mocharc-main.json'],
       ['.stylelintignore', '.stylelintignore'],
-      ['.stylelintrc.js', '.stylelintrc.js']
+      ['.stylelintrc.json', '.stylelintrc-main.json']
     ];
 
-    files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
-            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-    });
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
 
-  it('should generate dot files if argument options.js is false.', async () => {
-    await generateDotFiles(path.src, path.dest, {
+  it('should generate dot files if argument options.json is false.', async () => {
+    await generateDotFiles(srcDir, destDir, {
       css: true,
       html: true,
       image: true,
@@ -175,23 +206,25 @@ describe('generateDotFiles', () => {
     });
 
     const files = [
-      ['.babelrc.js', '.babelrc-no-js.js'],
       ['.editorconfig', '.editorconfig'],
       ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.js', '.eslintrc-no-js.js'],
+      ['.eslintrc.json', '.eslintrc-no-js.json'],
+      ['.prettierignore', '.prettierignore'],
+      ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
-      ['.gitignore', '.gitignore'],
+      ['.gitignore', '.gitignore-main'],
       ['.husky/pre-commit', '.husky-pre-commit'],
-      ['.lintstagedrc.js', '.lintstagedrc.js']
+      ['.lintstagedrc.json', '.lintstagedrc-main.json']
     ];
 
-    files.forEach((file) => {
-      const actual = fs.readFileSync(`${path.dest}/${file[0]}`).toString().trim(),
-            expected = fs.readFileSync(`${path.expected}/${file[1]}`).toString().trim();
+    await Promise.all(
+      files.map(async (file) => {
+        const actual = await readBuiltFile(`${destDir}/${file[0]}`);
+        const expected = await readBuiltFile(`${expectedDir}/${file[1]}`);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
-    });
+        assert(actual, `should generate ${file}.`);
+        assert.deepStrictEqual(actual, expected);
+      })
+    );
   });
-
 });

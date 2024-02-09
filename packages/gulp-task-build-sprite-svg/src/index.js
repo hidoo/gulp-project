@@ -1,8 +1,9 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
-import imagemin from 'gulp-imagemin';
+import imagemin, { svgo } from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
@@ -18,7 +19,14 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @example
  * import {svgo} from '@hidoo/gulp-task-build-sprite-svg';
  */
-export const svgo = imagemin.svgo;
+export { svgo };
+
+/**
+ * dirname
+ *
+ * @type {String}
+ */
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * path of css templates
@@ -26,9 +34,9 @@ export const svgo = imagemin.svgo;
  * @type {Map}
  */
 const TEMPLATES = new Map([
-  ['stylus', path.resolve(__dirname, '../template/stylus.hbs')],
-  ['sass', path.resolve(__dirname, '../template/scss.hbs')],
-  ['sass:module', path.resolve(__dirname, '../template/scss-module.hbs')]
+  ['stylus', path.resolve(dirname, '../template/stylus.hbs')],
+  ['sass', path.resolve(dirname, '../template/scss.hbs')],
+  ['sass:module', path.resolve(dirname, '../template/scss-module.hbs')]
 ]);
 
 /**
@@ -50,9 +58,7 @@ const DEFAULT_OPTIONS = {
   cssTemplate: '',
   cssHandlebarsHelpers: helpers,
   compress: false,
-  compressOptions: [
-    svgo()
-  ],
+  compressOptions: [svgo()],
   verbose: false
 };
 
@@ -107,33 +113,32 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildSprite(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  if (
-    !opts.cssTemplate &&
-    TEMPLATES.has(opts.cssPreprocessor)
-  ) {
+  if (!opts.cssTemplate && TEMPLATES.has(opts.cssPreprocessor)) {
     opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
   }
 
   // define task
   const task = () => {
-    const {compress, compressOptions, verbose} = opts;
+    const { compress, compressOptions, verbose } = opts;
 
-    const stream = src(opts.src)
-      .pipe(plumber({errorHandler}))
+    const stream = gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
       .pipe(svgSprite(opts));
 
     // out css stream
-    const css = stream.css.pipe(dest(opts.destCss));
+    const css = stream.css.pipe(gulp.dest(opts.destCss));
 
     // out image stream
     // + it optimize if opts.compress
-    const svg = stream.svg.pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
-      .pipe(dest(opts.destImg))
-      .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.destImg)));
+    const svg = stream.svg
+      .pipe(buffer())
+      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
+      .pipe(gulp.dest(opts.destImg))
+      .pipe(cond(compress, gzip({ append: true })))
+      .pipe(cond(compress, gulp.dest(opts.destImg)));
 
     // return merged stream
     return merge(css, svg);

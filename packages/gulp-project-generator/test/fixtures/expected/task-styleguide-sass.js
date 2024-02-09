@@ -1,14 +1,7 @@
-/**
- * import modules
- */
-import {relative} from 'path';
+import { relative } from 'node:path';
 import gulp from 'gulp';
 import buildStyleguide from '@hidoo/gulp-task-build-styleguide-kss';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 /**
  * relative path from styleguide to css
@@ -38,10 +31,7 @@ export const main = buildStyleguide({
 // define watch task
 export const watch = () => {
   gulp.watch(
-    [
-      `${config.path.srcCss}/*.md`,
-      `${config.path.srcStyleguide}/*.css`
-    ],
+    [`${config.path.srcCss}/*.md`, `${config.path.srcStyleguide}/*.css`],
     main
   );
 };

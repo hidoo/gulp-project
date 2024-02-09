@@ -1,9 +1,10 @@
-import path from 'path';
-import {src, dest} from 'gulp';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
-import imagemin from 'gulp-imagemin';
+import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
@@ -11,44 +12,21 @@ import evenizer from '@hidoo/gulp-plugin-image-evenizer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
- * gifsicle plugins for imagemin
+ * imagemin plugins
  *
  * @type {Function}
  *
  * @example
- * import {gifsicle} from '@hidoo/gulp-task-build-sprite-image';
+ * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
  */
-export const gifsicle = imagemin.gifsicle;
+export { gifsicle, mozjpeg, optipng, svgo };
 
 /**
- * mozjpeg plugins for imagemin
+ * dirname
  *
- * @type {Function}
- *
- * @example
- * import {mozjpeg} from '@hidoo/gulp-task-build-sprite-image';
+ * @type {String}
  */
-export const mozjpeg = imagemin.mozjpeg;
-
-/**
- * optipng plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {optipng} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const optipng = imagemin.optipng;
-
-/**
- * svgo plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {svgo} from '@hidoo/gulp-task-build-sprite-image';
- */
-export const svgo = imagemin.svgo;
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * path of css templates
@@ -56,9 +34,9 @@ export const svgo = imagemin.svgo;
  * @type {Map}
  */
 const TEMPLATES = new Map([
-  ['stylus', path.resolve(__dirname, '../template/stylus.hbs')],
-  ['sass', path.resolve(__dirname, '../template/scss.hbs')],
-  ['sass:module', path.resolve(__dirname, '../template/scss-module.hbs')]
+  ['stylus', path.resolve(dirname, '../template/stylus.hbs')],
+  ['sass', path.resolve(dirname, '../template/scss.hbs')],
+  ['sass:module', path.resolve(dirname, '../template/scss-module.hbs')]
 ]);
 
 /**
@@ -83,9 +61,9 @@ const DEFAULT_OPTIONS = {
   evenize: false,
   compress: false,
   compressOptions: [
-    gifsicle({interlaced: true}),
-    mozjpeg({quality: 90, progressive: true}),
-    optipng({optimizationLevel: 5}),
+    gifsicle({ interlaced: true }),
+    mozjpeg({ quality: 90, progressive: true }),
+    optipng({ optimizationLevel: 5 }),
     svgo()
   ],
   verbose: false
@@ -157,32 +135,31 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function buildSprite(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  if (
-    !opts.cssTemplate &&
-    TEMPLATES.has(opts.cssPreprocessor)
-  ) {
+  if (!opts.cssTemplate && TEMPLATES.has(opts.cssPreprocessor)) {
     opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
   }
 
   // define task
   const task = () => {
-    const {evenize, compress, compressOptions, verbose} = opts;
+    const { evenize, compress, compressOptions, verbose } = opts;
 
-    const stream = src(opts.src)
-      .pipe(plumber({errorHandler}))
-      .pipe(cond(evenize, evenizer({verbose})))
+    const stream = gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
+      .pipe(cond(evenize, evenizer({ verbose })))
       .pipe(spritesmith(opts));
 
     // out css stream
-    const css = stream.css.pipe(dest(opts.destCss));
+    const css = stream.css.pipe(gulp.dest(opts.destCss));
 
     // out image stream
     // + it optimize if opts.compress
-    const image = stream.img.pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], {verbose})))
-      .pipe(dest(opts.destImg));
+    const image = stream.img
+      .pipe(buffer())
+      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
+      .pipe(gulp.dest(opts.destImg));
 
     // return merged stream
     return merge(css, image);

@@ -1,5 +1,5 @@
-import pkg from '../../../package.json';
-import * as status from '../constants/statusCode';
+import * as status from '../constants/statusCode.js';
+import { pkg } from '../../../config.js';
 
 /**
  * show project info

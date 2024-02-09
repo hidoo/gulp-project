@@ -1,4 +1,4 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
@@ -24,7 +24,7 @@ const DEFAULT_OPTIONS = {
  *
  * @example
  * import {task} from 'gulp';
- * import {concatJs} from '@hidoo/gulp-task-copy';
+ * import copy from '@hidoo/gulp-task-copy';
  *
  * task('copy', copy({
  *   name: 'copy:main',
@@ -33,12 +33,14 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function copy(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   // define task
-  const task = () => src(opts.src)
-    .pipe(plumber({errorHandler}))
-    .pipe(dest(opts.dest));
+  const task = () =>
+    gulp
+      .src(opts.src)
+      .pipe(plumber({ errorHandler }))
+      .pipe(gulp.dest(opts.dest));
 
   // add displayName (used as task name for gulp)
   if (typeof opts.name === 'string' && opts.name !== '') {

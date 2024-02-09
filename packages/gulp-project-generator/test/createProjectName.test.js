@@ -1,8 +1,7 @@
-import assert from 'assert';
-import createProjectName from '../src/createProjectName';
+import assert from 'node:assert';
+import createProjectName from '../src/createProjectName.js';
 
 describe('createProjectName', () => {
-
   it('should return project name.', () => {
     const cases = [
       ['/path/to/project', 'project'],
@@ -26,7 +25,5 @@ describe('createProjectName', () => {
       assert(typeof actual === 'string');
       assert(actual === expected);
     });
-
   });
-
 });

@@ -1,55 +1,91 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
+/* eslint max-len: off, no-magic-numbers: off */
 
-import assert from 'assert';
-import inputOptions from '../src/inputOptions';
+import assert from 'node:assert';
+import inputOptions from '../src/inputOptions.js';
+import configurePlugins from '../src/configurePlugins.js';
 
 describe('inputOptions', () => {
+  it('should throw error if options is not object.', () => {
+    const cases = ['', [], null];
+
+    cases.forEach((options) => {
+      let err = null;
+
+      try {
+        inputOptions(options);
+      } catch (error) {
+        err = error;
+      }
+
+      assert(err instanceof Error, `when ${typeof options} specified.`);
+    });
+  });
+
+  it('should throw error if input source is not set.', () => {
+    let err = null;
+
+    try {
+      inputOptions({
+        src: null,
+        inputOptions: {
+          input: null
+        }
+      });
+    } catch (error) {
+      err = error;
+    }
+
+    assert(err instanceof Error);
+  });
 
   it('should return merged input options.', () => {
     const cases = [
       [
-        null,
-        {input: ''}
+        {
+          src: '/path/to/src'
+        },
+        {
+          input: '/path/to/src'
+        }
       ],
       [
-        [],
-        {input: ''}
+        {
+          inputOptions: {
+            input: '/path/to/src'
+          }
+        },
+        {
+          input: '/path/to/src'
+        }
       ],
       [
-        {},
-        {input: ''}
-      ],
-      [
-        {src: '/path/to/src'},
-        {input: '/path/to/src'}
-      ],
-      [
-        {src: '/path/to/src', inputOptions: {plugins: [() => {}]}}, // eslint-disable-line no-empty-function
-        {input: '/path/to/src'}
-      ],
-      [
-        {src: '/path/to/src', inputOptions: {hoge: 'fuga'}},
-        {input: '/path/to/src', hoge: 'fuga'}
+        {
+          src: '/path/to/src',
+          inputOptions: {
+            plugins: [
+              () => {
+                return {
+                  name: 'hoge'
+                };
+              }
+            ]
+          }
+        },
+        {
+          input: '/path/to/src'
+        }
       ]
     ];
 
     cases.forEach(([options, expected]) => {
-      const {onwarn, plugins, ...actual} = inputOptions(options);
+      const { onwarn, plugins, ...actual } = inputOptions(options);
 
-      assert(actual);
-      assert.deepStrictEqual(actual, expected);
+      assert.deepEqual(actual, expected);
       assert(typeof onwarn === 'function');
-      assert(Array.isArray(plugins));
-
-      if (
-        options && options.inputOptions &&
-        Array.isArray(options.plugins) && options.plugins.length
-      ) {
-        options.plugins.forEach((plugin) => {
-          assert(expected.plugins.includes(plugin));
-        });
-      }
+      assert.deepEqual(
+        plugins.map(({ name }) => name),
+        configurePlugins(options).map(({ name }) => name)
+      );
     });
   });
-
 });

@@ -1,11 +1,13 @@
-/* eslint no-magic-numbers: off */
-
-import path from 'path';
+import path from 'node:path';
+import util from 'node:util';
 import imageminWebp from 'imagemin-webp';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import PluginError from 'plugin-error';
 import log from 'fancy-log';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * plugin name.
@@ -55,7 +57,7 @@ const DEFAULT_OPTIONS = {
  *   .pipe(dest('/path/to/dest')));
  */
 export default function webp(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return through.obj(function transform(file, enc, done) {
     if (file.isStream()) {
@@ -69,14 +71,15 @@ export default function webp(options = {}) {
     }
 
     const stream = this; // eslint-disable-line no-invalid-this, consistent-this
-    const {dirname, extname, contents} = file;
+    const { dirname, extname, contents } = file;
     const basename = path.basename(file.path, extname);
-    const instance = imageminWebp(opts);
 
-    return instance(contents)
-      .then((buffer) => {
-        const filename = opts.keepExtname ?
-          `${basename}${extname}.webp` : `${basename}.webp`;
+    return (async () => {
+      try {
+        const buffer = await imageminWebp(opts)(contents);
+        const filename = opts.keepExtname
+          ? `${basename}${extname}.webp`
+          : `${basename}.webp`;
         const dest = path.resolve(dirname, filename);
 
         // prepend original image before webp.
@@ -97,8 +100,10 @@ export default function webp(options = {}) {
           })
         );
 
-        return done();
-      })
-      .catch((error) => done(new PluginError(PLUGIN_NAME, error)));
+        done();
+      } catch (error) {
+        done(new PluginError(PLUGIN_NAME, error));
+      }
+    })();
   });
 }

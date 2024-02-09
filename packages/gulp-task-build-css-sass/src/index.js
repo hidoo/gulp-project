@@ -1,10 +1,11 @@
-import path from 'path';
-import util from 'util';
-import {dest} from 'gulp';
+import fs from 'node:fs';
+import path from 'node:path';
+import util from 'node:util';
+import gulp from 'gulp';
 import cond from 'gulp-if';
 import through from 'through2';
 import Vinyl from 'vinyl';
-import sass from 'sass';
+import * as sass from 'sass';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -19,14 +20,18 @@ import log from 'fancy-log';
 import sassImporter from '@hidoo/sass-importer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
+
 let pkg = {};
 
 // try to load package.json that on current working directory
 try {
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
-}
-catch (error) {
+  pkg = JSON.parse(
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+  );
+} catch (error) {
   log.error('Failed to load package.json.');
 }
 
@@ -36,7 +41,6 @@ catch (error) {
  * @type {Object}
  */
 const DEFAULT_FUNCTIONS = {
-
   /**
    * add "env" function that get value from process.env
    *
@@ -46,9 +50,9 @@ const DEFAULT_FUNCTIONS = {
    */
   'env($key)': (key, done) => {
     const name = key.getValue(),
-          result = new sass.types.String(
-            process.env[name] || '' // eslint-disable-line node/no-process-env
-          );
+      result = new sass.types.String(
+        process.env[name] || '' // eslint-disable-line node/no-process-env
+      );
 
     if (typeof done === 'function') {
       return done(result);
@@ -110,11 +114,13 @@ function getProcesses(options = {}) {
     typeof options.url === 'string' &&
     ['inline', 'copy', 'rebase'].includes(options.url)
   ) {
-    processes.push(url({
-      basePath: path.dirname(options.src),
-      ...options.urlOptions,
-      url: options.url
-    }));
+    processes.push(
+      url({
+        basePath: path.dirname(options.src),
+        ...options.urlOptions,
+        url: options.url
+      })
+    );
   }
 
   // add post css process if options.uncssTargets is valid
@@ -122,10 +128,12 @@ function getProcesses(options = {}) {
     Array.isArray(options.uncssTargets) &&
     Boolean(options.uncssTargets.length)
   ) {
-    processes.push(uncss({
-      html: options.uncssTargets,
-      ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
-    }));
+    processes.push(
+      uncss({
+        html: options.uncssTargets,
+        ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
+      })
+    );
   }
 
   // add post css process if options.additionalProcess is valid
@@ -183,54 +191,60 @@ function getProcesses(options = {}) {
  * }));
  */
 export default function buildCss(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = {
+    ...DEFAULT_OPTIONS,
+    ...options
+  };
 
   // define task
   const task = () => {
-    const {suffix, compress} = opts;
+    const { suffix, compress } = opts;
     const stream = through.obj();
     const filename = opts.filename || path.basename(opts.src);
-    const sassOptions = opts.sassOptions || {functions: {}, importer: []};
+    const sassOptions = opts.sassOptions || { functions: {}, importer: [] };
     const processes = getProcesses(opts);
-    const compiler = render({
-      file: opts.src,
-      ...sassOptions,
-      importer: [
-        sassImporter(),
-        magicImporter(),
-        ...sassOptions.importer
-      ],
-      functions: {
-        ...DEFAULT_FUNCTIONS,
-        ...sassOptions.functions
-      }
-    });
 
-    compiler
-      .then(({css}) => {
+    (async () => {
+      try {
+        const { css } = await render({
+          file: opts.src,
+          ...sassOptions,
+          importer: [
+            sassImporter.default(),
+            magicImporter(),
+            ...sassOptions.importer
+          ],
+          functions: {
+            ...DEFAULT_FUNCTIONS,
+            ...sassOptions.functions
+          }
+        });
+
         // add code to stream as vinyl file
-        stream.push(new Vinyl({
-          path: filename,
-          contents: Buffer.from(css)
-        }));
+        stream.push(
+          new Vinyl({
+            path: filename,
+            contents: Buffer.from(css)
+          })
+        );
 
         // add null that indicates write completion
         stream.push(null);
-      })
-      .catch((error) => {
+      } catch (error) {
         errorHandler(error);
         stream.emit('end');
-      });
+      }
+    })();
 
     return stream
       .pipe(postcss(processes))
-      .pipe(header(opts.banner, {pkg}))
-      .pipe(dest(opts.dest))
-      .pipe(cond(compress, rename({suffix})))
-      .pipe(cond(compress, postcss([csso({restructure: false})])))
-      .pipe(cond(compress, dest(opts.dest)))
-      .pipe(cond(compress, gzip({append: true})))
-      .pipe(cond(compress, dest(opts.dest)));
+      .pipe(header(opts.banner, { pkg }))
+      .pipe(gulp.dest(opts.dest))
+      .pipe(cond(compress, rename({ suffix })))
+      .pipe(cond(compress, postcss([csso({ restructure: false })])))
+      .pipe(cond(compress, gulp.dest(opts.dest)))
+      .pipe(cond(compress, gzip({ append: true })))
+      .pipe(cond(compress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

@@ -1,23 +1,25 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
-import assert from 'assert';
-import render from '../src/render';
+import assert from 'node:assert';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import render from '../src/render.js';
 
 describe('render', () => {
-  const path = {
-    src: `${__dirname}/fixtures/src/render`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
 
-  it('should return Promise includes String of evaled template.', (done) => {
-    const actual = render(`${path.src}/template.hbs`, {type: 'template'});
-
-    assert(actual instanceof Promise);
-    actual
-      .then((content) => {
-        assert(typeof content === 'string');
-        assert(content.trim() === 'This is a template text.');
-      })
-      .then(() => done());
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src', 'render');
   });
 
+  it('should return string of evaluated template.', async () => {
+    const content = await render(`${srcDir}/template.hbs`, {
+      type: 'template'
+    });
+
+    assert(typeof content === 'string');
+    assert(content.trim() === 'This is a template text.');
+  });
 });

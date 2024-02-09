@@ -11,13 +11,16 @@ $ npm install --save-dev gulp@next @babel/{core,polyfill,preset-env} @hidoo/gulp
 ## Usage
 
 ```js
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-rollup';
 
-task('js', buildJs({
-  src: '/path/to/js/main.js',
-  dest: '/path/to/dest'
-}));
+task(
+  'js',
+  buildJs({
+    src: '/path/to/js/main.js',
+    dest: '/path/to/dest'
+  })
+);
 ```
 
 ## API
@@ -30,76 +33,62 @@ return javascript build task by rollup.js
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:js'`)
-    *   `options.src` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))** source path
-    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
-    *   `options.filename` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))** destination filename (optional, default `'main.js'`)
-    *   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
-    *   `options.targets` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** target browsers.
-        see: [default target browsers](http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4)
-    *   `options.browsers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** alias of options.targets.
-    *   `options.useBuiltIns` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean))** use polyfill or not.
-        see: [useBuiltIns in @babel/preset-env](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) (optional, default `'usage'`)
-    *   `options.corejs` **([Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number) | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** specify core-js version
-        see: [corejs in @babel/preset-env](https://github.com/zloirock/core-js#babelpreset-env) (optional, default `3`)
-    *   `options.babelrc` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** babelrc path.
-        see: [Merged with this function](./src/babelOptions.js) (optional, default `path.resolve(process.cwd(),'.babelrc.js')`)
-    *   `options.inputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** input options for rollup.js.
-        see: [Merged with this function](./src/inputOptions.js).
-        see: [inputOptions in JavaScript API of rollup.js](https://rollupjs.org/guide/en#inputoptions)
-    *   `options.outputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** output options for rollup.js.
-        see: [Merged with this function](./src/outputOptions.js).
-        see: [outputOptions in JavaScript API of rollup.js](https://rollupjs.org/guide/en#outputoptions)
-    *   `options.aliasOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-alias.
-        see: [Merged with this function](./src/aliasOptions.js).
-        see: [@rollup/plugin-alias](https://github.com/rollup/plugins/tree/master/packages/alias)
-    *   `options.nodeResolveOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-node-resolve.
-        see: [Merged with this function](./src/nodeResolveOptions.js).
-        see: [@rollup/plugin-node-resolve](https://github.com/rollup/plugins/tree/master/packages/node-resolve)
-    *   `options.jsonOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-json.
-        see: [Merged with this function](./src/jsonOptions.js).
-        see: [@rollup/plugin-json](https://github.com/rollup/plugins/tree/master/packages/json)
-    *   `options.commonjsOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for @rollup/plugin-commonjs.
-        see: [Merged with this function](./src/commonjsOptions.js).
-        see: [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs)
-    *   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-    *   `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:js'`)
+  - `options.src` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))** source path
+  - `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+  - `options.filename` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))** destination filename (optional, default `'main.js'`)
+  - `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
+  - `options.targets` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** target browsers.
+    see: [default target browsers](http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4)
+  - `options.browsers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>?** alias of options.targets.
+  - `options.inputOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** input options for rollup.js.
+    see: [Merged with this function](./src/inputOptions.js).
+    see: [inputOptions in JavaScript API of rollup.js](https://rollupjs.org/javascript-api/#inputoptions-object)
+  - `options.outputOptions` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)> | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))?** output options for rollup.js.
+    see: [Merged with this function](./src/outputOptions.js).
+    see: [outputOptions in JavaScript API of rollup.js](https://rollupjs.org/javascript-api/#outputoptions-object)
+  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
+  - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
+import { task } from 'gulp';
 import buildJs from '@hidoo/gulp-task-build-js-rollup';
 
-task('js', buildJs({
-  name: 'js:main',
-  src: '/path/to/js/main.js',
-  dest: '/path/to/dest',
-  filename: 'main.js',
-  suffix: '.hoge',
-  targets: ['> 0.1% in JP'],
-  useBuiltIns: false,
-  corejs: 2,
-  babelrc: '/path/to/.babelrc.js',
-  inputOptions: {},
-  outputOptions: {},
-  aliasOptions: {},
-  nodeResolveOptions: {},
-  jsonOptions: {},
-  commonjsOptions: {},
-  compress: true,
-  verbose: true
-}));
+task(
+  'js',
+  buildJs({
+    name: 'js:main',
+    src: '/path/to/js/main.js',
+    dest: '/path/to/dest',
+    suffix: '.compressed',
+    targets: ['> 0.1% in JP'],
+    inputOptions: {},
+    outputOptions: [
+      {
+        format: 'es',
+        file: 'main.es.js'
+      },
+      {
+        format: 'system',
+        file: 'main.system.js'
+      }
+    ],
+    compress: true,
+    verbose: true
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**&#x20;
 
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

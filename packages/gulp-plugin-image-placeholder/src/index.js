@@ -1,14 +1,17 @@
-/* eslint no-magic-numbers: off */
+/* eslint no-magic-numbers: off, max-statements: off */
 
-import path from 'path';
+import path from 'node:path';
+import util from 'node:util';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import PluginError from 'plugin-error';
-import getStream from 'get-stream';
 import ndarray from 'ndarray';
 import savePixels from 'save-pixels';
 import sizeOf from 'image-size';
 import log from 'fancy-log';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * plugin name.
@@ -50,7 +53,7 @@ const DEFAULT_OPTIONS = {
  *   .pipe(dest('/path/to/dest')));
  */
 export default function imagePlaceholder(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   return through.obj(function transform(file, enc, done) {
     if (file.isStream()) {
@@ -63,34 +66,46 @@ export default function imagePlaceholder(options = {}) {
       return done(null, file);
     }
 
-    const stream = this, // eslint-disable-line no-invalid-this, consistent-this
-          {dirname, contents} = file,
-          basename = path.basename(file.path, file.extname),
-          {width, height} = sizeOf(contents),
-          saveOptions = {},
-          fillPixel = [0, 0, 0, 0],
-          channels = 4;
+    // eslint-disable-next-line no-invalid-this, consistent-this
+    const stream = this;
+    const { dirname, contents } = file;
+    const basename = path.basename(file.path, file.extname);
+    const { width, height } = sizeOf(contents);
+    const fillPixel = [0, 0, 0, 0];
+    const channels = 4;
 
     // set params (example when image size is 12x10)
     // + shape -> [12, 10, 4]
     // + stride -> [4, 48, 1]
-    const sizeInRow = width * channels,
-          shape = [width, height, channels],
-          stride = [channels, sizeInRow, 1];
+    const sizeInRow = width * channels;
+    const shape = [width, height, channels];
+    const stride = [channels, sizeInRow, 1];
 
     // transform array to ndarray
-    const data = Array(width * height).fill(fillPixel),
-          pixels = ndarray(Uint8ClampedArray.from(data), shape, stride);
+    const data = Array(width * height).fill(fillPixel);
+    const pixels = ndarray(Uint8ClampedArray.from(data), shape, stride);
 
-    return getStream.buffer(savePixels(pixels, 'png', saveOptions))
-      .then((buffer) => {
-        const suffix = opts.suffix ? `.${opts.suffix}` : '',
-              placeholder = new Vinyl({
-                cwd: file.cwd,
-                base: file.base,
-                path: `${dirname}/${basename}${suffix}.png`,
-                contents: buffer
-              });
+    return (async () => {
+      try {
+        const buffer = await new Promise((resolve, reject) => {
+          const chunks = [];
+
+          savePixels(pixels, 'png')
+            .on('error', reject)
+            .on('data', (chunk) => {
+              chunks.push(chunk);
+            })
+            .on('end', () => {
+              resolve(Buffer.concat(chunks));
+            });
+        });
+        const suffix = opts.suffix ? `.${opts.suffix}` : '';
+        const placeholder = new Vinyl({
+          cwd: file.cwd,
+          base: file.base,
+          path: `${dirname}/${basename}${suffix}.png`,
+          contents: buffer
+        });
 
         // append placeholder image after original image.
         if (opts.append) {
@@ -105,9 +120,10 @@ export default function imagePlaceholder(options = {}) {
         else {
           stream.push(placeholder);
         }
-
         return done();
-      })
-      .catch((error) => done(new PluginError(PLUGIN_NAME, error)));
+      } catch (error) {
+        return done(new PluginError(PLUGIN_NAME, error));
+      }
+    })();
   });
 }

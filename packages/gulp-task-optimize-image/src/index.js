@@ -1,7 +1,7 @@
-import {src, dest, lastRun} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
-import imagemin from 'gulp-imagemin';
+import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
 import gzip from 'gulp-gzip';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
@@ -9,44 +9,14 @@ import webp from '@hidoo/gulp-plugin-webp';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
- * gifsicle plugins for imagemin
+ * imagemin plugins
  *
  * @type {Function}
  *
  * @example
- * import {gifsicle} from '@hidoo/gulp-task-optimize-image';
+ * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-optimize-image';
  */
-export const gifsicle = imagemin.gifsicle;
-
-/**
- * mozjpeg plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {mozjpeg} from '@hidoo/gulp-task-optimize-image';
- */
-export const mozjpeg = imagemin.mozjpeg;
-
-/**
- * optipng plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {optipng} from '@hidoo/gulp-task-optimize-image';
- */
-export const optipng = imagemin.optipng;
-
-/**
- * svgo plugins for imagemin
- *
- * @type {Function}
- *
- * @example
- * import {svgo} from '@hidoo/gulp-task-optimize-image';
- */
-export const svgo = imagemin.svgo;
+export { gifsicle, mozjpeg, optipng, svgo };
 
 /**
  * task default options.
@@ -62,9 +32,9 @@ const DEFAULT_OPTIONS = {
   webp: false,
   compress: false,
   compressOptions: [
-    gifsicle({interlaced: true}),
-    mozjpeg({quality: 90, progressive: true}),
-    optipng({optimizationLevel: 5}),
+    gifsicle({ interlaced: true }),
+    mozjpeg({ quality: 90, progressive: true }),
+    optipng({ optimizationLevel: 5 }),
     svgo()
   ],
   verbose: false
@@ -117,16 +87,16 @@ const DEFAULT_OPTIONS = {
  * }));
  */
 export default function optimizeImage(options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const isImage = '**/*.{jpg,jpeg,gif,png}';
   const isSvg = '**/*.svg';
   const isntIco = '!**/*.ico';
 
   // define task
   const task = () => {
-    const {evenize, placeholder, compress, compressOptions, verbose} = opts;
-    const since = lastRun(task);
-    let webpOptions = {verbose};
+    const { evenize, placeholder, compress, compressOptions, verbose } = opts;
+    const since = gulp.lastRun(task);
+    let webpOptions = { verbose };
 
     if (
       opts.webp &&
@@ -139,15 +109,26 @@ export default function optimizeImage(options = {}) {
       };
     }
 
-    return src(opts.src, {since})
-      .pipe(plumber({errorHandler}))
-      .pipe(cond(isImage, cond(evenize, imageEvenizer({verbose}))))
+    return gulp
+      .src(opts.src, { since })
+      .pipe(plumber({ errorHandler }))
+      .pipe(cond(isImage, cond(evenize, imageEvenizer({ verbose }))))
       .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
-      .pipe(cond(isntIco, cond(placeholder, imagePlaceholder({append: true, verbose}))))
-      .pipe(cond(isntIco, cond(compress, imagemin([...compressOptions], {verbose}))))
-      .pipe(dest(opts.dest))
-      .pipe(cond(isSvg, cond(compress, gzip({append: true}))))
-      .pipe(cond(isSvg, cond(compress, dest(opts.dest))));
+      .pipe(
+        cond(
+          isntIco,
+          cond(placeholder, imagePlaceholder({ append: true, verbose }))
+        )
+      )
+      .pipe(
+        cond(
+          isntIco,
+          cond(compress, imagemin([...compressOptions], { verbose }))
+        )
+      )
+      .pipe(gulp.dest(opts.dest))
+      .pipe(cond(isSvg, cond(compress, gzip({ append: true }))))
+      .pipe(cond(isSvg, cond(compress, gulp.dest(opts.dest))));
   };
 
   // add displayName (used as task name for gulp)

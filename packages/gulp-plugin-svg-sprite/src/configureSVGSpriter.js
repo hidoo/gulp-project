@@ -10,7 +10,7 @@ import SVGSpriter from 'svg-sprite';
  * @return {SVGSpriter}
  */
 export default function configureSvgSpriter(options = {}) {
-  const {padding, layout} = options;
+  const { padding, layout } = options;
 
   return new SVGSpriter({
     shape: {
@@ -18,14 +18,7 @@ export default function configureSvgSpriter(options = {}) {
         padding: padding || 0, // eslint-disable-line no-magic-numbers
         box: 'content'
       },
-      transform: [
-        {svgo: {
-          plugins: [
-            {removeTitle: true},
-            {removeAttrs: {attrs: 'fill'}}
-          ]
-        }}
-      ]
+      transform: ['svgo']
     },
     mode: {
       css: {
@@ -35,7 +28,7 @@ export default function configureSvgSpriter(options = {}) {
         dimensions: '',
         sprite: '',
         bust: false,
-        render: {styl: true}
+        render: { styl: true }
       }
     }
   });

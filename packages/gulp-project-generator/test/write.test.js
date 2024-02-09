@@ -1,32 +1,32 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
-import assert from 'assert';
-import fs from 'fs';
-import rimraf from 'rimraf';
-import write from '../src/write';
+import assert from 'node:assert';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import write from '../src/write.js';
 
 describe('write', () => {
-  const path = {
-    dest: `${__dirname}/fixtures/dest`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let destDir = null;
 
-  afterEach((done) => {
-    rimraf(`${path.dest}/*`, done);
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    destDir = path.resolve(fixturesDir, 'dest');
   });
 
-  it('should return Promise includes String of created file path.', (done) => {
-    const contents = 'hoge hoge',
-          dest = `${path.dest}/hoge.txt`,
-          actual = write(contents, dest, {verbose: false});
-
-    assert(actual instanceof Promise);
-    actual
-      .then((filepath) => {
-        assert(typeof filepath === 'string');
-        assert(filepath === dest);
-        assert(fs.readFileSync(filepath).toString() === contents);
-      })
-      .then(() => done());
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
+  it('should return string of created file path.', async () => {
+    const contents = 'hoge hoge';
+    const dest = `${destDir}/hoge.txt`;
+    const filePath = await write(contents, dest, { verbose: false });
+
+    assert(typeof filePath === 'string');
+    assert(filePath === dest);
+    assert((await fs.readFile(filePath)).toString() === contents);
+  });
 });

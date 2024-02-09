@@ -1,10 +1,7 @@
 /* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
 
-/**
- * import modules
- */
-import {Command} from 'commander';
-import ips from '@hidoo/util-local-ip';
+import fs from 'node:fs';
+import { Command } from 'commander';
 
 /**
  * adjust NODE_ENV
@@ -42,7 +39,7 @@ const opts = cli.opts();
  * @type {Object}
  */
 export const serverOptions = {
-  host: String(opts.host || process.env.SERVER_HOST || ips({ipv6: false, internal: false})[0]) || '0.0.0.0',
+  host: opts.host || process.env.SERVER_HOST,
   port: Number(opts.port || process.env.SERVER_PORT) || 8000,
   protocol: String(opts.protocol || process.env.SERVER_PROTOCOL || 'http'),
   open: opts.open || process.env.SERVER_OPEN || false,
@@ -55,14 +52,15 @@ export const serverOptions = {
  *
  * @type {Boolean}
  */
-export const compress = opts.compress || process.env.NODE_ENV !== 'development' || false;
+export const compress =
+  opts.compress || process.env.NODE_ENV !== 'development' || false;
 
 /**
  * package.json
  *
  * @type {Object}
  */
-export {default as pkg} from './package.json';
+export const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 /**
  * path settings
@@ -70,25 +68,50 @@ export {default as pkg} from './package.json';
  * @type {Object}
  */
 export const path = {
-
   // base
   src: './src',
   dest: './public',
 
   // source details
-  get srcCss() { return `${this.src}/css`; },
-  get srcData() { return `${this.src}/data`; },
-  get srcHtml() { return `${this.src}/html`; },
-  get srcImage() { return `${this.src}/image`; },
-  get srcJs() { return `${this.src}/js`; },
-  get srcSprite() { return `${this.src}/sprite`; },
-  get srcStyleguide() { return `${this.dest}/css`; },
+  get srcCss() {
+    return `${this.src}/css`;
+  },
+  get srcData() {
+    return `${this.src}/data`;
+  },
+  get srcHtml() {
+    return `${this.src}/html`;
+  },
+  get srcImage() {
+    return `${this.src}/image`;
+  },
+  get srcJs() {
+    return `${this.src}/js`;
+  },
+  get srcSprite() {
+    return `${this.src}/sprite`;
+  },
+  get srcStyleguide() {
+    return `${this.dest}/css`;
+  },
 
   // destinaion details
-  get destCss() { return `${this.dest}/css`; },
-  get destHtml() { return this.dest; },
-  get destImage() { return `${this.dest}/images`; },
-  get destJs() { return `${this.dest}/js`; },
-  get destSprite() { return `${this.dest}/images/sprites`; },
-  get destStyleguide() { return `${this.dest}/styleguide`; }
+  get destCss() {
+    return `${this.dest}/css`;
+  },
+  get destHtml() {
+    return this.dest;
+  },
+  get destImage() {
+    return `${this.dest}/images`;
+  },
+  get destJs() {
+    return `${this.dest}/js`;
+  },
+  get destSprite() {
+    return `${this.dest}/images/sprites`;
+  },
+  get destStyleguide() {
+    return `${this.dest}/styleguide`;
+  }
 };

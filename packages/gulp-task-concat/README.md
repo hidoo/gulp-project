@@ -52,38 +52,37 @@ return javascript concat task
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:asset'`)
-    *   `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
-    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
-    *   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.js'`)
-    *   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
-    *   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
-    *   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:asset'`)
+  - `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
+  - `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+  - `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.js'`)
+  - `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
+  - `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
+  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
-import {concatJs} from '@hidoo/gulp-task-concat';
+import { task } from 'gulp';
+import { concatJs } from '@hidoo/gulp-task-concat';
 
-task('concat:js', concatJs({
-  name: 'js:deps',
-  src: [
-    '/path/to/js/a.js',
-    '/path/to/js/b.js',
-    '/path/to/js/c.js'
-  ],
-  dest: '/path/to/dest',
-  filename: 'deps.js',
-  suffix: '.hoge',
-  banner: '/*! copyright <%= pkg.author %> * /\n',
-  compress: true
-}));
+task(
+  'concat:js',
+  concatJs({
+    name: 'js:deps',
+    src: ['/path/to/js/a.js', '/path/to/js/b.js', '/path/to/js/c.js'],
+    dest: '/path/to/dest',
+    filename: 'deps.js',
+    suffix: '.hoge',
+    banner: '/*! copyright <%= pkg.author %> * /\n',
+    compress: true
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**&#x20;
 
 ### concatCss
 
@@ -91,43 +90,42 @@ return css concat task
 
 #### Parameters
 
-*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
+- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options (optional, default `{}`)
 
-    *   `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:asset'`)
-    *   `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
-    *   `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
-    *   `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.css'`)
-    *   `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
-    *   `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
-    *   `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
+  - `options.name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** task name (use as displayName) (optional, default `'build:asset'`)
+  - `options.src` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** source path
+  - `options.dest` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination path
+  - `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.css'`)
+  - `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
+  - `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
+  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import {task} from 'gulp';
-import {concatCss} from '@hidoo/gulp-task-concat';
+import { task } from 'gulp';
+import { concatCss } from '@hidoo/gulp-task-concat';
 
-task('concat:css', concatCss({
-  name: 'css:deps',
-  src: [
-    '/path/to/css/a.css',
-    '/path/to/css/b.css',
-    '/path/to/css/c.css'
-  ],
-  dest: '/path/to/dest',
-  filename: 'deps.css',
-  suffix: '.hoge',
-  banner: '/*! copyright <%= pkg.author %> * /\n',
-  compress: true
-}));
+task(
+  'concat:css',
+  concatCss({
+    name: 'css:deps',
+    src: ['/path/to/css/a.css', '/path/to/css/b.css', '/path/to/css/c.css'],
+    dest: '/path/to/dest',
+    filename: 'deps.css',
+    suffix: '.hoge',
+    banner: '/*! copyright <%= pkg.author %> * /\n',
+    compress: true
+  })
+);
 ```
 
-Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>** 
+Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**&#x20;
 
 ## Test
 
 ```sh
-$ yarn test
+$ pnpm test
 ```
 
 ## License

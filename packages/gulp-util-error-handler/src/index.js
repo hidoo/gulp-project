@@ -1,5 +1,9 @@
-import {grey, cyan, red} from 'chalk';
+import util from 'node:util';
+import chalk from 'chalk';
 import log from 'fancy-log';
+
+// tweaks log date color like gulp log
+util.inspect.styles.date = 'grey';
 
 /**
  * Handling task error.
@@ -17,15 +21,17 @@ import log from 'fancy-log';
  *   .pipe(dest('/path/to/dest')));
  */
 export default function errorHandler(error) {
-  const {name, message, line, column, file, reason, plugin} = error,
-        pluginInfo = plugin ? ` from '${cyan(plugin)}'` : '',
-        fileInfo = line && column && file ? ` in ${file} at ${line}:${column}` : '',
-        detail = `${reason || message}`;
+  const { name, message, line, column, file, reason, plugin } = error,
+    pluginInfo = plugin ? ` from '${chalk.cyan(plugin)}'` : '',
+    fileInfo = line && column && file ? ` in ${file} at ${line}:${column}` : '',
+    detail = `${reason || message}`;
 
   if (!name) {
-    log.error(`${red('Error')}`);
+    log.error(`${chalk.red('Error')}`);
     return;
   }
 
-  log.error(`${red(name)}${pluginInfo}${grey(fileInfo)}${detail ? `, detail: ${grey(detail)}` : ''}`);
+  log.error(
+    `${chalk.red(name)}${pluginInfo}${chalk.grey(fileInfo)}${detail ? `, detail: ${chalk.grey(detail)}` : ''}`
+  );
 }

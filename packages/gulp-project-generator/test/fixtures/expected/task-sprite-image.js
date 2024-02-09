@@ -1,22 +1,17 @@
-/**
- * import modules
- */
-import {relative} from 'path';
+import { relative } from 'node:path';
 import gulp from 'gulp';
 import buildSprite from '@hidoo/gulp-task-build-sprite-image';
-
-/**
- * import modules - local
- */
-import * as config from '../config';
+import * as config from '../config.js';
 
 /**
  * url parameter for browser cache
  *
  * @type {String}
  */
-const cacheParameter = process.env.NODE_ENV === 'development' ? // eslint-disable-line node/no-process-env
-  '' : `?version=${config.pkg.version}`;
+const cacheParameter =
+  process.env.NODE_ENV === 'development' // eslint-disable-line node/no-process-env
+    ? ''
+    : `?version=${config.pkg.version}`;
 
 /**
  * relative path from css to sprite
@@ -43,20 +38,17 @@ function buildOptions(options = {}) {
 }
 
 // define main task
-export const main = buildSprite(buildOptions({
-  name: 'sprite:main',
-  src: `${config.path.srcSprite}/**/sample-*.png`,
-  imgName: 'sample.png',
-  cssName: '_sprite_sample.styl',
-  evenize: false
-}));
+export const main = buildSprite(
+  buildOptions({
+    name: 'sprite:main',
+    src: `${config.path.srcSprite}/**/sample-*.png`,
+    imgName: 'sample.png',
+    cssName: '_sprite_sample.styl',
+    evenize: false
+  })
+);
 
 // define watch task
 export const watch = () => {
-  gulp.watch(
-    [
-      `${config.path.srcSprite}/**/sample-*.png`
-    ],
-    main
-  );
+  gulp.watch([`${config.path.srcSprite}/**/sample-*.png`], main);
 };

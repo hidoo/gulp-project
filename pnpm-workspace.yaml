@@ -1,0 +1,6 @@
+packages:
+  - 'examples/**'
+  - 'packages/**'
+  - '!packages/**/builder'
+  - '!packages/**/template'
+  - '!packages/**/test'

@@ -3,8 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+# [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
+### Bug Fixes
+
+* **build-css-sass:** update dependencies and refactor buildCss ([1bbc0a9](https://github.com/hidoo/gulp-project/commit/1bbc0a9067450cd7352d777d86c64172392a595d))
+* **deps:** update dependency mocha to v10.2.0 ([f53abaa](https://github.com/hidoo/gulp-project/commit/f53abaa616be29bd40ce22bc6967c97fd4ac48c4))
+
+### Features
+
+* configure prettier ([73cfada](https://github.com/hidoo/gulp-project/commit/73cfadae6bb75bb1b6a640c1ecc3c6e6bbfb1f1a))
+
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
 
 ### Bug Fixes
 
@@ -22,17 +32,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency sass to v1.34.1 ([bf52d9f](https://github.com/hidoo/gulp-project/commit/bf52d9f5a95a5faca5010498b408ee43c76a470f))
 * **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
 
-
 ### Features
 
 * **build-css-sass:** add support for sass module system ([787cb80](https://github.com/hidoo/gulp-project/commit/787cb807b001f53676f0fdc6baf2df801c216a2c))
 
-
-
-
-
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
-
 
 ### Bug Fixes
 
@@ -43,20 +47,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency postcss-csso to v5 ([b933329](https://github.com/hidoo/gulp-project/commit/b93332954d06d0cbd5781fd65f191219b2b3358a))
 * **deps:** update dependency postcss-url to v10 ([58c9220](https://github.com/hidoo/gulp-project/commit/58c92203ad5cfd53663af4959dc7581bef550135))
 
-
-
-
-
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-css-sass
 
-
-
-
-
 # [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
-
 
 ### Bug Fixes
 
@@ -65,12 +60,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency autoprefixer to v9.8.6 ([370af25](https://github.com/hidoo/gulp-project/commit/370af253b212bd4543ea02cbd6aed8a8336a200f))
 * **deps:** update dependency gulp-sass to v4.1.0 ([8025afe](https://github.com/hidoo/gulp-project/commit/8025afebfb941c93e198313434a7e9660c8686d0))
 
-
-
-
-
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
-
 
 ### Bug Fixes
 
@@ -81,20 +71,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency uncss to v0.17.3 ([3035f51](https://github.com/hidoo/gulp-project/commit/3035f51fbbe2c70138eb85adb5dd09b22243f4a0))
 * **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
 
-
-
-
-
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-css-sass
 
-
-
-
-
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
-
 
 ### Bug Fixes
 
@@ -107,40 +88,22 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency uncss to v0.17.2 ([408775c](https://github.com/hidoo/gulp-project/commit/408775c8860e4bf669f3c76c1436741bfb23fef7))
 * **deps:** update do not automerge packages ([00783ae](https://github.com/hidoo/gulp-project/commit/00783ae5339799f124435f60a47bb0337a53a9fe))
 
-
-
-
-
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-css-sass
-
-
-
-
 
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-css-sass
 
-
-
-
-
 # [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
-
 
 ### Bug Fixes
 
 * **package:** update gulp-if to version 3.0.0 ([bc62233](https://github.com/hidoo/gulp-project/commit/bc62233))
 * **package:** update postcss-uncss to version 0.17.0 ([83cc3a5](https://github.com/hidoo/gulp-project/commit/83cc3a5))
 
-
-
-
-
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
-
 
 ### Features
 

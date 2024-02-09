@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-util-error-handler",
-  "version": "0.19.0",
+  "version": "1.0.0-alpha.0",
   "description": "Utility that handle task error for gulp.",
   "engines": {
     "node": ">=18.0.0"

@@ -16,7 +16,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @example
  * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-optimize-image';
  */
-export { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
+export { gifsicle, mozjpeg, optipng, svgo };
 
 /**
  * task default options.

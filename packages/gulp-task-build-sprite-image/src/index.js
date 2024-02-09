@@ -19,7 +19,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @example
  * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
  */
-export { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
+export { gifsicle, mozjpeg, optipng, svgo };
 
 /**
  * dirname

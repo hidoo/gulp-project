@@ -19,7 +19,7 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @example
  * import {svgo} from '@hidoo/gulp-task-build-sprite-svg';
  */
-export { svgo } from 'gulp-imagemin';
+export { svgo };
 
 /**
  * dirname

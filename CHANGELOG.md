@@ -3,8 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+# [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
+### Bug Fixes
+
+* **build-css-sass:** update dependencies and refactor buildCss ([1bbc0a9](https://github.com/hidoo/gulp-project/commit/1bbc0a9067450cd7352d777d86c64172392a595d))
+* **deps:** update dependency @hidoo/sass-importer to v0.6.0 ([f7b6018](https://github.com/hidoo/gulp-project/commit/f7b601853da5ef68c6f69ba2265a87b06f8c7d5e))
+* **deps:** update dependency @rollup/plugin-alias to v3.1.4 ([aadbfc2](https://github.com/hidoo/gulp-project/commit/aadbfc22d0bab9dace1891545ffae54b1887bc3b))
+* **deps:** update dependency @rollup/plugin-alias to v3.1.5 ([afedb8b](https://github.com/hidoo/gulp-project/commit/afedb8bebdc04171b7f29d3167c26230f6bf6628))
+* **deps:** update dependency @rollup/plugin-commonjs to v19.0.1 ([ca7b3b0](https://github.com/hidoo/gulp-project/commit/ca7b3b03b7204ca763cd0a91c6522d1829c766e0))
+* **deps:** update dependency @rollup/plugin-commonjs to v19.0.2 ([7a5b58f](https://github.com/hidoo/gulp-project/commit/7a5b58fb646196c3ee74201ca92717a03eb5177d))
+* **deps:** update dependency @rollup/plugin-commonjs to v21 ([f01edb8](https://github.com/hidoo/gulp-project/commit/f01edb8adc6e6a02a9677fde35ba8c070cad2d95))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13.0.2 ([e5d1d93](https://github.com/hidoo/gulp-project/commit/e5d1d9349e85e912ff2bc43f704c4d19b4020086))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13.0.3 ([f77b083](https://github.com/hidoo/gulp-project/commit/f77b083b8c2eda34c4b6e90f4525c830192b78db))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13.0.4 ([30258a0](https://github.com/hidoo/gulp-project/commit/30258a0d466c2a989f125d71d0b5f00b9604720d))
+* **deps:** update dependency @rollup/plugin-node-resolve to v13.0.5 ([ed7f4d5](https://github.com/hidoo/gulp-project/commit/ed7f4d5e6d950bc1577c7e469a0438d0e188d3d0))
+* **deps:** update dependency @rollup/plugin-replace to v3 ([0a431ac](https://github.com/hidoo/gulp-project/commit/0a431ac1b02d2fe1673f163375bcd1dd78a9d857))
+* **deps:** update dependency autoprefixer to v10.3.0 ([e8dfb96](https://github.com/hidoo/gulp-project/commit/e8dfb966ef8a410bebd86447e703fa2961ba0317))
+* **deps:** update dependency autoprefixer to v10.3.1 ([b870545](https://github.com/hidoo/gulp-project/commit/b8705453f52c0badf127d4f9831a6a02cba90806))
+* **deps:** update dependency autoprefixer to v10.3.2 ([5d8ace6](https://github.com/hidoo/gulp-project/commit/5d8ace6319125764af8c3ada1ce525963c384285))
+* **deps:** update dependency autoprefixer to v10.3.3 ([8b345db](https://github.com/hidoo/gulp-project/commit/8b345dbdb15a0575e887a585b25899744180b9fa))
+* **deps:** update dependency autoprefixer to v10.3.4 ([3ff1b84](https://github.com/hidoo/gulp-project/commit/3ff1b84c84ab8c74d8a1eaa9454f709be360e9ae))
+* **deps:** update dependency chalk to v4.1.2 ([235a95e](https://github.com/hidoo/gulp-project/commit/235a95ea976339e2aa0ba9a96216ceb8bc1dc423))
+* **deps:** update dependency chalk to v5.3.0 ([d4226d5](https://github.com/hidoo/gulp-project/commit/d4226d52e7b15f8261733dd29d285ead1b52304b))
+* **deps:** update dependency cheerio to v1.0.0-rc.10 ([796ea31](https://github.com/hidoo/gulp-project/commit/796ea3184d975bfa8d9852254dfa45eb56450fbd))
+* **deps:** update dependency cssom to v0.5.0 ([dee6129](https://github.com/hidoo/gulp-project/commit/dee612956c1c5421e99e63beb5af8c026b3034a8))
+* **deps:** update dependency eslint to v7.30.0 ([4a9f139](https://github.com/hidoo/gulp-project/commit/4a9f139f0673a5336cfc614b5aafed8907be87bc))
+* **deps:** update dependency eslint to v8 and dependents ([ad6a04c](https://github.com/hidoo/gulp-project/commit/ad6a04c7bd2a13cc1fe0c8fcd308329decf4016f))
+* **deps:** update dependency glob to v10.3.10 and tweaks dependents ([be431c7](https://github.com/hidoo/gulp-project/commit/be431c7c9c91fde43e6ecb13df18771713a69d7f))
+* **deps:** update dependency glob to v7.2.0 ([2094acf](https://github.com/hidoo/gulp-project/commit/2094acfef768ab302598ff5cd212d9f151b0c589))
+* **deps:** update dependency glob-parent to v6.0.1 ([af1709d](https://github.com/hidoo/gulp-project/commit/af1709d8df5f7b01c018b338a6f3df212556a7ac))
+* **deps:** update dependency glob-parent to v6.0.1 [security] ([b1ab592](https://github.com/hidoo/gulp-project/commit/b1ab5929c477adfd26b436ff9bc01b351247f3dc))
+* **deps:** update dependency glob-parent to v6.0.2 ([2530d09](https://github.com/hidoo/gulp-project/commit/2530d09418a2dbdb3406fae676e3d3dca8b5eddf))
+* **deps:** update dependency gulp-postcss to v9.0.1 ([1dcc2cd](https://github.com/hidoo/gulp-project/commit/1dcc2cd0a0fa7fb09ef0c6eeedd9f11c677bd20a))
+* **deps:** update dependency gulp-terser to v2.1.0 ([4e5c1fa](https://github.com/hidoo/gulp-project/commit/4e5c1faf821afaa8391a6f99d389b4b355bdfe7d))
+* **deps:** update dependency husky to v9.0.6 ([feb6de1](https://github.com/hidoo/gulp-project/commit/feb6de183ab00b0fe369a575640a07d8bccfa92e))
+* **deps:** update dependency inquirer to v8.1.1 ([ae3ff66](https://github.com/hidoo/gulp-project/commit/ae3ff666267b2e657e50625e29fb0ffc1e46d406))
+* **deps:** update dependency inquirer to v8.1.2 ([f07955e](https://github.com/hidoo/gulp-project/commit/f07955e15dea5b1c17252974ac8bb7ebe7f859ef))
+* **deps:** update dependency inquirer to v8.1.5 ([6df8e9d](https://github.com/hidoo/gulp-project/commit/6df8e9dbfc6ad10fd2dd61bc956fdae6535f69bd))
+* **deps:** update dependency mocha to v10.2.0 ([f53abaa](https://github.com/hidoo/gulp-project/commit/f53abaa616be29bd40ce22bc6967c97fd4ac48c4))
+* **deps:** update dependency postcss to v8.3.2 ([1af0394](https://github.com/hidoo/gulp-project/commit/1af03944e0059155cdc75ac6d58223dffae1814b))
+* **deps:** update dependency postcss to v8.3.5 ([b552e40](https://github.com/hidoo/gulp-project/commit/b552e40418875930c61275dfee8508a2545b22f7))
+* **deps:** update dependency postcss to v8.3.6 ([86b6cca](https://github.com/hidoo/gulp-project/commit/86b6cca7e8a8d79be7cae01fd8fd2711a9d10fc1))
+* **deps:** update dependency postcss to v8.3.7 ([38eb32e](https://github.com/hidoo/gulp-project/commit/38eb32ec4abf1168eaf13072d111f485b31b01c3))
+* **deps:** update dependency postcss to v8.3.8 ([46787b5](https://github.com/hidoo/gulp-project/commit/46787b5d9b1c059e4ad178b731b0bcb272052b26))
+* **deps:** update dependency rollup to v2.51.2 ([61d1cef](https://github.com/hidoo/gulp-project/commit/61d1cef20c155e9b0f796bbb1c894fb904b75fc4))
+* **deps:** update dependency rollup to v2.52.1 ([72f790e](https://github.com/hidoo/gulp-project/commit/72f790eac7b02843f3676a7a1326593e1ea634c6))
+* **deps:** update dependency rollup to v2.52.3 ([af3fe7d](https://github.com/hidoo/gulp-project/commit/af3fe7d86c7feb87c11c29ed308cf5c4341ff5e5))
+* **deps:** update dependency rollup to v2.52.7 ([78400a4](https://github.com/hidoo/gulp-project/commit/78400a4cde91bbbf1147384436ef9cb2638bcdbe))
+* **deps:** update dependency rollup to v2.53.0 ([227c873](https://github.com/hidoo/gulp-project/commit/227c873970c6f9b41735500a64d8305a7af449af))
+* **deps:** update dependency rollup to v2.53.1 ([469aefd](https://github.com/hidoo/gulp-project/commit/469aefdacc573e496f16fb6caff8074882362d3b))
+* **deps:** update dependency rollup to v2.53.2 ([a25048f](https://github.com/hidoo/gulp-project/commit/a25048f802e4947f36384351130699fd377469a7))
+* **deps:** update dependency rollup to v2.53.3 ([2e3b396](https://github.com/hidoo/gulp-project/commit/2e3b396b5484a44d43c3ace9dcbf9e8f267b6e27))
+* **deps:** update dependency sass to v1.35.1 ([cc8071c](https://github.com/hidoo/gulp-project/commit/cc8071c6e39b393e9e803745b9ce2b6719fd66ac))
+* **deps:** update dependency sass to v1.35.2 ([19f3d37](https://github.com/hidoo/gulp-project/commit/19f3d37ff1020059da36a4c6d5206cb885798ee0))
+* **deps:** update dependency sass to v1.44.0 ([ee50899](https://github.com/hidoo/gulp-project/commit/ee50899f60b1083feb96e7da64223998881fe468))
+* **deps:** update dependency save-pixels to v2.3.5 ([8bd24ca](https://github.com/hidoo/gulp-project/commit/8bd24ca11e6668960fb3e824d5928ad4a7d1da25))
+* **deps:** update dependency save-pixels to v2.3.6 ([29a37af](https://github.com/hidoo/gulp-project/commit/29a37af8a52f57dbde69e9e9f555618156367624))
+* **deps:** update dependency svg-sprite to v1.5.1 ([e3d0052](https://github.com/hidoo/gulp-project/commit/e3d00529ffd857d9d288a131838e5d653e390fd8))
+* **deps:** update dependency svg-sprite to v1.5.2 ([7f04c3c](https://github.com/hidoo/gulp-project/commit/7f04c3c8c6ff2904227e3862ea4f7ea15aa65ac1))
+* **deps:** update dependency svg-sprite to v1.5.3 ([33119cd](https://github.com/hidoo/gulp-project/commit/33119cd4fbb3d2f91b73d1ff986fa2ca186fd263))
+* fix issues for svg sprites ([a49698a](https://github.com/hidoo/gulp-project/commit/a49698aef370ed05f127189ead1545b6cb7cc23e))
+* **generator:** change dependencies to pin version in package.json ([a503d7d](https://github.com/hidoo/gulp-project/commit/a503d7da116564f2b73fad16453d07d7bd6da7ad))
+* **generator:** fix InvalidOptionArgumentError to InvalidArgumentError of commander ([c5d94c4](https://github.com/hidoo/gulp-project/commit/c5d94c45e246ea91f50635d81b7a09fe94dcf5f0))
+* **generator:** update eslintrc to use stylistic rules ([dd9a9d7](https://github.com/hidoo/gulp-project/commit/dd9a9d70454425160f22d0c1e6911ec458d502cd))
+* **generator:** update gitattributes template ([20480f5](https://github.com/hidoo/gulp-project/commit/20480f5a92491e0c938f4e45b09be37cf85718bc))
+
+### Features
+
+* configure prettier ([73cfada](https://github.com/hidoo/gulp-project/commit/73cfadae6bb75bb1b6a640c1ecc3c6e6bbfb1f1a))
+
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
 
 ### Bug Fixes
 
@@ -49,19 +118,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** remove node v8 support ([5395176](https://github.com/hidoo/gulp-project/commit/5395176120c9bd5527ad0000762e218ca418a8a6))
 * **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
 
-
 ### Features
 
 * **build-css-sass:** add support for sass module system ([787cb80](https://github.com/hidoo/gulp-project/commit/787cb807b001f53676f0fdc6baf2df801c216a2c))
 * **build-sprite-image:** add "sass:module" variation of options.cssPreprocessor ([6f6a46d](https://github.com/hidoo/gulp-project/commit/6f6a46daea47ac703bc01ba233db17f81e74d3c8))
 * **build-sprite-svg:** add "sass:module" variation of options.cssPreprocessor ([ac0b198](https://github.com/hidoo/gulp-project/commit/ac0b1980db561feecc80bd860af19be44acc3f62))
 
-
-
-
-
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
-
 
 ### Bug Fixes
 
@@ -75,29 +138,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency postcss-url to v10 ([58c9220](https://github.com/hidoo/gulp-project/commit/58c92203ad5cfd53663af4959dc7581bef550135))
 * **deps:** update dependency rollup to v2.44.0 ([a27245e](https://github.com/hidoo/gulp-project/commit/a27245e0874274cd9e81a566e4c0628595c650be))
 
-
-
-
-
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
-
 
 ### Bug Fixes
 
 * **optimize-image:** move webp process to after evenize ([78b58da](https://github.com/hidoo/gulp-project/commit/78b58dae995a0821601faf2201640b9deb40ccce))
-
 
 ### Features
 
 * **optimize-image:** add options.webp ([8ab7d15](https://github.com/hidoo/gulp-project/commit/8ab7d150478eed5a09fc7dea4da56552692f00e8))
 * **plugin:** add @hidoo/gulp-plugin-webp ([3aa8bf0](https://github.com/hidoo/gulp-project/commit/3aa8bf0d58972e00121691622b858bd4c9be7a99))
 
-
-
-
-
 # [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
-
 
 ### Bug Fixes
 
@@ -171,23 +223,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **merge-babelrc:** fix normalizeBabelPresets to complement preset opts ([19de5bb](https://github.com/hidoo/gulp-project/commit/19de5bb55555512e1cba630a5447b8591c37a170))
 * **util-merge-babelrc:** change to move targets field to top level ([7a220aa](https://github.com/hidoo/gulp-project/commit/7a220aa73134d570556eff8c7ebd69aaf72188c3))
 
-
 ### Features
 
 * **build-js-rollup:** update deps and support code splitting ([3bfa07e](https://github.com/hidoo/gulp-project/commit/3bfa07e816cb77825076f1b6cf12bc3c2dde8feb))
 * **node:** add node v14 support ([ae91c06](https://github.com/hidoo/gulp-project/commit/ae91c06821c1fb8d3f63f4cb357bcb103e27001d))
 
-
 ### Reverts
 
 * fix deps to exact version in packages ([b6ea59f](https://github.com/hidoo/gulp-project/commit/b6ea59fd4f852e0484faa8099a3c2fd2bb0cb35b))
 
-
-
-
-
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
-
 
 ### Bug Fixes
 
@@ -245,19 +290,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **plugin-image-evenizer:** fix to use FileType.fromBuffer ([db093dd](https://github.com/hidoo/gulp-project/commit/db093ddb269d9fd659aff234a73fb58cb30223e4))
 * **util-merge-babelrc:** fix checking of options.targets to more strict ([26819a4](https://github.com/hidoo/gulp-project/commit/26819a41c87d54182dc3f2f65eed9159289488b1))
 
-
 ### Features
 
 * **build-js-rollup:** add feature that convert .json to es6 modules ([913d2b8](https://github.com/hidoo/gulp-project/commit/913d2b841d55b2b4acc8317bac78e5ce996e1086))
 * **build-js-rollup:** add feature that resolve modules by alias ([6bf2054](https://github.com/hidoo/gulp-project/commit/6bf2054945d8c386d4792941c677db56297c23ca))
 * **generator:** add task for stylelint to npm-scripts ([8068fd2](https://github.com/hidoo/gulp-project/commit/8068fd2df653660fa7534a3a7efa1e1589989e38))
 
-
-
-
-
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
-
 
 ### Bug Fixes
 
@@ -269,12 +308,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency rollup to v1.26.5 ([4a51724](https://github.com/hidoo/gulp-project/commit/4a517249457b35dc761bb7440aaad01c6fc7d381))
 * **deps:** update dependency rollup to v1.27.0 ([16bf3ef](https://github.com/hidoo/gulp-project/commit/16bf3ef7322cfa20b7de9e2cb1d728683628b471))
 
-
-
-
-
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
-
 
 ### Bug Fixes
 
@@ -336,12 +370,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update do not automerge packages ([704649b](https://github.com/hidoo/gulp-project/commit/704649b0cd5068b38310bd4c93a84d25bc8e9c30))
 * **deps:** update do not automerge packages ([00783ae](https://github.com/hidoo/gulp-project/commit/00783ae5339799f124435f60a47bb0337a53a9fe))
 
-
-
-
-
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
-
 
 ### Bug Fixes
 
@@ -357,18 +386,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update commander to version 3.0.0 ([20dd0ec](https://github.com/hidoo/gulp-project/commit/20dd0ec))
 * **package:** update rollup-plugin-license to version 0.12.1 ([0b3bd90](https://github.com/hidoo/gulp-project/commit/0b3bd90)), closes [#340](https://github.com/hidoo/gulp-project/issues/340)
 
-
 ### Features
 
 * **generator:** add yarn.lock to .gitattributes ([af9c774](https://github.com/hidoo/gulp-project/commit/af9c774))
 * **generator:** use @hidoo/kss-builder if options.cssPreprocessor is sass ([844fa19](https://github.com/hidoo/gulp-project/commit/844fa19))
 
-
-
-
-
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
-
 
 ### Bug Fixes
 
@@ -376,17 +399,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** remove @babel/polyfill from dependencies ([466b1b6](https://github.com/hidoo/gulp-project/commit/466b1b6))
 * **package:** update rollup-plugin-license to version 0.10.0 ([4e87be7](https://github.com/hidoo/gulp-project/commit/4e87be7))
 
-
 ### Features
 
 * **generator:** add feature that generate files for stylelint ([e7d2272](https://github.com/hidoo/gulp-project/commit/e7d2272))
 
-
-
-
-
 # [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
-
 
 ### Bug Fixes
 
@@ -405,12 +422,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update postcss-uncss to version 0.17.0 ([83cc3a5](https://github.com/hidoo/gulp-project/commit/83cc3a5))
 * **package:** update postcss-uncss to version 0.17.0 ([6e8c135](https://github.com/hidoo/gulp-project/commit/6e8c135))
 
-
-
-
-
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
-
 
 ### Bug Fixes
 
@@ -421,7 +433,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update eslint to version 6.0.0 ([e3c6572](https://github.com/hidoo/gulp-project/commit/e3c6572))
 * **package:** update file-type to version 12.0.0 ([84ea96a](https://github.com/hidoo/gulp-project/commit/84ea96a))
 
-
 ### Features
 
 * **build-css-sass:** add node-sass-magic-importer as default importer ([eee5a5d](https://github.com/hidoo/gulp-project/commit/eee5a5d))
@@ -431,12 +442,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** add options.cssPreprocessor ([41ef543](https://github.com/hidoo/gulp-project/commit/41ef543))
 * **generator:** change config of husky and lint-staged to rc file ([6676b6e](https://github.com/hidoo/gulp-project/commit/6676b6e))
 
-
-
-
-
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
-
 
 ### Bug Fixes
 
@@ -458,48 +464,31 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update uncss to version 0.17.0 ([d1348ba](https://github.com/hidoo/gulp-project/commit/d1348ba))
 * **packages:** fix build error by documentation.js ([2275360](https://github.com/hidoo/gulp-project/commit/2275360))
 
-
 ### Features
 
 * **gulp-task-build-sprite-image:** add feature to optimized by mozjpeg ([cac498d](https://github.com/hidoo/gulp-project/commit/cac498d))
 * **gulp-task-build-sprite-svg:** add feature to be accessible to svgo ([4a25503](https://github.com/hidoo/gulp-project/commit/4a25503))
 * **gulp-task-optimize-image:** add feature to optimized by mozjpeg ([35f4f4e](https://github.com/hidoo/gulp-project/commit/35f4f4e))
 
-
-
-
-
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
-
 
 ### Bug Fixes
 
 * **gulp-task-build-styleguide-kss:** enable event bubbling in examples ([183362b](https://github.com/hidoo/gulp-project/commit/183362b))
 * **package:** update glob-parent to version 5.0.0 ([ea432e0](https://github.com/hidoo/gulp-project/commit/ea432e0)), closes [#212](https://github.com/hidoo/gulp-project/issues/212)
 
-
-
-
-
 ## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
-
 
 ### Bug Fixes
 
 * **util-merge-babelrc:** fix case that ignored merging presets ([e3bb406](https://github.com/hidoo/gulp-project/commit/e3bb406))
-
 
 ### Features
 
 * **gulp-task-build-js-browserify:** add corejs options ([ac0a127](https://github.com/hidoo/gulp-project/commit/ac0a127))
 * **gulp-task-build-js-rollup:** add corejs options ([40e77e3](https://github.com/hidoo/gulp-project/commit/40e77e3))
 
-
-
-
-
 ## [0.8.2](https://github.com/hidoo/gulp-project/compare/v0.8.1...v0.8.2) (2019-03-12)
-
 
 ### Bug Fixes
 
@@ -511,12 +500,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update get-stream to version 5.0.0 ([e01fff0](https://github.com/hidoo/gulp-project/commit/e01fff0))
 * **package:** update get-stream to version 5.0.0 ([aaa4a66](https://github.com/hidoo/gulp-project/commit/aaa4a66))
 
-
-
-
-
 ## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
-
 
 ### Bug Fixes
 
@@ -529,17 +513,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update rollup to version 1.0.2 ([856ea1e](https://github.com/hidoo/gulp-project/commit/856ea1e)), closes [#127](https://github.com/hidoo/gulp-project/issues/127)
 * **package:** update rollup-plugin-license to version 0.8.1 ([4b9889e](https://github.com/hidoo/gulp-project/commit/4b9889e)), closes [#143](https://github.com/hidoo/gulp-project/issues/143)
 
-
 ### Features
 
 * **gulp-task-build-js-rollup:** follow up version upgrade of rollup ([3f760ae](https://github.com/hidoo/gulp-project/commit/3f760ae))
 
-
-
-
-
 # [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
-
 
 ### Features
 
@@ -548,17 +526,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **gulp-project-generator:** update src files for server task ([990ce86](https://github.com/hidoo/gulp-project/commit/990ce86))
 * **gulp-task-build-css-stylus:** add options.url and options.urlOptions ([d61eed4](https://github.com/hidoo/gulp-project/commit/d61eed4))
 
-
-
-
-
 # [0.7.0](https://github.com/hidoo/gulp-project/compare/v0.6.2...v0.7.0) (2018-12-10)
-
 
 ### Bug Fixes
 
 * **package:** update rollup-plugin-node-resolve to version 4.0.0 ([e1fbd4e](https://github.com/hidoo/gulp-project/commit/e1fbd4e))
-
 
 ### Features
 
@@ -567,20 +539,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **gulp-task-build-js-rollup:** add options.suffix when compressed ([20889d0](https://github.com/hidoo/gulp-project/commit/20889d0))
 * **gulp-task-concat:** add options.suffix when compressed ([6848d7d](https://github.com/hidoo/gulp-project/commit/6848d7d))
 
-
-
-
-
 ## [0.6.2](https://github.com/hidoo/gulp-project/compare/v0.6.1...v0.6.2) (2018-10-26)
 
 **Note:** Version bump only for package @hidoo/gulp-project
 
-
-
-
-
 ## [0.6.1](https://github.com/hidoo/gulp-project/compare/v0.6.0...v0.6.1) (2018-10-26)
-
 
 ### Bug Fixes
 
@@ -590,29 +553,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.4.0 ([4ae7952](https://github.com/hidoo/gulp-project/commit/4ae7952))
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.4.0 ([7aa5594](https://github.com/hidoo/gulp-project/commit/7aa5594))
 
-
-
-
-
 # [0.6.0](https://github.com/hidoo/gulp-project/compare/v0.5.0...v0.6.0) (2018-10-23)
-
 
 ### Bug Fixes
 
 * **gulp-plugin-image-placeholder:** fix output to same dir as orig file ([f15564e](https://github.com/hidoo/gulp-project/commit/f15564e))
-
 
 ### Features
 
 * **gulp-task-optimize-image:** add options.placeholder ([9b80040](https://github.com/hidoo/gulp-project/commit/9b80040))
 * **packages:** add plugin that add image of placeholder for gulp ([33e456f](https://github.com/hidoo/gulp-project/commit/33e456f))
 
-
-
-
-
 # [0.5.0](https://github.com/hidoo/gulp-project/compare/v0.4.0...v0.5.0) (2018-10-16)
-
 
 ### Bug Fixes
 
@@ -622,18 +574,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.3.0 ([46f4466](https://github.com/hidoo/gulp-project/commit/46f4466))
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.3.0 ([e088a5d](https://github.com/hidoo/gulp-project/commit/e088a5d))
 
-
 ### Features
 
 * **gulp-project-generator:** remove highlight.js from server template ([e68a55f](https://github.com/hidoo/gulp-project/commit/e68a55f))
 * **gulp-task-build-styleguide-kss:** remove highlight.js from builder ([ffecd54](https://github.com/hidoo/gulp-project/commit/ffecd54))
 
-
-
-
-
 # [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
-
 
 ### Bug Fixes
 
@@ -645,7 +591,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([b38cba1](https://github.com/hidoo/gulp-project/commit/b38cba1))
 * **package:** update file-type to version 10.0.0 ([a35253a](https://github.com/hidoo/gulp-project/commit/a35253a))
 
-
 ### Features
 
 * **gulp-plugin-image-evenizer:** remove gm from dependencies ([8a821ce](https://github.com/hidoo/gulp-project/commit/8a821ce))
@@ -653,13 +598,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **gulp-task-optimize-image:** remove options.evenizeOptions ([83e25a5](https://github.com/hidoo/gulp-project/commit/83e25a5))
 * **packages:** change to accessible to imagemin plugins ([b028bf9](https://github.com/hidoo/gulp-project/commit/b028bf9))
 
-
 ### Reverts
 
 * **package:** fix to ignore browserify and babelify from greenkeeper ([ebf0cde](https://github.com/hidoo/gulp-project/commit/ebf0cde))
 * **package:** fix to ignore examples package from greenkeeper ([7931450](https://github.com/hidoo/gulp-project/commit/7931450))
 * **package:** fix to ignore kss builder package from greenkeeper ([019faf6](https://github.com/hidoo/gulp-project/commit/019faf6))
-
 
 ### BREAKING CHANGES
 
@@ -667,68 +610,42 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 update test case to add pixelmatch test
 add supported formats to README
 
-
-
-
-
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
-
 
 ### Bug Fixes
 
 * **packages:** fix .gitattributes template in gulp-project-generator ([51162d3](https://github.com/hidoo/gulp-project/commit/51162d3))
 * **packages:** fix config.js template in gulp-project-generator ([7382416](https://github.com/hidoo/gulp-project/commit/7382416))
 
-
 ### Features
 
 * **packages:** add server task to package.json in generated project ([b15e6dd](https://github.com/hidoo/gulp-project/commit/b15e6dd))
 * update husky to v1.0.1 and lint-staged to v7.3.0 ([297addb](https://github.com/hidoo/gulp-project/commit/297addb))
 
-
-
-
-
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/hidoo/gulp-project/compare/v0.2.0...v0.2.1) (2018-09-27)
-
 
 ### Bug Fixes
 
 * **packages:** fix display of config in gulp-project-generator ([6258c81](https://github.com/hidoo/gulp-project/commit/6258c81))
 
-
-
-
-
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/hidoo/gulp-project/compare/v0.1.1...v0.2.0) (2018-09-26)
-
 
 ### Features
 
 * **packages:** add --coventional-commits in gulp-project-generator ([f389c08](https://github.com/hidoo/gulp-project/commit/f389c08))
 
-
-
-
-
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/hidoo/gulp-project/compare/v0.1.0...v0.1.1) (2018-09-25)
-
 
 ### Bug Fixes
 
 * **packages:** add template dir to files field in gulp-project-generator ([258d0ff](https://github.com/hidoo/gulp-project/commit/258d0ff))
 
-
-
-
-
 <a name="0.1.0"></a>
 # 0.1.0 (2018-09-25)
-
 
 ### Bug Fixes
 
@@ -740,7 +657,6 @@ add supported formats to README
 * **packages:** fix mergeBabelrc to be should return merged all properties in argument source ([65777c8](https://github.com/hidoo/gulp-project/commit/65777c8))
 * **packages:** fix problem that write callback called multiple times in gulp-plugin-image-evenizer ([4605cc0](https://github.com/hidoo/gulp-project/commit/4605cc0))
 * **packages:** fix typo in gulp-task-build-js-browserify ([1917388](https://github.com/hidoo/gulp-project/commit/1917388))
-
 
 ### Features
 

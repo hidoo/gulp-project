@@ -3,8 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+# [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
+### Bug Fixes
+
+* **deps:** update dependency chalk to v5.3.0 ([d4226d5](https://github.com/hidoo/gulp-project/commit/d4226d52e7b15f8261733dd29d285ead1b52304b))
+* **deps:** update dependency eslint to v8 and dependents ([ad6a04c](https://github.com/hidoo/gulp-project/commit/ad6a04c7bd2a13cc1fe0c8fcd308329decf4016f))
+* **deps:** update dependency glob to v10.3.10 and tweaks dependents ([be431c7](https://github.com/hidoo/gulp-project/commit/be431c7c9c91fde43e6ecb13df18771713a69d7f))
+* **deps:** update dependency glob-parent to v6.0.1 [security] ([b1ab592](https://github.com/hidoo/gulp-project/commit/b1ab5929c477adfd26b436ff9bc01b351247f3dc))
+* **deps:** update dependency husky to v9.0.6 ([feb6de1](https://github.com/hidoo/gulp-project/commit/feb6de183ab00b0fe369a575640a07d8bccfa92e))
+* **deps:** update dependency mocha to v10.2.0 ([f53abaa](https://github.com/hidoo/gulp-project/commit/f53abaa616be29bd40ce22bc6967c97fd4ac48c4))
+* **generator:** change dependencies to pin version in package.json ([a503d7d](https://github.com/hidoo/gulp-project/commit/a503d7da116564f2b73fad16453d07d7bd6da7ad))
+* **generator:** fix InvalidOptionArgumentError to InvalidArgumentError of commander ([c5d94c4](https://github.com/hidoo/gulp-project/commit/c5d94c45e246ea91f50635d81b7a09fe94dcf5f0))
+* **generator:** update eslintrc to use stylistic rules ([dd9a9d7](https://github.com/hidoo/gulp-project/commit/dd9a9d70454425160f22d0c1e6911ec458d502cd))
+* **generator:** update gitattributes template ([20480f5](https://github.com/hidoo/gulp-project/commit/20480f5a92491e0c938f4e45b09be37cf85718bc))
+
+### Features
+
+* configure prettier ([73cfada](https://github.com/hidoo/gulp-project/commit/73cfadae6bb75bb1b6a640c1ecc3c6e6bbfb1f1a))
+
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
 
 ### Bug Fixes
 
@@ -18,28 +36,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** remove node v8 support ([5395176](https://github.com/hidoo/gulp-project/commit/5395176120c9bd5527ad0000762e218ca418a8a6))
 * **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
 
-
-
-
-
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
-
-
-
-
 
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 # [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
-
 
 ### Bug Fixes
 
@@ -65,12 +70,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** tweaks copy function ([7bcfa16](https://github.com/hidoo/gulp-project/commit/7bcfa16befd670db92f53a904e80395674758b15))
 * **generator:** update packages and fix babelrc ([d9de88a](https://github.com/hidoo/gulp-project/commit/d9de88a1c9497ff595a04c1599c8071dd06b6bc3))
 
-
-
-
-
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
-
 
 ### Bug Fixes
 
@@ -92,29 +92,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** change to use promise I/F of mkdirp ([914940d](https://github.com/hidoo/gulp-project/commit/914940d7b8d1d5804a599c9cde2070225cecfd71))
 * **generator:** remove node v8 support ([4ed30c9](https://github.com/hidoo/gulp-project/commit/4ed30c9780fca3415b3fe4c83535b245641a2877))
 
-
 ### Features
 
 * **generator:** add task for stylelint to npm-scripts ([8068fd2](https://github.com/hidoo/gulp-project/commit/8068fd2df653660fa7534a3a7efa1e1589989e38))
 
-
-
-
-
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
-
 
 ### Bug Fixes
 
 * **deps:** update dependency @hidoo/handlebars-helpers to v0.6.1 ([8cb2eca](https://github.com/hidoo/gulp-project/commit/8cb2eca7e0029077f2e3381c514c025d51b350d1))
 * **deps:** update dependency handlebars to v4.5.2 ([8911b37](https://github.com/hidoo/gulp-project/commit/8911b3777257796283c810e1bd1d3497b6dceb54))
 
-
-
-
-
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
-
 
 ### Bug Fixes
 
@@ -142,12 +131,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency mocha to v6.2.2 ([8e4b56a](https://github.com/hidoo/gulp-project/commit/8e4b56a9dd4e16cacc0edd138b65449ebecf3b43))
 * **deps:** update do not automerge packages ([00783ae](https://github.com/hidoo/gulp-project/commit/00783ae5339799f124435f60a47bb0337a53a9fe))
 
-
-
-
-
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
-
 
 ### Bug Fixes
 
@@ -157,42 +141,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update @hidoo/handlebars-helpers to version 0.6.0 ([c9056f2](https://github.com/hidoo/gulp-project/commit/c9056f2))
 * **package:** update commander to version 3.0.0 ([20dd0ec](https://github.com/hidoo/gulp-project/commit/20dd0ec))
 
-
 ### Features
 
 * **generator:** add yarn.lock to .gitattributes ([af9c774](https://github.com/hidoo/gulp-project/commit/af9c774))
 * **generator:** use @hidoo/kss-builder if options.cssPreprocessor is sass ([844fa19](https://github.com/hidoo/gulp-project/commit/844fa19))
 
-
-
-
-
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
-
 
 ### Bug Fixes
 
 * **package:** remove @babel/polyfill from dependencies ([466b1b6](https://github.com/hidoo/gulp-project/commit/466b1b6))
 
-
 ### Features
 
 * **generator:** add feature that generate files for stylelint ([e7d2272](https://github.com/hidoo/gulp-project/commit/e7d2272))
-
-
-
-
 
 # [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
-
 
 ### Bug Fixes
 
@@ -200,64 +168,36 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **generator:** fix formatCode and fix no-useless-catch error ([7358e14](https://github.com/hidoo/gulp-project/commit/7358e14))
 * **package:** update eslint to version 6.0.0 ([e3c6572](https://github.com/hidoo/gulp-project/commit/e3c6572))
 
-
 ### Features
 
 * **generator:** add options.cssPreprocessor ([41ef543](https://github.com/hidoo/gulp-project/commit/41ef543))
 * **generator:** change config of husky and lint-staged to rc file ([6676b6e](https://github.com/hidoo/gulp-project/commit/6676b6e))
 
-
-
-
-
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
-
 
 ### Bug Fixes
 
 * **package:** update glob-parent to version 5.0.0 ([ea432e0](https://github.com/hidoo/gulp-project/commit/ea432e0)), closes [#212](https://github.com/hidoo/gulp-project/issues/212)
 
-
-
-
-
 ## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 ## [0.8.2](https://github.com/hidoo/gulp-project/compare/v0.8.1...v0.8.2) (2019-03-12)
-
 
 ### Bug Fixes
 
 * **package:** update @hidoo/handlebars-helpers to version 0.5.0 ([9c3ba19](https://github.com/hidoo/gulp-project/commit/9c3ba19))
 
-
-
-
-
 ## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 # [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
-
 
 ### Features
 
@@ -265,130 +205,76 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **gulp-project-generator:** change "npm version" tasks ([68acf33](https://github.com/hidoo/gulp-project/commit/68acf33))
 * **gulp-project-generator:** update src files for server task ([990ce86](https://github.com/hidoo/gulp-project/commit/990ce86))
 
-
-
-
-
 # [0.7.0](https://github.com/hidoo/gulp-project/compare/v0.6.2...v0.7.0) (2018-12-10)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
-
-
-
-
 
 ## [0.6.2](https://github.com/hidoo/gulp-project/compare/v0.6.1...v0.6.2) (2018-10-26)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 ## [0.6.1](https://github.com/hidoo/gulp-project/compare/v0.6.0...v0.6.1) (2018-10-26)
-
 
 ### Bug Fixes
 
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.4.0 ([7aa5594](https://github.com/hidoo/gulp-project/commit/7aa5594))
 
-
-
-
-
 # [0.6.0](https://github.com/hidoo/gulp-project/compare/v0.5.0...v0.6.0) (2018-10-23)
 
 **Note:** Version bump only for package @hidoo/gulp-project-generator
 
-
-
-
-
 # [0.5.0](https://github.com/hidoo/gulp-project/compare/v0.4.0...v0.5.0) (2018-10-16)
-
 
 ### Bug Fixes
 
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.3.0 ([e088a5d](https://github.com/hidoo/gulp-project/commit/e088a5d))
 
-
 ### Features
 
 * **gulp-project-generator:** remove highlight.js from server template ([e68a55f](https://github.com/hidoo/gulp-project/commit/e68a55f))
 
-
-
-
-
 # [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
-
 
 ### Bug Fixes
 
 * **package:** update [@hidoo](https://github.com/hidoo)/handlebars-helpers to version 0.2.0 ([b38cba1](https://github.com/hidoo/gulp-project/commit/b38cba1))
 
-
-
-
-
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
-
 
 ### Bug Fixes
 
 * **packages:** fix .gitattributes template in gulp-project-generator ([51162d3](https://github.com/hidoo/gulp-project/commit/51162d3))
 * **packages:** fix config.js template in gulp-project-generator ([7382416](https://github.com/hidoo/gulp-project/commit/7382416))
 
-
 ### Features
 
 * **packages:** add server task to package.json in generated project ([b15e6dd](https://github.com/hidoo/gulp-project/commit/b15e6dd))
 * update husky to v1.0.1 and lint-staged to v7.3.0 ([297addb](https://github.com/hidoo/gulp-project/commit/297addb))
 
-
-
-
-
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/hidoo/gulp-project/compare/v0.2.0...v0.2.1) (2018-09-27)
-
 
 ### Bug Fixes
 
 * **packages:** fix display of config in gulp-project-generator ([6258c81](https://github.com/hidoo/gulp-project/commit/6258c81))
 
-
-
-
-
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/hidoo/gulp-project/compare/v0.1.1...v0.2.0) (2018-09-26)
-
 
 ### Features
 
 * **packages:** add --coventional-commits in gulp-project-generator ([f389c08](https://github.com/hidoo/gulp-project/commit/f389c08))
 
-
-
-
-
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/hidoo/gulp-project/compare/v0.1.0...v0.1.1) (2018-09-25)
-
 
 ### Bug Fixes
 
 * **packages:** add template dir to files field in gulp-project-generator ([258d0ff](https://github.com/hidoo/gulp-project/commit/258d0ff))
 
-
-
-
-
 <a name="0.1.0"></a>
 # 0.1.0 (2018-09-25)
-
 
 ### Features
 

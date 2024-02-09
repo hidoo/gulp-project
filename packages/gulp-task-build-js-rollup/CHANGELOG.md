@@ -3,8 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
+# [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
+### Bug Fixes
+
+* **deps:** update dependency eslint to v8 and dependents ([ad6a04c](https://github.com/hidoo/gulp-project/commit/ad6a04c7bd2a13cc1fe0c8fcd308329decf4016f))
+* **deps:** update dependency mocha to v10.2.0 ([f53abaa](https://github.com/hidoo/gulp-project/commit/f53abaa616be29bd40ce22bc6967c97fd4ac48c4))
+
+### Features
+
+* configure prettier ([73cfada](https://github.com/hidoo/gulp-project/commit/73cfadae6bb75bb1b6a640c1ecc3c6e6bbfb1f1a))
+
+# [0.19.0](https://github.com/hidoo/gulp-project/compare/v0.18.0...v0.19.0) (2021-06-09)
 
 ### Bug Fixes
 
@@ -19,32 +29,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency rollup-plugin-license to v2.5.0 ([a26dc7a](https://github.com/hidoo/gulp-project/commit/a26dc7a31cf0656979c5277c74a248e22fee604a))
 * **packages:** remove node v10 support ([23ce2ac](https://github.com/hidoo/gulp-project/commit/23ce2ac8fbae0ec0c00254e772d0c83a7b139ad8))
 
-
-
-
-
 # [0.18.0](https://github.com/hidoo/gulp-project/compare/v0.17.0...v0.18.0) (2021-04-07)
-
 
 ### Bug Fixes
 
 * **build-js-rollup:** change task to returns stream ([f4b2650](https://github.com/hidoo/gulp-project/commit/f4b2650b4ab4d20b489482cd59c9fc253162a64d))
 * **deps:** update dependency rollup to v2.44.0 ([a27245e](https://github.com/hidoo/gulp-project/commit/a27245e0874274cd9e81a566e4c0628595c650be))
 
-
-
-
-
 # [0.17.0](https://github.com/hidoo/gulp-project/compare/v0.16.0...v0.17.0) (2021-03-31)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 # [0.16.0](https://github.com/hidoo/gulp-project/compare/v0.15.0...v0.16.0) (2021-03-30)
-
 
 ### Bug Fixes
 
@@ -84,22 +80,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency through2 to v4 ([a152c88](https://github.com/hidoo/gulp-project/commit/a152c8870b65622b13a91d3897ba68acd90b99dc))
 * **deps:** update dependency vinyl to v2.2.1 ([631bd8b](https://github.com/hidoo/gulp-project/commit/631bd8b558b3eb5577854f5ad3e96b8a6e1aed6a))
 
-
 ### Features
 
 * **build-js-rollup:** update deps and support code splitting ([3bfa07e](https://github.com/hidoo/gulp-project/commit/3bfa07e816cb77825076f1b6cf12bc3c2dde8feb))
-
 
 ### Reverts
 
 * fix deps to exact version in packages ([b6ea59f](https://github.com/hidoo/gulp-project/commit/b6ea59fd4f852e0484faa8099a3c2fd2bb0cb35b))
 
-
-
-
-
 # [0.15.0](https://github.com/hidoo/gulp-project/compare/v0.14.1...v0.15.0) (2020-03-03)
-
 
 ### Bug Fixes
 
@@ -125,30 +114,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency rollup-plugin-license to v0.13.0 ([5c0015d](https://github.com/hidoo/gulp-project/commit/5c0015d66820fce935b4dbfb24c42ec83ae2901f))
 * **packages:** remove node v8 support ([750671b](https://github.com/hidoo/gulp-project/commit/750671b2df95f8dfe0da1a9bbe8940675cbdd487))
 
-
 ### Features
 
 * **build-js-rollup:** add feature that convert .json to es6 modules ([913d2b8](https://github.com/hidoo/gulp-project/commit/913d2b841d55b2b4acc8317bac78e5ce996e1086))
 * **build-js-rollup:** add feature that resolve modules by alias ([6bf2054](https://github.com/hidoo/gulp-project/commit/6bf2054945d8c386d4792941c677db56297c23ca))
 
-
-
-
-
 ## [0.14.1](https://github.com/hidoo/gulp-project/compare/v0.14.0...v0.14.1) (2019-11-21)
-
 
 ### Bug Fixes
 
 * **deps:** update dependency rollup to v1.26.5 ([4a51724](https://github.com/hidoo/gulp-project/commit/4a517249457b35dc761bb7440aaad01c6fc7d381))
 * **deps:** update dependency rollup to v1.27.0 ([16bf3ef](https://github.com/hidoo/gulp-project/commit/16bf3ef7322cfa20b7de9e2cb1d728683628b471))
 
-
-
-
-
 # [0.14.0](https://github.com/hidoo/gulp-project/compare/v0.13.0...v0.14.0) (2019-11-11)
-
 
 ### Bug Fixes
 
@@ -172,54 +150,30 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency rollup-plugin-replace to v2.2.0 ([f4fa3de](https://github.com/hidoo/gulp-project/commit/f4fa3de67fb71ad240c521fdae9cff994f841423))
 * **deps:** update do not automerge packages ([00783ae](https://github.com/hidoo/gulp-project/commit/00783ae5339799f124435f60a47bb0337a53a9fe))
 
-
-
-
-
 # [0.13.0](https://github.com/hidoo/gulp-project/compare/v0.12.0...v0.13.0) (2019-08-22)
-
 
 ### Bug Fixes
 
 * **package:** update rollup-plugin-license to version 0.12.1 ([0b3bd90](https://github.com/hidoo/gulp-project/commit/0b3bd90)), closes [#340](https://github.com/hidoo/gulp-project/issues/340)
 
-
-
-
-
 # [0.12.0](https://github.com/hidoo/gulp-project/compare/v0.11.0...v0.12.0) (2019-08-02)
-
 
 ### Bug Fixes
 
 * **package:** remove @babel/polyfill from dependencies ([466b1b6](https://github.com/hidoo/gulp-project/commit/466b1b6))
 * **package:** update rollup-plugin-license to version 0.10.0 ([4e87be7](https://github.com/hidoo/gulp-project/commit/4e87be7))
 
-
-
-
-
 # [0.11.0](https://github.com/hidoo/gulp-project/compare/v0.10.0...v0.11.0) (2019-07-19)
-
 
 ### Bug Fixes
 
 * **package:** update gulp-if to version 3.0.0 ([b179089](https://github.com/hidoo/gulp-project/commit/b179089))
 
-
-
-
-
 # [0.10.0](https://github.com/hidoo/gulp-project/compare/v0.9.0...v0.10.0) (2019-06-25)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 # [0.9.0](https://github.com/hidoo/gulp-project/compare/v0.8.4...v0.9.0) (2019-06-11)
-
 
 ### Bug Fixes
 
@@ -228,39 +182,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update rollup-plugin-license to version 0.9.0 ([4868fb9](https://github.com/hidoo/gulp-project/commit/4868fb9))
 * **package:** update rollup-plugin-node-resolve to version 5.0.1 ([ea349bf](https://github.com/hidoo/gulp-project/commit/ea349bf)), closes [#249](https://github.com/hidoo/gulp-project/issues/249)
 
-
-
-
-
 ## [0.8.4](https://github.com/hidoo/gulp-project/compare/v0.8.3...v0.8.4) (2019-04-08)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 ## [0.8.3](https://github.com/hidoo/gulp-project/compare/v0.8.2...v0.8.3) (2019-03-26)
-
 
 ### Features
 
 * **gulp-task-build-js-rollup:** add corejs options ([40e77e3](https://github.com/hidoo/gulp-project/commit/40e77e3))
 
-
-
-
-
 ## [0.8.2](https://github.com/hidoo/gulp-project/compare/v0.8.1...v0.8.2) (2019-03-12)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 ## [0.8.1](https://github.com/hidoo/gulp-project/compare/v0.8.0...v0.8.1) (2019-03-04)
-
 
 ### Bug Fixes
 
@@ -269,118 +205,66 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **package:** update rollup to version 1.0.2 ([856ea1e](https://github.com/hidoo/gulp-project/commit/856ea1e)), closes [#127](https://github.com/hidoo/gulp-project/issues/127)
 * **package:** update rollup-plugin-license to version 0.8.1 ([4b9889e](https://github.com/hidoo/gulp-project/commit/4b9889e)), closes [#143](https://github.com/hidoo/gulp-project/issues/143)
 
-
 ### Features
 
 * **gulp-task-build-js-rollup:** follow up version upgrade of rollup ([3f760ae](https://github.com/hidoo/gulp-project/commit/3f760ae))
-
-
-
-
 
 # [0.8.0](https://github.com/hidoo/gulp-project/compare/v0.7.0...v0.8.0) (2018-12-14)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 # [0.7.0](https://github.com/hidoo/gulp-project/compare/v0.6.2...v0.7.0) (2018-12-10)
-
 
 ### Bug Fixes
 
 * **package:** update rollup-plugin-node-resolve to version 4.0.0 ([e1fbd4e](https://github.com/hidoo/gulp-project/commit/e1fbd4e))
 
-
 ### Features
 
 * **gulp-task-build-js-rollup:** add options.suffix when compressed ([20889d0](https://github.com/hidoo/gulp-project/commit/20889d0))
-
-
-
-
 
 ## [0.6.2](https://github.com/hidoo/gulp-project/compare/v0.6.1...v0.6.2) (2018-10-26)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 ## [0.6.1](https://github.com/hidoo/gulp-project/compare/v0.6.0...v0.6.1) (2018-10-26)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
-
-
-
-
 
 # [0.6.0](https://github.com/hidoo/gulp-project/compare/v0.5.0...v0.6.0) (2018-10-23)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 # [0.5.0](https://github.com/hidoo/gulp-project/compare/v0.4.0...v0.5.0) (2018-10-16)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 # [0.4.0](https://github.com/hidoo/gulp-project/compare/v0.3.0...v0.4.0) (2018-10-12)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
-
-
-
-
 
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hidoo/gulp-project/compare/v0.2.1...v0.3.0) (2018-09-27)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/hidoo/gulp-project/compare/v0.2.0...v0.2.1) (2018-09-27)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
-
-
-
-
 
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/hidoo/gulp-project/compare/v0.1.1...v0.2.0) (2018-09-26)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/hidoo/gulp-project/compare/v0.1.0...v0.1.1) (2018-09-25)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-js-rollup
 
-
-
-
-
 <a name="0.1.0"></a>
 # 0.1.0 (2018-09-25)
-
 
 ### Features
 

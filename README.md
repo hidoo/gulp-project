@@ -1,6 +1,6 @@
 # gulp-project
 
-[![Status](https://github.com/hidoo/gulp-project/workflows/Main%20workflow/badge.svg)](https://github.com/hidoo/gulp-project/actions?query=branch%3Amaster)
+[![Test](https://github.com/hidoo/gulp-project/actions/workflows/test.yml/badge.svg)](https://github.com/hidoo/gulp-project/actions/workflows/test.yml)
 
 > This is the monorepo for gulp project packages.
 

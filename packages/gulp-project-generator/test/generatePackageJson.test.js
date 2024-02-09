@@ -18,7 +18,7 @@ async function readBuiltFile(file) {
       .toString()
       .trim()
       // eslint-disable-next-line prefer-named-capture-group
-      .replace(/"([^"]+)":\s+"\d+\.\d+\.\d+/g, '"$1": "<version>"')
+      .replace(/"([^"]+)":\s+"\d+\.\d+\.\d+.*/g, '"$1": "<version>"')
   );
 }
 
@@ -64,8 +64,6 @@ describe('generatePackageJson', () => {
 
     const actual = await readBuiltFile(`${destDir}/package.json`);
     const expected = await readBuiltFile(`${expectedDir}/pkg.json`);
-
-    console.log(actual, expected);
 
     assert(actual);
     assert.deepEqual(actual, expected);

@@ -27,7 +27,7 @@
     "cross-env": "7.0.3",
     "documentation": "14.0.3",
     "file-type": "19.0.0",
-    "get-pixels": "3.3.2",
+    "get-pixels": "3.3.3",
     "gulp": "4.0.2",
     "image-size": "1.1.1",
     "mocha": "10.2.0",

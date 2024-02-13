@@ -18,8 +18,12 @@
   "npm": {
     "packageRules": [
       {
-        "groupName": "lerna-lite",
-        "matchPackageNames": ["^@lerna-lite/"]
+        "groupName": "lerna-lite monorepo",
+        "matchPackagePatterns": ["^@lerna-lite/"]
+      },
+      {
+        "groupName": "ndarray packages",
+        "matchPackageNames": ["ndarray", "get-pixels", "save-pixels"]
       }
     ]
   }

@@ -2,15 +2,26 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
+    "group:allNonMajor",
     "schedule:earlyMondays",
-    ":pinAllExceptPeerDependencies",
     ":automergeMinor",
-    ":maintainLockFilesMonthly"
+    ":automergePr",
+    ":maintainLockFilesMonthly",
+    ":pinAllExceptPeerDependencies",
+    ":timezone(Asia/Tokyo)"
   ],
-  "timezone": "Asia/Tokyo",
   "labels": ["renovate"],
   "ignorePaths": [
     "packages/gulp-project-generator/test/fixtures/expected/**",
-    "packages/gulp-task-build-styleguide-kss/builder/**"
-  ]
+    "packages/gulp-task-build-styleguide-kss/builder/**",
+    "packages/gulp-task-build-styleguide-kss/test/fixtures/expected/**/*.html"
+  ],
+  "npm": {
+    "packageRules": [
+      {
+        "groupName": "lerna-lite",
+        "matchPackageNames": ["^@lerna-lite/"]
+      }
+    ]
+  }
 }

@@ -59,7 +59,7 @@ export default async function generatePackageJson(
     'gulp',
     'husky',
     'lint-staged',
-    'npm-run-all',
+    'npm-run-all2',
     'prettier'
   ];
 

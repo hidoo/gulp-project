@@ -57,7 +57,7 @@
     "lint-staged": "15.2.0",
     "mocha": "10.2.0",
     "npm-run-all2": "6.1.2",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "regenerator-runtime": "0.14.1",
     "stylelint": "15.11.0"
   },

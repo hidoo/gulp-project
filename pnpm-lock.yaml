@@ -997,8 +997,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       gulp-replace:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: 1.1.4
+        version: 1.1.4
       gulp-uglify:
         specifier: 3.0.2
         version: 3.0.2
@@ -3940,13 +3940,6 @@ packages:
 
   /@types/vinyl@2.0.11:
     resolution: {integrity: sha512-vPXzCLmRp74e9LsP8oltnWKTH+jBwt86WgRUb4Pc9Lf3pkMVGyvIo2gm9bODeGfCay2DBB/hAWDuvf07JcK4rw==}
-    dependencies:
-      '@types/expect': 1.20.4
-      '@types/node': 14.14.43
-    dev: false
-
-  /@types/vinyl@2.0.4:
-    resolution: {integrity: sha512-2o6a2ixaVI2EbwBPg1QYLGQoHK56p/8X/sGfKbFC8N6sY9lfjsMf/GprtkQkSya0D4uRiutRZ2BWj7k3JvLsAQ==}
     dependencies:
       '@types/expect': 1.20.4
       '@types/node': 14.14.43
@@ -8996,12 +8989,12 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /gulp-replace@1.1.3:
-    resolution: {integrity: sha512-HcPHpWY4XdF8zxYkDODHnG2+7a3nD/Y8Mfu3aBgMiCFDW3X2GiOKXllsAmILcxe3KZT2BXoN18WrpEFm48KfLQ==}
+  /gulp-replace@1.1.4:
+    resolution: {integrity: sha512-SVSF7ikuWKhpAW4l4wapAqPPSToJoiNKsbDoUnRrSgwZHH7lH8pbPeQj1aOVYQrbZKhfSVBxVW+Py7vtulRktw==}
     engines: {node: '>=10'}
     dependencies:
       '@types/node': 14.14.43
-      '@types/vinyl': 2.0.4
+      '@types/vinyl': 2.0.11
       istextorbinary: 3.3.0
       replacestream: 4.0.3
       yargs-parser: 21.1.1
@@ -9369,6 +9362,7 @@ packages:
 
   /hosted-git-info@2.8.8:
     resolution: {integrity: sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==}
+    requiresBuild: true
 
   /hosted-git-info@4.0.2:
     resolution: {integrity: sha512-c9OGXbZ3guC/xOlCg1Ci/VgWlwsqDv1yMQL1CWqXDL0hDjXuNcq0zuR4xqPSuasI3kqFDhqSyTjREz5gzq0fXg==}

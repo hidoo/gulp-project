@@ -29,7 +29,7 @@
     "lodash.chunk": "4.2.0",
     "ndarray": "1.0.19",
     "plugin-error": "2.0.1",
-    "save-pixels": "2.3.4",
+    "save-pixels": "2.3.6",
     "through2": "4.0.2"
   },
   "devDependencies": {

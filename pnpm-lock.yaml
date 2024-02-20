@@ -798,8 +798,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       gulp-terser:
-        specifier: 2.0.1
-        version: 2.0.1
+        specifier: 2.1.0
+        version: 2.1.0
       rollup:
         specifier: 4.9.6
         version: 4.9.6
@@ -2821,6 +2821,13 @@ packages:
   /@jridgewell/set-array@1.1.2:
     resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}
     engines: {node: '>=6.0.0'}
+
+  /@jridgewell/source-map@0.3.5:
+    resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/trace-mapping': 0.3.21
+    dev: false
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
@@ -9021,12 +9028,12 @@ packages:
       - supports-color
     dev: false
 
-  /gulp-terser@2.0.1:
-    resolution: {integrity: sha512-XCrnCXP8ovNpgLK9McJIXlgm0j3W2TsiWu7K9y3m+Sn5XZgUzi6U8MPHtS3NdLMic9poCj695N0ARJ2B6atypw==}
+  /gulp-terser@2.1.0:
+    resolution: {integrity: sha512-lQ3+JUdHDVISAlUIUSZ/G9Dz/rBQHxOiYDQ70IVWFQeh4b33TC1MCIU+K18w07PS3rq/CVc34aQO4SUbdaNMPQ==}
     engines: {node: '>=10'}
     dependencies:
       plugin-error: 1.0.1
-      terser: 5.4.0
+      terser: 5.27.2
       through2: 4.0.2
       vinyl-sourcemaps-apply: 0.2.1
     dev: false
@@ -14891,8 +14898,8 @@ packages:
       source-map-url: 0.4.1
       urix: 0.1.0
 
-  /source-map-support@0.5.19:
-    resolution: {integrity: sha512-Wonm7zOCIJzBGQdB+thsPar0kYuCIzYvxZwlBa87yi/Mdjv7Tip2cyVbLj5o0cFPN4EVkuTwb3GDDyUx2DGnGw==}
+  /source-map-support@0.5.21:
+    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
     dependencies:
       buffer-from: 1.1.1
       source-map: 0.6.1
@@ -15743,15 +15750,15 @@ packages:
       through2: 3.0.2
     dev: false
 
-  /terser@5.4.0:
-    resolution: {integrity: sha512-3dZunFLbCJis9TAF2VnX+VrQLctRUmt1p3W2kCsJuZE4ZgWqh//+1MZ62EanewrqKoUf4zIaDGZAvml4UDc0OQ==}
+  /terser@5.27.2:
+    resolution: {integrity: sha512-sHXmLSkImesJ4p5apTeT63DsV4Obe1s37qT8qvwHRmVxKTBH7Rv9Wr26VcAMmLbmk9UliiwK8z+657NyJHHy/w==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
+      '@jridgewell/source-map': 0.3.5
       acorn: 8.11.3
       commander: 2.20.3
-      source-map: 0.7.4
-      source-map-support: 0.5.19
+      source-map-support: 0.5.21
     dev: false
 
   /text-extensions@2.4.0:

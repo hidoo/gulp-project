@@ -32,7 +32,7 @@
   "license": "MIT",
   "devDependencies": {
     "cross-env": "7.0.3",
-    "mocha": "10.2.0"
+    "mocha": "10.3.0"
   },
   "dependencies": {
     "@hidoo/handlebars-helpers": "0.8.2",

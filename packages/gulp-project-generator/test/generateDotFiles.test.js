@@ -63,7 +63,7 @@ describe('generateDotFiles', () => {
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
-      ['.husky/pre-commit', '.husky-pre-commit'],
+      ['.githooks/pre-commit', '.githooks-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-main.json'],
       ['.mocharc.json', '.mocharc-main.json']
     ];
@@ -100,7 +100,7 @@ describe('generateDotFiles', () => {
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
-      ['.husky/pre-commit', '.husky-pre-commit'],
+      ['.githooks/pre-commit', '.githooks-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-main.json'],
       ['.mocharc.json', '.mocharc-main.json']
     ];
@@ -138,8 +138,8 @@ describe('generateDotFiles', () => {
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
       ['.gitignore', '.gitignore-main'],
-      ['.husky/commit-msg', '.husky-commit-msg'],
-      ['.husky/pre-commit', '.husky-pre-commit'],
+      ['.githooks/commit-msg', '.githooks-commit-msg'],
+      ['.githooks/pre-commit', '.githooks-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-main.json'],
       ['.mocharc.json', '.mocharc-main.json']
     ];
@@ -176,7 +176,7 @@ describe('generateDotFiles', () => {
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-sass'],
       ['.gitignore', '.gitignore-sass'],
-      ['.husky/pre-commit', '.husky-pre-commit'],
+      ['.githooks/pre-commit', '.githooks-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-sass.json'],
       ['.mocharc.json', '.mocharc-main.json'],
       ['.stylelintignore', '.stylelintignore'],
@@ -213,7 +213,7 @@ describe('generateDotFiles', () => {
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
       ['.gitignore', '.gitignore-main'],
-      ['.husky/pre-commit', '.husky-pre-commit'],
+      ['.githooks/pre-commit', '.githooks-pre-commit'],
       ['.lintstagedrc.json', '.lintstagedrc-main.json']
     ];
 

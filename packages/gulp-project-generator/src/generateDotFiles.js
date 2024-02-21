@@ -71,16 +71,16 @@ export default async function generateDotFiles(
     write(output, `${dest}/.prettierignore`, { verbose })
   );
 
-  await render(`${src}/.husky-pre-commit.hbs`, options).then((output) =>
-    write(output, `${dest}/.husky/pre-commit`, {
+  await render(`${src}/.githooks-pre-commit.hbs`, options).then((output) =>
+    write(output, `${dest}/.githooks/pre-commit`, {
       verbose,
       writeFile: { mode: parseInt('0755', 8) }
     })
   );
 
   if (options.conventionalCommits) {
-    await render(`${src}/.husky-commit-msg.hbs`, options).then((output) =>
-      write(output, `${dest}/.husky/commit-msg`, {
+    await render(`${src}/.githooks-commit-msg.hbs`, options).then((output) =>
+      write(output, `${dest}/.githooks/commit-msg`, {
         verbose,
         writeFile: { mode: parseInt('0755', 8) }
       })

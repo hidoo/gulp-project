@@ -9,7 +9,6 @@
 .eslintrc.json export-ignore
 .eslintignore export-ignore
 .babelrc.json export-ignore
-.huskyrc.json export-ignore
 .lintstagedrc.json export-ignore
 .stylelintrc.json export-ignore
 .stylelintignore export-ignore

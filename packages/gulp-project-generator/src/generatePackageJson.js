@@ -57,7 +57,6 @@ export default async function generatePackageJson(
     'cross-env',
     'eslint',
     'gulp',
-    'husky',
     'lint-staged',
     'npm-run-all2',
     'prettier'

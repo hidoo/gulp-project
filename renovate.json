@@ -1,15 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "schedule:earlyMondays",
-    ":automergeMinor",
-    ":automergePr",
-    ":maintainLockFilesMonthly",
-    ":pinAllExceptPeerDependencies",
-    ":timezone(Asia/Tokyo)"
-  ],
-  "labels": ["renovate"],
+  "extends": ["github>hidoo/renovate-config"],
   "ignorePaths": [
     "packages/gulp-project-generator/test/fixtures/expected/**",
     "packages/gulp-task-build-styleguide-kss/builder/**",
@@ -17,23 +8,6 @@
   ],
   "npm": {
     "packageRules": [
-      {
-        "groupName": "lerna-lite monorepo",
-        "matchSourceUrls": ["https://github.com/lerna-lite/lerna-lite"],
-        "matchUpdateTypes": ["digest", "patch", "minor", "major"],
-        "automerge": false
-      },
-      {
-        "extends": "monorepo:commitlint",
-        "groupName": "commitlint monorepo",
-        "matchUpdateTypes": ["digest", "patch", "minor", "major"],
-        "automerge": false
-      },
-      {
-        "groupName": "devtool packages",
-        "matchPackageNames": ["lint-staged"],
-        "automerge": false
-      },
       {
         "groupName": "ndarray packages",
         "matchPackageNames": ["ndarray", "get-pixels", "save-pixels"]

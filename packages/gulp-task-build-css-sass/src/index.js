@@ -8,17 +8,24 @@ import Vinyl from 'vinyl';
 import * as sass from 'sass';
 import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
-import autoprefixer from 'autoprefixer';
-import cssmqpacker from 'css-mqpacker';
-import uncss from 'postcss-uncss';
 import csso from 'postcss-csso';
-import url from 'postcss-url';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import gzip from 'gulp-gzip';
 import log from 'fancy-log';
 import sassImporter from '@hidoo/sass-importer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
+import configurePlugins, { defaultPlugins } from './configurePlugins.js';
+
+/**
+ * default plugins
+ *
+ * @type {Function}
+ *
+ * @example
+ * import { defaultPlugins } from '@hidoo/gulp-task-build-css-sass';
+ */
+export { defaultPlugins };
 
 // tweaks log date color like gulp log
 util.inspect.styles.date = 'grey';
@@ -72,77 +79,23 @@ const DEFAULT_OPTIONS = {
   dest: null,
   filename: 'main.css',
   suffix: '.min',
-  targets: ['> 0.5% in JP', 'ie >= 10', 'android >= 4.4'],
   banner: '',
   sassOptions: {
     outputStyle: 'expanded',
     functions: {},
     importer: []
   },
-  url: null,
-  urlOptions: {},
-  uncssTargets: [],
-  uncssIgnore: [],
-  additionalProcess: null,
+  postcssPlugins: null,
   compress: false
 };
 
 /**
- * promisifed sass.render
+ * promisified sass.render
  *
  * @param {Object} options options of sass.render
  * @return {Promise<Object>}
  */
 const render = util.promisify(sass.render).bind(sass);
-
-/**
- * get post css processes
- *
- * @param {DEFAULT_OPTIONS} options - options
- * @return {Array<Function>}
- */
-function getProcesses(options = {}) {
-  const processes = [
-    autoprefixer({
-      overrideBrowserslist: options.browsers || options.targets || []
-    }),
-    cssmqpacker
-  ];
-
-  // add post css process by postcss-url
-  if (
-    typeof options.url === 'string' &&
-    ['inline', 'copy', 'rebase'].includes(options.url)
-  ) {
-    processes.push(
-      url({
-        basePath: path.dirname(options.src),
-        ...options.urlOptions,
-        url: options.url
-      })
-    );
-  }
-
-  // add post css process if options.uncssTargets is valid
-  if (
-    Array.isArray(options.uncssTargets) &&
-    Boolean(options.uncssTargets.length)
-  ) {
-    processes.push(
-      uncss({
-        html: options.uncssTargets,
-        ignore: Array.isArray(options.uncssIgnore) ? options.uncssIgnore : []
-      })
-    );
-  }
-
-  // add post css process if options.additionalProcess is valid
-  if (typeof options.additionalProcess === 'function') {
-    processes.push(options.additionalProcess);
-  }
-
-  return processes;
-}
 
 /**
  * return css build task by sass
@@ -159,13 +112,7 @@ function getProcesses(options = {}) {
  * @param  {String} [options.banner=''] - license comments
  * @param  {Object} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
  *   see: {@link https://sass-lang.com/documentation/js-api#options sass options}
- * @param  {String} [options.url=null] - type of processing of url() (one of [inline|copy|rebase])
- *   see: {@link https://www.npmjs.com/package/postcss-url}
- * @param  {Object} [options.urlOptions={}] - options of processing of url()
- *   see: {@link https://www.npmjs.com/package/postcss-url#options-combinations}
- * @param  {Array<String>} [options.uncssTargets=[]] - array of html file path that target of uncss process
- * @param  {Array<String>} [options.uncssIgnore=[]] - array of selector that should not removed
- * @param  {Function<PostCSSRoot>} [options.additionalProcess=null] - additional PostCss process
+ * @param  {Object} [options.postcssPlugins=[]] - list of PostCSS plugin.
  * @param  {Boolean} [options.compress=false] - compress file or not
  * @return {Function<Stream>}
  *
@@ -182,11 +129,9 @@ function getProcesses(options = {}) {
  *   targets: ['> 0.1% in JP'],
  *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   sassOptions: {outputStyle: 'nested'},
- *   url: 'inline',
- *   urlOptions: {basePath: path.resolve(process.cwd(), 'src/images')},
- *   uncssTargets: ['/path/to/html/target.html'],
- *   uncssIgnore: ['.ignore-selector'],
- *   additionalProcess: (root) => root,
+ *   postcssPlugins: [
+ *     (root) => root
+ *   ],
  *   compress: true
  * }));
  */
@@ -202,7 +147,6 @@ export default function buildCss(options = {}) {
     const stream = through.obj();
     const filename = opts.filename || path.basename(opts.src);
     const sassOptions = opts.sassOptions || { functions: {}, importer: [] };
-    const processes = getProcesses(opts);
 
     (async () => {
       try {
@@ -237,11 +181,12 @@ export default function buildCss(options = {}) {
     })();
 
     return stream
-      .pipe(postcss(processes))
+      .pipe(postcss(configurePlugins(opts)))
       .pipe(header(opts.banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({ suffix })))
       .pipe(cond(compress, postcss([csso({ restructure: false })])))
+      .pipe(header(opts.banner, { pkg }))
+      .pipe(cond(compress, rename({ suffix })))
       .pipe(cond(compress, gulp.dest(opts.dest)))
       .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));

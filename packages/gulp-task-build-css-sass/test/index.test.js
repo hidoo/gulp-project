@@ -1,4 +1,4 @@
-/* eslint max-len: off, no-magic-numbers: off, max-statements: off */
+/* eslint max-statements: off */
 
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
@@ -112,6 +112,27 @@ describe('gulp-task-build-css-sass', () => {
     assert.equal(actual, expected);
   });
 
+  it('should out css file applied vendor-prefix by autoprefixer with .browserslistrc.', async () => {
+    const task = buildCss({
+      ...opts,
+      src: `${srcDir}/style.scss`,
+      compress: false
+    });
+    const cwd = process.cwd();
+
+    process.chdir(dirname);
+    await new Promise((resolve) => {
+      task().on('finish', resolve);
+    });
+    process.chdir(cwd);
+
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.browsers.css`);
+
+    assert(actual);
+    assert.equal(actual, expected);
+  });
+
   it('should out minified and compressed css file by options.compress.', async () => {
     const task = buildCss({
       ...opts,
@@ -184,57 +205,6 @@ describe('gulp-task-build-css-sass', () => {
     );
   });
 
-  it('should out css file not processed url() value without options.url.', async () => {
-    const task = buildCss({
-      ...opts,
-      src: `${srcDir}/style.url.scss`,
-      compress: false
-    });
-
-    await new Promise((resolve) => task().on('finish', resolve));
-
-    const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(`${expectedDir}/main.url-not-set.css`);
-
-    assert(actual);
-    assert.equal(actual, expected);
-  });
-
-  it('should out css file embed url() value by postcss-url and options.url.', async () => {
-    const task = buildCss({
-      ...opts,
-      src: `${srcDir}/style.url.scss`,
-      url: 'inline',
-      compress: false
-    });
-
-    await new Promise((resolve) => task().on('finish', resolve));
-
-    const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(`${expectedDir}/main.url.css`);
-
-    assert(actual);
-    assert.equal(actual, expected);
-  });
-
-  it('should out css file embed url() value with encode type by postcss-url and options.url.', async () => {
-    const task = buildCss({
-      ...opts,
-      src: `${srcDir}/style.url.scss`,
-      url: 'inline',
-      urlOptions: { encodeType: 'base64' },
-      compress: false
-    });
-
-    await new Promise((resolve) => task().on('finish', resolve));
-
-    const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(`${expectedDir}/main.url-options.css`);
-
-    assert(actual);
-    assert.equal(actual, expected);
-  });
-
   it('should out css file injected banner with options.banner.', async () => {
     const task = buildCss({
       ...opts,
@@ -252,30 +222,76 @@ describe('gulp-task-build-css-sass', () => {
     assert.equal(actual, expected);
   });
 
-  it('should out css file removed unused styles by postcss-uncss and options.uncssTargets.', async () => {
-    const task = buildCss({
-      ...opts,
-      src: `${srcDir}/style.scss`,
-      uncssTargets: [`${srcDir}/target.html`],
-      compress: false
+  context('with options.postcssPlugins', () => {
+    it('should out css file removed unused styles by postcss-uncss.', async () => {
+      const uncss = (await import('postcss-uncss')).default;
+      const task = buildCss({
+        ...opts,
+        src: `${srcDir}/style.scss`,
+        postcssPlugins(plugin, { current, last }) {
+          if (current === last) {
+            return [
+              plugin,
+              {
+                name: 'uncss',
+                factory: uncss,
+                config: {
+                  html: [`${srcDir}/target.html`]
+                }
+              }
+            ];
+          }
+          return plugin;
+        },
+        compress: false
+      });
+
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      const actual = await readBuiltFile(`${destDir}/main.css`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/main.remove-unused.css`
+      );
+
+      assert(actual);
+      assert.equal(actual, expected);
     });
 
-    await new Promise((resolve) => task().on('finish', resolve));
+    it('should out css file embed url() value by postcss-url.', async () => {
+      const url = (await import('postcss-url')).default;
+      const task = buildCss({
+        ...opts,
+        src: `${srcDir}/style.url.scss`,
+        postcssPlugins(plugin, { current, last }) {
+          if (current === last) {
+            return [
+              plugin,
+              {
+                name: 'url',
+                factory: url,
+                config: {
+                  url: 'inline',
+                  basePath: srcDir
+                }
+              }
+            ];
+          }
+          return plugin;
+        },
+        compress: false
+      });
 
-    const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(
-      `${expectedDir}/main.remove-unused.css`
-    );
+      await new Promise((resolve) => task().on('finish', resolve));
 
-    assert(actual);
-    assert.equal(actual, expected);
-  });
+      const actual = await readBuiltFile(`${destDir}/main.css`);
+      const expected = await readBuiltFile(`${expectedDir}/main.url.css`);
 
-  it('should out css file applied additional process with options.additionalProcess.', async () => {
-    const task = buildCss({
-      ...opts,
-      src: `${srcDir}/style.scss`,
-      additionalProcess(root) {
+      assert(actual);
+      assert.equal(actual, expected);
+    });
+
+    it('should out css file applied custom process.', async () => {
+      const customProcess = () => (root) => {
         root.walkRules(/\.block/, (rule) => {
           rule.selectors = rule.selectors.map((selector) =>
             selector.trim().replace(/\.block/, '.hoge')
@@ -283,19 +299,35 @@ describe('gulp-task-build-css-sass', () => {
         });
 
         return root;
-      },
-      compress: false
+      };
+      const task = buildCss({
+        ...opts,
+        src: `${srcDir}/style.scss`,
+        postcssPlugins(plugin, { current, last }) {
+          if (current === last) {
+            return [
+              plugin,
+              {
+                name: 'custom-process',
+                factory: customProcess
+              }
+            ];
+          }
+          return plugin;
+        },
+        compress: false
+      });
+
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      const actual = await readBuiltFile(`${destDir}/main.css`);
+      const expected = await readBuiltFile(
+        `${expectedDir}/main.post-process.css`
+      );
+
+      assert(actual);
+      assert.equal(actual, expected);
     });
-
-    await new Promise((resolve) => task().on('finish', resolve));
-
-    const actual = await readBuiltFile(`${destDir}/main.css`);
-    const expected = await readBuiltFile(
-      `${expectedDir}/main.post-process.css`
-    );
-
-    assert(actual);
-    assert.equal(actual, expected);
   });
 
   it('should not stop process if throw error.', async () => {
@@ -324,6 +356,16 @@ describe('gulp-task-build-css-sass', () => {
         assert.deepEqual(actual, expected);
         resolve();
       })();
+    });
+  });
+
+  describe('defaultPlugins', () => {
+    it('should named export as an Object.', async () => {
+      const { defaultPlugins } = await import('../src/index.js');
+      assert(
+        typeof defaultPlugins === 'object' &&
+          !(Array.isArray(defaultPlugins) && defaultPlugins === null)
+      );
     });
   });
 });

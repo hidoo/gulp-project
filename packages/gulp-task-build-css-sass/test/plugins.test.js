@@ -1,26 +1,17 @@
 import assert from 'node:assert';
-import configurePlugins, {
-  defaultPluginSettings,
-  defaultPlugins
-} from '../src/configurePlugins.js';
+import configure, {
+  settings,
+  autoprefixer,
+  cssmqpacker
+} from '../src/plugins.js';
 
-describe('configurePlugins', () => {
-  let autoprefixer = null;
-
-  before(async () => {
-    autoprefixer = (await import('autoprefixer')).default;
-  });
-
-  after(() => {
-    autoprefixer = null;
-  });
-
+describe('plugins', () => {
   it('should return configured plugins.', () => {
     const cases = [
       [
         'If no arguments specified:',
         undefined, // eslint-disable-line no-undefined
-        defaultPluginSettings.map(({ factory, config }) => factory(config))
+        settings.map(({ factory, config }) => factory(config))
       ],
       [
         'If empty array specified.',
@@ -52,7 +43,7 @@ describe('configurePlugins', () => {
             return { name, factory, config };
           }
         },
-        defaultPluginSettings.map(({ name, factory, config }) => {
+        settings.map(({ name, factory, config }) => {
           if (name === 'autoprefixer') {
             return { name: 'hoge' };
           }
@@ -84,7 +75,7 @@ describe('configurePlugins', () => {
             return { name, factory, config };
           }
         },
-        defaultPluginSettings
+        settings
           .map(({ name, factory, config }) => {
             if (name === 'autoprefixer') {
               return [{ name: 'hoge' }, { name: 'fuga' }];
@@ -96,7 +87,7 @@ describe('configurePlugins', () => {
     ];
 
     cases.forEach(([message, options, expected]) => {
-      const actual = configurePlugins(options);
+      const actual = configure(options);
 
       assert.deepEqual(
         actual.map(({ postcssPlugin }) => postcssPlugin),
@@ -106,18 +97,16 @@ describe('configurePlugins', () => {
     });
   });
 
-  describe('defaultPluginSettings', () => {
+  describe('settings', () => {
     it('should named export as an Array.', () => {
-      assert(Array.isArray(defaultPluginSettings));
+      assert(Array.isArray(settings));
     });
   });
 
-  describe('defaultPlugins', () => {
-    it('should named export as an Object.', () => {
-      assert(
-        typeof defaultPlugins === 'object' &&
-          !(Array.isArray(defaultPlugins) && defaultPlugins === null)
-      );
+  describe('exports postcss plugins', () => {
+    it('should be accessible to postcss plugins', async () => {
+      assert.equal((await import('autoprefixer')).default, autoprefixer);
+      assert.equal((await import('css-mqpacker')).default, cssmqpacker);
     });
   });
 });

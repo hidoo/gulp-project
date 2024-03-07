@@ -1,11 +1,11 @@
-/* eslint max-statements: off */
+/* eslint max-statements: off, node/no-process-env: off */
 
 import assert from 'node:assert';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
-import buildCss from '../src/index.js';
+import buildCss, { autoprefixer, cssmqpacker, csso } from '../src/index.js';
 
 /**
  * read built file
@@ -36,7 +36,7 @@ describe('gulp-task-build-css-sass', () => {
 
     opts = {
       dest: destDir,
-      verbose: false
+      verbose: Boolean(process.env.DEBUG)
     };
   });
 
@@ -359,13 +359,11 @@ describe('gulp-task-build-css-sass', () => {
     });
   });
 
-  describe('defaultPlugins', () => {
-    it('should named export as an Object.', async () => {
-      const { defaultPlugins } = await import('../src/index.js');
-      assert(
-        typeof defaultPlugins === 'object' &&
-          !(Array.isArray(defaultPlugins) && defaultPlugins === null)
-      );
+  describe('exports postcss plugins', () => {
+    it('should be accessible to postcss plugins', async () => {
+      assert.equal((await import('autoprefixer')).default, autoprefixer);
+      assert.equal((await import('css-mqpacker')).default, cssmqpacker);
+      assert.equal((await import('postcss-csso')).default, csso);
     });
   });
 });

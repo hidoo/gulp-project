@@ -1,79 +1,57 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import util from 'node:util';
 import gulp from 'gulp';
 import cond from 'gulp-if';
 import through from 'through2';
 import Vinyl from 'vinyl';
 import * as sass from 'sass';
-import magicImporter from 'node-sass-magic-importer';
 import postcss from 'gulp-postcss';
 import csso from 'postcss-csso';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import gzip from 'gulp-gzip';
-import log from 'fancy-log';
-import sassImporter from '@hidoo/sass-importer';
 import errorHandler from '@hidoo/gulp-util-error-handler';
-import configurePlugins, { defaultPlugins } from './configurePlugins.js';
+import configure, { autoprefixer, cssmqpacker } from './plugins.js';
+import functions from './functions.js';
+import * as importers from './importers.js';
+import log from './log.js';
 
 /**
- * default plugins
+ * Try to load package.json that on current working directory.
+ *
+ * @return {Object}
+ */
+function loadPackageJson() {
+  let pkg = {};
+
+  try {
+    pkg = JSON.parse(
+      // eslint-disable-next-line node/no-sync
+      fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+    );
+  } catch (error) {
+    log.error('Failed to load package.json.');
+  }
+
+  return pkg;
+}
+
+/**
+ * postcss plugins
  *
  * @type {Function}
  *
  * @example
- * import { defaultPlugins } from '@hidoo/gulp-task-build-css-sass';
+ * import { autoprefixer, cssmqpacker, csso } from '@hidoo/gulp-task-build-css-sass';
  */
-export { defaultPlugins };
-
-// tweaks log date color like gulp log
-util.inspect.styles.date = 'grey';
-
-let pkg = {};
-
-// try to load package.json that on current working directory
-try {
-  pkg = JSON.parse(
-    // eslint-disable-next-line node/no-sync
-    fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
-  );
-} catch (error) {
-  log.error('Failed to load package.json.');
-}
+export { autoprefixer, cssmqpacker, csso };
 
 /**
- * default custom sass functions
+ * Default options.
  *
  * @type {Object}
  */
-const DEFAULT_FUNCTIONS = {
-  /**
-   * add "env" function that get value from process.env
-   *
-   * @param {String} key key
-   * @param {Function} done callback function when call asynchronously
-   * @return {void|sass.compiler.types.String}
-   */
-  'env($key)': (key, done) => {
-    const name = key.getValue(),
-      result = new sass.types.String(
-        process.env[name] || '' // eslint-disable-line node/no-process-env
-      );
-
-    if (typeof done === 'function') {
-      return done(result);
-    }
-    return result;
-  }
-};
-
-/**
- * task default options.
- *
- * @type {Object}
- */
-const DEFAULT_OPTIONS = {
+export const defaultOptions = {
   name: 'build:css',
   src: null,
   dest: null,
@@ -81,44 +59,36 @@ const DEFAULT_OPTIONS = {
   suffix: '.min',
   banner: '',
   sassOptions: {
-    outputStyle: 'expanded',
-    functions: {},
-    importer: []
+    outputStyle: 'expanded'
   },
   postcssPlugins: null,
-  compress: false
+  compress: false,
+  verbose: false
 };
 
 /**
- * promisified sass.render
+ * Return css build task by sass
  *
- * @param {Object} options options of sass.render
- * @return {Promise<Object>}
- */
-const render = util.promisify(sass.render).bind(sass);
-
-/**
- * return css build task by sass
- *
- * @param  {Object} options - options
- * @param  {String} [options.name='build:css'] - task name (use as displayName)
- * @param  {String} options.src - source path
- * @param  {String} options.dest - destination path
- * @param  {String} [options.filename='main.css'] - destination filename
- * @param  {String} [options.suffix='.min'] - suffix when compressed
- * @param  {Array<String>} [options.targets] - target browsers.
+ * @param {Object} options - options
+ * @param {String} [options.name='build:css'] - task name (use as displayName)
+ * @param {String} options.src - source path
+ * @param {String} options.dest - destination path
+ * @param {String} [options.filename='main.css'] - destination filename
+ * @param {String} [options.suffix='.min'] - suffix when compressed
+ * @param {Array<String>} options.targets - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
- * @param  {Array<String>} [options.browsers] - alias of options.targets.
- * @param  {String} [options.banner=''] - license comments
- * @param  {Object} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
+ * @param {Array<String>} options.browsers - alias of options.targets.
+ * @param {String} [options.banner=''] - license comments
+ * @param {import('sass').Options} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
  *   see: {@link https://sass-lang.com/documentation/js-api#options sass options}
- * @param  {Object} [options.postcssPlugins=[]] - list of PostCSS plugin.
- * @param  {Boolean} [options.compress=false] - compress file or not
- * @return {Function<Stream>}
+ * @param {Object} [options.postcssPlugins=[]] - list of PostCSS plugin.
+ * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean} [options.verbose=false] - out debug log or not
+ * @return {Function<Transform>}
  *
  * @example
  * import {task} from 'gulp';
- * import buildCss from '@hidoo/gulp-task-build-css-sass';
+ * import buildCss, { autoprefixer } from '@hidoo/gulp-task-build-css-sass';
  *
  * task('css', buildCss({
  *   name: 'css:main',
@@ -130,6 +100,7 @@ const render = util.promisify(sass.render).bind(sass);
  *   banner: '/*! copyright <%= pkg.author %> * /\n',
  *   sassOptions: {outputStyle: 'nested'},
  *   postcssPlugins: [
+ *     autoprefixer(),
  *     (root) => root
  *   ],
  *   compress: true
@@ -137,29 +108,41 @@ const render = util.promisify(sass.render).bind(sass);
  */
 export default function buildCss(options = {}) {
   const opts = {
-    ...DEFAULT_OPTIONS,
+    ...defaultOptions,
     ...options
   };
 
   // define task
   const task = () => {
-    const { suffix, compress } = opts;
+    const { suffix, compress, verbose } = opts;
     const stream = through.obj();
+    const pkg = loadPackageJson();
     const filename = opts.filename || path.basename(opts.src);
-    const sassOptions = opts.sassOptions || { functions: {}, importer: [] };
+    const sassOptions = {
+      functions: {},
+      importers: [],
+      alertColor: true,
+      verbose,
+      ...opts.sassOptions
+    };
 
     (async () => {
       try {
-        const { css } = await render({
-          file: opts.src,
+        const { css, sourceMap } = await sass.compileAsync(opts.src, {
           ...sassOptions,
-          importer: [
-            sassImporter.default(),
-            magicImporter(),
-            ...sassOptions.importer
+          sourceMap: true,
+          sourceMapIncludeSources: true,
+          importers: [
+            new sass.NodePackageImporter(),
+            importers.compatSassImporter(),
+            importers.compatMagicImporter({
+              ...sassOptions,
+              includePaths: opts.src
+            }),
+            ...sassOptions.importers
           ],
           functions: {
-            ...DEFAULT_FUNCTIONS,
+            ...functions,
             ...sassOptions.functions
           }
         });
@@ -181,7 +164,7 @@ export default function buildCss(options = {}) {
     })();
 
     return stream
-      .pipe(postcss(configurePlugins(opts)))
+      .pipe(postcss(configure(opts)))
       .pipe(header(opts.banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
       .pipe(cond(compress, postcss([csso({ restructure: false })])))

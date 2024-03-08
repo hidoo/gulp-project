@@ -118,13 +118,13 @@ describe('gulp-task-build-css-sass', () => {
       src: `${srcDir}/style.scss`,
       compress: false
     });
-    const cwd = process.cwd();
 
-    process.chdir(dirname);
-    await new Promise((resolve) => {
-      task().on('finish', resolve);
-    });
-    process.chdir(cwd);
+    process.env.BROWSERSLIST_CONFIG = path.resolve(
+      expectedDir,
+      '.browserslistrc'
+    );
+    await new Promise((resolve) => task().on('finish', resolve));
+    process.env.BROWSERSLIST_CONFIG = '';
 
     const actual = await readBuiltFile(`${destDir}/main.css`);
     const expected = await readBuiltFile(`${expectedDir}/main.browsers.css`);

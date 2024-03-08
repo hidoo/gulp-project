@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import through from 'through2';
-import Vinyl from 'vinyl';
+import PluginError from 'plugin-error';
 import * as sass from 'sass';
 import postcss from 'gulp-postcss';
 import csso from 'postcss-csso';
@@ -19,18 +21,22 @@ import log from './log.js';
 /**
  * Try to load package.json that on current working directory.
  *
+ * @param {Boolean} verbose out debug log or not
  * @return {Object}
  */
-function loadPackageJson() {
+function loadPackageJson(verbose = false) {
+  const filename = path.resolve(process.cwd(), 'package.json');
   let pkg = {};
 
   try {
     pkg = JSON.parse(
       // eslint-disable-next-line node/no-sync
-      fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
+      fs.readFileSync(filename)
     );
   } catch (error) {
-    log.error('Failed to load package.json.');
+    if (verbose) {
+      log.error(`Failed to load package '${filename}':`, error);
+    }
   }
 
   return pkg;
@@ -76,11 +82,9 @@ export const defaultOptions = {
  * @param {String} [options.filename='main.css'] - destination filename
  * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {Array<String>} options.targets - target browsers.
- *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
  * @param {Array<String>} options.browsers - alias of options.targets.
  * @param {String} [options.banner=''] - license comments
  * @param {import('sass').Options} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
- *   see: {@link https://sass-lang.com/documentation/js-api#options sass options}
  * @param {Object} [options.postcssPlugins=[]] - list of PostCSS plugin.
  * @param {Boolean} [options.compress=false] - compress file or not
  * @param {Boolean} [options.verbose=false] - out debug log or not
@@ -115,29 +119,41 @@ export default function buildCss(options = {}) {
   // define task
   const task = () => {
     const { suffix, compress, verbose } = opts;
-    const stream = through.obj();
-    const pkg = loadPackageJson();
-    const filename = opts.filename || path.basename(opts.src);
-    const sassOptions = {
+    const pkg = loadPackageJson(verbose);
+    const pkgName = pkg.name || 'gulp-task-build-css-sass';
+    const extname = path.extname(opts.filename || opts.src);
+    const basename = path.basename(opts.filename || opts.src, extname);
+    const { sourceMap: sourcemaps, ...sassOptions } = {
       functions: {},
       importers: [],
-      alertColor: true,
+      sourceMap: false,
+      sourceMapIncludeSources: true,
       verbose,
       ...opts.sassOptions
     };
 
-    (async () => {
+    const compile = through.obj(async function transform(file, enc, done) {
+      if (file.isStream()) {
+        throw new PluginError(pkgName, 'Stream is not support.');
+      }
+      if (file.isNull()) {
+        return done(null, file);
+      }
+      if (!file.isBuffer()) {
+        return done(null, file);
+      }
+
       try {
-        const { css, sourceMap } = await sass.compileAsync(opts.src, {
+        const result = await sass.compileStringAsync(file.contents.toString(), {
           ...sassOptions,
-          sourceMap: true,
-          sourceMapIncludeSources: true,
+          url: pathToFileURL(file.path),
+          sourceMap: Boolean(sourcemaps),
           importers: [
             new sass.NodePackageImporter(),
             importers.compatSassImporter(),
             importers.compatMagicImporter({
               ...sassOptions,
-              includePaths: opts.src
+              includePaths: file.dirname
             }),
             ...sassOptions.importers
           ],
@@ -147,30 +163,38 @@ export default function buildCss(options = {}) {
           }
         });
 
-        // add code to stream as vinyl file
-        stream.push(
-          new Vinyl({
-            path: filename,
-            contents: Buffer.from(css)
-          })
-        );
+        file.contents = Buffer.from(result.css);
 
-        // add null that indicates write completion
-        stream.push(null);
+        if (sourcemaps && result.sourceMap) {
+          file.sourceMap = {
+            ...result.sourceMap,
+            sources: result.sourceMap.sources.map((source) =>
+              path.relative(file.relative, new URL(source).pathname)
+            ),
+            file: file.relative
+          };
+        }
+
+        // eslint-disable-next-line no-invalid-this
+        this.push(file);
+        return done();
       } catch (error) {
-        errorHandler(error);
-        stream.emit('end');
+        return done(new PluginError(pkgName, error));
       }
-    })();
+    });
 
-    return stream
+    return gulp
+      .src(opts.src, { sourcemaps: Boolean(sourcemaps) })
+      .pipe(plumber({ errorHandler }))
+      .pipe(compile)
+      .pipe(rename({ basename, extname }))
       .pipe(postcss(configure(opts)))
       .pipe(header(opts.banner, { pkg }))
-      .pipe(gulp.dest(opts.dest))
+      .pipe(gulp.dest(opts.dest, { sourcemaps }))
       .pipe(cond(compress, postcss([csso({ restructure: false })])))
       .pipe(header(opts.banner, { pkg }))
       .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
+      .pipe(cond(compress, gulp.dest(opts.dest, { sourcemaps })))
       .pipe(cond(compress, gzip({ append: true })))
       .pipe(cond(compress, gulp.dest(opts.dest)));
   };

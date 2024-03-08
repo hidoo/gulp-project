@@ -133,6 +133,26 @@ describe('gulp-task-build-css-sass', () => {
     assert.equal(actual, expected);
   });
 
+  it('should out css file with sourcemap file with options.sassOptions.sourceMap.', async () => {
+    const task = buildCss({
+      ...opts,
+      src: `${srcDir}/style.scss`,
+      sassOptions: {
+        sourceMap: '.'
+      },
+      compress: false
+    });
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    const actual = await readBuiltFile(`${destDir}/main.css`);
+    const expected = await readBuiltFile(`${expectedDir}/main.sourcemap.css`);
+
+    assert(actual);
+    assert(await readBuiltFile(`${destDir}/main.css.map`));
+    assert.equal(actual, expected);
+  });
+
   it('should out minified and compressed css file by options.compress.', async () => {
     const task = buildCss({
       ...opts,

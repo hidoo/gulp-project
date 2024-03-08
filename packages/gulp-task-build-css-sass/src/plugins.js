@@ -60,6 +60,12 @@ export default function configure(options = {}) {
     return postcssPlugins;
   }
 
+  const pluginInfo = (plugin) => {
+    if (typeof plugin.info === 'function' && options.verbose) {
+      log('Debug %s: %s', plugin.postcssPlugin, plugin.info());
+    }
+  };
+
   return settings
     .map((setting, index) => {
       if (typeof postcssPlugins === 'function') {
@@ -76,7 +82,10 @@ export default function configure(options = {}) {
             const { name, factory, config } = _settings;
 
             if (typeof factory === 'function') {
-              return factory(configureConfig(name, config, options));
+              const plugin = factory(configureConfig(name, config, options));
+
+              pluginInfo(plugin);
+              return plugin;
             }
             return null;
           })
@@ -84,8 +93,10 @@ export default function configure(options = {}) {
       }
 
       const { name, factory, config } = setting;
+      const plugin = factory(configureConfig(name, config, options));
 
-      return factory(configureConfig(name, config, options));
+      pluginInfo(plugin);
+      return plugin;
     })
     .flat();
 }

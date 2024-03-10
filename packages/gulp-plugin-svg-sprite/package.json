@@ -28,7 +28,7 @@
     "cssom": "0.5.0",
     "handlebars": "4.7.8",
     "plugin-error": "2.0.1",
-    "svg-sprite": "2.0.2",
+    "svg-sprite": "2.0.3",
     "through2": "4.0.2",
     "vinyl": "3.0.0"
   },

@@ -478,8 +478,8 @@ importers:
         specifier: 4.7.8
         version: 4.7.8
       inquirer:
-        specifier: 9.2.14
-        version: 9.2.14
+        specifier: 9.2.15
+        version: 9.2.15
       prettier:
         specifier: 3.2.5
         version: 3.2.5
@@ -2855,7 +2855,7 @@ packages:
       fs-extra: 11.2.0
       glob-parent: 6.0.2
       globby: 14.0.1
-      inquirer: 9.2.14
+      inquirer: 9.2.15
       is-ci: 3.0.1
       json5: 2.2.3
       load-json-file: 7.0.1
@@ -9657,8 +9657,8 @@ packages:
       source-map: 0.5.7
     dev: false
 
-  /inquirer@9.2.14:
-    resolution: {integrity: sha512-4ByIMt677Iz5AvjyKrDpzaepIyMewNvDcvwpVVRZNmy9dLakVoVgdCHZXbK1SlVJra1db0JZ6XkJyHsanpdrdQ==}
+  /inquirer@9.2.15:
+    resolution: {integrity: sha512-vI2w4zl/mDluHt9YEQ/543VTCwPKWiHzKtm9dM2V0NdFcqEexDAjUHzO1oA60HRNaVifGXXM1tRRNluLVHa0Kg==}
     engines: {node: '>=18'}
     dependencies:
       '@ljharb/through': 2.3.12

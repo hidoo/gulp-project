@@ -1,0 +1,28 @@
+.block {
+  padding: 10px;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  background-color: rgb(0, 0, 0);
+}
+.block__element {
+  padding: 10px;
+}
+.block--modifier {
+  padding: 10px;
+}
+
+.c__element {
+  margin: 10px;
+}
+.c--modifier {
+  padding: 10px;
+}
+@media (min-width: 500px) and (max-width: 600px) {
+  .block {
+    color: #fff;
+  }
+  .block {
+    font-size: 1rem;
+  }
+}
+/*# sourceMappingURL=main.css.map */

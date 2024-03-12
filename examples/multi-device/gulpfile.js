@@ -11,7 +11,6 @@ import * as styleguide from './task/styleguide.js';
 import server from './task/server.js';
 
 // print values of config
-/* eslint-disable node/no-process-env */
 console.log(
   chalk.gray.italic(`/**
  * ${config.pkg.name.toUpperCase()}
@@ -23,7 +22,6 @@ console.log(
  */
 `)
 );
-/* eslint-enable node/no-process-env */
 
 /**
  * clean dest task

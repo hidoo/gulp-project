@@ -10,6 +10,7 @@ describe('gulp-util-error-handler', () => {
   beforeEach(() => {
     spied = spy(log, 'error');
   });
+
   afterEach(() => {
     spied.restore();
   });

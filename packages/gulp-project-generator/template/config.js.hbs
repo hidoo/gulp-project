@@ -1,6 +1,6 @@
-/* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
+/* eslint no-magic-numbers: off, prefer-named-capture-group: off */
 
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 {{#if this.multiDevice}}
 import { Command, InvalidArgumentError } from 'commander';
 {{else}}
@@ -84,7 +84,7 @@ export const compress = opts.compress || process.env.NODE_ENV !== 'development' 
  *
  * @type {Object}
  */
-export const pkg = JSON.parse(fs.readFileSync('./package.json'));
+export const pkg = JSON.parse(await fs.readFile('./package.json'));
 
 /**
  * path settings

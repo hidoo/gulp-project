@@ -24,35 +24,6 @@ function isOdd(value = 0) {
 }
 
 /**
- * debug for ndarray of pixels
- *
- * @param {Vinyl} file vinyl of image file
- * @param {View4duint8} pixels ndarray of pixels
- * @return {void}
- */
-function debug(file, pixels) {
-  const hasFrames = pixels.shape.length === 4,
-    width = hasFrames ? pixels.shape[1] : pixels.shape[0],
-    channels = hasFrames ? pixels.shape[3] : pixels.shape[2],
-    data = chunk(chunk([...pixels.data], channels), width);
-
-  console.log(`
-    file: ${file.basename}
-    pixels:
-      shape: [${pixels.shape.join(', ')}]
-      stride: [${pixels.stride.join(', ')}]
-      offset: ${pixels.offset}
-      size: ${pixels.size}
-      order: ${pixels.order}
-      dimension: ${pixels.dimension}
-      data:
----
-${data.map((row) => row.map((el) => `[${el.join(' ')}]`).join(' ')).join('\n')}
----
-  `);
-}
-
-/**
  * plugin default options.
  *
  * @type {Object}

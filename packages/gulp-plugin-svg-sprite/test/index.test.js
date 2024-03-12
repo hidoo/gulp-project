@@ -6,7 +6,7 @@ import Vinyl from 'vinyl';
 import Handlebars from 'handlebars';
 import svgSprite from '../src/index.js';
 
-const DEBUG = false;
+const DEBUG = process.env.DEBUG;
 
 /**
  * convert svg contents to dataURL
@@ -53,12 +53,24 @@ describe('gulp-plugin-svg-sprite', () => {
       cssName: 'sample.styl',
       imgPath: './sample.svg'
     };
+    const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
+    const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
+    const stream = svgSprite({ ...opts });
 
-    await new Promise(async (resolve, reject) => {
-      const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
-      const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
-      const stream = svgSprite({ ...opts });
+    await Promise.all(
+      files.map(async (file) => {
+        stream.write(
+          new Vinyl({
+            path: file,
+            contents: await fs.readFile(file)
+          })
+        );
+      })
+    );
 
+    stream.end();
+
+    await new Promise((resolve, reject) => {
       stream.on('end', resolve);
       stream.on('error', reject);
 
@@ -87,19 +99,6 @@ describe('gulp-plugin-svg-sprite', () => {
         assert(file.contents.toString().includes(opts.imgPath));
         assert.deepEqual(actual.toString().trim(), expectedCss);
       });
-
-      await Promise.all(
-        files.map(async (file) => {
-          stream.write(
-            new Vinyl({
-              path: file,
-              contents: await fs.readFile(file)
-            })
-          );
-        })
-      );
-
-      stream.end();
     });
   });
 
@@ -111,11 +110,24 @@ describe('gulp-plugin-svg-sprite', () => {
       padding: 10
     };
 
-    await new Promise(async (resolve, reject) => {
-      const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
-      const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
-      const stream = svgSprite({ ...opts });
+    const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
+    const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
+    const stream = svgSprite({ ...opts });
 
+    await Promise.all(
+      files.map(async (file) => {
+        stream.write(
+          new Vinyl({
+            path: file,
+            contents: await fs.readFile(file)
+          })
+        );
+      })
+    );
+
+    stream.end();
+
+    await new Promise((resolve, reject) => {
       stream.on('end', resolve);
       stream.on('error', reject);
 
@@ -144,19 +156,6 @@ describe('gulp-plugin-svg-sprite', () => {
         assert(file.contents.toString().includes(opts.imgPath));
         assert.deepEqual(actual.toString().trim(), expectedCss);
       });
-
-      await Promise.all(
-        files.map(async (file) => {
-          stream.write(
-            new Vinyl({
-              path: file,
-              contents: await fs.readFile(file)
-            })
-          );
-        })
-      );
-
-      stream.end();
     });
   });
 
@@ -167,12 +166,24 @@ describe('gulp-plugin-svg-sprite', () => {
       imgPath: './sample.layout.svg',
       layout: 'vertical'
     };
+    const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
+    const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
+    const stream = svgSprite({ ...opts });
 
-    await new Promise(async (resolve, reject) => {
-      const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
-      const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
-      const stream = svgSprite({ ...opts });
+    await Promise.all(
+      files.map(async (file) => {
+        stream.write(
+          new Vinyl({
+            path: file,
+            contents: await fs.readFile(file)
+          })
+        );
+      })
+    );
 
+    stream.end();
+
+    await new Promise((resolve, reject) => {
       stream.on('end', resolve);
       stream.on('error', reject);
 
@@ -201,19 +212,6 @@ describe('gulp-plugin-svg-sprite', () => {
         assert(file.contents.toString().includes(opts.imgPath));
         assert.deepEqual(actual.toString().trim(), expectedCss);
       });
-
-      await Promise.all(
-        files.map(async (file) => {
-          stream.write(
-            new Vinyl({
-              path: file,
-              contents: await fs.readFile(file)
-            })
-          );
-        })
-      );
-
-      stream.end();
     });
   });
 
@@ -224,12 +222,24 @@ describe('gulp-plugin-svg-sprite', () => {
       imgPath: './sample.template.svg',
       cssTemplate: `${srcDir}/template.hbs`
     };
+    const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
+    const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
+    const stream = svgSprite({ ...opts });
 
-    await new Promise(async (resolve, reject) => {
-      const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
-      const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
-      const stream = svgSprite({ ...opts });
+    await Promise.all(
+      files.map(async (file) => {
+        stream.write(
+          new Vinyl({
+            path: file,
+            contents: await fs.readFile(file)
+          })
+        );
+      })
+    );
 
+    stream.end();
+
+    await new Promise((resolve, reject) => {
       stream.on('end', resolve);
       stream.on('error', reject);
 
@@ -258,19 +268,6 @@ describe('gulp-plugin-svg-sprite', () => {
         assert(file.contents.toString().includes(opts.imgPath));
         assert.deepEqual(actual.toString().trim(), expectedCss);
       });
-
-      await Promise.all(
-        files.map(async (file) => {
-          stream.write(
-            new Vinyl({
-              path: file,
-              contents: await fs.readFile(file)
-            })
-          );
-        })
-      );
-
-      stream.end();
     });
   });
 
@@ -284,12 +281,24 @@ describe('gulp-plugin-svg-sprite', () => {
         wrapBrackets: (value) => new Handlebars.SafeString(`[[ ${value} ]]`)
       }
     };
+    const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
+    const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
+    const stream = svgSprite({ ...opts });
 
-    await new Promise(async (resolve, reject) => {
-      const expectedSvg = await readBuiltFile(`${expectedDir}/${opts.imgName}`);
-      const expectedCss = await readBuiltFile(`${expectedDir}/${opts.cssName}`);
-      const stream = svgSprite({ ...opts });
+    await Promise.all(
+      files.map(async (file) => {
+        stream.write(
+          new Vinyl({
+            path: file,
+            contents: await fs.readFile(file)
+          })
+        );
+      })
+    );
 
+    stream.end();
+
+    await new Promise((resolve, reject) => {
       stream.on('end', resolve);
       stream.on('error', reject);
 
@@ -318,19 +327,6 @@ describe('gulp-plugin-svg-sprite', () => {
         assert(file.contents.toString().includes(opts.imgPath));
         assert.deepEqual(actual.toString().trim(), expectedCss);
       });
-
-      await Promise.all(
-        files.map(async (file) => {
-          stream.write(
-            new Vinyl({
-              path: file,
-              contents: await fs.readFile(file)
-            })
-          );
-        })
-      );
-
-      stream.end();
     });
   });
 });

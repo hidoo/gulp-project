@@ -9,7 +9,7 @@ import * as config from '../config.js';
  * @type {String}
  */
 const cacheParameter =
-  process.env.NODE_ENV === 'development' // eslint-disable-line node/no-process-env
+  process.env.NODE_ENV === 'development'
     ? ''
     : `?version=${config.pkg.version}`;
 

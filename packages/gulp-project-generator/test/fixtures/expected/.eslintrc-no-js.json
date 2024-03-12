@@ -4,10 +4,16 @@
   "extends": ["@hidoo/eslint-config", "@hidoo/eslint-config/+prettier"],
   "overrides": [
     {
-      "files": ["src/server/**/*.js", "task/**/*.js", "gulpfile.js"],
+      "files": [
+        "src/server/**/*.js",
+        "task/**/*.js",
+        "config.js",
+        "gulpfile.js"
+      ],
       "extends": ["@hidoo/eslint-config/+node"],
       "rules": {
-        "node/file-extension-in-import": ["error", "always"]
+        "node/file-extension-in-import": ["error", "always"],
+        "node/no-process-env": "off"
       }
     }
   ]

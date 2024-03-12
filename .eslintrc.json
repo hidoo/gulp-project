@@ -36,7 +36,8 @@
         "mocha/no-hooks-for-single-case": "off",
         "mocha/no-setup-in-describe": "off",
         "node/file-extension-in-import": ["error", "always"],
-        "node/no-sync": "off"
+        "node/no-sync": "off",
+        "node/no-process-env": "off"
       }
     },
     {
@@ -46,6 +47,7 @@
       ],
       "rules": {
         "no-console": "error",
+        "node/no-process-env": "off",
         "import/no-unresolved": "off"
       }
     },
@@ -57,6 +59,15 @@
       },
       "rules": {
         "node/file-extension-in-import": ["error", "never"]
+      }
+    },
+    {
+      "files": ["packages/gulp-task-build-styleguide-kss/builder/builder.js"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "node/no-process-env": "off"
       }
     }
   ]

@@ -16,8 +16,6 @@ describe('functions', () => {
       const actual = functions['env($name)']([new sass.SassString('NODE_ENV')]);
 
       assert(actual instanceof sass.SassString);
-
-      // eslint-disable-next-line node/no-process-env
       assert.equal(actual.text, process.env.NODE_ENV);
     });
   });

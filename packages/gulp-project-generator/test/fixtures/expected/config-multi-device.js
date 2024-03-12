@@ -1,6 +1,6 @@
-/* eslint max-len: off, no-magic-numbers: off, no-process-env: off, prefer-named-capture-group: off */
+/* eslint no-magic-numbers: off, prefer-named-capture-group: off */
 
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import { Command, InvalidArgumentError } from 'commander';
 
 /**
@@ -73,7 +73,7 @@ export const compress =
  *
  * @type {Object}
  */
-export const pkg = JSON.parse(fs.readFileSync('./package.json'));
+export const pkg = JSON.parse(await fs.readFile('./package.json'));
 
 /**
  * path settings

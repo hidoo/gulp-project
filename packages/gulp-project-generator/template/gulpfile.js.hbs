@@ -25,7 +25,6 @@ import * as config from './config.js';
 {{/if}}
 
 // print values of config
-/* eslint-disable node/no-process-env */
 console.log(chalk.gray.italic(`/**
  * ${config.pkg.name.toUpperCase()}
  * ${config.pkg.description || '(no description)'}
@@ -35,7 +34,6 @@ console.log(chalk.gray.italic(`/**
  * @type {Boolean} compress ${chalk.yellow(config.compress)}
  */
 `));
-/* eslint-enable node/no-process-env */
 
 /**
  * clean dest task

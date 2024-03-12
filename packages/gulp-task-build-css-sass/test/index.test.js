@@ -1,4 +1,4 @@
-/* eslint max-statements: off, node/no-process-env: off */
+/* eslint max-statements: off */
 
 import assert from 'node:assert';
 import fs from 'node:fs/promises';

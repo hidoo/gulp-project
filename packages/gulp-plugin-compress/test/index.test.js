@@ -55,7 +55,7 @@ describe('gulp-plugin-compress', () => {
   let files = null;
   let opts = null;
 
-  before(() => {
+  before(async () => {
     dirname = path.dirname(fileURLToPath(import.meta.url));
     srcDir = path.resolve(dirname, 'fixtures', 'src');
     destDir = path.resolve(dirname, 'fixtures', 'dest');
@@ -66,6 +66,11 @@ describe('gulp-plugin-compress', () => {
     opts = {
       verbose: DEBUG
     };
+    try {
+      await fs.stat(destDir);
+    } catch (err) {
+      await fs.mkdir(destDir);
+    }
   });
 
   beforeEach(async () => {
@@ -80,8 +85,10 @@ describe('gulp-plugin-compress', () => {
     );
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     files = null;
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
   context('by default.', () => {
@@ -328,6 +335,57 @@ describe('gulp-plugin-compress', () => {
             assert.deepEqual(
               await decompress(file),
               originals[`${file.stem}.${file.stem.split('-')[1]}`],
+              `File ${file.stem} is losslessly compressed.`
+            );
+          }
+
+          if (DEBUG) {
+            await fs.writeFile(
+              path.resolve(destDir, file.basename),
+              file.contents
+            );
+          }
+        })
+      );
+    });
+  });
+
+  context("options.targetExtnames is ['.html'].", () => {
+    it('should out compressed files without files not subject extnames.', async () => {
+      const plugin = compress({ ...opts, targetExtnames: ['.html'] });
+      const promise = new Promise((resolve, reject) => {
+        plugin.on('end', resolve);
+        plugin.on('error', reject);
+      });
+      const originals = {};
+      const outputs = [];
+
+      plugin.on('data', (file) => outputs.push(file));
+      files.forEach((file) => {
+        plugin.write(file);
+        originals[file.basename] = file.contents;
+      });
+      plugin.end();
+
+      await promise;
+
+      assert.deepEqual(
+        outputs.map(({ basename }) => basename),
+        [
+          'example-html.html',
+          'example-html.html.gz',
+          'example-html.html.br',
+          'example-txt.txt'
+        ],
+        'Output files without files not subject extnames.'
+      );
+
+      await Promise.all(
+        outputs.map(async (file) => {
+          if (hasCompressedFileExtname(file)) {
+            assert.deepEqual(
+              await decompress(file),
+              originals[file.stem],
               `File ${file.stem} is losslessly compressed.`
             );
           }

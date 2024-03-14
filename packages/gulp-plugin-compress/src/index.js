@@ -136,6 +136,15 @@ export default function compress(options = {}) {
       if (file.isNull() || !file.isBuffer()) {
         return done(null, file);
       }
+      if (!opts.targetExtnames.includes(file.extname)) {
+        if (opts.verbose) {
+          log(
+            `${PLUGIN_NAME}:`,
+            `${chalk.cyan('!')} ${file.relative} is skipped.`
+          );
+        }
+        return done(null, file);
+      }
 
       // eslint-disable-next-line no-invalid-this, consistent-this
       const stream = this;

@@ -300,6 +300,37 @@ importers:
         specifier: 15.11.0
         version: 15.11.0(typescript@5.3.3)
 
+  packages/gulp-plugin-compress:
+    dependencies:
+      chalk:
+        specifier: 5.3.0
+        version: 5.3.0
+      fancy-log:
+        specifier: 2.0.0
+        version: 2.0.0
+      gulp:
+        specifier: '>=4.0.2'
+        version: 4.0.2
+      plugin-error:
+        specifier: 2.0.1
+        version: 2.0.1
+      through2:
+        specifier: 4.0.2
+        version: 4.0.2
+      vinyl:
+        specifier: 3.0.0
+        version: 3.0.0
+    devDependencies:
+      cross-env:
+        specifier: 7.0.3
+        version: 7.0.3
+      documentation:
+        specifier: 14.0.3
+        version: 14.0.3
+      mocha:
+        specifier: 10.3.0
+        version: 10.3.0
+
   packages/gulp-plugin-image-evenizer:
     dependencies:
       fancy-log:
@@ -16850,11 +16881,11 @@ packages:
   /yargs-parser@20.2.4:
     resolution: {integrity: sha512-WOkpgNhPTlE73h4VFAFsOnomJVaovO8VqLDzy5saChRBFQFBoMYirowyW+Q9HB4HFF4Z7VZTiG3iSzJJA29yRA==}
     engines: {node: '>=10'}
+    dev: true
 
   /yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
-    dev: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
@@ -16886,7 +16917,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
 
   /yargs@17.7.2:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}

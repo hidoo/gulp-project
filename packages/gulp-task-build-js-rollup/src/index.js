@@ -1,11 +1,11 @@
 import gulp from 'gulp';
 import cond from 'gulp-if';
-import gzip from 'gulp-gzip';
 import rename from 'gulp-rename';
 import terser from 'gulp-terser';
 import { rollup } from 'rollup';
 import through from 'through2';
 import Vinyl from 'vinyl';
+import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import inputOptions from './inputOptions.js';
 import outputOptions, { defaultOutputOptions } from './outputOptions.js';
@@ -45,7 +45,7 @@ const DEFAULT_OPTIONS = {
  * @param {Array<Object>|Object} [options.outputOptions] - output options for rollup.js.
  *   see: {@link ./src/outputOptions.js Merged with this function}.
  *   see: {@link https://rollupjs.org/javascript-api/#outputoptions-object outputOptions in JavaScript API of rollup.js}
- * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Stream>}
  *
@@ -82,11 +82,18 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = () => {
-    const { suffix, compress } = opts;
+    const { suffix, verbose } = opts;
     const stream = through.obj();
     const filenames = Array.isArray(opts.filename)
       ? [...opts.filename]
       : [opts.filename];
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
 
     (async () => {
       try {
@@ -134,11 +141,10 @@ export default function buildJs(options = {}) {
 
     return stream
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond((file) => file.isEntry && compress, rename({ suffix })))
-      .pipe(cond(compress, terser({ format: { comments: 'some' } })))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond((file) => file.isEntry && enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, terser({ format: { comments: 'some' } })))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

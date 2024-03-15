@@ -163,8 +163,8 @@ const DEFAULT_OPTIONS = {
  * @param  {String} [options.layouts=''] - Handlebars layouts files glob pattern
  * @param  {String} [options.helpers=''] - Handlebars helpers files glob pattern
  * @param  {String} [options.data=''] - data files glob pattern
- * @param  {Boolean} [options.compress=false] - compress file or not
- * @param  {Object} [options.compressOptions] - compress options. (see examples for default)
+ * @param  {Boolean|Object} [options.compress=false] - compress file whether or not
+ * @param {Array<Function>} options.compress.htmlmin - htmlmin settings
  *   see: {@link https://www.npmjs.com/package/gulp-htmlmin gulp-htmlmin options}.
  * @param  {Function<Object>} [options.onFilesParsed=(context) => context] - additional process after data files parsed
  * @param  {Function<Object>} [options.onFrontMatterParsed=(context) => context] - additional process after front matter parsed
@@ -184,20 +184,20 @@ const DEFAULT_OPTIONS = {
  *   layouts: '/path/to/html/layouts/*.hbs',
  *   helpers: '/path/to/html/helpers/*.js',
  *   data: '/path/to/html/data/*.{json,yaml}',
- *   compress: true,
- *   // Default for this options
- *   compressOptions: {
- *     caseSensitive: true,
- *     collapseWhitespace: true,
- *     conservativeCollapse: true,
- *     preserveLineBreaks: true,
- *     ignoreCustomFragments: [
- *       // php start end tags
- *       /<\?[\s\S]*?\?>/,
- *       // cms tags
- *       /<\/?mt:?[\s\S]*?>/i,
- *       /<\$mt:?[\s\S]*?\$>/i
- *     ]
+ *   compress: {
+ *     htmlmin: {
+ *       caseSensitive: true,
+ *       collapseWhitespace: true,
+ *       conservativeCollapse: true,
+ *       preserveLineBreaks: true,
+ *       ignoreCustomFragments: [
+ *         // php start end tags
+ *         /<\?[\s\S]*?\?>/,
+ *         // cms tags
+ *         /<\/?mt:?[\s\S]*?>/i,
+ *         /<\$mt:?[\s\S]*?\$>/i
+ *       ]
+ *     }
  *   },
  *   onFilesParsed: (context) => context,
  *   onFrontMatterParsed: (context) => context,
@@ -209,14 +209,7 @@ export default function buildHtml(options = {}) {
 
   // define task
   const task = () => {
-    const {
-      extname,
-      compress,
-      compressOptions,
-      onFilesParsed,
-      onFrontMatterParsed,
-      verbose
-    } = opts;
+    const { extname, onFilesParsed, onFrontMatterParsed, verbose } = opts;
     const handlebars = Handlebars.create();
     const context = getContextFromFiles(opts.data, {
       onParsed: onFilesParsed,
@@ -224,6 +217,26 @@ export default function buildHtml(options = {}) {
       verbose
     });
     const pages = [];
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      htmlmin: {
+        caseSensitive: true,
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        preserveLineBreaks: true,
+        ignoreCustomFragments: [
+          // php start end tags
+          /<\?[\s\S]*?\?>/,
+          // cms tags
+          /<\/?mt:?[\s\S]*?>/i,
+          /<\$mt:?[\s\S]*?\$>/i
+        ]
+      },
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
 
     // add default helpers from @hidoo/handlebars-helpers
     Object.entries(helpers).forEach(([name, helper]) =>
@@ -269,13 +282,13 @@ export default function buildHtml(options = {}) {
           .data({
             ...context,
             NODE_ENV: process.env.NODE_ENV || 'development', // eslint-disable-line node/no-process-env
-            compress,
+            enableCompress,
             pages
           })
       )
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, htmlmin({ ...compressOptions })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, htmlmin(compressOpts.htmlmin)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

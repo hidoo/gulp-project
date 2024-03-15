@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import cond from 'gulp-if';
-import gzip from 'gulp-gzip';
 import rename from 'gulp-rename';
 import uglify from 'gulp-uglify';
 import browserify from 'browserify';
@@ -9,6 +8,7 @@ import envify from 'envify';
 import licensify from 'licensify';
 import buffer from 'vinyl-buffer';
 import source from 'vinyl-source-stream';
+import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 /**
@@ -38,7 +38,7 @@ const DEFAULT_OPTIONS = {
  * @param {Array<String>} [options.targets] - target browsers.
  *   see: {@link http://browserl.ist/?q=%3E+0.5%25+in+JP%2C+ie%3E%3D+10%2C+android+%3E%3D+4.4 default target browsers}
  * @param {Array<String>} [options.browsers] - alias of options.targets.
- * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Stream>}
  *
@@ -70,7 +70,14 @@ export default function buildJs(options = {}) {
 
   // define task
   const task = () => {
-    const { filename, suffix, compress } = opts;
+    const { filename, suffix, verbose } = opts;
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
 
     const bundler = browserify()
       .add(opts.src)
@@ -87,11 +94,10 @@ export default function buildJs(options = {}) {
       .pipe(source(filename))
       .pipe(buffer())
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, uglify({ output: { comments: 'some' } })))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, uglify({ output: { comments: 'some' } })))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

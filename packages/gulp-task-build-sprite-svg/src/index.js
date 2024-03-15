@@ -4,9 +4,9 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import imagemin, { svgo } from 'gulp-imagemin';
-import gzip from 'gulp-gzip';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
+import compress from '@hidoo/gulp-plugin-compress';
 import svgSprite from '@hidoo/gulp-plugin-svg-sprite';
 import * as helpers from '@hidoo/handlebars-helpers';
 import errorHandler from '@hidoo/gulp-util-error-handler';
@@ -58,7 +58,6 @@ const DEFAULT_OPTIONS = {
   cssTemplate: '',
   cssHandlebarsHelpers: helpers,
   compress: false,
-  compressOptions: [svgo()],
   verbose: false
 };
 
@@ -80,10 +79,8 @@ const DEFAULT_OPTIONS = {
  *   `options.cssPreprocessor` is ignored if this value is specified.
  *   see: {@link ./template/stylus.hbs default template}
  * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
- * @param {Boolean} [options.compress=false] - compress file or not
- * @param {Array} [options.compressOptions] - compress options.
- *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
- *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
+ * @param {Array<Function>} options.compress.imagemin - list of imagemin plugins
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Stream>}
  *
@@ -104,11 +101,9 @@ const DEFAULT_OPTIONS = {
  *   cssPreprocessor: 'sass',
  *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
- *   compress: true,
- *   // Default for this options
- *   compressOptions: [
- *     svgo()
- *   ],
+ *   compress: {
+ *     imagemin: [svgo())]
+ *   },
  *   verbose: true
  * }));
  */
@@ -121,7 +116,15 @@ export default function buildSprite(options = {}) {
 
   // define task
   const task = () => {
-    const { compress, compressOptions, verbose } = opts;
+    const { verbose } = opts;
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      imagemin: [svgo()],
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
 
     const stream = gulp
       .src(opts.src)
@@ -135,10 +138,9 @@ export default function buildSprite(options = {}) {
     // + it optimize if opts.compress
     const svg = stream.svg
       .pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
-      .pipe(gulp.dest(opts.destImg))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.destImg)));
+      .pipe(cond(enableCompress, imagemin(compressOpts.imagemin, { verbose })))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(gulp.dest(opts.destImg));
 
     // return merged stream
     return merge(css, svg);

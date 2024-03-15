@@ -6,13 +6,13 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import concat from 'gulp-concat';
 import replace from 'gulp-replace';
-import gzip from 'gulp-gzip';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import header from 'gulp-header';
 import uglify from 'gulp-uglify';
 import csso from 'postcss-csso';
 import log from 'fancy-log';
+import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 // tweaks log date color like gulp log
@@ -55,7 +55,7 @@ const DEFAULT_OPTIONS = {
  * @param {String} [options.filename='bundle.js'] - destination filename
  * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {String} [options.banner=''] - license comments
- * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @return {Function<Stream>}
  *
  * @example
@@ -81,7 +81,10 @@ export function concatJs(options = {}) {
 
   // define task
   const task = () => {
-    const { filename, suffix, banner, compress } = opts;
+    const { filename, suffix, banner } = opts;
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts =
+      opts.compress && typeof opts.compress === 'object' ? opts.compress : {};
 
     return gulp
       .src(opts.src)
@@ -96,11 +99,10 @@ export function concatJs(options = {}) {
       )
       .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, uglify({ output: { comments: 'some' } })))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, uglify({ output: { comments: 'some' } })))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)
@@ -121,7 +123,7 @@ export function concatJs(options = {}) {
  * @param {String} [options.filename='bundle.css'] - destination filename
  * @param {String} [options.suffix='.min'] - suffix when compressed
  * @param {String} [options.banner=''] - license comments
- * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @return {Function<Stream>}
  *
  * @example
@@ -147,7 +149,10 @@ export function concatCss(options = {}) {
 
   // define task
   const task = () => {
-    const { filename, suffix, banner, compress } = opts;
+    const { filename, suffix, banner } = opts;
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts =
+      opts.compress && typeof opts.compress === 'object' ? opts.compress : {};
 
     return gulp
       .src(opts.src)
@@ -155,11 +160,10 @@ export function concatCss(options = {}) {
       .pipe(concat(filename || 'bundle.css'))
       .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, postcss([csso({ restructure: false })])))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

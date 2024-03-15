@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
-import gzip from 'gulp-gzip';
+import compress from '@hidoo/gulp-plugin-compress';
 import imageEvenizer from '@hidoo/gulp-plugin-image-evenizer';
 import imagePlaceholder from '@hidoo/gulp-plugin-image-placeholder';
 import webp from '@hidoo/gulp-plugin-webp';
@@ -31,12 +31,6 @@ const DEFAULT_OPTIONS = {
   placeholder: false,
   webp: false,
   compress: false,
-  compressOptions: [
-    gifsicle({ interlaced: true }),
-    mozjpeg({ quality: 90, progressive: true }),
-    optipng({ optimizationLevel: 5 }),
-    svgo()
-  ],
   verbose: false
 };
 
@@ -50,10 +44,8 @@ const DEFAULT_OPTIONS = {
  * @param {Boolean} [options.evenize=false] - apply evenize or not
  * @param {Boolean} [options.placeholder=false] - generate placeholder image or not
  * @param {Boolean|Object} [options.webp=false] - generate webp or not. use as webp options if object specified.
- * @param {Boolean} [options.compress=false] - compress file or not
- * @param {Array} [options.compressOptions] - compress options.
- *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
- *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
+ * @param {Array<Function>} options.compress.imagemin - list of imagemin plugins
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Stream>}
  *
@@ -75,14 +67,14 @@ const DEFAULT_OPTIONS = {
  *   webp: {
  *     method: 6
  *   },
- *   compress: true,
- *   // Default for this options
- *   compressOptions: [
- *     gifsicle({interlaced: true}),
- *     mozjpeg({quality: 90, progressive: true}),
- *     optipng({optimizationLevel: 5}),
- *     svgo()
- *   ],
+ *   compress: {
+ *     imagemin: [
+ *       gifsicle({ interlaced: true }),
+ *       mozjpeg({ quality: 90, progressive: true }),
+ *       optipng({ optimizationLevel: 5 }),
+ *       svgo()
+ *     ]
+ *   },
  *   verbose: true
  * }));
  */
@@ -94,26 +86,35 @@ export default function optimizeImage(options = {}) {
 
   // define task
   const task = () => {
-    const { evenize, placeholder, compress, compressOptions, verbose } = opts;
+    const { evenize, placeholder, verbose } = opts;
     const since = gulp.lastRun(task);
-    let webpOptions = { verbose };
-
-    if (
-      opts.webp &&
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      imagemin: [
+        gifsicle({ interlaced: true }),
+        mozjpeg({ quality: 90, progressive: true }),
+        optipng({ optimizationLevel: 5 }),
+        svgo()
+      ],
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
+    const webpOpts = {
+      ...(opts.webp &&
       typeof opts.webp === 'object' &&
       !Array.isArray(opts.webp)
-    ) {
-      webpOptions = {
-        verbose,
-        ...opts.webp
-      };
-    }
+        ? opts.webp
+        : {}),
+      verbose
+    };
 
     return gulp
       .src(opts.src, { since })
       .pipe(plumber({ errorHandler }))
       .pipe(cond(isImage, cond(evenize, imageEvenizer({ verbose }))))
-      .pipe(cond(isImage, cond(opts.webp, webp(webpOptions))))
+      .pipe(cond(isImage, cond(opts.webp, webp(webpOpts))))
       .pipe(
         cond(
           isntIco,
@@ -123,12 +124,11 @@ export default function optimizeImage(options = {}) {
       .pipe(
         cond(
           isntIco,
-          cond(compress, imagemin([...compressOptions], { verbose }))
+          cond(enableCompress, imagemin(compressOpts.imagemin, { verbose }))
         )
       )
-      .pipe(gulp.dest(opts.dest))
-      .pipe(cond(isSvg, cond(compress, gzip({ append: true }))))
-      .pipe(cond(isSvg, cond(compress, gulp.dest(opts.dest))));
+      .pipe(cond(isSvg, cond(enableCompress, compress(compressOpts))))
+      .pipe(gulp.dest(opts.dest));
   };
 
   // add displayName (used as task name for gulp)

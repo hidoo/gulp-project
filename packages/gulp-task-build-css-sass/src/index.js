@@ -11,7 +11,7 @@ import postcss from 'gulp-postcss';
 import csso from 'postcss-csso';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
-import gzip from 'gulp-gzip';
+import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import configure, { autoprefixer, cssmqpacker } from './plugins.js';
 import functions from './functions.js';
@@ -86,7 +86,7 @@ export const defaultOptions = {
  * @param {String} [options.banner=''] - license comments
  * @param {import('sass').Options} [options.sassOptions={outputStyle: 'expanded'}] - sass options.
  * @param {Object} [options.postcssPlugins=[]] - list of PostCSS plugin.
- * @param {Boolean} [options.compress=false] - compress file or not
+ * @param {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @param {Boolean} [options.verbose=false] - out debug log or not
  * @return {Function<Transform>}
  *
@@ -118,7 +118,7 @@ export default function buildCss(options = {}) {
 
   // define task
   const task = () => {
-    const { suffix, compress, verbose } = opts;
+    const { suffix, verbose } = opts;
     const pkg = loadPackageJson(verbose);
     const pkgName = pkg.name || 'gulp-task-build-css-sass';
     const extname = path.extname(opts.filename || opts.src);
@@ -130,6 +130,13 @@ export default function buildCss(options = {}) {
       sourceMapIncludeSources: true,
       verbose,
       ...opts.sassOptions
+    };
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
     };
 
     const compile = through.obj(async function transform(file, enc, done) {
@@ -191,12 +198,11 @@ export default function buildCss(options = {}) {
       .pipe(postcss(configure(opts)))
       .pipe(header(opts.banner, { pkg }))
       .pipe(gulp.dest(opts.dest, { sourcemaps }))
-      .pipe(cond(compress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
       .pipe(header(opts.banner, { pkg }))
-      .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, gulp.dest(opts.dest, { sourcemaps })))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest, { sourcemaps })));
   };
 
   // add displayName (used as task name for gulp)

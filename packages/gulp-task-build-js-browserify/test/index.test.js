@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import buildJs from '../src/index.js';
 
+const DEBUG = Boolean(process.env.DEBUG);
 let pkg = null;
 
 /**
@@ -46,7 +47,7 @@ describe('gulp-task-build-js-browserify', () => {
     expectedDir = path.resolve(fixturesDir, 'expected');
     opts = {
       dest: destDir,
-      verbose: true
+      verbose: DEBUG
     };
   });
 

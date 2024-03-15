@@ -165,8 +165,8 @@ describe('gulp-task-build-css-sass', () => {
     await Promise.all(
       ['css', 'min.css', 'min.css.gz'].map(async (ext) => {
         if (ext === '.css') {
-          const actual = await readBuiltFile(`${destDir}/main.js`);
-          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+          const actual = await readBuiltFile(`${destDir}/main.css`);
+          const expected = await readBuiltFile(`${expectedDir}/main.css`);
 
           assert(actual);
           assert.equal(actual, expected);
@@ -192,8 +192,8 @@ describe('gulp-task-build-css-sass', () => {
     await Promise.all(
       ['css', 'compressed.css', 'compressed.css.gz'].map(async (ext) => {
         if (ext === '.css') {
-          const actual = await readBuiltFile(`${destDir}/main.js`);
-          const expected = await readBuiltFile(`${expectedDir}/main.js`);
+          const actual = await readBuiltFile(`${destDir}/main.css`);
+          const expected = await readBuiltFile(`${expectedDir}/main.css`);
 
           assert(actual);
           assert.equal(actual, expected);

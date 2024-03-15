@@ -4,7 +4,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
-import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin';
+import imagemin, { gifsicle, mozjpeg, optipng } from 'gulp-imagemin';
 import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
@@ -17,9 +17,9 @@ import errorHandler from '@hidoo/gulp-util-error-handler';
  * @type {Function}
  *
  * @example
- * import {gifsicle, mozjpeg, optipng, svgo} from '@hidoo/gulp-task-build-sprite-image';
+ * import { gifsicle, mozjpeg, optipng } from '@hidoo/gulp-task-build-sprite-image';
  */
-export { gifsicle, mozjpeg, optipng, svgo };
+export { gifsicle, mozjpeg, optipng };
 
 /**
  * dirname
@@ -60,12 +60,6 @@ const DEFAULT_OPTIONS = {
   cssHandlebarsHelpers: helpers,
   evenize: false,
   compress: false,
-  compressOptions: [
-    gifsicle({ interlaced: true }),
-    mozjpeg({ quality: 90, progressive: true }),
-    optipng({ optimizationLevel: 5 }),
-    svgo()
-  ],
   verbose: false
 };
 
@@ -92,10 +86,8 @@ const DEFAULT_OPTIONS = {
  *   see: {@link ./template/stylus.hbs default template}
  * @param {Object} [options.cssHandlebarsHelpers=require('@hidoo/handlebars-helpers')] - Handlebars helpers
  * @param {Boolean} [options.evenize=false] - apply evenize or not
- * @param {Boolean} [options.compress=false] - compress file or not
- * @param {Array} [options.compressOptions] - compress options.
- *   see: {@link ./src/index.js DEFAULT_OPTIONS}.
- *   see: {@link https://www.npmjs.com/package/gulp-imagemin gulp-imagemin}
+ * @param {Boolean|Object} [options.compress=false] - compress file whether or not
+ * @param {Array<Function>} options.compress.imagemin - list of imagemin plugins
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Stream>}
  *
@@ -104,8 +96,7 @@ const DEFAULT_OPTIONS = {
  * import buildSprite, {
  *   gifsicle,
  *   mozjpeg,
- *   optipng,
- *   svgo
+ *   optipng
  * } from '@hidoo/gulp-task-build-sprite-image';
  *
  * task('sprite', buildSprite({
@@ -123,14 +114,13 @@ const DEFAULT_OPTIONS = {
  *   cssTemplate: '/path/to/template/sass.hbs',
  *   cssHandlebarsHelpers: {hoge: (value) => value},
  *   evenize: true,
- *   compress: true,
- *   // Default for this options
- *   compressOptions: [
- *     gifsicle({interlaced: true}),
- *     mozjpeg({quality: 90, progressive: true}),
- *     optipng({optimizationLevel: 5}),
- *     svgo()
- *   ],
+ *   compress: {
+ *     imagemin: [
+ *       gifsicle({ interlaced: true }),
+ *       mozjpeg({ quality: 90, progressive: true }),
+ *       optipng({ optimizationLevel: 5 })
+ *     ]
+ *   },
  *   verbose: true
  * }));
  */
@@ -143,7 +133,19 @@ export default function buildSprite(options = {}) {
 
   // define task
   const task = () => {
-    const { evenize, compress, compressOptions, verbose } = opts;
+    const { evenize, verbose } = opts;
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts = {
+      imagemin: [
+        gifsicle({ interlaced: true }),
+        mozjpeg({ quality: 90, progressive: true }),
+        optipng({ optimizationLevel: 5 })
+      ],
+      ...(opts.compress && typeof opts.compress === 'object'
+        ? opts.compress
+        : {}),
+      verbose
+    };
 
     const stream = gulp
       .src(opts.src)
@@ -158,7 +160,7 @@ export default function buildSprite(options = {}) {
     // + it optimize if opts.compress
     const image = stream.img
       .pipe(buffer())
-      .pipe(cond(compress, imagemin([...compressOptions], { verbose })))
+      .pipe(cond(enableCompress, imagemin(compressOpts.imagemin, { verbose })))
       .pipe(gulp.dest(opts.destImg));
 
     // return merged stream

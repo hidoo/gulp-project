@@ -524,6 +524,9 @@ importers:
 
   packages/gulp-task-build-css-sass:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -539,9 +542,6 @@ importers:
       fancy-log:
         specifier: 2.0.0
         version: 2.0.0
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-header:
         specifier: 2.0.9
         version: 2.0.9
@@ -600,6 +600,9 @@ importers:
 
   packages/gulp-task-build-css-stylus:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -612,9 +615,6 @@ importers:
       fancy-log:
         specifier: 2.0.0
         version: 2.0.0
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-header:
         specifier: 2.0.9
         version: 2.0.9
@@ -722,6 +722,9 @@ importers:
 
   packages/gulp-task-build-js-browserify:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -734,9 +737,6 @@ importers:
       envify:
         specifier: 4.1.0
         version: 4.1.0
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -783,6 +783,9 @@ importers:
 
   packages/gulp-task-build-js-rollup:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -807,9 +810,6 @@ importers:
       fancy-log:
         specifier: 2.0.0
         version: 2.0.0
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -917,6 +917,9 @@ importers:
 
   packages/gulp-task-build-sprite-svg:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-plugin-svg-sprite':
         specifier: workspace:*
         version: link:../gulp-plugin-svg-sprite
@@ -926,9 +929,6 @@ importers:
       '@hidoo/handlebars-helpers':
         specifier: 0.8.2
         version: 0.8.2(handlebars@4.7.7)
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -988,6 +988,9 @@ importers:
 
   packages/gulp-task-concat:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -997,9 +1000,6 @@ importers:
       gulp-concat:
         specifier: 2.6.1
         version: 2.6.1
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-header:
         specifier: 2.0.9
         version: 2.0.9
@@ -1065,6 +1065,9 @@ importers:
 
   packages/gulp-task-optimize-image:
     dependencies:
+      '@hidoo/gulp-plugin-compress':
+        specifier: workspace:*
+        version: link:../gulp-plugin-compress
       '@hidoo/gulp-plugin-image-evenizer':
         specifier: workspace:*
         version: link:../gulp-plugin-image-evenizer
@@ -1077,9 +1080,6 @@ importers:
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
-      gulp-gzip:
-        specifier: 1.4.2
-        version: 1.4.2
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -4318,10 +4318,6 @@ packages:
     resolution: {integrity: sha512-ZyznvL8k/FZeQHr2T6LzcJ/+vBApDnMNZvfVFy3At0knswWd6rJ3/0Hhmpu8oqa6C92npmozs890sX9Dl6q+Qw==}
     engines: {node: '>=0.10.0'}
 
-  /any-promise@1.3.0:
-    resolution: {integrity: sha512-7UvmKalWRt1wgjL1RrGxoSJW/0QZFIegpeGvZG9kjp8vrRu55XTHbwnqq2GpXm9uLbcuhxm3IqX9OB4MZR1b2A==}
-    dev: false
-
   /anymatch@2.0.0:
     resolution: {integrity: sha512-5teOsQWABXHHBFP9y3skS5P3d/WfWXpv3FUpy+LorMrNYaT9pI4oLMQX7jzQ2KklNpGpWHzdCXTDT2Y3XGlZBw==}
     dependencies:
@@ -5262,6 +5258,7 @@ packages:
   /bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
+    dev: true
 
   /cacache@18.0.2:
     resolution: {integrity: sha512-r3NU8h/P+4lVUHfeRw1dtgQYar3DZMm4/cm2bZgOvrFC/su7budSOeqh52VJIC4U4iG1WWwV6vRW0znqBvxNuw==}
@@ -8857,18 +8854,6 @@ packages:
       plugin-error: 0.1.2
       through2: 2.0.5
       util-extend: 1.0.3
-    dev: false
-
-  /gulp-gzip@1.4.2:
-    resolution: {integrity: sha512-ZIxfkUwk2XmZPTT9pPHrHUQlZMyp9nPhg2sfoeN27mBGpi7OaHnOD+WCN41NXjfJQ69lV1nQ9LLm1hYxx4h3UQ==}
-    engines: {node: '>= 0.10.0'}
-    dependencies:
-      ansi-colors: 1.1.0
-      bytes: 3.1.2
-      fancy-log: 1.3.3
-      plugin-error: 1.0.1
-      stream-to-array: 2.3.0
-      through2: 2.0.5
     dev: false
 
   /gulp-hb@8.0.0:
@@ -14935,12 +14920,6 @@ packages:
       commander: 2.20.3
       limiter: 1.1.5
     dev: true
-
-  /stream-to-array@2.3.0:
-    resolution: {integrity: sha512-UsZtOYEn4tWU2RGLOXr/o/xjRBftZRlG3dEWoaHr8j4GuypJ3isitGbVyjQKAuMu+xbiop8q224TjiZWc4XTZA==}
-    dependencies:
-      any-promise: 1.3.0
-    dev: false
 
   /streamx@2.16.1:
     resolution: {integrity: sha512-m9QYj6WygWyWa3H1YY69amr4nVgy61xfjys7xO7kviL5rfIEc2naf+ewFiOA+aEJD7y0JO3h2GoiUv4TDwEGzQ==}

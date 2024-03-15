@@ -7,7 +7,7 @@ import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
 import { fileTypeFromBuffer } from 'file-type';
 import * as imagemin from 'gulp-imagemin';
-import buildSprite, { gifsicle, mozjpeg, optipng, svgo } from '../src/index.js';
+import buildSprite, { gifsicle, mozjpeg, optipng } from '../src/index.js';
 
 /**
  * get array of uint8array from buffers
@@ -284,7 +284,6 @@ describe('gulp-task-build-sprite-image', () => {
       assert(imagemin.gifsicle === gifsicle);
       assert(imagemin.mozjpeg === mozjpeg);
       assert(imagemin.optipng === optipng);
-      assert(imagemin.svgo === svgo);
     });
   });
 });

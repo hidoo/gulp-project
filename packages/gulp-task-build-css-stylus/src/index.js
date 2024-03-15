@@ -13,8 +13,8 @@ import csso from 'postcss-csso';
 import url from 'postcss-url';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
-import gzip from 'gulp-gzip';
 import log from 'fancy-log';
+import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
 // tweaks log date color like gulp log
@@ -75,7 +75,7 @@ const DEFAULT_OPTIONS = {
  * @param  {Array<String>} [options.uncssTargets=[]] - array of html file path that target of uncss process
  * @param  {Array<String>} [options.uncssIgnore=[]] - array of selector that should not removed
  * @param  {Function<PostCSSRoot>} [options.additionalProcess=null] - additional PostCss process
- * @param  {Boolean} [options.compress=false] - compress file or not
+ * @param  {Boolean|import('@hidoo/gulp-plugin-compress').defaultOptions} [options.compress=false] - compress file whether or not
  * @return {Function<Stream>}
  *
  * @example
@@ -111,13 +111,15 @@ export default function buildCss(options = {}) {
         banner,
         uncssTargets,
         uncssIgnore,
-        additionalProcess,
-        compress
+        additionalProcess
       } = opts,
       extname = path.extname(filename),
       basename = path.basename(filename, extname),
       stylusOptions = opts.stylusOptions || {},
       postProcesses = [];
+    const enableCompress = Boolean(opts.compress);
+    const compressOpts =
+      opts.compress && typeof opts.compress === 'object' ? opts.compress : {};
 
     // additinal stylus data
     // + always add NODE_ENV
@@ -169,11 +171,10 @@ export default function buildCss(options = {}) {
       .pipe(header(banner, { pkg }))
       .pipe(rename({ basename, extname }))
       .pipe(gulp.dest(opts.dest))
-      .pipe(cond(compress, rename({ suffix })))
-      .pipe(cond(compress, postcss([csso({ restructure: false })])))
-      .pipe(cond(compress, gulp.dest(opts.dest)))
-      .pipe(cond(compress, gzip({ append: true })))
-      .pipe(cond(compress, gulp.dest(opts.dest)));
+      .pipe(cond(enableCompress, rename({ suffix })))
+      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, compress(compressOpts)))
+      .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };
 
   // add displayName (used as task name for gulp)

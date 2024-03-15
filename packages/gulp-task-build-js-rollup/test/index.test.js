@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
 import buildJs from '../src/index.js';
 
+const DEBUG = Boolean(process.env.DEBUG);
 let pkg = null;
 
 /**
@@ -54,7 +55,7 @@ describe('gulp-task-build-js-rollup', () => {
           return { name, factory, config: { ...config } };
         }
       },
-      verbose: false
+      verbose: DEBUG
     };
   });
 

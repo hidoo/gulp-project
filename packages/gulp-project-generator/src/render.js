@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import Handlebars from 'handlebars';
-import * as helpers from '@hidoo/handlebars-helpers';
+import defaultHelpersRegister from '@hidoo/handlebars-helpers/register'; // eslint-disable-line import/no-unresolved
 
 /**
  * render file from template
@@ -17,9 +17,7 @@ export default async function render(src = '', context = {}) {
 
   const hbs = Handlebars.create();
 
-  Object.entries(helpers).forEach(([name, helper]) =>
-    hbs.registerHelper(name, helper)
-  );
+  defaultHelpersRegister(hbs);
 
   const content = await fs.readFile(path.resolve(src));
   const template = hbs.compile(content.toString());

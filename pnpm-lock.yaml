@@ -665,8 +665,8 @@ importers:
   packages/gulp-task-build-html-handlebars:
     dependencies:
       '@hidoo/data-from':
-        specifier: 0.3.1
-        version: 0.3.1
+        specifier: 1.0.0
+        version: 1.0.0
       '@hidoo/gulp-util-error-handler':
         specifier: workspace:*
         version: link:../gulp-util-error-handler
@@ -2706,15 +2706,16 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@hidoo/data-from@0.3.1:
-    resolution: {integrity: sha512-i7bW+HH2srdew6ynX6SRx3r4B1gQWm5OAoK7mYbfQLYs0wkFNgLtvu594SAWv7DhAOaT2XmYyYahhOIaGLyTWA==}
-    engines: {node: '>=10.0.0'}
+  /@hidoo/data-from@1.0.0:
+    resolution: {integrity: sha512-G+ge2ditVv5/+AqQ6ZKcRzs5Bw5CK8fs1TCc7Qk+TBY+7jnwbSDnDinvAK/HWyLlk6djB4hMLfKPEECgd4hb2A==}
+    engines: {node: '>=18.0.0', pnpm: 8.15.5}
+    requiresBuild: true
     dependencies:
       front-matter: 4.0.2
-      glob: 7.1.6
-      handlebars: 4.7.7
-      js-yaml: 4.0.0
-      json5: 2.2.0
+      glob: 10.3.10
+      handlebars: 4.7.8
+      js-yaml: 4.1.0
+      json5: 2.2.3
       lodash.merge: 4.6.2
     dev: false
 
@@ -8683,17 +8684,6 @@ packages:
       minipass: 7.0.4
       path-scurry: 1.10.1
 
-  /glob@7.1.6:
-    resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.1.2
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: false
-
   /glob@7.1.7:
     resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==}
     dependencies:
@@ -10395,13 +10385,6 @@ packages:
       esprima: 4.0.1
     dev: false
 
-  /js-yaml@4.0.0:
-    resolution: {integrity: sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==}
-    hasBin: true
-    dependencies:
-      argparse: 2.0.1
-    dev: false
-
   /js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
@@ -10557,14 +10540,6 @@ packages:
     dependencies:
       minimist: 1.2.8
     dev: true
-
-  /json5@2.2.0:
-    resolution: {integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==}
-    engines: {node: '>=6'}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.8
-    dev: false
 
   /json5@2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}

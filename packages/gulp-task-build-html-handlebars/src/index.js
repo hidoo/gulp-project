@@ -12,7 +12,7 @@ import layouts from 'handlebars-layouts';
 import { glob } from 'glob';
 import * as helpers from '@hidoo/handlebars-helpers';
 import errorHandler from '@hidoo/gulp-util-error-handler';
-import { fromFiles, fromFrontMatter } from '@hidoo/data-from';
+import { fromFilesSync, fromFrontMatter } from '@hidoo/data-from';
 import pathDepth from './pathDepth.js';
 
 /**
@@ -27,7 +27,7 @@ const TASK_NAME = 'gulp-task-build-html-handlebars';
  *
  * @param {String} pattern glob pattern
  * @param {Object} options options
- * @param {HandlebarsEnvironment} options.handlebars Handlrbars instance
+ * @param {HandlebarsEnvironment} options.handlebars Handlebars instance
  * @param {Function} options.onParsed process after files parsed
  * @param {Boolean} options.verbose out log or not
  * @return {Object}
@@ -41,7 +41,7 @@ function getContextFromFiles(pattern, options = {}) {
   let context = {};
 
   try {
-    context = fromFiles(pattern, { handlebars });
+    context = fromFilesSync(pattern, { handlebars });
 
     if (typeof onParsed === 'function') {
       return onParsed(context);
@@ -61,8 +61,8 @@ function getContextFromFiles(pattern, options = {}) {
  *
  * @param {Vinyl} file Vinyl file
  * @param {Object} options options
- * @param {Object} options.context additinal data
- * @param {HandlebarsEnvironment} options.handlebars Handlrbars instance
+ * @param {Object} options.context additional data
+ * @param {HandlebarsEnvironment} options.handlebars Handlebars instance
  * @param {Function} options.onParsed process after front matter parsed
  * @return {Object}
  */
@@ -90,7 +90,7 @@ function getContextFromFrontMatter(file, options = {}) {
 
 /**
  * sort vinyl stream by filename
- * + it sort to be end of sorting, if filename is like "pagelist".
+ * + it sort to be end of sorting, if filename is like "page-list".
  *
  * @param {Object} options options
  * @param {String} options.extname extname

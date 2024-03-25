@@ -46,7 +46,7 @@
     "gulp-rename": "2.0.0",
     "node-sass-magic-importer": "5.3.3",
     "plugin-error": "2.0.1",
-    "postcss": "8.4.35",
+    "postcss": "8.4.38",
     "postcss-csso": "6.0.1",
     "sass": "1.72.0",
     "through2": "4.0.2"

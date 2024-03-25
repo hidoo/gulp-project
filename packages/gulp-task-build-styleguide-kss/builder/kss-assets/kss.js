@@ -1,6 +1,5 @@
 /* eslint strict: off, no-var: off, func-names: off, prefer-arrow-callback: off */
-(function() {
-
+(function () {
   'use strict';
 
   var THEME_CLASS_NAME_DARK = 'styleguide-element-wrapper--dark';
@@ -13,36 +12,31 @@
     document.querySelectorAll('.styleguide-element-wrapper')
   );
 
-  elements.forEach(function(element) {
+  elements.forEach(function (element) {
     element.addEventListener(
       'click',
-      function() {
+      function () {
         var isDark = hasClass(element, THEME_CLASS_NAME_DARK),
-            isLight = hasClass(element, THEME_CLASS_NAME_LIGHT),
-            isRed = hasClass(element, THEME_CLASS_NAME_RED),
-            isGreen = hasClass(element, THEME_CLASS_NAME_GREEN),
-            isBlue = hasClass(element, THEME_CLASS_NAME_BLUE);
+          isLight = hasClass(element, THEME_CLASS_NAME_LIGHT),
+          isRed = hasClass(element, THEME_CLASS_NAME_RED),
+          isGreen = hasClass(element, THEME_CLASS_NAME_GREEN),
+          isBlue = hasClass(element, THEME_CLASS_NAME_BLUE);
 
         if (isDark) {
           addClass(element, THEME_CLASS_NAME_LIGHT);
           removeClass(element, THEME_CLASS_NAME_DARK);
-        }
-        else if (isLight) {
+        } else if (isLight) {
           addClass(element, THEME_CLASS_NAME_RED);
           removeClass(element, THEME_CLASS_NAME_LIGHT);
-        }
-        else if (isRed) {
+        } else if (isRed) {
           addClass(element, THEME_CLASS_NAME_GREEN);
           removeClass(element, THEME_CLASS_NAME_RED);
-        }
-        else if (isGreen) {
+        } else if (isGreen) {
           addClass(element, THEME_CLASS_NAME_BLUE);
           removeClass(element, THEME_CLASS_NAME_GREEN);
-        }
-        else if (isBlue) {
+        } else if (isBlue) {
           removeClass(element, THEME_CLASS_NAME_BLUE);
-        }
-        else {
+        } else {
           addClass(element, THEME_CLASS_NAME_DARK);
         }
       },
@@ -102,18 +96,16 @@
     var filterdClassNames = [];
 
     if (hasClass(element, className)) {
-      classNames.forEach(function(value) {
+      classNames.forEach(function (value) {
         if (value !== className) {
           filterdClassNames.push(value);
         }
       });
       element.className = filterdClassNames.join(' ');
-    }
-    else {
+    } else {
       element.className = classNames.join(' ');
     }
 
     return element;
   }
-
 })();

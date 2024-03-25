@@ -7,6 +7,5 @@ packages/**/test/fixtures/expected/*
 packages/gulp-task-build-css-sass/test/fixtures/src/error.scss
 packages/gulp-task-build-html-handlebars/test/fixtures/src/data/invalid.yml
 packages/gulp-task-build-js-rollup/test/fixtures/src/error.js
-packages/gulp-task-build-styleguide-kss/builder/*
 CHANGELOG.md
 pnpm-lock.yaml

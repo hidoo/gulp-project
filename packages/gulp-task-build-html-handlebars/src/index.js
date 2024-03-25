@@ -10,7 +10,7 @@ import cloneDeep from 'lodash.clonedeep';
 import Handlebars from 'handlebars';
 import layouts from 'handlebars-layouts';
 import { glob } from 'glob';
-import * as helpers from '@hidoo/handlebars-helpers';
+import defaultHelpersRegister from '@hidoo/handlebars-helpers/register'; // eslint-disable-line import/no-unresolved
 import errorHandler from '@hidoo/gulp-util-error-handler';
 import { fromFilesSync, fromFrontMatter } from '@hidoo/data-from';
 import pathDepth from './pathDepth.js';
@@ -238,10 +238,8 @@ export default function buildHtml(options = {}) {
       verbose
     };
 
-    // add default helpers from @hidoo/handlebars-helpers
-    Object.entries(helpers).forEach(([name, helper]) =>
-      handlebars.registerHelper(name, helper)
-    );
+    // register default helpers from @hidoo/handlebars-helpers
+    defaultHelpersRegister(handlebars);
 
     return gulp
       .src(opts.src)

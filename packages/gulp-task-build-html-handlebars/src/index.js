@@ -12,7 +12,7 @@ import layouts from 'handlebars-layouts';
 import { glob } from 'glob';
 import * as helpers from '@hidoo/handlebars-helpers';
 import errorHandler from '@hidoo/gulp-util-error-handler';
-import { fromFiles, fromFrontMatter } from '@hidoo/data-from';
+import { fromFilesSync, fromFrontMatter } from '@hidoo/data-from';
 import pathDepth from './pathDepth.js';
 
 /**
@@ -41,7 +41,7 @@ function getContextFromFiles(pattern, options = {}) {
   let context = {};
 
   try {
-    context = fromFiles(pattern, { handlebars });
+    context = fromFilesSync(pattern, { handlebars });
 
     if (typeof onParsed === 'function') {
       return onParsed(context);

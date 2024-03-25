@@ -51,9 +51,9 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
     css: [`${pathToCssDesktop}/main.css`],
     js: [{{#if this.js}}`${pathToJsDesktop}/main.js`{{/if}}],
     homepage: `${config.path.srcCssDesktop}/README.md`,
-    {{#is this.cssPreprocessor 'sass'}}
+    {{#if (calc (or cssPreprocessor '') '===' 'sass')}}
     builder: '@hidoo/kss-builder'
-    {{/is}}
+    {{/if}}
   });
   const mainMobile = buildStyleguide({
     name: 'styleguide:mobile:build',
@@ -62,9 +62,9 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
     css: [`${pathToCssMobile}/main.css`],
     js: [{{#if this.js}}`${pathToJsMobile}/main.js`{{/if}}],
     homepage: `${config.path.srcCssMobile}/README.md`,
-    {{#is this.cssPreprocessor 'sass'}}
+    {{#if (calc (or cssPreprocessor '') '===' 'sass')}}
     builder: '@hidoo/kss-builder'
-    {{/is}}
+    {{/if}}
   });
 
   // define watch task
@@ -107,9 +107,9 @@ const pathToJs = relative(config.path.destStyleguide, config.path.destJs);
     css: [`${pathToCss}/main.css`],
     js: [{{#if this.js}}`${pathToJs}/main.js`{{/if}}],
     homepage: `${config.path.srcCss}/README.md`,
-    {{#is this.cssPreprocessor 'sass'}}
+    {{#if (calc (or cssPreprocessor '') '===' 'sass')}}
     builder: '@hidoo/kss-builder'
-    {{/is}}
+    {{/if}}
   });
 
   // define watch task

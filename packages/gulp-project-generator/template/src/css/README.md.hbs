@@ -2,7 +2,7 @@
 
 ## Comments for Styleguide
 
-```{{#is cssPreprocessor 'sass'}}scss{{else}}stylus{{/is}}
+```{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}stylus{{/if}}
 /*!
 Module Name
 

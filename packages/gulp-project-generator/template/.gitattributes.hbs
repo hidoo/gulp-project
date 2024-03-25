@@ -13,10 +13,10 @@
 {{#if this.conventionalCommits}}
 .commitlintrc.json export-ignore
 {{/if}}
-{{#is cssPreprocessor 'sass'}}
+{{#if (calc (or cssPreprocessor '') '===' 'sass')}}
 .stylelintrc.json export-ignore
 .stylelintignore export-ignore
-{{/is}}
+{{/if}}
 
 # package manager
 package.json export-ignore

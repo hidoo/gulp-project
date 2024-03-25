@@ -17,7 +17,7 @@ node_modules/
 
 # sources
 {{#if this.sprite}}
-src/**/_sprite_*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}
+src/**/_sprite_*.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}
 {{/if}}
 
 # distributions

@@ -6,7 +6,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 {{#if this.css}}
 
-[*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}]
+[*.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}]
 quote_type = double
 indent_style = space
 indent_size = 2

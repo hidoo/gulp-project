@@ -1,19 +1,19 @@
-const fs = require('node:fs');
+const fs = require('node:fs/promises');
 const path = require('node:path');
 const Handlebars = require('handlebars');
 const KssBuilderBase = require('kss/builder/base/index.js');
-const helpers = require('@hidoo/handlebars-helpers');
 
-let pkg = {};
-
-// try to load package.json that on current working directory
-try {
-  // eslint-disable-next-line import/no-dynamic-require
-  pkg = require(path.resolve(process.cwd(), 'package.json'));
-}
-catch (error) {
-  console.error('Failed to load package.json.'); // eslint-disable-line no-console
-}
+const pkg = (() => {
+  // try to load package.json that on current working directory
+  try {
+    // eslint-disable-next-line import/no-dynamic-require
+    return require(path.resolve(process.cwd(), 'package.json'));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Failed to load package.json.');
+    return {};
+  }
+})();
 
 /**
  * A kss-node builder that takes input files and builds a style guide using
@@ -24,7 +24,6 @@ catch (error) {
  * @class KssBuilderHandlebars
  */
 class KssBuilderHandlebars extends KssBuilderBase {
-
   constructor() {
     super();
 
@@ -36,25 +35,25 @@ class KssBuilderHandlebars extends KssBuilderBase {
     // + can use like {{ options.xxxx }} in styleguide template
     this.addOptionDefinitions({
       title: {
-        'group': 'Style guide:',
-        'string': true,
-        'multiple': false,
-        'describe': 'Title of the style guide',
-        'default': pkg.name || ''
+        group: 'Style guide:',
+        string: true,
+        multiple: false,
+        describe: 'Title of the style guide',
+        default: pkg.name || ''
       },
       version: {
-        'group': 'Style guide:',
-        'string': true,
-        'multiple': false,
-        'describe': 'Version of the style guide',
-        'default': pkg.version || '0.0.0'
+        group: 'Style guide:',
+        string: true,
+        multiple: false,
+        describe: 'Version of the style guide',
+        default: pkg.version || '0.0.0'
       },
       author: {
-        'group': 'Style guide:',
-        'string': true,
-        'multiple': false,
-        'describe': 'Author of the style guide',
-        'default': pkg.author || ''
+        group: 'Style guide:',
+        string: true,
+        multiple: false,
+        describe: 'Author of the style guide',
+        default: pkg.author || ''
       }
     });
   }
@@ -69,8 +68,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
    * @return {Promise.<KssStyleGuide>} A `Promise` object resolving to a
    *   `KssStyleGuide` object.
    */
-  buildGuide(styleGuide, options) {
-
+  async buildGuide(styleGuide, options) {
     // if set the value other than undefined to this.templates.item,
     // individual style guide will not be generated
     // https://github.com/kss-node/kss-node/blob/master/builder/base/kss_builder_base.js#L743
@@ -78,12 +76,11 @@ class KssBuilderHandlebars extends KssBuilderBase {
       this.templates = {
         item: null
       };
-    }
-    else {
+    } else {
       this.templates.item = null;
     }
 
-    return super.buildGuide(styleGuide, options);
+    return await super.buildGuide(styleGuide, options);
   }
 
   /**
@@ -97,33 +94,34 @@ class KssBuilderHandlebars extends KssBuilderBase {
    * @param {KssStyleGuide} styleGuide The KSS style guide in object format.
    * @return {Promise.<null>} A `Promise` object resolving to `null`.
    */
-  prepare(styleGuide) {
-
+  async prepare(styleGuide) {
     // call prepare method in parent class
     // + "prepare" method return Promise, so add process by "then" method
-    // eslint-disable-next-line no-shadow
-    return super.prepare(styleGuide).then((styleGuide) => {
-      if (this.options.verbose) {
-        this.log('');
-      }
+    const sg = await super.prepare(styleGuide);
 
-      // create new Handlebars instance
-      this.Handlebars = Handlebars.create();
+    if (this.options.verbose) {
+      this.log('');
+    }
 
-      // add helpers
-      Object.entries(helpers).forEach(
-        ([name, func]) => this.Handlebars.registerHelper(name, func)
-      );
+    // create new Handlebars instance
+    this.Handlebars = Handlebars.create();
 
-      // + Create a new destination directory.
-      // + Load modules that extend Handlebars.
-      const prepareTasks = [
-        this.prepareDestination('kss-assets'),
-        this.prepareExtend(this.Handlebars)
-      ];
+    // load default helpers by dynamic import because module is ESM
+    const { default: defaultHelpersRegister } = await import(
+      '@hidoo/handlebars-helpers/register' // eslint-disable-line import/no-unresolved
+    );
 
-      return Promise.all(prepareTasks).then(() => Promise.resolve(styleGuide));
-    });
+    // register default helpers
+    defaultHelpersRegister(this.Handlebars);
+
+    // + Create a new destination directory.
+    // + Load modules that extend Handlebars.
+    await Promise.all([
+      this.prepareDestination('kss-assets'),
+      this.prepareExtend(this.Handlebars)
+    ]);
+
+    return sg;
   }
 
   /**
@@ -133,69 +131,54 @@ class KssBuilderHandlebars extends KssBuilderBase {
    * @return {Promise.<KssStyleGuide>} A `Promise` object resolving to a
    *   `KssStyleGuide` object.
    */
-  build(styleGuide) {
+  async build(styleGuide) {
     const options = {};
 
     // Returns a promise to read/load a template provided by the builder.
-    options.readBuilderTemplate = (name) => new Promise((resolve, reject) => {
-      const filepath = path.resolve(this.options.builder, `${name}.hbs`);
+    options.readBuilderTemplate = async (name) => {
+      const content = await fs.readFile(
+        path.resolve(this.options.builder, `${name}.hbs`),
+        'utf8'
+      );
 
-      fs.readFile(filepath, 'utf8', (error, data) => {
-        if (error) {
-          return reject(error);
-        }
-        return resolve(this.Handlebars.compile(data));
-      });
-    });
+      return this.Handlebars.compile(content);
+    };
 
     // Returns a promise to read/load a template specified by a section.
-    options.readSectionTemplate = (name, filepath) => new Promise((resolve, reject) => {
-      fs.readFile(filepath, 'utf8', (error, data) => {
-        if (error) {
-          return reject(error);
-        }
-        this.Handlebars.registerPartial(name, data);
-        return resolve(data);
-      });
-    });
+    options.readSectionTemplate = async (name, filepath) => {
+      const content = await fs.readFile(filepath, 'utf8');
+
+      this.Handlebars.registerPartial(name, content);
+      return content;
+    };
 
     // Returns a promise to load an inline template from markup.
-    options.loadInlineTemplate = (name, markup) => new Promise((resolve) => {
-      this.Handlebars.registerPartial(name, markup);
-      return resolve();
-    });
+    options.loadInlineTemplate = async (name, markup) =>
+      await this.Handlebars.registerPartial(name, markup);
 
     // Returns a promise to load the data context given a template file path.
-    options.loadContext = (filepath) => new Promise((resolve) => {
-      let context = null;
-
-      // Load sample context for the template from the sample .json file.
+    options.loadContext = async (filepath) => {
       try {
-        const dir = path.dirname(filepath),
-              filename = `${path.basename(filepath, path.extname(filepath))}.json`,
-              jsonpath = path.join(dir, filename);
-
-        // require() returns a cached object. We want an independent clone of
-        // the object so we can make changes without affecting the original.
-        context = require(jsonpath); // eslint-disable-line import/no-dynamic-require
-        context = JSON.parse(JSON.stringify(context));
+        return JSON.parse(
+          await fs.readFile(
+            path.join(
+              path.dirname(filepath),
+              `${path.basename(filepath, path.extname(filepath))}.json`
+            )
+          )
+        );
+      } catch (error) {
+        return {};
       }
-      catch (error) {
-        context = {};
-      }
-
-      return resolve(context);
-    });
+    };
 
     // Returns a promise to get a template by name.
-    options.getTemplate = (name) => new Promise(
-      (resolve) => resolve(this.Handlebars.compile(`{{> ${name}}}`))
-    );
+    options.getTemplate = async (name) =>
+      await this.Handlebars.compile(`{{> ${name}}}`);
 
     // Returns a promise to get a template's markup by name.
-    options.getTemplateMarkup = (name) => new Promise(
-      (resolve) => resolve(this.Handlebars.partials[name])
-    );
+    options.getTemplateMarkup = async (name) =>
+      await this.Handlebars.partials[name];
 
     // Renders a template and returns the markup.
     options.templateRender = (template, context) => template(context);
@@ -208,7 +191,7 @@ class KssBuilderHandlebars extends KssBuilderBase {
     options.templateExtension = 'hbs';
     options.emptyTemplate = '{{! Cannot be an empty string. }}';
 
-    return this.buildGuide(styleGuide, options);
+    return await this.buildGuide(styleGuide, options);
   }
 }
 

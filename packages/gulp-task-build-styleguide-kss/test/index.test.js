@@ -1,126 +1,99 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import buildStyleguide from '../src/index.js';
 
+const DEBUG = Boolean(process.env.DEBUG);
 let pkg = {};
 
-// try to load package.json that on current working directory
-try {
-  pkg = JSON.parse(fs.readFileSync(resolve(process.cwd(), 'package.json')));
-} catch (error) {
-  console.error('Failed to load package.json.');
-}
-
 /**
- * replace version number in license comment
+ * read built file
  *
- * @param {String} code target source code
+ * @param {String} file filename
  * @return {String}
  */
-function replaceVersion(code = '') {
-  return code.replace(
-    '<span class="version">(v0.0.0)</span>',
-    `<span class="version">(v${pkg.version})</span>`
-  );
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
+
+  return content
+    .toString()
+    .trim()
+    .replace(
+      '<span class="version">(v0.0.0)</span>',
+      `<span class="version">(v${pkg.version})</span>`
+    );
 }
 
 describe('gulp-task-build-styleguide-kss', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
+  before(async () => {
+    pkg = JSON.parse(
+      await fs.readFile(path.resolve(process.cwd(), 'package.json'))
+    );
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+    opts = {
+      src: srcDir,
+      dest: destDir,
+      verbose: DEBUG
+    };
   });
 
-  it('should output files to "options.dest" if argument "options" is minimal settings.', (done) => {
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
+  });
+
+  it('should output style guide to options.dest with default options.', async () => {
+    const task = buildStyleguide(opts);
+
+    await task();
+
+    await Promise.all(
+      ['index.html', 'section-block.html'].map(async (filename) => {
+        const actual = await readBuiltFile(path.join(destDir, filename));
+
+        assert.deepEqual(
+          actual,
+          await readBuiltFile(path.join(expectedDir, 'minimal', filename))
+        );
+      })
+    );
+  });
+
+  it('should output style guide includes specified markdown contents to options.dest with options.homepage', async () => {
     const task = buildStyleguide({
-      src: `${path.src}`,
-      dest: `${path.dest}`
+      ...opts,
+      homepage: path.join(srcDir, 'hoge.md')
     });
 
-    task()
-      .then(() => {
-        const actualIndex = fs
-            .readFileSync(`${path.dest}/index.html`)
-            .toString()
-            .trim(),
-          actualBlock = fs
-            .readFileSync(`${path.dest}/section-block.html`)
-            .toString()
-            .trim(),
-          expectedIndex = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/minimal/index.html`)
-              .toString()
-              .trim()
-          ),
-          expectedBlock = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/minimal/section-block.html`)
-              .toString()
-              .trim()
-          );
+    await task();
 
-        assert(actualIndex);
-        assert(actualBlock);
-        assert.deepStrictEqual(actualIndex, expectedIndex);
-        assert.deepStrictEqual(actualBlock, expectedBlock);
-        done();
+    await Promise.all(
+      ['index.html', 'section-block.html'].map(async (filename) => {
+        const actual = await readBuiltFile(path.join(destDir, filename));
+
+        assert.deepEqual(
+          actual,
+          await readBuiltFile(path.join(expectedDir, 'homepage', filename))
+        );
       })
-      .catch((error) => done(error));
+    );
   });
 
-  it('should output files that applied specified markdown contents to "options.dest" if argument "options.homepage" is set.', (done) => {
+  it('should output style guide injected specified css or js to options.dest with options.css or options.js.', async () => {
     const task = buildStyleguide({
-      src: `${path.src}`,
-      dest: `${path.dest}`,
-      homepage: `${path.src}/hoge.md`
-    });
-
-    task()
-      .then(() => {
-        const actualIndex = fs
-            .readFileSync(`${path.dest}/index.html`)
-            .toString()
-            .trim(),
-          actualBlock = fs
-            .readFileSync(`${path.dest}/section-block.html`)
-            .toString()
-            .trim(),
-          expectedIndex = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/homepage/index.html`)
-              .toString()
-              .trim()
-          ),
-          expectedBlock = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/homepage/section-block.html`)
-              .toString()
-              .trim()
-          );
-
-        assert(actualIndex);
-        assert(actualBlock);
-        assert.deepStrictEqual(actualIndex, expectedIndex);
-        assert.deepStrictEqual(actualBlock, expectedBlock);
-        done();
-      })
-      .catch((error) => done(error));
-  });
-
-  it('should output files that loaded specified css or javascript to "options.dest" if argument "options.css" or "options.js" is set.', (done) => {
-    const task = buildStyleguide({
-      src: `${path.src}`,
-      dest: `${path.dest}`,
+      ...opts,
       css: [
         '//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'
       ],
@@ -129,35 +102,17 @@ describe('gulp-task-build-styleguide-kss', () => {
       ]
     });
 
-    task()
-      .then(() => {
-        const actualIndex = fs
-            .readFileSync(`${path.dest}/index.html`)
-            .toString()
-            .trim(),
-          actualBlock = fs
-            .readFileSync(`${path.dest}/section-block.html`)
-            .toString()
-            .trim(),
-          expectedIndex = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/css-js/index.html`)
-              .toString()
-              .trim()
-          ),
-          expectedBlock = replaceVersion(
-            fs
-              .readFileSync(`${path.expected}/css-js/section-block.html`)
-              .toString()
-              .trim()
-          );
+    await task();
 
-        assert(actualIndex);
-        assert(actualBlock);
-        assert.deepStrictEqual(actualIndex, expectedIndex);
-        assert.deepStrictEqual(actualBlock, expectedBlock);
-        done();
+    await Promise.all(
+      ['index.html', 'section-block.html'].map(async (filename) => {
+        const actual = await readBuiltFile(path.join(destDir, filename));
+
+        assert.deepEqual(
+          actual,
+          await readBuiltFile(path.join(expectedDir, 'css-js', filename))
+        );
       })
-      .catch((error) => done(error));
+    );
   });
 });

@@ -154,7 +154,7 @@ html {
 }
 @media screen and (max-width: 1020px) {
   #styleguide {
-    min-width: 100% ;
+    min-width: 100%;
   }
 }
 #styleguide .styleguide-container {
@@ -167,7 +167,7 @@ html {
 }
 @media screen and (max-width: 1020px) {
   #styleguide .styleguide-container {
-    width: auto ;
+    width: auto;
     padding-left: 0;
     padding-right: 0;
   }
@@ -190,7 +190,7 @@ html {
 }
 @media screen and (max-width: 1020px) {
   #styleguide .styleguide-header {
-    margin-bottom: 10px ;
+    margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
     padding-left: 0;
@@ -233,8 +233,8 @@ html {
     position: relative;
     top: auto;
     left: auto;
-    width: auto ;
-    margin: 10px ;
+    width: auto;
+    margin: 10px;
   }
 }
 #styleguide .styleguide-menu .styleguide-menu-list {
@@ -300,16 +300,32 @@ html {
 #styleguide .styleguide-menu .styleguide-menu-list .styleguide-menu-list-child {
   list-style: none;
 }
-#styleguide .styleguide-menu .styleguide-menu-list .styleguide-menu-list-child li {
+#styleguide
+  .styleguide-menu
+  .styleguide-menu-list
+  .styleguide-menu-list-child
+  li {
   border-top: none;
 }
-#styleguide .styleguide-menu .styleguide-menu-list .styleguide-menu-list-child li:first-child {
+#styleguide
+  .styleguide-menu
+  .styleguide-menu-list
+  .styleguide-menu-list-child
+  li:first-child {
   border-bottom: none;
 }
-#styleguide .styleguide-menu .styleguide-menu-list .styleguide-menu-list-child li:last-child {
+#styleguide
+  .styleguide-menu
+  .styleguide-menu-list
+  .styleguide-menu-list-child
+  li:last-child {
   border-bottom: none;
 }
-#styleguide .styleguide-menu .styleguide-menu-list .styleguide-menu-list-child a {
+#styleguide
+  .styleguide-menu
+  .styleguide-menu-list
+  .styleguide-menu-list-child
+  a {
   padding-left: 20px;
 }
 #styleguide .styleguide-content {
@@ -317,7 +333,7 @@ html {
 }
 @media screen and (max-width: 1020px) {
   #styleguide .styleguide-content {
-    margin: 10px ;
+    margin: 10px;
     padding-top: 20px;
   }
 }
@@ -448,7 +464,10 @@ html {
 #styleguide .styleguide-example:first-child {
   margin-top: 0;
 }
-#styleguide .styleguide-example > .styleguide-example-header .styleguide-example-header-title {
+#styleguide
+  .styleguide-example
+  > .styleguide-example-header
+  .styleguide-example-header-title {
   margin: -1px -1px 0;
   padding: 10px;
   color: #fff;
@@ -457,7 +476,11 @@ html {
   border-top: 1px solid #000;
   font-weight: normal;
 }
-#styleguide .styleguide-example > .styleguide-example-header .styleguide-example-header-title em {
+#styleguide
+  .styleguide-example
+  > .styleguide-example-header
+  .styleguide-example-header-title
+  em {
   float: right;
   text-transform: none;
   font-style: normal;
@@ -487,11 +510,11 @@ html {
 #styleguide .styleguide-example .styleguide-element {
   position: relative;
   padding: 20px;
-  padding-top: 35px ;
+  padding-top: 35px;
 }
 #styleguide .styleguide-example .styleguide-element + .styleguide-element {
   margin-top: -5px;
-  padding-top: 35px ;
+  padding-top: 35px;
   border-top: 1px solid #eee;
 }
 #styleguide .styleguide-example .styleguide-element .styleguide-modifier-name {
@@ -499,7 +522,7 @@ html {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 9999 ;
+  z-index: 9999;
   padding: 5px 15px;
   margin: 0;
   font-size: 11px;
@@ -508,27 +531,45 @@ html {
   border: 1px solid #eee;
   border-top: none;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper {
   overflow: auto;
   position: relative;
-  padding: 10px ;
+  padding: 10px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAG0lEQVR4AWP8b8yAAhgZUMFIUcCApuD/yFQAAH/gEzlVREVsAAAAAElFTkSuQmCC);
   background-position: 0 0;
   background-repeat: repeat;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper--dark {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper--dark {
   background-color: #000;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper--light {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper--light {
   background-color: #fff;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper--red {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper--red {
   background-color: #f44;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper--green {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper--green {
   background-color: #4f4;
 }
-#styleguide .styleguide-example .styleguide-element .styleguide-element-wrapper--blue {
+#styleguide
+  .styleguide-example
+  .styleguide-element
+  .styleguide-element-wrapper--blue {
   background-color: #44f;
 }
 #styleguide .styleguide-example .styleguide-html {
@@ -586,7 +627,7 @@ html {
 @media screen and (max-width: 1020px) {
   #styleguide .styleguide-footer p {
     float: none !important;
-    padding: 5px 0 0 ;
+    padding: 5px 0 0;
   }
 }
 /*

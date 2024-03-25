@@ -1,9 +1,9 @@
 import gulp from 'gulp';
-{{#is cssPreprocessor 'sass'}}
+{{#if (calc (or cssPreprocessor '') '===' 'sass')}}
 import buildCss from '@hidoo/gulp-task-build-css-sass';
 {{else}}
 import buildCss from '@hidoo/gulp-task-build-css-stylus';
-{{/is}}
+{{/if}}
 {{#if cssDeps}}
 import {concatCss} from '@hidoo/gulp-task-concat';
 {{/if}}
@@ -14,14 +14,14 @@ import * as config from '../config.js';
   // define main task
   const mainDesktop = buildCss({
     name: 'css:desktop:main',
-    src: `${config.path.srcCssDesktop}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
+    src: `${config.path.srcCssDesktop}/main.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`,
     dest: `${config.path.destCssDesktop}`,
     filename: 'main.css',
     compress: config.compress
   });
   const mainMobile = buildCss({
     name: 'css:mobile:main',
-    src: `${config.path.srcCssMobile}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
+    src: `${config.path.srcCssMobile}/main.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`,
     dest: `${config.path.destCssMobile}`,
     filename: 'main.css',
     compress: config.compress
@@ -55,7 +55,7 @@ import * as config from '../config.js';
   const watchDesktop = () => {
     gulp.watch(
       [
-        `${config.path.srcCssDesktop}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
+        `${config.path.srcCssDesktop}/*.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`
       ],
       mainDesktop
     );
@@ -71,7 +71,7 @@ import * as config from '../config.js';
   const watchMobile = () => {
     gulp.watch(
       [
-        `${config.path.srcCssMobile}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
+        `${config.path.srcCssMobile}/*.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`
       ],
       mainMobile
     );
@@ -106,7 +106,7 @@ import * as config from '../config.js';
   // define main task
   export const main = buildCss({
     name: 'css:main',
-    src: `${config.path.srcCss}/main.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`,
+    src: `${config.path.srcCss}/main.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`,
     dest: `${config.path.destCss}`,
     filename: 'main.css',
     compress: config.compress
@@ -130,7 +130,7 @@ import * as config from '../config.js';
   export const watch = () => {
     gulp.watch(
       [
-        `${config.path.srcCss}/*.{{#is cssPreprocessor 'sass'}}scss{{else}}styl{{/is}}`
+        `${config.path.srcCss}/*.{{#if (calc (or cssPreprocessor '') '===' 'sass')}}scss{{else}}styl{{/if}}`
       ],
       main
     );

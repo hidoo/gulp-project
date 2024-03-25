@@ -24,7 +24,7 @@ is:
   <h1>Page list</h1>
 
   {{#each (sortArray @root.pages order='ascend' key='uid') }}
-    {{#isnt this.uid 'Z'}}
+    {{#if (calc this.uid '!==' 'Z')}}
 
       <h2>[{{this.uid}}] <a class="mod-text__link" href="{{@root.path.depth}}{{this.path.relative}}">{{this.title}}</a></h2>
 
@@ -52,7 +52,7 @@ is:
       <p>og:image</p>
       <p style="color:#999;">{{#if this.ogp.image}}{{this.ogp.image}} <span style="color:#0f0;font-size:12px;">(Specific)</span>{{else}}{{@root.site.ogp.image}} <span style="color:#00f;font-size:12px;">(Common)</span>{{/if}}</p>
 
-    {{/isnt}}
+    {{/if}}
   {{/each}}
 
 {{/content}}

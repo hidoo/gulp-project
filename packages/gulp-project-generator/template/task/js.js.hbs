@@ -1,10 +1,10 @@
 import gulp from 'gulp';
-{{#is jsBundler 'browserify'}}
+{{#if (calc jsBundler '===' 'browserify')}}
 import buildJs from '@hidoo/gulp-task-build-js-browserify';
-{{/is}}
-{{#is jsBundler 'rollup'}}
+{{/if}}
+{{#if (calc jsBundler '===' 'rollup')}}
 import buildJs from '@hidoo/gulp-task-build-js-rollup';
-{{/is}}
+{{/if}}
 {{#if jsDeps}}
 import {concatJs} from '@hidoo/gulp-task-concat';
 {{/if}}

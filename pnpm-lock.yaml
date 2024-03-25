@@ -60,8 +60,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(@babel/core@7.24.3)(eslint@8.57.0)(typescript@5.3.3)
       '@hidoo/express-engine-handlebars':
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 1.0.0
+        version: 1.0.0
       '@hidoo/gulp-task-build-css-stylus':
         specifier: workspace:*
         version: link:../../packages/gulp-task-build-css-stylus
@@ -141,8 +141,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(@babel/core@7.24.3)(eslint@8.57.0)(typescript@5.3.3)
       '@hidoo/express-engine-handlebars':
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 1.0.0
+        version: 1.0.0
       '@hidoo/gulp-task-build-css-stylus':
         specifier: workspace:*
         version: link:../../packages/gulp-task-build-css-stylus
@@ -222,8 +222,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(@babel/core@7.24.3)(eslint@8.57.0)(typescript@5.3.3)
       '@hidoo/express-engine-handlebars':
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 1.0.0
+        version: 1.0.0
       '@hidoo/gulp-task-build-css-sass':
         specifier: workspace:*
         version: link:../../packages/gulp-task-build-css-sass
@@ -2747,16 +2747,16 @@ packages:
       - typescript
     dev: true
 
-  /@hidoo/express-engine-handlebars@0.8.2:
-    resolution: {integrity: sha512-VfhXq6o8rk4VRKsB2+jKHq1BQ0JR2kWX9Xz7exUAr3LP7gKP4XoB0FhzjTmkV0kcD1sJT82p1O3e1u/narTS8Q==}
-    engines: {node: '>=12.0.0'}
+  /@hidoo/express-engine-handlebars@1.0.0:
+    resolution: {integrity: sha512-ca+y210rSr+He4HkkEBKEJjPMWDBmTbBBRY48C1ay9OKPLaiCsdl5PRFS4UWFOH+I+CfcRuSASQiAHBlst++vg==}
+    engines: {node: '>=18.0.0'}
     dependencies:
-      '@hidoo/handlebars-helpers': 0.8.2(handlebars@4.7.7)
-      glob: 7.1.7
-      glob-parent: 6.0.0
-      handlebars: 4.7.7
+      '@hidoo/handlebars-helpers': 1.0.0(handlebars@4.7.8)
+      glob: 10.3.10
+      glob-parent: 6.0.2
+      handlebars: 4.7.8
       handlebars-layouts: 3.1.4
-      vinyl: 2.2.1
+      vinyl: 3.0.0
     dev: true
 
   /@hidoo/handlebars-helpers@0.8.2(handlebars@4.7.7):
@@ -2781,6 +2781,19 @@ packages:
       marked: 2.0.7
       path-browserify: 1.0.1
     dev: false
+
+  /@hidoo/handlebars-helpers@1.0.0(handlebars@4.7.8):
+    resolution: {integrity: sha512-um8o5kP/gdnC4EnHzeHkY2y2sDjkPM80fu24OlARJY/x07rB8LAJ4K+xnbzBZDw8LPwfUygRYzj525zJ7glhoA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      handlebars: '>=4.7.8'
+    dependencies:
+      handlebars: 4.7.8
+      highlight.js: 11.9.0
+      marked: 12.0.1
+      marked-gfm-heading-id: 3.1.3(marked@12.0.1)
+      marked-highlight: 2.1.1(marked@12.0.1)
+    dev: true
 
   /@hidoo/kss-builder@0.9.0(handlebars@4.7.7):
     resolution: {integrity: sha512-Bp5BSstv5g7EllA/6fqBXajVs/XCWL4yLy3pG+qN904cuFMDyqHe1lqbQ1Twa6UWUlvgFrlo/vBSQob56UmKVQ==}
@@ -8631,13 +8644,6 @@ packages:
     dependencies:
       is-glob: 4.0.3
 
-  /glob-parent@6.0.0:
-    resolution: {integrity: sha512-Hdd4287VEJcZXUwv1l8a+vXC1GjOQqXe+VS30w/ypihpcnu9M1n3xeYeJu5CBpeEQj2nAab2xxz28GuA3vp4Ww==}
-    engines: {node: '>=10.13.0'}
-    dependencies:
-      is-glob: 4.0.3
-    dev: true
-
   /glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
@@ -8683,17 +8689,6 @@ packages:
       minimatch: 9.0.3
       minipass: 7.0.4
       path-scurry: 1.10.1
-
-  /glob@7.1.7:
-    resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.1.2
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: true
 
   /glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
@@ -11178,6 +11173,29 @@ packages:
 
   /markdown-table@3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
+    dev: true
+
+  /marked-gfm-heading-id@3.1.3(marked@12.0.1):
+    resolution: {integrity: sha512-A0cRU4PCueX/5m8VE4mT8uTQ36l3xMYRojz3Eqnk4BmUFZ0T+9Xhn2KvHcANP4qbhfOeuMrWJCTQbASIBR5xeg==}
+    peerDependencies:
+      marked: '>=4 <13'
+    dependencies:
+      github-slugger: 2.0.0
+      marked: 12.0.1
+    dev: true
+
+  /marked-highlight@2.1.1(marked@12.0.1):
+    resolution: {integrity: sha512-ktdqwtBne8rim5mb+vvZ9FzElGFb+CHCgkx/g6DSzTjaSrVnxsJdSzB5YgCkknFrcOW+viocM1lGyIjC0oa3fg==}
+    peerDependencies:
+      marked: '>=4 <13'
+    dependencies:
+      marked: 12.0.1
+    dev: true
+
+  /marked@12.0.1:
+    resolution: {integrity: sha512-Y1/V2yafOcOdWQCX0XpAKXzDakPOpn6U0YLxTJs3cww6VxOzZV1BTOOYWLvH3gX38cq+iLwljHHTnMtlDfg01Q==}
+    engines: {node: '>= 18'}
+    hasBin: true
     dev: true
 
   /marked@2.0.7:

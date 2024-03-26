@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v10.4.18 ([f2459fc](https://github.com/hidoo/gulp-project/commit/f2459fcd7f7f2e301975cd6b358d0dd057a1f600))
+* **deps:** update dependency autoprefixer to v10.4.19 ([5cf57db](https://github.com/hidoo/gulp-project/commit/5cf57db20fc869ff8da270e97ad328251beae3e3))
+* **deps:** update dependency postcss to v8.4.38 ([019485e](https://github.com/hidoo/gulp-project/commit/019485eec18e804b1e9a4ab7373e6f9ca7879029))
+
+* fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))
+
+### BREAKING CHANGES
+
+* Remove options.compressOptions and merge into options.compress in all tasks.
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

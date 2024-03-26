@@ -70,7 +70,6 @@ return css build task by stylus
   - `options.uncssTargets` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** array of html file path that target of uncss process (optional, default `[]`)
   - `options.uncssIgnore` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** array of selector that should not removed (optional, default `[]`)
   - `options.additionalProcess` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)\<PostCSSRoot>** additional PostCss process (optional, default `null`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
 #### Examples
 

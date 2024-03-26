@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **build-css-sass:** change postcss plugins to configure directly except autoprefixer, cssmqpacker ([ffc710a](https://github.com/hidoo/gulp-project/commit/ffc710aebd793b61daa17c59384d634119be9b65))
+* **build-css-sass:** migrate from legacy api ([1211b87](https://github.com/hidoo/gulp-project/commit/1211b87403839ac24f515c5f7b5679d884fc57d0))
+* **deps:** update dependency autoprefixer to v10.4.18 ([f2459fc](https://github.com/hidoo/gulp-project/commit/f2459fcd7f7f2e301975cd6b358d0dd057a1f600))
+* **deps:** update dependency autoprefixer to v10.4.19 ([5cf57db](https://github.com/hidoo/gulp-project/commit/5cf57db20fc869ff8da270e97ad328251beae3e3))
+* **deps:** update dependency postcss to v8.4.38 ([019485e](https://github.com/hidoo/gulp-project/commit/019485eec18e804b1e9a4ab7373e6f9ca7879029))
+* **deps:** update dependency sass to v1.71.1 ([6ba06d3](https://github.com/hidoo/gulp-project/commit/6ba06d34f871adaf82155a7d732bc2013a94da2a))
+* **deps:** update dependency sass to v1.72.0 ([fb77910](https://github.com/hidoo/gulp-project/commit/fb77910fe3af7147ecb74acd002f3a7f7861c561))
+* fix eslint problems ([2896db8](https://github.com/hidoo/gulp-project/commit/2896db861b4ca523cd6a390f3c020ca3f20535b2))
+
+* fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))
+
+### Features
+
+* **build-css-sass:** add sourcemap support and rewrite sass process as internal plugin ([fa68472](https://github.com/hidoo/gulp-project/commit/fa6847275915fa5e33aa602e6d329ea662cfb206))
+
+### BREAKING CHANGES
+
+* Remove options.compressOptions and merge into options.compress in all tasks.
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

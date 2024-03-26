@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **build-css-sass:** change postcss plugins to configure directly except autoprefixer, cssmqpacker ([ffc710a](https://github.com/hidoo/gulp-project/commit/ffc710aebd793b61daa17c59384d634119be9b65))
+* **build-css-sass:** migrate from legacy api ([1211b87](https://github.com/hidoo/gulp-project/commit/1211b87403839ac24f515c5f7b5679d884fc57d0))
+* **build-html-handlebars:** change to use fromFilesSync of @hidoo/data-from ([6c6f7fb](https://github.com/hidoo/gulp-project/commit/6c6f7fbbd5b2e11ea5198d54f5ebeec1798a0625))
+* **build-html-handlebars:** change to use register function to load default helpers ([4dd77aa](https://github.com/hidoo/gulp-project/commit/4dd77aaad401a353eae3440c379aed6ddcf7a582))
+* **build-styleguide-kss:** fix to load default helpers with dynamic import ([378fa58](https://github.com/hidoo/gulp-project/commit/378fa58ebaec7dd7d0c14aa9fdf992a2a0115a23))
+* **deps:** pin dependency glob to 10.3.10 ([faadcb5](https://github.com/hidoo/gulp-project/commit/faadcb5c10e76696bea40182657bbca56a98c179))
+* **deps:** update dependency @hidoo/data-from to v1 ([0cf582b](https://github.com/hidoo/gulp-project/commit/0cf582bb6f45f99df07b4752bcf2610d33d62680))
+* **deps:** update dependency autoprefixer to v10.4.18 ([f2459fc](https://github.com/hidoo/gulp-project/commit/f2459fcd7f7f2e301975cd6b358d0dd057a1f600))
+* **deps:** update dependency autoprefixer to v10.4.19 ([5cf57db](https://github.com/hidoo/gulp-project/commit/5cf57db20fc869ff8da270e97ad328251beae3e3))
+* **deps:** update dependency glob-parent to v6.0.2 ([0877a32](https://github.com/hidoo/gulp-project/commit/0877a327a6750f973f8696b102d91e3ff9ee103c))
+* **deps:** update dependency gulp-replace to v1.1.4 ([582aeb3](https://github.com/hidoo/gulp-project/commit/582aeb3151cbbb73ce0916105a200212fa554868))
+* **deps:** update dependency gulp-terser to v2.1.0 ([cc7d80e](https://github.com/hidoo/gulp-project/commit/cc7d80eb3eb86cf93a0b4b9f252a4f501b0e9371))
+* **deps:** update dependency handlebars to v4.7.8 ([b67c900](https://github.com/hidoo/gulp-project/commit/b67c9009368edc6d810d882948f9a822285a9af1))
+* **deps:** update dependency inquirer to v9.2.15 ([7d846c4](https://github.com/hidoo/gulp-project/commit/7d846c42041390b00f890c336d94e95be9371378))
+* **deps:** update dependency inquirer to v9.2.16 ([9be0f15](https://github.com/hidoo/gulp-project/commit/9be0f151e98d20e0f88d4f8069f500dadacc7ad4))
+* **deps:** update dependency postcss to v8.4.38 ([019485e](https://github.com/hidoo/gulp-project/commit/019485eec18e804b1e9a4ab7373e6f9ca7879029))
+* **deps:** update dependency rollup to v4.12.1 ([99f1f77](https://github.com/hidoo/gulp-project/commit/99f1f7774fe63a3fc1927bedf68e138c1a6b8469))
+* **deps:** update dependency rollup to v4.13.0 ([9ffd2f3](https://github.com/hidoo/gulp-project/commit/9ffd2f31363157e96dbe42c6b2b0182e6bdaf2d2))
+* **deps:** update dependency rollup-plugin-license to v3.3.1 ([36cc974](https://github.com/hidoo/gulp-project/commit/36cc974a9d1dfd7a36d1da7036d135ea5522ae22))
+* **deps:** update dependency sass to v1.71.1 ([6ba06d3](https://github.com/hidoo/gulp-project/commit/6ba06d34f871adaf82155a7d732bc2013a94da2a))
+* **deps:** update dependency sass to v1.72.0 ([fb77910](https://github.com/hidoo/gulp-project/commit/fb77910fe3af7147ecb74acd002f3a7f7861c561))
+* **deps:** update dependency save-pixels to v2.3.6 ([64362e6](https://github.com/hidoo/gulp-project/commit/64362e6af3421bf16902416e936fa40ae8a99c7a))
+* **deps:** update dependency svg-sprite to v2.0.3 ([15556d1](https://github.com/hidoo/gulp-project/commit/15556d178e7f390eaad6352cd225d100175b8554))
+* fix eslint problems ([2896db8](https://github.com/hidoo/gulp-project/commit/2896db861b4ca523cd6a390f3c020ca3f20535b2))
+* **generator:** change to use register function to load default helpers ([a4843be](https://github.com/hidoo/gulp-project/commit/a4843be05361da53260da18cc5e69e7776f6f8a7))
+* **generator:** fix default import issue of @hidoo/express-engine-handlebars ([11167b3](https://github.com/hidoo/gulp-project/commit/11167b3a3fb0f3e3f4135fcfa861835547acd9f8))
+* migrate deprecated handlebars helpers ([f438baa](https://github.com/hidoo/gulp-project/commit/f438baa0578b5256402e23e23ff2c128081805cb))
+
+* fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))
+
+### Features
+
+* add gulp-plugin-compress ([f1db142](https://github.com/hidoo/gulp-project/commit/f1db142be76b5ea5b1e7d237fcacea8c6de33c05))
+* **build-css-sass:** add sourcemap support and rewrite sass process as internal plugin ([fa68472](https://github.com/hidoo/gulp-project/commit/fa6847275915fa5e33aa602e6d329ea662cfb206))
+* **plugin-compress:** implement options.targetExtnames ([24c37b5](https://github.com/hidoo/gulp-project/commit/24c37b5304fe782c38da1a9d2ee72cd47602b1f3))
+
+### BREAKING CHANGES
+
+* Remove options.compressOptions and merge into options.compress in all tasks.
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

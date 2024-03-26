@@ -55,39 +55,32 @@ return build svg sprite sheet task
     `options.cssPreprocessor` is ignored if this value is specified.
     see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
   - `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-  - `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
-    see: [DEFAULT_OPTIONS](./src/index.js).
-    see: [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
 
 ```javascript
-import { task } from 'gulp';
-import buildSprite, { svgo } from '@hidoo/gulp-task-build-sprite-svg';
+import {task} from 'gulp';
+import buildSprite, {svgo} from '@hidoo/gulp-task-build-sprite-svg';
 
-task(
-  'sprite',
-  buildSprite({
-    name: 'sprite:main',
-    src: '/path/to/sprite/*.svg',
-    destImg: '/path/to/dest/image',
-    destCss: '/path/to/dest/css',
-    imgName: 'sprite.svg',
-    cssName: 'sprite.styl',
-    imgPath: './path/from/css/to/sprite/sprite.svg',
-    padding: 10,
-    layout: 'vertical',
-    cssPreprocessor: 'sass',
-    cssTemplate: '/path/to/template/sass.hbs',
-    cssHandlebarsHelpers: { hoge: (value) => value },
-    compress: true,
-    // Default for this options
-    compressOptions: [svgo()],
-    verbose: true
-  })
-);
+task('sprite', buildSprite({
+  name: 'sprite:main',
+  src: '/path/to/sprite/*.svg',
+  destImg: '/path/to/dest/image',
+  destCss: '/path/to/dest/css',
+  imgName: 'sprite.svg',
+  cssName: 'sprite.styl',
+  imgPath: './path/from/css/to/sprite/sprite.svg',
+  padding: 10,
+  layout: 'vertical',
+  cssPreprocessor: 'sass',
+  cssTemplate: '/path/to/template/sass.hbs',
+  cssHandlebarsHelpers: {hoge: (value) => value},
+  compress: {
+    imagemin: [svgo())]
+  },
+  verbose: true
+}));
 ```
 
 Returns **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Stream](https://nodejs.org/api/stream.html)>**&#x20;

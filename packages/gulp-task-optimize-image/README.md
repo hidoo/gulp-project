@@ -57,10 +57,6 @@ return image optimize task
   - `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
   - `options.placeholder` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** generate placeholder image or not (optional, default `false`)
   - `options.webp` **([Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** generate webp or not. use as webp options if object specified. (optional, default `false`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-  - `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
-    see: [DEFAULT_OPTIONS](./src/index.js).
-    see: [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
@@ -85,14 +81,14 @@ task(
     webp: {
       method: 6
     },
-    compress: true,
-    // Default for this options
-    compressOptions: [
-      gifsicle({ interlaced: true }),
-      mozjpeg({ quality: 90, progressive: true }),
-      optipng({ optimizationLevel: 5 }),
-      svgo()
-    ],
+    compress: {
+      imagemin: [
+        gifsicle({ interlaced: true }),
+        mozjpeg({ quality: 90, progressive: true }),
+        optipng({ optimizationLevel: 5 }),
+        svgo()
+      ]
+    },
     verbose: true
   })
 );

@@ -60,7 +60,6 @@ return javascript concat task
   - `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.js'`)
   - `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
   - `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
 #### Examples
 
@@ -98,7 +97,6 @@ return css concat task
   - `options.filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination filename (optional, default `'bundle.css'`)
   - `options.suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** suffix when compressed (optional, default `'.min'`)
   - `options.banner` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** license comments (optional, default `''`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
 
 #### Examples
 

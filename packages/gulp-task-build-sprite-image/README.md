@@ -45,8 +45,6 @@ task(
 
 ### optipng
 
-### svgo
-
 ### buildSprite
 
 return build image sprite sheet task
@@ -74,10 +72,10 @@ return build image sprite sheet task
     see: [default template](./template/stylus.hbs) (optional, default `path.resolve(__dirname,'../template/stylus.hbs')`)
   - `options.cssHandlebarsHelpers` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Handlebars helpers (optional, default `require('@hidoo/handlebars-helpers')`)
   - `options.evenize` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** apply evenize or not (optional, default `false`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-  - `options.compressOptions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** compress options.
-    see: [DEFAULT_OPTIONS](./src/index.js).
-    see: [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin)
+  - `options.compress` **([Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** compress file whether or not (optional, default `false`)
+
+    - `options.compress.imagemin` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)>** list of imagemin plugins
+
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples
@@ -87,8 +85,7 @@ import { task } from 'gulp';
 import buildSprite, {
   gifsicle,
   mozjpeg,
-  optipng,
-  svgo
+  optipng
 } from '@hidoo/gulp-task-build-sprite-image';
 
 task(
@@ -108,14 +105,13 @@ task(
     cssTemplate: '/path/to/template/sass.hbs',
     cssHandlebarsHelpers: { hoge: (value) => value },
     evenize: true,
-    compress: true,
-    // Default for this options
-    compressOptions: [
-      gifsicle({ interlaced: true }),
-      mozjpeg({ quality: 90, progressive: true }),
-      optipng({ optimizationLevel: 5 }),
-      svgo()
-    ],
+    compress: {
+      imagemin: [
+        gifsicle({ interlaced: true }),
+        mozjpeg({ quality: 90, progressive: true }),
+        optipng({ optimizationLevel: 5 })
+      ]
+    },
     verbose: true
   })
 );

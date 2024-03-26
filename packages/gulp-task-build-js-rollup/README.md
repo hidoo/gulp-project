@@ -49,7 +49,6 @@ return javascript build task by rollup.js
   - `options.outputOptions` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)> | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))?** output options for rollup.js.
     see: [Merged with this function](./src/outputOptions.js).
     see: [outputOptions in JavaScript API of rollup.js](https://rollupjs.org/javascript-api/#outputoptions-object)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples

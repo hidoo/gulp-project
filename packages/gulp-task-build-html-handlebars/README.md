@@ -43,9 +43,11 @@ return html build task by handlebars
   - `options.layouts` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars layouts files glob pattern (optional, default `''`)
   - `options.helpers` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Handlebars helpers files glob pattern (optional, default `''`)
   - `options.data` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** data files glob pattern (optional, default `''`)
-  - `options.compress` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** compress file or not (optional, default `false`)
-  - `options.compressOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** compress options. (see examples for default)
-    see: [gulp-htmlmin options](https://www.npmjs.com/package/gulp-htmlmin).
+  - `options.compress` **([Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** compress file whether or not (optional, default `false`)
+
+    - `options.compress.htmlmin` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)>** htmlmin settings
+      see: [gulp-htmlmin options](https://www.npmjs.com/package/gulp-htmlmin).
+
   - `options.onFilesParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after data files parsed (optional, default `(context)=>context`)
   - `options.onFrontMatterParsed` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** additional process after front matter parsed (optional, default `(context)=>context`)
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
@@ -67,20 +69,20 @@ task(
     layouts: '/path/to/html/layouts/*.hbs',
     helpers: '/path/to/html/helpers/*.js',
     data: '/path/to/html/data/*.{json,yaml}',
-    compress: true,
-    // Default for this options
-    compressOptions: {
-      caseSensitive: true,
-      collapseWhitespace: true,
-      conservativeCollapse: true,
-      preserveLineBreaks: true,
-      ignoreCustomFragments: [
-        // php start end tags
-        /<\?[\s\S]*?\?>/,
-        // cms tags
-        /<\/?mt:?[\s\S]*?>/i,
-        /<\$mt:?[\s\S]*?\$>/i
-      ]
+    compress: {
+      htmlmin: {
+        caseSensitive: true,
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        preserveLineBreaks: true,
+        ignoreCustomFragments: [
+          // php start end tags
+          /<\?[\s\S]*?\?>/,
+          // cms tags
+          /<\/?mt:?[\s\S]*?>/i,
+          /<\$mt:?[\s\S]*?\$>/i
+        ]
+      }
     },
     onFilesParsed: (context) => context,
     onFrontMatterParsed: (context) => context,

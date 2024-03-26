@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **deps:** update dependency save-pixels to v2.3.6 ([64362e6](https://github.com/hidoo/gulp-project/commit/64362e6af3421bf16902416e936fa40ae8a99c7a))
+* fix eslint problems ([2896db8](https://github.com/hidoo/gulp-project/commit/2896db861b4ca523cd6a390f3c020ca3f20535b2))
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

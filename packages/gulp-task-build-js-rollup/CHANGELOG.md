@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **deps:** update dependency gulp-terser to v2.1.0 ([cc7d80e](https://github.com/hidoo/gulp-project/commit/cc7d80eb3eb86cf93a0b4b9f252a4f501b0e9371))
+* **deps:** update dependency rollup to v4.12.1 ([99f1f77](https://github.com/hidoo/gulp-project/commit/99f1f7774fe63a3fc1927bedf68e138c1a6b8469))
+* **deps:** update dependency rollup to v4.13.0 ([9ffd2f3](https://github.com/hidoo/gulp-project/commit/9ffd2f31363157e96dbe42c6b2b0182e6bdaf2d2))
+* **deps:** update dependency rollup-plugin-license to v3.3.1 ([36cc974](https://github.com/hidoo/gulp-project/commit/36cc974a9d1dfd7a36d1da7036d135ea5522ae22))
+
+* fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))
+
+### BREAKING CHANGES
+
+* Remove options.compressOptions and merge into options.compress in all tasks.
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

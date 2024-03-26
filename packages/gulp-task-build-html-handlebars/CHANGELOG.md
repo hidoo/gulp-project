@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **build-html-handlebars:** change to use fromFilesSync of @hidoo/data-from ([6c6f7fb](https://github.com/hidoo/gulp-project/commit/6c6f7fbbd5b2e11ea5198d54f5ebeec1798a0625))
+* **build-html-handlebars:** change to use register function to load default helpers ([4dd77aa](https://github.com/hidoo/gulp-project/commit/4dd77aaad401a353eae3440c379aed6ddcf7a582))
+* **deps:** pin dependency glob to 10.3.10 ([faadcb5](https://github.com/hidoo/gulp-project/commit/faadcb5c10e76696bea40182657bbca56a98c179))
+* **deps:** update dependency @hidoo/data-from to v1 ([0cf582b](https://github.com/hidoo/gulp-project/commit/0cf582bb6f45f99df07b4752bcf2610d33d62680))
+* **deps:** update dependency handlebars to v4.7.8 ([b67c900](https://github.com/hidoo/gulp-project/commit/b67c9009368edc6d810d882948f9a822285a9af1))
+
+* fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))
+
+### BREAKING CHANGES
+
+* Remove options.compressOptions and merge into options.compress in all tasks.
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

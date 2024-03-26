@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **deps:** update dependency glob-parent to v6.0.2 ([0877a32](https://github.com/hidoo/gulp-project/commit/0877a327a6750f973f8696b102d91e3ff9ee103c))
+* **deps:** update dependency handlebars to v4.7.8 ([b67c900](https://github.com/hidoo/gulp-project/commit/b67c9009368edc6d810d882948f9a822285a9af1))
+* **deps:** update dependency inquirer to v9.2.15 ([7d846c4](https://github.com/hidoo/gulp-project/commit/7d846c42041390b00f890c336d94e95be9371378))
+* **deps:** update dependency inquirer to v9.2.16 ([9be0f15](https://github.com/hidoo/gulp-project/commit/9be0f151e98d20e0f88d4f8069f500dadacc7ad4))
+* fix eslint problems ([2896db8](https://github.com/hidoo/gulp-project/commit/2896db861b4ca523cd6a390f3c020ca3f20535b2))
+* **generator:** change to use register function to load default helpers ([a4843be](https://github.com/hidoo/gulp-project/commit/a4843be05361da53260da18cc5e69e7776f6f8a7))
+* **generator:** fix default import issue of @hidoo/express-engine-handlebars ([11167b3](https://github.com/hidoo/gulp-project/commit/11167b3a3fb0f3e3f4135fcfa861835547acd9f8))
+* migrate deprecated handlebars helpers ([f438baa](https://github.com/hidoo/gulp-project/commit/f438baa0578b5256402e23e23ff2c128081805cb))
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+* **build-styleguide-kss:** fix to load default helpers with dynamic import ([378fa58](https://github.com/hidoo/gulp-project/commit/378fa58ebaec7dd7d0c14aa9fdf992a2a0115a23))
+* **deps:** update dependency handlebars to v4.7.8 ([b67c900](https://github.com/hidoo/gulp-project/commit/b67c9009368edc6d810d882948f9a822285a9af1))
+
 # [1.0.0-alpha.0](https://github.com/hidoo/gulp-project/compare/v0.19.0...v1.0.0-alpha.0) (2024-02-09)
 
 ### Bug Fixes

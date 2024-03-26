@@ -28,6 +28,7 @@
     "test:examples": "cross-env NODE_ENV=test mocha",
     "preinstall": "npx only-allow pnpm",
     "prepare": "git config --local core.hooksPath .githooks",
+    "version:prerelease": "lerna version --conventional-commits --conventional-prerelease && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
     "version:patch": "lerna version patch && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
     "version:minor": "lerna version minor && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",
     "version:major": "lerna version major && pnpm run --sequential '/^(build|test)$/' && pnpm run version:commit",

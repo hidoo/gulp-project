@@ -1,12 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/stylelintrc.json",
-  "extends": ["@hidoo/stylelint-config/scss"],
+  "extends": [
+    "@hidoo/stylelint-config",
+    "@hidoo/stylelint-config/+order",
+    "@hidoo/stylelint-config/+compatibility",
+    "@hidoo/stylelint-config/+performance",
+    "@hidoo/stylelint-config/+scss"
+  ],
   "rules": {
     "plugin/no-unsupported-browser-features": [
       true,
       {
         "browsers": ["> 0.25% in JP", "not dead"],
-        "ignore": ["text-size-adjust", "rem"],
+        "ignore": ["css-nesting", "rem", "text-size-adjust"],
         "severity": "warning"
       }
     ]

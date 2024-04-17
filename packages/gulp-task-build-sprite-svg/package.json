@@ -27,7 +27,7 @@
   "devDependencies": {
     "cross-env": "7.0.3",
     "documentation": "14.0.3",
-    "gulp": "4.0.2",
+    "gulp": "5.0.0",
     "mocha": "10.4.0"
   },
   "dependencies": {

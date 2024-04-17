@@ -5,7 +5,6 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import spritesmith from 'gulp.spritesmith';
 import imagemin, { gifsicle, mozjpeg, optipng } from 'gulp-imagemin';
-import merge from 'merge-stream';
 import buffer from 'vinyl-buffer';
 import * as helpers from '@hidoo/handlebars-helpers';
 import evenizer from '@hidoo/gulp-plugin-image-evenizer';
@@ -126,6 +125,7 @@ const DEFAULT_OPTIONS = {
  */
 export default function buildSprite(options = {}) {
   const opts = { ...DEFAULT_OPTIONS, ...options };
+  const isImage = '**/*.{jpg,jpeg,gif,png}';
 
   if (!opts.cssTemplate && TEMPLATES.has(opts.cssPreprocessor)) {
     opts.cssTemplate = TEMPLATES.get(opts.cssPreprocessor);
@@ -147,24 +147,15 @@ export default function buildSprite(options = {}) {
       verbose
     };
 
-    const stream = gulp
-      .src(opts.src)
+    return gulp
+      .src(opts.src, { encoding: false })
       .pipe(plumber({ errorHandler }))
       .pipe(cond(evenize, evenizer({ verbose })))
-      .pipe(spritesmith(opts));
-
-    // out css stream
-    const css = stream.css.pipe(gulp.dest(opts.destCss));
-
-    // out image stream
-    // + it optimize if opts.compress
-    const image = stream.img
+      .pipe(spritesmith(opts))
       .pipe(buffer())
       .pipe(cond(enableCompress, imagemin(compressOpts.imagemin, { verbose })))
-      .pipe(gulp.dest(opts.destImg));
-
-    // return merged stream
-    return merge(css, image);
+      .pipe(cond(isImage, gulp.dest(opts.destImg)))
+      .pipe(cond(`!${isImage}`, gulp.dest(opts.destCss)));
   };
 
   // add displayName (used as task name for gulp)

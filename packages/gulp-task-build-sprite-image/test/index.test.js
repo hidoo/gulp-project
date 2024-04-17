@@ -1,7 +1,10 @@
+/* eslint max-statements: off */
+
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PNG } from 'pngjs';
 import sizeOf from 'image-size';
 import pixelmatch from 'pixelmatch';
 import getPixels from 'get-pixels';
@@ -10,273 +13,378 @@ import * as imagemin from 'gulp-imagemin';
 import buildSprite, { gifsicle, mozjpeg, optipng } from '../src/index.js';
 
 /**
- * get array of uint8array from buffers
+ * get pixels from buffers
  *
- * @param {Buffer} buffers array of buffer of image
- * @return {Promise}
+ * @param {Buffer} buffer buffer of image
+ * @return {Promise<Uint8Array>}
  */
-function getUint8ArraysFromBuffers(buffers) {
-  return Promise.all(
-    buffers.map((buffer) =>
-      fileTypeFromBuffer(buffer).then(
-        ({ mime }) =>
-          new Promise((done, reject) => {
-            getPixels(buffer, mime, (error, pixels) => {
-              if (error) {
-                return reject(error);
-              }
-              return done(pixels.data);
-            });
-          })
-      )
-    )
-  );
+async function getPixelsFromBuffer(buffer) {
+  const { mime } = await fileTypeFromBuffer(buffer);
+  const pixels = await new Promise((resolve, reject) => {
+    getPixels(buffer, mime, (error, pxls) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(pxls);
+      }
+    });
+  });
+
+  return pixels.data;
 }
 
+/* eslint-disable max-params */
 /**
  * compare pixels
  *
- * @param {Array} params array of parameter
- * @return {Promise}
+ * @param {Buffer} bufferA buffer A
+ * @param {Buffer} bufferB buffer B
+ * @param {Array<Number>} size width and height
+ * @param {Object} options options
+ * @return {Promise<Number>}
  */
-function comparePixels(params) {
-  return Promise.all(
-    params.map(
-      ([actualBuffer, expectedBuffer, width, height]) =>
-        new Promise((done, reject) =>
-          getUint8ArraysFromBuffers([actualBuffer, expectedBuffer])
-            .then((pixels) => {
-              const [actualPixels, expectedPixels] = pixels,
-                countDiffPixels = pixelmatch(
-                  actualPixels,
-                  expectedPixels,
-                  null,
-                  width,
-                  height,
-                  { threshold: 0.1 }
-                );
+async function comparePixels(bufferA, bufferB, size, options = {}) {
+  const [width, height] = size;
+  const { diff } = options;
+  let png = null;
 
-              assert(countDiffPixels === 0);
-              return done();
-            })
-            .catch((error) => reject(error))
-        )
-    )
+  if (diff) {
+    png = new PNG({ width, height });
+  }
+
+  const differences = pixelmatch(
+    await getPixelsFromBuffer(bufferA),
+    await getPixelsFromBuffer(bufferB),
+    png.data,
+    ...size,
+    {
+      threshold: 0.1
+    }
   );
+
+  if (png) {
+    await fs.writeFile(diff, PNG.sync.write(png));
+  }
+
+  return differences;
 }
+/* eslint-enable max-params */
 
 describe('gulp-task-build-sprite-image', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+  let opts = null;
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
-  });
-
-  it('should output files to "options.destXxx" if argument "options" is minimal settings.', (done) => {
-    const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+    opts = {
+      src: `${srcDir}/**/sample-*.png`,
+      destImg: `${destDir}`,
+      destCss: `${destDir}`,
       imgName: 'image-sprite.png',
       cssName: 'image-sprite.styl',
       imgPath: './image-sprite.png'
-    });
-
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.styl`),
-        { width, height } = sizeOf(expectedImage);
-
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    };
   });
 
-  it('should output evenized files to "options.destXxx" if argument "options.evenize" is true.', (done) => {
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
+  });
+
+  it('should output sprite sheet image and css files.', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.png'],
+      ['image-sprite.styl', 'image-sprite.styl']
+    ];
+    const task = buildSprite(opts);
+
+    await new Promise((resolve) => task().on('finish', resolve));
+
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
+  });
+
+  it('should output sprite sheet image and css files with options.evenize.', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.evenized.png'],
+      ['image-sprite.styl', 'image-sprite.evenized.styl']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
-      cssName: 'image-sprite.styl',
-      imgPath: './image-sprite.png',
+      ...opts,
       evenize: true
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-        expectedImage = fs.readFileSync(
-          `${path.expected}/image-sprite.evenized.png`
-        ),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/image-sprite.evenized.styl`
-        ),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
-  it('should output compressed files to "options.destXxx" if argument "options.compress" is true.', (done) => {
+  it('should output sprite sheet image and css files with options.compress.', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.compressed.png'],
+      ['image-sprite.styl', 'image-sprite.compressed.styl']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
-      cssName: 'image-sprite.styl',
-      imgPath: './image-sprite.png',
+      ...opts,
       compress: true
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-        expectedImage = fs.readFileSync(
-          `${path.expected}/image-sprite.compressed.png`
-        ),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/image-sprite.compressed.styl`
-        ),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
-  it('should output files to "options.destXxx" if argument "options.imgPath" is pathname with parameters.', (done) => {
+  it('should output sprite sheet image and css files with options.imgPath.', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.with-parameters.png'],
+      ['image-sprite.styl', 'image-sprite.with-parameters.styl']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
-      cssName: 'image-sprite.styl',
+      ...opts,
       imgPath: './image-sprite.png?version=0.0.0'
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.styl`),
-        expectedImage = fs.readFileSync(
-          `${path.expected}/image-sprite.with-parameters.png`
-        ),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/image-sprite.with-parameters.styl`
-        ),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
-  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass".', (done) => {
+  it('should output sprite sheet image and css files with options.cssPreprocessor = "sass".', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.png'],
+      ['image-sprite.scss', 'image-sprite.scss']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
+      ...opts,
       cssName: 'image-sprite.scss',
-      imgPath: './image-sprite.png',
       cssPreprocessor: 'sass'
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
-        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.scss`),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
-  it('should output file that "scss" format to "options.destCss" if argument "options.cssPreprocessor" is "sass:module".', (done) => {
+  it('should output sprite sheet image and css files with options.cssPreprocessor = "sass:module".', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.png'],
+      ['image-sprite.scss', 'image-sprite-module.scss']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
+      ...opts,
       cssName: 'image-sprite.scss',
-      imgPath: './image-sprite.png',
       cssPreprocessor: 'sass:module'
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.scss`),
-        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-        expectedCss = fs.readFileSync(
-          `${path.expected}/image-sprite-module.scss`
-        ),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
-  it('should output file that specified format to "options.destCss" if argument "options.cssTemplate" is set. (ignore "options.cssPreprocessor")', (done) => {
+  it('should output sprite sheet image and css files with options.cssTemplate. (ignore "options.cssPreprocessor")', async () => {
+    const files = [
+      ['image-sprite.png', 'image-sprite.png'],
+      ['image-sprite.css', 'image-sprite.css']
+    ];
     const task = buildSprite({
-      src: `${path.src}/**/sample-*.png`,
-      destImg: `${path.dest}`,
-      destCss: `${path.dest}`,
-      imgName: 'image-sprite.png',
+      ...opts,
       cssName: 'image-sprite.css',
-      imgPath: './image-sprite.png',
       cssPreprocessor: 'stylus',
-      cssTemplate: `${path.src}/custom-template.hbs`
+      cssTemplate: `${srcDir}/custom-template.hbs`
     });
 
-    task().on('finish', () => {
-      const actualImage = fs.readFileSync(`${path.dest}/image-sprite.png`),
-        actualCss = fs.readFileSync(`${path.dest}/image-sprite.css`),
-        expectedImage = fs.readFileSync(`${path.expected}/image-sprite.png`),
-        expectedCss = fs.readFileSync(`${path.expected}/image-sprite.css`),
-        { width, height } = sizeOf(expectedImage);
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      assert(actualImage);
-      assert(actualCss);
-      assert.equal(String(actualCss), String(expectedCss));
-      comparePixels([[actualImage, expectedImage, width, height]])
-        .then(() => done(null))
-        .catch((error) => done(error));
-    });
+    await Promise.all(
+      files.map(async ([act, exp]) => {
+        const actual = await fs.readFile(path.join(destDir, act));
+        const expected = await fs.readFile(path.join(expectedDir, exp));
+        const isNotImage = act.match(/\.png$/) === null;
+
+        assert(actual);
+
+        if (isNotImage) {
+          assert.deepEqual(actual, expected);
+        } else {
+          const dimensions = sizeOf(actual);
+          const differences = await comparePixels(
+            actual,
+            expected,
+            [dimensions.width, dimensions.height],
+            { diff: path.join(destDir, `${exp}.diff.png`) }
+          );
+
+          assert.equal(
+            differences,
+            0,
+            `No differences are found between ${act} files.`
+          );
+        }
+      })
+    );
   });
 
   describe('exports imagemin plugins', () => {

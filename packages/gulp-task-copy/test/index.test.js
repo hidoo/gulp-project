@@ -1,39 +1,49 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import copy from '../src/index.js';
 
 describe('gulp-task-copy', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`
-  };
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
   });
 
-  it('should out to "options.dest" if argument "options" is default.', (done) => {
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
+  });
+
+  it('should output files to options.dest.', async () => {
+    const extnames = ['css', 'js', 'png', 'jpg', 'gif', 'svg'];
     const task = copy({
-      src: [`${path.src}/*.{css,js,png,jpg,gif,svg}`],
-      dest: path.dest
+      src: `${srcDir}/*.{${extnames.join(',')}}`,
+      dest: destDir
     });
 
-    task().on('finish', () => {
-      const extnames = ['css', 'js', 'png', 'jpg', 'gif', 'svg'];
+    await new Promise((resolve) => task().on('finish', resolve));
 
-      extnames.forEach((extname) => {
-        const actual = fs.readFileSync(`${path.dest}/sample.${extname}`),
-          expected = fs.readFileSync(`${path.src}/sample.${extname}`);
+    await Promise.all(
+      extnames.map(async (extname) => {
+        const actual = await fs.readFile(
+          path.join(destDir, `sample.${extname}`)
+        );
+        const expected = await fs.readFile(
+          path.join(srcDir, `sample.${extname}`)
+        );
 
         assert(actual);
-        assert.deepStrictEqual(actual, expected);
-      });
-      done();
-    });
+
+        assert.deepEqual(actual, expected);
+      })
+    );
   });
 });

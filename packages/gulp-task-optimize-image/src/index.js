@@ -111,7 +111,7 @@ export default function optimizeImage(options = {}) {
     };
 
     return gulp
-      .src(opts.src, { since })
+      .src(opts.src, { since, encoding: false })
       .pipe(plumber({ errorHandler }))
       .pipe(cond(isImage, cond(evenize, imageEvenizer({ verbose }))))
       .pipe(cond(isImage, cond(opts.webp, webp(webpOpts))))

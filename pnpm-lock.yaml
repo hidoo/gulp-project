@@ -883,9 +883,6 @@ importers:
       gulp.spritesmith:
         specifier: 6.13.0
         version: 6.13.0
-      merge-stream:
-        specifier: 2.0.0
-        version: 2.0.0
       vinyl-buffer:
         specifier: 1.0.1
         version: 1.0.1
@@ -914,6 +911,9 @@ importers:
       pixelmatch:
         specifier: 5.3.0
         version: 5.3.0
+      pngjs:
+        specifier: 7.0.0
+        version: 7.0.0
 
   packages/gulp-task-build-sprite-svg:
     dependencies:
@@ -1089,9 +1089,6 @@ importers:
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
-      pixelmatch:
-        specifier: 5.3.0
-        version: 5.3.0
     devDependencies:
       cross-env:
         specifier: 7.0.3
@@ -1114,6 +1111,9 @@ importers:
       mocha:
         specifier: 10.4.0
         version: 10.4.0
+      pixelmatch:
+        specifier: 5.3.0
+        version: 5.3.0
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
@@ -13459,6 +13459,7 @@ packages:
     hasBin: true
     dependencies:
       pngjs: 6.0.0
+    dev: true
 
   /pixelsmith@2.6.0:
     resolution: {integrity: sha512-1W0C8EVxAPJwsCodw/+dfeEtdSc8JuHFipVylf51PIvh7S7Q33qmVCCzeWQp1y1sXpZ52iXGY2D/ICMyHPIULw==}
@@ -13531,6 +13532,7 @@ packages:
   /pngjs@6.0.0:
     resolution: {integrity: sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==}
     engines: {node: '>=12.13.0'}
+    dev: true
 
   /pngjs@7.0.0:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}

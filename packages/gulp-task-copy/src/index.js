@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = {
  *
  * @param {Object} options - options
  * @param {String} [options.name='copy:asset'] - task name (use as displayName)
- * @param {String} options.src - source path
+ * @param {Array<String>|String} options.src - source path
  * @param {String} options.dest - destination path
  * @return {Function<Stream>}
  *
@@ -38,7 +38,7 @@ export default function copy(options = {}) {
   // define task
   const task = () =>
     gulp
-      .src(opts.src)
+      .src(opts.src, { encoding: false })
       .pipe(plumber({ errorHandler }))
       .pipe(gulp.dest(opts.dest));
 

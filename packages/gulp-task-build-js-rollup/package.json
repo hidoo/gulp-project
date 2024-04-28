@@ -47,7 +47,7 @@
     "gulp-if": "3.0.0",
     "gulp-rename": "2.0.0",
     "gulp-terser": "2.1.0",
-    "rollup": "4.16.1",
+    "rollup": "4.17.0",
     "rollup-plugin-license": "3.3.1",
     "through2": "4.0.2",
     "vinyl": "3.0.0"

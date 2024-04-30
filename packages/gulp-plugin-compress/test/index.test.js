@@ -111,7 +111,7 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html',
           'example-html.html.gz',
@@ -119,7 +119,7 @@ describe('gulp-plugin-compress', () => {
           'example-txt.txt',
           'example-txt.txt.gz',
           'example-txt.txt.br'
-        ],
+        ].sort(),
         'Output files.'
       );
 
@@ -164,13 +164,13 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html',
           'example-html.html.br',
           'example-txt.txt',
           'example-txt.txt.br'
-        ],
+        ].sort(),
         'Output files without gzip files.'
       );
 
@@ -215,13 +215,13 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html',
           'example-html.html.gz',
           'example-txt.txt',
           'example-txt.txt.gz'
-        ],
+        ].sort(),
         'Output files without brotli files.'
       );
 
@@ -266,13 +266,13 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html.gz',
           'example-html.html.br',
           'example-txt.txt.gz',
           'example-txt.txt.br'
-        ],
+        ].sort(),
         'Output files without original files.'
       );
 
@@ -317,7 +317,7 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html',
           'example-html.gz',
@@ -325,7 +325,7 @@ describe('gulp-plugin-compress', () => {
           'example-txt.txt',
           'example-txt.gz',
           'example-txt.br'
-        ],
+        ].sort(),
         'Output files without original extname in compressed files.'
       );
 
@@ -370,13 +370,13 @@ describe('gulp-plugin-compress', () => {
       await promise;
 
       assert.deepEqual(
-        outputs.map(({ basename }) => basename),
+        outputs.map(({ basename }) => basename).sort(),
         [
           'example-html.html',
           'example-html.html.gz',
           'example-html.html.br',
           'example-txt.txt'
-        ],
+        ].sort(),
         'Output files without files not subject extnames.'
       );
 

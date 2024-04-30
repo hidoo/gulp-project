@@ -1,6 +1,6 @@
-import { pathToFileURL } from 'node:url';
 import magicImporter from 'node-sass-magic-importer';
-import sassImporter from '@hidoo/sass-importer';
+
+export { createFileImporter } from '@hidoo/sass-importer';
 
 /**
  * compatible version of node-sass-magic-importer
@@ -38,30 +38,6 @@ export function compatMagicImporter(sassOptions = {}, options = {}) {
           contents: result.contents,
           syntax: 'scss'
         };
-      }
-      return null;
-    }
-  };
-}
-
-/**
- * compatible version of @hidoo/sass-importer
- *
- * @param {Object} options importer options
- * @return {import('sass').FileImporter<async>}
- */
-export function compatSassImporter(options = {}) {
-  return {
-    async findFileUrl(url, { containingUrl: prevUrl }) {
-      const prev = prevUrl.pathname;
-      const importer = sassImporter.default(options);
-
-      const result = await new Promise((resolve) =>
-        importer(url, prev, resolve)
-      );
-
-      if (result && result.file) {
-        return new URL(pathToFileURL(result.file));
       }
       return null;
     }

@@ -156,7 +156,7 @@ export default function svgSprite(options) {
    * @param {Function} done callback
    * @return {Promise}
    */
-  function flush(done) {
+  async function flush(done) {
     const { imgName, imgPath, cssName } = opts;
 
     // eslint-disable-next-line no-magic-numbers
@@ -164,63 +164,61 @@ export default function svgSprite(options) {
       svgStream.push(null);
       cssStream.push(null);
       stream.push(null);
-      return done();
+      return done(null);
     }
 
-    return (async () => {
-      try {
-        const { result, data } = await spriter.compileAsync();
+    try {
+      const { result, data } = await spriter.compileAsync();
 
-        Object.entries(result.css).forEach(([type, resource]) => {
-          // resource is .svg
-          if (type === 'sprite') {
-            const contents = optimizeSvg(resource.contents.toString());
+      Object.entries(result.css).forEach(([type, resource]) => {
+        // resource is .svg
+        if (type === 'sprite') {
+          const contents = optimizeSvg(resource.contents.toString());
 
-            // add file to svg stream
-            svgStream.push(
-              new Vinyl({
-                path: imgName,
-                contents: Buffer.from(contents)
-              })
-            );
-            svgStream.push(null);
+          // add file to svg stream
+          svgStream.push(
+            new Vinyl({
+              path: imgName,
+              contents: Buffer.from(contents)
+            })
+          );
+          svgStream.push(null);
 
-            // add original file to master stream
-            // + required to notify completion of processing
-            stream.push(resource);
-          }
-          // resource is .styl
-          else if (type === 'styl') {
-            const contents = template({
-              spriteName: path.basename(
-                imgPath.replace(/(\?|#).*$/g, ''), // eslint-disable-line prefer-named-capture-group
-                '.svg'
-              ),
-              imgPath,
-              shapes: reshapeTemplateVars(data.css)
-            });
+          // add original file to master stream
+          // + required to notify completion of processing
+          stream.push(resource);
+        }
+        // resource is .styl
+        else if (type === 'styl') {
+          const contents = template({
+            spriteName: path.basename(
+              imgPath.replace(/(\?|#).*$/g, ''), // eslint-disable-line prefer-named-capture-group
+              '.svg'
+            ),
+            imgPath,
+            shapes: reshapeTemplateVars(data.css)
+          });
 
-            // add file to css stream
-            cssStream.push(
-              new Vinyl({
-                path: cssName,
-                contents: Buffer.from(contents)
-              })
-            );
-            cssStream.push(null);
-          }
-        });
+          // add file to css stream
+          cssStream.push(
+            new Vinyl({
+              path: cssName,
+              contents: Buffer.from(contents)
+            })
+          );
+          cssStream.push(null);
+        }
+      });
 
-        await Promise.all([
-          new Promise((resolve) => svgStream.on('end', resolve)),
-          new Promise((resolve) => cssStream.on('end', resolve))
-        ]);
+      await Promise.all([
+        new Promise((resolve) => svgStream.on('end', resolve)),
+        new Promise((resolve) => cssStream.on('end', resolve))
+      ]);
 
-        done();
-      } catch (error) {
-        done(new PluginError(PLUGIN_NAME, error));
-      }
-    })();
+      return done(null);
+    } catch (error) {
+      return done(new PluginError(PLUGIN_NAME, error));
+    }
   }
 
   stream.css = cssStream;

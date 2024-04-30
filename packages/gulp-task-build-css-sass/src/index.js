@@ -157,7 +157,7 @@ export default function buildCss(options = {}) {
           sourceMap: Boolean(sourcemaps),
           importers: [
             new sass.NodePackageImporter(),
-            importers.compatSassImporter(),
+            importers.createFileImporter(),
             importers.compatMagicImporter({
               ...sassOptions,
               includePaths: file.dirname

@@ -19,19 +19,12 @@ describe('importers', () => {
     });
   });
 
-  describe('compatSassImporter', () => {
-    it('should be accessible to compatSassImporter as named export.', async () => {
+  describe('exports createFileImporter from @hidoo/sass-importer.', () => {
+    it('should be accessible to createFileImporter as named export.', async () => {
       assert.equal(
-        (await import('../src/importers.js')).compatSassImporter,
-        importers.compatSassImporter
+        (await import('@hidoo/sass-importer')).createFileImporter,
+        importers.createFileImporter
       );
-    });
-
-    it('should return an importer as sass.Importer.', () => {
-      const actual = importers.compatSassImporter({}, {});
-
-      assert.equal(typeof actual, 'object');
-      assert.equal(typeof actual.findFileUrl, 'function');
     });
   });
 });

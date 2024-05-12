@@ -41,7 +41,7 @@
     "@hidoo/gulp-plugin-webp": "workspace:*",
     "@hidoo/gulp-util-error-handler": "workspace:*",
     "gulp-if": "3.0.0",
-    "gulp-imagemin": "9.0.0",
+    "gulp-imagemin": "9.1.0",
     "gulp-plumber": "1.2.1"
   },
   "peerDependencies": {

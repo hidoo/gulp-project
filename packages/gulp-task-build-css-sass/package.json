@@ -48,7 +48,7 @@
     "plugin-error": "2.0.1",
     "postcss": "8.4.38",
     "postcss-csso": "6.0.1",
-    "sass": "1.77.1",
+    "sass": "1.77.2",
     "through2": "4.0.2"
   },
   "peerDependencies": {

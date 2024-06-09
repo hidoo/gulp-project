@@ -42,7 +42,7 @@
     "@rollup/plugin-commonjs": "25.0.8",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
-    "@rollup/plugin-replace": "5.0.5",
+    "@rollup/plugin-replace": "5.0.7",
     "fancy-log": "2.0.0",
     "gulp-if": "3.0.0",
     "gulp-rename": "2.0.0",

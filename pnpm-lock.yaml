@@ -245,9 +245,6 @@ importers:
       '@hidoo/gulp-task-optimize-image':
         specifier: workspace:*
         version: link:../../packages/gulp-task-optimize-image
-      '@hidoo/kss-builder':
-        specifier: 1.0.0
-        version: 1.0.0(chokidar@3.6.0)
       '@hidoo/stylelint-config':
         specifier: 1.0.0
         version: 1.0.0(postcss@8.4.38)(stylelint@16.6.1(typescript@5.4.5))

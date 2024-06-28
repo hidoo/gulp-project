@@ -18,14 +18,14 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(@babel/core@7.24.5)(eslint@8.57.0)(typescript@5.4.5)
       '@lerna-lite/cli':
-        specifier: 3.4.0
-        version: 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
+        specifier: 3.6.0
+        version: 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(@lerna-lite/version@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
       '@lerna-lite/publish':
-        specifier: 3.4.0
-        version: 3.4.0(typescript@5.4.5)
+        specifier: 3.6.0
+        version: 3.6.0(typescript@5.4.5)
       '@lerna-lite/version':
-        specifier: 3.4.0
-        version: 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5)
+        specifier: 3.6.0
+        version: 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5)
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -1989,8 +1989,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@lerna-lite/cli@3.4.0':
-    resolution: {integrity: sha512-8T7WsUFhCIO9sm+cY7IfkngHZVEKi1Jcu1+vVExnInO9ONEaaX+XBclDwfQXR5U3wrJR43jSq45C9djYigJ/7w==}
+  '@lerna-lite/cli@3.6.0':
+    resolution: {integrity: sha512-X6N39fKArqZ0rS+8DqDToGen9OA+CM0x9edF+r1O/IZR1SO7cNbaLSXl9YDRW/lz5aJGIWsguMoGMjVbv1vCRQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -2014,20 +2014,24 @@ packages:
       '@lerna-lite/watch':
         optional: true
 
-  '@lerna-lite/core@3.4.0':
-    resolution: {integrity: sha512-IFN8wojsl77zKQ5pe0DEW8BYr4qdbyNJCZEa9E9mE3Gh+N7JeB7doGlTqg1pu5eigaSh/UP4SeHvV2jq3Cm4Tg==}
+  '@lerna-lite/core@3.6.0':
+    resolution: {integrity: sha512-nyRJARtEUnmD+y3C9gCqJZiz12RAkAseVMDRmIFzMw4ZQvczur69AK62OCsjDYwqlXO3slqNmGz9YG0Yi1RO2Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
 
-  '@lerna-lite/init@3.4.0':
-    resolution: {integrity: sha512-5lKL0Ab5vsk8PVNEUby6IVlgA3OxC+9pRH/jWhDMdgDKci9apCuTGoKMhVY8ixsbKvg9+ObRs3eIuMlxs4mvWw==}
+  '@lerna-lite/init@3.6.0':
+    resolution: {integrity: sha512-COTQZB/8QBklGf4hVilHSx7P54dbJubI+RaMLIe4/JD5ffhu1bOG4jsWwsYusP/mk3t1k1U0mxmiYaWsuO8oqQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
 
-  '@lerna-lite/publish@3.4.0':
-    resolution: {integrity: sha512-BiWDdV1vKhdxumXX4uSrhauvD7qV8TpImAYFyR3XxKEOv8SQt4O5ZlAIKG8yH1i365zIsS6DOPfBdamMFKB9hw==}
+  '@lerna-lite/npmlog@3.6.0':
+    resolution: {integrity: sha512-sx/dqt+5BRgPPuE0KMW524noVzs1PKuKb+DryMx+J0ZAvveGSwxtddbUADl0XEiAyLwRUXKtsTqcQd0dmCrBaQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
 
-  '@lerna-lite/version@3.4.0':
-    resolution: {integrity: sha512-LQ265fmNCkJ9s1ndM4idttMB7PhO2ndKdxUciXe6+0PJLIkEOmWJ5v3fVHyDiOMtzFGC4LgCw4HISGgEU5ELLA==}
+  '@lerna-lite/publish@3.6.0':
+    resolution: {integrity: sha512-OIkY4D0AEpxP5fNpxo3vkchgcjZUk6W168iLBwnkhXp8iiTKGXgvGWWBXINx+sHp3QIOCx/pFDau0vfIQjPA8g==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+
+  '@lerna-lite/version@3.6.0':
+    resolution: {integrity: sha512-ahv+RcVtURDem8yjB8zc4cNdh2EqUevaH358HJ5uv+9IEtxGByGb00xpmCl7YNMHztACS07G3U8hLqDeRM1ZZw==}
     engines: {node: ^18.0.0 || >=20.0.0}
 
   '@ljharb/through@2.3.13':
@@ -2077,6 +2081,10 @@ packages:
     resolution: {integrity: sha512-1aL4TuVrLS9sf8quCLerU3H9J4vtCtgu8VauYozrmEyU57i/EdKleCnsQ7vpnABIH6c9mnTxcH5sFkO3BlV8wQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
+  '@npmcli/package-json@5.2.0':
+    resolution: {integrity: sha512-qe/kiqqkW0AGtvBjL8TJKZk/eBBSpnJkUWvHdQ9jM2lKHXRYYJuyNpJPlJw3c8QjC2ow6NZYiLExhUaeJelbxQ==}
+    engines: {node: ^16.14.0 || >=18.0.0}
+
   '@npmcli/promise-spawn@7.0.1':
     resolution: {integrity: sha512-P4KkF9jX3y+7yFUxgcUdDtLy+t4OlDGuEBLNs57AZsfSfg+uV6MLndqGpnl4831ggaEdXwR50XFoZP4VFtHolg==}
     engines: {node: ^16.14.0 || >=18.0.0}
@@ -2089,20 +2097,20 @@ packages:
     resolution: {integrity: sha512-y7efHHwghQfk28G2z3tlZ67pLG0XdfYbcVG26r7YIXALRsrVQcTq4/tdenSmdOrEsNahIYA/eh8aEVROWGFUDg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  '@octokit/auth-token@4.0.0':
-    resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
+  '@octokit/auth-token@5.1.1':
+    resolution: {integrity: sha512-rh3G3wDO8J9wSjfI436JUKzHIxq8NaiL0tVeB2aXmG6p/9859aUOAjA9pmSPNGGZxfwmaJ9ozOJImuNVJdpvbA==}
     engines: {node: '>= 18'}
 
-  '@octokit/core@5.2.0':
-    resolution: {integrity: sha512-1LFfa/qnMQvEOAdzlQymH0ulepxbxnCYAKJZfMci/5XJyIHWgEYnDmgnKakbTh7CH2tFQ5O60oYDvns4i9RAIg==}
+  '@octokit/core@6.1.2':
+    resolution: {integrity: sha512-hEb7Ma4cGJGEUNOAVmyfdB/3WirWMg5hDuNFVejGEDFqupeOysLc2sG6HJxY2etBp5YQu5Wtxwi020jS9xlUwg==}
     engines: {node: '>= 18'}
 
-  '@octokit/endpoint@9.0.5':
-    resolution: {integrity: sha512-ekqR4/+PCLkEBF6qgj8WqJfvDq65RH85OAgrtnVp1mSxaXF03u2xW/hUdweGS5654IlC0wkNYC18Z50tSYTAFw==}
+  '@octokit/endpoint@10.1.1':
+    resolution: {integrity: sha512-JYjh5rMOwXMJyUpj028cu0Gbp7qe/ihxfJMLc8VZBMMqSwLgOxDI1911gV4Enl1QSavAQNJcwmwBF9M0VvLh6Q==}
     engines: {node: '>= 18'}
 
-  '@octokit/graphql@7.1.0':
-    resolution: {integrity: sha512-r+oZUH7aMFui1ypZnAvZmn0KSqAUgE1/tUXIWaqUCa1758ts/Jio84GZuzsvUkme98kv0WFY8//n0J1Z+vsIsQ==}
+  '@octokit/graphql@8.1.1':
+    resolution: {integrity: sha512-ukiRmuHTi6ebQx/HFRCXKbDlOh/7xEV6QUXaE7MJEKGNAncGI/STSbOkl12qVXZrfZdpXctx5O9X1AIaebiDBg==}
     engines: {node: '>= 18'}
 
   '@octokit/openapi-types@22.2.0':
@@ -2117,11 +2125,11 @@ packages:
     peerDependencies:
       '@octokit/core': '5'
 
-  '@octokit/plugin-request-log@4.0.1':
-    resolution: {integrity: sha512-GihNqNpGHorUrO7Qa9JbAl0dbLnqJVrV8OXe2Zm5/Y4wFkZQDfTreBzVmiRfJVfE4mClXdihHnbpyyO9FSX4HA==}
+  '@octokit/plugin-request-log@5.3.0':
+    resolution: {integrity: sha512-FiGcyjdtYPlr03ExBk/0ysIlEFIFGJQAVoPPMxL19B24bVSEiZQnVGBunNtaAF1YnvE/EFoDpXmITtRnyCiypQ==}
     engines: {node: '>= 18'}
     peerDependencies:
-      '@octokit/core': '5'
+      '@octokit/core': '>=6'
 
   '@octokit/plugin-rest-endpoint-methods@13.2.2':
     resolution: {integrity: sha512-EI7kXWidkt3Xlok5uN43suK99VWqc8OaIMktY9d9+RNKl69juoTyxmLoWPIZgJYzi41qj/9zU7G/ljnNOJ5AFA==}
@@ -2129,16 +2137,16 @@ packages:
     peerDependencies:
       '@octokit/core': ^5
 
-  '@octokit/request-error@5.1.0':
-    resolution: {integrity: sha512-GETXfE05J0+7H2STzekpKObFe765O5dlAKUTLNGeH+x47z7JjXHfsHKo5z21D/o/IOZTUEI6nyWyR+bZVP/n5Q==}
+  '@octokit/request-error@6.1.1':
+    resolution: {integrity: sha512-1mw1gqT3fR/WFvnoVpY/zUM2o/XkMs/2AszUUG9I69xn0JFLv6PGkPhNk5lbfvROs79wiS0bqiJNxfCZcRJJdg==}
     engines: {node: '>= 18'}
 
-  '@octokit/request@8.4.0':
-    resolution: {integrity: sha512-9Bb014e+m2TgBeEJGEbdplMVWwPmL1FPtggHQRkV+WVsMggPtEkLKPlcVYm/o8xKLkpJ7B+6N8WfQMtDLX2Dpw==}
+  '@octokit/request@9.1.1':
+    resolution: {integrity: sha512-pyAguc0p+f+GbQho0uNetNQMmLG1e80WjkIaqqgUkihqUp0boRU6nKItXO4VWnr+nbZiLGEyy4TeKRwqaLvYgw==}
     engines: {node: '>= 18'}
 
-  '@octokit/rest@20.1.1':
-    resolution: {integrity: sha512-MB4AYDsM5jhIHro/dq4ix1iWTLGToIGk6cWF5L6vanFaMble5jTX/UBQyiv05HsWnwUtY8JrfHy2LWfKwihqMw==}
+  '@octokit/rest@21.0.0':
+    resolution: {integrity: sha512-XudXXOmiIjivdjNZ+fN71NLrnDM00sxSZlhqmPR3v0dVoJwyP628tSlc12xqn8nX3N0965583RBw5GPo6r8u4Q==}
     engines: {node: '>= 18'}
 
   '@octokit/types@13.5.0':
@@ -2758,11 +2766,6 @@ packages:
     resolution: {integrity: sha512-ixiS0nLNNG5jNQzgZJNoUpBKdo9yTYZMGJ+QgT2jmjR7G7+QHRCc4v6LQ3NgE7EBJq+o0ams3waJwkrlBom8Ig==}
     engines: {node: '>=14'}
 
-  are-we-there-yet@4.0.2:
-    resolution: {integrity: sha512-ncSWAawFhKMJDTdoAeOV+jyW1VCMj5QIAwULIBV0SSR7B/RLPPEQiknKcg/RIIZlUQrxELpsxMiTUoAQ4sIUyg==}
-    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-    deprecated: This package is no longer supported.
-
   argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
 
@@ -2988,8 +2991,8 @@ packages:
   bcrypt-pbkdf@1.0.2:
     resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
 
-  before-after-hook@2.2.3:
-    resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
+  before-after-hook@3.0.2:
+    resolution: {integrity: sha512-Nik3Sc0ncrMK4UUdXQmAnRtzmNQTAAXmXIopizwZ1W1t8QmfJj+zL4OA2I7XPTPW5z5TDqv4hRo/JzouDJnX3A==}
 
   bin-build@3.0.0:
     resolution: {integrity: sha512-jcUOof71/TNAI2uM5uoUaDq2ePcVBQ3R/qhxAz1rX7UfvduAL/RXD3jXzvn8cVcDJdGVkiR1shal3OH0ImpuhA==}
@@ -3847,9 +3850,6 @@ packages:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
 
-  deprecation@2.3.1:
-    resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}
-
   deps-sort@2.0.1:
     resolution: {integrity: sha512-1orqXQr5po+3KI6kQb9A4jnXT1PBwggGl2d7Sq2xsnOeI9GPcE/tGcF9UiSZtZBM7MukY4cAh7MemS6tZYipfw==}
     hasBin: true
@@ -4647,11 +4647,6 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  gauge@5.0.1:
-    resolution: {integrity: sha512-CmykPMJGuNan/3S4kZOpvvPYSNqSHANiWnh9XcMU2pSjtBfF0XzZ2p1bFAxTbnFxyBuPxQYHhzwaoOmUdqzvxQ==}
-    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-    deprecated: This package is no longer supported.
-
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -5305,6 +5300,10 @@ packages:
     resolution: {integrity: sha512-kod5s+FBPIDM2xiy9fu+6wdU/SkK5le5GS9lh4FEBjBHqiMgD9lLFbCbuqFNAjNL2ZOy9Wd9F694IOzN9pZHBA==}
     engines: {node: '>=18'}
 
+  inquirer@9.3.0:
+    resolution: {integrity: sha512-zdopqPUKWmnOcaBJYMMtjqWCB2HHXrteAou9tCYgkTJu01QheLfYOrkzigDfidPBtCizmkdpSU0fp2DKaMdFPA==}
+    engines: {node: '>=18'}
+
   insert-module-globals@7.2.1:
     resolution: {integrity: sha512-ufS5Qq9RZN+Bu899eA9QCAYThY+gGW7oRkmb0vC93Vlyu/CFGcH0OYPEjVkDXA5FEbTt1+VWzdoOD3Ny9N+8tg==}
     hasBin: true
@@ -5838,8 +5837,8 @@ packages:
     resolution: {integrity: sha512-uM8DHDEfYG6G5gVivVl+yQd4pH3uRclHC59lzIbSvy7b5FEwR+mU49Zq1jEyRtRFv7+M99mUW9S0wL/4laT4lw==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  libnpmpublish@9.0.8:
-    resolution: {integrity: sha512-sIsWBSAT7ugDPrV72/Js1vYpZBZuOqlMOOZmpXh2Mn5Tjh4Ycv3qYQGHX19g5wdOuQw4wgluSzF/z7EFSO084g==}
+  libnpmpublish@9.0.9:
+    resolution: {integrity: sha512-26zzwoBNAvX9AWOPiqqF6FG4HrSCPsHFkQm7nT+xU1ggAujL/eae81RnCv4CJ2In9q9fh10B88sYSzKCUh/Ghg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
   licensify@3.1.3:
@@ -5954,6 +5953,9 @@ packages:
 
   lodash.pick@4.4.0:
     resolution: {integrity: sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==}
+
+  lodash.set@4.3.2:
+    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
 
   lodash.snakecase@4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
@@ -6357,6 +6359,10 @@ packages:
     resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  minimatch@9.0.5:
+    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
+    engines: {node: '>=16 || 14 >=14.17'}
+
   minimist-options@4.1.0:
     resolution: {integrity: sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==}
     engines: {node: '>= 6'}
@@ -6375,9 +6381,6 @@ packages:
   minipass-flush@1.0.5:
     resolution: {integrity: sha512-JmQSYYpPUqX5Jyn1mXaRwOda1uQ8HP5KAT/oDSLCzt1BYRhQU0/hDtsB1ufZfEEzMZ9aAVmsBw8+FWsIXlClWw==}
     engines: {node: '>= 8'}
-
-  minipass-json-stream@1.0.1:
-    resolution: {integrity: sha512-ODqY18UZt/I8k+b7rl2AENgbWE8IDYam+undIJONvigAz8KR5GWblsFTEfQs0WODsjbSXWlm+JHEv8Gr6Tfdbg==}
 
   minipass-pipeline@1.2.4:
     resolution: {integrity: sha512-xuIq7cIOt09RPRJ19gdi4b+RiNvDFYe5JH+ggNvBqGqpQXcru3PcRmOZuHBKWK1Txf9+cQ+HMVN4d6z46LZP7A==}
@@ -6540,10 +6543,6 @@ packages:
     resolution: {integrity: sha512-p2W1sgqij3zMMyRC067Dg16bfzVH+w7hyegmpIvZ4JNjqtGOVAIvLmjBx3yP7YTe9vKJgkoNOPjwQGogDoMXFA==}
     engines: {node: '>=10'}
 
-  normalize-package-data@6.0.0:
-    resolution: {integrity: sha512-UL7ELRVxYBHBgYEtZCXjxuD5vPxnmvMGq0jp/dGPKKrN7tfsBh2IY7TlJ15WWwdjRWD3RJbnsygUurTK3xkPkg==}
-    engines: {node: ^16.14.0 || >=18.0.0}
-
   normalize-package-data@6.0.1:
     resolution: {integrity: sha512-6rvCfeRW+OEZagAB4lMLSNuTNYZWLVtKccK79VSTf//yTY5VOCgcpH80O+bZK8Neps7pUnd5G+QlMg1yV/2iZQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
@@ -6605,8 +6604,8 @@ packages:
     resolution: {integrity: sha512-VfvRSs/b6n9ol4Qb+bDwNGUXutpy76x6MARw/XssevE0TnctIKcmklJZM5Z7nqs5z5aW+0S63pgCNbpkUNNXBg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  npm-registry-fetch@17.0.1:
-    resolution: {integrity: sha512-fLu9MTdZTlJAHUek/VLklE6EpIiP3VZpTiuN7OOMCt2Sd67NCpSEetMaxHHEZiZxllp8ZLsUpvbEszqTFEc+wA==}
+  npm-registry-fetch@17.1.0:
+    resolution: {integrity: sha512-5+bKQRH0J1xG1uZ1zMNvxW0VEyoNWgJpY9UDuluPFLKDfJ9u2JmmjmTJV1srBGQOROfdBMiVvnH2Zvpbm+xkVA==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
   npm-run-all2@6.2.0:
@@ -6625,11 +6624,6 @@ packages:
   npm-run-path@5.3.0:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  npmlog@7.0.1:
-    resolution: {integrity: sha512-uJ0YFk/mCQpLBt+bxN88AKd+gyqZvZDbtiNxk6Waqcj2aPRyfVx8ITawkyQynxUagInjdYT1+qj4NfA5KJJUxg==}
-    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-    deprecated: This package is no longer supported.
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -6801,6 +6795,10 @@ packages:
   p-limit@4.0.0:
     resolution: {integrity: sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  p-limit@5.0.0:
+    resolution: {integrity: sha512-/Eaoq+QyLSiXQ4lyYV23f14mZRQcXnxfHrN0vCai+ak9G0pp9iEQukIIZq5NccEvwRB8PUnZT0KsOoDCINS1qQ==}
+    engines: {node: '>=18'}
 
   p-locate@4.1.0:
     resolution: {integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==}
@@ -7363,11 +7361,6 @@ packages:
   read-package-json-fast@3.0.2:
     resolution: {integrity: sha512-0J+Msgym3vrLOUB3hzQCuZHII0xkNGCtz/HJH9xZshwv9DbDwkw1KaE3gx/e2J5rpEY5rtOy6cyhKOPrkP7FZw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-
-  read-package-json@7.0.1:
-    resolution: {integrity: sha512-8PcDiZ8DXUjLf687Ol4BR8Bpm2umR7vhoZOzNRt+uxD9GpBh/K+CAAALVIiYFknmvlmyg7hM7BSNUXPaCCqd0Q==}
-    engines: {node: ^16.14.0 || >=18.0.0}
-    deprecated: This package is no longer supported. Please use @npmcli/package-json instead.
 
   read-pkg-up@10.1.0:
     resolution: {integrity: sha512-aNtBq4jR8NawpKJQldrQcSW9y/d+KWH4v24HWkHljOZ7H0av+YTGANBzRh9A5pw7v/bLVsLVPpOhJ7gHNVy8lA==}
@@ -8676,8 +8669,8 @@ packages:
   unist-util-visit@4.1.2:
     resolution: {integrity: sha512-MSd8OUGISqHdVvfY9TPhyK2VdUrPgxkUtWSuMHF6XAAFuL4LokseigBnZtPnJMu+FbynTkFNnFlyjxpVKujMRg==}
 
-  universal-user-agent@6.0.1:
-    resolution: {integrity: sha512-yCzhz6FN2wU1NiiQRogkTQszlQSlpWaw8SvVegAc+bDxbzHgh1vX8uIe8OYyMH6DwH+sdTJsgMl36+mSMdRJIQ==}
+  universal-user-agent@7.0.2:
+    resolution: {integrity: sha512-0JCqzSKnStlRRQfCdowvqy3cy0Dvtlb8xecj/H8JFZuCze4rwjPZQOgvFvn0Ws/usCHQFGpyr+pB9adaGwXn4Q==}
 
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -8750,13 +8743,13 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
+  uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
-    hasBin: true
-
-  uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
 
   uvu@0.5.6:
@@ -9909,7 +9902,7 @@ snapshots:
   '@commitlint/is-ignored@19.2.2':
     dependencies:
       '@commitlint/types': 19.0.3
-      semver: 7.6.0
+      semver: 7.6.2
 
   '@commitlint/lint@19.2.2':
     dependencies:
@@ -10172,27 +10165,28 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@lerna-lite/cli@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)':
+  '@lerna-lite/cli@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(@lerna-lite/version@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)':
     dependencies:
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/init': 3.4.0(typescript@5.4.5)
+      '@lerna-lite/core': 3.6.0(typescript@5.4.5)
+      '@lerna-lite/init': 3.6.0(typescript@5.4.5)
+      '@lerna-lite/npmlog': 3.6.0
       dedent: 1.5.3
       dotenv: 16.4.5
       import-local: 3.1.0
       load-json-file: 7.0.1
-      npmlog: 7.0.1
       yargs: 17.7.2
     optionalDependencies:
-      '@lerna-lite/publish': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/version': 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5)
+      '@lerna-lite/publish': 3.6.0(typescript@5.4.5)
+      '@lerna-lite/version': 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5)
     transitivePeerDependencies:
       - babel-plugin-macros
       - bluebird
       - supports-color
       - typescript
 
-  '@lerna-lite/core@3.4.0(typescript@5.4.5)':
+  '@lerna-lite/core@3.6.0(typescript@5.4.5)':
     dependencies:
+      '@lerna-lite/npmlog': 3.6.0
       '@npmcli/run-script': 8.1.0
       chalk: 5.3.0
       clone-deep: 4.0.1
@@ -10203,13 +10197,12 @@ snapshots:
       fs-extra: 11.2.0
       glob-parent: 6.0.2
       globby: 14.0.1
-      inquirer: 9.2.23
+      inquirer: 9.3.0
       is-ci: 3.0.1
       json5: 2.2.3
       load-json-file: 7.0.1
-      minimatch: 9.0.4
+      minimatch: 9.0.5
       npm-package-arg: 11.0.2
-      npmlog: 7.0.1
       p-map: 7.0.2
       p-queue: 8.0.1
       resolve-from: 5.0.0
@@ -10225,9 +10218,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/init@3.4.0(typescript@5.4.5)':
+  '@lerna-lite/init@3.6.0(typescript@5.4.5)':
     dependencies:
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
+      '@lerna-lite/core': 3.6.0(typescript@5.4.5)
       fs-extra: 11.2.0
       p-map: 7.0.2
       write-json-file: 5.0.0
@@ -10237,11 +10230,25 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/publish@3.4.0(typescript@5.4.5)':
+  '@lerna-lite/npmlog@3.6.0':
     dependencies:
-      '@lerna-lite/cli': 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
-      '@lerna-lite/version': 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5)
+      aproba: 2.0.0
+      color-support: 1.1.3
+      console-control-strings: 1.1.0
+      has-unicode: 2.0.1
+      set-blocking: 2.0.0
+      signal-exit: 4.1.0
+      string-width: 7.1.0
+      strip-ansi: 7.1.0
+      wide-align: 1.1.5
+
+  '@lerna-lite/publish@3.6.0(typescript@5.4.5)':
+    dependencies:
+      '@lerna-lite/cli': 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(@lerna-lite/version@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
+      '@lerna-lite/core': 3.6.0(typescript@5.4.5)
+      '@lerna-lite/npmlog': 3.6.0
+      '@lerna-lite/version': 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5)
+      '@npmcli/package-json': 5.2.0
       byte-size: 8.1.1
       chalk: 5.3.0
       columnify: 1.6.0
@@ -10249,17 +10256,14 @@ snapshots:
       glob: 10.4.2
       has-unicode: 2.0.1
       libnpmaccess: 8.0.6
-      libnpmpublish: 9.0.8
+      libnpmpublish: 9.0.9
       normalize-path: 3.0.0
       npm-package-arg: 11.0.2
       npm-packlist: 5.1.3
-      npm-registry-fetch: 17.0.1
-      npmlog: 7.0.1
+      npm-registry-fetch: 17.1.0
       p-map: 7.0.2
       p-pipe: 4.0.0
       pacote: 18.0.6
-      pify: 6.1.0
-      read-package-json: 7.0.1
       semver: 7.6.2
       ssri: 10.0.6
       tar: 6.2.1
@@ -10274,12 +10278,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5)':
+  '@lerna-lite/version@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5)':
     dependencies:
-      '@lerna-lite/cli': 3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(@lerna-lite/version@3.4.0(@lerna-lite/publish@3.4.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
-      '@lerna-lite/core': 3.4.0(typescript@5.4.5)
+      '@lerna-lite/cli': 3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(@lerna-lite/version@3.6.0(@lerna-lite/publish@3.6.0(typescript@5.4.5))(typescript@5.4.5))(typescript@5.4.5)
+      '@lerna-lite/core': 3.6.0(typescript@5.4.5)
+      '@lerna-lite/npmlog': 3.6.0
       '@octokit/plugin-enterprise-rest': 6.0.1
-      '@octokit/rest': 20.1.1
+      '@octokit/rest': 21.0.0
       chalk: 5.3.0
       conventional-changelog-angular: 7.0.0
       conventional-changelog-core: 7.0.0
@@ -10294,11 +10299,11 @@ snapshots:
       is-stream: 4.0.1
       load-json-file: 7.0.1
       make-dir: 5.0.0
-      minimatch: 9.0.4
+      minimatch: 9.0.5
       new-github-release-url: 2.0.0
       node-fetch: 3.3.2
       npm-package-arg: 11.0.2
-      npmlog: 7.0.1
+      p-limit: 5.0.0
       p-map: 7.0.2
       p-pipe: 4.0.0
       p-reduce: 3.0.0
@@ -10306,7 +10311,7 @@ snapshots:
       semver: 7.6.2
       slash: 5.1.0
       temp-dir: 3.0.0
-      uuid: 9.0.1
+      uuid: 10.0.0
       write-json-file: 5.0.0
     transitivePeerDependencies:
       - '@lerna-lite/exec'
@@ -10381,7 +10386,19 @@ snapshots:
       glob: 10.4.2
       hosted-git-info: 7.0.1
       json-parse-even-better-errors: 3.0.1
-      normalize-package-data: 6.0.0
+      normalize-package-data: 6.0.1
+      proc-log: 4.2.0
+      semver: 7.6.2
+    transitivePeerDependencies:
+      - bluebird
+
+  '@npmcli/package-json@5.2.0':
+    dependencies:
+      '@npmcli/git': 5.0.6
+      glob: 10.4.2
+      hosted-git-info: 7.0.1
+      json-parse-even-better-errors: 3.0.1
+      normalize-package-data: 6.0.1
       proc-log: 4.2.0
       semver: 7.6.2
     transitivePeerDependencies:
@@ -10405,66 +10422,64 @@ snapshots:
       - bluebird
       - supports-color
 
-  '@octokit/auth-token@4.0.0': {}
+  '@octokit/auth-token@5.1.1': {}
 
-  '@octokit/core@5.2.0':
+  '@octokit/core@6.1.2':
     dependencies:
-      '@octokit/auth-token': 4.0.0
-      '@octokit/graphql': 7.1.0
-      '@octokit/request': 8.4.0
-      '@octokit/request-error': 5.1.0
+      '@octokit/auth-token': 5.1.1
+      '@octokit/graphql': 8.1.1
+      '@octokit/request': 9.1.1
+      '@octokit/request-error': 6.1.1
       '@octokit/types': 13.5.0
-      before-after-hook: 2.2.3
-      universal-user-agent: 6.0.1
+      before-after-hook: 3.0.2
+      universal-user-agent: 7.0.2
 
-  '@octokit/endpoint@9.0.5':
+  '@octokit/endpoint@10.1.1':
     dependencies:
       '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
+      universal-user-agent: 7.0.2
 
-  '@octokit/graphql@7.1.0':
+  '@octokit/graphql@8.1.1':
     dependencies:
-      '@octokit/request': 8.4.0
+      '@octokit/request': 9.1.1
       '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
+      universal-user-agent: 7.0.2
 
   '@octokit/openapi-types@22.2.0': {}
 
   '@octokit/plugin-enterprise-rest@6.0.1': {}
 
-  '@octokit/plugin-paginate-rest@11.3.1(@octokit/core@5.2.0)':
+  '@octokit/plugin-paginate-rest@11.3.1(@octokit/core@6.1.2)':
     dependencies:
-      '@octokit/core': 5.2.0
+      '@octokit/core': 6.1.2
       '@octokit/types': 13.5.0
 
-  '@octokit/plugin-request-log@4.0.1(@octokit/core@5.2.0)':
+  '@octokit/plugin-request-log@5.3.0(@octokit/core@6.1.2)':
     dependencies:
-      '@octokit/core': 5.2.0
+      '@octokit/core': 6.1.2
 
-  '@octokit/plugin-rest-endpoint-methods@13.2.2(@octokit/core@5.2.0)':
+  '@octokit/plugin-rest-endpoint-methods@13.2.2(@octokit/core@6.1.2)':
     dependencies:
-      '@octokit/core': 5.2.0
+      '@octokit/core': 6.1.2
       '@octokit/types': 13.5.0
 
-  '@octokit/request-error@5.1.0':
+  '@octokit/request-error@6.1.1':
     dependencies:
       '@octokit/types': 13.5.0
-      deprecation: 2.3.1
-      once: 1.4.0
 
-  '@octokit/request@8.4.0':
+  '@octokit/request@9.1.1':
     dependencies:
-      '@octokit/endpoint': 9.0.5
-      '@octokit/request-error': 5.1.0
+      '@octokit/endpoint': 10.1.1
+      '@octokit/request-error': 6.1.1
       '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
+      universal-user-agent: 7.0.2
 
-  '@octokit/rest@20.1.1':
+  '@octokit/rest@21.0.0':
     dependencies:
-      '@octokit/core': 5.2.0
-      '@octokit/plugin-paginate-rest': 11.3.1(@octokit/core@5.2.0)
-      '@octokit/plugin-request-log': 4.0.1(@octokit/core@5.2.0)
-      '@octokit/plugin-rest-endpoint-methods': 13.2.2(@octokit/core@5.2.0)
+      '@octokit/core': 6.1.2
+      '@octokit/plugin-paginate-rest': 11.3.1(@octokit/core@6.1.2)
+      '@octokit/plugin-request-log': 5.3.0(@octokit/core@6.1.2)
+      '@octokit/plugin-rest-endpoint-methods': 13.2.2(@octokit/core@6.1.2)
 
   '@octokit/types@13.5.0':
     dependencies:
@@ -10837,7 +10852,7 @@ snapshots:
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.3
-      semver: 7.6.0
+      semver: 7.6.2
       ts-api-utils: 1.3.0(typescript@5.4.5)
     optionalDependencies:
       typescript: 5.4.5
@@ -10853,7 +10868,7 @@ snapshots:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.4.5)
       eslint: 8.57.0
-      semver: 7.6.0
+      semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -11052,8 +11067,6 @@ snapshots:
       file-type: 4.4.0
 
   are-docs-informative@0.0.2: {}
-
-  are-we-there-yet@4.0.2: {}
 
   argparse@1.0.10:
     dependencies:
@@ -11274,7 +11287,7 @@ snapshots:
     dependencies:
       tweetnacl: 0.14.5
 
-  before-after-hook@2.2.3: {}
+  before-after-hook@3.0.2: {}
 
   bin-build@3.0.0:
     dependencies:
@@ -11984,7 +11997,7 @@ snapshots:
       git-raw-commits: 4.0.0
       git-semver-tags: 7.0.1
       hosted-git-info: 7.0.1
-      normalize-package-data: 6.0.0
+      normalize-package-data: 6.0.1
       read-pkg: 8.1.0
       read-pkg-up: 10.1.0
 
@@ -12368,8 +12381,6 @@ snapshots:
   depd@1.1.2: {}
 
   depd@2.0.0: {}
-
-  deprecation@2.3.1: {}
 
   deps-sort@2.0.1:
     dependencies:
@@ -13430,17 +13441,6 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  gauge@5.0.1:
-    dependencies:
-      aproba: 2.0.0
-      color-support: 1.1.3
-      console-control-strings: 1.1.0
-      has-unicode: 2.0.1
-      signal-exit: 4.1.0
-      string-width: 4.2.3
-      strip-ansi: 6.0.1
-      wide-align: 1.1.5
-
   gensync@1.0.0-beta.2: {}
 
   get-assigned-identifiers@1.2.0: {}
@@ -14321,6 +14321,23 @@ snapshots:
       strip-ansi: 6.0.1
       wrap-ansi: 6.2.0
 
+  inquirer@9.3.0:
+    dependencies:
+      '@inquirer/figures': 1.0.3
+      ansi-escapes: 4.3.2
+      cli-width: 4.1.0
+      external-editor: 3.1.0
+      lodash.get: 4.4.2
+      lodash.set: 4.3.2
+      mute-stream: 1.0.0
+      ora: 5.4.1
+      picocolors: 1.0.1
+      run-async: 3.0.0
+      rxjs: 7.8.1
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wrap-ansi: 6.2.0
+
   insert-module-globals@7.2.1:
     dependencies:
       JSONStream: 1.3.5
@@ -14840,16 +14857,16 @@ snapshots:
   libnpmaccess@8.0.6:
     dependencies:
       npm-package-arg: 11.0.2
-      npm-registry-fetch: 17.0.1
+      npm-registry-fetch: 17.1.0
     transitivePeerDependencies:
       - supports-color
 
-  libnpmpublish@9.0.8:
+  libnpmpublish@9.0.9:
     dependencies:
       ci-info: 4.0.0
       normalize-package-data: 6.0.1
       npm-package-arg: 11.0.2
-      npm-registry-fetch: 17.0.1
+      npm-registry-fetch: 17.1.0
       proc-log: 4.2.0
       semver: 7.6.2
       sigstore: 2.3.0
@@ -14966,6 +14983,8 @@ snapshots:
   lodash.partialright@4.2.1: {}
 
   lodash.pick@4.4.0: {}
+
+  lodash.set@4.3.2: {}
 
   lodash.snakecase@4.1.1: {}
 
@@ -15535,6 +15554,10 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
+  minimatch@9.0.5:
+    dependencies:
+      brace-expansion: 2.0.1
+
   minimist-options@4.1.0:
     dependencies:
       arrify: 1.0.1
@@ -15557,11 +15580,6 @@ snapshots:
 
   minipass-flush@1.0.5:
     dependencies:
-      minipass: 3.3.6
-
-  minipass-json-stream@1.0.1:
-    dependencies:
-      jsonparse: 1.3.1
       minipass: 3.3.6
 
   minipass-pipeline@1.2.4:
@@ -15751,13 +15769,6 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.13.1
-      semver: 7.6.0
-      validate-npm-package-license: 3.0.4
-
-  normalize-package-data@6.0.0:
-    dependencies:
-      hosted-git-info: 7.0.1
-      is-core-module: 2.13.1
       semver: 7.6.2
       validate-npm-package-license: 3.0.4
 
@@ -15828,13 +15839,13 @@ snapshots:
       npm-package-arg: 11.0.2
       semver: 7.6.2
 
-  npm-registry-fetch@17.0.1:
+  npm-registry-fetch@17.1.0:
     dependencies:
       '@npmcli/redact': 2.0.0
+      jsonparse: 1.3.1
       make-fetch-happen: 13.0.1
       minipass: 7.1.2
       minipass-fetch: 3.0.4
-      minipass-json-stream: 1.0.1
       minizlib: 2.1.2
       npm-package-arg: 11.0.2
       proc-log: 4.2.0
@@ -15863,13 +15874,6 @@ snapshots:
   npm-run-path@5.3.0:
     dependencies:
       path-key: 4.0.0
-
-  npmlog@7.0.1:
-    dependencies:
-      are-we-there-yet: 4.0.2
-      console-control-strings: 1.1.0
-      gauge: 5.0.1
-      set-blocking: 2.0.0
 
   nth-check@2.1.1:
     dependencies:
@@ -16057,6 +16061,10 @@ snapshots:
     dependencies:
       yocto-queue: 1.0.0
 
+  p-limit@5.0.0:
+    dependencies:
+      yocto-queue: 1.0.0
+
   p-locate@4.1.0:
     dependencies:
       p-limit: 2.3.0
@@ -16110,7 +16118,7 @@ snapshots:
     dependencies:
       '@npmcli/git': 5.0.6
       '@npmcli/installed-package-contents': 2.1.0
-      '@npmcli/package-json': 5.1.0
+      '@npmcli/package-json': 5.2.0
       '@npmcli/promise-spawn': 7.0.1
       '@npmcli/run-script': 8.1.0
       cacache: 18.0.2
@@ -16119,7 +16127,7 @@ snapshots:
       npm-package-arg: 11.0.2
       npm-packlist: 8.0.2
       npm-pick-manifest: 9.0.0
-      npm-registry-fetch: 17.0.1
+      npm-registry-fetch: 17.1.0
       proc-log: 4.2.0
       promise-retry: 2.0.1
       sigstore: 2.3.0
@@ -16571,13 +16579,6 @@ snapshots:
       json-parse-even-better-errors: 3.0.1
       npm-normalize-package-bin: 3.0.1
 
-  read-package-json@7.0.1:
-    dependencies:
-      glob: 10.4.2
-      json-parse-even-better-errors: 3.0.1
-      normalize-package-data: 6.0.0
-      npm-normalize-package-bin: 3.0.1
-
   read-pkg-up@10.1.0:
     dependencies:
       find-up: 6.3.0
@@ -16613,14 +16614,14 @@ snapshots:
   read-pkg@8.1.0:
     dependencies:
       '@types/normalize-package-data': 2.4.4
-      normalize-package-data: 6.0.0
+      normalize-package-data: 6.0.1
       parse-json: 7.1.1
       type-fest: 4.18.0
 
   read-pkg@9.0.1:
     dependencies:
       '@types/normalize-package-data': 2.4.4
-      normalize-package-data: 6.0.0
+      normalize-package-data: 6.0.1
       parse-json: 8.1.0
       type-fest: 4.18.0
       unicorn-magic: 0.1.0
@@ -18191,7 +18192,7 @@ snapshots:
       unist-util-is: 5.2.1
       unist-util-visit-parents: 5.1.3
 
-  universal-user-agent@6.0.1: {}
+  universal-user-agent@7.0.2: {}
 
   universalify@0.1.2: {}
 
@@ -18263,9 +18264,9 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  uuid@3.4.0: {}
+  uuid@10.0.0: {}
 
-  uuid@9.0.1: {}
+  uuid@3.4.0: {}
 
   uvu@0.5.6:
     dependencies:

@@ -207,11 +207,14 @@ describe('examples', () => {
         '/page-list.html',
         '/styleguide/index.html',
         '/styleguide/kss-assets/css/main.min.css',
+        '/styleguide/kss-assets/css/main.min.css.br',
         '/styleguide/kss-assets/css/main.min.css.gz',
         '/styleguide/kss-assets/images/favicon.ico',
+        '/styleguide/kss-assets/images/favicon.svg',
         '/styleguide/kss-assets/images/touchicon.png',
-        '/styleguide/kss-assets/js/main.min.js',
-        '/styleguide/kss-assets/js/main.min.js.gz',
+        '/styleguide/kss-assets/js/main.js',
+        '/styleguide/kss-assets/js/main.js.br',
+        '/styleguide/kss-assets/js/main.js.gz',
         '/styleguide/section-block.html'
       ]);
     });

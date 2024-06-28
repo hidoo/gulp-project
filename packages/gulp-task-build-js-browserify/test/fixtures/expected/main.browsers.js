@@ -1453,7 +1453,7 @@ if (!TO_STRING_TAG_SUPPORT) {
 require("core-js/modules/es.array.for-each.js");
 require("core-js/modules/es.object.to-string.js");
 var _esm = _interopRequireDefault(require("./modules/esm"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var commonJsModule = require('./modules/cjs');
 (0, _esm["default"])();
 commonJsModule();

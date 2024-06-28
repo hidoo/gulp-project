@@ -1,5 +1,4 @@
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import kss from 'kss';
 import errorHandler from '@hidoo/gulp-util-error-handler';
 
@@ -17,10 +16,7 @@ const DEFAULT_OPTIONS = {
   placeholder: '{{modifier_class}}',
   'nav-depth': 2,
   mask: '*.css',
-  builder: path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '../builder'
-  ),
+  builder: '@hidoo/kss-builder',
   verbose: false
 };
 
@@ -38,8 +34,8 @@ const DEFAULT_OPTIONS = {
  * @param {String} [options.placeholder='{{modifier_class}}'] - modifier string
  * @param {Number} [options.nav-depth=2] - navigation depth to display
  * @param {String} [options.mask='*.css'] - masking of file that includes kss comments
- * @param {String} [options.builder=path.resolve(__dirname, '../builder')] - builder path.
- *   see: {@link ./builder default builder}
+ * @param {String} [options.builder='@hidoo/kss-builder'] - builder.
+ *   see: {@link https://github.com/hidoo/kss-builder default builder}
  * @param {Boolean} [options.verbose=false] - out log or not
  * @return {Function<Promise>}
  *

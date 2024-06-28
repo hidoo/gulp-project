@@ -19,9 +19,14 @@ async function readBuiltFile(file) {
   return content
     .toString()
     .trim()
+    .replace(/^\s\s*\n?/gm, '')
     .replace(
       '<span class="version">(v0.0.0)</span>',
       `<span class="version">(v${pkg.version})</span>`
+    )
+    .replace(
+      '<p class="kss-heading-menu__version  kss-c-text">v0.0.0</p>',
+      `<p class="kss-heading-menu__version  kss-c-text">v${pkg.version}</p>`
     );
 }
 
@@ -54,65 +59,150 @@ describe('gulp-task-build-styleguide-kss', () => {
     await fs.mkdir(destDir);
   });
 
-  it('should output style guide to options.dest with default options.', async () => {
-    const task = buildStyleguide(opts);
+  describe('with default builder', () => {
+    it('should output style guide with default options.', async () => {
+      const task = buildStyleguide(opts);
 
-    await task();
+      await task();
 
-    await Promise.all(
-      ['index.html', 'section-block.html'].map(async (filename) => {
-        const actual = await readBuiltFile(path.join(destDir, filename));
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
 
-        assert.deepEqual(
-          actual,
-          await readBuiltFile(path.join(expectedDir, 'minimal', filename))
-        );
-      })
-    );
-  });
-
-  it('should output style guide includes specified markdown contents to options.dest with options.homepage', async () => {
-    const task = buildStyleguide({
-      ...opts,
-      homepage: path.join(srcDir, 'hoge.md')
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(path.join(expectedDir, 'minimal', filename))
+          );
+        })
+      );
     });
 
-    await task();
+    it('should output style guide includes specified markdown contents with options.homepage', async () => {
+      const task = buildStyleguide({
+        ...opts,
+        homepage: path.join(srcDir, 'hoge.md')
+      });
 
-    await Promise.all(
-      ['index.html', 'section-block.html'].map(async (filename) => {
-        const actual = await readBuiltFile(path.join(destDir, filename));
+      await task();
 
-        assert.deepEqual(
-          actual,
-          await readBuiltFile(path.join(expectedDir, 'homepage', filename))
-        );
-      })
-    );
-  });
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
 
-  it('should output style guide injected specified css or js to options.dest with options.css or options.js.', async () => {
-    const task = buildStyleguide({
-      ...opts,
-      css: [
-        '//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'
-      ],
-      js: [
-        '//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.core.min.js'
-      ]
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(path.join(expectedDir, 'homepage', filename))
+          );
+        })
+      );
     });
 
-    await task();
+    it('should output style guide with additional css and js with options.css, options.js and options.mjs.', async () => {
+      const task = buildStyleguide({
+        ...opts,
+        css: ['https://example.com/css/additional.css'],
+        js: ['https://example.com/js/additional.js'],
+        mjs: ['https://example.com/js/additional-module.js']
+      });
 
-    await Promise.all(
-      ['index.html', 'section-block.html'].map(async (filename) => {
-        const actual = await readBuiltFile(path.join(destDir, filename));
+      await task();
 
-        assert.deepEqual(
-          actual,
-          await readBuiltFile(path.join(expectedDir, 'css-js', filename))
-        );
-      })
-    );
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
+
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(path.join(expectedDir, 'css-js', filename))
+          );
+        })
+      );
+    });
+  });
+
+  describe('with legacy builder', () => {
+    let builder = null;
+    let expectedDirLegacy = null;
+
+    before(() => {
+      builder = path.resolve(dirname, '../builder/builder.js');
+      expectedDirLegacy = path.resolve(expectedDir, 'regacy');
+    });
+
+    it('should be importable.', async () => {
+      const { default: builderFromLocalPath } = await import(builder);
+      const { default: builderFromPackage } = await import(
+        // eslint-disable-next-line import/no-unresolved
+        '@hidoo/gulp-task-build-styleguide-kss/legacy-builder'
+      );
+
+      assert.equal(builderFromLocalPath, builderFromPackage);
+    });
+
+    it('should output style guide to options.dest with default options.', async () => {
+      const task = buildStyleguide({ ...opts, builder });
+
+      await task();
+
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
+
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(
+              path.join(expectedDirLegacy, 'minimal', filename)
+            )
+          );
+        })
+      );
+    });
+
+    it('should output style guide includes specified markdown contents to options.dest with options.homepage', async () => {
+      const task = buildStyleguide({
+        ...opts,
+        builder,
+        homepage: path.join(srcDir, 'hoge.md')
+      });
+
+      await task();
+
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
+
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(
+              path.join(expectedDirLegacy, 'homepage', filename)
+            )
+          );
+        })
+      );
+    });
+
+    it('should output style guide injected specified css or js to options.dest with options.css or options.js.', async () => {
+      const task = buildStyleguide({
+        ...opts,
+        builder,
+        css: ['https://example.com/css/additional.css'],
+        js: ['https://example.com/js/additional.js']
+      });
+
+      await task();
+
+      await Promise.all(
+        ['index.html', 'section-block.html'].map(async (filename) => {
+          const actual = await readBuiltFile(path.join(destDir, filename));
+
+          assert.deepEqual(
+            actual,
+            await readBuiltFile(
+              path.join(expectedDirLegacy, 'css-js', filename)
+            )
+          );
+        })
+      );
+    });
   });
 });

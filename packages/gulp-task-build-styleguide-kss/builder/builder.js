@@ -3,6 +3,17 @@ const path = require('node:path');
 const Handlebars = require('handlebars');
 const KssBuilderBase = require('kss/builder/base/index.js');
 
+process.emitWarning(
+  [
+    '@hidoo/gulp-task-build-styleguide-kss:',
+    'legacy-builder is deprecated.',
+    'Please use instead @hidoo/kss-builder.'
+  ].join(' '),
+  {
+    type: 'DeprecationWarning'
+  }
+);
+
 const pkg = (() => {
   // try to load package.json that on current working directory
   try {
@@ -21,6 +32,7 @@ const pkg = (() => {
  * + Fixed handling of Promise (Bluebird) in original KssBuilderHandlebars.
  * + original: <https://github.com/kss-node/kss-node/blob/master/builder/base/handlebars/kss_builder_base_handlebars.js>
  *
+ * @deprecated use @hidoo/kss-builder instead.
  * @class KssBuilderHandlebars
  */
 class KssBuilderHandlebars extends KssBuilderBase {

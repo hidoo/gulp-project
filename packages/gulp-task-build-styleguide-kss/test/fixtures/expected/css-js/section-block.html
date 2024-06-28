@@ -1,202 +1,292 @@
 <!DOCTYPE html>
-<html lang="ja">
-  <head>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-
-    <title>Style Guide - @hidoo/gulp-task-build-styleguide-kss</title>
-    <meta name="description" content="" />
-
-    <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
-    <link rel="stylesheet" href="kss-assets/kss.css" />
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"/>
-
-
-  </head>
-<body id="styleguide">
-
-  <header class="styleguide-header styleguide-reset">
-    <div class="styleguide-container">
-      <h1>Style Guide<span class="title">@hidoo/gulp-task-build-styleguide-kss</span><span class="version">(v0.0.0)</span></h1>
-    </div>
-  </header>
-
-  <div class="styleguide-container">
-
-        <nav class="styleguide-menu styleguide-reset">
-          <ul class="styleguide-menu-list">
-
-            <li><a href="./">0. README</a></li>
-
-          <li><a href="section-block.html"  class="selected">1. block</a>
-
-                <ul class="styleguide-menu-list-child">
-
-                      <li>
-                        <a href="section-block.html#styleguide-section-block-test">1.1. block-test</a>
-                      </li>
-
-                </ul>
-
-          </li>
-
-          </ul>
-        </nav>
-
-    <main class="styleguide-content">
-
-
-
-
-              <div class="styleguide-section-header styleguide-section-depth-1 styleguide-reset">
-
-                <header class="styleguide-section-header-label" id="styleguide-section-block">
-                  <h1>block</h1>
-                </header>
-
-                <div class="markdown-body styleguide-reset">
-                  <p>Block</p>
-
-                </div>
-
-              </div>
-
-
-
-
-              <div class="styleguide-section-header styleguide-section-depth-2 styleguide-reset">
-
-                <header class="styleguide-section-header-label" id="styleguide-section-block-test">
-                  <h2>block-test</h2>
-                </header>
-
-                <div class="markdown-body styleguide-reset">
-                  <p>Test Block</p>
-
-                </div>
-
-              </div>
-
-
-
-
-
-
-
-
-            <section class="styleguide-example">
-
-              <header class="styleguide-example-header styleguide-reset" id="styleguide-item-block-test-a-a">
-                <h4 class="styleguide-example-header-title">Style guide: block.test.a.a <em>Variations</em></h4>
-              </header>
-
-              <div class="styleguide-description styleguide-markdown-body styleguide-reset">
-
-                  <p>Test Block - Type A - A</p>
-
-
-                  <ul class="styleguide-modifier">
-                      <li><strong>block-test-a-a</strong> - default style</li>
-                  </ul>
-
-
-
-              </div>
-
-                <div class="styleguide-element styleguide-modifier">
-                  <span class="styleguide-modifier-name">block-test-a-a</span>
-                  <div class="styleguide-element-wrapper"><div class="block-test-a-a  mod-box">
-  <div class="block-test-a-a__container  mod-box__container">
-    <!-- some contents here -->
-    <div class="block-test-b-a  mod-box">
-      <div class="block-test-b-a__container  mod-box__container">
-        <!-- some contents here -->
-      </div>
-    </div>  </div>
-</div></div>
-                </div>
-
-              <div class="styleguide-html styleguide-reset">
-                <div class="styleguide-html-highlight">
-                  <pre><code class="hljs handlebars html javascript"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">  mod-box&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">__container  mod-box__container&quot;</span>&gt;</span>
-    <span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;block-test-b-a  mod-box&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;block-test-b-a__container  mod-box__container&quot;</span>&gt;</span>
-        <span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<html lang="en" class="kss-root  is-kss-example-light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="rgba(255, 255, 255)" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="rgba(30, 30, 30)" />
+<title>Style Guide - @hidoo/gulp-task-build-styleguide-kss (v1.0.0-alpha.1)</title>
+<meta name="description" content="Task that build styleguide by kss for gulp." />
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="kss-assets/images/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="kss-assets/images/favicon.svg" />
+<link rel="apple-touch-icon" sizes="192x192" href="kss-assets/images/touchicon.png" />
+<meta name="apple-mobile-web-app-title" content="@hidoo/gulp-task-build-styleguide-kss" />
+<link rel="stylesheet" href="kss-assets/css/main.min.css" />
+<link rel="stylesheet" href="https://example.com/css/additional.css"/>
+</head>
+<body>
+<div class="kss-layout-drawer  kss-c-box  kss-c-box--theme-fill-main  js-kss-drawer  ">
+<nav class="kss-bar-tool  kss-c-box  kss-c-box--theme-fill-main  " rol="navigation" id="js-kss-tool-bar">
+<button class="kss-bar-tool__button-drawer  kss-c-button  js-kss-drawer__toggle" type="button">
+<span class="kss-c-icon  kss-c-icon--type-drawer">
+MENU
+</span>
+</button><section class="kss-section-inline  kss-c-box  kss-bar-tool__theme-switcher">
+<header class="kss-section-inline__header  kss-c-box">
+<h2 class="kss-section-inline__label  kss-c-text">
+THEME
+</h2>
+</header>
+<div class="kss-section-inline__container  kss-c-box">
+<div class="kss-navi-icon  kss-c-box  js-kss-theme-switcher">
+<button class="kss-navi-icon__button  kss-c-button  is-kss-current" type="button" data-kss-theme-value="system">
+<svg class="kss-navi-icon__button__icon" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M41.024,19.017a9,9,0,1,1,9-9A9,9,0,0,1,41.024,19.017ZM41.026,3c-0.021,0-.01,14.04,0,14.04A7.02,7.02,0,0,0,41.026,3Z" transform="translate(-31)"/></svg>
+</button>
+<button class="kss-navi-icon__button  kss-c-button" type="button" data-kss-theme-value="light">
+<svg class="kss-navi-icon__button__icon" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18.008,10.941l-1,.008a1,1,0,1,1-.017-2l1-.008A1,1,0,1,1,18.008,10.941ZM15.616,5.735a1,1,0,1,1-1.426-1.4l0.7-.713a1,1,0,1,1,1.426,1.4ZM10,14.994a5,5,0,1,1,5-5A5,5,0,0,1,10,14.994ZM10.008,4a1,1,0,0,1-1-1V2a1,1,0,0,1,2,0V3A1,1,0,0,1,10.008,4ZM4.3,5.811l-0.713-.7a1,1,0,1,1,1.4-1.426L5.7,4.385A1,1,0,1,1,4.3,5.811ZM4,10.058a1,1,0,0,1-.992,1.008l-1,.008a1,1,0,0,1-.017-2l1-.008A1,1,0,0,1,4,10.058Zm0.373,4.257a1,1,0,1,1,1.426,1.4l-0.7.713a1,1,0,1,1-1.426-1.4ZM10.008,16a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0V17A1,1,0,0,1,10.008,16Zm5.679-1.8L16.4,14.9A1,1,0,1,1,15,16.328l-0.713-.7A1,1,0,0,1,15.687,14.2Z" /></svg>
+</button>
+<button class="kss-navi-icon__button  kss-c-button" type="button" data-kss-theme-value="dark">
+<svg class="kss-navi-icon__button__icon" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M80.063,13.694A8.538,8.538,0,1,1,71.049,1.56l0,0.008a0.406,0.406,0,0,1,.082-0.016,0.427,0.427,0,0,1,.427.427,0.42,0.42,0,0,1-.16.326,6.759,6.759,0,0,0,8.119,10.772l0,0a0.417,0.417,0,0,1,.194-0.053,0.427,0.427,0,0,1,.427.427A0.416,0.416,0,0,1,80.063,13.694Zm-1.3-6.784-1.747.437L76.583,9.094a0.336,0.336,0,0,1-.652,0L75.495,7.347,73.748,6.91a0.336,0.336,0,0,1,0-.652l1.747-.437,0.437-1.747a0.336,0.336,0,0,1,.652,0L77.02,5.822l1.747,0.437A0.336,0.336,0,0,1,78.767,6.91Z" transform="translate(-62)"/></svg>
+</button>
+</div>
+</div>
+</section>
+<section class="kss-section-inline  kss-c-box  kss-bar-tool__example-switcher">
+<header class="kss-section-inline__header  kss-c-box">
+<h2 class="kss-section-inline__label  kss-c-text">
+EXAMPLE
+</h2>
+</header>
+<div class="kss-section-inline__container  kss-c-box">
+<div class="kss-navi-button  kss-c-box  js-kss-example-switcher">
+<button class="kss-navi-button__button  kss-c-button" type="button" data-kss-example-value="light">
+<span class="kss-c-button__label  kss-c-text">
+Switch example to light mode
+</span>
+</button>
+<button class="kss-navi-button__button  kss-c-button" type="button" data-kss-example-value="dark">
+<span class="kss-c-button__label  kss-c-text">
+Switch example to dark mode
+</span>
+</button>
+<button class="kss-navi-button__button  kss-c-button" type="button" data-kss-example-value="light-transparent">
+<span class="kss-c-button__label  kss-c-text">
+Switch example to light mode (transparent)
+</span>
+</button>
+<button class="kss-navi-button__button  kss-c-button" type="button" data-kss-example-value="dark-transparent">
+<span class="kss-c-button__label  kss-c-text">
+Switch example to dark mode (transparent)
+</span>
+</button>
+</div>
+<div class="kss-navi-button  kss-c-box  js-kss-expand-switcher">
+<button class="kss-navi-button__button  kss-c-button" type="button" data-kss-expand-value="true">
+<span class="kss-c-icon  kss-c-icon--type-expand">
+Expand example
+</span>
+</button>
+</div>
+</div>
+</section>
+</nav>
+<div class="kss-layout-drawer__drawer  kss-c-box  js-kss-drawer__drawer">
+<header class="kss-heading-menu  kss-c-box  kss-u--padding-top-40  kss-u--padding-right-15  kss-u--padding-left-15">
+<h1 class="kss-heading-menu__name  kss-c-text">@hidoo/gulp-task-build-styleguide-kss</h1>
+<p class="kss-heading-menu__version  kss-c-text">v1.0.0-alpha.1</p>
+<p class="kss-heading-menu__description  kss-c-text">Task that build styleguide by kss for gulp.</p>
+</header>
+<aside class="kss-section-menu  kss-c-box  kss-u--padding-top-40  kss-u--padding-horizontal-25">
+<header class="kss-section-menu__header  kss-c-box">
+<h2 class="kss-section-menu__label  kss-c-text">OVERVIEW</h2>
+</header>
+<div class="kss-section-menu__container  kss-c-box">
+<nav class="kss-navi-tree  kss-c-box  ">
+<ul class="kss-navi-tree__list  kss-c-list">
+<li class="kss-navi-tree__list__item  kss-c-list__item  kss-c-text">
+<span class="kss-navi-tree__list__item__reference  kss-c-text">0</span>
+<a class="kss-navi-tree__list__item__name  kss-c-text__link  js-kss-smooth-scroll" href="./index.html">
+README.md
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<aside class="kss-section-menu  kss-c-box  kss-u--padding-top-40  kss-u--padding-bottom-40  kss-u--padding-horizontal-25">
+<header class="kss-section-menu__header  kss-c-box">
+<h2 class="kss-section-menu__label  kss-c-text">COMPONENTS</h2>
+</header>
+<div class="kss-section-menu__container  kss-c-box">
+<nav class="kss-navi-tree  kss-c-box  kss-u--padding-bottom-40">
+<ul class="kss-navi-tree__list  kss-c-list">
+<li class="kss-navi-tree__list__item  kss-c-list__item  kss-c-text">
+<span class="kss-navi-tree__list__item__reference  kss-c-text  is-kss-current">1</span>
+<a class="kss-navi-tree__list__item__name  kss-c-text__link  js-kss-smooth-scroll" href="section-block.html">
+block
+</a>
+<nav class="kss-navi-tree  kss-c-box  ">
+<ul class="kss-navi-tree__list  kss-c-list">
+<li class="kss-navi-tree__list__item  kss-c-list__item  kss-c-text">
+<span class="kss-navi-tree__list__item__reference  kss-c-text">1.1</span>
+<a class="kss-navi-tree__list__item__name  kss-c-text__link  js-kss-smooth-scroll" href="section-block.html#kss-section-block-test">
+block-test
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</div>
+<main class="kss-layout-drawer__main  kss-c-box">
+<header class="kss-heading-section  kss-heading-section--depth-1  kss-c-box  ">
+<span class="kss-anchor" id="kss-section-"></span>
+<h1 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1</span>
+block
+</h1>
+<div class="kss-heading-section__description  kss-c-document  kss-c-document--theme-main">
+<p>Block</p>
+</div>
+</header>
+<header class="kss-heading-section  kss-heading-section--depth-2  kss-c-box  kss-u--margin-top-60">
+<span class="kss-anchor" id="kss-section-block-test"></span>
+<h2 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1.1</span>
+<a class="kss-heading-section__label__link  kss-c-text__link  js-kss-smooth-scroll" href="#kss-section-block-test">
+block-test
+</a>
+</h2>
+<div class="kss-heading-section__description  kss-c-document  kss-c-document--theme-main">
+<p>Test Block</p>
+</div>
+</header>
+<header class="kss-heading-section  kss-heading-section--depth-3  kss-c-box  kss-u--margin-top-60">
+<span class="kss-anchor" id="kss-section-block-test-a"></span>
+<h3 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1.1.1</span>
+<a class="kss-heading-section__label__link  kss-c-text__link  js-kss-smooth-scroll" href="#kss-section-block-test-a">
+block.test.a
+</a>
+</h3>
+</header>
+<section class="kss-section-main  kss-c-box  kss-u--margin-top-40  kss-u--padding-top-40  kss-u--border-highlight-top">
+<header class="kss-heading-section  kss-heading-section--depth-4  kss-c-box  ">
+<span class="kss-anchor" id="kss-section-block-test-a-a"></span>
+<h4 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1.1.1.1</span>
+<a class="kss-heading-section__label__link  kss-c-text__link  js-kss-smooth-scroll" href="#kss-section-block-test-a-a">
+Variations
+</a>
+</h4>
+<div class="kss-heading-section__description  kss-c-document  kss-c-document--theme-main">
+<p>Test Block - Type A - A</p>
+</div>
+</header>
+<article class="kss-document-overview  kss-c-box  kss-u--padding-top-15">
+<div class="kss-document-overview__body  kss-c-document  kss-c-document--theme-main">  </div>
+</article>
+<article class="kss-example-variation  kss-c-box  kss-u--margin-top-30">
+<header class="kss-example-variation__header  kss-c-box">
+<code class="kss-example-variation__header__name  kss-c-text  kss-c-text--theme-code">default</code>
+</header>
+<div class="kss-example-variation__canvas  kss-c-box  kss-c-box--texture-transparent">
+<div class="{{modifier_class}}  mod-box">
+<div class="{{modifier_class}}__container  mod-box__container">
+<!-- some contents here -->
+<div class="block-test-b-a  mod-box">
+<div class="block-test-b-a__container  mod-box__container">
+<!-- some contents here -->
+</div>
+</div>  </div>
+</div>
+</div>
+</article>
+<article class="kss-example-variation  kss-c-box  kss-u--margin-top-30">
+<header class="kss-example-variation__header  kss-c-box">
+<code class="kss-example-variation__header__name  kss-c-text  kss-c-text--theme-code">block-test-a-a</code>
+<div class="kss-example-variation__header__description  kss-c-document  kss-c-document--theme-main">default style</div>
+</header>
+<div class="kss-example-variation__canvas  kss-c-box  kss-c-box--texture-transparent">
+<div class="block-test-a-a  mod-box">
+<div class="block-test-a-a__container  mod-box__container">
+<!-- some contents here -->
+<div class="block-test-b-a  mod-box">
+<div class="block-test-b-a__container  mod-box__container">
+<!-- some contents here -->
+</div>
+</div>  </div>
+</div>
+</div>
+</article>
+<div class="kss-example-markup  kss-c-box  kss-u--margin-top-30">
+<pre><code class="hljs handlebars html"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">  mod-box&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">__container  mod-box__container&quot;</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;block-test-b-a  mod-box&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;block-test-b-a__container  mod-box__container&quot;</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre>
-                </div>
-              </div>
-
-            </section>
-
-
-
-
-
-
-
-
-            <section class="styleguide-example">
-
-              <header class="styleguide-example-header styleguide-reset" id="styleguide-item-block-test-b-a">
-                <h4 class="styleguide-example-header-title">Style guide: block.test.b.a <em>Variations</em></h4>
-              </header>
-
-              <div class="styleguide-description styleguide-markdown-body styleguide-reset">
-
-                  <p>Test Block - Type B - A</p>
-
-
-                  <ul class="styleguide-modifier">
-                      <li><strong>block-test-b-a</strong> - default style</li>
-                  </ul>
-
-
-
-              </div>
-
-                <div class="styleguide-element styleguide-modifier">
-                  <span class="styleguide-modifier-name">block-test-b-a</span>
-                  <div class="styleguide-element-wrapper"><div class="block-test-b-a  mod-box">
-  <div class="block-test-b-a__container  mod-box__container">
-    <!-- some contents here -->
-  </div>
-</div></div>
-                </div>
-
-              <div class="styleguide-html styleguide-reset">
-                <div class="styleguide-html-highlight">
-                  <pre><code class="hljs handlebars html javascript"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">  mod-box&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">__container  mod-box__container&quot;</span>&gt;</span>
-    <span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div>
+</section>
+<header class="kss-heading-section  kss-heading-section--depth-3  kss-c-box  kss-u--margin-top-60">
+<span class="kss-anchor" id="kss-section-block-test-b"></span>
+<h3 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1.1.2</span>
+<a class="kss-heading-section__label__link  kss-c-text__link  js-kss-smooth-scroll" href="#kss-section-block-test-b">
+block.test.b
+</a>
+</h3>
+</header>
+<section class="kss-section-main  kss-c-box  kss-u--margin-top-40  kss-u--padding-top-40  kss-u--border-highlight-top">
+<header class="kss-heading-section  kss-heading-section--depth-4  kss-c-box  ">
+<span class="kss-anchor" id="kss-section-block-test-b-a"></span>
+<h4 class="kss-heading-section__label  kss-c-text">
+<span class="kss-heading-section__label__reference  kss-c-text">1.1.2.1</span>
+<a class="kss-heading-section__label__link  kss-c-text__link  js-kss-smooth-scroll" href="#kss-section-block-test-b-a">
+Variations
+</a>
+</h4>
+<div class="kss-heading-section__description  kss-c-document  kss-c-document--theme-main">
+<p>Test Block - Type B - A</p>
+</div>
+</header>
+<article class="kss-document-overview  kss-c-box  kss-u--padding-top-15">
+<div class="kss-document-overview__body  kss-c-document  kss-c-document--theme-main">  </div>
+</article>
+<article class="kss-example-variation  kss-c-box  kss-u--margin-top-30">
+<header class="kss-example-variation__header  kss-c-box">
+<code class="kss-example-variation__header__name  kss-c-text  kss-c-text--theme-code">default</code>
+</header>
+<div class="kss-example-variation__canvas  kss-c-box  kss-c-box--texture-transparent">
+<div class="{{modifier_class}}  mod-box">
+<div class="{{modifier_class}}__container  mod-box__container">
+<!-- some contents here -->
+</div>
+</div>
+</div>
+</article>
+<article class="kss-example-variation  kss-c-box  kss-u--margin-top-30">
+<header class="kss-example-variation__header  kss-c-box">
+<code class="kss-example-variation__header__name  kss-c-text  kss-c-text--theme-code">block-test-b-a</code>
+<div class="kss-example-variation__header__description  kss-c-document  kss-c-document--theme-main">default style</div>
+</header>
+<div class="kss-example-variation__canvas  kss-c-box  kss-c-box--texture-transparent">
+<div class="block-test-b-a  mod-box">
+<div class="block-test-b-a__container  mod-box__container">
+<!-- some contents here -->
+</div>
+</div>
+</div>
+</article>
+<div class="kss-example-markup  kss-c-box  kss-u--margin-top-30">
+<pre><code class="hljs handlebars html"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">  mod-box&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">{{<span class="hljs-name">modifier_class</span>}}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">__container  mod-box__container&quot;</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- some contents here --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre>
-                </div>
-              </div>
-
-            </section>
-
-
-
-
-    </main>
-
-  </div>
-
-  <footer class="styleguide-footer styleguide-reset styleguide-container">
-    <p>Created using <a href="https://github.com/hughsk/kss-node">kss-node</a>.</p>
-    <p>Designed by <a href="https://github.com/">GitHub</a>, Adjusted by hidoo</p>
-  </footer>
-
-  <script src="kss-assets/kss.js"></script>
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.core.min.js"></script>
-
-
+</div>
+</section>
+</main>
+</div>
+<script type="module" src="kss-assets/js/main.js"></script>
+<script src="https://example.com/js/additional.js"></script>
+<script type="module" src="https://example.com/js/additional-module.js"></script>
 </body>
 </html>

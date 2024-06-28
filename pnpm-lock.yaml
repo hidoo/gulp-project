@@ -245,9 +245,6 @@ importers:
       '@hidoo/gulp-task-optimize-image':
         specifier: workspace:*
         version: link:../../packages/gulp-task-optimize-image
-      '@hidoo/kss-builder':
-        specifier: 0.9.0
-        version: 0.9.0(handlebars@4.7.8)
       '@hidoo/stylelint-config':
         specifier: 1.0.0
         version: 1.0.0(postcss@8.4.38)(stylelint@16.6.1(typescript@5.4.5))
@@ -966,6 +963,9 @@ importers:
       '@hidoo/handlebars-helpers':
         specifier: 1.1.0
         version: 1.1.0(handlebars@4.7.8)
+      '@hidoo/kss-builder':
+        specifier: 1.0.0
+        version: 1.0.0(chokidar@3.6.0)
       handlebars:
         specifier: 4.7.8
         version: 4.7.8
@@ -1915,20 +1915,15 @@ packages:
     resolution: {integrity: sha512-VchaYfa+TCqJOo1q3MRSNmPBDlkJUYnFpI9K6Mc3T43Cl8OpmNfM3TkxlBHh61hfjif5OzbCp8RpmTj8UgJKUw==}
     engines: {node: '>=18.0.0'}
 
-  '@hidoo/handlebars-helpers@0.8.2':
-    resolution: {integrity: sha512-ENsec0Sw0UYgagg69IVnnECQSLSwu5Ng5AMYN0XtiTqZt7TIOmPvr1uxh+y4Ts5C4gR3ewTCLSEBDTSqE98zrQ==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      handlebars: 4.7.7
-
   '@hidoo/handlebars-helpers@1.1.0':
     resolution: {integrity: sha512-wa9SBvmtdyXigII+86tHxuPnruTm1XyGT/+fTiZS53EEsf5GtM9Ek45BWNbUF5hOUYxKRzQVOccSqGLUy4Efeg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       handlebars: '>=4.7.8'
 
-  '@hidoo/kss-builder@0.9.0':
-    resolution: {integrity: sha512-Bp5BSstv5g7EllA/6fqBXajVs/XCWL4yLy3pG+qN904cuFMDyqHe1lqbQ1Twa6UWUlvgFrlo/vBSQob56UmKVQ==}
+  '@hidoo/kss-builder@1.0.0':
+    resolution: {integrity: sha512-Vq/ii0cffB/IDksR4VEuyFaUleaTZJ8huXHhY5fcJ1FrDakgsD1dXLRnK06f+QY/6oXqdN5MtbSzIZg9A3FhHA==}
+    engines: {node: '>=18.12.0', pnpm: 9.1.1}
 
   '@hidoo/sass-importer@1.0.0':
     resolution: {integrity: sha512-Ol2SpZgTiGZ+r8jGEXbAld8Fc3IcK+Dc73GsSQXpt/bPs+jUP16PIj9+38vXNoqKu1dwwBSP0ECdOvneSxyuwg==}
@@ -4762,6 +4757,11 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
 
+  glob@10.4.1:
+    resolution: {integrity: sha512-2jelhlq3E4ho74ZyVLN03oKdAZVUa6UDZzFLVH1H7dnoax+y9qyaq8zBkfDIggjniU19z0wU18y16jMB2eyVIw==}
+    engines: {node: '>=16 || 14 >=14.18'}
+    hasBin: true
+
   glob@10.4.2:
     resolution: {integrity: sha512-GwMlUF6PkPo3Gk21UxkCohOv0PLcIXVtKyLlpEI28R/cO/4eNOdmLk3CMW1wROV/WR/EsZOWAfBbBOqYvs88/w==}
     engines: {node: '>=16 || 14 >=14.18'}
@@ -5068,14 +5068,6 @@ packages:
 
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
-
-  highlight.js@11.0.1:
-    resolution: {integrity: sha512-EqYpWyTF2s8nMfttfBA2yLKPNoZCO33pLS4MnbXQ4hECf1TKujCt1Kq7QAdrio7roL4+CqsfjqwYj4tYgq0pJQ==}
-    engines: {node: '>=12.0.0'}
-
-  highlight.js@11.4.0:
-    resolution: {integrity: sha512-nawlpCBCSASs7EdvZOYOYVkJpGmAOKMYZgZtUqSRqodZE0GRVcFKwo1RcpeOemqh9hyttTdd5wDBwHkuSyUfnA==}
-    engines: {node: '>=12.0.0'}
 
   highlight.js@11.9.0:
     resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
@@ -6087,11 +6079,6 @@ packages:
   marked@12.0.1:
     resolution: {integrity: sha512-Y1/V2yafOcOdWQCX0XpAKXzDakPOpn6U0YLxTJs3cww6VxOzZV1BTOOYWLvH3gX38cq+iLwljHHTnMtlDfg01Q==}
     engines: {node: '>= 18'}
-    hasBin: true
-
-  marked@2.0.7:
-    resolution: {integrity: sha512-BJXxkuIfJchcXOJWTT2DOL+yFWifFv2yGYOUzvXg8Qz610QKw+sHCvTMYwA+qWGhlA2uivBezChZ/pBy1tWdkQ==}
-    engines: {node: '>= 8.16.2'}
     hasBin: true
 
   mathml-tag-names@2.1.3:
@@ -10068,13 +10055,6 @@ snapshots:
       handlebars-layouts: 3.1.4
       vinyl: 3.0.0
 
-  '@hidoo/handlebars-helpers@0.8.2(handlebars@4.7.8)':
-    dependencies:
-      handlebars: 4.7.8
-      highlight.js: 11.0.1
-      marked: 2.0.7
-      path-browserify: 1.0.1
-
   '@hidoo/handlebars-helpers@1.1.0(handlebars@4.7.8)':
     dependencies:
       '@hidoo/data-from': 1.0.0
@@ -10084,14 +10064,16 @@ snapshots:
       marked-gfm-heading-id: 3.1.3(marked@12.0.1)
       marked-highlight: 2.1.1(marked@12.0.1)
 
-  '@hidoo/kss-builder@0.9.0(handlebars@4.7.8)':
+  '@hidoo/kss-builder@1.0.0(chokidar@3.6.0)':
     dependencies:
-      '@hidoo/handlebars-helpers': 0.8.2(handlebars@4.7.8)
+      '@hidoo/handlebars-helpers': 1.1.0(handlebars@4.7.8)
       '@hidoo/unit': 0.9.0
-      glob: 7.2.3
-      highlight.js: 11.4.0
+      glob: 10.4.1
+      handlebars: 4.7.8
+      highlight.js: 11.9.0
+      kss: 3.1.0(chokidar@3.6.0)
     transitivePeerDependencies:
-      - handlebars
+      - chokidar
 
   '@hidoo/sass-importer@1.0.0':
     dependencies:
@@ -10761,7 +10743,7 @@ snapshots:
   '@tufjs/models@2.0.0':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 9.0.4
+      minimatch: 9.0.5
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
@@ -13582,6 +13564,14 @@ snapshots:
       minipass: 7.0.4
       path-scurry: 1.10.2
 
+  glob@10.4.1:
+    dependencies:
+      foreground-child: 3.1.1
+      jackspeak: 3.1.2
+      minimatch: 9.0.5
+      minipass: 7.1.2
+      path-scurry: 1.11.1
+
   glob@10.4.2:
     dependencies:
       foreground-child: 3.1.1
@@ -14067,10 +14057,6 @@ snapshots:
 
   highlight.js@10.7.3: {}
 
-  highlight.js@11.0.1: {}
-
-  highlight.js@11.4.0: {}
-
   highlight.js@11.9.0: {}
 
   hmac-drbg@1.0.1:
@@ -14201,7 +14187,7 @@ snapshots:
 
   ignore-walk@6.0.4:
     dependencies:
-      minimatch: 9.0.4
+      minimatch: 9.0.5
 
   ignore@5.3.1: {}
 
@@ -15123,8 +15109,6 @@ snapshots:
       marked: 12.0.1
 
   marked@12.0.1: {}
-
-  marked@2.0.7: {}
 
   mathml-tag-names@2.1.3: {}
 

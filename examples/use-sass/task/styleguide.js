@@ -24,8 +24,7 @@ export const main = buildStyleguide({
   dest: `${config.path.destStyleguide}`,
   css: [`${pathToCss}/main.css`],
   js: [`${pathToJs}/main.js`],
-  homepage: `${config.path.srcCss}/README.md`,
-  builder: '@hidoo/kss-builder'
+  homepage: `${config.path.srcCss}/README.md`
 });
 
 // define watch task

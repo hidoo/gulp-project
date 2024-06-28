@@ -68,7 +68,6 @@ export default async function generatePackageJson(
       devDependencies.push(
         '@hidoo/gulp-task-build-css-sass',
         '@hidoo/stylelint-config',
-        '@hidoo/kss-builder',
         'stylelint'
       );
     } else {

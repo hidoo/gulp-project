@@ -506,8 +506,8 @@ importers:
         specifier: 4.7.8
         version: 4.7.8
       inquirer:
-        specifier: 9.2.23
-        version: 9.2.23
+        specifier: 9.3.2
+        version: 9.3.2
       prettier:
         specifier: 3.3.2
         version: 3.3.2
@@ -2095,10 +2095,6 @@ packages:
   '@lerna-lite/version@3.6.0':
     resolution: {integrity: sha512-ahv+RcVtURDem8yjB8zc4cNdh2EqUevaH358HJ5uv+9IEtxGByGb00xpmCl7YNMHztACS07G3U8hLqDeRM1ZZw==}
     engines: {node: ^18.0.0 || >=20.0.0}
-
-  '@ljharb/through@2.3.13':
-    resolution: {integrity: sha512-/gKJun8NNiWGZJkGzI/Ragc53cOdcLNdzjLaIa+GEjguQs0ulsurx8WN0jijdK9yPqDvziX995sMRLyLt1uZMQ==}
-    engines: {node: '>= 0.4'}
 
   '@mdn/browser-compat-data@5.5.23':
     resolution: {integrity: sha512-nIy38qL3nfNcGOz5J2BJQpBXa7vM9QO1+wbyvqqS89lgNTWE8Q10whLsmE0sTVBooXiEaRc4fVME5IXjCYiHAw==}
@@ -5351,12 +5347,8 @@ packages:
   inline-source-map@0.6.3:
     resolution: {integrity: sha512-1aVsPEsJWMJq/pdMU61CDlm1URcW702MTB4w9/zUjMus6H/Py8o7g68Pr9D4I6QluWGt/KdmswuRhaA05xVR1w==}
 
-  inquirer@9.2.23:
-    resolution: {integrity: sha512-kod5s+FBPIDM2xiy9fu+6wdU/SkK5le5GS9lh4FEBjBHqiMgD9lLFbCbuqFNAjNL2ZOy9Wd9F694IOzN9pZHBA==}
-    engines: {node: '>=18'}
-
-  inquirer@9.3.0:
-    resolution: {integrity: sha512-zdopqPUKWmnOcaBJYMMtjqWCB2HHXrteAou9tCYgkTJu01QheLfYOrkzigDfidPBtCizmkdpSU0fp2DKaMdFPA==}
+  inquirer@9.3.2:
+    resolution: {integrity: sha512-+ynEbhWKhyomnaX0n2aLIMSkgSlGB5RrWbNXnEqj6mdaIydu6y40MdBjL38SAB0JcdmOaIaMua1azdjLEr3sdw==}
     engines: {node: '>=18'}
 
   insert-module-globals@7.2.1:
@@ -6008,9 +6000,6 @@ packages:
 
   lodash.pick@4.4.0:
     resolution: {integrity: sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==}
-
-  lodash.set@4.3.2:
-    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
 
   lodash.snakecase@4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
@@ -9138,6 +9127,10 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
 
+  yoctocolors-cjs@2.1.1:
+    resolution: {integrity: sha512-c6T13b6qYcJZvck7QbEFXrFX/Mu2KOjvAGiKHmYMUg96jxNpfP6i+psGW72BOPxOIDUJrORG+Kyu7quMX9CQBQ==}
+    engines: {node: '>=18'}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -10390,7 +10383,7 @@ snapshots:
       fs-extra: 11.2.0
       glob-parent: 6.0.2
       globby: 14.0.1
-      inquirer: 9.3.0
+      inquirer: 9.3.2
       is-ci: 3.0.1
       json5: 2.2.3
       load-json-file: 7.0.1
@@ -10516,10 +10509,6 @@ snapshots:
       - bluebird
       - supports-color
       - typescript
-
-  '@ljharb/through@2.3.13':
-    dependencies:
-      call-bind: 1.0.7
 
   '@mdn/browser-compat-data@5.5.23': {}
 
@@ -14488,16 +14477,12 @@ snapshots:
     dependencies:
       source-map: 0.5.7
 
-  inquirer@9.2.23:
+  inquirer@9.3.2:
     dependencies:
       '@inquirer/figures': 1.0.3
-      '@ljharb/through': 2.3.13
       ansi-escapes: 4.3.2
-      chalk: 5.3.0
-      cli-cursor: 3.1.0
       cli-width: 4.1.0
       external-editor: 3.1.0
-      lodash: 4.17.21
       mute-stream: 1.0.0
       ora: 5.4.1
       run-async: 3.0.0
@@ -14505,23 +14490,7 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 6.2.0
-
-  inquirer@9.3.0:
-    dependencies:
-      '@inquirer/figures': 1.0.3
-      ansi-escapes: 4.3.2
-      cli-width: 4.1.0
-      external-editor: 3.1.0
-      lodash.get: 4.4.2
-      lodash.set: 4.3.2
-      mute-stream: 1.0.0
-      ora: 5.4.1
-      picocolors: 1.0.1
-      run-async: 3.0.0
-      rxjs: 7.8.1
-      string-width: 4.2.3
-      strip-ansi: 6.0.1
-      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.1
 
   insert-module-globals@7.2.1:
     dependencies:
@@ -15168,8 +15137,6 @@ snapshots:
   lodash.partialright@4.2.1: {}
 
   lodash.pick@4.4.0: {}
-
-  lodash.set@4.3.2: {}
 
   lodash.snakecase@4.1.1: {}
 
@@ -18852,5 +18819,7 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.0.0: {}
+
+  yoctocolors-cjs@2.1.1: {}
 
   zwitch@2.0.4: {}

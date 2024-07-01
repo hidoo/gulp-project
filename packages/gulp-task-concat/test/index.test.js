@@ -1,318 +1,365 @@
-/* eslint max-len: 0, no-magic-numbers: 0 */
-
 import assert from 'node:assert';
-import fs from 'node:fs';
-import { dirname } from 'node:path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { concatJs, concatCss } from '../src/index.js';
 
-describe('gulp-task-concat', () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = {
-    src: `${__dirname}/fixtures/src`,
-    dest: `${__dirname}/fixtures/dest`,
-    expected: `${__dirname}/fixtures/expected`
-  };
+/**
+ * read built file
+ *
+ * @param {String} file filename
+ * @return {String}
+ */
+async function readBuiltFile(file) {
+  const content = await fs.readFile(file);
 
-  afterEach((done) => {
-    fs.rm(path.dest, { recursive: true }, () => fs.mkdir(path.dest, done));
+  return content
+    .toString()
+    .trim()
+    .replace(/^\s\s*\n?/gm, '');
+}
+
+describe('gulp-task-concat', () => {
+  let dirname = null;
+  let fixturesDir = null;
+  let srcDir = null;
+  let destDir = null;
+  let expectedDir = null;
+
+  before(() => {
+    dirname = path.dirname(fileURLToPath(import.meta.url));
+    fixturesDir = path.resolve(dirname, 'fixtures');
+    srcDir = path.resolve(fixturesDir, 'src');
+    destDir = path.resolve(fixturesDir, 'dest');
+    expectedDir = path.resolve(fixturesDir, 'expected');
+  });
+
+  afterEach(async () => {
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
   describe('concatJs', () => {
-    it('should out to "bundle.js" if argument "options" is default.', (done) => {
-      const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest
-      });
+    let options = null;
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.js`),
-          expected = fs.readFileSync(`${path.expected}/bundle.default.js`);
-
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+    beforeEach(() => {
+      options = {
+        src: [
+          path.join(srcDir, 'a.js'),
+          path.join(srcDir, 'c.js'),
+          path.join(srcDir, 'b.js')
+        ],
+        dest: destDir
+      };
     });
 
-    it('should out to specified filename if argument "options.filename" is set.', (done) => {
+    afterEach(() => {
+      options = null;
+    });
+
+    it('should out to "bundle.js" with default options.', async () => {
+      const task = concatJs(options);
+
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.js'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.default.js')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
+    });
+
+    it('should out file as specified filename with options.filename.', async () => {
       const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest,
+        ...options,
         filename: 'hoge.js'
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/hoge.js`),
-          expected = fs.readFileSync(`${path.expected}/bundle.filename.js`);
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+      const actual = await readBuiltFile(path.join(destDir, 'hoge.js'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.filename.js')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
     });
 
-    it('should out to file that applied specified banner if argument "options.banner" is set.', (done) => {
+    it('should out file includes specified banner with options.banner.', async () => {
       const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest,
+        ...options,
         banner: '/* copyright <%= pkg.author %> */\n'
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.js`),
-          expected = fs.readFileSync(`${path.expected}/bundle.banner.js`);
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.js'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.banner.js')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
     });
 
-    it('should out to compressed file if argument "options.compress" is true.', (done) => {
+    it('should out compressed file with options.compress.', async () => {
       const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest,
+        ...options,
         compress: true
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.js`),
-          actualMin = fs.readFileSync(`${path.dest}/bundle.min.js`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.min.js.gz`),
-          expected = fs.readFileSync(`${path.expected}/bundle.compress.js`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.js`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      {
+        const actual = await readBuiltFile(path.join(destDir, 'bundle.js'));
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.js')
+        );
 
         assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
+        assert.deepEqual(actual, expected);
+      }
+
+      {
+        const actual = await readBuiltFile(path.join(destDir, 'bundle.min.js'));
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.min.js')
         );
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
-        );
-        done();
-      });
+
+        assert(actual);
+        assert(await readBuiltFile(path.join(destDir, 'bundle.min.js.gz')));
+        assert(await readBuiltFile(path.join(destDir, 'bundle.min.js.br')));
+        assert.deepEqual(actual, expected);
+      }
     });
 
-    it('should out to compressed file if argument "options.compress" is true and argument "options.compress" is ".hoge".', (done) => {
+    it('should out compressed file with options.compress and options.suffix.', async () => {
       const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest,
+        ...options,
         suffix: '.hoge',
         compress: true
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.js`),
-          actualMin = fs.readFileSync(`${path.dest}/bundle.hoge.js`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.hoge.js.gz`),
-          expected = fs.readFileSync(`${path.expected}/bundle.compress.js`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.js`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      {
+        const actual = await readBuiltFile(path.join(destDir, 'bundle.js'));
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.js')
+        );
 
         assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
+        assert.deepEqual(actual, expected);
+      }
+
+      {
+        const actual = await readBuiltFile(
+          path.join(destDir, 'bundle.hoge.js')
         );
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.min.js')
         );
-        done();
-      });
+
+        assert(actual);
+        assert(await readBuiltFile(path.join(destDir, 'bundle.hoge.js.gz')));
+        assert(await readBuiltFile(path.join(destDir, 'bundle.hoge.js.br')));
+        assert.deepEqual(actual, expected);
+      }
     });
 
-    it('should out to compressed file if argument "options.compress" is true and argument "options.compress" is empty string.', (done) => {
+    it('should out compressed file with options.compress and without options.suffix.', async () => {
       const task = concatJs({
-        src: [`${path.src}/a.js`, `${path.src}/c.js`, `${path.src}/b.js`],
-        dest: path.dest,
+        ...options,
         suffix: '',
         compress: true
       });
+      let err = null;
 
-      task().on('finish', () => {
-        const actualMin = fs.readFileSync(`${path.dest}/bundle.js`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.js.gz`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.js`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
-        );
-        done();
-      });
+      try {
+        await readBuiltFile(path.join(destDir, 'bundle.min.js'));
+      } catch (error) {
+        err = error;
+      }
+
+      assert(err instanceof Error);
+
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.js'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.compress.min.js')
+      );
+
+      assert(actual);
+      assert(await readBuiltFile(path.join(destDir, 'bundle.js.gz')));
+      assert(await readBuiltFile(path.join(destDir, 'bundle.js.br')));
+      assert.deepEqual(actual, expected);
     });
   });
 
   describe('concatCss', () => {
-    it('should out to "bundle.css" if argument "options" is default.', (done) => {
-      const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest
-      });
+    let options = null;
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.css`),
-          expected = fs.readFileSync(`${path.expected}/bundle.default.css`);
-
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+    beforeEach(() => {
+      options = {
+        src: [
+          path.join(srcDir, 'a.css'),
+          path.join(srcDir, 'c.css'),
+          path.join(srcDir, 'b.css')
+        ],
+        dest: destDir
+      };
     });
 
-    it('should out to specified filename if argument "options.filename" is set.', (done) => {
+    afterEach(() => {
+      options = null;
+    });
+
+    it('should out to "bundle.css" with default options.', async () => {
+      const task = concatCss(options);
+
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.css'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.default.css')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
+    });
+
+    it('should out file as specified filename with options.filename.', async () => {
       const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest,
+        ...options,
         filename: 'hoge.css'
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/hoge.css`),
-          expected = fs.readFileSync(`${path.expected}/bundle.filename.css`);
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+      const actual = await readBuiltFile(path.join(destDir, 'hoge.css'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.filename.css')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
     });
 
-    it('should out to file that applied specified banner if argument "options.banner" is set.', (done) => {
+    it('should out file includes specified banner with options.banner.', async () => {
       const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest,
+        ...options,
         banner: '/* copyright <%= pkg.author %> */\n'
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.css`),
-          expected = fs.readFileSync(`${path.expected}/bundle.banner.css`);
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actual);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
-        );
-        done();
-      });
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.css'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.banner.css')
+      );
+
+      assert(actual);
+      assert.deepEqual(actual, expected);
     });
 
-    it('should out to compressed file if argument "options.compress" is true.', (done) => {
+    it('should out compressed file with options.compress.', async () => {
       const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest,
+        ...options,
         compress: true
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.css`),
-          actualMin = fs.readFileSync(`${path.dest}/bundle.min.css`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.min.css.gz`),
-          expected = fs.readFileSync(`${path.expected}/bundle.compress.css`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.css`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      {
+        const actual = await readBuiltFile(path.join(destDir, 'bundle.css'));
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.css')
+        );
 
         assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
+        assert.deepEqual(actual, expected);
+      }
+
+      {
+        const actual = await readBuiltFile(
+          path.join(destDir, 'bundle.min.css')
         );
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.min.css')
         );
-        done();
-      });
+
+        assert(actual);
+        assert(await readBuiltFile(path.join(destDir, 'bundle.min.css.gz')));
+        assert(await readBuiltFile(path.join(destDir, 'bundle.min.css.br')));
+        assert.deepEqual(actual, expected);
+      }
     });
 
-    it('should out to compressed file with suffix if argument "options.compress" is true and argument "options.suffix" is ".hoge".', (done) => {
+    it('should out compressed file with options.compress and options.suffix.', async () => {
       const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest,
+        ...options,
         suffix: '.hoge',
         compress: true
       });
 
-      task().on('finish', () => {
-        const actual = fs.readFileSync(`${path.dest}/bundle.css`),
-          actualMin = fs.readFileSync(`${path.dest}/bundle.hoge.css`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.hoge.css.gz`),
-          expected = fs.readFileSync(`${path.expected}/bundle.compress.css`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.css`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
+
+      {
+        const actual = await readBuiltFile(path.join(destDir, 'bundle.css'));
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.css')
+        );
 
         assert(actual);
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actual.toString().trim(),
-          expected.toString().trim()
+        assert.deepEqual(actual, expected);
+      }
+
+      {
+        const actual = await readBuiltFile(
+          path.join(destDir, 'bundle.hoge.css')
         );
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
+        const expected = await readBuiltFile(
+          path.join(expectedDir, 'bundle.compress.min.css')
         );
-        done();
-      });
+
+        assert(actual);
+        assert(await readBuiltFile(path.join(destDir, 'bundle.hoge.css.gz')));
+        assert(await readBuiltFile(path.join(destDir, 'bundle.hoge.css.br')));
+        assert.deepEqual(actual, expected);
+      }
     });
 
-    it('should out to compressed file with suffix if argument "options.compress" is true and argument "options.suffix" is empty string.', (done) => {
+    it('should out compressed file with options.compress and without options.suffix.', async () => {
       const task = concatCss({
-        src: [`${path.src}/a.css`, `${path.src}/c.css`, `${path.src}/b.css`],
-        dest: path.dest,
+        ...options,
         suffix: '',
         compress: true
       });
+      let err = null;
 
-      task().on('finish', () => {
-        const actualMin = fs.readFileSync(`${path.dest}/bundle.css`),
-          actualGz = fs.readFileSync(`${path.dest}/bundle.css.gz`),
-          expectedMin = fs.readFileSync(
-            `${path.expected}/bundle.compress.min.css`
-          );
+      await new Promise((resolve) => task().on('finish', resolve));
 
-        assert(actualMin);
-        assert(actualGz);
-        assert.deepStrictEqual(
-          actualMin.toString().trim(),
-          expectedMin.toString().trim()
-        );
-        done();
-      });
+      try {
+        await readBuiltFile(path.join(destDir, 'bundle.min.css'));
+      } catch (error) {
+        err = error;
+      }
+
+      assert(err instanceof Error);
+
+      const actual = await readBuiltFile(path.join(destDir, 'bundle.css'));
+      const expected = await readBuiltFile(
+        path.join(expectedDir, 'bundle.compress.min.css')
+      );
+
+      assert(actual);
+      assert(await readBuiltFile(path.join(destDir, 'bundle.css.gz')));
+      assert(await readBuiltFile(path.join(destDir, 'bundle.css.br')));
+      assert.deepEqual(actual, expected);
     });
   });
 });

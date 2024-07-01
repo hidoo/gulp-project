@@ -9,7 +9,7 @@ import replace from 'gulp-replace';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import header from 'gulp-header';
-import uglify from 'gulp-uglify';
+import terser from 'gulp-terser';
 import csso from 'postcss-csso';
 import log from 'fancy-log';
 import compress from '@hidoo/gulp-plugin-compress';
@@ -100,7 +100,7 @@ export function concatJs(options = {}) {
       .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
       .pipe(cond(enableCompress, rename({ suffix })))
-      .pipe(cond(enableCompress, uglify({ output: { comments: 'some' } })))
+      .pipe(cond(enableCompress, terser({ format: { comments: 'some' } })))
       .pipe(cond(enableCompress, compress(compressOpts)))
       .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };

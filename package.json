@@ -50,6 +50,6 @@
     "lint-staged": "15.2.7",
     "mocha": "10.5.2",
     "prettier": "3.3.2",
-    "replace-in-files-cli": "2.2.0"
+    "replace-in-files-cli": "3.0.0"
   }
 }

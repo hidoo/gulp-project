@@ -1018,9 +1018,9 @@ importers:
       gulp-replace:
         specifier: 1.1.4
         version: 1.1.4
-      gulp-uglify:
-        specifier: 3.0.2
-        version: 3.0.2
+      gulp-terser:
+        specifier: 2.1.0
+        version: 2.1.0
       postcss:
         specifier: 8.4.39
         version: 8.4.39

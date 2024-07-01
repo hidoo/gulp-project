@@ -58,8 +58,8 @@ describe('gulp-task-build-sprite-svg', () => {
   });
 
   afterEach(async () => {
-    // await fs.rm(destDir, { recursive: true });
-    // await fs.mkdir(destDir);
+    await fs.rm(destDir, { recursive: true });
+    await fs.mkdir(destDir);
   });
 
   it('should output files with minimum settings.', async () => {

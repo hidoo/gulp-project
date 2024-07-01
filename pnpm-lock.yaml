@@ -820,8 +820,8 @@ importers:
         specifier: 4.18.0
         version: 4.18.0
       rollup-plugin-license:
-        specifier: 3.4.0
-        version: 3.4.0(rollup@4.18.0)
+        specifier: 3.5.1
+        version: 3.5.1(rollup@4.18.0)
       through2:
         specifier: 4.0.2
         version: 4.0.2
@@ -4466,6 +4466,14 @@ packages:
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
 
+  fdir@6.1.1:
+    resolution: {integrity: sha512-QfKBVg453Dyn3mr0Q0O+Tkr1r79lOTAKSi9f/Ot4+qVEwxWhav2Z+SudrG9vQjM2aYRMQQZ2/Q1zdA8ACM1pDg==}
+    peerDependencies:
+      picomatch: 3.x
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   fecha@4.2.3:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
 
@@ -6460,11 +6468,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  mkdirp@3.0.1:
-    resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   mocha@10.5.2:
     resolution: {integrity: sha512-9btlN3JKCefPf+vKd/kcKz2SXxi12z6JswkGfaAF0saQvnsqLJk504ZmbxhSoENge08E9dsymozKgFMTl5PQsA==}
     engines: {node: '>= 14.0.0'}
@@ -7642,8 +7645,8 @@ packages:
   ripemd160@2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
 
-  rollup-plugin-license@3.4.0:
-    resolution: {integrity: sha512-Nwx4dDjoPlzR7QWcsswezxFAOC000+JLACganH3L+5toit0TEAfD4SF1DsvJR/kunHWJgqnhmzvOO+iLI1oKPw==}
+  rollup-plugin-license@3.5.1:
+    resolution: {integrity: sha512-z/UN/d5KbJhyvmmAg6no/2M2XK1QH8DUZyhbQeuaxe48hkIBTvvMlUP97g4txOzEC82HlZzb7dlWslc/rmBskg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
@@ -13360,6 +13363,8 @@ snapshots:
     dependencies:
       pend: 1.2.0
 
+  fdir@6.1.1: {}
+
   fecha@4.2.3: {}
 
   fetch-blob@3.2.0:
@@ -15757,8 +15762,6 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  mkdirp@3.0.1: {}
-
   mocha@10.5.2:
     dependencies:
       ansi-colors: 4.1.1
@@ -17056,18 +17059,19 @@ snapshots:
       hash-base: 3.1.0
       inherits: 2.0.4
 
-  rollup-plugin-license@3.4.0(rollup@4.18.0):
+  rollup-plugin-license@3.5.1(rollup@4.18.0):
     dependencies:
       commenting: 1.1.0
-      glob: 7.2.3
+      fdir: 6.1.1
       lodash: 4.17.21
       magic-string: 0.30.10
-      mkdirp: 3.0.1
       moment: 2.30.1
       package-name-regex: 2.0.6
       rollup: 4.18.0
       spdx-expression-validate: 2.0.0
       spdx-satisfies: 5.0.1
+    transitivePeerDependencies:
+      - picomatch
 
   rollup@4.18.0:
     dependencies:

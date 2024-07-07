@@ -42,7 +42,7 @@
     "gulp-if": "3.0.0",
     "gulp-imagemin": "9.1.0",
     "gulp-plumber": "1.2.1",
-    "gulp.spritesmith": "6.13.0",
+    "gulp.spritesmith": "6.13.1",
     "vinyl-buffer": "1.0.1"
   },
   "peerDependencies": {

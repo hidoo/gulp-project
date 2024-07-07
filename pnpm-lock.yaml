@@ -878,8 +878,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       gulp.spritesmith:
-        specifier: 6.13.0
-        version: 6.13.0
+        specifier: 6.13.1
+        version: 6.13.1
       vinyl-buffer:
         specifier: 1.0.1
         version: 1.0.1
@@ -4889,8 +4889,8 @@ packages:
     resolution: {integrity: sha512-lQ3+JUdHDVISAlUIUSZ/G9Dz/rBQHxOiYDQ70IVWFQeh4b33TC1MCIU+K18w07PS3rq/CVc34aQO4SUbdaNMPQ==}
     engines: {node: '>=10'}
 
-  gulp.spritesmith@6.13.0:
-    resolution: {integrity: sha512-maHC3FgCiOV+9wuLAgcqzq+oZjI8b57CgFVi0/r8Ax1AM2i51nEoKXtXM8RUh9ybTjT1mcGWNYzACDOK2hC8RQ==}
+  gulp.spritesmith@6.13.1:
+    resolution: {integrity: sha512-8hcfp4IFoQ8Usu2cC2q8Iu63fwyMqrZGFm+MxpMszcxWheGB8g0cKqLNoT5pYZWKJUxoN40S22LHvAgzdMa0yg==}
     engines: {node: '>= 4.0.0'}
 
   gulp@5.0.0:
@@ -13700,7 +13700,7 @@ snapshots:
       through2: 4.0.2
       vinyl-sourcemaps-apply: 0.2.1
 
-  gulp.spritesmith@6.13.0:
+  gulp.spritesmith@6.13.1:
     dependencies:
       async: 3.2.5
       minimatch: 3.0.8

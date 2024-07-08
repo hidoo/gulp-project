@@ -820,8 +820,8 @@ importers:
         specifier: 4.18.0
         version: 4.18.0
       rollup-plugin-license:
-        specifier: 3.5.1
-        version: 3.5.1(rollup@4.18.0)
+        specifier: 3.5.2
+        version: 3.5.2(rollup@4.18.0)
       through2:
         specifier: 4.0.2
         version: 4.0.2
@@ -7454,8 +7454,8 @@ packages:
   ripemd160@2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
 
-  rollup-plugin-license@3.5.1:
-    resolution: {integrity: sha512-z/UN/d5KbJhyvmmAg6no/2M2XK1QH8DUZyhbQeuaxe48hkIBTvvMlUP97g4txOzEC82HlZzb7dlWslc/rmBskg==}
+  rollup-plugin-license@3.5.2:
+    resolution: {integrity: sha512-NNeXBcE6RyQdZdSC8Vxe8Cheax2aUa/K0Ok6JDZwr9isjkSDer4aMg0sovas1Ua76ojLZX1BrNQ6ZFspztKkZQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
@@ -16597,7 +16597,7 @@ snapshots:
       hash-base: 3.1.0
       inherits: 2.0.4
 
-  rollup-plugin-license@3.5.1(rollup@4.18.0):
+  rollup-plugin-license@3.5.2(rollup@4.18.0):
     dependencies:
       commenting: 1.1.0
       fdir: 6.1.1

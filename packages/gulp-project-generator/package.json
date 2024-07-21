@@ -41,7 +41,7 @@
     "glob": "10.4.5",
     "glob-parent": "6.0.2",
     "handlebars": "4.7.8",
-    "inquirer": "9.3.5",
+    "inquirer": "9.3.6",
     "prettier": "3.3.3"
   }
 }

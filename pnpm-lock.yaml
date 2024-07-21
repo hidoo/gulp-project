@@ -506,8 +506,8 @@ importers:
         specifier: 4.7.8
         version: 4.7.8
       inquirer:
-        specifier: 9.3.5
-        version: 9.3.5
+        specifier: 9.3.6
+        version: 9.3.6
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -5349,8 +5349,8 @@ packages:
     resolution: {integrity: sha512-XgthhRIn0Ci9JdGJpUo2EtpPfaczbooZbGTN+FTzSCyUb7YHJcPPnuSXfeG5903bJMy3OyEoVTQMnvO4Ly5tFg==}
     engines: {node: '>=18'}
 
-  inquirer@9.3.5:
-    resolution: {integrity: sha512-SVRCRovA7KaT6nqWB2mCNpTvU4cuZ0hOXo5KPyiyOcNNUIZwq/JKtvXuDJNaxfuJKabBYRu1ecHze0YEwDYoRQ==}
+  inquirer@9.3.6:
+    resolution: {integrity: sha512-riK/iQB2ctwkpWYgjjWIRv3MBLt2gzb2Sj0JNQNbyTXgyXsLWcDPJ5WS5ZDTCx7BRFnJsARtYh+58fjP5M2Y0Q==}
     engines: {node: '>=18'}
 
   insert-module-globals@7.2.1:
@@ -14485,7 +14485,7 @@ snapshots:
       run-async: 3.0.0
       rxjs: 7.8.1
 
-  inquirer@9.3.5:
+  inquirer@9.3.6:
     dependencies:
       '@inquirer/figures': 1.0.3
       ansi-escapes: 4.3.2

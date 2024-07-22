@@ -334,8 +334,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       file-type:
-        specifier: 19.1.1
-        version: 19.1.1
+        specifier: 19.2.0
+        version: 19.2.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -408,8 +408,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.1.1
-        version: 19.1.1
+        specifier: 19.2.0
+        version: 19.2.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -891,8 +891,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.1.1
-        version: 19.1.1
+        specifier: 19.2.0
+        version: 19.2.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1097,8 +1097,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.1.1
-        version: 19.1.1
+        specifier: 19.2.0
+        version: 19.2.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -4519,8 +4519,8 @@ packages:
     resolution: {integrity: sha512-uzk64HRpUZyTGZtVuvrjP0FYxzQrBf4rojot6J65YMEbwBLB0CWm0CLojVpwpmFmxcE/lkvYICgfcGozbBq6rw==}
     engines: {node: '>=6'}
 
-  file-type@19.1.1:
-    resolution: {integrity: sha512-FF4rVPjylL7HkybFBpnBfcnpdi4MGNSFuk4s4VvTdt1wm9tVMdGmtBhvXyz+nh8565FJ5qDUMIPXR+WHLrfHew==}
+  file-type@19.2.0:
+    resolution: {integrity: sha512-tUgGaVcM7enfk+toLsBbbCP71iIThjBiMWLk1gYUprcY21/uRNnui0Py9oJ5AIXE7EJYfBeJRAl8pNHBmujboQ==}
     engines: {node: '>=18'}
 
   file-type@3.9.0:
@@ -7007,8 +7007,8 @@ packages:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
 
-  peek-readable@5.1.2:
-    resolution: {integrity: sha512-RXwDkKgcwPyi1AJs7qcKk00Q7v9vZdy8HQNQrJ0QOCTshdebt14dfsGYeO33Uz6bvi3DFE24RSzqshxyx5qjUw==}
+  peek-readable@5.1.3:
+    resolution: {integrity: sha512-kCsc9HwH5RgVA3H3VqkWFyGQwsxUxLdiSX1d5nqAm7hnMFjNFX1VhBLmJoUY0hZNc8gmDNgBkLjfhiWPsziXWA==}
     engines: {node: '>=14.16'}
 
   pend@1.2.0:
@@ -8103,9 +8103,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  strtok3@7.1.0:
-    resolution: {integrity: sha512-19dQEwG6Jd+VabjPRyBhymIF069vZiqWSZa2jJBoKJTsqGKnTxowGoQaLnz+yLARfDI041IUQekyPUMWElOgsQ==}
-    engines: {node: '>=14.16'}
+  strtok3@8.0.0:
+    resolution: {integrity: sha512-YzsSP+kli3q1tTA04HsfY1GqIapi3vEMN38jJ+aLpFyoev0onI/RuZWBGkQgc7ORynb3LW4cSOP3XtsKV21X6Q==}
+    engines: {node: '>=16'}
 
   stylelint-config-clean-order@5.4.2:
     resolution: {integrity: sha512-lhPnDUL1gQbZYqG9kQx5dfEfiD/EpyVbb6jOiR7YfKzkIVv7Rw4jSKzvxr4v5PZqmRyCSzM3goc93jqfF+OZbA==}
@@ -8533,10 +8533,6 @@ packages:
     resolution: {integrity: sha512-Y2VsbPVs0FIshJztycsO2SfPk7/KAF/T72qzv9u5EpQ4kB2hQoHlhNQTsNyy6ul7lQtqJN/AoWeS23OzEiEFxw==}
     engines: {node: '>=0.8.0'}
     hasBin: true
-
-  uint8array-extras@1.2.0:
-    resolution: {integrity: sha512-+J8XoVf9Y/vyCz8Xp7kGRb6dVuC5qIIWibNrpIoYVcjJqBzdb+tbS2XunRO4dxPj0YGy1G+TvrQU2EYjF0LiBA==}
-    engines: {node: '>=18'}
 
   uint8array-extras@1.3.0:
     resolution: {integrity: sha512-npBAT0ZIX6mAIG7SF6G4LF1BIoRx3h+HVajSplHx0XmOD0Ug4qio5Yhcajn72i5OEj/qkk1OFaYh2PhqHBV33w==}
@@ -13424,9 +13420,9 @@ snapshots:
 
   file-type@10.11.0: {}
 
-  file-type@19.1.1:
+  file-type@19.2.0:
     dependencies:
-      strtok3: 7.1.0
+      strtok3: 8.0.0
       token-types: 6.0.0
       uint8array-extras: 1.3.0
 
@@ -14420,13 +14416,13 @@ snapshots:
     dependencies:
       change-file-extension: 0.1.1
       environment: 1.1.0
-      file-type: 19.1.1
+      file-type: 19.2.0
       globby: 14.0.2
       junk: 4.0.1
       ow: 2.0.0
       p-pipe: 4.0.0
       slash: 5.1.0
-      uint8array-extras: 1.2.0
+      uint8array-extras: 1.3.0
 
   immutable@3.8.2: {}
 
@@ -16384,7 +16380,7 @@ snapshots:
       safe-buffer: 5.2.1
       sha.js: 2.4.11
 
-  peek-readable@5.1.2: {}
+  peek-readable@5.1.3: {}
 
   pend@1.2.0: {}
 
@@ -17635,10 +17631,10 @@ snapshots:
       minimist: 1.2.8
       through: 2.3.8
 
-  strtok3@7.1.0:
+  strtok3@8.0.0:
     dependencies:
       '@tokenizer/token': 0.3.0
-      peek-readable: 5.1.2
+      peek-readable: 5.1.3
 
   stylelint-config-clean-order@5.4.2(stylelint@16.7.0(typescript@5.5.2)):
     dependencies:
@@ -18141,8 +18137,6 @@ snapshots:
     dependencies:
       commander: 2.19.0
       source-map: 0.6.1
-
-  uint8array-extras@1.2.0: {}
 
   uint8array-extras@1.3.0: {}
 

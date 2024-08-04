@@ -32,7 +32,7 @@
   "dependencies": {
     "@hidoo/gulp-plugin-compress": "workspace:*",
     "@hidoo/gulp-util-error-handler": "workspace:*",
-    "autoprefixer": "10.4.19",
+    "autoprefixer": "10.4.20",
     "css-mqpacker": "7.0.0",
     "fancy-log": "2.0.0",
     "gulp-header": "2.0.9",

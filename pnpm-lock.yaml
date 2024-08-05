@@ -334,8 +334,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       file-type:
-        specifier: 19.3.0
-        version: 19.3.0
+        specifier: 19.4.0
+        version: 19.4.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -408,8 +408,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.3.0
-        version: 19.3.0
+        specifier: 19.4.0
+        version: 19.4.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -891,8 +891,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.3.0
-        version: 19.3.0
+        specifier: 19.4.0
+        version: 19.4.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1097,8 +1097,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.3.0
-        version: 19.3.0
+        specifier: 19.4.0
+        version: 19.4.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -4480,8 +4480,8 @@ packages:
     resolution: {integrity: sha512-uzk64HRpUZyTGZtVuvrjP0FYxzQrBf4rojot6J65YMEbwBLB0CWm0CLojVpwpmFmxcE/lkvYICgfcGozbBq6rw==}
     engines: {node: '>=6'}
 
-  file-type@19.3.0:
-    resolution: {integrity: sha512-mROwiKLZf/Kwa/2Rol+OOZQn1eyTkPB3ZTwC0ExY6OLFCbgxHYZvBm7xI77NvfZFMKBsmuXfmLJnD4eEftEhrA==}
+  file-type@19.4.0:
+    resolution: {integrity: sha512-7N7Pu0UzVYV8YP6WXhN+kcvtp/P00eWKVo76nMAK+RasRO/ICzuJzjoG+aSLqbY6khDAFQuqsyImGaSdkm49Iw==}
     engines: {node: '>=18'}
 
   file-type@3.9.0:
@@ -13354,8 +13354,9 @@ snapshots:
 
   file-type@10.11.0: {}
 
-  file-type@19.3.0:
+  file-type@19.4.0:
     dependencies:
+      get-stream: 9.0.1
       strtok3: 8.0.1
       token-types: 6.0.0
       uint8array-extras: 1.4.0
@@ -14361,7 +14362,7 @@ snapshots:
     dependencies:
       change-file-extension: 0.1.1
       environment: 1.1.0
-      file-type: 19.3.0
+      file-type: 19.4.0
       globby: 14.0.2
       junk: 4.0.1
       ow: 2.0.0

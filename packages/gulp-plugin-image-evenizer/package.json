@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "fancy-log": "2.0.0",
-    "file-type": "19.3.0",
+    "file-type": "19.4.0",
     "get-pixels": "3.3.3",
     "lodash.chunk": "4.2.0",
     "ndarray": "1.0.19",

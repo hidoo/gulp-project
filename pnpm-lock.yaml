@@ -93,8 +93,8 @@ importers:
         specifier: 12.1.0
         version: 12.1.0
       core-js:
-        specifier: 3.35.1
-        version: 3.35.1
+        specifier: 3.38.0
+        version: 3.38.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -174,8 +174,8 @@ importers:
         specifier: 12.1.0
         version: 12.1.0
       core-js:
-        specifier: 3.35.1
-        version: 3.35.1
+        specifier: 3.38.0
+        version: 3.38.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -258,8 +258,8 @@ importers:
         specifier: 12.1.0
         version: 12.1.0
       core-js:
-        specifier: 3.35.1
-        version: 3.35.1
+        specifier: 3.38.0
+        version: 3.38.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -760,8 +760,8 @@ importers:
         specifier: 7.25.3
         version: 7.25.3(@babel/core@7.25.2)
       core-js:
-        specifier: 3.35.1
-        version: 3.35.1
+        specifier: 3.38.0
+        version: 3.38.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -839,8 +839,8 @@ importers:
         specifier: 7.24.7
         version: 7.24.7(@babel/core@7.25.2)
       core-js:
-        specifier: 3.35.1
-        version: 3.35.1
+        specifier: 3.38.0
+        version: 3.38.0
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -3603,8 +3603,8 @@ packages:
   core-js-compat@3.37.1:
     resolution: {integrity: sha512-9TNiImhKvQqSUkOvk/mMRZzOANTiEVC7WaBNhHcKM7x+/5E1l5NvsysR19zuDQScE8k+kfQXWRN3AtS/eOSHpg==}
 
-  core-js@3.35.1:
-    resolution: {integrity: sha512-IgdsbxNyMskrTFxa9lWHyMwAJU5gXOPP+1yO+K59d50VLVAIDAbs7gIv705KzALModfK3ZrSZTPNpC0PQgIZuw==}
+  core-js@3.38.0:
+    resolution: {integrity: sha512-XPpwqEodRljce9KswjZShh95qJ1URisBeKCjUdq27YdenkslVe7OO0ZJhlYXAChW7OhXaRLl8AAba7IBfoIHug==}
 
   core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
@@ -12203,7 +12203,7 @@ snapshots:
     dependencies:
       browserslist: 4.23.3
 
-  core-js@3.35.1: {}
+  core-js@3.38.0: {}
 
   core-util-is@1.0.2: {}
 

@@ -108,11 +108,11 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       jsdom:
-        specifier: 24.1.1
-        version: 24.1.1
+        specifier: 24.1.3
+        version: 24.1.3
       jsdom-global:
         specifier: 3.0.2
-        version: 3.0.2(jsdom@24.1.1)
+        version: 3.0.2(jsdom@24.1.3)
       lint-staged:
         specifier: 15.2.7
         version: 15.2.7
@@ -189,11 +189,11 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       jsdom:
-        specifier: 24.1.1
-        version: 24.1.1
+        specifier: 24.1.3
+        version: 24.1.3
       jsdom-global:
         specifier: 3.0.2
-        version: 3.0.2(jsdom@24.1.1)
+        version: 3.0.2(jsdom@24.1.3)
       lint-staged:
         specifier: 15.2.7
         version: 15.2.7
@@ -273,11 +273,11 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       jsdom:
-        specifier: 24.1.1
-        version: 24.1.1
+        specifier: 24.1.3
+        version: 24.1.3
       jsdom-global:
         specifier: 3.0.2
-        version: 3.0.2(jsdom@24.1.1)
+        version: 3.0.2(jsdom@24.1.3)
       lint-staged:
         specifier: 15.2.7
         version: 15.2.7
@@ -5751,8 +5751,8 @@ packages:
     resolution: {integrity: sha512-O901mfJSuTdwU2w3Sn+74T+RnDVP+FuV5fH8tcPWyqrseRAb0s5xOtPgCFiPOtLcyK7CLIJwPyD83ZqQWvA5ng==}
     engines: {node: '>=8'}
 
-  jsdom@24.1.1:
-    resolution: {integrity: sha512-5O1wWV99Jhq4DV7rCLIoZ/UIhyQeDR7wHVyZAHAshbrvZsLs+Xzz7gtwnlJTJDjleiTKh54F4dXrX70vJQTyJQ==}
+  jsdom@24.1.3:
+    resolution: {integrity: sha512-MyL55p3Ut3cXbeBEG7Hcv0mVM8pp8PBNWxRqchZnSfAiES1v1mRnMeFfaHWIPULpwsYfvO+ZmMZz5tGCnjzDUQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -14881,9 +14881,9 @@ snapshots:
 
   jsdoc-type-pratt-parser@4.0.0: {}
 
-  jsdom-global@3.0.2(jsdom@24.1.1):
+  jsdom-global@3.0.2(jsdom@24.1.3):
     dependencies:
-      jsdom: 24.1.1
+      jsdom: 24.1.3
 
   jsdom@14.1.0:
     dependencies:
@@ -14917,7 +14917,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  jsdom@24.1.1:
+  jsdom@24.1.3:
     dependencies:
       cssstyle: 4.0.1
       data-urls: 5.0.0

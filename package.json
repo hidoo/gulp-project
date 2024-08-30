@@ -47,7 +47,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.57.0",
     "glob": "11.0.0",
-    "lint-staged": "15.2.7",
+    "lint-staged": "15.2.9",
     "mocha": "10.7.3",
     "prettier": "3.3.3",
     "replace-in-files-cli": "3.0.0"

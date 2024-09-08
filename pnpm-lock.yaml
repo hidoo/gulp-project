@@ -334,8 +334,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       file-type:
-        specifier: 19.4.1
-        version: 19.4.1
+        specifier: 19.5.0
+        version: 19.5.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -408,8 +408,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.4.1
-        version: 19.4.1
+        specifier: 19.5.0
+        version: 19.5.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -891,8 +891,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.4.1
-        version: 19.4.1
+        specifier: 19.5.0
+        version: 19.5.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1097,8 +1097,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.4.1
-        version: 19.4.1
+        specifier: 19.5.0
+        version: 19.5.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -4516,8 +4516,8 @@ packages:
     resolution: {integrity: sha512-uzk64HRpUZyTGZtVuvrjP0FYxzQrBf4rojot6J65YMEbwBLB0CWm0CLojVpwpmFmxcE/lkvYICgfcGozbBq6rw==}
     engines: {node: '>=6'}
 
-  file-type@19.4.1:
-    resolution: {integrity: sha512-RuWzwF2L9tCHS76KR/Mdh+DwJZcFCzrhrPXpOw6MlEfl/o31fjpTikzcKlYuyeV7e7ftdCGVJTNOCzkYD/aLbw==}
+  file-type@19.5.0:
+    resolution: {integrity: sha512-dMuq6WWnP6BpQY0zYJNpTtQWgeCImSMG0BTIzUBXvxbwc1HWP/E7AE4UWU9XSCOPGJuOHda0HpDnwM2FW+d90A==}
     engines: {node: '>=18'}
 
   file-type@3.9.0:
@@ -13467,7 +13467,7 @@ snapshots:
 
   file-type@10.11.0: {}
 
-  file-type@19.4.1:
+  file-type@19.5.0:
     dependencies:
       get-stream: 9.0.1
       strtok3: 8.1.0
@@ -14477,7 +14477,7 @@ snapshots:
     dependencies:
       change-file-extension: 0.1.1
       environment: 1.1.0
-      file-type: 19.4.1
+      file-type: 19.5.0
       globby: 14.0.2
       junk: 4.0.1
       ow: 2.0.0

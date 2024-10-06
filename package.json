@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "description": "This is the monorepo for gulp project packages.",
   "private": true,
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.0",
   "engines": {
     "node": ">=18.0.0",
-    "pnpm": "9.11.0"
+    "pnpm": "9.12.0"
   },
   "type": "module",
   "files": [],

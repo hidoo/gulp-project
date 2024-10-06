@@ -37,7 +37,7 @@
     "@hidoo/gulp-plugin-compress": "workspace:*",
     "@hidoo/gulp-util-error-handler": "workspace:*",
     "babelify": "10.0.0",
-    "browserify": "17.0.0",
+    "browserify": "17.0.1",
     "envify": "4.1.0",
     "gulp-if": "3.0.0",
     "gulp-rename": "2.0.0",

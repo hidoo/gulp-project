@@ -334,8 +334,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       file-type:
-        specifier: 19.5.0
-        version: 19.5.0
+        specifier: 19.6.0
+        version: 19.6.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -408,8 +408,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.5.0
-        version: 19.5.0
+        specifier: 19.6.0
+        version: 19.6.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -891,8 +891,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.5.0
-        version: 19.5.0
+        specifier: 19.6.0
+        version: 19.6.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1097,8 +1097,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 19.5.0
-        version: 19.5.0
+        specifier: 19.6.0
+        version: 19.6.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -4495,8 +4495,8 @@ packages:
     resolution: {integrity: sha512-uzk64HRpUZyTGZtVuvrjP0FYxzQrBf4rojot6J65YMEbwBLB0CWm0CLojVpwpmFmxcE/lkvYICgfcGozbBq6rw==}
     engines: {node: '>=6'}
 
-  file-type@19.5.0:
-    resolution: {integrity: sha512-dMuq6WWnP6BpQY0zYJNpTtQWgeCImSMG0BTIzUBXvxbwc1HWP/E7AE4UWU9XSCOPGJuOHda0HpDnwM2FW+d90A==}
+  file-type@19.6.0:
+    resolution: {integrity: sha512-VZR5I7k5wkD0HgFnMsq5hOsSc710MJMu5Nc5QYsbe38NN5iPV/XTObYLc/cpttRTf6lX538+5uO1ZQRhYibiZQ==}
     engines: {node: '>=18'}
 
   file-type@3.9.0:
@@ -7011,8 +7011,8 @@ packages:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
 
-  peek-readable@5.1.4:
-    resolution: {integrity: sha512-E7mY2VmKqw9jYuXrSWGHFuPCW2SLQenzXLF3amGaY6lXXg4/b3gj5HVM7h8ZjCO/nZS9ICs0Cz285+32FvNd/A==}
+  peek-readable@5.3.1:
+    resolution: {integrity: sha512-GVlENSDW6KHaXcd9zkZltB7tCLosKB/4Hg0fqBJkAoBgYG2Tn1xtMgXtSUuMU9AK/gCm/tTdT8mgAeF4YNeeqw==}
     engines: {node: '>=14.16'}
 
   pend@1.2.0:
@@ -8094,8 +8094,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  strtok3@8.1.0:
-    resolution: {integrity: sha512-ExzDvHYPj6F6QkSNe/JxSlBxTh3OrI6wrAIz53ulxo1c4hBJ1bT9C/JrAthEKHWG9riVH3Xzg7B03Oxty6S2Lw==}
+  strtok3@9.0.1:
+    resolution: {integrity: sha512-ERPW+XkvX9W2A+ov07iy+ZFJpVdik04GhDA4eVogiG9hpC97Kem2iucyzhFxbFRvQ5o2UckFtKZdp1hkGvnrEw==}
     engines: {node: '>=16'}
 
   stylelint-config-clean-order@5.4.2:
@@ -13390,10 +13390,10 @@ snapshots:
 
   file-type@10.11.0: {}
 
-  file-type@19.5.0:
+  file-type@19.6.0:
     dependencies:
       get-stream: 9.0.1
-      strtok3: 8.1.0
+      strtok3: 9.0.1
       token-types: 6.0.0
       uint8array-extras: 1.4.0
 
@@ -14398,7 +14398,7 @@ snapshots:
     dependencies:
       change-file-extension: 0.1.1
       environment: 1.1.0
-      file-type: 19.5.0
+      file-type: 19.6.0
       globby: 14.0.2
       junk: 4.0.1
       ow: 2.0.0
@@ -16369,7 +16369,7 @@ snapshots:
       safe-buffer: 5.2.1
       sha.js: 2.4.11
 
-  peek-readable@5.1.4: {}
+  peek-readable@5.3.1: {}
 
   pend@1.2.0: {}
 
@@ -17589,10 +17589,10 @@ snapshots:
       minimist: 1.2.8
       through: 2.3.8
 
-  strtok3@8.1.0:
+  strtok3@9.0.1:
     dependencies:
       '@tokenizer/token': 0.3.0
-      peek-readable: 5.1.4
+      peek-readable: 5.3.1
 
   stylelint-config-clean-order@5.4.2(stylelint@16.10.0(typescript@5.5.4)):
     dependencies:

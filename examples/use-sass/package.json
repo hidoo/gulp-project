@@ -53,7 +53,7 @@
     "jsdom": "25.0.1",
     "jsdom-global": "3.0.2",
     "lint-staged": "15.2.9",
-    "mocha": "10.7.3",
+    "mocha": "10.8.2",
     "npm-run-all2": "6.2.6",
     "prettier": "3.3.3",
     "regenerator-runtime": "0.14.1",

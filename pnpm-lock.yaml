@@ -532,7 +532,7 @@ importers:
         version: 1.0.0
       autoprefixer:
         specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.47)
+        version: 10.4.20(postcss@8.4.49)
       css-mqpacker:
         specifier: 7.0.0
         version: 7.0.0
@@ -550,7 +550,7 @@ importers:
         version: 1.2.1
       gulp-postcss:
         specifier: 10.0.0
-        version: 10.0.0(jiti@1.21.6)(postcss@8.4.47)
+        version: 10.0.0(jiti@1.21.6)(postcss@8.4.49)
       gulp-rename:
         specifier: 2.0.0
         version: 2.0.0
@@ -561,11 +561,11 @@ importers:
         specifier: 2.0.1
         version: 2.0.1
       postcss:
-        specifier: 8.4.47
-        version: 8.4.47
+        specifier: 8.4.49
+        version: 8.4.49
       postcss-csso:
         specifier: 6.0.1
-        version: 6.0.1(postcss@8.4.47)
+        version: 6.0.1(postcss@8.4.49)
       sass:
         specifier: 1.80.6
         version: 1.80.6
@@ -593,7 +593,7 @@ importers:
         version: 0.17.0(uncss@0.17.3)
       postcss-url:
         specifier: 10.1.3
-        version: 10.1.3(postcss@8.4.47)
+        version: 10.1.3(postcss@8.4.49)
 
   packages/gulp-task-build-css-stylus:
     dependencies:
@@ -605,7 +605,7 @@ importers:
         version: link:../gulp-util-error-handler
       autoprefixer:
         specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.47)
+        version: 10.4.20(postcss@8.4.49)
       css-mqpacker:
         specifier: 7.0.0
         version: 7.0.0
@@ -623,7 +623,7 @@ importers:
         version: 1.2.1
       gulp-postcss:
         specifier: 10.0.0
-        version: 10.0.0(jiti@1.21.6)(postcss@8.4.47)
+        version: 10.0.0(jiti@1.21.6)(postcss@8.4.49)
       gulp-rename:
         specifier: 2.0.0
         version: 2.0.0
@@ -631,17 +631,17 @@ importers:
         specifier: 3.0.1
         version: 3.0.1
       postcss:
-        specifier: 8.4.47
-        version: 8.4.47
+        specifier: 8.4.49
+        version: 8.4.49
       postcss-csso:
         specifier: 6.0.1
-        version: 6.0.1(postcss@8.4.47)
+        version: 6.0.1(postcss@8.4.49)
       postcss-uncss:
         specifier: 0.17.0
         version: 0.17.0(uncss@0.17.3)
       postcss-url:
         specifier: 10.1.3
-        version: 10.1.3(postcss@8.4.47)
+        version: 10.1.3(postcss@8.4.49)
       uncss:
         specifier: 0.17.3
         version: 0.17.3
@@ -1011,7 +1011,7 @@ importers:
         version: 1.2.1
       gulp-postcss:
         specifier: 10.0.0
-        version: 10.0.0(jiti@1.21.6)(postcss@8.4.47)
+        version: 10.0.0(jiti@1.21.6)(postcss@8.4.49)
       gulp-rename:
         specifier: 2.0.0
         version: 2.0.0
@@ -1022,11 +1022,11 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       postcss:
-        specifier: 8.4.47
-        version: 8.4.47
+        specifier: 8.4.49
+        version: 8.4.49
       postcss-csso:
         specifier: 6.0.1
-        version: 6.0.1(postcss@8.4.47)
+        version: 6.0.1(postcss@8.4.49)
     devDependencies:
       cross-env:
         specifier: 7.0.3
@@ -7164,6 +7164,9 @@ packages:
   picocolors@1.1.0:
     resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
 
+  picocolors@1.1.1:
+    resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -7339,6 +7342,10 @@ packages:
 
   postcss@8.4.47:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
+  postcss@8.4.49:
+    resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.1.2:
@@ -11332,7 +11339,7 @@ snapshots:
       '@vue/shared': 3.4.35
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.47
+      postcss: 8.4.49
       source-map-js: 1.2.0
     optional: true
 
@@ -11642,14 +11649,14 @@ snapshots:
 
   at-least-node@1.0.0: {}
 
-  autoprefixer@10.4.20(postcss@8.4.47):
+  autoprefixer@10.4.20(postcss@8.4.49):
     dependencies:
       browserslist: 4.23.3
       caniuse-lite: 1.0.30001647
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.47
+      postcss: 8.4.49
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -12913,7 +12920,7 @@ snapshots:
       duplexify: 4.1.3
       ldjson-stream: 1.2.1
       multimatch: 5.0.0
-      postcss: 8.4.47
+      postcss: 8.4.49
       source-map: 0.7.4
       yargs: 17.7.2
 
@@ -14268,12 +14275,12 @@ snapshots:
       plugin-error: 0.1.2
       through2: 2.0.5
 
-  gulp-postcss@10.0.0(jiti@1.21.6)(postcss@8.4.47):
+  gulp-postcss@10.0.0(jiti@1.21.6)(postcss@8.4.49):
     dependencies:
       fancy-log: 2.0.0
       plugin-error: 2.0.1
-      postcss: 8.4.47
-      postcss-load-config: 5.1.0(jiti@1.21.6)(postcss@8.4.47)
+      postcss: 8.4.49
+      postcss-load-config: 5.1.0(jiti@1.21.6)(postcss@8.4.49)
       vinyl-sourcemaps-apply: 0.2.1
     transitivePeerDependencies:
       - jiti
@@ -16642,6 +16649,8 @@ snapshots:
 
   picocolors@1.1.0: {}
 
+  picocolors@1.1.1: {}
+
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
@@ -16719,18 +16728,18 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-csso@6.0.1(postcss@8.4.47):
+  postcss-csso@6.0.1(postcss@8.4.49):
     dependencies:
       csso: 5.0.5
-      postcss: 8.4.47
+      postcss: 8.4.49
 
-  postcss-load-config@5.1.0(jiti@1.21.6)(postcss@8.4.47):
+  postcss-load-config@5.1.0(jiti@1.21.6)(postcss@8.4.49):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
       jiti: 1.21.6
-      postcss: 8.4.47
+      postcss: 8.4.49
 
   postcss-media-query-parser@0.2.3: {}
 
@@ -16744,7 +16753,7 @@ snapshots:
 
   postcss-scss@3.0.5:
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.49
 
   postcss-scss@4.0.9(postcss@8.4.47):
     dependencies:
@@ -16766,20 +16775,20 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss-sorting@8.0.2(postcss@8.4.47):
+  postcss-sorting@8.0.2(postcss@8.4.49):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.49
 
   postcss-uncss@0.17.0(uncss@0.17.3):
     dependencies:
       uncss: 0.17.3
 
-  postcss-url@10.1.3(postcss@8.4.47):
+  postcss-url@10.1.3(postcss@8.4.49):
     dependencies:
       make-dir: 3.1.0
       mime: 2.5.2
       minimatch: 3.0.8
-      postcss: 8.4.47
+      postcss: 8.4.49
       xxhashjs: 0.2.2
 
   postcss-value-parser@4.2.0: {}
@@ -16799,6 +16808,12 @@ snapshots:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.1.0
+      source-map-js: 1.2.1
+
+  postcss@8.4.49:
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.1.1
       source-map-js: 1.2.1
 
   prelude-ls@1.1.2: {}
@@ -17904,7 +17919,7 @@ snapshots:
   stylelint-group-selectors@1.0.10(stylelint@16.10.0(typescript@5.5.4)):
     dependencies:
       md5: 2.3.0
-      postcss: 8.4.47
+      postcss: 8.4.49
       stylelint: 16.10.0(typescript@5.5.4)
 
   stylelint-high-performance-animation@1.10.0(stylelint@16.10.0(typescript@5.5.4)):
@@ -17915,13 +17930,13 @@ snapshots:
   stylelint-no-unsupported-browser-features@8.0.1(stylelint@16.10.0(typescript@5.5.4)):
     dependencies:
       doiuse: 6.0.2
-      postcss: 8.4.47
+      postcss: 8.4.49
       stylelint: 16.10.0(typescript@5.5.4)
 
   stylelint-order@6.0.4(stylelint@16.10.0(typescript@5.5.4)):
     dependencies:
-      postcss: 8.4.47
-      postcss-sorting: 8.0.2(postcss@8.4.47)
+      postcss: 8.4.49
+      postcss-sorting: 8.0.2(postcss@8.4.49)
       stylelint: 16.10.0(typescript@5.5.4)
 
   stylelint-scss@6.2.1(stylelint@16.10.0(typescript@5.5.4)):

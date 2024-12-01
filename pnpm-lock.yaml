@@ -42,8 +42,8 @@ importers:
         specifier: 10.8.2
         version: 10.8.2
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       replace-in-files-cli:
         specifier: 3.0.0
         version: 3.0.0
@@ -123,8 +123,8 @@ importers:
         specifier: 6.2.6
         version: 6.2.6
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       regenerator-runtime:
         specifier: 0.14.1
         version: 0.14.1
@@ -204,8 +204,8 @@ importers:
         specifier: 6.2.6
         version: 6.2.6
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       regenerator-runtime:
         specifier: 0.14.1
         version: 0.14.1
@@ -288,8 +288,8 @@ importers:
         specifier: 6.2.6
         version: 6.2.6
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       regenerator-runtime:
         specifier: 0.14.1
         version: 0.14.1
@@ -509,8 +509,8 @@ importers:
         specifier: 10.2.2
         version: 10.2.2
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
     devDependencies:
       cross-env:
         specifier: 7.0.3
@@ -7364,8 +7364,8 @@ packages:
     resolution: {integrity: sha512-ravE6m9Atw9Z/jjttRUZ+clIXogdghyZAuWJ3qEzjT+jI/dL1ifAqhZeC5VHzQp1MSt1+jxKkFNemj/iO7tVUA==}
     engines: {node: '>=4'}
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.4.1:
+    resolution: {integrity: sha512-G+YdqtITVZmOJje6QkXQWzl3fSfMxFwm1tjTyo9exhkmWSqC4Yhd1+lug++IlR2mvRVAxEDDWYkQdeSztajqgg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -16824,7 +16824,7 @@ snapshots:
 
   prepend-http@2.0.0: {}
 
-  prettier@3.3.3: {}
+  prettier@3.4.1: {}
 
   pretty-bytes@6.1.1: {}
 

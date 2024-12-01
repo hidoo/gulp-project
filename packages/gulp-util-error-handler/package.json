@@ -28,7 +28,7 @@
   "devDependencies": {
     "cross-env": "7.0.3",
     "mocha": "10.8.2",
-    "sinon": "18.0.1",
+    "sinon": "19.0.2",
     "strip-ansi": "7.1.0"
   }
 }

@@ -25,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "fancy-log": "2.0.0",
-    "image-size": "1.1.1",
+    "image-size": "1.2.1",
     "ndarray": "1.0.19",
     "plugin-error": "2.0.1",
     "save-pixels": "2.3.6",

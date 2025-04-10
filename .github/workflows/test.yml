@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+env:
+  # workaround for ERR_REQUIRE_ASYNC_MODULE on gulp-cli
+  NYC_CONFIG: 1
+
 jobs:
   test:
     name: 'Test on Node.js ${{ matrix.node-version }}'

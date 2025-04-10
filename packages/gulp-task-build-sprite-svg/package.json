@@ -28,7 +28,7 @@
     "cross-env": "7.0.3",
     "documentation": "14.0.3",
     "gulp": "5.0.0",
-    "mocha": "10.8.2"
+    "mocha": "11.1.0"
   },
   "dependencies": {
     "@hidoo/gulp-plugin-compress": "workspace:*",

@@ -967,8 +967,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(handlebars@4.7.8)
       '@hidoo/kss-builder':
-        specifier: 1.0.0
-        version: 1.0.0(chokidar@3.6.0)
+        specifier: 1.0.1
+        version: 1.0.1(chokidar@3.6.0)
       handlebars:
         specifier: 4.7.8
         version: 4.7.8
@@ -1920,9 +1920,9 @@ packages:
     peerDependencies:
       handlebars: '>=4.7.8'
 
-  '@hidoo/kss-builder@1.0.0':
-    resolution: {integrity: sha512-Vq/ii0cffB/IDksR4VEuyFaUleaTZJ8huXHhY5fcJ1FrDakgsD1dXLRnK06f+QY/6oXqdN5MtbSzIZg9A3FhHA==}
-    engines: {node: '>=18.12.0', pnpm: 9.1.1}
+  '@hidoo/kss-builder@1.0.1':
+    resolution: {integrity: sha512-xtnXxyK+F/Jh7hmSYlBTh/40F5FaORIpOMGGLvRPC8gI/Gl1pCu7o98kmmZKjH3jrULDpb+lIpWAHDetXYz7Tw==}
+    engines: {node: '>=18.12.0', pnpm: 10.8.0}
 
   '@hidoo/sass-importer@1.0.0':
     resolution: {integrity: sha512-Ol2SpZgTiGZ+r8jGEXbAld8Fc3IcK+Dc73GsSQXpt/bPs+jUP16PIj9+38vXNoqKu1dwwBSP0ECdOvneSxyuwg==}
@@ -5148,11 +5148,6 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
 
-  glob@10.4.1:
-    resolution: {integrity: sha512-2jelhlq3E4ho74ZyVLN03oKdAZVUa6UDZzFLVH1H7dnoax+y9qyaq8zBkfDIggjniU19z0wU18y16jMB2eyVIw==}
-    engines: {node: '>=16 || 14 >=14.18'}
-    hasBin: true
-
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
@@ -5447,6 +5442,10 @@ packages:
 
   highlight.js@11.10.0:
     resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==}
+    engines: {node: '>=12.0.0'}
+
+  highlight.js@11.11.1:
+    resolution: {integrity: sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==}
     engines: {node: '>=12.0.0'}
 
   highlight.js@11.9.0:
@@ -10545,13 +10544,13 @@ snapshots:
       marked-gfm-heading-id: 3.1.3(marked@12.0.1)
       marked-highlight: 2.1.1(marked@12.0.1)
 
-  '@hidoo/kss-builder@1.0.0(chokidar@3.6.0)':
+  '@hidoo/kss-builder@1.0.1(chokidar@3.6.0)':
     dependencies:
       '@hidoo/handlebars-helpers': 1.1.0(handlebars@4.7.8)
       '@hidoo/unit': 0.9.0
-      glob: 10.4.1
+      glob: 11.0.1
       handlebars: 4.7.8
-      highlight.js: 11.9.0
+      highlight.js: 11.11.1
       kss: 3.1.0(chokidar@3.6.0)
     transitivePeerDependencies:
       - chokidar
@@ -14473,14 +14472,6 @@ snapshots:
       minipass: 7.1.2
       path-scurry: 1.11.1
 
-  glob@10.4.1:
-    dependencies:
-      foreground-child: 3.2.1
-      jackspeak: 3.4.3
-      minimatch: 9.0.5
-      minipass: 7.1.2
-      path-scurry: 1.11.1
-
   glob@10.4.5:
     dependencies:
       foreground-child: 3.2.1
@@ -14943,6 +14934,8 @@ snapshots:
   highlight.js@10.7.3: {}
 
   highlight.js@11.10.0: {}
+
+  highlight.js@11.11.1: {}
 
   highlight.js@11.9.0: {}
 

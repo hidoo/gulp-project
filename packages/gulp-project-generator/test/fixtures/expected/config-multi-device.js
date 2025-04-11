@@ -30,6 +30,7 @@ const cli = new Command()
     return value;
   })
   .option('--compress', 'enable file compress or not.')
+  .allowExcessArguments()
   .parse(process.argv);
 
 /**

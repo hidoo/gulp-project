@@ -52,7 +52,7 @@
     "@hidoo/stylelint-config": "1.0.0",
     "browser-sync": "3.0.4",
     "chalk": "5.4.1",
-    "commander": "12.1.0",
+    "commander": "13.1.0",
     "conventional-changelog-cli": "5.0.0",
     "core-js": "3.35.1",
     "cross-env": "7.0.3",

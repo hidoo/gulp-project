@@ -24,6 +24,7 @@ const cli = new Command()
   .option('--open [type]', 'open browser automatically or not.')
   .option('--ui', 'enable debug ui or not.')
   .option('--compress', 'enable file compress or not.')
+  .allowExcessArguments()
   .parse(process.argv);
 
 /**

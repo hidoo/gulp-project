@@ -408,6 +408,7 @@ program
     'svg'
   )
   .option('--verbose', 'Enable output logs.')
+  .allowExcessArguments()
   .parse(process.argv);
 
 // argument <dir> is required.

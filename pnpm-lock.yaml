@@ -365,8 +365,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       image-size:
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.2
+        version: 2.0.2
       mocha:
         specifier: 11.1.0
         version: 11.1.0
@@ -386,8 +386,8 @@ importers:
         specifier: '>=4.0.2'
         version: 5.0.0
       image-size:
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.2
+        version: 2.0.2
       ndarray:
         specifier: 1.0.19
         version: 1.0.19
@@ -903,8 +903,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       image-size:
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.2
+        version: 2.0.2
       mocha:
         specifier: 11.1.0
         version: 11.1.0
@@ -1109,8 +1109,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       image-size:
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.2
+        version: 2.0.2
       mocha:
         specifier: 11.1.0
         version: 11.1.0
@@ -5588,8 +5588,8 @@ packages:
     resolution: {integrity: sha512-InwqeHHN2XpumIkMvpl/DCJVrAHgCsG5+cn1XlnLWGwtZBm8QJfSusItfrwx81CTp5agNZqpKU2J/ccC5nGT4A==}
     engines: {node: '>= 4'}
 
-  image-size@1.2.1:
-    resolution: {integrity: sha512-rH+46sQJ2dlwfjfhCyNx5thzrv+dtmBIhPHk0zgRUukHzZ/kRueTJXoYYsclBaKcSMBWuGbOFXtioLpzTb5euw==}
+  image-size@2.0.2:
+    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
     engines: {node: '>=16.x'}
     hasBin: true
 
@@ -7721,9 +7721,6 @@ packages:
 
   queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
-
-  queue@6.0.2:
-    resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
 
   rambda@7.5.0:
     resolution: {integrity: sha512-y/M9weqWAH4iopRd7EHDEQQvpFPHj1AA3oHozE9tfITHUtTR7Z9PSlIRRG2l1GuW7sefC1cXFfIcF+cgnShdBA==}
@@ -15105,9 +15102,7 @@ snapshots:
 
   ignore@6.0.2: {}
 
-  image-size@1.2.1:
-    dependencies:
-      queue: 6.0.2
+  image-size@2.0.2: {}
 
   imagemin-gifsicle@7.0.0:
     dependencies:
@@ -17403,10 +17398,6 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   queue-tick@1.0.1: {}
-
-  queue@6.0.2:
-    dependencies:
-      inherits: 2.0.4
 
   rambda@7.5.0: {}
 

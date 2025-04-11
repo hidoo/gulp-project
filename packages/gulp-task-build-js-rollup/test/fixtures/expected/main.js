@@ -47,10 +47,10 @@
 	(shared$3.exports = function (key, value) {
 	  return store$2[key] || (store$2[key] = value !== undefined ? value : {});
 	})('versions', []).push({
-	  version: '<core-js version>',
+	  version: '3.35.1',
 	  mode: 'global',
 	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-	  license: 'https://github.com/zloirock/core-js/blob/v<core-js version>/LICENSE',
+	  license: 'https://github.com/zloirock/core-js/blob/v3.35.1/LICENSE',
 	  source: 'https://github.com/zloirock/core-js'
 	});
 	var sharedExports = shared$3.exports;
@@ -223,15 +223,15 @@
 	});
 
 	var isCallable$9 = isCallable$a;
-	var isObject$5 = function (it) {
+	var isObject$4 = function (it) {
 	  return typeof it == 'object' ? it !== null : isCallable$9(it);
 	};
 
 	var global$4 = global$a;
-	var isObject$4 = isObject$5;
+	var isObject$3 = isObject$4;
 	var document$1 = global$4.document;
 	// typeof document.createElement is 'object' in old IE
-	var EXISTS$1 = isObject$4(document$1) && isObject$4(document$1.createElement);
+	var EXISTS$1 = isObject$3(document$1) && isObject$3(document$1.createElement);
 	var documentCreateElement = function (it) {
 	  return EXISTS$1 ? document$1.createElement(it) : {};
 	};
@@ -263,13 +263,13 @@
 	  }).prototype !== 42;
 	});
 
-	var isObject$3 = isObject$5;
+	var isObject$2 = isObject$4;
 	var $String$2 = String;
 	var $TypeError$4 = TypeError;
 
 	// `Assert: Type(argument) is Object`
 	var anObject$1 = function (argument) {
-	  if (isObject$3(argument)) return argument;
+	  if (isObject$2(argument)) return argument;
 	  throw new $TypeError$4($String$2(argument) + ' is not an object');
 	};
 
@@ -334,21 +334,21 @@
 
 	var call$1 = functionCall;
 	var isCallable$5 = isCallable$a;
-	var isObject$2 = isObject$5;
+	var isObject$1 = isObject$4;
 	var $TypeError$2 = TypeError;
 
 	// `OrdinaryToPrimitive` abstract operation
 	// https://tc39.es/ecma262/#sec-ordinarytoprimitive
 	var ordinaryToPrimitive$1 = function (input, pref) {
 	  var fn, val;
-	  if (pref === 'string' && isCallable$5(fn = input.toString) && !isObject$2(val = call$1(fn, input))) return val;
-	  if (isCallable$5(fn = input.valueOf) && !isObject$2(val = call$1(fn, input))) return val;
-	  if (pref !== 'string' && isCallable$5(fn = input.toString) && !isObject$2(val = call$1(fn, input))) return val;
+	  if (pref === 'string' && isCallable$5(fn = input.toString) && !isObject$1(val = call$1(fn, input))) return val;
+	  if (isCallable$5(fn = input.valueOf) && !isObject$1(val = call$1(fn, input))) return val;
+	  if (pref !== 'string' && isCallable$5(fn = input.toString) && !isObject$1(val = call$1(fn, input))) return val;
 	  throw new $TypeError$2("Can't convert object to primitive value");
 	};
 
 	var call = functionCall;
-	var isObject$1 = isObject$5;
+	var isObject = isObject$4;
 	var isSymbol$1 = isSymbol$2;
 	var getMethod = getMethod$1;
 	var ordinaryToPrimitive = ordinaryToPrimitive$1;
@@ -359,13 +359,13 @@
 	// `ToPrimitive` abstract operation
 	// https://tc39.es/ecma262/#sec-toprimitive
 	var toPrimitive$1 = function (input, pref) {
-	  if (!isObject$1(input) || isSymbol$1(input)) return input;
+	  if (!isObject(input) || isSymbol$1(input)) return input;
 	  var exoticToPrim = getMethod(input, TO_PRIMITIVE);
 	  var result;
 	  if (exoticToPrim) {
 	    if (pref === undefined) pref = 'default';
 	    result = call(exoticToPrim, input, pref);
-	    if (!isObject$1(result) || isSymbol$1(result)) return result;
+	    if (!isObject(result) || isSymbol$1(result)) return result;
 	    throw new $TypeError$1("Can't convert object to primitive value");
 	  }
 	  if (pref === undefined) pref = 'number';
@@ -434,12 +434,8 @@
 	// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
 	var getDescriptor = DESCRIPTORS$2 && Object.getOwnPropertyDescriptor;
 	var EXISTS = hasOwn$2(FunctionPrototype, 'name');
-	// additional protection from minified / mangled / dropped function names
-	var PROPER = EXISTS && function something() {/* empty */}.name === 'something';
 	var CONFIGURABLE = EXISTS && (!DESCRIPTORS$2 || DESCRIPTORS$2 && getDescriptor(FunctionPrototype, 'name').configurable);
 	var functionName = {
-	  EXISTS: EXISTS,
-	  PROPER: PROPER,
 	  CONFIGURABLE: CONFIGURABLE
 	};
 
@@ -489,7 +485,6 @@
 
 	var NATIVE_WEAK_MAP = weakMapBasicDetection;
 	var global$1 = global$a;
-	var isObject = isObject$5;
 	var createNonEnumerableProperty = createNonEnumerableProperty$1;
 	var hasOwn$1 = hasOwnProperty_1;
 	var shared = sharedStore;
@@ -500,15 +495,6 @@
 	var set, get, has;
 	var enforce = function (it) {
 	  return has(it) ? get(it) : set(it, {});
-	};
-	var getterFor = function (TYPE) {
-	  return function (it) {
-	    var state;
-	    if (!isObject(it) || (state = get(it)).type !== TYPE) {
-	      throw new TypeError$1('Incompatible receiver, ' + TYPE + ' required');
-	    }
-	    return state;
-	  };
 	};
 	if (NATIVE_WEAK_MAP || shared.state) {
 	  var store = shared.state || (shared.state = new WeakMap());
@@ -545,12 +531,8 @@
 	  };
 	}
 	var internalState = {
-	  set: set,
 	  get: get,
-	  has: has,
-	  enforce: enforce,
-	  getterFor: getterFor
-	};
+	  enforce: enforce};
 
 	var uncurryThis$1 = functionUncurryThis;
 	var fails = fails$6;

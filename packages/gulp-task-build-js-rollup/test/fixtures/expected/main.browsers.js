@@ -149,7 +149,7 @@
 	};
 
 	var isCallable$b = isCallable$c;
-	var isObject$6 = function (it) {
+	var isObject$5 = function (it) {
 	  return typeof it == 'object' ? it !== null : isCallable$b(it);
 	};
 
@@ -257,16 +257,16 @@
 
 	var call$2 = functionCall;
 	var isCallable$7 = isCallable$c;
-	var isObject$5 = isObject$6;
+	var isObject$4 = isObject$5;
 	var $TypeError$3 = TypeError;
 
 	// `OrdinaryToPrimitive` abstract operation
 	// https://tc39.es/ecma262/#sec-ordinarytoprimitive
 	var ordinaryToPrimitive$1 = function (input, pref) {
 	  var fn, val;
-	  if (pref === 'string' && isCallable$7(fn = input.toString) && !isObject$5(val = call$2(fn, input))) return val;
-	  if (isCallable$7(fn = input.valueOf) && !isObject$5(val = call$2(fn, input))) return val;
-	  if (pref !== 'string' && isCallable$7(fn = input.toString) && !isObject$5(val = call$2(fn, input))) return val;
+	  if (pref === 'string' && isCallable$7(fn = input.toString) && !isObject$4(val = call$2(fn, input))) return val;
+	  if (isCallable$7(fn = input.valueOf) && !isObject$4(val = call$2(fn, input))) return val;
+	  if (pref !== 'string' && isCallable$7(fn = input.toString) && !isObject$4(val = call$2(fn, input))) return val;
 	  throw new $TypeError$3("Can't convert object to primitive value");
 	};
 
@@ -352,7 +352,7 @@
 	};
 
 	var call$1 = functionCall;
-	var isObject$4 = isObject$6;
+	var isObject$3 = isObject$5;
 	var isSymbol$1 = isSymbol$2;
 	var getMethod = getMethod$1;
 	var ordinaryToPrimitive = ordinaryToPrimitive$1;
@@ -363,13 +363,13 @@
 	// `ToPrimitive` abstract operation
 	// https://tc39.es/ecma262/#sec-toprimitive
 	var toPrimitive$1 = function (input, pref) {
-	  if (!isObject$4(input) || isSymbol$1(input)) return input;
+	  if (!isObject$3(input) || isSymbol$1(input)) return input;
 	  var exoticToPrim = getMethod(input, TO_PRIMITIVE);
 	  var result;
 	  if (exoticToPrim) {
 	    if (pref === undefined) pref = 'default';
 	    result = call$1(exoticToPrim, input, pref);
-	    if (!isObject$4(result) || isSymbol$1(result)) return result;
+	    if (!isObject$3(result) || isSymbol$1(result)) return result;
 	    throw new $TypeError$2("Can't convert object to primitive value");
 	  }
 	  if (pref === undefined) pref = 'number';
@@ -387,10 +387,10 @@
 	};
 
 	var global$4 = global$b;
-	var isObject$3 = isObject$6;
+	var isObject$2 = isObject$5;
 	var document$1 = global$4.document;
 	// typeof document.createElement is 'object' in old IE
-	var EXISTS$1 = isObject$3(document$1) && isObject$3(document$1.createElement);
+	var EXISTS$1 = isObject$2(document$1) && isObject$2(document$1.createElement);
 	var documentCreateElement = function (it) {
 	  return EXISTS$1 ? document$1.createElement(it) : {};
 	};
@@ -447,13 +447,13 @@
 	  }).prototype !== 42;
 	});
 
-	var isObject$2 = isObject$6;
+	var isObject$1 = isObject$5;
 	var $String$1 = String;
 	var $TypeError$1 = TypeError;
 
 	// `Assert: Type(argument) is Object`
 	var anObject$2 = function (argument) {
-	  if (isObject$2(argument)) return argument;
+	  if (isObject$1(argument)) return argument;
 	  throw new $TypeError$1($String$1(argument) + ' is not an object');
 	};
 
@@ -519,12 +519,8 @@
 	// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
 	var getDescriptor = DESCRIPTORS$1 && Object.getOwnPropertyDescriptor;
 	var EXISTS = hasOwn$4(FunctionPrototype, 'name');
-	// additional protection from minified / mangled / dropped function names
-	var PROPER = EXISTS && function something() {/* empty */}.name === 'something';
 	var CONFIGURABLE = EXISTS && (!DESCRIPTORS$1 || DESCRIPTORS$1 && getDescriptor(FunctionPrototype, 'name').configurable);
 	var functionName = {
-	  EXISTS: EXISTS,
-	  PROPER: PROPER,
 	  CONFIGURABLE: CONFIGURABLE
 	};
 
@@ -557,7 +553,6 @@
 
 	var NATIVE_WEAK_MAP = weakMapBasicDetection;
 	var global$2 = global$b;
-	var isObject$1 = isObject$6;
 	var createNonEnumerableProperty$1 = createNonEnumerableProperty$2;
 	var hasOwn$3 = hasOwnProperty_1;
 	var shared = sharedStore;
@@ -569,15 +564,6 @@
 	var set, get, has;
 	var enforce = function (it) {
 	  return has(it) ? get(it) : set(it, {});
-	};
-	var getterFor = function (TYPE) {
-	  return function (it) {
-	    var state;
-	    if (!isObject$1(it) || (state = get(it)).type !== TYPE) {
-	      throw new TypeError$1('Incompatible receiver, ' + TYPE + ' required');
-	    }
-	    return state;
-	  };
 	};
 	if (NATIVE_WEAK_MAP || shared.state) {
 	  var store = shared.state || (shared.state = new WeakMap());
@@ -615,12 +601,8 @@
 	  };
 	}
 	var internalState = {
-	  set: set,
 	  get: get,
-	  has: has,
-	  enforce: enforce,
-	  getterFor: getterFor
-	};
+	  enforce: enforce};
 
 	var uncurryThis$6 = functionUncurryThis;
 	var fails$3 = fails$a;
@@ -786,9 +768,6 @@
 	  };
 	};
 	var arrayIncludes = {
-	  // `Array.prototype.includes` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.includes
-	  includes: createMethod$1(true),
 	  // `Array.prototype.indexOf` method
 	  // https://tc39.es/ecma262/#sec-array.prototype.indexof
 	  indexOf: createMethod$1(false)
@@ -1051,7 +1030,7 @@
 
 	var isArray = isArray$1;
 	var isConstructor = isConstructor$1;
-	var isObject = isObject$6;
+	var isObject = isObject$5;
 	var wellKnownSymbol = wellKnownSymbol$4;
 	var SPECIES = wellKnownSymbol('species');
 	var $Array = Array;
@@ -1139,29 +1118,7 @@
 	var arrayIteration = {
 	  // `Array.prototype.forEach` method
 	  // https://tc39.es/ecma262/#sec-array.prototype.foreach
-	  forEach: createMethod(0),
-	  // `Array.prototype.map` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.map
-	  map: createMethod(1),
-	  // `Array.prototype.filter` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.filter
-	  filter: createMethod(2),
-	  // `Array.prototype.some` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.some
-	  some: createMethod(3),
-	  // `Array.prototype.every` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.every
-	  every: createMethod(4),
-	  // `Array.prototype.find` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.find
-	  find: createMethod(5),
-	  // `Array.prototype.findIndex` method
-	  // https://tc39.es/ecma262/#sec-array.prototype.findIndex
-	  findIndex: createMethod(6),
-	  // `Array.prototype.filterReject` method
-	  // https://github.com/tc39/proposal-array-filtering
-	  filterReject: createMethod(7)
-	};
+	  forEach: createMethod(0)};
 
 	var fails = fails$a;
 	var arrayMethodIsStrict$1 = function (METHOD_NAME, argument) {

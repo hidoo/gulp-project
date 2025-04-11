@@ -37,7 +37,7 @@
   "dependencies": {
     "@hidoo/handlebars-helpers": "1.1.0",
     "chalk": "5.4.1",
-    "commander": "12.1.0",
+    "commander": "13.1.0",
     "glob": "11.0.0",
     "glob-parent": "6.0.2",
     "handlebars": "4.7.8",

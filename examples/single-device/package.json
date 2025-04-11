@@ -42,7 +42,7 @@
     "@hidoo/gulp-task-optimize-image": "workspace:*",
     "browser-sync": "3.0.3",
     "chalk": "5.4.1",
-    "commander": "12.1.0",
+    "commander": "13.1.0",
     "core-js": "3.35.1",
     "cross-env": "7.0.3",
     "eslint": "8.57.1",

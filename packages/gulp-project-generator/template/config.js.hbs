@@ -38,6 +38,7 @@ const cli = new Command()
   })
 {{/if}}
   .option('--compress', 'enable file compress or not.')
+  .allowExcessArguments()
   .parse(process.argv);
 
 /**

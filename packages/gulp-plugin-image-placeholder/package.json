@@ -38,7 +38,7 @@
     "file-type": "20.4.1",
     "get-pixels": "3.3.3",
     "mocha": "11.1.0",
-    "pixelmatch": "6.0.0"
+    "pixelmatch": "7.1.0"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

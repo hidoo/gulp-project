@@ -52,5 +52,13 @@
     "pnpm": "10.8.0",
     "prettier": "3.5.3",
     "replace-in-files-cli": "3.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "cwebp-bin",
+      "gifsicle",
+      "mozjpeg",
+      "optipng-bin"
+    ]
   }
 }

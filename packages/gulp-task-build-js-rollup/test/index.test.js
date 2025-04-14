@@ -69,8 +69,8 @@ describe('gulp-task-build-js-rollup', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, { recursive: true });
-    await fs.mkdir(destDir);
+    // await fs.rm(destDir, { recursive: true });
+    // await fs.mkdir(destDir);
   });
 
   it('should out js file with default options.', async () => {

@@ -1,3 +1,4 @@
+/* eslint import/namespace: off */
 import * as prettier from 'prettier';
 
 /**

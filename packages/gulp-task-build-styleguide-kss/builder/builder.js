@@ -17,11 +17,10 @@ process.emitWarning(
 const pkg = (() => {
   // try to load package.json that on current working directory
   try {
-    // eslint-disable-next-line import/no-dynamic-require
     return require(path.resolve(process.cwd(), 'package.json'));
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Failed to load package.json.');
+    console.error('Failed to load package.json:', error);
     return {};
   }
 })();
@@ -180,6 +179,8 @@ class KssBuilderHandlebars extends KssBuilderBase {
           )
         );
       } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to load data context:', error);
         return {};
       }
     };

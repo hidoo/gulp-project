@@ -1,4 +1,3 @@
-/* eslint node/no-process-env: off, import/no-anonymous-default-export: off */
 import * as sass from 'sass';
 
 /**
@@ -13,6 +12,7 @@ function env(args) {
   return new sass.SassString(process.env[name.text] || '');
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   'env($name)': env
 };

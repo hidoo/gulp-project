@@ -69,6 +69,7 @@ describe('gulp-plugin-compress', () => {
     try {
       await fs.stat(destDir);
     } catch (err) {
+      console.error(err);
       await fs.mkdir(destDir);
     }
   });

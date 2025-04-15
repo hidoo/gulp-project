@@ -6,7 +6,6 @@
 export const defaultOutputOptions = {
   format: 'iife',
   name: '',
-  // eslint-disable-next-line node/no-process-env
   sourcemap: process.env.NODE_ENV === 'development' ? 'inline' : false
 };
 

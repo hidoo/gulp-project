@@ -68,7 +68,6 @@ export const defaultPluginSettings = [
     factory: replace,
     config: {
       preventAssignment: true,
-      // eslint-disable-next-line node/no-process-env
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }
   },

@@ -29,10 +29,7 @@ function loadPackageJson(verbose = false) {
   let pkg = {};
 
   try {
-    pkg = JSON.parse(
-      // eslint-disable-next-line node/no-sync
-      fs.readFileSync(filename)
-    );
+    pkg = JSON.parse(fs.readFileSync(filename));
   } catch (error) {
     if (verbose) {
       log.error(`Failed to load package '${filename}':`, error);

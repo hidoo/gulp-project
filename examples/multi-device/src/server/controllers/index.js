@@ -20,6 +20,8 @@ export async function readme(req, res) {
       content: content.toString()
     });
   } catch (error) {
-    res.status(status.NOT_FOUND).send('README.md is not Found.');
+    res
+      .status(status.NOT_FOUND)
+      .send(`README.md is not Found: ${error.message}`);
   }
 }

@@ -1,4 +1,4 @@
-/* eslint no-console: off, node/file-extension-in-import: off */
+/* eslint no-console: off, n/file-extension-in-import: off */
 
 import json from './with-json.json';
 

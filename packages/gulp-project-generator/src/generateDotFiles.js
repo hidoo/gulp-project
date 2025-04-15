@@ -55,13 +55,9 @@ export default async function generateDotFiles(
       .then((output) => write(output, `${dest}/.mocharc.json`, { verbose }));
   }
 
-  await render(`${src}/.eslintrc.json.hbs`, options)
-    .then((output) => format(output, { parser: 'json' }))
-    .then((output) => write(output, `${dest}/.eslintrc.json`, { verbose }));
-
-  await render(`${src}/.eslintignore.hbs`, options).then((output) =>
-    write(output, `${dest}/.eslintignore`, { verbose })
-  );
+  await render(`${src}/eslint.config.js.hbs`, options)
+    .then((output) => format(output))
+    .then((output) => write(output, `${dest}/eslint.config.js`, { verbose }));
 
   await render(`${src}/.prettierrc.json.hbs`, options)
     .then((output) => format(output, { parser: 'json' }))

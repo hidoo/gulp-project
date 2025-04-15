@@ -279,7 +279,7 @@ export default function buildHtml(options = {}) {
           .partials(opts.partials)
           .data({
             ...context,
-            NODE_ENV: process.env.NODE_ENV || 'development', // eslint-disable-line node/no-process-env
+            NODE_ENV: process.env.NODE_ENV || 'development',
             enableCompress,
             pages
           })

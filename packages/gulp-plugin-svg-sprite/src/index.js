@@ -90,7 +90,6 @@ export default function svgSprite(options) {
       'Argument "options.imgPath" is required.'
     );
   }
-  // eslint-disable-next-line node/no-sync
   if (!fs.existsSync(opts.cssTemplate)) {
     throw new PluginError(
       PLUGIN_NAME,
@@ -117,7 +116,7 @@ export default function svgSprite(options) {
 
   // evaluate template
   const template = handlebars.compile(
-    fs.readFileSync(cssTemplate, 'utf8') // eslint-disable-line node/no-sync
+    fs.readFileSync(cssTemplate, 'utf8') // eslint-disable-linen/no-sync
   );
 
   /**

@@ -57,8 +57,7 @@ describe('generateDotFiles', () => {
     const files = [
       ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig'],
-      ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['eslint.config.js', 'eslint.config-main.js'],
       ['.prettierignore', '.prettierignore'],
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
@@ -94,8 +93,7 @@ describe('generateDotFiles', () => {
     const files = [
       ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig'],
-      ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['eslint.config.js', 'eslint.config-main.js'],
       ['.prettierignore', '.prettierignore'],
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],
@@ -132,8 +130,7 @@ describe('generateDotFiles', () => {
       ['.babelrc.json', '.babelrc-main.json'],
       ['.commitlintrc.json', '.commitlintrc-main.json'],
       ['.editorconfig', '.editorconfig'],
-      ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['eslint.config.js', 'eslint.config-main.js'],
       ['.prettierignore', '.prettierignore'],
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-conventional-commits'],
@@ -170,8 +167,7 @@ describe('generateDotFiles', () => {
     const files = [
       ['.babelrc.json', '.babelrc-main.json'],
       ['.editorconfig', '.editorconfig-sass'],
-      ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.json', '.eslintrc-main.json'],
+      ['eslint.config.js', 'eslint.config-main.js'],
       ['.prettierignore', '.prettierignore'],
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes-sass'],
@@ -207,8 +203,7 @@ describe('generateDotFiles', () => {
 
     const files = [
       ['.editorconfig', '.editorconfig'],
-      ['.eslintignore', '.eslintignore'],
-      ['.eslintrc.json', '.eslintrc-no-js.json'],
+      ['eslint.config.js', 'eslint.config-no-js.js'],
       ['.prettierignore', '.prettierignore'],
       ['.prettierrc.json', '.prettierrc-main.json'],
       ['.gitattributes', '.gitattributes'],

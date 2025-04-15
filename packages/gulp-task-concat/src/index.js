@@ -23,11 +23,10 @@ let pkg = {};
 // try to load package.json that on current working directory
 try {
   pkg = JSON.parse(
-    // eslint-disable-next-line node/no-sync
     fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
   );
 } catch (error) {
-  log.error('Failed to load package.json.');
+  log.error('Failed to load package.json:', error);
 }
 
 /**
@@ -93,7 +92,7 @@ export function concatJs(options = {}) {
       .pipe(
         replace(
           'process.env.NODE_ENV',
-          // eslint-disable-next-line node/no-process-env
+          // eslint-disable-next-linen/no-process-env
           `'${process.env.NODE_ENV || 'development'}'`
         )
       )

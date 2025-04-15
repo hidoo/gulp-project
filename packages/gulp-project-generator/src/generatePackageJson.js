@@ -1,4 +1,4 @@
-/* eslint max-lines-per-function: off, max-statements: off */
+/* eslint max-lines-per-function: off, max-statements: off, complexity: off */
 
 import fs from 'node:fs/promises';
 import path from 'node:path';

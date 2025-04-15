@@ -82,7 +82,7 @@ export default function buildJs(options = {}) {
     const bundler = browserify()
       .add(opts.src)
       .transform(babelify, babelOptions)
-      .transform(envify, { NODE_ENV: process.env.NODE_ENV }) // eslint-disable-line node/no-process-env
+      .transform(envify, { NODE_ENV: process.env.NODE_ENV })
       .plugin(licensify, { includePrivate: true })
       .bundle()
       .on('error', (error) => {

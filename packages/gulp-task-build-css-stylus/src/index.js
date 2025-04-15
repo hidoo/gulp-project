@@ -25,11 +25,10 @@ let pkg = {};
 // try to load package.json that on current working directory
 try {
   pkg = JSON.parse(
-    // eslint-disable-next-line node/no-sync
     fs.readFileSync(path.resolve(process.cwd(), 'package.json'))
   );
 } catch (error) {
-  log.error('Failed to load package.json.');
+  log.error('Failed to load package.json.', error);
 }
 
 /**
@@ -127,7 +126,7 @@ export default function buildCss(options = {}) {
       ...stylusOptions,
       rawDefine: {
         ...stylusOptions.rawDefine,
-        NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-line node/no-process-env
+        NODE_ENV: process.env.NODE_ENV || 'development' // eslint-disable-linen/no-process-env
       }
     };
 

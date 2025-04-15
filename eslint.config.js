@@ -22,7 +22,7 @@ export default [
 
   // for this file
   {
-    files: ['eslint.config.js'],
+    files: ['eslint.config.js', '**/eslint.config.js'],
     rules: {
       'import/no-anonymous-default-export': 'off'
     }

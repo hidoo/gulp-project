@@ -21,11 +21,15 @@ async function readBuiltFile(file) {
     .trim()
     .replace(/^\s\s*\n?/gm, '')
     .replace(
-      '<span class="version">(v0.0.0)</span>',
+      /<title>(.+)\(v.+?\)<\/title>/,
+      `<title>$1(v${pkg.version})</title>`
+    )
+    .replace(
+      /<span class="version">\(v.+?\)<\/span>/,
       `<span class="version">(v${pkg.version})</span>`
     )
     .replace(
-      '<p class="kss-heading-menu__version  kss-c-text">v0.0.0</p>',
+      /<p class="kss-heading-menu__version\s+kss-c-text">v.+?<\/p>/,
       `<p class="kss-heading-menu__version  kss-c-text">v${pkg.version}</p>`
     );
 }

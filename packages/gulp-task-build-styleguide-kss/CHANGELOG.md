@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+* fix(build-styleguide-kss)!: change default builder to @hidoo/kss-builder ([ffb86d2](https://github.com/hidoo/gulp-project/commit/ffb86d2016e9e11d1a89c36f54f6ce4824ca0f7f))
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/kss-builder to v1.0.1 ([#1098](https://github.com/hidoo/gulp-project/issues/1098)) ([78a9687](https://github.com/hidoo/gulp-project/commit/78a9687e1180063887b88b3d8cb7fdc49f793a6e))
+* **deps:** update handlebars-lib monorepo to v1.2.0 ([3459d9e](https://github.com/hidoo/gulp-project/commit/3459d9e4bdf7698c61919e8d96d0bc76d5da2b2a))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
+### BREAKING CHANGES
+
+* Legacy builder is available by @hidoo/gulp-task-build-styleguide-kss/legacy-builder
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 ### Bug Fixes

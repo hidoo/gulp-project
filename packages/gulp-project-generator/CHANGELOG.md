@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v5.4.1 ([#1085](https://github.com/hidoo/gulp-project/issues/1085)) ([84bd1f5](https://github.com/hidoo/gulp-project/commit/84bd1f59d9638473ecccdc673e745409bbf88ee6))
+* **deps:** update dependency commander to v13 ([c945da2](https://github.com/hidoo/gulp-project/commit/c945da24398143425a2f233badb11c78c24b2717))
+* **deps:** update dependency glob to v10.3.12 ([8aaa3fc](https://github.com/hidoo/gulp-project/commit/8aaa3fc1c2751da39d08153e6b60c55f53b8d642))
+* **deps:** update dependency glob to v10.3.15 ([d9f2f59](https://github.com/hidoo/gulp-project/commit/d9f2f59836e7b5019a3f688eb4542c7f3621f407))
+* **deps:** update dependency glob to v10.4.1 ([5c6a813](https://github.com/hidoo/gulp-project/commit/5c6a8138dd0699944f140d78cf37655241c6433b))
+* **deps:** update dependency glob to v10.4.2 ([d03d8c7](https://github.com/hidoo/gulp-project/commit/d03d8c71636e9a2459e912fb0d7005f2c4fcc070))
+* **deps:** update dependency glob to v10.4.3 ([fe9fcc0](https://github.com/hidoo/gulp-project/commit/fe9fcc0869f6a27ff6b0ae1aecb7df0c4eab0e17))
+* **deps:** update dependency glob to v10.4.5 ([671f1f2](https://github.com/hidoo/gulp-project/commit/671f1f2a0b2e43b3144fbb1a57b72dc8df5895bb))
+* **deps:** update dependency glob to v11 ([c6e1011](https://github.com/hidoo/gulp-project/commit/c6e10113f85060e5d79780b1b8b8004997f87f49))
+* **deps:** update dependency glob to v11.0.1 ([#1093](https://github.com/hidoo/gulp-project/issues/1093)) ([0b983ff](https://github.com/hidoo/gulp-project/commit/0b983ffff1ecf0773dbcf80bb76ef94c86ec35a3))
+* **deps:** update dependency inquirer to v10 ([942ff3e](https://github.com/hidoo/gulp-project/commit/942ff3e0372a29413b9cd388d441190809b90bb9))
+* **deps:** update dependency inquirer to v10.1.6 ([ef8935c](https://github.com/hidoo/gulp-project/commit/ef8935c9e602e723edbf7f4c6af987a3506742cb))
+* **deps:** update dependency inquirer to v10.1.8 ([2339288](https://github.com/hidoo/gulp-project/commit/233928821e93a0b7278daa7cedfc7c0466e2c85d))
+* **deps:** update dependency inquirer to v10.2.2 ([b760a24](https://github.com/hidoo/gulp-project/commit/b760a24afecb75b3856e3d8b4bf058b87af3be46))
+* **deps:** update dependency inquirer to v12 ([56b4af9](https://github.com/hidoo/gulp-project/commit/56b4af9a453345406561f89fce8d3177d4472f3e))
+* **deps:** update dependency inquirer to v9.2.17 ([764657b](https://github.com/hidoo/gulp-project/commit/764657bde3202b7a16d038d3c4f6065aa2fb2d85))
+* **deps:** update dependency inquirer to v9.2.18 ([2fefd3b](https://github.com/hidoo/gulp-project/commit/2fefd3b3c06ef992fa58650696248739be740220))
+* **deps:** update dependency inquirer to v9.2.19 ([02a93bd](https://github.com/hidoo/gulp-project/commit/02a93bd4ce76eac9893e155171effbc4b2b27815))
+* **deps:** update dependency inquirer to v9.2.20 ([f34897c](https://github.com/hidoo/gulp-project/commit/f34897ce20cf62d48943a07da013393b8898d698))
+* **deps:** update dependency inquirer to v9.2.22 ([42c05b2](https://github.com/hidoo/gulp-project/commit/42c05b24447195623e63314691119b14d7daa318))
+* **deps:** update dependency inquirer to v9.2.23 ([92146c4](https://github.com/hidoo/gulp-project/commit/92146c40fb7dced31cf1b0a3b713be8ff4781aa8))
+* **deps:** update dependency inquirer to v9.3.2 ([c59b6c1](https://github.com/hidoo/gulp-project/commit/c59b6c12daf9e550bdc566c3bf69734ad51b1b2f))
+* **deps:** update dependency inquirer to v9.3.5 ([3b01e94](https://github.com/hidoo/gulp-project/commit/3b01e949b952570bf98e80dac8ad63f48b0eefe1))
+* **deps:** update dependency inquirer to v9.3.6 ([647aff8](https://github.com/hidoo/gulp-project/commit/647aff8b5dce814ac377bb851b4665573407214c))
+* **deps:** update dependency prettier to v3.5.3 ([#1077](https://github.com/hidoo/gulp-project/issues/1077)) ([c40aa27](https://github.com/hidoo/gulp-project/commit/c40aa275a535ed35588da001922c80bcc4dc08b7))
+* **deps:** update handlebars-lib monorepo to v1.2.0 ([3459d9e](https://github.com/hidoo/gulp-project/commit/3459d9e4bdf7698c61919e8d96d0bc76d5da2b2a))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+* **generator:** add setting for commander v13 ([0d37753](https://github.com/hidoo/gulp-project/commit/0d377533498857f2884a3966dced61c56ae707dd))
+* **generator:** migrate to generate flat config for eslint ([5aae3dc](https://github.com/hidoo/gulp-project/commit/5aae3dcb3aca414226da46eb9b91a788484452d3))
+* **generator:** update template for stylelintrc ([c79ed01](https://github.com/hidoo/gulp-project/commit/c79ed0106609257b2250a7065f0064e114644bb4))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 ### Bug Fixes

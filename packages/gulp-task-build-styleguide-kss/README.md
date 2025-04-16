@@ -45,8 +45,8 @@ return build styleguide task by kss
   - `options.placeholder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** modifier string (optional, default `'{{modifier_class}}'`)
   - `options.nav-depth` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** navigation depth to display (optional, default `2`)
   - `options.mask` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** masking of file that includes kss comments (optional, default `'*.css'`)
-  - `options.builder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** builder path.
-    see: [default builder](./builder) (optional, default `path.resolve(__dirname,'../builder')`)
+  - `options.builder` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** builder.
+    see: [default builder](https://github.com/hidoo/kss-builder) (optional, default `'@hidoo/kss-builder'`)
   - `options.verbose` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** out log or not (optional, default `false`)
 
 #### Examples

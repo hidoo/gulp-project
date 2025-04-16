@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-plugin-webp",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Plugin that generate webp for gulp.",
   "engines": {
     "node": ">=18.4.0"

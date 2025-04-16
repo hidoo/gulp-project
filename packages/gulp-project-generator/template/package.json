@@ -49,7 +49,7 @@
     "@hidoo/gulp-task-build-styleguide-kss": "1.0.0-alpha.1",
     "@hidoo/gulp-task-concat": "1.0.0-alpha.1",
     "@hidoo/gulp-task-optimize-image": "1.0.0-alpha.1",
-    "@hidoo/stylelint-config": "1.0.0",
+    "@hidoo/stylelint-config": "1.1.0",
     "browser-sync": "3.0.4",
     "chalk": "5.4.1",
     "commander": "13.1.0",

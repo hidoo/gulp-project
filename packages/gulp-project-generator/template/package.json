@@ -37,7 +37,7 @@
     "@babel/preset-env": "7.26.9",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
-    "@hidoo/eslint-config": "2.0.0-beta.0",
+    "@hidoo/eslint-config": "2.0.0",
     "@hidoo/express-engine-handlebars": "1.2.0",
     "@hidoo/gulp-task-build-css-sass": "1.0.0-alpha.1",
     "@hidoo/gulp-task-build-css-stylus": "1.0.0-alpha.1",

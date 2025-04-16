@@ -32,7 +32,7 @@
   "dependencies": {
     "@hidoo/data-from": "1.0.0",
     "@hidoo/gulp-util-error-handler": "workspace:*",
-    "@hidoo/handlebars-helpers": "1.1.0",
+    "@hidoo/handlebars-helpers": "1.2.0",
     "glob": "11.0.1",
     "gulp-data": "1.3.1",
     "gulp-hb": "8.0.0",

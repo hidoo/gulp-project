@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **deps:** update dependency file-type to v20 ([14a8d76](https://github.com/hidoo/gulp-project/commit/14a8d76fc3e8ad91ba125e7409cfe7c8d94adbec))
+* **deps:** update dependency image-size to v1.2.1 [security] ([e3293b1](https://github.com/hidoo/gulp-project/commit/e3293b1b2b77c75476d201ab19cd393fce5ddcbe))
+* **deps:** update dependency image-size to v2 ([be91f1b](https://github.com/hidoo/gulp-project/commit/be91f1be17a4aa1ec5e374597f77ef18268a8c6e))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 ### Bug Fixes

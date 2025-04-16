@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **build-sprite-image:** support for changing default stream encoding ([d49caaa](https://github.com/hidoo/gulp-project/commit/d49caaa54f4f34c3ed67d28e5c039d62d0682be5))
+* **deps:** update dependency file-type to v20 ([14a8d76](https://github.com/hidoo/gulp-project/commit/14a8d76fc3e8ad91ba125e7409cfe7c8d94adbec))
+* **deps:** update dependency gulp-imagemin to v9.1.0 ([a90c1b5](https://github.com/hidoo/gulp-project/commit/a90c1b5fef8688054a4124509e00ef1c565a582d))
+* **deps:** update dependency gulp.spritesmith to v6.13.1 ([202f6dd](https://github.com/hidoo/gulp-project/commit/202f6dd5477acbbeeb661dde699855a9dca92605))
+* **deps:** update dependency image-size to v1.2.1 [security] ([e3293b1](https://github.com/hidoo/gulp-project/commit/e3293b1b2b77c75476d201ab19cd393fce5ddcbe))
+* **deps:** update dependency image-size to v2 ([be91f1b](https://github.com/hidoo/gulp-project/commit/be91f1be17a4aa1ec5e374597f77ef18268a8c6e))
+* **deps:** update handlebars-lib monorepo to v1.2.0 ([3459d9e](https://github.com/hidoo/gulp-project/commit/3459d9e4bdf7698c61919e8d96d0bc76d5da2b2a))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 * fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))

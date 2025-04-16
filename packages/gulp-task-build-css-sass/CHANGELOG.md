@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **build-css-sass:** change to use createFileImporter of @hidoo/sass-importer ([b8244cd](https://github.com/hidoo/gulp-project/commit/b8244cdbcb0902508aaf1b4a6a6f70575f53d803))
+* **deps:** update dependency @hidoo/sass-importer to v1 ([d0fd01d](https://github.com/hidoo/gulp-project/commit/d0fd01d78faec339c6211b35521c78eac3cdeaa8))
+* **deps:** update dependency autoprefixer to v10.4.20 ([b8666ad](https://github.com/hidoo/gulp-project/commit/b8666ad7addf297e3f0121d61185466044b39737))
+* **deps:** update dependency autoprefixer to v10.4.21 ([993f073](https://github.com/hidoo/gulp-project/commit/993f0736c50d3f0511f046e7decbc6789d3e2469))
+* **deps:** update dependency postcss to v8.4.39 ([e6e68a9](https://github.com/hidoo/gulp-project/commit/e6e68a911fc4e3cfbed0e65455b5536d8330d517))
+* **deps:** update dependency postcss to v8.4.40 ([984cba1](https://github.com/hidoo/gulp-project/commit/984cba129f8a22141325a8d57af6ff7f5fa98a5c))
+* **deps:** update dependency postcss to v8.4.41 ([2f5871e](https://github.com/hidoo/gulp-project/commit/2f5871ea905be45e57f06101b84c8784a22efbd9))
+* **deps:** update dependency postcss to v8.4.43 ([6af87fe](https://github.com/hidoo/gulp-project/commit/6af87fecaf857b5b4239fecabe963a8a25142282))
+* **deps:** update dependency postcss to v8.4.45 ([375e515](https://github.com/hidoo/gulp-project/commit/375e515138445485a7e73c588b7e0b9fb1c45079))
+* **deps:** update dependency postcss to v8.4.47 ([3947d56](https://github.com/hidoo/gulp-project/commit/3947d562440d423835fb0ebdb554fa02c22267ad))
+* **deps:** update dependency postcss to v8.4.49 ([#1069](https://github.com/hidoo/gulp-project/issues/1069)) ([8a8ae4e](https://github.com/hidoo/gulp-project/commit/8a8ae4e0b4265d6a50aa95a6cbb16add59d235dd))
+* **deps:** update dependency postcss to v8.5.3 ([#1094](https://github.com/hidoo/gulp-project/issues/1094)) ([793b538](https://github.com/hidoo/gulp-project/commit/793b538ab0b4e58aa7419e19860a3b6cb7119ab0))
+* **deps:** update dependency sass to v1.74.1 ([19e0fa5](https://github.com/hidoo/gulp-project/commit/19e0fa5c5df4d89331d583e343744fd3d88281a1))
+* **deps:** update dependency sass to v1.75.0 ([53d7dac](https://github.com/hidoo/gulp-project/commit/53d7daca9805b81ab6b1191d9931b4d21080daa6))
+* **deps:** update dependency sass to v1.76.0 ([45e7696](https://github.com/hidoo/gulp-project/commit/45e769603b7350edf3c3dbb3a0c4562925d1ab6d))
+* **deps:** update dependency sass to v1.77.1 ([7fdb898](https://github.com/hidoo/gulp-project/commit/7fdb898c8f95953223ab592325049ae72b30ce41))
+* **deps:** update dependency sass to v1.77.2 ([ef8a3c4](https://github.com/hidoo/gulp-project/commit/ef8a3c4de4e152b3b01a2f532a1c8614e826b89b))
+* **deps:** update dependency sass to v1.77.4 ([517e261](https://github.com/hidoo/gulp-project/commit/517e261e3e54a20e2850fbc127769c2b9ae024fe))
+* **deps:** update dependency sass to v1.77.5 ([b1a984b](https://github.com/hidoo/gulp-project/commit/b1a984b559a6be7e73733188df80318ed0037ad2))
+* **deps:** update dependency sass to v1.77.6 ([bb49a83](https://github.com/hidoo/gulp-project/commit/bb49a83a59703fa9dcb99d85f8e2b9a47da12f20))
+* **deps:** update dependency sass to v1.77.8 ([6633abc](https://github.com/hidoo/gulp-project/commit/6633abc4d57ccaaa46fee7aed9464cf6644c115e))
+* **deps:** update dependency sass to v1.78.0 ([e3a6307](https://github.com/hidoo/gulp-project/commit/e3a63074c1abf83ad8b8dcd84ba937c9d7ec8416))
+* **deps:** update dependency sass to v1.80.4 ([8f6ce3a](https://github.com/hidoo/gulp-project/commit/8f6ce3a4cecbadf7dbac3ace20ee201399be436a))
+* **deps:** update dependency sass to v1.80.6 ([8a07010](https://github.com/hidoo/gulp-project/commit/8a0701098a29390e816f9256f33d4d653d28c424))
+* **deps:** update dependency sass to v1.81.0 ([#1073](https://github.com/hidoo/gulp-project/issues/1073)) ([c7c2f2c](https://github.com/hidoo/gulp-project/commit/c7c2f2cd6885c8cc37f627f9d3ba0b432b35f085))
+* **deps:** update dependency sass to v1.86.3 ([1ecb282](https://github.com/hidoo/gulp-project/commit/1ecb282bb8350e8adcfb5464d72069c4dc50e18f))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 ### Bug Fixes

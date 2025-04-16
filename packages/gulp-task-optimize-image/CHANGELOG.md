@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **build-optimize-image:** support for changing default stream encoding ([f258944](https://github.com/hidoo/gulp-project/commit/f2589441fa0fcadc5b353e9e2a5bd6c7586c8ee7))
+* **deps:** update dependency file-type to v20 ([14a8d76](https://github.com/hidoo/gulp-project/commit/14a8d76fc3e8ad91ba125e7409cfe7c8d94adbec))
+* **deps:** update dependency gulp-imagemin to v9.1.0 ([a90c1b5](https://github.com/hidoo/gulp-project/commit/a90c1b5fef8688054a4124509e00ef1c565a582d))
+* **deps:** update dependency image-size to v1.2.1 [security] ([e3293b1](https://github.com/hidoo/gulp-project/commit/e3293b1b2b77c75476d201ab19cd393fce5ddcbe))
+* **deps:** update dependency image-size to v2 ([be91f1b](https://github.com/hidoo/gulp-project/commit/be91f1be17a4aa1ec5e374597f77ef18268a8c6e))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 * fix!: use @hidoo/gulp-plugin-compress instead of gulp-gzip ([e3904ca](https://github.com/hidoo/gulp-project/commit/e3904cac5eb015d01c4caea3bceb2ff571cea5e5))

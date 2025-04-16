@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v10.4.20 ([b8666ad](https://github.com/hidoo/gulp-project/commit/b8666ad7addf297e3f0121d61185466044b39737))
+* **deps:** update dependency autoprefixer to v10.4.21 ([993f073](https://github.com/hidoo/gulp-project/commit/993f0736c50d3f0511f046e7decbc6789d3e2469))
+* **deps:** update dependency postcss to v8.4.39 ([e6e68a9](https://github.com/hidoo/gulp-project/commit/e6e68a911fc4e3cfbed0e65455b5536d8330d517))
+* **deps:** update dependency postcss to v8.4.40 ([984cba1](https://github.com/hidoo/gulp-project/commit/984cba129f8a22141325a8d57af6ff7f5fa98a5c))
+* **deps:** update dependency postcss to v8.4.41 ([2f5871e](https://github.com/hidoo/gulp-project/commit/2f5871ea905be45e57f06101b84c8784a22efbd9))
+* **deps:** update dependency postcss to v8.4.43 ([6af87fe](https://github.com/hidoo/gulp-project/commit/6af87fecaf857b5b4239fecabe963a8a25142282))
+* **deps:** update dependency postcss to v8.4.45 ([375e515](https://github.com/hidoo/gulp-project/commit/375e515138445485a7e73c588b7e0b9fb1c45079))
+* **deps:** update dependency postcss to v8.4.47 ([3947d56](https://github.com/hidoo/gulp-project/commit/3947d562440d423835fb0ebdb554fa02c22267ad))
+* **deps:** update dependency postcss to v8.4.49 ([#1069](https://github.com/hidoo/gulp-project/issues/1069)) ([8a8ae4e](https://github.com/hidoo/gulp-project/commit/8a8ae4e0b4265d6a50aa95a6cbb16add59d235dd))
+* **deps:** update dependency postcss to v8.5.3 ([#1094](https://github.com/hidoo/gulp-project/issues/1094)) ([793b538](https://github.com/hidoo/gulp-project/commit/793b538ab0b4e58aa7419e19860a3b6cb7119ab0))
+* **eslint:** migrate to flat config ([769c3bd](https://github.com/hidoo/gulp-project/commit/769c3bdcc2ecd4d2fe6d758e42a7f4c70d998afe))
+
 # [1.0.0-alpha.1](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2024-03-26)
 
 ### Bug Fixes

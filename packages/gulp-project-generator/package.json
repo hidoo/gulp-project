@@ -35,7 +35,7 @@
     "mocha": "11.1.0"
   },
   "dependencies": {
-    "@hidoo/handlebars-helpers": "1.1.0",
+    "@hidoo/handlebars-helpers": "1.2.0",
     "chalk": "5.4.1",
     "commander": "13.1.0",
     "glob": "11.0.1",

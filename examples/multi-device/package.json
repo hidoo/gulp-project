@@ -45,7 +45,7 @@
     "commander": "13.1.0",
     "core-js": "3.35.1",
     "cross-env": "7.0.3",
-    "eslint": "9.24.0",
+    "eslint": "9.25.1",
     "express": "5.1.0",
     "gulp": "5.0.0",
     "jsdom": "26.1.0",

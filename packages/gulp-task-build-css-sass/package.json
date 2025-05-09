@@ -38,6 +38,7 @@
     "@hidoo/sass-importer": "1.0.0",
     "autoprefixer": "10.4.21",
     "css-mqpacker": "7.0.0",
+    "cssnano": "7.0.7",
     "fancy-log": "2.0.0",
     "gulp-header": "2.0.9",
     "gulp-if": "3.0.0",
@@ -47,7 +48,6 @@
     "node-sass-magic-importer": "5.3.3",
     "plugin-error": "2.0.1",
     "postcss": "8.5.3",
-    "postcss-csso": "6.0.1",
     "sass": "1.87.0",
     "through2": "4.0.2"
   },

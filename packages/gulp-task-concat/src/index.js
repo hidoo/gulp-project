@@ -10,7 +10,7 @@ import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import header from 'gulp-header';
 import terser from 'gulp-terser';
-import csso from 'postcss-csso';
+import cssnano from 'cssnano';
 import log from 'fancy-log';
 import compress from '@hidoo/gulp-plugin-compress';
 import errorHandler from '@hidoo/gulp-util-error-handler';
@@ -152,6 +152,19 @@ export function concatCss(options = {}) {
     const enableCompress = Boolean(opts.compress);
     const compressOpts =
       opts.compress && typeof opts.compress === 'object' ? opts.compress : {};
+    const cssnanoOptions =
+      compressOpts.cssnano && typeof compressOpts.cssnano === 'object'
+        ? compressOpts.cssnano
+        : {
+            preset: [
+              'default',
+              {
+                cssDeclarationSorter: false,
+                mergeRules: false,
+                normalizeCharset: false
+              }
+            ]
+          };
 
     return gulp
       .src(opts.src)
@@ -160,7 +173,7 @@ export function concatCss(options = {}) {
       .pipe(header(banner, { pkg }))
       .pipe(gulp.dest(opts.dest))
       .pipe(cond(enableCompress, rename({ suffix })))
-      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, postcss([cssnano(cssnanoOptions)])))
       .pipe(cond(enableCompress, compress(compressOpts)))
       .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };

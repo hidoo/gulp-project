@@ -8,7 +8,7 @@ import through from 'through2';
 import PluginError from 'plugin-error';
 import * as sass from 'sass';
 import postcss from 'gulp-postcss';
-import csso from 'postcss-csso';
+import cssnano from 'cssnano';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import compress from '@hidoo/gulp-plugin-compress';
@@ -45,9 +45,9 @@ function loadPackageJson(verbose = false) {
  * @type {Function}
  *
  * @example
- * import { autoprefixer, cssmqpacker, csso } from '@hidoo/gulp-task-build-css-sass';
+ * import { autoprefixer, cssmqpacker, cssnano } from '@hidoo/gulp-task-build-css-sass';
  */
-export { autoprefixer, cssmqpacker, csso };
+export { autoprefixer, cssmqpacker, cssnano };
 
 /**
  * Default options.
@@ -67,6 +67,22 @@ export const defaultOptions = {
   postcssPlugins: null,
   compress: false,
   verbose: false
+};
+
+/**
+ * Default options for cssnano.
+ *
+ * @type {Object}
+ */
+const defaultCssnanoOptions = {
+  preset: [
+    'default',
+    {
+      cssDeclarationSorter: false,
+      mergeRules: false,
+      normalizeCharset: false
+    }
+  ]
 };
 
 /**
@@ -135,6 +151,10 @@ export default function buildCss(options = {}) {
         : {}),
       verbose
     };
+    const cssnanoOptions =
+      compressOpts.cssnano && typeof compressOpts.cssnano === 'object'
+        ? compressOpts.cssnano
+        : defaultCssnanoOptions;
 
     const compile = through.obj(async function transform(file, enc, done) {
       if (file.isStream()) {
@@ -195,7 +215,7 @@ export default function buildCss(options = {}) {
       .pipe(postcss(configure(opts)))
       .pipe(header(opts.banner, { pkg }))
       .pipe(gulp.dest(opts.dest, { sourcemaps }))
-      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, postcss([cssnano(cssnanoOptions)])))
       .pipe(header(opts.banner, { pkg }))
       .pipe(cond(enableCompress, rename({ suffix })))
       .pipe(cond(enableCompress, compress(compressOpts)))

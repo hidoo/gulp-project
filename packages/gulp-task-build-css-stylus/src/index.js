@@ -9,7 +9,7 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import cssmqpacker from 'css-mqpacker';
 import uncss from 'postcss-uncss';
-import csso from 'postcss-csso';
+import cssnano from 'cssnano';
 import url from 'postcss-url';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
@@ -119,6 +119,19 @@ export default function buildCss(options = {}) {
     const enableCompress = Boolean(opts.compress);
     const compressOpts =
       opts.compress && typeof opts.compress === 'object' ? opts.compress : {};
+    const cssnanoOptions =
+      compressOpts.cssnano && typeof compressOpts.cssnano === 'object'
+        ? compressOpts.cssnano
+        : {
+            preset: [
+              'default',
+              {
+                cssDeclarationSorter: false,
+                mergeRules: false,
+                normalizeCharset: false
+              }
+            ]
+          };
 
     // additinal stylus data
     // + always add NODE_ENV
@@ -171,7 +184,7 @@ export default function buildCss(options = {}) {
       .pipe(rename({ basename, extname }))
       .pipe(gulp.dest(opts.dest))
       .pipe(cond(enableCompress, rename({ suffix })))
-      .pipe(cond(enableCompress, postcss([csso({ restructure: false })])))
+      .pipe(cond(enableCompress, postcss([cssnano(cssnanoOptions)])))
       .pipe(cond(enableCompress, compress(compressOpts)))
       .pipe(cond(enableCompress, gulp.dest(opts.dest)));
   };

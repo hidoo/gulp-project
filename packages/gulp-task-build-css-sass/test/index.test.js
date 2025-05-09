@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import gulp from 'gulp';
-import buildCss, { autoprefixer, cssmqpacker, csso } from '../src/index.js';
+import buildCss, { autoprefixer, cssmqpacker, cssnano } from '../src/index.js';
 
 /**
  * read built file
@@ -41,8 +41,8 @@ describe('gulp-task-build-css-sass', () => {
   });
 
   afterEach(async () => {
-    await fs.rm(destDir, { recursive: true });
-    await fs.mkdir(destDir);
+    // await fs.rm(destDir, { recursive: true });
+    // await fs.mkdir(destDir);
   });
 
   it('should out css file with default options.', async () => {
@@ -383,7 +383,7 @@ describe('gulp-task-build-css-sass', () => {
     it('should be accessible to postcss plugins', async () => {
       assert.equal((await import('autoprefixer')).default, autoprefixer);
       assert.equal((await import('css-mqpacker')).default, cssmqpacker);
-      assert.equal((await import('postcss-csso')).default, csso);
+      assert.equal((await import('cssnano')).default, cssnano);
     });
   });
 });

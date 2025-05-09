@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-plugin-svg-sprite",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Plugin that build svg sprite sheet for gulp.",
   "engines": {
     "node": ">=18.4.0"

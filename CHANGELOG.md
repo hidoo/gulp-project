@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
+
+### Bug Fixes
+
+* **deps:** update dependency file-type to v20.5.0 ([#1118](https://github.com/hidoo/gulp-project/issues/1118)) ([1f8660e](https://github.com/hidoo/gulp-project/commit/1f8660e8fc2d584ba53b78779538e4182218de82))
+* **deps:** update dependency glob to v11.0.2 ([#1114](https://github.com/hidoo/gulp-project/issues/1114)) ([28376f5](https://github.com/hidoo/gulp-project/commit/28376f574edae69d257e0ebaee9444a538099469))
+* **deps:** update dependency inquirer to v12.6.0 ([#1119](https://github.com/hidoo/gulp-project/issues/1119)) ([8df3934](https://github.com/hidoo/gulp-project/commit/8df3934f4a5e5a3bc5b8a28288f725263eb69c22))
+* **deps:** update dependency rollup to v4.40.1 ([#1122](https://github.com/hidoo/gulp-project/issues/1122)) ([2126203](https://github.com/hidoo/gulp-project/commit/21262036799a2f01ea996aa29c4446daca13ca69))
+* **deps:** update dependency sass to v1.87.0 ([#1120](https://github.com/hidoo/gulp-project/issues/1120)) ([08aff47](https://github.com/hidoo/gulp-project/commit/08aff47e53645578eb6964a9c0b5171908e6e353))
+* migrate csso to cssnano ([89c5ba6](https://github.com/hidoo/gulp-project/commit/89c5ba65d68dccb4be63c16f7739cec5443e0bd8))
+
 # [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
 
 * fix(build-styleguide-kss)!: change default builder to @hidoo/kss-builder ([ffb86d2](https://github.com/hidoo/gulp-project/commit/ffb86d2016e9e11d1a89c36f54f6ce4824ca0f7f))

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
+
+### Bug Fixes
+
+* **deps:** update dependency glob to v11.0.2 ([#1114](https://github.com/hidoo/gulp-project/issues/1114)) ([28376f5](https://github.com/hidoo/gulp-project/commit/28376f574edae69d257e0ebaee9444a538099469))
+
 # [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
 
 ### Bug Fixes

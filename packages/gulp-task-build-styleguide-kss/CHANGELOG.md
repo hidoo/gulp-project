@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
+
+**Note:** Version bump only for package @hidoo/gulp-task-build-styleguide-kss
+
 # [1.0.0-alpha.2](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2025-04-16)
 
 * fix(build-styleguide-kss)!: change default builder to @hidoo/kss-builder ([ffb86d2](https://github.com/hidoo/gulp-project/commit/ffb86d2016e9e11d1a89c36f54f6ce4824ca0f7f))

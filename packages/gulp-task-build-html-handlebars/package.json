@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-html-handlebars",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Task that build html by handlebars for gulp.",
   "engines": {
     "node": ">=18.4.0"

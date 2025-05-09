@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-copy",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Task that copy files for gulp.",
   "engines": {
     "node": ">=18.4.0"

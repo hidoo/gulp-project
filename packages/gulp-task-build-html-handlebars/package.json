@@ -27,7 +27,7 @@
     "cross-env": "7.0.3",
     "documentation": "14.0.3",
     "gulp": "5.0.0",
-    "mocha": "11.2.2"
+    "mocha": "11.3.0"
   },
   "dependencies": {
     "@hidoo/data-from": "1.0.0",

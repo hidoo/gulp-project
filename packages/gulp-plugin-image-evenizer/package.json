@@ -35,7 +35,7 @@
   "devDependencies": {
     "cross-env": "7.0.3",
     "image-size": "2.0.2",
-    "mocha": "11.2.2",
+    "mocha": "11.3.0",
     "pixelmatch": "7.1.0",
     "vinyl": "3.0.0"
   },

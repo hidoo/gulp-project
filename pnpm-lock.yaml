@@ -967,8 +967,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0(handlebars@4.7.8)
       '@hidoo/kss-builder':
-        specifier: 1.0.2
-        version: 1.0.2(chokidar@3.6.0)
+        specifier: 1.1.0
+        version: 1.1.0(chokidar@3.6.0)
       handlebars:
         specifier: 4.7.8
         version: 4.7.8
@@ -1910,8 +1910,8 @@ packages:
     peerDependencies:
       handlebars: '>=4.7.8'
 
-  '@hidoo/kss-builder@1.0.2':
-    resolution: {integrity: sha512-ZXtixFFJOcNBCPgGL0X3AHefrlxXYk5wZFEm19ViHR7ZqH6603DjHzJcfL7jN0cFNyj6Gy3hQY7RHDyyg9rrJQ==}
+  '@hidoo/kss-builder@1.1.0':
+    resolution: {integrity: sha512-kW70i89MIg8zyzPJW+UGla5dZEYU/Iu2Wu/8pFD0UMkxt9KLdMGlayYafli+vEC/LJXyiC7N6acLtQXqeJvplQ==}
     engines: {node: '>=18.12.0', pnpm: 10.10.0}
 
   '@hidoo/sass-importer@1.0.0':
@@ -10673,7 +10673,7 @@ snapshots:
       marked-gfm-heading-id: 4.1.1(marked@15.0.8)
       marked-highlight: 2.2.1(marked@15.0.8)
 
-  '@hidoo/kss-builder@1.0.2(chokidar@3.6.0)':
+  '@hidoo/kss-builder@1.1.0(chokidar@3.6.0)':
     dependencies:
       '@hidoo/handlebars-helpers': 1.2.0(handlebars@4.7.8)
       '@hidoo/unit': 0.9.0

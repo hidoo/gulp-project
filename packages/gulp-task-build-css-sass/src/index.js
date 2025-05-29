@@ -6,7 +6,7 @@ import plumber from 'gulp-plumber';
 import cond from 'gulp-if';
 import through from 'through2';
 import PluginError from 'plugin-error';
-import * as sass from 'sass';
+import * as sass from 'sass-embedded';
 import postcss from 'gulp-postcss';
 import cssnano from 'cssnano';
 import header from 'gulp-header';

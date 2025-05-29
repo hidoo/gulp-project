@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2025-05-29)
+
+**Note:** Version bump only for package @hidoo/gulp-plugin-image-placeholder
+
 # [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
 
 ### Bug Fixes

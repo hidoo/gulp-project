@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2025-05-29)
+
+### Bug Fixes
+
+* **build-css-sass:** migrate sass to sass-embedded ([7062005](https://github.com/hidoo/gulp-project/commit/7062005e649a0b56449ea5b471cb21ca96a0dd58))
+* **build-html-handlebars:** fix loading for helpers ([81f71dc](https://github.com/hidoo/gulp-project/commit/81f71dcf17ae435f365275058ac1b48bac203687))
+* **deps:** update dependency @hidoo/kss-builder to v1.0.2 ([#1133](https://github.com/hidoo/gulp-project/issues/1133)) ([35548a0](https://github.com/hidoo/gulp-project/commit/35548a0af7dfb8a973ab41b0ffab89cd5c0f0196))
+* **deps:** update dependency @hidoo/kss-builder to v1.1.0 ([#1142](https://github.com/hidoo/gulp-project/issues/1142)) ([b545788](https://github.com/hidoo/gulp-project/commit/b545788604fdea830fc7e6b8eaef1a4111ed62a7))
+* **deps:** update dependency inquirer to v12.6.1 ([#1134](https://github.com/hidoo/gulp-project/issues/1134)) ([02a2f1e](https://github.com/hidoo/gulp-project/commit/02a2f1eaecf50b4125572ffd0acd2c6ef8b28f4e))
+* **deps:** update dependency inquirer to v12.6.3 ([#1143](https://github.com/hidoo/gulp-project/issues/1143)) ([32b0517](https://github.com/hidoo/gulp-project/commit/32b0517f942a4904f63a80007b420b3ff72c9e5f))
+* **deps:** update dependency rollup to v4.40.2 ([#1135](https://github.com/hidoo/gulp-project/issues/1135)) ([e4add8f](https://github.com/hidoo/gulp-project/commit/e4add8ff7731edd1c6a90dbd816e31197f8d1ca5))
+* **deps:** update dependency rollup to v4.41.1 ([#1145](https://github.com/hidoo/gulp-project/issues/1145)) ([7a2c4ed](https://github.com/hidoo/gulp-project/commit/7a2c4ed0406c321498af91e682a50b81b896fcae))
+* **deps:** update dependency sass to v1.89.0 ([#1136](https://github.com/hidoo/gulp-project/issues/1136)) ([c29899d](https://github.com/hidoo/gulp-project/commit/c29899d115c817e1abb7e14f75769bd09d635e0f))
+
 # [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
 
 ### Bug Fixes

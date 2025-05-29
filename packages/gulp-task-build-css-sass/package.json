@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-css-sass",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Task that build css by sass for gulp.",
   "engines": {
     "node": ">=18.4.0"

@@ -263,7 +263,7 @@ export default function buildHtml(options = {}) {
         data(
           // add helpers from options.helpers
           () =>
-            glob(opts.helpers, { ignore: 'node_modules/**' })
+            glob(opts.helpers, { ignore: 'node_modules/**', absolute: true })
               .then((filenames) =>
                 Promise.all(filenames.map((filename) => import(filename)))
               )

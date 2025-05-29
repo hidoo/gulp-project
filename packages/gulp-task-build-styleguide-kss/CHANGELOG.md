@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2025-05-29)
+
+### Bug Fixes
+
+* **deps:** update dependency @hidoo/kss-builder to v1.0.2 ([#1133](https://github.com/hidoo/gulp-project/issues/1133)) ([35548a0](https://github.com/hidoo/gulp-project/commit/35548a0af7dfb8a973ab41b0ffab89cd5c0f0196))
+* **deps:** update dependency @hidoo/kss-builder to v1.1.0 ([#1142](https://github.com/hidoo/gulp-project/issues/1142)) ([b545788](https://github.com/hidoo/gulp-project/commit/b545788604fdea830fc7e6b8eaef1a4111ed62a7))
+
 # [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
 
 **Note:** Version bump only for package @hidoo/gulp-task-build-styleguide-kss

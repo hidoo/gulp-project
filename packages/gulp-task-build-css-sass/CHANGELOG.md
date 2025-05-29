@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2025-05-29)
+
+### Bug Fixes
+
+* **build-css-sass:** migrate sass to sass-embedded ([7062005](https://github.com/hidoo/gulp-project/commit/7062005e649a0b56449ea5b471cb21ca96a0dd58))
+* **deps:** update dependency sass to v1.89.0 ([#1136](https://github.com/hidoo/gulp-project/issues/1136)) ([c29899d](https://github.com/hidoo/gulp-project/commit/c29899d115c817e1abb7e14f75769bd09d635e0f))
+
 # [1.0.0-alpha.3](https://github.com/hidoo/gulp-project/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2025-05-09)
 
 ### Bug Fixes

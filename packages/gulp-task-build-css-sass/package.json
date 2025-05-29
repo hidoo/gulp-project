@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-css-sass",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Task that build css by sass for gulp.",
   "engines": {
     "node": ">=18.4.0"
@@ -48,7 +48,7 @@
     "node-sass-magic-importer": "5.3.3",
     "plugin-error": "2.0.1",
     "postcss": "8.5.3",
-    "sass": "1.89.0",
+    "sass-embedded": "1.89.0",
     "through2": "4.0.2"
   },
   "peerDependencies": {

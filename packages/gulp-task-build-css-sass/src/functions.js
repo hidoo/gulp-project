@@ -1,4 +1,4 @@
-import * as sass from 'sass';
+import * as sass from 'sass-embedded';
 
 /**
  * get environment variable by name

@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-task-build-js-browserify",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Task that build javascript by browserify for gulp.",
   "engines": {
     "node": ">=18.4.0"

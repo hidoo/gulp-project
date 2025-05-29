@@ -1,6 +1,6 @@
 {
   "name": "@hidoo/gulp-project-generator",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Command line tool that generate gulp project scaffold.",
   "engines": {
     "node": ">=18.4.0"

@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import * as sass from 'sass';
+import * as sass from 'sass-embedded';
 import functions from '../src/functions.js';
 
 describe('functions', () => {

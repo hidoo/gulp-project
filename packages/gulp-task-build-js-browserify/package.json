@@ -24,7 +24,7 @@
   "author": "hidoo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.27.1",
+    "@babel/core": "7.27.4",
     "@babel/preset-env": "7.27.2",
     "core-js": "3.35.1",
     "cross-env": "7.0.3",

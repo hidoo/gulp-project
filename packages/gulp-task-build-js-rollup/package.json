@@ -50,7 +50,7 @@
     "rollup": "4.41.1",
     "rollup-plugin-license": "3.6.0",
     "through2": "4.0.2",
-    "vinyl": "3.0.0"
+    "vinyl": "3.0.1"
   },
   "peerDependencies": {
     "core-js": ">=3.0.0",

@@ -108,8 +108,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       jsdom:
         specifier: 26.1.0
         version: 26.1.0
@@ -189,8 +189,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       jsdom:
         specifier: 26.1.0
         version: 26.1.0
@@ -273,8 +273,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       jsdom:
         specifier: 26.1.0
         version: 26.1.0
@@ -310,7 +310,7 @@ importers:
         version: 2.0.0
       gulp:
         specifier: '>=4.0.2'
-        version: 5.0.0
+        version: 5.0.1
       plugin-error:
         specifier: 2.0.1
         version: 2.0.1
@@ -344,7 +344,7 @@ importers:
         version: 3.3.3
       gulp:
         specifier: '>=4.0.2'
-        version: 5.0.0
+        version: 5.0.1
       lodash.chunk:
         specifier: 4.2.0
         version: 4.2.0
@@ -384,7 +384,7 @@ importers:
         version: 2.0.0
       gulp:
         specifier: '>=4.0.2'
-        version: 5.0.0
+        version: 5.0.1
       image-size:
         specifier: 2.0.2
         version: 2.0.2
@@ -433,7 +433,7 @@ importers:
         version: 0.5.0
       gulp:
         specifier: '>=4.0.2'
-        version: 5.0.0
+        version: 5.0.1
       handlebars:
         specifier: 4.7.8
         version: 4.7.8
@@ -464,7 +464,7 @@ importers:
         version: 2.0.0
       gulp:
         specifier: '>=4.0.2'
-        version: 5.0.0
+        version: 5.0.1
       imagemin-webp:
         specifier: 8.0.0
         version: 8.0.0
@@ -586,8 +586,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -656,8 +656,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -714,8 +714,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -772,8 +772,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -851,8 +851,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -876,7 +876,7 @@ importers:
         version: 3.0.0
       gulp-imagemin:
         specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.0)
+        version: 9.1.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -900,8 +900,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       image-size:
         specifier: 2.0.2
         version: 2.0.2
@@ -934,7 +934,7 @@ importers:
         version: 3.0.0
       gulp-imagemin:
         specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.0)
+        version: 9.1.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -952,8 +952,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -983,8 +983,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -1038,8 +1038,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -1060,8 +1060,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       mocha:
         specifier: 11.5.0
         version: 11.5.0
@@ -1088,7 +1088,7 @@ importers:
         version: 3.0.0
       gulp-imagemin:
         specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.0)
+        version: 9.1.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -1106,8 +1106,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       gulp:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       image-size:
         specifier: 2.0.2
         version: 2.0.2
@@ -5011,8 +5011,8 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
-  glob-stream@8.0.2:
-    resolution: {integrity: sha512-R8z6eTB55t3QeZMmU1C+Gv+t5UnNRkA55c5yo67fAVfxODxieTwsjNG7utxS/73NdP1NbDgCrhVEg2h00y4fFw==}
+  glob-stream@8.0.3:
+    resolution: {integrity: sha512-fqZVj22LtFJkHODT+M4N1RJQ3TjnnQhfE9GwZI8qXscYarnhpip70poMldRnP8ipQ/w0B621kOhfc53/J9bd/A==}
     engines: {node: '>=10.13.0'}
 
   glob-watcher@6.0.0:
@@ -5128,8 +5128,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  gulp-cli@3.0.0:
-    resolution: {integrity: sha512-RtMIitkT8DEMZZygHK2vEuLPqLPAFB4sntSxg4NoDta7ciwGZ18l7JuhCTiS5deOJi2IoK0btE+hs6R4sfj7AA==}
+  gulp-cli@3.1.0:
+    resolution: {integrity: sha512-zZzwlmEsTfXcxRKiCHsdyjZZnFvXWM4v1NqBJSYbuApkvVKivjcmOS2qruAJ+PkEHLFavcDKH40DPc1+t12a9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
@@ -5204,8 +5204,8 @@ packages:
     resolution: {integrity: sha512-8hcfp4IFoQ8Usu2cC2q8Iu63fwyMqrZGFm+MxpMszcxWheGB8g0cKqLNoT5pYZWKJUxoN40S22LHvAgzdMa0yg==}
     engines: {node: '>= 4.0.0'}
 
-  gulp@5.0.0:
-    resolution: {integrity: sha512-S8Z8066SSileaYw1S2N1I64IUc/myI2bqe2ihOBzO6+nKpvNSg7ZcWJt/AwF8LC/NVN+/QZ560Cb/5OPsyhkhg==}
+  gulp@5.0.1:
+    resolution: {integrity: sha512-PErok3DZSA5WGMd6XXV3IRNO0mlB+wW3OzhFJLEec1jSERg2j1bxJ6e5Fh6N6fn3FH2T9AP4UYNb/pYlADB9sA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
@@ -6125,8 +6125,8 @@ packages:
   licensify@3.1.3:
     resolution: {integrity: sha512-3sEEBR0Cxq8yeSrV1KGZwpjm4KJKp8Cx/WHZxBnG/YX319ZTvxGtL+NCF+A9pcXwh8KwKB4BmVrc6eRrfk/Raw==}
 
-  liftoff@5.0.0:
-    resolution: {integrity: sha512-a5BQjbCHnB+cy+gsro8lXJ4kZluzOijzJ1UVVfyJYZC+IP2pLv1h4+aysQeKuTmyO8NAqfyQAk4HWaP/HjcKTg==}
+  liftoff@5.0.1:
+    resolution: {integrity: sha512-wwLXMbuxSF8gMvubFcFRp56lkFV69twvbU5vDPbaw+Q+/rF8j0HKjGbIdlSi+LuJm9jf7k9PB+nTxnsLMPcv2Q==}
     engines: {node: '>=10.13.0'}
 
   lilconfig@3.1.3:
@@ -9382,8 +9382,8 @@ packages:
     resolution: {integrity: sha512-i1CGRaiDs3qJ+Yc8cgtOnrZOwlhY02oDBrWSBKD9uYSsxqQG1RhNXLmR/orke0ye0sbKpVtAUHwhF2rs9A46cQ==}
     engines: {node: '>=0.10.0'}
 
-  vinyl-fs@4.0.0:
-    resolution: {integrity: sha512-7GbgBnYfaquMk3Qu9g22x000vbYkOex32930rBnc3qByw6HfMEAoELjCjoJv4HuEQxHAurT+nvMHm6MnJllFLw==}
+  vinyl-fs@4.0.2:
+    resolution: {integrity: sha512-XRFwBLLTl8lRAOYiBqxY279wY46tVxLaRhSwo3GzKEuLz1giffsOquWWboD/haGf5lx+JyTigCFfe7DWHoARIA==}
     engines: {node: '>=10.13.0'}
 
   vinyl-source-stream@2.0.0:
@@ -14475,7 +14475,7 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  glob-stream@8.0.2:
+  glob-stream@8.0.3:
     dependencies:
       '@gulpjs/to-absolute-glob': 4.0.0
       anymatch: 3.1.3
@@ -14667,14 +14667,14 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  gulp-cli@3.0.0:
+  gulp-cli@3.1.0:
     dependencies:
       '@gulpjs/messages': 1.1.0
       chalk: 4.1.2
       copy-props: 4.0.0
       gulplog: 2.2.0
       interpret: 3.1.1
-      liftoff: 5.0.0
+      liftoff: 5.0.1
       mute-stdout: 2.0.0
       replace-homedir: 2.0.0
       semver-greatest-satisfied-range: 2.0.0
@@ -14723,7 +14723,7 @@ snapshots:
       ternary-stream: 3.0.0
       through2: 3.0.2
 
-  gulp-imagemin@9.1.0(gulp@5.0.0):
+  gulp-imagemin@9.1.0(gulp@5.0.1):
     dependencies:
       chalk: 5.4.1
       gulp-plugin-extras: 1.1.0
@@ -14731,7 +14731,7 @@ snapshots:
       plur: 5.1.0
       pretty-bytes: 6.1.1
     optionalDependencies:
-      gulp: 5.0.0
+      gulp: 5.0.1
       imagemin-gifsicle: 7.0.0
       imagemin-mozjpeg: 10.0.0
       imagemin-optipng: 8.0.0
@@ -14809,12 +14809,12 @@ snapshots:
       url2: 1.0.4
       vinyl: 2.1.0
 
-  gulp@5.0.0:
+  gulp@5.0.1:
     dependencies:
       glob-watcher: 6.0.0
-      gulp-cli: 3.0.0
+      gulp-cli: 3.1.0
       undertaker: 2.0.0
-      vinyl-fs: 4.0.0
+      vinyl-fs: 4.0.2
 
   gulplog@2.2.0:
     dependencies:
@@ -15791,7 +15791,7 @@ snapshots:
       through2: 2.0.5
       type-name: 2.0.2
 
-  liftoff@5.0.0:
+  liftoff@5.0.1:
     dependencies:
       extend: 3.0.2
       findup-sync: 5.0.0
@@ -19542,10 +19542,10 @@ snapshots:
       strip-bom-stream: 1.0.0
       vinyl: 1.2.0
 
-  vinyl-fs@4.0.0:
+  vinyl-fs@4.0.2:
     dependencies:
       fs-mkdirp-stream: 2.0.1
-      glob-stream: 8.0.2
+      glob-stream: 8.0.3
       graceful-fs: 4.2.11
       iconv-lite: 0.6.3
       is-valid-glob: 1.0.0

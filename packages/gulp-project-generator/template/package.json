@@ -58,7 +58,7 @@
     "cross-env": "7.0.3",
     "eslint": "9.28.0",
     "express": "5.1.0",
-    "gulp": "5.0.0",
+    "gulp": "5.0.1",
     "jsdom": "26.1.0",
     "jsdom-global": "3.0.2",
     "lint-staged": "16.1.0",

@@ -39,7 +39,7 @@
     "@hidoo/gulp-util-error-handler": "workspace:*",
     "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-babel": "6.0.4",
-    "@rollup/plugin-commonjs": "28.0.3",
+    "@rollup/plugin-commonjs": "28.0.5",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-replace": "6.0.2",

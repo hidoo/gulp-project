@@ -42,7 +42,7 @@
     "gulp-rename": "2.0.0",
     "gulp-replace": "1.1.4",
     "gulp-terser": "2.1.0",
-    "postcss": "8.5.4"
+    "postcss": "8.5.5"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

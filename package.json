@@ -45,7 +45,7 @@
     "@lerna-lite/publish": "4.1.1",
     "@lerna-lite/version": "4.1.1",
     "cross-env": "7.0.3",
-    "eslint": "9.28.0",
+    "eslint": "9.30.0",
     "glob": "11.0.3",
     "lint-staged": "16.1.0",
     "mocha": "11.5.0",

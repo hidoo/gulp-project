@@ -37,7 +37,7 @@
     "documentation": "14.0.3",
     "file-type": "20.5.0",
     "get-pixels": "3.3.3",
-    "mocha": "11.5.0",
+    "mocha": "11.7.1",
     "pixelmatch": "7.1.0"
   },
   "peerDependencies": {

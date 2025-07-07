@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "cross-env": "7.0.3",
-    "mocha": "11.5.0"
+    "mocha": "11.7.1"
   },
   "peerDependencies": {
     "gulp": ">=4.0.2"

@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "description": "This is the monorepo for gulp project packages.",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "engines": {
     "node": ">=18.4.0",
-    "pnpm": "10.14.0"
+    "pnpm": "10.15.0"
   },
   "type": "module",
   "files": [],
@@ -49,7 +49,7 @@
     "glob": "11.0.3",
     "lint-staged": "16.1.0",
     "mocha": "11.7.1",
-    "pnpm": "10.14.0",
+    "pnpm": "10.15.0",
     "prettier": "3.5.3",
     "replace-in-files-cli": "3.0.0"
   },

@@ -29,7 +29,7 @@
     "test:unit:js": "cross-env NODE_ENV=test mocha ./src/js/**/*.test.js"
   },
   "devDependencies": {
-    "@babel/core": "7.28.3",
+    "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
     "@hidoo/eslint-config": "2.0.0",
     "@hidoo/express-engine-handlebars": "1.2.0",

@@ -29,6 +29,6 @@
     "cross-env": "7.0.3",
     "mocha": "11.7.2",
     "sinon": "20.0.0",
-    "strip-ansi": "7.1.0"
+    "strip-ansi": "7.1.2"
   }
 }

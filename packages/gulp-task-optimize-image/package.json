@@ -30,7 +30,7 @@
     "get-pixels": "3.3.3",
     "gulp": "5.0.1",
     "image-size": "2.0.2",
-    "mocha": "11.7.4",
+    "mocha": "11.7.5",
     "pixelmatch": "7.1.0",
     "pngjs": "7.0.0"
   },

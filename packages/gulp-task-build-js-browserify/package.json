@@ -30,7 +30,7 @@
     "cross-env": "7.0.3",
     "documentation": "14.0.3",
     "gulp": "5.0.1",
-    "mocha": "11.7.4",
+    "mocha": "11.7.5",
     "regenerator-runtime": "0.14.1"
   },
   "dependencies": {

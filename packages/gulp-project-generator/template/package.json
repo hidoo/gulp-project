@@ -57,7 +57,7 @@
     "core-js": "3.35.1",
     "cross-env": "7.0.3",
     "eslint": "9.34.0",
-    "express": "5.2.0",
+    "express": "5.2.1",
     "gulp": "5.0.1",
     "jsdom": "26.1.0",
     "jsdom-global": "3.0.2",

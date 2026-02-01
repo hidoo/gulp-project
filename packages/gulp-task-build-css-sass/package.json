@@ -36,7 +36,7 @@
     "@hidoo/gulp-plugin-compress": "workspace:*",
     "@hidoo/gulp-util-error-handler": "workspace:*",
     "@hidoo/sass-importer": "1.0.0",
-    "autoprefixer": "10.4.23",
+    "autoprefixer": "10.4.24",
     "css-mqpacker": "7.0.0",
     "cssnano": "7.0.7",
     "fancy-log": "2.0.0",

@@ -337,8 +337,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       file-type:
-        specifier: 20.5.0
-        version: 20.5.0
+        specifier: 21.3.0
+        version: 21.3.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -411,8 +411,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 20.5.0
-        version: 20.5.0
+        specifier: 21.3.0
+        version: 21.3.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -894,8 +894,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 20.5.0
-        version: 20.5.0
+        specifier: 21.3.0
+        version: 21.3.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1100,8 +1100,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       file-type:
-        specifier: 20.5.0
-        version: 20.5.0
+        specifier: 21.3.0
+        version: 21.3.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -1742,6 +1742,9 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@borewit/text-codec@0.2.1':
+    resolution: {integrity: sha512-k7vvKPbf7J2fZ5klGRD9AeKfUvojuZIQ3BT5u7Jfv+puwXkUBUT5PVyMDfJZpy30CBDXGMgw7fguK/lpOMBvgw==}
 
   '@bufbuild/protobuf@2.6.0':
     resolution: {integrity: sha512-6cuonJVNOIL7lTj5zgo/Rc2bKAo4/GvN+rKCrUj7GdEHRzCk8zKOfFwUsL9nAVk5rSIsRmlgcpLzTRysopEeeg==}
@@ -2734,8 +2737,8 @@ packages:
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@tokenizer/inflate@0.2.7':
-    resolution: {integrity: sha512-MADQgmZT1eKjp06jpI2yozxaU9uVs4GzzgSL+uEq7bVcJ9V1ZXQkeGNql1fsSI0gMy1vhvNTNbUqrx+pZfJVmg==}
+  '@tokenizer/inflate@0.4.1':
+    resolution: {integrity: sha512-2mAv+8pkG6GIZiF1kNg1jAjh27IDxEPKwdGul3snfztFerfPGI1LjDezZp3i7BElXompqEtPmoPx6c2wgtWsOA==}
     engines: {node: '>=18'}
 
   '@tokenizer/token@0.3.0':
@@ -4823,9 +4826,6 @@ packages:
   fecha@4.2.3:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
 
-  fflate@0.8.2:
-    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
-
   figures@6.1.0:
     resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
     engines: {node: '>=18'}
@@ -4845,9 +4845,9 @@ packages:
     resolution: {integrity: sha512-VZR5I7k5wkD0HgFnMsq5hOsSc710MJMu5Nc5QYsbe38NN5iPV/XTObYLc/cpttRTf6lX538+5uO1ZQRhYibiZQ==}
     engines: {node: '>=18'}
 
-  file-type@20.5.0:
-    resolution: {integrity: sha512-BfHZtG/l9iMm4Ecianu7P8HRD2tBHLtjXinm4X62XBOYzi7CYA7jyqfJzOvXHqzVrVPYqBo2/GvbARMaaJkKVg==}
-    engines: {node: '>=18'}
+  file-type@21.3.0:
+    resolution: {integrity: sha512-8kPJMIGz1Yt/aPEwOsrR97ZyZaD1Iqm8PClb1nYFclUCkBi0Ma5IsYNQzvSFS9ib51lWyIw5mIT9rWzI/xjpzA==}
+    engines: {node: '>=20'}
 
   file-type@3.9.0:
     resolution: {integrity: sha512-RLoqTXE8/vPmMuTI88DAzhMYC99I8BWv7zYP4A1puo5HIjEJ5EX48ighy4ZyKMG9EDXxBgW6e++cn7d1xuFghA==}
@@ -8833,8 +8833,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  strtok3@10.3.1:
-    resolution: {integrity: sha512-3JWEZM6mfix/GCJBBUrkA8p2Id2pBkyTkVCJKto55w080QBKZ+8R171fGrbiSp+yMO/u6F8/yUh7K4V9K+YCnw==}
+  strtok3@10.3.4:
+    resolution: {integrity: sha512-KIy5nylvC5le1OdaaoCJ07L+8iQzJHGH6pWDuzS+d07Cu7n1MZ2x26P8ZKIWfbK02+XIL8Mp4RkWeqdUCrDMfg==}
     engines: {node: '>=18'}
 
   strtok3@9.1.1:
@@ -9172,6 +9172,10 @@ packages:
 
   token-types@6.0.3:
     resolution: {integrity: sha512-IKJ6EzuPPWtKtEIEPpIdXv9j5j2LGJEYk0CKY2efgKoYKLBiZdh6iQkLVBow/CB3phyWAWCyk+bZeaimJn6uRQ==}
+    engines: {node: '>=14.16'}
+
+  token-types@6.1.2:
+    resolution: {integrity: sha512-dRXchy+C0IgK8WPC6xvCHFRIWYUbqqdEIKPaKo/AcTUNzwLTK6AH7RjdLWsEZcAN/TBdtfUw3PYEgPr5VPr6ww==}
     engines: {node: '>=14.16'}
 
   tough-cookie@2.5.0:
@@ -10688,6 +10692,8 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
+  '@borewit/text-codec@0.2.1': {}
+
   '@bufbuild/protobuf@2.6.0': {}
 
   '@cacheable/memory@2.0.7':
@@ -11847,11 +11853,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tokenizer/inflate@0.2.7':
+  '@tokenizer/inflate@0.4.1':
     dependencies:
       debug: 4.4.3
-      fflate: 0.8.2
-      token-types: 6.0.3
+      token-types: 6.1.2
     transitivePeerDependencies:
       - supports-color
 
@@ -14450,8 +14455,6 @@ snapshots:
 
   fecha@4.2.3: {}
 
-  fflate@0.8.2: {}
-
   figures@6.1.0:
     dependencies:
       is-unicode-supported: 2.1.0
@@ -14473,11 +14476,11 @@ snapshots:
       token-types: 6.0.3
       uint8array-extras: 1.4.0
 
-  file-type@20.5.0:
+  file-type@21.3.0:
     dependencies:
-      '@tokenizer/inflate': 0.2.7
-      strtok3: 10.3.1
-      token-types: 6.0.3
+      '@tokenizer/inflate': 0.4.1
+      strtok3: 10.3.4
+      token-types: 6.1.2
       uint8array-extras: 1.4.0
     transitivePeerDependencies:
       - supports-color
@@ -19107,7 +19110,7 @@ snapshots:
       minimist: 1.2.8
       through: 2.3.8
 
-  strtok3@10.3.1:
+  strtok3@10.3.4:
     dependencies:
       '@tokenizer/token': 0.3.0
 
@@ -19523,6 +19526,12 @@ snapshots:
 
   token-types@6.0.3:
     dependencies:
+      '@tokenizer/token': 0.3.0
+      ieee754: 1.2.1
+
+  token-types@6.1.2:
+    dependencies:
+      '@borewit/text-codec': 0.2.1
       '@tokenizer/token': 0.3.0
       ieee754: 1.2.1
 

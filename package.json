@@ -47,7 +47,7 @@
     "cross-env": "7.0.3",
     "eslint": "9.39.3",
     "glob": "11.1.0",
-    "lint-staged": "16.1.0",
+    "lint-staged": "16.3.1",
     "mocha": "11.7.5",
     "pnpm": "10.29.3",
     "prettier": "3.5.3",

@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.0",
+    "@babel/preset-env": "7.29.2",
     "@hidoo/eslint-config": "2.0.0",
     "@hidoo/express-engine-handlebars": "1.2.0",
     "@hidoo/gulp-task-build-css-stylus": "workspace:*",

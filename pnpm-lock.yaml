@@ -435,8 +435,8 @@ importers:
         specifier: '>=4.0.2'
         version: 5.0.1
       handlebars:
-        specifier: 4.7.8
-        version: 4.7.8
+        specifier: 4.7.9
+        version: 4.7.9
       plugin-error:
         specifier: 2.0.1
         version: 2.0.1
@@ -492,7 +492,7 @@ importers:
     dependencies:
       '@hidoo/handlebars-helpers':
         specifier: 1.2.0
-        version: 1.2.0(handlebars@4.7.8)
+        version: 1.2.0(handlebars@4.7.9)
       chalk:
         specifier: 5.4.1
         version: 5.4.1
@@ -506,8 +506,8 @@ importers:
         specifier: 6.0.2
         version: 6.0.2
       handlebars:
-        specifier: 4.7.8
-        version: 4.7.8
+        specifier: 4.7.9
+        version: 4.7.9
       inquirer:
         specifier: 12.6.3
         version: 12.6.3(@types/node@24.0.7)
@@ -672,7 +672,7 @@ importers:
         version: link:../gulp-util-error-handler
       '@hidoo/handlebars-helpers':
         specifier: 1.2.0
-        version: 1.2.0(handlebars@4.7.8)
+        version: 1.2.0(handlebars@4.7.9)
       glob:
         specifier: 11.1.0
         version: 11.1.0
@@ -698,8 +698,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       handlebars:
-        specifier: 4.7.8
-        version: 4.7.8
+        specifier: 4.7.9
+        version: 4.7.9
       handlebars-layouts:
         specifier: 3.1.4
         version: 3.1.4
@@ -870,7 +870,7 @@ importers:
         version: link:../gulp-util-error-handler
       '@hidoo/handlebars-helpers':
         specifier: 1.2.0
-        version: 1.2.0(handlebars@4.7.8)
+        version: 1.2.0(handlebars@4.7.9)
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -928,7 +928,7 @@ importers:
         version: link:../gulp-util-error-handler
       '@hidoo/handlebars-helpers':
         specifier: 1.2.0
-        version: 1.2.0(handlebars@4.7.8)
+        version: 1.2.0(handlebars@4.7.9)
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -965,13 +965,13 @@ importers:
         version: link:../gulp-util-error-handler
       '@hidoo/handlebars-helpers':
         specifier: 1.2.0
-        version: 1.2.0(handlebars@4.7.8)
+        version: 1.2.0(handlebars@4.7.9)
       '@hidoo/kss-builder':
         specifier: 1.1.0
         version: 1.1.0(chokidar@3.6.0)
       handlebars:
-        specifier: 4.7.8
-        version: 4.7.8
+        specifier: 4.7.9
+        version: 4.7.9
       kss:
         specifier: 3.1.0
         version: 3.1.0(chokidar@3.6.0)
@@ -5394,6 +5394,11 @@ packages:
 
   handlebars@4.7.8:
     resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
+
+  handlebars@4.7.9:
+    resolution: {integrity: sha512-4E71E0rpOaQuJR2A3xDZ+GM1HyWYv1clR58tC8emQNeQe3RH7MAzSbat+V0wG78LQBo6m6bzSG/L4pBuCsgnUQ==}
     engines: {node: '>=0.4.7'}
     hasBin: true
 
@@ -10986,6 +10991,15 @@ snapshots:
       marked-gfm-heading-id: 4.1.1(marked@15.0.8)
       marked-highlight: 2.2.1(marked@15.0.8)
 
+  '@hidoo/handlebars-helpers@1.2.0(handlebars@4.7.9)':
+    dependencies:
+      '@hidoo/data-from': 1.0.0
+      handlebars: 4.7.9
+      highlight.js: 11.11.1
+      marked: 15.0.8
+      marked-gfm-heading-id: 4.1.1(marked@15.0.8)
+      marked-highlight: 2.2.1(marked@15.0.8)
+
   '@hidoo/kss-builder@1.1.0(chokidar@3.6.0)':
     dependencies:
       '@hidoo/handlebars-helpers': 1.2.0(handlebars@4.7.8)
@@ -13170,7 +13184,7 @@ snapshots:
   conventional-changelog-writer@8.1.0:
     dependencies:
       conventional-commits-filter: 5.0.0
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       meow: 13.2.0
       semver: 7.7.2
 
@@ -15089,7 +15103,7 @@ snapshots:
       ansi-gray: 0.1.1
       ansi-green: 0.1.1
       cli-columns: 3.1.2
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       handlebars-wax: 6.1.0
       plugin-error: 1.0.1
       through2: 3.0.2
@@ -15218,6 +15232,15 @@ snapshots:
       require-glob: 3.2.0
 
   handlebars@4.7.8:
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.19.3
+
+  handlebars@4.7.9:
     dependencies:
       minimist: 1.2.8
       neo-async: 2.6.2
@@ -16141,7 +16164,7 @@ snapshots:
       bluebird: 3.7.2
       fs-extra: 9.1.0
       glob: 7.2.3
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       highlight.js: 10.7.3
       markdown-it: 12.3.2
       nunjucks: 3.2.4(chokidar@3.6.0)
@@ -18915,7 +18938,7 @@ snapshots:
 
   spritesheet-templates@10.5.2:
     dependencies:
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       handlebars-layouts: 3.1.4
       json-content-demux: 0.1.4
       underscore: 1.13.7

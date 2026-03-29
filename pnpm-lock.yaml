@@ -546,8 +546,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       gulp-header:
-        specifier: 2.0.9
-        version: 2.0.9
+        specifier: 2.0.12
+        version: 2.0.12
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -619,8 +619,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       gulp-header:
-        specifier: 2.0.9
-        version: 2.0.9
+        specifier: 2.0.12
+        version: 2.0.12
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -1007,8 +1007,8 @@ importers:
         specifier: 2.6.1
         version: 2.6.1
       gulp-header:
-        specifier: 2.0.9
-        version: 2.0.9
+        specifier: 2.0.12
+        version: 2.0.12
       gulp-if:
         specifier: 3.0.0
         version: 3.0.0
@@ -5316,8 +5316,8 @@ packages:
     resolution: {integrity: sha512-0tu+rhfm+Q9cUVjCxJMHf5yFwF0CIE6+eRKBA/XV7+CaJJGSkyNQQGvOIdgLPscNrhjJjqcxeKMJ74mkzw5xhg==}
     engines: {node: '>= 4', npm: '>= 3'}
 
-  gulp-header@2.0.9:
-    resolution: {integrity: sha512-LMGiBx+qH8giwrOuuZXSGvswcIUh0OiioNkUpLhNyvaC6/Ga8X6cfAeme2L5PqsbXMhL8o8b/OmVqIQdxprhcQ==}
+  gulp-header@2.0.12:
+    resolution: {integrity: sha512-7PFW56tRISOroZ3N5R+f1Bn4wvdtE5LZXfZqz4ubEAXLEsLS7kSifgsk/lF26hSqnYO786GniQCxCuLxQZ0SoA==}
 
   gulp-htmlmin@5.0.1:
     resolution: {integrity: sha512-ASlyDPZOSKjHYUifYV0rf9JPDflN9IRIb8lw2vRqtYMC4ljU3zAmnnaVXwFQ3H+CfXxZSUesZ2x7jrnPJu93jA==}
@@ -6365,9 +6365,6 @@ packages:
     resolution: {integrity: sha512-fr7OCpbE4xeefhHqfh6hM2/l9ZB3XvClHgtgFnQNImrM/nqL950o6FO98vmUH8GysfQRCcyBYtZ4C8GcY52Edw==}
     engines: {node: '>= 10', yarn: '>= 1'}
 
-  lodash._reinterpolate@3.0.0:
-    resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
-
   lodash.assign@4.2.0:
     resolution: {integrity: sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==}
 
@@ -6436,13 +6433,6 @@ packages:
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
-
-  lodash.template@4.5.0:
-    resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
-    deprecated: This package is deprecated. Use https://socket.dev/npm/package/eta instead.
-
-  lodash.templatesettings@4.2.0:
-    resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
 
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
@@ -15108,12 +15098,12 @@ snapshots:
       plugin-error: 1.0.1
       through2: 3.0.2
 
-  gulp-header@2.0.9:
+  gulp-header@2.0.12:
     dependencies:
       concat-with-sourcemaps: 1.1.0
-      lodash.template: 4.5.0
+      lodash: 4.17.21
       map-stream: 0.0.7
-      through2: 2.0.5
+      through2: 4.0.2
 
   gulp-htmlmin@5.0.1:
     dependencies:
@@ -16288,8 +16278,6 @@ snapshots:
 
   locutus@2.0.32: {}
 
-  lodash._reinterpolate@3.0.0: {}
-
   lodash.assign@4.2.0: {}
 
   lodash.camelcase@4.3.0: {}
@@ -16333,15 +16321,6 @@ snapshots:
   lodash.sortby@4.7.0: {}
 
   lodash.startcase@4.4.0: {}
-
-  lodash.template@4.5.0:
-    dependencies:
-      lodash._reinterpolate: 3.0.0
-      lodash.templatesettings: 4.2.0
-
-  lodash.templatesettings@4.2.0:
-    dependencies:
-      lodash._reinterpolate: 3.0.0
 
   lodash.truncate@4.4.2: {}
 

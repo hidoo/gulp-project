@@ -32,7 +32,7 @@
   "dependencies": {
     "@hidoo/gulp-plugin-compress": "workspace:*",
     "@hidoo/gulp-util-error-handler": "workspace:*",
-    "cssnano": "7.0.7",
+    "cssnano": "7.1.9",
     "fancy-log": "2.0.0",
     "gulp-concat": "2.6.1",
     "gulp-header": "2.0.12",

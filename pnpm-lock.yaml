@@ -875,8 +875,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       gulp-imagemin:
-        specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.1)
+        specifier: 9.2.0
+        version: 9.2.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -933,8 +933,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       gulp-imagemin:
-        specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.1)
+        specifier: 9.2.0
+        version: 9.2.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -1087,8 +1087,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       gulp-imagemin:
-        specifier: 9.1.0
-        version: 9.1.0(gulp@5.0.1)
+        specifier: 9.2.0
+        version: 9.2.0(gulp@5.0.1)
       gulp-plumber:
         specifier: 1.2.1
         version: 1.2.1
@@ -5374,8 +5374,8 @@ packages:
   gulp-if@3.0.0:
     resolution: {integrity: sha512-fCUEngzNiEZEK2YuPm+sdMpO6ukb8+/qzbGfJBXyNOXz85bCG7yBI+pPSl+N90d7gnLvMsarthsAImx0qy7BAw==}
 
-  gulp-imagemin@9.1.0:
-    resolution: {integrity: sha512-PmzTWoNrVMYVN4ObRdHyt6oer4mqxV53IbCDi3Q8EHeDZW0OzAuh6RlOtpd/R7PFmbDUk64q5P+L04fD9I5cVA==}
+  gulp-imagemin@9.2.0:
+    resolution: {integrity: sha512-y7yAHTUzfHHq6njHY2OIvLOcffF1I/ULSlfzunnIvPeNNpYDArwrlqCzPvnN4Le0p3H/1ERAAQJJPMhbnTRnFQ==}
     engines: {node: '>=18'}
     peerDependencies:
       gulp: '>=4'
@@ -15218,7 +15218,7 @@ snapshots:
       ternary-stream: 3.0.0
       through2: 3.0.2
 
-  gulp-imagemin@9.1.0(gulp@5.0.1):
+  gulp-imagemin@9.2.0(gulp@5.0.1):
     dependencies:
       chalk: 5.6.2
       gulp-plugin-extras: 1.1.0

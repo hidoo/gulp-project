@@ -42,8 +42,8 @@ importers:
         specifier: 11.7.6
         version: 11.7.6
       pnpm:
-        specifier: 10.34.3
-        version: 10.34.3
+        specifier: 10.34.4
+        version: 10.34.4
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -7602,8 +7602,8 @@ packages:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
     engines: {node: '>=14.19.0'}
 
-  pnpm@10.34.3:
-    resolution: {integrity: sha512-8sUxsIgp175/A8kK3cJmYV+cVHdGPkvx0nXLJjzp6lfPDVWZEQ2UZJqbs/7Z8LXvzqdKcBa2FTKiTLmth4YMHQ==}
+  pnpm@10.34.4:
+    resolution: {integrity: sha512-h2i+VSAK4/Iia2Un/Momh+FLxOXxLXchoPJdo99HkVF3BYZI20F3uvNIEg+guidS2NjZP2vq8f5krhjajelhrw==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -17751,7 +17751,7 @@ snapshots:
 
   pngjs@7.0.0: {}
 
-  pnpm@10.34.3: {}
+  pnpm@10.34.4: {}
 
   portscanner@2.2.0:
     dependencies:

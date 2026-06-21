@@ -39,7 +39,7 @@
     "gulp-htmlmin": "5.0.1",
     "gulp-if": "3.0.0",
     "gulp-plumber": "1.2.1",
-    "gulp-rename": "2.0.0",
+    "gulp-rename": "2.1.0",
     "gulp-sort": "2.0.0",
     "handlebars": "4.7.9",
     "handlebars-layouts": "3.1.4",

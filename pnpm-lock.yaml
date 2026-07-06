@@ -823,8 +823,8 @@ importers:
         specifier: 4.62.2
         version: 4.62.2
       rollup-plugin-license:
-        specifier: 3.6.0
-        version: 3.6.0(picomatch@4.0.2)(rollup@4.62.2)
+        specifier: 3.7.1
+        version: 3.7.1(picomatch@4.0.2)(rollup@4.62.2)
       through2:
         specifier: 4.0.2
         version: 4.0.2
@@ -8306,8 +8306,8 @@ packages:
   ripemd160@2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
 
-  rollup-plugin-license@3.6.0:
-    resolution: {integrity: sha512-1ieLxTCaigI5xokIfszVDRoy6c/Wmlot1fDEnea7Q/WXSR8AqOjYljHDLObAx7nFxHC2mbxT3QnTSPhaic2IYw==}
+  rollup-plugin-license@3.7.1:
+    resolution: {integrity: sha512-FcGXUbAmPvRSLxjVdjp/r/MUtKBlttVQd+ApUyvKfREnsoAfAZA6Ic2fE1Tz4RL0f9XqEQU9UIRNUMdtQtliDw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
@@ -18550,7 +18550,7 @@ snapshots:
       hash-base: 3.0.5
       inherits: 2.0.4
 
-  rollup-plugin-license@3.6.0(picomatch@4.0.2)(rollup@4.62.2):
+  rollup-plugin-license@3.7.1(picomatch@4.0.2)(rollup@4.62.2):
     dependencies:
       commenting: 1.1.0
       fdir: 6.4.6(picomatch@4.0.2)

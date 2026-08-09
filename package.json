@@ -48,7 +48,7 @@
     "eslint": "9.39.5",
     "glob": "11.1.0",
     "lint-staged": "16.1.0",
-    "mocha": "11.7.6",
+    "mocha": "11.8.0",
     "pnpm": "10.34.5",
     "prettier": "3.9.6",
     "replace-in-files-cli": "3.0.0"

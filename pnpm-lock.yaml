@@ -39,8 +39,8 @@ importers:
         specifier: 16.1.0
         version: 16.1.0
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       pnpm:
         specifier: 10.34.5
         version: 10.34.5
@@ -120,8 +120,8 @@ importers:
         specifier: 16.1.0
         version: 16.1.0
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       npm-run-all2:
         specifier: 7.0.2
         version: 7.0.2
@@ -201,8 +201,8 @@ importers:
         specifier: 16.1.0
         version: 16.1.0
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       npm-run-all2:
         specifier: 7.0.2
         version: 7.0.2
@@ -285,8 +285,8 @@ importers:
         specifier: 16.1.0
         version: 16.1.0
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       npm-run-all2:
         specifier: 7.0.2
         version: 7.0.2
@@ -328,8 +328,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-plugin-image-evenizer:
     dependencies:
@@ -368,8 +368,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       pixelmatch:
         specifier: 7.2.0
         version: 7.2.0
@@ -417,8 +417,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       pixelmatch:
         specifier: 7.2.0
         version: 7.2.0
@@ -454,8 +454,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-plugin-webp:
     dependencies:
@@ -485,8 +485,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-project-generator:
     dependencies:
@@ -519,8 +519,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-build-css-sass:
     dependencies:
@@ -589,8 +589,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       postcss-uncss:
         specifier: 0.17.0
         version: 0.17.0(uncss@0.17.3)
@@ -659,8 +659,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-build-html-handlebars:
     dependencies:
@@ -717,8 +717,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-build-js-browserify:
     dependencies:
@@ -775,8 +775,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       regenerator-runtime:
         specifier: 0.14.1
         version: 0.14.1
@@ -854,8 +854,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       regenerator-runtime:
         specifier: 0.14.1
         version: 0.14.1
@@ -906,8 +906,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       pixelmatch:
         specifier: 7.2.0
         version: 7.2.0
@@ -955,8 +955,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-build-styleguide-kss:
     dependencies:
@@ -986,8 +986,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-concat:
     dependencies:
@@ -1041,8 +1041,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-copy:
     dependencies:
@@ -1063,8 +1063,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
 
   packages/gulp-task-optimize-image:
     dependencies:
@@ -1112,8 +1112,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       pixelmatch:
         specifier: 7.2.0
         version: 7.2.0
@@ -1134,8 +1134,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       mocha:
-        specifier: 11.7.6
-        version: 11.7.6
+        specifier: 11.8.0
+        version: 11.8.0
       sinon:
         specifier: 20.0.0
         version: 20.0.0
@@ -6258,10 +6258,6 @@ packages:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
 
-  js-yaml@4.1.1:
-    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
-    hasBin: true
-
   js-yaml@4.3.0:
     resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
     hasBin: true
@@ -6984,8 +6980,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  mocha@11.7.6:
-    resolution: {integrity: sha512-nS9xOGbw2I3cjCpxwZAEJ9xK9lmJ08vEkQvLtz4du9ZrF9UrjRpeJGiIgl2Z+Qs++pmB4ecDe48Fwsh+j+j7xA==}
+  mocha@11.8.0:
+    resolution: {integrity: sha512-VyCeUdGN3A9lmCTTgG4yuvY9ixxaDk+xt2R/7/+1AP6EqNG+G9OKkzBwhVtVYoNX8YsxNSgAl8mOv3IAeOpFbw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
 
@@ -13478,7 +13474,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.8.3
@@ -16203,10 +16199,6 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@4.1.1:
-    dependencies:
-      argparse: 2.0.1
-
   js-yaml@4.3.0:
     dependencies:
       argparse: 2.0.1
@@ -17118,7 +17110,7 @@ snapshots:
 
   mkdirp@3.0.1: {}
 
-  mocha@11.7.6:
+  mocha@11.8.0:
     dependencies:
       browser-stdout: 1.3.1
       chokidar: 4.0.3
@@ -17129,7 +17121,7 @@ snapshots:
       glob: 10.4.5
       he: 1.2.0
       is-path-inside: 3.0.3
-      js-yaml: 4.1.1
+      js-yaml: 4.3.0
       log-symbols: 4.1.0
       minimatch: 9.0.5
       ms: 2.1.3

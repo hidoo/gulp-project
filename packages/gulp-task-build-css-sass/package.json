@@ -48,7 +48,7 @@
     "node-sass-magic-importer": "5.3.3",
     "plugin-error": "2.0.1",
     "postcss": "8.5.26",
-    "sass-embedded": "1.89.2",
+    "sass-embedded": "1.103.1",
     "through2": "4.0.2"
   },
   "peerDependencies": {

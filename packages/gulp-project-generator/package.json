@@ -40,7 +40,7 @@
     "commander": "13.1.0",
     "glob": "11.1.0",
     "glob-parent": "6.0.2",
-    "handlebars": "4.7.9",
+    "handlebars": "4.7.10",
     "inquirer": "12.11.1",
     "prettier": "3.9.9"
   }
